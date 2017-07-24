@@ -39,6 +39,7 @@ import com.google.gson.Gson;
 
 /**
  * Handles requests for the application home page.
+ * 1
  */
 @Controller
 @RequestMapping(value="/blog", method = {RequestMethod.GET,RequestMethod.POST})
