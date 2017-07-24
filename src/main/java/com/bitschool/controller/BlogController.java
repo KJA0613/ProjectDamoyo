@@ -39,7 +39,7 @@ import com.google.gson.Gson;
 
 /**
  * Handles requests for the application home page.
- * 1 gyu
+ * 1 gyu hihihi
  */
 @Controller
 @RequestMapping(value="/blog", method = {RequestMethod.GET,RequestMethod.POST})
