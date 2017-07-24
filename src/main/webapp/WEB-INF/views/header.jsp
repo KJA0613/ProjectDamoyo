@@ -1,0 +1,126 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- JSTL -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<!-- Bootstrap core CSS -->
+<link href="/resources/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<!-- <link href="/resources/examples/offcanvas/offcanvas.css" rel="stylesheet"> -->
+<script src="/resources/assets/js/ie-emulation-modes-warning.js"></script>
+
+<title>공통 헤더</title>
+
+<!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
+<style type="text/css">
+   .navbar-inverse {
+       /* background-color: #2bb7d5; */
+       /* background-color: #074069; */
+       /* background-color: #3399ff; */		/* 잡코리아 배경색 */
+       background-color: #40b4e5;			/* 모꼬지 배경색 */
+       border-color: #00a3cc;
+   }
+   .navbar {
+       margin: 0;
+       border: none;
+       border-bottom: 2px solid #95daea;
+       border-radius: 0;
+   }
+   .navbar .navbar-brand{
+       color: #fff;
+       font-size: 30px;
+       font-weight: bold;
+   }   
+   .navbar-inverse .navbar-nav > li > a {
+      color: white;
+      font-size: 17px;
+      margin-right: 3px;
+      font-weight: bold;
+   }   
+   .a {
+   	  font-weight: bold;
+   }
+
+   /* 헤더 오른쪽 효과 */
+    .actionBtn7 {
+	 position:relative;
+	 display:inline-block;
+	 height:40px;
+	 margin:auto;
+	 padding:0 18px;
+	 line-height:30px;
+	 color:#4c4c4d;
+	 font-family:oswald;
+	 text-transform:uppercase;
+	 text-align:center;
+	 text-decoration:none;
+	  }
+	  
+	.actionBtn7:after {
+		 position:absolute;
+		 bottom:0;
+		 left:0;
+		 display:block;
+		 content:"";
+		 width:100%;
+		 height:2.5px;
+		 background-color:#FFFFFF;
+		 transform:scale3d(0,1,1);
+		 transform-origin:center center;
+		 transition:transform .2s;
+	}
+	
+	.actionBtn7:hover:after {
+		 transform:scale3d(1,1,1);
+		 font-size: 19px;
+	} 
+</style>
+
+<script type="text/javascript"></script>
+
+</head>
+<body>
+
+	<!-- 01.[Header] Navigation Bar로 구현 -->
+	<nav class="navbar navbar-inverse navbar-static-top"> <!-- [헤더 영역] 컨테이너 생성 -->
+	<div class="container">
+		<!-- clearfix: 어긋난 칼럼들 보정 -->
+		<div class="clearfix">
+			<!-- 01-01. 로고 -->
+			<div class="navbar-header">
+				<a href="/" class="navbar-brand navbar-brand-center">DAMOYO</a>
+			</div>
+			
+			<!-- 01-02. 헤더 오른쪽 -->
+			<ul class="nav navbar-nav navbar-right">	<!-- ul: 순서가 필요없는 목록 만들 때 사용(ol과 반대개념) -->				
+				<!-- 01-02-01. 세션에 데이터 저장 여부에 따라 보여지는 화면 다름  --> 
+				<!-- 1) 로그인 안 된 상태 (session에 저장된 id가 없을 때) -->
+				<!-- 2) 로그인이 된 상태 (session에 저장된 id가 있을 때) -->
+				
+				<c:choose>
+					<c:when test = "${empty pdto.guserId}">
+						<li><a href="/member/LoginForm" class="code_view actionBtn7">로그인</a></li>
+						<li><a href="/join/JoinChoiceForm" class="code_view actionBtn7">회원가입</a></li>
+					</c:when>
+					
+					<c:otherwise>							
+						<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7">${pdto.guserId}님 마이페이지</a></li>
+						<li><a href="/member/Logout" class="code_view actionBtn7">로그아웃</a></li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</div>
+	</div>
+	</nav>
+	
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="/resources/dist/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="/resources/assets/js/ie10-viewport-bug-workaround.js"></script>
+	<!-- <script src="/resources/examples/offcanvas/offcanvas.js"></script> -->
+</body>
+</html>

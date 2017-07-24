@@ -1,0 +1,76 @@
+<%@ page session="false" contentType="text/html; charset=UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!-- <link href="/resources/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<!-- Custom styles for this template -->
+<!-- <link href="/resources/examples/offcanvas/offcanvas.css" rel="stylesheet"> -->
+
+<script src="/resources/assets/js/ie-emulation-modes-warning.js"></script>
+ 
+<style type="text/css">
+#sidebar {
+	position: relative;
+	top: 100px;
+}
+
+a:link {
+	color: black;
+	text-decoration: none;
+	display: block;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+</style>
+
+
+<!-- jquery를 이용하여 뿌리기 -->
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script
+	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script type="text/javascript">
+	$(function() {
+
+		/* 스크롤 움직여도 왼쪽에 목록창 고정 */
+		$(window).scroll(function() {
+			var height = $(document).scrollTop(); /* 스크롤바의 최고의 좌표를 받아와 로그함수로 보냄 */
+			log(height);
+		});
+
+		function log(str) {
+			// 로그 함수는 받으로 스크롤bar값을 css에 적용시켜 실시간으로 움직이는것처럼 함
+			$('#sidebar').css('top', str + 100)
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	function login_check(id){
+		if(id == null){
+			alert("로그인 후 이용 가능합니다.");
+			$("#makeHref").attr("href", "#");
+		}
+		
+	}
+</script>
+
+<!-- <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar"> -->
+<div class="col-xs-6 col-sm-2 sidebar1" id="sidebar">
+	<div class="list-group">
+		<a href="/gather/gatheringMake" id="makeHref" class="list-group-item" onclick="login_check(${pdto.guserId})">모집글쓰기</a>
+		<a href="/gather/gathering" class="list-group-item">모집메뉴</a> 
+		<a href="#" class="list-group-item">장소추천</a> 
+		<a href="/board/listAll?boardName=free" class="list-group-item">자유게시판</a> 
+		<a href="/board/listAll?boardName=review" class="list-group-item">후기게시판</a>
+		<c:if test="${pdto.guserId ne null}">
+			<a href="/gather/gatheringParti" class="list-group-item">참여중인모임</a>
+		</c:if>
+	</div>
+</div>

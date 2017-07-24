@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitschool.ReplyMapper">
+
+	<update id="updateReplyCount" parameterType="ReplyDTO"> <!-- 게시판에 댓글의 no를 뜻하는 replyCount를 +1 하여 댓글이 하나 더 달렸다는것을 의미함 -->
+		update post set replyCounts = replyCounts + 1 where postNo = #{postNo} and boardName = #{boardName}
+	</update>
+	
+	<insert id="insertReply" parameterType="ReplyDTO">
+		insert into reply(replyNo, replyContents, postNo, replyUserId, boardName) 
+		values(#{replyNo}, #{replyContents}, #{postNo}, #{replyUserId}, #{boardName})
+	</insert>
+	
+	<select id="selectReply" resultType="ReplyDTO" parameterType="ReplyDTO">
+		select * from reply where postNo = #{postNo} and boardName = #{boardName} order by replyNo
+	</select>
+	
+</mapper>

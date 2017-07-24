@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitschool.PageMapper">
+	<select id="count" resultType="Integer">
+		select count(*) from post
+	</select>
+	
+	<select id="searchCount" resultType="Integer" parameterType="hashmap">
+		select count(*) 
+		from post 
+		where boardName = #{boardName}
+		<if test="query != ''">
+			and ( postTitle like '%'||#{query}||'%' or postContents like '%'||#{query}||'%' )
+		</if>
+	</select>
+</mapper>

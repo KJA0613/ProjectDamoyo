@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitschool.basic.GalleryMapper">
+	<insert id="insertImg" parameterType="BGalleryDTO">
+		<selectKey keyProperty="imageNo" resultType="int" order="BEFORE">
+			select imageNo.nextval from dual
+		</selectKey>
+			insert into gallery(imageNo,imageTitle,userId,uploadImg,imageContents) values
+			(#{imageNo},#{imageTitle},#{userId},#{uploadImg},#{imageContents})
+	</insert>
+	
+	<select id="selectImgList" resultType="BGalleryDTO">
+		select * from gallery order by imageNo desc
+	</select>
+	
+	<delete id="deleteImg" parameterType="int">
+		delete from gallery where imageNo = #{imageNo}
+	</delete>
+	
+	<select id="selectOnePhoto" parameterType="int" resultType="BGalleryDTO">
+		select * from gallery where imageNo = #{imageNo}
+	</select>
+	
+	<update id="updateImg" parameterType="BGalleryDTO">
+		update gallery set imageTitle = #{imageTitle}, userId = #{userId}, uploadImg = #{uploadImg},
+		imageContents = #{imageContents} where imageNo = #{imageNo}
+	</update>
+</mapper>
