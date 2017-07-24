@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -61,7 +62,7 @@ public class MemberLoginController {
 	// 01. [개인회원] 로그인
 	// "쿠키"와 "세션" 설명 : http://88240.tistory.com/190 > [1차 처리] 세션 > [2차 처리 고민] 스프링 제공
 	@RequestMapping(value = "/PersonLogin", method = RequestMethod.POST)
-	public String LoginCheck(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, HttpSession session, Model model) {
+	public String LoginCheck(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, HttpServletRequest request, HttpSession session, Model model) {
 							
 		String url = null;
 
@@ -78,8 +79,14 @@ public class MemberLoginController {
 			List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
 			session.setAttribute("recommgatherList", recommgatherList);
 			
+			// 이전 페이지로 복귀
+			//String referer = request.getHeader("Referer");
+			//System.out.println("페이지 경로명: " + referer);		// [출력] http://localhost:5050/member/LoginForm		
+			//String[] loginReferer = referer.split("/");
+			
 			// 메인페이지 이동 (reload)
-			url = "redirect:/";	
+			//url = loginReferer.toString();
+			url = "redirect:/";
 			
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} else {	
