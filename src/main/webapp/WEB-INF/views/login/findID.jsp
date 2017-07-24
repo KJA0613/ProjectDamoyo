@@ -114,7 +114,7 @@
 					<br>
 					
 					<!-- 회원가입 선택 페이지로 이동 -->
-					<a href="/join/JoinChoiceForm" tabindex="4"> 처음 오셨나요? 지금 바로 회원가입 하실 수  있습니다^^</a>	
+					<a href="/join/JoinChoiceForm" tabindex="4"> 처음 오셨나요? 지금 바로 회원가입을 하실 수  있습니다^^</a>	
 				</form>
 			
 			</div>

@@ -47,7 +47,7 @@ public class MemberLoginController {
 	// 00. [개인&기업회원] 로그인 폼 (Connection URL)
 	@RequestMapping(value="/LoginForm", method={RequestMethod.POST, RequestMethod.GET})
 	public String LoginForm() {
-		String url = "LoginForm";
+		String url = "login/LoginForm";
 		
 		/*-------------------------- [2차 처리 예정] --------------------------
 			1) 개인/기업 > 체크박스 추가 	2) 개인/기업 > DB등록된 코드값 비교해서 로그인 처리 
@@ -87,7 +87,7 @@ public class MemberLoginController {
 			model.addAttribute("loginErrorMsg", "※ 아이디 또는 비밀번호를 잘못 입력하셨습니다. 다시 입력해주세요!");
 			
 			// 로그인 폼 페이지 이동
-			url = "LoginForm";
+			url = "login/LoginForm";
 		}
 
 		return url;
