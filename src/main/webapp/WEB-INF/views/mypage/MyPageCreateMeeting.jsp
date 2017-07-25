@@ -85,14 +85,6 @@
 					<!-- <input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"> -->
 	
 				</div>
-		
-				<!-- 페이징하기 (프리뷰, 넥스트 적용시키기) -->
-				<!-- 프리뷰, 넥스트 > 참고 할 사이트
-					 : https://www.w3schools.com/bootstrap/bootstrap_pager.asp
-					 : http://getbootstrap.com/components/#pagination -->
-				<!-- <ul class="pagination">
-				    <li><a href="#">1</a></li>
-			  	</ul> -->
 			</div>
 		</div>
 	
