@@ -48,7 +48,7 @@ public class GatheringController {
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 		
 		List<GatheringDTO> recommList = gService.getRecommDefault(); // 디폴트
-		System.out.println("추천 디폴트 리스트"+recommList.size());
+		System.out.println("추천 디폴트 리스트 크기 : "+recommList.size());
 		
 		if(pdto!=null){ // 로그인 중이면
 			recommList = gService.getRecommendUser(pdto.getGuserId()); //사용자 추천 리스트
@@ -64,6 +64,8 @@ public class GatheringController {
 			model.addAttribute("gath", gList);
 		}		
 		
+		System.out.println(recommList);
+		System.out.println(gList);
 
 		model.addAttribute("recomm", recommList);
 		

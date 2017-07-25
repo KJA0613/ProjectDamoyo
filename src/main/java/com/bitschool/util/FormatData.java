@@ -26,6 +26,7 @@ public class FormatData {
 			if(gath.getGatherImg()==null||gath.getGatherImg().equals("")){
 				gath.setGatherImg("\\resources\\image\\mozip\\damoyo_noPicture.png");
 			}
+			
 		
 		}
 		
