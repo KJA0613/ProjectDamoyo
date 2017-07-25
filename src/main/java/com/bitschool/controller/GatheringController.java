@@ -29,7 +29,7 @@ import com.bitschool.service.IGatheringService;
 @RequestMapping("/gather")
 @Controller
 public class GatheringController {
-
+	//21
 	@Inject
 	private IGatheringService gService;
 		
