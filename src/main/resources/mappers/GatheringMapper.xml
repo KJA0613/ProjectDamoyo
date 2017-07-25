@@ -23,6 +23,18 @@
 		where b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName
 	</select>
 	
+	<select id="recommDefault" resultType="com.bitschool.dto.GatheringDTO">
+		select * 
+		from (  select *
+		        from (  select * 
+		                from RECOMMGATHER 
+		                order by RECOMMGATHERCNT desc
+		              )
+		        <![CDATA[where rownum <= 1]]>) a, GATHER b
+		
+		where b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName
+	</select>
+	
 	<select id="getherCheck" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
 		
 		select * 

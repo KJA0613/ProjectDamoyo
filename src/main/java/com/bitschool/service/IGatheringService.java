@@ -23,7 +23,9 @@ public interface IGatheringService {
 
 	public boolean mergeRecommend(List<RecommGatherDTO> recommgatherList);
 
-	public List<GatheringDTO> getRecommendAll(String guserId);
+	public List<GatheringDTO> getRecommendUser(String guserId);
+
+	public List<GatheringDTO> getRecommDefault();
 
 
 }

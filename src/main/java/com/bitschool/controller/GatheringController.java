@@ -43,25 +43,29 @@ public class GatheringController {
 		String url = "gather/gathering";
 		
 		// 현재 세션에 저장된 정보 > pdto에 저장
+		// 즉, 로그인된 사용자의 정보를 나타냄
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 		
-		System.out.println(pdto);
-
-		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체글 가져옴
-		/* 로그인 되면 userId에 session.getAttribute("아이디"); 이거 해야함 */
-		//session.getAttribute("guserId");		
+		List<GatheringDTO> recommList = gService.getRecommDefault(); // 디폴트
+		System.out.println("추천 디폴트 리스트"+recommList.size());
 		
-		if(pdto!=null){
-			List<GatheringDTO> recommList = gService.getRecommendAll(pdto.getGuserId()); // 추천글 가져옴
+		if(pdto!=null){ // 로그인 중이면
+			recommList = gService.getRecommendUser(pdto.getGuserId()); //사용자 추천 리스트
+			// 사용자 정보에 따른 추천글 가져옴
 			model.addAttribute("pdto", pdto);
+			// 그리고 jsp로 모델을 보냄
 			
-			if(recommList != null){
-				model.addAttribute("recomm", recommList);
+			if(recommList == null){ // 사용자 추천 리스트가 업으면
+				recommList = gService.getRecommDefault();
 			}
 		}
 		if (gList != null) {
 			model.addAttribute("gath", gList);
 		}		
+		
+
+		model.addAttribute("recomm", recommList);
 		
 		return url;
 	}

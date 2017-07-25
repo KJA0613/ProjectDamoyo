@@ -82,9 +82,19 @@ public class GatheringService implements IGatheringService {
 	}
 
 	@Override
-	public List<GatheringDTO> getRecommendAll(String guserId) {
+	public List<GatheringDTO> getRecommendUser(String guserId) {
 
-		List<GatheringDTO> recommList = gDao.getRecommAll(guserId);
+		List<GatheringDTO> recommList = gDao.getRecommUser(guserId);
+		fData = new FormatData();
+		recommList = fData.formatData(recommList);
+		
+		return recommList;
+	}
+
+	@Override
+	public List<GatheringDTO> getRecommDefault() {
+
+		List<GatheringDTO> recommList = gDao.getRecommDefault();
 		fData = new FormatData();
 		recommList = fData.formatData(recommList);
 		

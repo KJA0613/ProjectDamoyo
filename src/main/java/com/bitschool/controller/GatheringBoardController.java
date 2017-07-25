@@ -94,7 +94,6 @@ public class GatheringBoardController {
 
 	@RequestMapping(value = "/boardRegist", method = { RequestMethod.GET, RequestMethod.POST })
 	public String boardRegist(PostDTO post) {
-		System.out.println("2.boardRegist DTO : "+post);
 		String url = null;
 		boolean flag = postService.registPost(post);
 		if (flag) {
@@ -113,7 +112,6 @@ public class GatheringBoardController {
 			HttpSession session
 			) {
 		String url = null;
-		System.out.println("read의 "+postdto);
 		boolean flag = postService.increasCount(postdto); // 게시글 조회수 +1해주는 메서드
 		if (flag) {
 			PostDTO post = postService.readPost(postdto); // 게시글 내용 불러오는 메서드
@@ -192,7 +190,6 @@ public class GatheringBoardController {
 			@RequestParam(value="query", defaultValue="") String query
 			){
 		String url = null;
-		System.out.println("modify의 "+post);
 		boolean flag = postService.modify(post);
 		int postNo = post.getPostNo();
 		String boardName = post.getBoardName();
@@ -216,7 +213,6 @@ public class GatheringBoardController {
 			@RequestParam("page") int page,
 			@RequestParam(value="query", defaultValue="") String query) {
 		String url = null;
-		System.out.println(reply);
 		
 		int postNo = reply.getPostNo();
 		String boardName = reply.getBoardName();
