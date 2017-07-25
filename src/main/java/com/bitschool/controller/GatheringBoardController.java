@@ -24,7 +24,7 @@ import com.bitschool.service.IReplyService;
 @Controller
 @RequestMapping("/board")
 public class GatheringBoardController {
-	
+	//test
 	@Inject
 	private IPostService postService;
 	
