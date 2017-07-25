@@ -20,7 +20,7 @@
 		              )
 		        <![CDATA[where rownum <= 1]]>) a, GATHER b
 		
-		where b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName
+		 <![CDATA[where rownum <=4]]> and (b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName)
 	</select>
 	
 	<select id="recommDefault" resultType="com.bitschool.dto.GatheringDTO">
@@ -30,9 +30,9 @@
 		                from RECOMMGATHER 
 		                order by RECOMMGATHERCNT desc
 		              )
-		        <![CDATA[where rownum <= 1]]>) a, GATHER b
+	   <![CDATA[where rownum <= 1]]>) a, GATHER b
 		
-		where b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName
+		 <![CDATA[where rownum <=4]]> and (b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName)
 	</select>
 	
 	<select id="getherCheck" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
