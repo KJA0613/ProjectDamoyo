@@ -43,12 +43,12 @@
        color: white;
    }   
    
-   .h4 {
+/*    .h4 {
    	   font-size: 18px;
    	   margin-top: 10px;
    	   margin-bottom: 10px;
    	   color: inherit;
-   }
+   } */
       
    .li {
    	  font-color: black;
