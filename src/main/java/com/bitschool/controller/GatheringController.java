@@ -42,12 +42,12 @@ public class GatheringController {
 			
 		String url = "gather/gathering";
 		
-		// 현재 세션에 저장된 정보 > pdto에 저장
+		// 현재 세션에 저장된 정보 > pdto에 저장 
 		// 즉, 로그인된 사용자의 정보를 나타냄
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 		
-		List<GatheringDTO> recommList = gService.getRecommDefault(); // 디폴트
+		List<GatheringDTO> recommList = gService.getRecommDefault(); // 디폴트 추천검색
 		System.out.println("추천 디폴트 리스트 크기 : "+recommList.size());
 		
 		if(pdto!=null){ // 로그인 중이면
