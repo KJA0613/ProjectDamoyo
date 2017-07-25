@@ -14,52 +14,14 @@
 <!-- Latest compiled JavaScript -->
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- JQuery CDN -->	
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-
 <title>마이페이지</title>
 
 <!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
-<style type="text/css">
-   .navbar-inverse {
-       background-color: #2bb7d5;
-       border-color: #00a3cc;
-   }
-   
-   .navbar {
-       margin: 0;
-       border: none;
-       border-bottom: 2px solid #95daea;
-       border-radius: 0;
-   }
-   
-   .navbar .navbar-brand{
-       color: #fff;
-       font-size: 28px;
-       font-weight: bold;
-   }   
-   
-   .navbar-inverse .navbar-nav > li > a {
-       color: white;
-   }   
-   
-/*    .h4 {
-   	   font-size: 18px;
-   	   margin-top: 10px;
-   	   margin-bottom: 10px;
-   	   color: inherit;
-   } */
-      
+<style type="text/css"> 
    .li {
    	  font-color: black;
    }
 </style>
-
-<!-- JavaScript -->
-<!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
-<script>
-	$('.nav-pills').scrollingTabs();
-</script>
 
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>

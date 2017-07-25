@@ -29,7 +29,7 @@
 </style>
 
 <!-- JavaScript -->
-<script type="text/javascript">
+<script>
 	function meeting_delete() {
 		alert('해당 모임을 삭제하시겠습니까?');
 		
@@ -37,78 +37,98 @@
 	}
 </script>
 
+
+<!-- [Header] 공통 헤더 -->
+<%@include file = "../header.jsp"%>
 </head>
 <body>
 	
-	<!-- 2. [Content] 내용 가져오기 -->
-	<div class="tab-content">
-	 
-		<!-- 검색 -->
-	    <div class="col-md-4 col-md-offset-8">
-			<form action="#" method="POST" class="search-form">
-				<div class="form-group has-feedback">
-	           		<label for="search" class="sr-only">search</label>
-	           		<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력해주세요.">
-	             		<!-- 돋보기 모양 -->
-	            	<span class="glyphicon glyphicon-search form-control-feedback"></span>
-	           	</div>
-			</form>
-		</div>
+	 <div class="container">
+      <!-- 타이틀 -->
+      <div class="page-header clearfix">
+         <h1>마이페이지</h1>      
+      </div>
+      
+      <div id="myPageSetting" class="row">
+	         <!--/// [왼쪽/리스트 목록]: 12칸 중 "3칸" 크기 확보 ///-->
+	         <div class="col-md-3">         
+	         	<%@include file = "MyPageSidebar.jsp"%>
+	         </div>
+        
+        	 <!--/// [오른쪽/해당되는 내용]: 12칸 중 "9칸" 크기 확보 ///-->
+			 <div class="col-md-9">
+				  <div class="tab-content">	 
+					<!-- 검색 -->
+				    <div class="col-md-4 col-md-offset-8">
+						<form action="#" method="POST" class="search-form">
+							<div class="form-group has-feedback">
+				           		<label for="search" class="sr-only">search</label>
+				           		<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력해주세요.">
+				             		<!-- 돋보기 모양 -->
+				            	<span class="glyphicon glyphicon-search form-control-feedback"></span>
+				           	</div>
+						</form>
+					</div>
 	
 				
-			<!-- [오른쪽/리스트에 해당되는 내용]: 12칸 중 "9칸" 크기 확보 -->
-			<!-- 테이블 마우스 갖다대면 활성화 표시됨 -->
-			<table class="table table-hover">
-				<!-- 리스트 > 타이틀 -->
-				
-				<!-- 테이블 값 > 가져와서 뿌리기 -->
-				<!--  -->
-			    <thead>
-			      <tr>
-			        <th>순번</th>
-			        <th>모임명</th>
-			        <th>작성자</th>
-			        <th>참여인원 현황</th>
-			        <th>등록일</th>
-			        <th>조회수</th>
-			        <th>삭제</th>			        
-			      </tr>
-			    </thead>
-			    
-				<tbody>
-					<tr>
-				        <td>1</td>
-				        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-				        <td>자바 뽀개기1</td>
-				        <td>AAA</td>
-				        <td>3/4</td>
-				        <td>2017/06/20</td>
-				        <td>20</td>
-				        <td><input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"></td>
-					</tr>
-					<tr>
-				        <td>2</td>
-				        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-				        <td>자바 뽀개기2</td>
-				        <td>AAA</td>
-				        <td>3/4</td>
-				        <td>2017/06/20</td>
-				        <td>20</td>
-				        <td><input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"></td>
-					</tr>
-				</tbody>
-			</table>	
-		</div>
-
+					<!-- [오른쪽/리스트에 해당되는 내용]: 12칸 중 "9칸" 크기 확보 -->
+					<!-- 테이블 마우스 갖다대면 활성화 표시됨 -->
+					<table class="table table-hover">
+						<!-- 리스트 > 타이틀 -->
+						
+						<!-- 테이블 값 > 가져와서 뿌리기 -->
+						<!--  -->
+					    <thead>
+					      <tr>
+					        <th>순번</th>
+					        <th>모임명</th>
+					        <th>작성자</th>
+					        <th>참여인원 현황</th>
+					        <th>등록일</th>
+					        <th>조회수</th>
+					        <th>삭제</th>			        
+					      </tr>
+					    </thead>
+					    
+						<tbody>
+							<tr>
+						        <td>1</td>
+						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
+						        <td>자바 뽀개기1</td>
+						        <td>AAA</td>
+						        <td>3/4</td>
+						        <td>2017/06/20</td>
+						        <td>20</td>
+						        <td><input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"></td>
+							</tr>
+							<tr>
+						        <td>2</td>
+						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
+						        <td>자바 뽀개기2</td>
+						        <td>AAA</td>
+						        <td>3/4</td>
+						        <td>2017/06/20</td>
+						        <td>20</td>
+						        <td><input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"></td>
+							</tr>
+						</tbody>
+					</table>	
+				</div>
 		
-		<!-- 페이징하기 (프리뷰, 넥스트 적용시키기) -->
-		<!-- 프리뷰, 넥스트 > 참고 할 사이트
-			 : https://www.w3schools.com/bootstrap/bootstrap_pager.asp
-			 : http://getbootstrap.com/components/#pagination -->
-		<ul class="pagination">
-		    <li><a href="#">1</a></li>
-	  	</ul>
-			
+				<!-- 페이징하기 (프리뷰, 넥스트 적용시키기) -->
+				<!-- 프리뷰, 넥스트 > 참고 할 사이트
+					 : https://www.w3schools.com/bootstrap/bootstrap_pager.asp
+					 : http://getbootstrap.com/components/#pagination -->
+				<!-- <ul class="pagination">
+				    <li><a href="#">1</a></li>
+			  	</ul> -->
+			</div>
+		</div>
+	
+	<!-- [Footer] 페이지 하단 (고정화면) -->
+	<hr>
+	<%@include file = "../footer.jsp"%>
+	</div>		
 	
 </body>
 </html>

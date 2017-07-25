@@ -11,43 +11,36 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery library -->
-<script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
 <title>회원가입 저장한 내용 수정</title>
 
-<!-- JavaScript -->
-<!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
-<script>
-   $('.nav-pills').scrollingTabs(); 
-</script>
-
-<script>
+<!-- <script>
 	 $(document).ready(function(){
-	    var link = document.location.href;//현재접속url
-	    var tab = link.split('/').pop(); // 배열의 맨 마지막 요소를 삭제하고 삭제된 해당 값을 반환함
-	    $('a[href$='+tab+']').trigger("click");//해당 앵커트리거를 이용 클릭 이벤트
+		 var link = document.location.href;				//현재접속url
+		 var tab = link.split('/').pop(); 				// 배열의 맨 마지막 요소를 삭제하고 삭제된 해당 값을 반환함
+		 $('a[href$='+tab+']').trigger("click");		//해당 앵커트리거를 이용 클릭 이벤트
 	 });
-</script>
+</script> -->
 
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
 </head>
 <body>
           
-   <!-- [Content] 1단계 > 개인 회원가입 폼 내용부분 -->
    <div class="container">
       <!-- 타이틀 -->
       <div class="page-header clearfix">
          <h1>마이페이지</h1>      
       </div>
-         <!-- <div class="col-8 col-md-offset-2"> -->
-         <div id="changeMyInfo" class="tab-pane fade active in">
-         
-            <!-- 참고 사이트: https://www.w3schools.com/bootstrap/bootstrap_panels.asp -->
-            <!-- panel: 콘텐츠가 있는 박스 형태의 구성요소를 만들 때 사용 -->
-            <div id="myPageSetting" class="row">
+
+	  <!-- 참고 사이트: https://www.w3schools.com/bootstrap/bootstrap_panels.asp -->
+      <!-- panel: 콘텐츠가 있는 박스 형태의 구성요소를 만들 때 사용 -->
+      <div id="changeMyInfo" class="tab-pane fade active in">      
+      <div id="myPageSetting" class="row">
       
          <!--/// [왼쪽/리스트 목록]: 12칸 중 "3칸" 크기 확보 ///-->
          <div class="col-md-3">         
@@ -69,18 +62,15 @@
                   <p class="help-block">
                      &nbsp;<small>* 회원님의 인적사항을 수정 및 확인하실 수 있습니다.</small>   
                   </p>
-                  <br>
                   
+                  <br>                 
 
                   <!-- [Form] 개인정보 수정할 수 있는 폼 -->
                   <form action="/mypage/PersonSecondModify" class="form-horizontal" method="post">               
                      <!-- 아이디(비활성화) -->
                      <div class="form-group">
-                        <!-- 입력항목이름 -->
-                        <label for="Id" class="col-md-2 control-label">아이디</label>
-               
+                        <label for="Id" class="col-md-2 control-label">아이디</label>               
                         <div class="col-md-10">
-                           <!-- 입력칸크기 -->
                            <input type="text" class="form-control" name="guserId" value="${pdto.guserId}" required disabled>
                         </div>
                      </div>
@@ -101,7 +91,7 @@
                         </div>
                      </div>
                      
-                     <!-- 전화번호 -->
+                     <!-- 연락처 -->
                      <div class="form-group">
                         <label for="Phone" class="col-md-2 control-label">휴대폰 번호</label>
                         <div class="col-md-10">
@@ -109,7 +99,7 @@
                         </div>
                      </div>
                      
-                     <!-- 성별 (라디오 버튼) -->
+                     <!-- 성별 -->
                      <div class="form-group">
                         <label for="Gender" class="col-md-2 control-label">성별</label>
                         <div class="col-md-10">
@@ -135,7 +125,7 @@
                      <input type="hidden" name="guserPw" value="${pdto.guserPw}">
                      <input type="hidden" name="guserCode" value="${pdto.guserCode}">
       
-                     <!-- 1단계 확인 버튼 -->
+                     <!-- 1단계 수정완료 버튼 -->
                      <div class="clear-fix">
                         <div class="pull-right">
                            <button type="submit" class="btn btn-primary">1단계 수정완료</button>

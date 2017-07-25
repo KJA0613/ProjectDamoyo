@@ -44,6 +44,7 @@ public class PersonMypageController {
 	}
 	
 
+	
 	// 01-01-01. [개인회원] 마이페이지 - 개인정보 수정 > 비밀번호 확인 후, "수정할 수 있는 페이지로 이동"
 	@RequestMapping(value="/PersonFirstModify", method = RequestMethod.POST)
 	public String PersonFirstModify(@RequestParam("guserInfoPw") String guserInfoPw, HttpSession session, Model model){
@@ -238,35 +239,37 @@ public class PersonMypageController {
 		return url;
 	}
 	
-	// 내가개설한모임
-	@RequestMapping(value = "/CreateMeeting", method = RequestMethod.GET)
-	public String CreateMeeting() {
+	
+	
+	// 02. [개인회원] 마이페이지 - 내가 개설한 모임
+	@RequestMapping(value = "/MyPageCreateMeeting", method = RequestMethod.GET)
+	public String MyPageCreateMeeting() {
 		String url = "mypage/MyPageCreateMeeting";
 
 		return url;
 	}
 
-	// 내가참여중인모임
-	@RequestMapping(value = "/Participation", method = RequestMethod.GET)
-	public String Participation() {
+	// 03. [개인회원] 마이페이지 - 내가 참여중인 모임
+	@RequestMapping(value = "/MyPageParticipation", method = RequestMethod.GET)
+	public String MyPageParticipation() {
 		String url = "mypage/MyPageParticipation";
-
+		
 		return url;
 	}
 
-	// 내가찜한모임
-	@RequestMapping(value = "/Good", method = RequestMethod.GET)
-	public String Good() {
+	// 04. [개인회원] 마이페이지 - 내가 찜한 모임
+	@RequestMapping(value = "/MyPageGood", method = RequestMethod.GET)
+	public String MyPageGood() {
 		String url = "mypage/MyPageGood";
 
 		return url;
 	}
 
-	// 내가올린자료
-	@RequestMapping(value = "/UploadFile", method = RequestMethod.GET)
-	public String UploadFile() {
+	// 05. [개인회원] 마이페이지 - 내가 올린 자료
+	@RequestMapping(value = "/MyPageUploadFile", method = RequestMethod.GET)
+	public String MyPageUploadFile() {
 		String url = "mypage/MyPageUploadFile";
-
+			
 		return url;
 	}
 	
