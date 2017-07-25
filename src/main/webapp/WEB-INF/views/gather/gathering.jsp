@@ -1993,8 +1993,7 @@ a:visited {
 		<hr>
 
 		<!-- 모달  -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 				<!--	<div class="modal-header">
@@ -2005,13 +2004,17 @@ a:visited {
 		      			</div> -->
 				<!-- 	<div class="modal-body" id="modal-body-no"></div> -->
 					
+					<div class="modal-header">
+						<div class="col-xs-2 col-md-12">
+					    	<img width="80px" height="80px" style="margin-left: auto; margin-right: auto; display: block;" src="/resources/image/icon/heart_before.png">
+				    	</div>
+					</div>
+					
 					<div class="modal-body" id="modal-body-img">
-						<img class='img-responsive' id='modalImg'>
+						<img class='img-responsive' width="598px" height="350px"  id='modalImg'
+							 style="margin-left: auto; margin-right: auto; display: block;">
 					</div>
 					<div class="modal-body" id="modal-body-id"></div>
-					<div class="modal-body" id="modal-body-subject">
-						<label for="recipient-name" class="control-label">제목 : </label>
-					</div>
 					<div class="modal-body" id="modal-body-category"></div>
 					<!-- <div class="modal-body" id="modal-body-write"></div> -->
 					<div class="modal-body" id="modal-body-date"></div>
