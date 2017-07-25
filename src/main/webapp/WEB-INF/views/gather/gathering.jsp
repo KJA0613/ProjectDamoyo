@@ -16,7 +16,7 @@
 <title>모임 모집</title>
 
 <!-- Bootstrap core CSS -->
-<!-- <link href="/resources/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+<link href="/resources/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <!-- <link href="/resources/examples/offcanvas/offcanvas.css" rel="stylesheet"> -->
 <script src="/resources/assets/js/ie-emulation-modes-warning.js"></script>
@@ -2019,8 +2019,7 @@ a:visited {
 					<div class="modal-body" id="modal-body-area"></div>
 					<div class="modal-body" id="modal-body-content"></div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default pull-left"
-							data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
 						<button type="button" class="btn btn-primary">신청</button>
 					</div>
 				</div>
