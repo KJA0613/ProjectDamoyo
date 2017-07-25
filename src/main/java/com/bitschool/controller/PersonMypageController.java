@@ -97,8 +97,11 @@ public class PersonMypageController {
 		//System.out.println("[TEST-회원정보 수정(희망 카테고리)] 로그인 사용자 > 희망카테고리 데이터: " + cdto);	
 		
 		// 희망지역, 카테고리 > 데이터 저장해서 보내기 (뿌려주기 위해서)
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("adto", adto);
 		model.addAttribute("cdto", cdto);
+		
+		System.out.println("참/거짓: "+ flag);
 		
 		// 희망지역, 카테고리 > 2단계 수정페이지에 데이터들 뿌려주기
 		if(flag) {	
@@ -112,16 +115,23 @@ public class PersonMypageController {
 	
 	// 01-01-03. [개인회원] 마이페이지 - 2단계 > 희망지역 및 카테고리 > 전체 조회
 	@RequestMapping(value="/PersonFinalCheck", method=RequestMethod.POST)
-	public String PersonFinalCheck() {
-		String url = null;
-			
+	public String PersonFinalCheck(PersonDTO pdto, AreaDTO adto, CategoryDTO cdto, Model model) {
+		String url = null;			
 		
-		//System.out.println("[TEST-회원정보 수정(희망 지역 수정)] 2단계 수정 완료된 데이터: " + adto);
-		//System.out.println("[TEST-회원정보 수정(희망 카테고리 수정)] 2단계 수정 완료된 데이터: " + cdto);
+		System.out.println("[TEST-회원정보 수정(개인정보 수정)] 1단계 수정 완료된 데이터: " + pdto);
+		System.out.println("[TEST-회원정보 수정(희망 지역 수정)] 2단계 수정 완료된 데이터: " + adto);
+		System.out.println("[TEST-회원정보 수정(희망 카테고리 수정)] 2단계 수정 완료된 데이터: " + cdto);
+		
+		// 희망지역 & 희망카테고리 수정
+		//boolean adtoFlag = memberService.PersonHopeAreaModify(adto);
+		//boolean cdtoFlag = memberService.PersonHopeCategoryModify(cdto);
 		
 		// model 사용
+		//model.addAttribute("adto", adto);
+		//model.addAttribute("cdto", cdto);
 		
-		// url = "";
+		// 개인회원 마이페이지 비밀번호 확인 폼 이동
+		url = "mypage/MyPageManagement";
 		
 		return url;
 	}
@@ -228,36 +238,36 @@ public class PersonMypageController {
 		return url;
 	}
 	
-	//내가개설한모임
-	   @RequestMapping(value = "/CreateMeeting", method = RequestMethod.GET)
-	   public String CreateMeeting() {
-	      String url = "mypage/MyPageCreateMeeting";
-	      
-	      return url;
-	   }
-	   
-	   //내가참여중인모임
-	      @RequestMapping(value = "/Participation", method = RequestMethod.GET)
-	      public String Participation() {
-	         String url = "mypage/MyPageParticipation";
-	         
-	         return url;
-	      }
-	      
-	   //내가찜한모임
-	      @RequestMapping(value = "/Good", method = RequestMethod.GET)
-	      public String Good() {
-	         String url = "mypage/MyPageGood";
-	         
-	         return url;
-	      }
-	      
-	   //내가올린자료      
-	      @RequestMapping(value = "/UploadFile", method = RequestMethod.GET)
-	      public String UploadFile() {
-	         String url = "mypage/MyPageUploadFile";
-	         
-	         return url;
-	      }
+	// 내가개설한모임
+	@RequestMapping(value = "/CreateMeeting", method = RequestMethod.GET)
+	public String CreateMeeting() {
+		String url = "mypage/MyPageCreateMeeting";
+
+		return url;
+	}
+
+	// 내가참여중인모임
+	@RequestMapping(value = "/Participation", method = RequestMethod.GET)
+	public String Participation() {
+		String url = "mypage/MyPageParticipation";
+
+		return url;
+	}
+
+	// 내가찜한모임
+	@RequestMapping(value = "/Good", method = RequestMethod.GET)
+	public String Good() {
+		String url = "mypage/MyPageGood";
+
+		return url;
+	}
+
+	// 내가올린자료
+	@RequestMapping(value = "/UploadFile", method = RequestMethod.GET)
+	public String UploadFile() {
+		String url = "mypage/MyPageUploadFile";
+
+		return url;
+	}
 	
 }

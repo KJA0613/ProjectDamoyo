@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bitschool.dto.EmailDTO;
 import com.bitschool.dto.PersonDTO;
@@ -61,8 +62,9 @@ public class MemberLoginController {
 	
 	// 01. [개인회원] 로그인
 	// "쿠키"와 "세션" 설명 : http://88240.tistory.com/190 > [1차 처리] 세션 > [2차 처리 고민] 스프링 제공
-	@RequestMapping(value = "/PersonLogin", method = RequestMethod.POST)
-	public String LoginCheck(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, HttpServletRequest request, HttpSession session, Model model) {
+	@RequestMapping(value = "/PersonLogin", method = {RequestMethod.POST, RequestMethod.GET})
+	public String LoginCheck(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, HttpSession session, Model model, 
+							 HttpServletRequest request, RedirectAttributes redirectAttributes) {
 							
 		String url = null;
 
@@ -73,19 +75,25 @@ public class MemberLoginController {
 
 		// 로그인 성공 (DB에 해당 데이터 있음)
 		if(pdto != null) {
+			
 			// 세션에 사용자 정보 저장
-			session.setAttribute("pdto", pdto);
-
+			session.setAttribute("pdto", pdto);			
+			
 			List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
 			session.setAttribute("recommgatherList", recommgatherList);
+			
+			//redirectAttributes.addFlashAttribute("pdto", pdto);
+			//System.out.println("리다이렉트 값: " + pdto);
 			
 			// 이전 페이지로 복귀
 			//String referer = request.getHeader("Referer");
 			//System.out.println("페이지 경로명: " + referer);		// [출력] http://localhost:5050/member/LoginForm		
 			//String[] loginReferer = referer.split("/");
 			
+			//System.out.println("4번째: " + loginReferer[4]);
+			
 			// 메인페이지 이동 (reload)
-			//url = loginReferer.toString();
+			//url = "redirect:/member/" + loginReferer[4].toString();
 			url = "redirect:/";
 			
 		// 로그인 실패 (DB에 해당 데이터 없음)
