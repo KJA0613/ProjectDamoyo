@@ -80,20 +80,7 @@
 			<!--/// [왼쪽/리스트 목록]: 12칸 중 "3칸" 크기 확보 ///-->
 			<div class="col-md-3">			
 				<!-- 메뉴 리스트 -->
-				<ul class="nav nav-pills nav-stacked" role="tablist">
-					<!-- active: selected 의미 (미리 선택되어 있음) -->
-					<!-- data-toggle="tab": 탭 활성화 -->
-					<!-- 1. 회원정보관리 -->
-					<li id="link_myInfoModify" class="active"><a href="#tab1" data-toggle="tab">회원정보관리</a></li>
-					<!-- 2. 내가 개설한 모임 -->
-					<li id="link_myCreateMeeting"><a href="#tab2" data-toggle="tab">내가 개설한 모임</a></li>
-					<!-- 3. 내가 참여중인 모임 -->
-					<li id="link_myEnterMeeting"><a href="#tab3" data-toggle="tab">내가 참여중인 모임</a></li>
-					<!-- 4. 내가 찜한 모임 -->
-					<li id="link_myGoodMeeting"><a href="#tab4" data-toggle="tab">내가 찜한 모임</a></li>
-					<!-- 5. 내가 올린 자료 -->
-					<li id="link_myUploadFile"><a href="#tab5" data-toggle="tab">내가 올린 자료</a></li>
-				</ul>				
+				<%@include file = "MyPageSidebar.jsp"%>			
 			</div>
 			
 			
