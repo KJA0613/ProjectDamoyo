@@ -39,7 +39,7 @@ import com.google.gson.Gson;
 
 /**
  * Handles requests for the application home page.
- * 1 gyu hihihi
+ * 1 gyu hihihi jung-a
  */
 @Controller
 @RequestMapping(value="/blog", method = {RequestMethod.GET,RequestMethod.POST})
@@ -62,9 +62,6 @@ public class BlogController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
-	/**
-	 * github ¼º°ø!
-	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
