@@ -4,6 +4,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<!-- JQuery CDN -->	
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
 <title>회원 정보 수정</title>
 
 <!-- [TEST] CSS (2차: resource에서 스타일시트  따로 관리 할 예정) -->
@@ -47,6 +50,11 @@
 		
 	}
 
+</script>
+
+<!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
+<script>
+   $('.nav-pills').scrollingTabs(); 
 </script>
 
 </head>

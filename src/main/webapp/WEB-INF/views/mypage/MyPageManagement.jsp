@@ -14,52 +14,14 @@
 <!-- Latest compiled JavaScript -->
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- JQuery CDN -->	
-<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-
 <title>마이페이지</title>
 
 <!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
-<style type="text/css">
-   .navbar-inverse {
-       background-color: #2bb7d5;
-       border-color: #00a3cc;
-   }
-   
-   .navbar {
-       margin: 0;
-       border: none;
-       border-bottom: 2px solid #95daea;
-       border-radius: 0;
-   }
-   
-   .navbar .navbar-brand{
-       color: #fff;
-       font-size: 28px;
-       font-weight: bold;
-   }   
-   
-   .navbar-inverse .navbar-nav > li > a {
-       color: white;
-   }   
-   
-/*    .h4 {
-   	   font-size: 18px;
-   	   margin-top: 10px;
-   	   margin-bottom: 10px;
-   	   color: inherit;
-   } */
-      
+<style type="text/css"> 
    .li {
    	  font-color: black;
    }
 </style>
-
-<!-- JavaScript -->
-<!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
-<script>
-	$('.nav-pills').scrollingTabs();
-</script>
 
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
@@ -80,20 +42,7 @@
 			<!--/// [왼쪽/리스트 목록]: 12칸 중 "3칸" 크기 확보 ///-->
 			<div class="col-md-3">			
 				<!-- 메뉴 리스트 -->
-				<ul class="nav nav-pills nav-stacked" role="tablist">
-					<!-- active: selected 의미 (미리 선택되어 있음) -->
-					<!-- data-toggle="tab": 탭 활성화 -->
-					<!-- 1. 회원정보관리 -->
-					<li id="link_myInfoModify" class="active"><a href="#tab1" data-toggle="tab">회원정보관리</a></li>
-					<!-- 2. 내가 개설한 모임 -->
-					<li id="link_myCreateMeeting"><a href="#tab2" data-toggle="tab">내가 개설한 모임</a></li>
-					<!-- 3. 내가 참여중인 모임 -->
-					<li id="link_myEnterMeeting"><a href="#tab3" data-toggle="tab">내가 참여중인 모임</a></li>
-					<!-- 4. 내가 찜한 모임 -->
-					<li id="link_myGoodMeeting"><a href="#tab4" data-toggle="tab">내가 찜한 모임</a></li>
-					<!-- 5. 내가 올린 자료 -->
-					<li id="link_myUploadFile"><a href="#tab5" data-toggle="tab">내가 올린 자료</a></li>
-				</ul>				
+				<%@include file = "MyPageSidebar.jsp"%>			
 			</div>
 			
 			
