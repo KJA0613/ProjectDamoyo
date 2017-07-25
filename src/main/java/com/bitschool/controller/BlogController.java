@@ -63,7 +63,7 @@ public class BlogController {
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
 	/**
-	 * Simply selects the home view to render by returning its name.
+	 * github ¼º°ø!
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
