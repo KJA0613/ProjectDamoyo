@@ -63,7 +63,7 @@ public class BlogController {
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
 	/**
-	 * github 성공!
+	 * github 성공! 테스트
 	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
