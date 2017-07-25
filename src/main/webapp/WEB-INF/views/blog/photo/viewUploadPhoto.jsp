@@ -50,7 +50,7 @@
             if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                    var imgObj = document.getElementById('blah');
+                    var imgObj = document.getElementById('imgWindow');
                     imgObj.src = e.target.result;
             }
               reader.readAsDataURL(input.files[0]);
@@ -85,7 +85,7 @@
 								</div>
 								<div class="form-group">
 									<input type='file' id="imgInp" class="form-control" name="uploadImg" onchange="readURL(this)"/>
-      							    <img id="blah" src="\resources\blog\image\no_detail_img.gif" width="400" height="300" />
+      							    <img id="imgWindow" src="\resources\blog\image\no_detail_img.gif" width="400" height="300" />
 								</div>							
 							</td>
 						</tr>
