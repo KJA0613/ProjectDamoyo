@@ -22,6 +22,8 @@ public interface IGatheringDAO {
 
 	public boolean mergeList(List<RecommGatherDTO> recommgatherList);
 
-	public List<GatheringDTO> getRecommAll(String guserId);
+	public List<GatheringDTO> getRecommUser(String guserId);
+
+	public List<GatheringDTO> getRecommDefault();
 	
 }

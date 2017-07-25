@@ -360,46 +360,36 @@ function catMidChangeThr(item){
 
 <title>희망지역, 카테고리 수정</title>
 
-<!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
-<style type="text/css">
-   .navbar-inverse {
-       background-color: #2bb7d5;
-       border-color: #00a3cc;
-   }
-   .navbar {
-       margin: 0;
-       border: none;
-       border-bottom: 2px solid #95daea;
-       border-radius: 0;
-   }
-   .navbar .navbar-brand{
-       color: #fff;
-       font-size: 28px;
-       font-weight: bold;
-   }
-   
-   .navbar-inverse .navbar-nav > li > a {
-      color: white;
-   }   
-</style>
+
+<!-- [Header] 공통 헤더 -->
+<%@include file = "../header.jsp"%>
 </head>
 
 <body>	
 
-	<br>
-	<!-- 02. [Content] 2단계 > 개인 회원가입 폼 내용부분 -->
+	<!-- [Content] 개인 회원가입 폼 내용부분 -->
 	<div class="container">
-		<!-- clearfix: 어긋난 칼럼들 보정 -->
-		<div class="clearfix">
-			<div class="col-md-8 col-md-offset-2">
-			<div id="changeMyInfo" class="tab-pane fade active in">
-				<!-- 참고 사이트: https://www.w3schools.com/bootstrap/bootstrap_panels.asp -->
-				<!-- panel: 콘텐츠가 있는 박스 형태의 구성요소를 만들 때 사용 -->
+	    <!-- 타이틀 -->
+        <div class="page-header clearfix">
+           <h1>마이페이지</h1>      
+        </div>
+        
+        <div id="changeMyInfo" class="tab-pane fade active in">  
+	         <div id="myPageSetting" class="row">
+	         <!--/// [왼쪽/리스트 목록]: 12칸 중 "3칸" 크기 확보 ///-->
+	         <div class="col-md-3">         
+	         	<%@include file = "MyPageSidebar.jsp"%>
+	         </div>
+	         
+	         <!--/// [오른쪽/해당되는 내용]: 12칸 중 "9칸" 크기 확보 ///-->
+			 <div class="col-md-9">
+				<div class="tab-content">   
 				<div class="panel panel-default">
 					<!--/// 제목 ///-->
 					<div class="panel-heading">
 						<h4><strong>회원정보수정 - 2단계</strong></h4>					
 					</div>
+						
 					<!--/// 내용 ///-->
 					<div class="panel-body">
 						<!-- 도움말 -->
@@ -408,262 +398,262 @@ function catMidChangeThr(item){
 						</p>
 						<br>
 						
-						<!-- 희망지역, 카테고리 수정할 수 있는 폼 -->
+						<!-- [Form] 희망지역, 희망카테고리 수정 -->
 						<form action="/mypage/PersonFinalCheck" method="post" name="signform" id="per">
-					         <h4>모임 희망지역</h4>
-					         <div id=list1>
-					            <div class="dropdown">
-					
-					               <table cellpadding=1>
-					                  <tr>
-					                     <td>1차</td>
-					                     <td>2차</td>
-					                  </tr>
-					                  <tr>
-					                     <!--1차지역선택  -->
-					                     <td>
-						                     <select class="form-control" id="bigarea1" name="bigarea1" onChange="areachange(this.options.selectedIndex)">
-						                           <option selected value="">-선택-</option>
-							                       <option value="1" <c:if test="${adto.bigarea1 eq '1'}">selected="selected"</c:if>>서울특별시</option>
-							                       <option value="2" <c:if test="${adto.bigarea1 eq '2'}">selected="selected"</c:if>>경기도</option>
-							                       <option value="3" <c:if test="${adto.bigarea1 eq '3'}">selected="selected"</c:if>>인천광역시</option>
-							                       <option value="4" <c:if test="${adto.bigarea1 eq '4'}">selected="selected"</c:if>>강원도</option>
-							                       <option value="5" <c:if test="${adto.bigarea1 eq '5'}">selected="selected"</c:if>>대전광역시</option>
-							                       <option value="6" <c:if test="${adto.bigarea1 eq '6'}">selected="selected"</c:if>>세종특별자치시</option>
-							                       <option value="7" <c:if test="${adto.bigarea1 eq '7'}">selected="selected"</c:if>>충청남도</option>
-							                       <option value="8" <c:if test="${adto.bigarea1 eq '8'}">selected="selected"</c:if>>충청북도</option>
-							                       <option value="9" <c:if test="${adto.bigarea1 eq '9'}">selected="selected"</c:if>>부산광역시</option>
-							                       <option value="10" <c:if test="${adto.bigarea1 eq '10'}">selected="selected"</c:if>>울산광역시</option>
-							                       <option value="11" <c:if test="${adto.bigarea1 eq '11'}">selected="selected"</c:if>>경상남도</option>
-							                       <option value="12" <c:if test="${adto.bigarea1 eq '12'}">selected="selected"</c:if>>경상북도</option>
-							                       <option value="13" <c:if test="${adto.bigarea1 eq '13'}">selected="selected"</c:if>>대구광역시</option>
-							                       <option value="14" <c:if test="${adto.bigarea1 eq '14'}">selected="selected"</c:if>>광주광역시</option>
-							                       <option value="15" <c:if test="${adto.bigarea1 eq '15'}">selected="selected"</c:if>>전라남도</option>
-							                       <option value="16" <c:if test="${adto.bigarea1 eq '16'}">selected="selected"</c:if>>전라북도</option>
-							                       <option value="17" <c:if test="${adto.bigarea1 eq '17'}">selected="selected"</c:if>>제주특별자치도</option>
+						         <h4>모임 희망지역</h4>
+						         <div id=list1>
+						            <div class="dropdown">
+						
+						               <table cellpadding=1>
+						                  <tr>
+						                     <td>1차</td>
+						                     <td>2차</td>
+						                  </tr>
+						                  <tr>
+						                     <!--1차지역선택  -->
+						                     <td>
+							                     <select class="form-control" id="bigarea1" name="bigarea1" onChange="areachange(this.options.selectedIndex)">
+							                           <option selected value="">-선택-</option>
+								                       <option value="1" <c:if test="${adto.bigarea1 eq '1'}">selected="selected"</c:if>>서울특별시</option>
+								                       <option value="2" <c:if test="${adto.bigarea1 eq '2'}">selected="selected"</c:if>>경기도</option>
+								                       <option value="3" <c:if test="${adto.bigarea1 eq '3'}">selected="selected"</c:if>>인천광역시</option>
+								                       <option value="4" <c:if test="${adto.bigarea1 eq '4'}">selected="selected"</c:if>>강원도</option>
+								                       <option value="5" <c:if test="${adto.bigarea1 eq '5'}">selected="selected"</c:if>>대전광역시</option>
+								                       <option value="6" <c:if test="${adto.bigarea1 eq '6'}">selected="selected"</c:if>>세종특별자치시</option>
+								                       <option value="7" <c:if test="${adto.bigarea1 eq '7'}">selected="selected"</c:if>>충청남도</option>
+								                       <option value="8" <c:if test="${adto.bigarea1 eq '8'}">selected="selected"</c:if>>충청북도</option>
+								                       <option value="9" <c:if test="${adto.bigarea1 eq '9'}">selected="selected"</c:if>>부산광역시</option>
+								                       <option value="10" <c:if test="${adto.bigarea1 eq '10'}">selected="selected"</c:if>>울산광역시</option>
+								                       <option value="11" <c:if test="${adto.bigarea1 eq '11'}">selected="selected"</c:if>>경상남도</option>
+								                       <option value="12" <c:if test="${adto.bigarea1 eq '12'}">selected="selected"</c:if>>경상북도</option>
+								                       <option value="13" <c:if test="${adto.bigarea1 eq '13'}">selected="selected"</c:if>>대구광역시</option>
+								                       <option value="14" <c:if test="${adto.bigarea1 eq '14'}">selected="selected"</c:if>>광주광역시</option>
+								                       <option value="15" <c:if test="${adto.bigarea1 eq '15'}">selected="selected"</c:if>>전라남도</option>
+								                       <option value="16" <c:if test="${adto.bigarea1 eq '16'}">selected="selected"</c:if>>전라북도</option>
+								                       <option value="17" <c:if test="${adto.bigarea1 eq '17'}">selected="selected"</c:if>>제주특별자치도</option>
+							                     </select>
+						                     </td>
+											 
+						                     <td>					                     
+						                     
+						                     <select class="form-control" name="area" size=1>
+							                     <%-- <c:forEach var = "adto" items="${adto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${adto.area}">${adto.area}</option>					                      
+							                     <%-- </c:forEach> --%>
 						                     </select>
-					                     </td>
-										 
-					                     <td>					                     
-					                     
-					                     <select class="form-control" name="area" size=1>
-						                     <%-- <c:forEach var = "adto" items="${adto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${adto.area}">${adto.area}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select>
-					                     
-					                     </td>
-					                  <tr>
-					                     <td>1차</td>
-					                     <td>2차</td>
-					                  </tr>
-					                  <tr>
-					                     <!--2차지역선택  -->
-					                     <td><select class="form-control" id="bigarea2" name="bigarea2" onChange="areachange2(this.options.selectedIndex)">
-					                           <option selected value="">-선택-</option>
-							                       <option value="1" <c:if test="${adto.bigarea2 eq '1'}">selected="selected"</c:if>>서울특별시</option>
-							                       <option value="2" <c:if test="${adto.bigarea2 eq '2'}">selected="selected"</c:if>>경기도</option>
-							                       <option value="3" <c:if test="${adto.bigarea2 eq '3'}">selected="selected"</c:if>>인천광역시</option>
-							                       <option value="4" <c:if test="${adto.bigarea2 eq '4'}">selected="selected"</c:if>>강원도</option>
-							                       <option value="5" <c:if test="${adto.bigarea2 eq '5'}">selected="selected"</c:if>>대전광역시</option>
-							                       <option value="6" <c:if test="${adto.bigarea2 eq '6'}">selected="selected"</c:if>>세종특별자치시</option>
-							                       <option value="7" <c:if test="${adto.bigarea2 eq '7'}">selected="selected"</c:if>>충청남도</option>
-							                       <option value="8" <c:if test="${adto.bigarea2 eq '8'}">selected="selected"</c:if>>충청북도</option>
-							                       <option value="9" <c:if test="${adto.bigarea2 eq '9'}">selected="selected"</c:if>>부산광역시</option>
-							                       <option value="10" <c:if test="${adto.bigarea2 eq '10'}">selected="selected"</c:if>>울산광역시</option>
-							                       <option value="11" <c:if test="${adto.bigarea2 eq '11'}">selected="selected"</c:if>>경상남도</option>
-							                       <option value="12" <c:if test="${adto.bigarea2 eq '12'}">selected="selected"</c:if>>경상북도</option>
-							                       <option value="13" <c:if test="${adto.bigarea2 eq '13'}">selected="selected"</c:if>>대구광역시</option>
-							                       <option value="14" <c:if test="${adto.bigarea2 eq '14'}">selected="selected"</c:if>>광주광역시</option>
-							                       <option value="15" <c:if test="${adto.bigarea2 eq '15'}">selected="selected"</c:if>>전라남도</option>
-							                       <option value="16" <c:if test="${adto.bigarea2 eq '16'}">selected="selected"</c:if>>전라북도</option>
-							                       <option value="17" <c:if test="${adto.bigarea2 eq '17'}">selected="selected"</c:if>>제주특별자치도</option>
-					                     </select></td>
-					                     <td><select class="form-control" name="areaP" size=1>
-					                        <%-- <c:forEach var = "adto" items="${adto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${adto.areaP}">${adto.areaP}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select></td>
-					                  <tr>
-					                     <td>1차</td>
-					                     <td>2차</td>
-					                  </tr>
-					                  <tr>
-					                     <!--3차지역선택  -->
-					                     <td><select class="form-control" name="bigarea3" onChange="areachange3(this.options.selectedIndex)">
-					                           	   <option selected value="">-선택-</option>
-							                       <option value="1" <c:if test="${adto.bigarea3 eq '1'}">selected="selected"</c:if>>서울특별시</option>
-							                       <option value="2" <c:if test="${adto.bigarea3 eq '2'}">selected="selected"</c:if>>경기도</option>
-							                       <option value="3" <c:if test="${adto.bigarea3 eq '3'}">selected="selected"</c:if>>인천광역시</option>
-							                       <option value="4" <c:if test="${adto.bigarea3 eq '4'}">selected="selected"</c:if>>강원도</option>
-							                       <option value="5" <c:if test="${adto.bigarea3 eq '5'}">selected="selected"</c:if>>대전광역시</option>
-							                       <option value="6" <c:if test="${adto.bigarea3 eq '6'}">selected="selected"</c:if>>세종특별자치시</option>
-							                       <option value="7" <c:if test="${adto.bigarea3 eq '7'}">selected="selected"</c:if>>충청남도</option>
-							                       <option value="8" <c:if test="${adto.bigarea3 eq '8'}">selected="selected"</c:if>>충청북도</option>
-							                       <option value="9" <c:if test="${adto.bigarea3 eq '9'}">selected="selected"</c:if>>부산광역시</option>
-							                       <option value="10" <c:if test="${adto.bigarea3 eq '10'}">selected="selected"</c:if>>울산광역시</option>
-							                       <option value="11" <c:if test="${adto.bigarea3 eq '11'}">selected="selected"</c:if>>경상남도</option>
-							                       <option value="12" <c:if test="${adto.bigarea3 eq '12'}">selected="selected"</c:if>>경상북도</option>
-							                       <option value="13" <c:if test="${adto.bigarea3 eq '13'}">selected="selected"</c:if>>대구광역시</option>
-							                       <option value="14" <c:if test="${adto.bigarea3 eq '14'}">selected="selected"</c:if>>광주광역시</option>
-							                       <option value="15" <c:if test="${adto.bigarea3 eq '15'}">selected="selected"</c:if>>전라남도</option>
-							                       <option value="16" <c:if test="${adto.bigarea3 eq '16'}">selected="selected"</c:if>>전라북도</option>
-							                       <option value="17" <c:if test="${adto.bigarea3 eq '17'}">selected="selected"</c:if>>제주특별자치도</option>
-					                     </select></td>
-					                     <td><select name="areaPP" class="form-control" size=1>
-					                         <%-- <c:forEach var = "adto" items="${adto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${adto.areaPP}">${adto.areaPP}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select></td>
-					
-					                     <!-- <td>
-					                     <button type="submit">go</button>
-					                  </td> -->
-					                  </tr>
-					
-					               </table>
-					            </div>
-					         </div>
-					
-					         <br> <br>
-					         
-					         <h4>모임 희망카테고리</h4>
-					         <!-- 카테고리 선택 -->
-					         <div id=list2>
-					            <div class="dropdown">
-					               <!-- 카테고리 그룹 선택 3-1 -->
-					               <table cellpadding=1>
-					                  <tr>
-					                     <td>1차</td>
-					                     <td>2차</td>
-					                     <td>3차</td>
-					                  </tr>
-					                  <tr>
-					                     <!--1차카테고리선택  -->
-					                     <td><select class="form-control" name="catTopOne" onChange="catChangeOne(this.options.selectedIndex)">
-					                           <option selected value="">-선택-</option>
-					                           <option value="1" <c:if test="${cdto.catTopOne eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
-					                           <option value="2" <c:if test="${cdto.catTopOne eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
-					                           <option value="3" <c:if test="${cdto.catTopOne eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
-					
-					                     </select></td>
-					                     <!--2차카테고리선택  -->
-					                     <td><select class="form-control" name="catMidOne" size=1 onChange="catMidChangeOne(this.options.selectedIndex)">
-					                     	 <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${cdto.catMidOne}">${cdto.catMidOne}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select></td>
-					                     <!--3차카테고리선택  -->
-					                     <td><select class="form-control" name="catBotOne" size=1>
-						                     <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${cdto.catBotOne}">${cdto.catBotOne}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select></td>
-					                  </tr>
-					               </table>
-					
-					               <!-- 카테고리 그룹 선택 3-2 -->
-					               <table cellpadding=1>
-					                  <tr>
-					                     <td>1차</td>
-					                     <td>2차</td>
-					                     <td>3차</td>
-					                  </tr>
-					                  <tr>
-					                     <!--1차카테고리선택  -->
-					                     <td><select class="form-control" name="catTopTwo" onChange="catChangeTwo(this.options.selectedIndex)">
-					                           <option selected value="">-선택-</option>
-					                           <option value="1" <c:if test="${cdto.catTopTwo eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
-					                           <option value="2" <c:if test="${cdto.catTopTwo eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
-					                           <option value="3" <c:if test="${cdto.catTopTwo eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
-					
-					                     </select></td>
-					                     <!--2차카테고리선택  -->
-					                      
-					                     <td><select class="form-control" name="catMidTwo" size=1 onChange="catMidChangeTwo(this.options.selectedIndex)">
-					                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${cdto.catMidTwo}">${cdto.catMidTwo}</option>					                      
-						                     <%-- </c:forEach> --%>				                           
-					                     </select></td>
-					                     
-					                     <!--3차카테고리선택  -->
-					                     <td><select class="form-control" name="catBotTwo" size=1>
-					                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${cdto.catBotTwo}">${cdto.catBotTwo}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select></td>
-					                  </tr>
-					               </table>
-					
-					               <!-- 카테고리 그룹 선택 3-3 -->
-					               <table cellpadding=1>
-					                  <tr>
-					                     <td>1차</td>
-					                     <td>2차</td>
-					                     <td>3차</td>
-					                  </tr>
-					                  <tr>
-					                     <!--1차카테고리선택  -->
-					                     <td><select class="form-control" name="catTopThr" onChange="catChangeThr(this.options.selectedIndex)">
-					                           <option selected value="">-선택-</option>
-					                           <option value="1" <c:if test="${cdto.catTopThr eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
-					                           <option value="2" <c:if test="${cdto.catTopThr eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
-					                           <option value="3" <c:if test="${cdto.catTopThr eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
-					
-					                     </select></td>
-					                     <!--2차카테고리선택  -->
-					                     <td><select class="form-control" name="catMidThr" size=1 onChange="catMidChangeThr(this.options.selectedIndex)">
-					                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${cdto.catMidThr}">${cdto.catMidThr}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select></td>
-					                     <!--3차카테고리선택  -->
-					                     <td><select class="form-control" name="catBotThr" size=1>
-					                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
-						                           <option value="" >-선택-</option>
-						                           <option selected value="${cdto.catBotThr}">${cdto.catBotThr}</option>					                      
-						                     <%-- </c:forEach> --%>
-					                     </select></td>
-					                  </tr>
-					                  <!-- <td>
-					               <button type="submit">go</button>
-					            </td> -->
-					
-					               </table>
-					            </div>
-					         </div>
-							 <br>
-		 
-							 <!-- [hidden] 회원가입하려는 사용자 정보 (1단계에서 입력한 내용) -->
-							 <input type="hidden" name="guserId" value="${pdto.guserId}">
-							 <input type="hidden" name="guserPw" value="${pdto.guserPw}">
-							 <input type="hidden" name="guserName" value="${pdto.guserName}">
-							 <input type="hidden" name="guserGender" value="${pdto.guserGender}">
-							 <input type="hidden" name="guserPhone" value="${pdto.guserPhone}">
-							 <input type="hidden" name="guserEmail" value="${pdto.guserEmail}">
-							 <input type="hidden" name="guserCode" value="${pdto.guserCode}">
-							 
-							 <!-- 2단계 > 수정완료 버튼 -->
-							 <div class="clear-fix">
-								<div class="pull-right">
-									<button type="submit" class="btn btn-primary" onClick="TwoSubmit()">수정완료</button>
-								</div>
-							 </div>
-					      </form>
+						                     
+						                     </td>
+						                  <tr>
+						                     <td>1차</td>
+						                     <td>2차</td>
+						                  </tr>
+						                  <tr>
+						                     <!--2차지역선택  -->
+						                     <td><select class="form-control" id="bigarea2" name="bigarea2" onChange="areachange2(this.options.selectedIndex)">
+						                           <option selected value="">-선택-</option>
+								                       <option value="1" <c:if test="${adto.bigarea2 eq '1'}">selected="selected"</c:if>>서울특별시</option>
+								                       <option value="2" <c:if test="${adto.bigarea2 eq '2'}">selected="selected"</c:if>>경기도</option>
+								                       <option value="3" <c:if test="${adto.bigarea2 eq '3'}">selected="selected"</c:if>>인천광역시</option>
+								                       <option value="4" <c:if test="${adto.bigarea2 eq '4'}">selected="selected"</c:if>>강원도</option>
+								                       <option value="5" <c:if test="${adto.bigarea2 eq '5'}">selected="selected"</c:if>>대전광역시</option>
+								                       <option value="6" <c:if test="${adto.bigarea2 eq '6'}">selected="selected"</c:if>>세종특별자치시</option>
+								                       <option value="7" <c:if test="${adto.bigarea2 eq '7'}">selected="selected"</c:if>>충청남도</option>
+								                       <option value="8" <c:if test="${adto.bigarea2 eq '8'}">selected="selected"</c:if>>충청북도</option>
+								                       <option value="9" <c:if test="${adto.bigarea2 eq '9'}">selected="selected"</c:if>>부산광역시</option>
+								                       <option value="10" <c:if test="${adto.bigarea2 eq '10'}">selected="selected"</c:if>>울산광역시</option>
+								                       <option value="11" <c:if test="${adto.bigarea2 eq '11'}">selected="selected"</c:if>>경상남도</option>
+								                       <option value="12" <c:if test="${adto.bigarea2 eq '12'}">selected="selected"</c:if>>경상북도</option>
+								                       <option value="13" <c:if test="${adto.bigarea2 eq '13'}">selected="selected"</c:if>>대구광역시</option>
+								                       <option value="14" <c:if test="${adto.bigarea2 eq '14'}">selected="selected"</c:if>>광주광역시</option>
+								                       <option value="15" <c:if test="${adto.bigarea2 eq '15'}">selected="selected"</c:if>>전라남도</option>
+								                       <option value="16" <c:if test="${adto.bigarea2 eq '16'}">selected="selected"</c:if>>전라북도</option>
+								                       <option value="17" <c:if test="${adto.bigarea2 eq '17'}">selected="selected"</c:if>>제주특별자치도</option>
+						                     </select></td>
+						                     <td><select class="form-control" name="areaP" size=1>
+						                        <%-- <c:forEach var = "adto" items="${adto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${adto.areaP}">${adto.areaP}</option>					                      
+							                     <%-- </c:forEach> --%>
+						                     </select></td>
+						                  <tr>
+						                     <td>1차</td>
+						                     <td>2차</td>
+						                  </tr>
+						                  <tr>
+						                     <!--3차지역선택  -->
+						                     <td><select class="form-control" name="bigarea3" onChange="areachange3(this.options.selectedIndex)">
+						                           	   <option selected value="">-선택-</option>
+								                       <option value="1" <c:if test="${adto.bigarea3 eq '1'}">selected="selected"</c:if>>서울특별시</option>
+								                       <option value="2" <c:if test="${adto.bigarea3 eq '2'}">selected="selected"</c:if>>경기도</option>
+								                       <option value="3" <c:if test="${adto.bigarea3 eq '3'}">selected="selected"</c:if>>인천광역시</option>
+								                       <option value="4" <c:if test="${adto.bigarea3 eq '4'}">selected="selected"</c:if>>강원도</option>
+								                       <option value="5" <c:if test="${adto.bigarea3 eq '5'}">selected="selected"</c:if>>대전광역시</option>
+								                       <option value="6" <c:if test="${adto.bigarea3 eq '6'}">selected="selected"</c:if>>세종특별자치시</option>
+								                       <option value="7" <c:if test="${adto.bigarea3 eq '7'}">selected="selected"</c:if>>충청남도</option>
+								                       <option value="8" <c:if test="${adto.bigarea3 eq '8'}">selected="selected"</c:if>>충청북도</option>
+								                       <option value="9" <c:if test="${adto.bigarea3 eq '9'}">selected="selected"</c:if>>부산광역시</option>
+								                       <option value="10" <c:if test="${adto.bigarea3 eq '10'}">selected="selected"</c:if>>울산광역시</option>
+								                       <option value="11" <c:if test="${adto.bigarea3 eq '11'}">selected="selected"</c:if>>경상남도</option>
+								                       <option value="12" <c:if test="${adto.bigarea3 eq '12'}">selected="selected"</c:if>>경상북도</option>
+								                       <option value="13" <c:if test="${adto.bigarea3 eq '13'}">selected="selected"</c:if>>대구광역시</option>
+								                       <option value="14" <c:if test="${adto.bigarea3 eq '14'}">selected="selected"</c:if>>광주광역시</option>
+								                       <option value="15" <c:if test="${adto.bigarea3 eq '15'}">selected="selected"</c:if>>전라남도</option>
+								                       <option value="16" <c:if test="${adto.bigarea3 eq '16'}">selected="selected"</c:if>>전라북도</option>
+								                       <option value="17" <c:if test="${adto.bigarea3 eq '17'}">selected="selected"</c:if>>제주특별자치도</option>
+						                     </select></td>
+						                     <td><select name="areaPP" class="form-control" size=1>
+						                         <%-- <c:forEach var = "adto" items="${adto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${adto.areaPP}">${adto.areaPP}</option>					                      
+							                     <%-- </c:forEach> --%>
+						                     </select></td>
+						
+						                     <!-- <td>
+						                     <button type="submit">go</button>
+						                  </td> -->
+						                  </tr>
+						
+						               </table>
+						            </div>
+						         </div>
+						
+						         <br> <br>
+						         
+						         <h4>모임 희망카테고리</h4>
+						         <!-- 카테고리 선택 -->
+						         <div id=list2>
+						            <div class="dropdown">
+						               <!-- 카테고리 그룹 선택 3-1 -->
+						               <table cellpadding=1>
+						                  <tr>
+						                     <td>1차</td>
+						                     <td>2차</td>
+						                     <td>3차</td>
+						                  </tr>
+						                  <tr>
+						                     <!--1차카테고리선택  -->
+						                     <td><select class="form-control" name="catTopOne" onChange="catChangeOne(this.options.selectedIndex)">
+						                           <option selected value="">-선택-</option>
+						                           <option value="1" <c:if test="${cdto.catTopOne eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
+						                           <option value="2" <c:if test="${cdto.catTopOne eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
+						                           <option value="3" <c:if test="${cdto.catTopOne eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
+						
+						                     </select></td>
+						                     <!--2차카테고리선택  -->
+						                     <td><select class="form-control" name="catMidOne" size=1 onChange="catMidChangeOne(this.options.selectedIndex)">
+						                     	 <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${cdto.catMidOne}">${cdto.catMidOne}</option>					                      
+							                     <%-- </c:forEach> --%>
+						                     </select></td>
+						                     <!--3차카테고리선택  -->
+						                     <td><select class="form-control" name="catBotOne" size=1>
+							                     <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${cdto.catBotOne}">${cdto.catBotOne}</option>					                      
+							                     <%-- </c:forEach> --%>
+						                     </select></td>
+						                  </tr>
+						               </table>
+						
+						               <!-- 카테고리 그룹 선택 3-2 -->
+						               <table cellpadding=1>
+						                  <tr>
+						                     <td>1차</td>
+						                     <td>2차</td>
+						                     <td>3차</td>
+						                  </tr>
+						                  <tr>
+						                     <!--1차카테고리선택  -->
+						                     <td><select class="form-control" name="catTopTwo" onChange="catChangeTwo(this.options.selectedIndex)">
+						                           <option selected value="">-선택-</option>
+						                           <option value="1" <c:if test="${cdto.catTopTwo eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
+						                           <option value="2" <c:if test="${cdto.catTopTwo eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
+						                           <option value="3" <c:if test="${cdto.catTopTwo eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
+						
+						                     </select></td>
+						                     <!--2차카테고리선택  -->
+						                      
+						                     <td><select class="form-control" name="catMidTwo" size=1 onChange="catMidChangeTwo(this.options.selectedIndex)">
+						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${cdto.catMidTwo}">${cdto.catMidTwo}</option>					                      
+							                     <%-- </c:forEach> --%>				                           
+						                     </select></td>
+						                     
+						                     <!--3차카테고리선택  -->
+						                     <td><select class="form-control" name="catBotTwo" size=1>
+						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${cdto.catBotTwo}">${cdto.catBotTwo}</option>					                      
+							                     <%-- </c:forEach> --%>
+						                     </select></td>
+						                  </tr>
+						               </table>
+						
+						               <!-- 카테고리 그룹 선택 3-3 -->
+						               <table cellpadding=1>
+						                  <tr>
+						                     <td>1차</td>
+						                     <td>2차</td>
+						                     <td>3차</td>
+						                  </tr>
+						                  <tr>
+						                     <!--1차카테고리선택  -->
+						                     <td><select class="form-control" name="catTopThr" onChange="catChangeThr(this.options.selectedIndex)">
+						                           <option selected value="">-선택-</option>
+						                           <option value="1" <c:if test="${cdto.catTopThr eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
+						                           <option value="2" <c:if test="${cdto.catTopThr eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
+						                           <option value="3" <c:if test="${cdto.catTopThr eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
+						
+						                     </select></td>
+						                     <!--2차카테고리선택  -->
+						                     <td><select class="form-control" name="catMidThr" size=1 onChange="catMidChangeThr(this.options.selectedIndex)">
+						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${cdto.catMidThr}">${cdto.catMidThr}</option>					                      
+							                     <%-- </c:forEach> --%>
+						                     </select></td>
+						                     <!--3차카테고리선택  -->
+						                     <td><select class="form-control" name="catBotThr" size=1>
+						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
+							                           <option value="" >-선택-</option>
+							                           <option selected value="${cdto.catBotThr}">${cdto.catBotThr}</option>					                      
+							                     <%-- </c:forEach> --%>
+						                     </select></td>
+						                  </tr>
+						                  <!-- <td>
+						               <button type="submit">go</button>
+						            </td> -->
+						
+						               </table>
+						            </div>
+						         </div>
+								 <br>
+			 
+								 <!-- [hidden] 회원가입하려는 사용자 정보 (1단계에서 입력한 내용) -->
+								 <input type="hidden" name="guserId" value="${pdto.guserId}">
+								 <input type="hidden" name="guserPw" value="${pdto.guserPw}">
+								 <input type="hidden" name="guserName" value="${pdto.guserName}">
+								 <input type="hidden" name="guserGender" value="${pdto.guserGender}">
+								 <input type="hidden" name="guserPhone" value="${pdto.guserPhone}">
+								 <input type="hidden" name="guserEmail" value="${pdto.guserEmail}">
+								 <input type="hidden" name="guserCode" value="${pdto.guserCode}">
+								 
+								 <!-- 2단계 > 수정완료 버튼 -->
+								 <div class="clear-fix">
+									<div class="pull-right">
+										<button type="submit" class="btn btn-primary" onClick="TwoSubmit()">2단계 수정완료</button>
+									</div>
+								 </div>
+						      </form>
 					</div>					
 				</div>
 			</div>		
 			</div>
+			 </div>
 		</div>
 	</div>
-	
 </body>
 </html>

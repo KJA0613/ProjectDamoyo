@@ -117,10 +117,20 @@ public class GatheringDAO implements IGatheringDAO {
 	}
 
 	@Override
-	public List<GatheringDTO> getRecommAll(String guserId) {
+	public List<GatheringDTO> getRecommUser(String guserId) {
 
 		List<GatheringDTO> recommList = null;
 		recommList = session.selectList(namespace+".recommAll", guserId);
+		
+		return recommList;
+	}
+
+	@Override
+	public List<GatheringDTO> getRecommDefault() {
+
+		List<GatheringDTO> recommList = null;
+		recommList = session.selectList(namespace+".recommDefault");
+		System.out.println(recommList);
 		
 		return recommList;
 	}

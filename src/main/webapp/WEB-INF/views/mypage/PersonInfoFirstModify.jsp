@@ -17,42 +17,6 @@
 
 <title>회원가입 저장한 내용 수정</title>
 
-<!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
-<style type="text/css">
-   .navbar-inverse {
-       background-color: #2bb7d5;
-       border-color: #00a3cc;
-   }
-   
-   .navbar {
-       margin: 0;
-       border: none;
-       border-bottom: 2px solid #95daea;
-       border-radius: 0;
-   }
-   
-   .navbar .navbar-brand{
-       color: #fff;
-       font-size: 28px;
-       font-weight: bold;
-   }   
-   
-   .navbar-inverse .navbar-nav > li > a {
-       color: white;
-   }   
-   
-   .h4 {
-         font-size: 18px;
-         margin-top: 10px;
-         margin-bottom: 10px;
-         color: inherit;
-   }
-      
-   .li {
-        font-color: black;
-   }
-   
-</style>
 <!-- JavaScript -->
 <!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
 <script>
@@ -66,8 +30,6 @@
 	    $('a[href$='+tab+']').trigger("click");//해당 앵커트리거를 이용 클릭 이벤트
 	 });
 </script>
-
-
 
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
@@ -89,23 +51,10 @@
       
          <!--/// [왼쪽/리스트 목록]: 12칸 중 "3칸" 크기 확보 ///-->
          <div class="col-md-3">         
-            <!-- 메뉴 리스트 -->
-            <ul class="nav nav-pills nav-stacked" role="tablist">
-               <!-- active: selected 의미 (미리 선택되어 있음) -->
-               <!-- data-toggle="tab": 탭 활성화 -->
-               <!-- 1. 회원정보관리 -->
-               <li id="link_myInfoModify" class="active"><a href="/mypage/CreateMeeting">회원정보관리</a></li>
-               <!-- 2. 내가 개설한 모임 -->
-               <li id="link_myCreateMeeting"><a href="/mypage/CreateMeeting">내가 개설한 모임</a></li>
-               <!-- 3. 내가 참여중인 모임 -->
-               <li id="link_myEnterMeeting"><a href="/mypage/Participation">내가 참여중인 모임</a></li>
-               <!-- 4. 내가 찜한 모임 -->
-               <li id="link_myGoodMeeting"><a href="/mypage/Good">내가 찜한 모임</a></li>
-               <!-- 5. 내가 올린 자료 -->
-               <li id="link_myUploadFile"><a href="/mypage/UploadFile">내가 올린 자료</a></li>
-            </ul>            
+         	<%@include file = "MyPageSidebar.jsp"%>
          </div>
       
+      	 <!--/// [오른쪽/해당되는 내용]: 12칸 중 "9칸" 크기 확보 ///-->
          <div class="col-md-9">                     
             <!-- 각 탭에 해당되는 내용 -->   
             <div class="tab-content">   
@@ -123,7 +72,7 @@
                   <br>
                   
 
-                  <!-- [1] 개인정보 수정할 수 있는 폼 -->
+                  <!-- [Form] 개인정보 수정할 수 있는 폼 -->
                   <form action="/mypage/PersonSecondModify" class="form-horizontal" method="post">               
                      <!-- 아이디(비활성화) -->
                      <div class="form-group">
@@ -189,7 +138,7 @@
                      <!-- 1단계 확인 버튼 -->
                      <div class="clear-fix">
                         <div class="pull-right">
-                           <button type="submit" class="btn btn-primary">수정완료</button>
+                           <button type="submit" class="btn btn-primary">1단계 수정완료</button>
                         </div>
                      </div>
                   </form>
