@@ -220,7 +220,8 @@
 		<!-- <div class="col-md-3 col-md-offset-1"> -->
 		<!-- 01. 검색 -->
 		<!-- 01-01. 위치 검색 (위치 선택)-->
-		<div class="from-group">		
+		<div class="from-group">
+		<br><br><br><br>		
 			<div class="col-md-3 col-md-offset-2">
 				<form action="" method="POST" name="signform">
 					<select name="bigarea1"
@@ -251,14 +252,14 @@
 				</form>
 			</div>		
 		
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<!-- 01-02. 주제어 검색 -->
 					<span class="blue_search">
 						<input type="text" title="검색어 입력" class="input_text" placeholder="주제어를 검색해주세요.">
 					</span>
 					<button type="button" class="btn_search" onclick="">
 						<span class="img_srh">
-							<img src="resources/image/main/btn_srh.png">		 <!-- 돋보기 흰색으로 바꾸기 -->
+							<img src="resources/image/main/btn_srh.png">		 
 						</span>
 					</button>
 			</div>
@@ -267,15 +268,17 @@
 			<!-- 01-03. 인기 검색 -->
 			</div>	
 
-   <br><br><br><br>		
+   <br><br><br><br><br><br><br><br>	
 
    
-		<!-- 02. 주제  -->
-		<h1 class="page-header">주제</h1>
+		<!-- 02. 테마  -->
+		<h1>테마별 검색</h1>
+		<hr>
 		<br>
 		
 		<!-- 1행 -->
 		<div class="images1">
+		<br>
 				<!-- 1. 외국어 -->
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('foreign');" style="position: absolute;">		
@@ -398,8 +401,10 @@
            
 
 
-   <br><br><br> <br><br><br>  <br><br><br>
-   <h1 class="page-header">광고</h1>
+   <br><br><br> <br><br><br>  <br><br><br><br>
+   <h1>광고</h1>
+   <hr>
+   <br>
    <div class="row">
             <div class="col-xs-6 col-lg-4">
               <h2>모아스터디</h2>
