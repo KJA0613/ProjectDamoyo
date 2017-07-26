@@ -2,7 +2,7 @@ package com.bitschool.dto;
 
 import java.sql.Timestamp;
 
-public class BPostDTO {
+public class BNoticeDTO {
 	private int postNo;
 	private String postTitle;
 	private String postContents;

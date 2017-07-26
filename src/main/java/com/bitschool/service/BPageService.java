@@ -46,7 +46,7 @@ public class BPageService{
 	}
 	public ArrayList<String> makeSerachList(int page,int amount,BSearchVO vo){
 		ArrayList<String> list = null;
-		System.out.println(amount+"--->"+this.getSearchCount(vo));
+		//System.out.println(amount+"--->"+this.getSearchCount(vo));
 		int pageCount = (int)Math.ceil(this.getSearchCount(vo)/(double)amount);
 		int pageUnit = page/amount;
 		int endPage = (pageUnit*amount)+amount;

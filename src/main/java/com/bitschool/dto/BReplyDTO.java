@@ -8,7 +8,14 @@ public class BReplyDTO {
 	private Timestamp replyDate;
 	private int postNo;
 	private String replyUserId;
+	private String boardName;
 	
+	public String getBoardName() {
+		return boardName;
+	}
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
 	public String getReplyUserId() {
 		return replyUserId;
 	}

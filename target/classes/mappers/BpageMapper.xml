@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitschool.complete.PageMapper">
 	<select id="count" resultType="Integer">
-		select count(*) from post
+		select count(*) from post where boardname = 'free'
 	</select>
 	
 	<select id="searchCount" resultType="Integer" parameterType="com.bitschool.dto.SearchVO">
-		select count(*) from post where postTitle like '%'||#{query}||'%' or postContents = '%'||#{query}||'%'
+		select count(*) from post where postTitle like '%'||#{query}||'%' or postContents = '%'||#{query}||'%' and boardname = 'free'
 	</select>
 </mapper>
 

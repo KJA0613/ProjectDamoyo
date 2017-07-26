@@ -11,7 +11,7 @@
 		select * from
 			(select rownum as num, temp.* from
 			(select * from post order by postNo desc) temp)
-		where num between #{start} and #{end}
+		where num between #{start} and #{end} and boardname = #{boardName}
 	</select>
 
 	<insert id="insert" parameterType="BPostDTO">
@@ -19,7 +19,7 @@
 			select postNo.nextval from dual
 		</selectKey>
 		insert into post(postNo,postTitle,postContents,userId,boardName) values
-		(#{postNo},#{postTitle},#{postContents},#{userId},'free board')
+		(#{postNo},#{postTitle},#{postContents},#{userId},#{boardName})
 	</insert>
 	
 	<update id="updateCnt" parameterType="Integer">

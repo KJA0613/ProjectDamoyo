@@ -16,11 +16,10 @@ public class BPostDAO {
 	private static final String namespace = "com.bitschool.basic.PostMapper";
 	@Inject
 	private SqlSession session;
-	
 
 	public List<BPostDTO> selectRange(BPageVO page) {
 		List<BPostDTO> list = null;
-		list = session.selectList(namespace+".selectRange",page);
+		list = session.selectList(namespace+".selectRange", page);
 		return list;
 	}
 	
@@ -43,6 +42,7 @@ public class BPostDAO {
 	}
 
 	public BPostDTO selectPost(int postNo) {
+		
 		BPostDTO post = null;
 		post = session.selectOne(namespace+".selectOne", postNo);
 		return post;
