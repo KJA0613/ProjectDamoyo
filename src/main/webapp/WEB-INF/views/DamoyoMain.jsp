@@ -83,34 +83,74 @@
 
 <!-- 검색창 효과 -->
 <style>
+	fieldset {
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
 	.blue_search{
 		display: inline-block;
-	    width: 474px;
+	    width: 445px;
 	    height: 41px;
 	    border: 2px solid #40b4e5;
 	    background: #fff;
 	}
 	.input_text {
-	    margin: 11px 0 0 9px;
+	    margin: 8px 0 0 0px;
 	    width: 405px;
 	    height: 23px;
 	    outline: 0;
 	    border: 0;
-	    background-color: transparent;
-	    color: #000;
-	    font-weight: 700;
-	    font-size: 18px;
-	    line-height: 23px;
+	    color: #bbb9b9;
+	    font-weight: normal;
+	    font-size: 16px;
+	    line-height: 20px;
 	}
-
+	.btn_search {
+		position: absolute;
+ 		width: 41px;
+		height: 41px;	 
+		position: absolute;
+		border: 0;
+	    background: #40b4e5;
+		overflow: visible;    
+	    /* top: 0;
+    	right: 0; */
+	}
+	.img_srh{
+		position: absolute;
+	    top: 4px;
+	    left: 3px;
+	}
 </style>
 
 <!-- 주제별 URL -->
 <script>
+	// 검색어 체크된 상태로 검색되게 작업하기
 	function subject(type) {
 		if(type == 'foreign') {
 			document.location.href='gather/gathering';
-		}	
+		} else if (type == 'eng') {
+			document.location.href='gather/gathering';
+		} else if (type == 'music') {
+			document.location.href='gather/gathering';
+		} else if (type == 'life') {
+			document.location.href='gather/gathering';
+		} else if (type == 'job') {
+			document.location.href='gather/gathering';
+		} else if (type == 'game') {
+			document.location.href='gather/gathering';
+		} else if (type == 'sports') {
+			document.location.href='gather/gathering';
+		} else if (type == 'computer') {
+			document.location.href='gather/gathering';
+		} else if (type == 'lifr') {
+			document.location.href='gather/gathering';
+		} else if (type == 'art') {
+			document.location.href='gather/gathering';
+		} else if (type == 'etc') {
+			document.location.href='gather/gathering';
+		}
 	}
 </script>
 
@@ -124,18 +164,26 @@
     <div class="container text-center">
 
     <!-- 01. 검색 -->
-    <span class="blue_search">
-    	<input type="text" title="검색어 입력" onclick="" class="input_text">
-    </span>	
-   <!--  <form class="form-inline">
-		<div class="input-group">
-			<input type="text" class="form-control" size="50" placeholder="지역명을 작성해주세요." required>
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-primary">검색</button>
-				</div>
-		</div>
-	</form>	 -->
+    <!-- 위치 -->
+    <fieldset>
+    	<span>
+    		
+    	</span>
+    </fieldset>
+    
+    <!-- 주제어 -->
+    <fieldset>
+		    <span class="blue_search">
+		    	<input type="text" title="검색어 입력" class="input_text" placeholder="주제어를 검색해주세요.">
+		    </span>	
+		    <button type="button" class="btn_search" onclick="">
+		    		<span class="img_srh">
+		    			<img src="resources/image/main/btn_srh.png">	<!-- 돋보기 흰색으로 바꾸기 -->
+		    		</span>
+		    </button>
+	</fieldset>
 	<br><br><br>	
+
 
 	<!-- 02. 주제  -->
 	<h1 class="page-header">주제</h1>
@@ -200,6 +248,7 @@
 	</div>
 	<br><br>
 	
+	
 	<!-- 2행 -->
 	<div class="images2">
 			<!-- 7. 스포츠 -->
@@ -259,18 +308,16 @@
 	</div>	
 
 
-	<!-- hidden -->
-    <input type="hidden" name="guserId" value="${pdto.guserId}">
-    <input type="hidden" name="guserPw" value="${pdto.guserPw}">
+
            
 
 
 
 
 
-    <br><br><br> <br><br><br>  <br><br><br>
-	<h1 class="page-header">광고</h1>
-    <div class="row">
+   <br><br><br> <br><br><br>  <br><br><br>
+   <h1 class="page-header">광고</h1>
+   <div class="row">
             <div class="col-xs-6 col-lg-4">
               <h2>모아스터디</h2>
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
@@ -304,6 +351,9 @@
           </div><!--/row-->   
              
 
+   <!-- hidden -->
+   <input type="hidden" name="guserId" value="${pdto.guserId}">
+   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
 
 
    <!-- [Footer] 페이지 하단 (고정화면) -->
