@@ -3,6 +3,7 @@ package com.bitschool.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.RecommGatherDTO;
 
@@ -25,5 +26,7 @@ public interface IGatheringDAO {
 	public List<GatheringDTO> getRecommUser(String guserId);
 
 	public List<GatheringDTO> getRecommDefault();
+
+	public boolean manageAddons(GatherAddonsDTO gadto);
 	
 }

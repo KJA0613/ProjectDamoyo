@@ -129,8 +129,9 @@ a:visited {
 	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+
+<!-- 체크박스 전체체크-락, 체크해제-언락 -->
 <script type="text/javascript">
-	/* 체크박스 전체체크-락, 체크해제-언락*/
 	function checkAllFunc(obj, box) {
 		$("[name=" + box + "]").each(function() {
 			if (obj.checked == true) {
@@ -144,6 +145,7 @@ a:visited {
 	};
 </script>
 
+<!-- 검색 버튼 눌렀을때 체크박스 값들 and 조건하고 검색하여 db에서 체크된조건의 모집글 가져오기 -->
 <script type="text/javascript">
 	function search_click(){
 		
@@ -268,176 +270,9 @@ a:visited {
 	}
 </script>
 
+<!-- 카테고리 선택 -->
 <script type="text/javascript">
 	$(function() {
-		
-		/* $("input[name*='box']");  ->  우선 모든 input 테그를 검색하고 속성 name 중에 ‘box’ 라는 문자열이 포함 되어 있다면 무조건 반환 하라. */
-		/* 체크된값 가져오기 */
-		$("input[name*='box']").change(
-			function() {
-
-				var cDATA = "";
-				$("input[name*='cbox']").each(
-						function() {
-							if ($(this).is(':checked')
-									&& $(this).val() != "on")
-								cDATA += "," + ($(this).val());
-						});
-
-				var aDATA = "";
-				$("input[name*='abox']").each(
-						function() {
-							if ($(this).is(':checked')
-									&& $(this).val() != "on")
-								aDATA += "," + ($(this).val());
-						});
-
-				var DATA = {
-					"cDATA" : cDATA,
-					"aDATA" : aDATA
-				};
-
-				/* 이거는 #execute를 클릭하면 일어나는 ajax */
-				$.ajax({
-						url : '/gather/gatheringSearch',
-						dataType : 'json',
-						type : 'POST',
-						cache : false,
-						data : DATA,
-						success : function(gath) {
-							var count = Object.keys(gath).length
-							console.log(gath.gList);
-
-							$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
-
-							$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
-																
-								var write = gList.gatherWrite;
-								write = write.substring(0,16);
-								
-								var sdate = gList.gatherSdate;
-								sdate = sdate.substring(0,10);
-									 
-								var edate = gList.gatherEdate;
-								if(edate != null){
-									edate = edate.substring(0,10);
-								}else{
-									edate = '추후 협의';
-								}
-								
-								var stime = gList.gatherStime;
-								stime = stime.substring(10,16);
-								
-								var etime = gList.gatherEtime;
-								etime = etime.substring(10,16);	
-								
-								var day = gList.gatherDay;
-								if(day===null){
-									day = '추후 협의';
-								}
-								
-								var img = gList.gatherImg;
-								if(img===null){
-									img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
-								}
-								
-								
-								var str = "";
-								str += "<div class='col-xs-4 col-lg-3' id='gather'>";
-								str += "<a data-toggle='modal' href='#myModal' data-no='"+gList.gatherNo+
-								"'  data-subject='"+gList.gatherSubject+
-								"'  data-category='"+gList.gatherCategory+
-								"'  data-write='"+write+
-								"'  data-sdate='"+sdate+
-								"'  data-edate='"+edate+
-								"'  data-area='"+gList.gatherArea+
-								"'  data-parti='"+gList.gatherParti+
-								"'  data-content='"+gList.gatherContent+
-								"'  data-img='"+img+
-								"'  data-id='"+gList.guserId+
-								"'  data-stime='"+stime+
-								"'  data-etime='"+etime+
-								"'  data-day='"+day+
-								"' >"
-								
-								str += "<img width='213px' height='120px' src='" + img + "'>";
-								str += "<h4 align='center'>" + gList.gatherSubject + "</h4>";
-								str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
-								str += "요일 : " + day + "<br>" ;
-								str += "지역 : " + gList.gatherArea + "<br>";
-								str += "신청인원 : " + gList.gatherParti + "</h5>";
-								str += "</a>";
-								str += "</div>";
-
-								$("#gatherSelect").append(str);
-
-							})
-						},
-						error : function(request, status, error) {
-							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-						}
-				});
-			});
-
-		$('#myModal').on('show.bs.modal', function(event) { /*  myModal 윈도우가 오픈할때 아래의 옵션을 적용 */
-			var href = $(event.relatedTarget); /* 모달 윈도우를 오픈하는 버튼 */
-			var no = href.data('no'); /*  href태그에서 data- 값을 변수에 저장 */
-			var subject = href.data('subject'); /*  href태그에서 data- 값을 변수에 저장 */
-			var category = href.data('category'); /*  href태그에서 data- 값을 변수에 저장 */
-			var write = href.data('write');
-			var sdate = href.data('sdate');
-			var edate = href.data('edate');
-			var stime = href.data('stime');
-			var etime = href.data('etime');
-			var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
-			var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
-			var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
-			var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
-			var id = href.data('id'); /*  href태그에서 data- 값을 변수에 저장 */
-			
-			var DATA = {
-				"category" : category,
-				"area" : area,				
-			};
-			
-			// 여기서 클릭했을 때 recommend를 해주는 컨트롤러로 이동해야함
-			 $.ajax({
-				url : '/gather/gatheringRecomm',
-				dataType : 'json',
-				type : 'POST',
-				cache : false,
-				data : DATA,
-				success : function(data) {
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				}
-			});
-			
-			var modal = $(this);
-			
-			modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-subject').text(
-					"제  목 ] " + subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-category').text(
-					"분  야 ] " + category); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-write').text(
-					"작성자 ] " + write); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-date').text(
-					"기  간 ] " + sdate + " ~ " + edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-area').text(
-					"지  역 ] " + area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-parti').text(
-					"인  원 ] " + parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-content').text(
-					"상세인원 ] " + content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			$('#modalImg').attr('src', img);
-			modal.find('#modal-body-id').text("작성자 ] " + id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-			modal.find('#modal-body-time').text(
-					"시간 ] " + stime + " ~ " + etime); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		});
-
-		/* 카테고리 선택 */
 		$('.cateChk1').click(function() {
 			$('#cateChk1').show();
 			$('#cateChk2').hide();
@@ -932,8 +767,257 @@ a:visited {
 			$('#areaChk16').hide();
 			$('#areaChk1').hide();
 		});
+		
+	});
+</script>
+
+<!-- 체크박스 체크된값 가져오기, db에서 체크된조건의 모집글 가져오기 -->
+<script type="text/javascript">
+	$(function() {
+		
+		/* $("input[name*='box']");  ->  우선 모든 input 테그를 검색하고 속성 name 중에 ‘box’ 라는 문자열이 포함 되어 있다면 무조건 반환 하라. */
+		
+		$("input[name*='box']").change(
+			function() {
+
+				var cDATA = "";
+				$("input[name*='cbox']").each(
+						function() {
+							if ($(this).is(':checked')
+									&& $(this).val() != "on")
+								cDATA += "," + ($(this).val());
+						});
+
+				var aDATA = "";
+				$("input[name*='abox']").each(
+						function() {
+							if ($(this).is(':checked')
+									&& $(this).val() != "on")
+								aDATA += "," + ($(this).val());
+						});
+
+				var DATA = {
+					"cDATA" : cDATA,
+					"aDATA" : aDATA
+				};
+
+				/* 이거는 #execute를 클릭하면 일어나는 ajax */
+				$.ajax({
+						url : '/gather/gatheringSearch',
+						dataType : 'json',
+						type : 'POST',
+						cache : false,
+						data : DATA,
+						success : function(gath) {
+							var count = Object.keys(gath).length
+							console.log(gath.gList);
+
+							$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
+
+							$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
+																
+								var write = gList.gatherWrite;
+								write = write.substring(0,16);
+								
+								var sdate = gList.gatherSdate;
+								sdate = sdate.substring(0,10);
+									 
+								var edate = gList.gatherEdate;
+								if(edate != null){
+									edate = edate.substring(0,10);
+								}else{
+									edate = '추후 협의';
+								}
+								
+								var stime = gList.gatherStime;
+								stime = stime.substring(10,16);
+								
+								var etime = gList.gatherEtime;
+								etime = etime.substring(10,16);	
+								
+								var day = gList.gatherDay;
+								if(day===null){
+									day = '추후 협의';
+								}
+								
+								var img = gList.gatherImg;
+								if(img===null){
+									img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
+								}
+								
+								
+								var str = "";
+								str += "<div class='col-xs-4 col-lg-3' id='gather'>";
+								str += "<a data-toggle='modal' href='#myModal' data-no='"+gList.gatherNo+
+								"'  data-subject='"+gList.gatherSubject+
+								"'  data-category='"+gList.gatherCategory+
+								"'  data-write='"+write+
+								"'  data-sdate='"+sdate+
+								"'  data-edate='"+edate+
+								"'  data-area='"+gList.gatherArea+
+								"'  data-parti='"+gList.gatherParti+
+								"'  data-content='"+gList.gatherContent+
+								"'  data-img='"+img+
+								"'  data-id='"+gList.guserId+
+								"'  data-stime='"+stime+
+								"'  data-etime='"+etime+
+								"'  data-day='"+day+
+								"' >"
+								
+								str += "<img width='213px' height='120px' src='" + img + "'>";
+								str += "<h4 align='center'>" + gList.gatherSubject + "</h4>";
+								str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
+								str += "요일 : " + day + "<br>" ;
+								str += "지역 : " + gList.gatherArea + "<br>";
+								str += "신청인원 : " + gList.gatherParti + "</h5>";
+								str += "</a>";
+								str += "</div>";
+
+								$("#gatherSelect").append(str);
+
+							})
+						},
+						error : function(request, status, error) {
+							alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						}
+				});
+			});
+
+		$('#myModal').on('show.bs.modal', function(event) { /*  myModal 윈도우가 오픈할때 아래의 옵션을 적용 */
+			var href = $(event.relatedTarget); /* 모달 윈도우를 오픈하는 버튼 */
+			var no = href.data('no'); /*  href태그에서 data- 값을 변수에 저장 */
+			var subject = href.data('subject'); /*  href태그에서 data- 값을 변수에 저장 */
+			var category = href.data('category'); /*  href태그에서 data- 값을 변수에 저장 */
+			var write = href.data('write');
+			var sdate = href.data('sdate');
+			var edate = href.data('edate');
+			var stime = href.data('stime');
+			var etime = href.data('etime');
+			var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
+			var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
+			var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
+			var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
+			var id = href.data('id'); /*  href태그에서 data- 값을 변수에 저장 */
+			
+			var DATA = {
+				"category" : category,
+				"area" : area,				
+			};
+			
+			// 여기서 클릭했을 때 recommend를 해주는 컨트롤러로 이동해야함
+			 $.ajax({
+				url : '/gather/gatheringRecomm',
+				dataType : 'json',
+				type : 'POST',
+				cache : false,
+				data : DATA,
+				success : function(data) {
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
+			
+			var modal = $(this);
+			
+			modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-subject').text(
+					"제  목 ] " + subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-category').text(
+					"분  야 ] " + category); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-write').text(
+					"작성자 ] " + write); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-date').text(
+					"기  간 ] " + sdate + " ~ " + edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-area').text(
+					"지  역 ] " + area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-parti').text(
+					"인  원 ] " + parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-content').text(
+					"상세인원 ] " + content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			$('#modalImg').attr('src', img);
+			modal.find('#modal-body-id').text("작성자 ] " + id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+			modal.find('#modal-body-time').text(
+					"시간 ] " + stime + " ~ " + etime); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		});
 
 	});
+</script>
+
+<!-- 글 클릭시 모달창 띄우기 -->
+<script type="text/javascript">
+
+$(function() {
+	$('#myModal').on('show.bs.modal', function(event) { /*  myModal 윈도우가 오픈할때 아래의 옵션을 적용 */
+		var href = $(event.relatedTarget); /* 모달 윈도우를 오픈하는 버튼 */
+		var no = href.data('no'); /*  href태그에서 data- 값을 변수에 저장 */
+		var subject = href.data('subject'); /*  href태그에서 data- 값을 변수에 저장 */
+		var category = href.data('category'); /*  href태그에서 data- 값을 변수에 저장 */
+		var write = href.data('write');
+		var sdate = href.data('sdate');
+		var edate = href.data('edate');
+		var stime = href.data('stime');
+		var etime = href.data('etime');
+		var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
+		var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
+		var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
+		var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
+		var id = href.data('id'); /*  href태그에서 data- 값을 변수에 저장 */
+		
+		var DATA = {
+			"category" : category,
+			"area" : area,				
+		};
+		
+		// 여기서 클릭했을 때 recommend를 해주는 컨트롤러로 이동해야함
+		 $.ajax({
+			url : '/gather/gatheringRecomm',
+			dataType : 'json',
+			type : 'POST',
+			cache : false,
+			data : DATA,
+			success : function(data) {
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+			}
+		});
+		
+		var modal = $(this);
+		
+		modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-subject').text("제  목 ] " + subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-category').text("분  야 ] " + category); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-write').text("작성자 ] " + write); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-date').text("기  간 ] " + sdate + " ~ " + edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-area').text("지  역 ] " + area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-parti').text("인  원 ] " + parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-content').text("상세인원 ] " + content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		$('#modalImg').attr('src', img);
+		modal.find('#modal-body-id').text("작성자 ] " + id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-time').text("시간 ] " + stime + " ~ " + etime); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+	});
+});
+
+</script>
+
+
+<!-- 모달의 좋아요 버튼 눌렀을 때 그림 바꾸고 ajax로 디비값 비교하여 그림 교체 -->
+<script type="text/javascript">
+	
+	/*  */
+	function imgChange(){
+		
+		
+		
+		var img = document.getElementById('imgchange');
+		if(img.src.match("heart_before")){
+			img.src = "/resources/image/icon/heart_after.png";
+		}else {
+			img.src = "/resources/image/icon/heart_before.png";
+		}
+	}
+
 </script>
 
 <%@include file="../header.jsp"%>
@@ -1992,21 +2076,14 @@ a:visited {
 
 		<hr>
 
-		<!-- 모달  -->
+<!-- ************************************** 모달  -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-				<!--	<div class="modal-header">
-		        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		        				<span aria-hidden="true">×</span>
-	        				</button>
-		        			<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-		      			</div> -->
-				<!-- 	<div class="modal-body" id="modal-body-no"></div> -->
 					
 					<div class="modal-header">
 						<div class="col-xs-2 col-md-12">
-					    	<img width="80px" height="80px" style="margin-left: auto; margin-right: auto; display: block;" src="/resources/image/icon/heart_before.png">
+					    	<img onclick="imgChange()" id="imgchange" width="80px" height="80px" style="margin-left: auto; margin-right: auto; display: block;" src="/resources/image/icon/heart_before.png">
 				    	</div>
 					</div>
 					

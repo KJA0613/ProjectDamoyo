@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
@@ -97,11 +98,13 @@ public class GatheringController {
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
 		if(!sSTR.equals("")){
-			regather = new RecommGatherDTO();
-			regather.setRecommgatherName(sSTR);
-			regather.setRecommgatherCode(sSelect);
-			regather.setGuserId(pdto.getGuserId());
-			recommgatherList.add(regather);
+			if(pdto!=null){ // 로그인 안했을때
+				regather = new RecommGatherDTO();
+				regather.setRecommgatherName(sSTR);
+				regather.setRecommgatherCode(sSelect);
+				regather.setGuserId(pdto.getGuserId());
+				recommgatherList.add(regather);
+			}
 		}
 		
 		
@@ -388,7 +391,6 @@ public class GatheringController {
 			}
 			
 			
-			
 			System.out.println(recommgatherList);
 			session.setAttribute("recommgatherList", recommgatherList);	
 		
@@ -396,6 +398,33 @@ public class GatheringController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("success", "success");
 		
+		return map;
+	}
+	
+	// 모임 찜하기 or 앵콜요청 (아직은 여기까지, 추가로 더 들어갈 수 있음 )
+	// Json 사용하땐 @ResponseBody
+	@RequestMapping(value="/gatherAddons", method=RequestMethod.GET)
+	public @ResponseBody HashMap<String, Object> gatherAddons(
+			@RequestParam(value="gatherNo") int gatherNo,
+			@RequestParam(value="guserId") String guserId,
+			@RequestParam(value="gatherAddonsCode") String gatherAddonsCode
+			){
+		String url = "default";
+		
+		GatherAddonsDTO gadto = new GatherAddonsDTO();
+		gadto.setGatherNo(gatherNo);
+		gadto.setGuserId(guserId);
+		gadto.setGatherAddonsCode(gatherAddonsCode);
+		
+		boolean flag = gService.manageAddons(gadto);
+		
+		if(flag){
+			
+		}
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+				
 		return map;
 	}
 

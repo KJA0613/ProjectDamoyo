@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IGatheringDAO;
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.util.FormatData;
@@ -99,6 +100,14 @@ public class GatheringService implements IGatheringService {
 		recommList = fData.formatData(recommList);
 		
 		return recommList;
+	}
+
+	@Override
+	public boolean manageAddons(GatherAddonsDTO gadto) {
+
+		boolean flag = gDao.manageAddons(gadto);
+		
+		return flag;
 	}
 
 	
