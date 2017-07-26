@@ -69,59 +69,22 @@
 				           	</div>
 						</form>
 					</div>
+					<!-- 내용 -->
+								
+					<!-- 
+						순번
+						모임명
+						작성자
+						참여인원 현황
+						등록일
+						조회수
+						삭제
+					-->
+					
+					<!-- 삭제 체크 클릭시 JS -->
+					<!-- <input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"> -->
 	
-				
-					<!-- [오른쪽/리스트에 해당되는 내용]: 12칸 중 "9칸" 크기 확보 -->
-					<!-- 테이블 마우스 갖다대면 활성화 표시됨 -->
-					<table class="table table-hover">
-						<!-- 리스트 > 타이틀 -->
-						
-						<!-- 테이블 값 > 가져와서 뿌리기 -->
-						<!--  -->
-					    <thead>
-					      <tr>
-					        <th>순번</th>
-					        <th>모임명</th>
-					        <th>작성자</th>
-					        <th>참여인원 현황</th>
-					        <th>등록일</th>
-					        <th>조회수</th>
-					        <th>삭제</th>			        
-					      </tr>
-					    </thead>
-					    
-						<tbody>
-							<tr>
-						        <td>1</td>
-						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-						        <td>자바 뽀개기1</td>
-						        <td>AAA</td>
-						        <td>3/4</td>
-						        <td>2017/06/20</td>
-						        <td>20</td>
-						        <td><input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"></td>
-							</tr>
-							<tr>
-						        <td>2</td>
-						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-						        <td>자바 뽀개기2</td>
-						        <td>AAA</td>
-						        <td>3/4</td>
-						        <td>2017/06/20</td>
-						        <td>20</td>
-						        <td><input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"></td>
-							</tr>
-						</tbody>
-					</table>	
 				</div>
-		
-				<!-- 페이징하기 (프리뷰, 넥스트 적용시키기) -->
-				<!-- 프리뷰, 넥스트 > 참고 할 사이트
-					 : https://www.w3schools.com/bootstrap/bootstrap_pager.asp
-					 : http://getbootstrap.com/components/#pagination -->
-				<!-- <ul class="pagination">
-				    <li><a href="#">1</a></li>
-			  	</ul> -->
 			</div>
 		</div>
 	

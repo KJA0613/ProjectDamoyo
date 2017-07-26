@@ -6,6 +6,7 @@
 
 <!-- JQuery CDN -->	
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
 <title>마이페이지 사이드바</title>
 
 <script>
@@ -19,7 +20,7 @@
 		<!-- active: selected 의미 (미리 선택되어 있음) -->
 		<!-- data-toggle="tab": 탭 활성화 -->
 		<!-- 1. 회원정보관리 -->
-		<li id="link_myInfoModify" class="active"><a href="/mypage/MyPageManagement">회원정보관리</a></li>
+		<li id="link_myInfoModify" class="active"><a href="/mypage/MyPageManagement" class="active">회원정보관리</a></li>
 		<!-- 2. 내가 개설한 모임 -->
 		<li id="link_myCreateMeeting"><a href="/mypage/MyPageCreateMeeting">내가 개설한 모임</a></li>
 		<!-- 3. 내가 참여중인 모임 -->
