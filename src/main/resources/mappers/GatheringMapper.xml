@@ -115,7 +115,7 @@
 	    </selectKey>
 	
 		insert into gatheraddons ( gatheraddonsno, gatheraddonscode, gatherno, guserid )
-		select #{}, #{gatherAddonsCode}, #{gatherNo}, #{guserId}
+		select #{gatheraddonsno}, #{gatherAddonsCode}, #{gatherNo}, #{guserId}
 		from dual
 		where not exists ( 
 				select * 
@@ -124,10 +124,11 @@
 		
 	</insert>
 	
+	<!-- 
 	<delete id="deleteAddons" parameterType="com.bitschool.dto.GatherAddonsDTO">
 		
 	</delete>
-	
+	 -->
 
 <!-- 
 	<update id="mergeList" parameterType="java.util.List">
