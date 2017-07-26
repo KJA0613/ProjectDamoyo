@@ -98,11 +98,13 @@ public class GatheringController {
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
 		if(!sSTR.equals("")){
-			regather = new RecommGatherDTO();
-			regather.setRecommgatherName(sSTR);
-			regather.setRecommgatherCode(sSelect);
-			regather.setGuserId(pdto.getGuserId());
-			recommgatherList.add(regather);
+			if(pdto!=null){ // 로그인 안했을때
+				regather = new RecommGatherDTO();
+				regather.setRecommgatherName(sSTR);
+				regather.setRecommgatherCode(sSelect);
+				regather.setGuserId(pdto.getGuserId());
+				recommgatherList.add(regather);
+			}
 		}
 		
 		
