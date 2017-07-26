@@ -108,7 +108,13 @@
 				</c:if>
 				<h1>로그인</h1>
 				<br>
-				<form action="" method="POST" id="dataset" name="loginForm">
+				
+					<div class="radio">
+						<label><input type="radio" name="person">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+					
+						<label><input type="radio" name="company">기업회원</label>
+					</div>
+					<form action="" method="POST" id="dataset" name="loginForm">
 					<div class="form-group">
 						<label for="guserId">아이디 입력 &nbsp;
 							<small>
