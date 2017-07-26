@@ -84,22 +84,16 @@
 
 <!-- 검색창 효과 -->
 <style>
-	fieldset {
-		border: 0;
-		margin: 0;
-		padding: 0;
-		size: 400px;
-	}
 	.blue_search{
 		display: inline-block;
-	    width: 445px;
+	    width: 400px;
 	    height: 41px;
 	    border: 2px solid #40b4e5;
 	    background: #fff;
 	}
 	.input_text {
 	    margin: 8px 0 0 0px;
-	    width: 405px;
+	    width: 380px;
 	    height: 23px;
 	    outline: 0;
 	    border: 0;
@@ -124,18 +118,18 @@
 	
 	#choice_area1 {
 		/* position: absolute; */
- 		width: 100px;
+ 		width: 120px;
 		height: 41px;	 
 		border: 2px solid #40b4e5;   
 	    background: #fff;
 	}
 	#choice_area2 {
 		/* position: absolute; */
- 		width: 100px;
+ 		width: 120px;
 		height: 41px;	 
 		border: 2px solid #40b4e5;   
 	    background: #fff;
-	    left: 100px;
+/* 	    left: 100px; */
 	}
 	
 </style>
@@ -222,59 +216,59 @@
 <body>
 	<br><br><br>
 	
-	<div class="container text-center">
+   <div class="container text-center">
+		<!-- <div class="col-md-3 col-md-offset-1"> -->
 		<!-- 01. 검색 -->
 		<!-- 01-01. 위치 검색 (위치 선택)-->
-		<fieldset>
-			<form action="" method="POST" name="signform">
-				<select name="bigarea1"
-					onChange="areachange(this.options.selectedIndex)" id="choice_area1">
-					<option selected value="">지역선택</option>
-					<option value=1>서울특별시</option>
-					<option value=2>경기도</option>
-					<option value=3>인천광역시</option>
-					<option value=4>강원도</option>
-					<option value=5>대전광역시</option>
-					<option value=6>세종특별자치시</option>
-					<option value=7>충청남도</option>
-					<option value=8>충청북도</option>
-					<option value=9>부산광역시</option>
-					<option value=10>울산광역시</option>
-					<option value=11>경상남도</option>
-					<option value=12>경상북도</option>
-					<option value=13>대구광역시</option>
-					<option value=14>광주광역시</option>
-					<option value=15>전라남도</option>
-					<option value=16>전라북도</option>
-					<option value=17>제주특별자치도</option>
-				</select> <select name="area" size=1 id="choice_area2">
-					<option selected value="">-선택-</option>
-					<option value=""></option>
-				</select>
-			</form>
-		</fieldset>
-
-
-		<fieldset>
-			<!-- 01-02. 주제어 검색 -->
-			<form action="" method="POST">
-				<span class="blue_search"> <input type="text" title="검색어 입력" class="input_text" placeholder="주제어를 검색해주세요.">
-				</span>
-				<button type="button" class="btn_search" onclick="">
-					<span class="img_srh"> <img
-						src="resources/image/main/btn_srh.png"> <!-- 돋보기 흰색으로 바꾸기 -->
+		<div class="from-group">		
+			<div class="col-md-3 col-md-offset-2">
+				<form action="" method="POST" name="signform">
+					<select name="bigarea1"
+						onChange="areachange(this.options.selectedIndex)" id="choice_area1">
+						<option selected value="">시 선택</option>
+						<option value=1>서울특별시</option>
+						<option value=2>경기도</option>
+						<option value=3>인천광역시</option>
+						<option value=4>강원도</option>
+						<option value=5>대전광역시</option>
+						<option value=6>세종특별자치시</option>
+						<option value=7>충청남도</option>
+						<option value=8>충청북도</option>
+						<option value=9>부산광역시</option>
+						<option value=10>울산광역시</option>
+						<option value=11>경상남도</option>
+						<option value=12>경상북도</option>
+						<option value=13>대구광역시</option>
+						<option value=14>광주광역시</option>
+						<option value=15>전라남도</option>
+						<option value=16>전라북도</option>
+						<option value=17>제주특별자치도</option>
+					</select>&nbsp;
+					<select name="area" size=1 id="choice_area2">
+						<option selected value="">구/군</option>
+						<option value=""></option>
+					</select>
+				</form>
+			</div>		
+		
+			<div class="col-md-6">
+				<!-- 01-02. 주제어 검색 -->
+					<span class="blue_search">
+						<input type="text" title="검색어 입력" class="input_text" placeholder="주제어를 검색해주세요.">
 					</span>
-				</button>
-			</form>
-		</fieldset>
+					<button type="button" class="btn_search" onclick="">
+						<span class="img_srh">
+							<img src="resources/image/main/btn_srh.png">		 <!-- 돋보기 흰색으로 바꾸기 -->
+						</span>
+					</button>
+			</div>
 		
-		<!-- 01-03. 인기 검색 -->
 		
-	</div>
+			<!-- 01-03. 인기 검색 -->
+			</div>	
 
+   <br><br><br><br>		
 
-	<br><br><br>	
-	<div class="container text-center">
    
 		<!-- 02. 주제  -->
 		<h1 class="page-header">주제</h1>
@@ -437,9 +431,9 @@
               <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
               <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
             </div><!--/.col-xs-6.col-lg-4-->
-          </div><!--/row-->   
-    </div>         
+          </div><!--/row-->         
 
+		
    <!-- hidden -->
    <input type="hidden" name="guserId" value="${pdto.guserId}">
    <input type="hidden" name="guserPw" value="${pdto.guserPw}">
