@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.RecommGatherDTO;
 
@@ -133,6 +134,28 @@ public class GatheringDAO implements IGatheringDAO {
 		System.out.println(recommList);
 		
 		return recommList;
+	}
+
+	@Override
+	public boolean manageAddons(GatherAddonsDTO gadto) {
+		
+		boolean flag = false;
+		
+		int result = session.insert(namespace+".insertAddons", gadto);
+		// 이미 값이 존재할 경우 0 리턴
+		System.out.println("삽입 : "+result);
+		
+		if(result==0){
+			// 이미 값이 존재하면 delete
+			result = session.insert(namespace+".deleteAddons", gadto);
+			System.out.println("삭제 : "+result);
+		}
+
+		if(result>0){
+			flag = true;
+		}
+		
+		return flag;
 	}
 	
 }

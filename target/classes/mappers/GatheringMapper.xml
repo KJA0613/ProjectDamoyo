@@ -108,6 +108,26 @@
 	
 	</update>
 	
+	<insert id="insertAddons" parameterType="com.bitschool.dto.GatherAddonsDTO">
+		
+		<selectKey keyProperty="gatheraddonsno" resultType="int" order="BEFORE">
+	        select addonsseq.nextval from dual
+	    </selectKey>
+	
+		insert into gatheraddons ( gatheraddonsno, gatheraddonscode, gatherno, guserid )
+		select #{}, #{gatherAddonsCode}, #{gatherNo}, #{guserId}
+		from dual
+		where not exists ( 
+				select * 
+				from gatheraddons 
+				where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and guserId = #{guserId})
+		
+	</insert>
+	
+	<delete id="deleteAddons" parameterType="com.bitschool.dto.GatherAddonsDTO">
+		
+	</delete>
+	
 
 <!-- 
 	<update id="mergeList" parameterType="java.util.List">

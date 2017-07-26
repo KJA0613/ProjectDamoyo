@@ -936,6 +936,50 @@ a:visited {
 	});
 </script>
 
+<script type="text/javascript">
+	
+	function imgChange(){
+		var img = document.getElementById('imgchange');
+		if(img.src.match("heart_before")){
+			img.src = "/resources/image/icon/heart_after.png";
+		}else {
+			img.src = "/resources/image/icon/heart_before.png";
+		}
+	}
+
+</script>
+
+<script type="text/javascript">
+$(function() {
+	/* 
+	.on은  하나 혹은 그 이상의 요소에 이벤트 핸들러를 부탁한다.  
+
+	.on( events [, selector] [, data], handler( eventObject ) )
+	events: 공백으로 구분된 하나 이상의 이벤트 타입과 옵션인 네임스페이스. "click", "keydown.myPlugin", ".myPlugin" 등이 있음
+	selector: 이벤트가 발생할 요소들의 자손을 찾는 선택자. 선택자가 null 이거나 생략됐다면 이벤트는 선택된 요소에 한해서 반응한다.
+	data: 이벤트가 발생할 때 핸들러에 전달할 데이터
+	handler(eventObject): 이벤트가 발생되면 실행될 기능. false를 반환하는 함수라면 간단하게 false 를 직접 인자로 하면 된다.
+	
+	$(선택자).on(이벤트타입 [, 자손선택자] [, 데이터], 핸들러());
+	
+	
+	
+	$('imgchange').on({
+		'click' : function () {
+			var src = ($(this).attr('src') === '/resources/image/icon/heart_before.png') ? '/resources/image/icon/heart_after.png' : '/resources/image/icon/heart_before.png'
+			$(this).attr('src',src);
+		}
+	
+		
+		 이제 여기서 ajax로 이미지 누른거 설정하기 
+	
+	});
+	 */
+});
+
+
+</script>
+
 <%@include file="../header.jsp"%>
 
 </head>
@@ -1992,21 +2036,16 @@ a:visited {
 
 		<hr>
 
-		<!-- 모달  -->
+<!-- ************************************** 모달  -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-				<!--	<div class="modal-header">
-		        			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		        				<span aria-hidden="true">×</span>
-	        				</button>
-		        			<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-		      			</div> -->
-				<!-- 	<div class="modal-body" id="modal-body-no"></div> -->
 					
 					<div class="modal-header">
 						<div class="col-xs-2 col-md-12">
-					    	<img width="80px" height="80px" style="margin-left: auto; margin-right: auto; display: block;" src="/resources/image/icon/heart_before.png">
+							<a>
+					    		<img onclick="imgChange()" id="imgchange" width="80px" height="80px" style="margin-left: auto; margin-right: auto; display: block;" src="/resources/image/icon/heart_before.png">
+				    		</a>
 				    	</div>
 					</div>
 					
