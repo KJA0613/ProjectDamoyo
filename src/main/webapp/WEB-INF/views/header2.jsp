@@ -18,8 +18,8 @@
 <!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
 <style type="text/css">
    .navbar-inverse {
-       /* background-color: #2bb7d5; */
-       background-color: #40b4e5;
+       /* background-color: #40b4e5; */			/* 모꼬지 배경색 */
+       background-color: #03a9f4;
        border-color: #00a3cc;
    }
    .navbar {

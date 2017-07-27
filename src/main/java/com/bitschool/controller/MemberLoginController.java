@@ -94,7 +94,11 @@ public class MemberLoginController {
 			
 			// 메인페이지 이동 (reload)
 			//url = "redirect:/member/" + loginReferer[4].toString();
-			url = "redirect:/";
+			if(pdto.getGuserCode().equals("A")) {
+				url = "redirect:/";
+			} else {
+				url = "/PartnerMain";
+			}
 			
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} else {	
