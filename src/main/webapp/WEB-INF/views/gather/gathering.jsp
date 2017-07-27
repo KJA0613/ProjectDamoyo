@@ -929,9 +929,9 @@ $(function() {
 				var changeImg;
 				
 				if(data.result === 'yes'){
-					changeImg ="/resources/image/icon/heart_after.png";
+					changeImg ="/resources/image/icon/img_heart_after.png";
 				}else{
-					changeImg = "/resources/image/icon/heart_before.png";
+					changeImg = "/resources/image/icon/img_heart_before.png";
 				}
 
 				$('#imgchange').attr('src', changeImg);
@@ -1035,9 +1035,9 @@ $(function() {
 		var img = document.getElementById('imgchange');
 		
 		if(img.src.match("heart_before")){
-			img.src = "/resources/image/icon/heart_after.png";
+			img.src = "/resources/image/icon/img_heart_after.png";
 		}else {
-			img.src = "/resources/image/icon/heart_before.png";
+			img.src = "/resources/image/icon/img_heart_before.png";
 		} 
 	}
 

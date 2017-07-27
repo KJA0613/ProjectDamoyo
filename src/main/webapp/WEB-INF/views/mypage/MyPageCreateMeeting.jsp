@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -70,7 +72,26 @@
 						</form>
 					</div>
 					<!-- 내용 -->
-								
+					
+					<div class="row">
+						<c:forEach var="make" items="${mlist}">
+							<div class="col-xs-6 col-lg-6" id="gather">
+								<a href=""> <img width="408px" height="300px" src='${make.gatherImg}'>
+									<h3 align="center">${make.gatherSubject}</h3>
+									<h4>
+										기간 : ${fn:substring(make.gatherSdate, 0, 10)} ~ ${fn:substring(make.gatherEdate, 0, 10)}<br> 
+										최근 글 : 12 <br>
+										오늘 방문자수 : 3
+										<%-- 요일 : ${make.gatherDay}<br> 
+										지역 : ${make.gatherArea}<br>
+										인원 : ${make.gatherParti} --%>
+									</h4>
+								</a>
+							</div>
+						</c:forEach>
+
+					</div>
+							
 					<!-- 
 						순번
 						모임명

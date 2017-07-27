@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -67,12 +69,24 @@
 						</form>
 					</div>	
 
-					<!-- <th>순번</th>
-					<th>모임명</th>
-					<th>작성자</th>
-					<th>참여인원 현황</th>
-					<th>등록일</th>
-					<th>조회수</th>-->	        
+					<div class="row">
+						<c:forEach var="parti" items="${plist}">
+							<div class="col-xs-6 col-lg-6" id="gather">
+								<a href=""> <img width="408px" height="300px" src='${parti.gatherImg}'>
+									<h3 align="center">${parti.gatherSubject}</h4>
+									<h4>
+										기간 : ${fn:substring(parti.gatherSdate, 0, 10)} ~ ${fn:substring(parti.gatherEdate, 0, 10)}<br> 
+										최근 글 : 12<br>
+										오늘 방문자수 : 3
+										<%-- 요일 : ${parti.gatherDay}<br> 
+										지역 : ${parti.gatherArea}<br>
+										신청인원 : ${parti.gatherParti} --%>
+									</h4>
+								</a>
+							</div>
+						</c:forEach>
+
+					</div>        
 
 				</div>
 

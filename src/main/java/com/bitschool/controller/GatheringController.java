@@ -397,24 +397,24 @@ public class GatheringController {
 		
 		}
 		
-		// 초기에 모달에 심장무늬를 뿌릴때 여기서는 gatherNo를 가지고 디비에 조회하여 값의 유무를 비교하여 yes or no 를 보내는 메서드
-		GatherAddonsDTO gadto = new GatherAddonsDTO();
-		gadto.setGatherNo(gatherNo);
-		gadto.setGuserId(guserId);
-		gadto.setGatherAddonsCode("관심"); // 우선은 관심or앵콜
-		
-		boolean flag = gService.existAddons(gadto);
-		
-		
 		HashMap<String, String> map = new HashMap<String, String>();
-				
-		if(flag){
-			map.put("result", "yes");
-		}else{
-			map.put("result", "no");
-		}
+		map.put("result", "no");
 		
-		System.out.println("맵 결과 : "+map.get("result"));
+		if(pdto!=null){
+		
+			// 초기에 모달에 심장무늬를 뿌릴때 여기서는 gatherNo를 가지고 디비에 조회하여 값의 유무를 비교하여 yes or no 를 보내는 메서드
+			GatherAddonsDTO gadto = new GatherAddonsDTO();
+			gadto.setGatherNo(gatherNo);
+			gadto.setGuserId(guserId);
+			gadto.setGatherAddonsCode("관심"); // 우선은 관심or앵콜
+			
+			boolean flag = gService.existAddons(gadto);
+			
+			if(flag){
+				map.put("result", "yes");
+			}
+			System.out.println("맵 결과 : "+map.get("result"));
+		}
 		
 		return map;
 	}
