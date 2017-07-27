@@ -71,8 +71,7 @@
    }
 </style>
 
-<!-- CSS -->
-<!-- 주제 이미지 효과 -->
+<!-- 주제 이미지 효과  CSS -->
 <style>
 	.clear {
 	    clear: both;
@@ -133,6 +132,102 @@
 	}
 	
 </style>
+
+<!-- 장소 광고 CSS -->
+<style>
+	.wrapper {
+	    max-width: 1100px;
+	    margin: 0 auto;
+	    position: relative;
+	}
+	
+	.wrapper ul.properties_list li {
+	    display: block;
+	    width: 30%;
+	    height: auto;
+	    position: relative;
+	    float: left;	    
+	    margin: 0 3% 3% 0;
+	}
+	
+	.wrapper ul.properties_list li img.property_img {
+	    width: 100%;
+	    height: auto!important;
+	    vertical-align: top;
+	}
+	
+	.wrapper ul.properties_list li .price {
+	    position: absolute;
+	    top: 10px;
+	    left: 10px;
+	    padding: 15px 20px;
+	    background: #ffffff;
+	    color: #514d4d;
+	    font-size: 16px;
+	    font-weight: bold;
+	    letter-spacing: 1px;
+    }
+    
+    .wrapper ul li .property_details {
+	    width: 100%;
+	    padding: 2.9% 5.8% 4.1% 5.8%;
+	    border-bottom: 1px solid #f2f1f1;
+	    border-left: 1px solid #f2f1f1;
+	    border-right: 1px solid #f2f1f1;
+    }
+    
+    .wrapper ul li .property_details h1 a {
+	    text-decoration: none;
+	    color: #666464;
+	}
+	 
+/* 	a {
+	    margin: 0;
+	    padding: 0;
+	    font-size: 100%;
+	    vertical-align: baseline;
+	    background: transparent;
+    } */
+
+	.wrapper ul li .property_details.title a{
+	    color: #666464;
+	    font-size: 28%;
+	    font-weight: bold;
+	    margin-left: 0px;
+	    margin-bottom: 5px;
+	    line-height: 28px;
+	    vertical-align: baseline;
+	    background: transparent;
+	}
+	
+	.property_details h3 {
+		color: #40b4e5;
+		margin-left: 0px;
+	    margin-bottom: 5px;
+	    line-height: 25px;
+	}
+	
+	.details {
+		margin-left: 0;
+	}
+	
+	#s1 {
+	margin-left: 0px;
+		color: #777;
+		font-weight: bold;
+		font-size: 16px;
+		    /* display: inline-block; */
+    	/* padding: 0px 5px 0; */
+	}
+	#s2 {
+	margin-left: 0px;
+		color: #777;
+		font-size: 16px;
+		font-weight: normal;
+	}	
+
+</style>
+
 
 <!-- JavaScript -->
 <!-- 주제별 URL -->
@@ -217,7 +312,6 @@
 	<br><br><br>
 	
    <div class="container text-center">
-		<!-- <div class="col-md-3 col-md-offset-1"> -->
 		<!-- 01. 검색 -->
 		<!-- 01-01. 위치 검색 (위치 선택)-->
 		<div class="from-group">
@@ -252,8 +346,8 @@
 				</form>
 			</div>		
 		
+			<!-- 01-02. 주제어 검색 -->
 			<div class="col-md-5">
-				<!-- 01-02. 주제어 검색 -->
 					<span class="blue_search">
 						<input type="text" title="검색어 입력" class="input_text" placeholder="주제어를 검색해주세요.">
 					</span>
@@ -262,13 +356,14 @@
 							<img src="resources/image/main/btn_srh.png">		 
 						</span>
 					</button>
-			</div>
-		
+			</div>		
 		
 			<!-- 01-03. 인기 검색 -->
-			</div>	
+			
+		</div>	
 
-   <br><br><br><br><br><br><br><br>	
+
+  		<br><br><br><br><br><br><br><br>	
 
    
 		<!-- 02. 테마  -->
@@ -396,54 +491,162 @@
 		</div>	
 	
 
-
-
-           
-
-
-   <br><br><br> <br><br><br>  <br><br><br><br>
-   <h1>광고</h1>
-   <hr>
-   <br>
-   <div class="row">
-            <div class="col-xs-6 col-lg-4">
-              <h2>모아스터디</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <h2>스프링 모임</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <h2>토익 스피킹 뽀개기</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <h2>기타 교실</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <h2>독서 토론 모임</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-            <div class="col-xs-6 col-lg-4">
-              <h2>쿠아 카페</h2>
-              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-              <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/.col-xs-6.col-lg-4-->
-          </div><!--/row-->         
-
 		
+	   <br><br><br> <br><br><br>  <br><br><br><br><br>
+	   
+	   <!-- 03. 광고  -->
+	   <h1>모임 공간</h1>
+	   <hr>
+	   <br>
+   
+   	   <div class="wrapper">
+			<ul class="properties_list">
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" alt title class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" alt title class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" alt title class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+			</ul>
+			
+			<br>
+			
+			<ul class="properties_list">
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" alt title class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" alt title class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" alt title class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+			</ul>
+   	   </div>
+		
+   <br><br><br>		
    <!-- hidden -->
    <input type="hidden" name="guserId" value="${pdto.guserId}">
    <input type="hidden" name="guserPw" value="${pdto.guserPw}">
 
 
+   <br><br><br>
+   
    <!-- [Footer] 페이지 하단 (고정화면) -->
    <hr>
    <%@include file = "footer.jsp"%>
