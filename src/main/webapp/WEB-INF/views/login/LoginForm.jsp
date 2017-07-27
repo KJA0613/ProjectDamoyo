@@ -84,6 +84,25 @@
 		});
 	});		
 	
+ // [개인회원, 기업회원 선택 ] 
+    function LoginChoiceSubmit(type) {
+       
+       // 폼 안에 있는 데이터들 사용하려고 셋팅
+       var lc = document.getElementById('loginForm');      
+       
+       // "개인" 회원가입 폼 이동
+       if(type == A) {         
+          // 개인회원 : value = A > 값 찍기
+          var person = document.getElementById('person').value;
+          
+        } 
+       if(type == B){
+    	   
+    	  var company = document.getElementById('company').value;
+       }
+      
+       lc.submit();      
+    }
 </script>
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
@@ -108,13 +127,13 @@
 				</c:if>
 				<h1>로그인</h1>
 				<br>
-				
+				<form action="" method="POST" id="dataset" name="loginForm">
 					<div class="radio">
-						<label><input type="radio" name="person">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<label><input type="radio" name="person" value="A">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
-						<label><input type="radio" name="company">기업회원</label>
+						<label><input type="radio" name="person" value="B">기업회원</label>
 					</div>
-					<form action="" method="POST" id="dataset" name="loginForm">
+					
 					<div class="form-group">
 						<label for="guserId">아이디 입력 &nbsp;
 							<small>
