@@ -15,7 +15,7 @@
 
 <title>공통 헤더</title>
 
-<!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
+<!-- 헤더 전체 CSS -->
 <style type="text/css">
    .navbar-inverse {
        /* background-color: #2bb7d5; */
@@ -35,29 +35,30 @@
        font-size: 30px;
        font-weight: bold;
    }   
-   .navbar-inverse .navbar-nav > li > a {
-      color: white;
+   .navbar-inverse .navbar-nav > li {
       font-size: 17px;
       margin-right: 3px;
       font-weight: bold;
    }   
-   .a {
+   a.btn_link_host {
    	  font-weight: bold;
    }
+</style>
 
-   /* 헤더 오른쪽 효과 */
+<!-- 헤더 오른쪽 효과  CSS -->
+<style type="text/css">
     .actionBtn7 {
-	 position:relative;
-	 display:inline-block;
-	 height:40px;
-	 margin:auto;
-	 padding:0 18px;
-	 line-height:30px;
-	 color:#4c4c4d;
-	 font-family:oswald;
-	 text-transform:uppercase;
-	 text-align:center;
-	 text-decoration:none;
+		 position:relative;
+		 display:inline-block;
+		 height:40px;
+		 margin:auto;
+		 padding:0 18px;
+		 line-height:30px;
+		 color:#4c4c4d;
+		 font-family:oswald;
+		 text-transform:uppercase;
+		 text-align:center;
+		 text-decoration:none;
 	  }
 	  
 	.actionBtn7:after {
@@ -80,13 +81,42 @@
 	} 
 </style>
 
+
+<!-- 장소링크 CSS -->
+<style type="text/css">
+	#f_color {
+		color: white;
+	}
+	
+	#s_color {
+		color: #ffff00;
+	}
+	
+	.btn_link_host {
+		margin-top: 8px;
+ 		padding: 1px 2px 4px 2px;
+ 		   
+		display: block;
+		position: absolute;
+
+		height: 35px; 
+		border: 3px solid #ffff00;
+	    text-align:center;
+	    /* line-height:2px; */
+/*     right: 158px;
+    top: 19px;
+    */ 
+
+    }
+</style>
+
 <script type="text/javascript"></script>
 
 </head>
 <body>
 
 	<!-- 01.[Header] Navigation Bar로 구현 -->
-	<nav class="navbar navbar-inverse navbar-static-top"> <!-- [헤더 영역] 컨테이너 생성 -->
+	<nav class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
 		<!-- clearfix: 어긋난 칼럼들 보정 -->
 		<div class="clearfix">
@@ -97,19 +127,28 @@
 			
 			<!-- 01-02. 헤더 오른쪽 -->
 			<ul class="nav navbar-nav navbar-right">	<!-- ul: 순서가 필요없는 목록 만들 때 사용(ol과 반대개념) -->				
-				<!-- 01-02-01. 세션에 데이터 저장 여부에 따라 보여지는 화면 다름  --> 
-				<!-- 1) 로그인 안 된 상태 (session에 저장된 id가 없을 때) -->
-				<!-- 2) 로그인이 된 상태 (session에 저장된 id가 있을 때) -->
+				<!-- 세션에 데이터 저장 여부에 따라 보여지는 화면 다름  --> 
+				<!-- 1) [비회원] 로그인 안 된 상태 (session에 저장된 id가 없을 때) -->
+				<!-- 2) [회원 - 개인(A)/광고주(B)]로그인이 된 상태 (session에 저장된 id가 있을 때) -->
 				
 				<c:choose>
 					<c:when test = "${empty pdto.guserId}">
-						<li><a href="/member/LoginForm" class="code_view actionBtn7">로그인</a></li>
-						<li><a href="/join/JoinChoiceForm" class="code_view actionBtn7">회원가입</a></li>
+						<li><a href="/member/LoginForm" class="code_view actionBtn7" id="f_color">로그인</a></li>
+						<li><a href="/join/JoinChoiceForm" class="code_view actionBtn7" id="f_color">회원가입</a></li>
 					</c:when>
 					
-					<c:otherwise>							
-						<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7">${pdto.guserId}님 마이페이지</a></li>
-						<li><a href="/member/Logout" class="code_view actionBtn7">로그아웃</a></li>
+					<c:otherwise>
+						<c:choose>
+							<c:when test = "${pdto.guserCode eq 'A'}">	
+								<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
+								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
+							</c:when>					
+							<c:otherwise>
+								<li style="padding-right: 4px;"><a href="/" class="btn_link_host" style="padding: 7px 7px 10px 7px;" id="s_color">공간 등록하기</a></li>&nbsp;
+								<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
+								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:otherwise>
 				</c:choose>
 			</ul>

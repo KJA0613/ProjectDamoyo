@@ -9,14 +9,14 @@
 		var page = document.getElementById("page");
 		var query = document.getElementById("query");
 		if(query.value === "") {
-			var url = "/blog/board/listAll?page=" + page.value;
+			var url = "/blog/notice/listAll?page=" + page.value;
 		} else {
-			var url = "/blog/board/search?page=" + page.value;
+			var url = "/blog/notice/search?page=" + page.value;
 		}
 		if (type == 2) {
-			url = "/blog/board/viewModify";
+			url = "/blog/notice/viewModify";
 		} else if (type == 3) {
-			url = "/blog/board/remove";
+			url = "/blog/notice/remove";
 		}
 		ds.action = url;
 		ds.submit();
@@ -65,7 +65,7 @@
 		<form action="" method="POST" id="dataset">
 			<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc;">
 				<tr>
-					<td style="border-left-style: hidden; border-top-style: hidden;"><h4>자유게시판</h4></td>
+					<td style="border-left-style: hidden; border-top-style: hidden;"><h4>공지사항</h4></td>
 					<td style="border-right-style: hidden; border-top-style: hidden; padding-right: 0px;">
 						<a href="/blog/board/viewRegist"><button type="button" class="btn btn-primary" style="float: right;">새 글 쓰기</button></a>
 					</td>
@@ -127,7 +127,7 @@
 			</c:forEach>
 		</table>
 		
-		<form action="/blog/board/reply" method="POST" style="margin-top: 70px">
+		<form action="/blog/notice/reply" method="POST" style="margin-top: 70px">
 			<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc;">
 				<tr>
 					<td style="border: solid 1px #ccc; width: 600px;">

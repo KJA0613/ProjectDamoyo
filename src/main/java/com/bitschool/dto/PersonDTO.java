@@ -14,7 +14,7 @@ public class PersonDTO implements Serializable{
 	private String guserPhone;			    /* 유저 연락처 */
 	private String guserEmail;  	 		/* 유저 이메일  */
 	private Timestamp guserDate;			/* 유저 가입날짜 */
-	private char guserCode; 				/* 유저 구분 코드 > 개인회원: A, 광고주(기업): B, 관리자: Z */		
+	private String guserCode; 				/* 유저 구분 코드 > 개인회원: A, 광고주(기업): B, 관리자: Z */		
 	
 	
 	// Getter, Setter
@@ -66,19 +66,22 @@ public class PersonDTO implements Serializable{
 	public void setGuserDate(Timestamp guserDate) {
 		this.guserDate = guserDate;
 	}	
-	public char getGuserCode() {
+	public String getGuserCode() {
 		return guserCode;
 	}
-	public void setGuserCode(char guserCode) {
+	public void setGuserCode(String guserCode) {
 		this.guserCode = guserCode;
 	}
 	
 	// toString > 테스트용
 	@Override
 	public String toString() {
-		return "DamoyoPersonDTO [guserNo=" + guserNo + ", guserId=" + guserId + ", guserPw=" + guserPw + ", guserName="
+		return "PersonDTO [guserNo=" + guserNo + ", guserId=" + guserId + ", guserPw=" + guserPw + ", guserName="
 				+ guserName + ", guserGender=" + guserGender + ", guserPhone=" + guserPhone + ", guserEmail="
 				+ guserEmail + ", guserDate=" + guserDate + ", guserCode=" + guserCode + "]";
 	}
+	
+	
+
 	
 }

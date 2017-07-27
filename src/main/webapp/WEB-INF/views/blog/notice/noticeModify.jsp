@@ -41,7 +41,7 @@
 
 		<!-- Page Content -->
 		<div class="container" style="margin-left: 20px;">
-			<form action="/blog/board/modify" method="POST" style="width:600px; margin-top: 70px">
+			<form action="/blog/notice/modify" method="POST" style="width:600px; margin-top: 70px">
 				<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc; padding-top: 100px">
 						<tr>
 							<td height="60px;" style="border: solid 1px #ccc; border-right-style: none; padding-left: 15px;">
