@@ -63,7 +63,7 @@ public class MemberLoginController {
 	// 01. [개인회원] 로그인
 	// "쿠키"와 "세션" 설명 : http://88240.tistory.com/190 > [1차 처리] 세션 > [2차 처리 고민] 스프링 제공
 	@RequestMapping(value = "/PersonLogin", method = {RequestMethod.POST, RequestMethod.GET})
-	public String LoginCheck(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, HttpSession session, Model model, 
+	public String LoginCheck(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, @RequestParam("guserCode") String guserCode,HttpSession session, Model model, 
 							 HttpServletRequest request, RedirectAttributes redirectAttributes) {
 							
 		String url = null;
@@ -74,7 +74,7 @@ public class MemberLoginController {
 		System.out.println("[TEST-로그인(개인)/세션유지] 세션에 저장된 회원 정보 확인: " + pdto);
 
 		// 로그인 성공 (DB에 해당 데이터 있음)
-		if(pdto != null) {
+		if(pdto != null && pdto.getGuserCode().equals(guserCode)) {
 			
 			// 세션에 사용자 정보 저장
 			session.setAttribute("pdto", pdto);			

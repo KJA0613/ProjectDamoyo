@@ -64,7 +64,7 @@
 			<c:forEach var="post" items="${list}">
 				<tr>
 					<td style="text-align: center">${post.postNo}</td>
-					<td><a href="/blog/board/read?postNo=${post.postNo}&page=${page}">${post.postTitle}</a></td>
+					<td><a href="/blog/notice/read?postNo=${post.postNo}&page=${page}">${post.postTitle}</a></td>
 					<td style="text-align: center">${post.userId}</td>
 					<td style="text-align: center"><fmt:formatDate
 							value="${post.postDate}" pattern="YYYY-MM-dd" /></td>

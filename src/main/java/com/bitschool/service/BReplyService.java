@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.BReplyDAO;
+import com.bitschool.dto.BPostNoInfoDTO;
 import com.bitschool.dto.BReplyDTO;
 
 @Service
@@ -21,9 +22,9 @@ public class BReplyService {
 		return flag;
 	}
 
-	public List<BReplyDTO> getReplyListAll(int postNo) {
+	public List<BReplyDTO> getReplyListAll(BPostNoInfoDTO infoDTO) {
 		List<BReplyDTO> list = null;
-		list = dao.selectReply(postNo);
+		list = dao.selectReply(infoDTO);
 		return list;
 	}
 }

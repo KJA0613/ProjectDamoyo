@@ -76,9 +76,12 @@ public class PersonDTO implements Serializable{
 	// toString > 테스트용
 	@Override
 	public String toString() {
-		return "DamoyoPersonDTO [guserNo=" + guserNo + ", guserId=" + guserId + ", guserPw=" + guserPw + ", guserName="
+		return "PersonDTO [guserNo=" + guserNo + ", guserId=" + guserId + ", guserPw=" + guserPw + ", guserName="
 				+ guserName + ", guserGender=" + guserGender + ", guserPhone=" + guserPhone + ", guserEmail="
 				+ guserEmail + ", guserDate=" + guserDate + ", guserCode=" + guserCode + "]";
 	}
+	
+	
+
 	
 }

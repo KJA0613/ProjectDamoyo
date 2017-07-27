@@ -36,13 +36,13 @@
 			<tr>
 				<td colspan="2" style="border-style: hidden;"><h4>자유게시판</h4></td>
 				<td colspan="3" style="border-style: hidden;">
-					<button class="btn btn-primary" onclick="location.href='/blog/board/viewRegist'" style="float: right;">새 글 쓰기</button>
+					<button class="btn btn-primary" onclick="location.href='/blog/notice/viewRegist'" style="float: right;">새 글 쓰기</button>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="5">
 					<div class="category-filter-wrapper" style="width: 300px; float: right;">
-						<form action="/blog/board/search" method="post">
+						<form action="/blog/notice/search" method="post">
 							<div class="input-group input-group-sm">
 								<input type="search" name="query" class="form-control" placeholder="검색어" value=""/> <span class="input-group-btn">
 									<button type="submit" class="btn btn-default">
@@ -64,7 +64,7 @@
 			<c:forEach var="post" items="${list}">
 				<tr>
 					<td style="text-align: center">${post.postNo}</td>
-					<td><a href="/blog/board/read?postNo=${post.postNo}&page=${page}&query=${search.query}">${post.postTitle}</a></td>
+					<td><a href="/blog/notice/read?postNo=${post.postNo}&page=${page}&query=${search.query}">${post.postTitle}</a></td>
 					<td style="text-align: center">${post.userId}</td>
 					<td style="text-align: center"><fmt:formatDate
 							value="${post.postDate}" pattern="YYYY-MM-dd" /></td>
