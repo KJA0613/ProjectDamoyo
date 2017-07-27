@@ -45,7 +45,7 @@ public class MemberJoinController {
 
 	// 01. 회원가입 유형 > 개인회원: value = A (name값: 'person' 넘어옴)
 	@RequestMapping(value="/JoinChoiceCheck", method=RequestMethod.POST)
-	public String JoinChoiceCheck(@RequestParam("person") char person, PersonDTO pdto, Model model) {
+	public String JoinChoiceCheck(@RequestParam("person") String person, PersonDTO pdto, Model model) {
 		String url = null;
 		
 		//System.out.println("[TEST-회원가입(개인:A)] 회원가입 유형: " + person);
