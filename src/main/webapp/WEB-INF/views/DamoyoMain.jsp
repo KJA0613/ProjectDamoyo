@@ -181,14 +181,6 @@
 	    color: #666464;
 	}
 	 
-/* 	a {
-	    margin: 0;
-	    padding: 0;
-	    font-size: 100%;
-	    vertical-align: baseline;
-	    background: transparent;
-    } */
-
 	.wrapper ul li .property_details.title a{
 	    color: #666464;
 	    font-size: 28%;
