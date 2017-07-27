@@ -42,7 +42,7 @@ import com.google.gson.Gson;
  * 1 gyu hihihi
  */
 @Controller
-@RequestMapping(value="/blog", method = {RequestMethod.GET,RequestMethod.POST})
+@RequestMapping(value="/blog")
 public class BlogController {
 	
 	@Inject
@@ -62,9 +62,6 @@ public class BlogController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
-	/**
-	 * github 성공! 테스트
-	 */
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
@@ -74,10 +71,60 @@ public class BlogController {
 	
 	//*****************************************************************
 	
-	@RequestMapping(value="/notice", method = RequestMethod.GET)
-	public String notice() {
-		
-		return "blog/notice/notice";
+	@RequestMapping(value="/notice/listAll", method = RequestMethod.GET)
+	public String notice(@RequestParam(value="page",defaultValue="0") int page,Model model) {
+		int amount = 15;
+		BPageVO vo = pService.getPageVO(page,amount);
+		vo.setBoardName("notice");
+		List<BPostDTO> list = service.getListAll(vo);
+		ArrayList<String> pList = pService.makePageList(page, amount);
+		model.addAttribute("list",list);
+		model.addAttribute("pList",pList);
+		model.addAttribute("page",page);
+		return "blog/notice/noticeList";
+	}
+	
+	@RequestMapping(value="/notice/viewRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String viewNoticeRegist() {
+		return "blog/notice/noticeRegist";
+	}
+	
+	@RequestMapping(value="/notice/noticeRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String noticeList(BPostDTO post) {
+		String url = null;
+		post.setBoardName("notice");
+		boolean flag = service.registPost(post);
+		if(flag) {
+			url = "redirect:/blog/notice/listAll";
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/notice/read", method = RequestMethod.GET)
+	public String noticeRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
+								@RequestParam(value="query", defaultValue="") String query,Model model) {
+		String url = null;
+		boolean flag = service.increasCount(postNo);
+		if(flag){
+			BPostDTO post = service.readPost(postNo);
+			model.addAttribute("post", post);
+			model.addAttribute("page", page);
+			List<BReplyDTO> list = rService.getReplyListAll(postNo);
+			model.addAttribute("list", list);
+			model.addAttribute("query", query);
+			url = "blog/notice/detailNotice";
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/notice/remove", method=RequestMethod.POST)
+	public String noticeRemove(@RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+		String url = null;
+		boolean flag = service.remove(postNo);
+		if(flag) {
+			url = "redirect:/blog/board/listAll?page="+page;
+		}
+		return url;
 	}
 	
 	//*****************************************************************
@@ -157,6 +204,7 @@ public class BlogController {
 	public String listAll(@RequestParam(value="page",defaultValue="0") int page, Model model) {
 		int amount = 15;
 		BPageVO vo = pService.getPageVO(page,amount);
+		vo.setBoardName("free");
 		List<BPostDTO> list = service.getListAll(vo);
 		ArrayList<String> pList = pService.makePageList(page, amount);
 		model.addAttribute("list",list);
@@ -173,6 +221,7 @@ public class BlogController {
 	@RequestMapping(value="/board/boardRegist", method = {RequestMethod.GET, RequestMethod.POST})
 	public String boardList(BPostDTO post) {
 		String url = null;
+		post.setBoardName("free");
 		boolean flag = service.registPost(post);
 		if(flag) {
 			url = "redirect:/blog/board/listAll";

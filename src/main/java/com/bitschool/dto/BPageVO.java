@@ -3,7 +3,14 @@ package com.bitschool.dto;
 public class BPageVO {
 	private int start;
 	private int end;
+	private String boardName;
 	
+	public String getBoardName() {
+		return boardName;
+	}
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
 	public BPageVO(){}
 	public BPageVO(int start,int end){
 		this.start = start;

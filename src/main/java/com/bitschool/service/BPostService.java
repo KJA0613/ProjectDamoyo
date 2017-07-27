@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.BPostDAO;
 import com.bitschool.dto.BGalleryDTO;
+import com.bitschool.dto.BNoticeDTO;
 import com.bitschool.dto.BPageVO;
 import com.bitschool.dto.BPostDTO;
 import com.bitschool.dto.BSearchVO;
