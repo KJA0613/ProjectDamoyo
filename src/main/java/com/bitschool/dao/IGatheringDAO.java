@@ -27,6 +27,8 @@ public interface IGatheringDAO {
 
 	public List<GatheringDTO> getRecommDefault();
 
-	public boolean manageAddons(GatherAddonsDTO gadto);
+	public boolean manageAddons(GatherAddonsDTO gadto, String state);
+
+	public boolean existAddons(GatherAddonsDTO gadto);
 	
 }

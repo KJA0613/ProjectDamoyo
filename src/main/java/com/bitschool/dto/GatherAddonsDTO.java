@@ -3,8 +3,9 @@ package com.bitschool.dto;
 public class GatherAddonsDTO {
 	private int gatherAddonsNo;
 	private int gatherNo;
-	private String guserId;
+	private String gatherAddonsWriter;
 	private String gatherAddonsCode;
+	private String guserId;
 	
 	public int getGatherAddonsNo() {
 		return gatherAddonsNo;
@@ -34,12 +35,22 @@ public class GatherAddonsDTO {
 		this.gatherAddonsCode = gatherAddonsCode;
 	}
 	
-	@Override
-	public String toString() {
-		return "GatherAddonsDTO [gatherAddonsNo=" + gatherAddonsNo + ", gatherNo=" + gatherNo + ", guserId=" + guserId
-				+ ", gatherAddonsCode=" + gatherAddonsCode + "]";
+	public String getGatherAddonsWriter() {
+		return gatherAddonsWriter;
+	}
+	public void setGatherAddonsWriter(String gatherAddonsWriter) {
+		this.gatherAddonsWriter = gatherAddonsWriter;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "GatherAddonsDTO [gatherAddonsNo=" + gatherAddonsNo + ", gatherNo=" + gatherNo + ", gatherAddonsWriter="
+				+ gatherAddonsWriter + ", gatherAddonsCode=" + gatherAddonsCode + ", guserId=" + guserId + "]";
+	}
+	
+	
+
 	
 	
 	

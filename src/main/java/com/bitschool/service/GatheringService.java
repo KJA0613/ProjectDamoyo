@@ -103,9 +103,17 @@ public class GatheringService implements IGatheringService {
 	}
 
 	@Override
-	public boolean manageAddons(GatherAddonsDTO gadto) {
+	public boolean manageAddons(GatherAddonsDTO gadto, String state) {
 
-		boolean flag = gDao.manageAddons(gadto);
+		boolean flag = gDao.manageAddons(gadto, state);
+		
+		return flag;
+	}
+
+	@Override
+	public boolean existAddons(GatherAddonsDTO gadto) {
+		
+		boolean flag = gDao.existAddons(gadto);
 		
 		return flag;
 	}
