@@ -131,28 +131,42 @@ public class GatheringDAO implements IGatheringDAO {
 
 		List<GatheringDTO> recommList = null;
 		recommList = session.selectList(namespace+".recommDefault");
-		System.out.println(recommList);
-		
 		return recommList;
 	}
 
 	@Override
-	public boolean manageAddons(GatherAddonsDTO gadto) {
+	public boolean manageAddons(GatherAddonsDTO gadto, String state) {
 		
 		boolean flag = false;
 		
-		int result = session.insert(namespace+".insertAddons", gadto);
-		// 이미 값이 존재할 경우 0 리턴
-		System.out.println("삽입 : "+result);
+		int result=-1;
 		
-		if(result==0){
-			// 이미 값이 존재하면 delete
-			result = session.insert(namespace+".deleteAddons", gadto);
-			System.out.println("삭제 : "+result);
+		if(state.equals("insert")){// 이미 값이 존재하면 delete
+			result = session.insert(namespace+".insertAddons", gadto);// 이미 값이 존재할 경우 0 리턴
+			System.out.println("insert 들어옴 : "+result);
+		}else{
+			result = session.delete(namespace+".deleteAddons", gadto);
+			System.out.println("delete 들어옴 : "+result);
 		}
+		
+		if(result>=0){
+			flag=true;
+		}
+		
+		return flag;
+	}
 
-		if(result>0){
-			flag = true;
+	@Override
+	public boolean existAddons(GatherAddonsDTO gadto) {
+		
+		boolean flag = false;
+		
+		int result = session.selectOne(namespace+".existAddons", gadto);
+		System.out.println("select 결과 : "+result);
+		
+		
+		if(result>0){ // 값이 존재하면
+			flag = true; // true == 값이 존재
 		}
 		
 		return flag;

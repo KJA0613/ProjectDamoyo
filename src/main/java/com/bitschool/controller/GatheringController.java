@@ -48,26 +48,25 @@ public class GatheringController {
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 		
-		List<GatheringDTO> recommList = gService.getRecommDefault(); // 디폴트 추천검색
-		System.out.println("추천 디폴트 리스트 크기 : "+recommList.size());
+		List<GatheringDTO> recommList = gService.getRecommDefault();
 		
 		if(pdto!=null){ // 로그인 중이면
+			model.addAttribute("pdto", pdto);
+			
 			recommList = gService.getRecommendUser(pdto.getGuserId()); //사용자 추천 리스트
 			// 사용자 정보에 따른 추천글 가져옴
-			model.addAttribute("pdto", pdto);
 			// 그리고 jsp로 모델을 보냄
 			
 			if(recommList == null){ // 사용자 추천 리스트가 업으면
-				recommList = gService.getRecommDefault();
+				recommList = gService.getRecommDefault();// 디폴트 추천검색
 			}
 		}
+		
+		
 		if (gList != null) {
 			model.addAttribute("gath", gList);
 		}		
 		
-		System.out.println(recommList);
-		System.out.println(gList);
-
 		model.addAttribute("recomm", recommList);
 		
 		return url;
@@ -75,7 +74,7 @@ public class GatheringController {
 
 	
 	@RequestMapping(value = "/gatheringSearch", method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody HashMap<String, List<GatheringDTO>> gatheringAjax(
+	public @ResponseBody HashMap<String, List<GatheringDTO>> gatheringSearch(
 			@RequestParam(value = "cDATA", defaultValue="") String cData,
 			@RequestParam(value = "aDATA", defaultValue="") String aData,
 			@RequestParam(value = "sSTR", defaultValue="") String sSTR,
@@ -167,7 +166,7 @@ public class GatheringController {
 	}
 
 	
-	
+	// 모집글 쓰는 페이지로 이동하는 메서드
 	@RequestMapping(value = "/gatheringMake", method = { RequestMethod.GET, RequestMethod.POST })
 	public String gathering_make(HttpSession session,Model model) {
 		String url = "gather/gathering_make";
@@ -180,6 +179,7 @@ public class GatheringController {
 	}
 	
 	
+	// 모집글 디비에 삽입하는 메서드
 	@RequestMapping(value="/gatheringInsert",method={RequestMethod.GET, RequestMethod.POST})
 	public String gatheringInsert(HttpServletRequest req){
 		String url = null;
@@ -358,10 +358,13 @@ public class GatheringController {
 	}
 	
 	// 게시글 클릭했을때 사용자 클릭한 게시글의 카테고리와 지역을 db 추천테이블에 넣는것
+	// + 추가로 여기다 게시글 클릭했을때 모달로 띄우기전, 관심글 체크 유무 여부를 불러와서 리턴해야함
 	@RequestMapping(value = "/gatheringRecomm", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody  HashMap<String, String>  gatheringRecomm(
 			@RequestParam(value = "category", defaultValue="") String category,
 			@RequestParam(value = "area", defaultValue="") String area,
+			@RequestParam(value = "no") int gatherNo,
+			@RequestParam("id") String guserId,
 			HttpSession session
 			) {
 				
@@ -371,7 +374,7 @@ public class GatheringController {
 		// 로그인 사용자 정보
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
-		
+		// 사용자가 클릭한 모집글의 값을 dto에 담에 디비로 넣음
 		if(recommgatherList!=null){
 		
 			RecommGatherDTO regather = null;
@@ -390,41 +393,64 @@ public class GatheringController {
 				recommgatherList.add(regather);
 			}
 			
-			
-			System.out.println(recommgatherList);
 			session.setAttribute("recommgatherList", recommgatherList);	
 		
 		}
+		
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("success", "success");
+		map.put("result", "no");
+		
+		if(pdto!=null){
+		
+			// 초기에 모달에 심장무늬를 뿌릴때 여기서는 gatherNo를 가지고 디비에 조회하여 값의 유무를 비교하여 yes or no 를 보내는 메서드
+			GatherAddonsDTO gadto = new GatherAddonsDTO();
+			gadto.setGatherNo(gatherNo);
+			gadto.setGuserId(guserId);
+			gadto.setGatherAddonsCode("관심"); // 우선은 관심or앵콜
+			
+			boolean flag = gService.existAddons(gadto);
+			
+			if(flag){
+				map.put("result", "yes");
+			}
+			System.out.println("맵 결과 : "+map.get("result"));
+		}
 		
 		return map;
 	}
 	
+	// 여기서는 모달차잉 띄어지고 하트모양을 눌렀을때 유무체크 판단하여 뿌리기
 	// 모임 찜하기 or 앵콜요청 (아직은 여기까지, 추가로 더 들어갈 수 있음 )
 	// Json 사용하땐 @ResponseBody
-	@RequestMapping(value="/gatherAddons", method=RequestMethod.GET)
-	public @ResponseBody HashMap<String, Object> gatherAddons(
-			@RequestParam(value="gatherNo") int gatherNo,
-			@RequestParam(value="guserId") String guserId,
-			@RequestParam(value="gatherAddonsCode") String gatherAddonsCode
+	@RequestMapping(value="/gatherAddons", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody HashMap<String, String> gatherAddons(
+			@RequestParam(value="no") int gatherNo,
+			@RequestParam(value="writer") String gatherAddonsWriter,
+			@RequestParam(value="state") String state,
+			@RequestParam(value="code") String gatherAddonsCode,
+			HttpSession session
 			){
-		String url = "default";
 		
 		GatherAddonsDTO gadto = new GatherAddonsDTO();
 		gadto.setGatherNo(gatherNo);
-		gadto.setGuserId(guserId);
+		gadto.setGatherAddonsWriter(gatherAddonsWriter);
 		gadto.setGatherAddonsCode(gatherAddonsCode);
 		
-		boolean flag = gService.manageAddons(gadto);
-		
-		if(flag){
-			
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		if(pdto!=null){
+			gadto.setGuserId(pdto.getGuserId());
 		}
 		
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		boolean flag = gService.manageAddons(gadto, state);
+
+		HashMap<String, String> map = new HashMap<String, String>();
 		
-				
+		if(flag){
+			map.put("result", "yes");
+		}else{
+			map.put("result", "no");
+		}
+		
 		return map;
 	}
 

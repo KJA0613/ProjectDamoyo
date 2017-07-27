@@ -1,5 +1,7 @@
 package com.bitschool.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.service.IGatheringService;
 import com.bitschool.service.IMemberService;
 
 //[개인회원] - 마이페이지
@@ -30,6 +34,9 @@ public class PersonMypageController {
 	// [주입] 서비스 인터페이스
 	@Inject
 	private IMemberService memberService;	
+	
+	@Inject
+	private IGatheringService gatherService;
 	
 	
 	// --------------------------------------- [개인회원] 마 이 페 이 지  ---------------------------------------//
@@ -243,18 +250,62 @@ public class PersonMypageController {
 	
 	// 02. [개인회원] 마이페이지 - 내가 개설한 모임
 	@RequestMapping(value = "/MyPageCreateMeeting", method = RequestMethod.GET)
-	public String MyPageCreateMeeting() {
-		String url = "mypage/MyPageCreateMeeting";
+	public String MyPageCreateMeeting(
+			HttpSession session,
+			Model model
+			) {
 
-		return url;
+		String url = "default";	
+
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
+		List<GatheringDTO> mlist = null;
+		
+		if(pdto!=null){ // 로그인 체크
+			
+			model.addAttribute("pdto", pdto);
+			
+			String guserId = pdto.getGuserId();
+			mlist = gatherService.getmakeList(guserId); // 내가 만든 모임
+			
+			url="mypage/MyPageCreateMeeting";
+		}
+		
+		if(mlist!=null){
+			model.addAttribute("mlist", mlist);
+		}
+		
+		return url; 
 	}
 
 	// 03. [개인회원] 마이페이지 - 내가 참여중인 모임
 	@RequestMapping(value = "/MyPageParticipation", method = RequestMethod.GET)
-	public String MyPageParticipation() {
-		String url = "mypage/MyPageParticipation";
+	public String MyPageParticipation(
+		HttpSession session,
+		Model model
+		) {
+
+		String url = "default";	
+	
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
-		return url;
+		List<GatheringDTO> plist = null;
+		
+		if(pdto!=null){ // 로그인 체크
+			
+			model.addAttribute("pdto", pdto);
+			
+			String guserId = pdto.getGuserId();
+			plist = gatherService.getpartiList(guserId); // 참여중인 모임
+			
+			url="mypage/MyPageParticipation";
+		}
+		
+		if(plist!=null){
+			model.addAttribute("plist", plist);
+		}
+		
+		return url; 
 	}
 
 	// 04. [개인회원] 마이페이지 - 내가 찜한 모임
