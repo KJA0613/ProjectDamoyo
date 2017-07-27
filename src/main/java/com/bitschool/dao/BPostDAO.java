@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.BPageVO;
 import com.bitschool.dto.BPostDTO;
+import com.bitschool.dto.BPostNoInfoDTO;
 import com.bitschool.dto.BSearchVO;
 
 @Repository
@@ -32,25 +33,24 @@ public class BPostDAO {
 		return flag;
 	}
 
-	public boolean updateCnt(int postNo) {
+	public boolean updateCnt(BPostNoInfoDTO infoDTO) {
 		boolean flag = false;
-		int aCnt = session.update(namespace+".updateCnt", postNo);
+		int aCnt = session.update(namespace+".updateCnt", infoDTO);
 		if(aCnt > 0) {
 			flag = true;
 		}
 		return flag;
 	}
 
-	public BPostDTO selectPost(int postNo) {
-		
+	public BPostDTO selectPost(BPostNoInfoDTO infoDTO) {
 		BPostDTO post = null;
-		post = session.selectOne(namespace+".selectOne", postNo);
+		post = session.selectOne(namespace+".selectOne", infoDTO);
 		return post;
 	}
 
-	public boolean remove(int postNo) {
+	public boolean remove(BPostNoInfoDTO infoDTO) {
 		boolean flag = false;
-		int cnt = session.delete(namespace+".deleteOne", postNo);
+		int cnt = session.delete(namespace+".deleteOne", infoDTO);
 		if(cnt > 0) {
 			flag = true;
 		}

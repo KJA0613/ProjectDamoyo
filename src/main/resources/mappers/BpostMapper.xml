@@ -22,20 +22,20 @@
 		(#{postNo},#{postTitle},#{postContents},#{userId},#{boardName})
 	</insert>
 	
-	<update id="updateCnt" parameterType="Integer">
-		update post set postCount = postCount + 1 where postNo = #{postNo}
+	<update id="updateCnt" parameterType="BPostNoInfoDTO">
+		update post set postCount = postCount + 1 where postNo = #{postNo} and boardName = #{boardName}
 	</update>
 	
-	<select id="selectOne" parameterType="Integer" resultType="BPostDTO">
-		select * from post where postNo = #{postNo}
+	<select id="selectOne" parameterType="BPostNoInfoDTO" resultType="BPostDTO">
+		select * from post where postNo = #{postNo} and boardName = #{boardName}
 	</select>
 	
-	<delete id="deleteOne" parameterType="Integer">
-		delete from post where postNo = #{postNo}
+	<delete id="deleteOne" parameterType="BPostNoInfoDTO">
+		delete from post where postNo = #{postNo} and boardName = #{boardName}
 	</delete>
 	
 	<update id="updateContents" parameterType="BPostDTO">
-		update post set postTitle = #{postTitle}, postContents = #{postContents} where postNo = #{postNo}
+		update post set postTitle = #{postTitle}, postContents = #{postContents} where postNo = #{postNo} and boardName = #{boardName}
 	</update>
 	
 	<select id="selectSearch" resultType="BPostDTO" parameterType="BSearchVO">

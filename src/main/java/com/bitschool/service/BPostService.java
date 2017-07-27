@@ -7,10 +7,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.BPostDAO;
-import com.bitschool.dto.BGalleryDTO;
-import com.bitschool.dto.BNoticeDTO;
 import com.bitschool.dto.BPageVO;
 import com.bitschool.dto.BPostDTO;
+import com.bitschool.dto.BPostNoInfoDTO;
 import com.bitschool.dto.BSearchVO;
 
 @Service
@@ -31,21 +30,21 @@ public class BPostService {
 		return list;
 	}
 
-	public boolean increasCount(int postNo) {
+	public boolean increasCount(BPostNoInfoDTO infoDTO) {
 		boolean flag = false;
-		flag = dao.updateCnt(postNo);
+		flag = dao.updateCnt(infoDTO);
 		return flag;
 	}
 
-	public BPostDTO readPost(int postNo) {
+	public BPostDTO readPost(BPostNoInfoDTO infoDTO) {
 		BPostDTO post = null;
-		post = dao.selectPost(postNo);
+		post = dao.selectPost(infoDTO);
 		return post;
 	}
 
-	public boolean remove(int postNo) {
+	public boolean remove(BPostNoInfoDTO infoDTO) {
 		boolean flag = false;
-		flag = dao.remove(postNo);
+		flag = dao.remove(infoDTO);
 		return flag;
 	}
 
