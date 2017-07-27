@@ -12,8 +12,8 @@
 		insert into reply(replyNo,replyContents,postNo,replyUserId) values(#{replyNo},#{replyContents},#{postNo},#{replyUserId})
 	</insert>
 	
-	<select id="selectReply" resultType="BReplyDTO" parameterType="Integer">
-		select * from reply where postNo = #{postNo} order by replyNo
+	<select id="selectReply" resultType="BReplyDTO" parameterType="BPostNoInfoDTO">
+		select * from reply where postNo = #{postNo} and boardName = #{boardName} order by replyNo
 	</select>
 	
 </mapper>

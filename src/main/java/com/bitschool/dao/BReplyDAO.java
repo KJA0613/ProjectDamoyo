@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.BPostNoInfoDTO;
 import com.bitschool.dto.BReplyDTO;
 
 @Repository
@@ -28,9 +29,9 @@ public class BReplyDAO {
 		return flag;
 	}
 
-	public List<BReplyDTO> selectReply(int postNo) {
+	public List<BReplyDTO> selectReply(BPostNoInfoDTO infoDTO) {
 		List<BReplyDTO> list = null;
-		list = session.selectList(namespace+".selectReply", postNo);
+		list = session.selectList(namespace+".selectReply", infoDTO);
 		return list;
 	}
 

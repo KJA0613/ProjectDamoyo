@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bitschool.dto.BGalleryDTO;
 import com.bitschool.dto.BPageVO;
 import com.bitschool.dto.BPostDTO;
+import com.bitschool.dto.BPostNoInfoDTO;
 import com.bitschool.dto.BReplyDTO;
 import com.bitschool.dto.BScheduleDTO;
 import com.bitschool.dto.BScheduleFormatDTO;
@@ -71,7 +72,7 @@ public class BlogController {
 	
 	//*****************************************************************
 	
-	@RequestMapping(value="/notice/listAll", method = RequestMethod.GET)
+	@RequestMapping(value="/notice/listAll", method = {RequestMethod.GET, RequestMethod.POST})
 	public String notice(@RequestParam(value="page",defaultValue="0") int page,Model model) {
 		int amount = 15;
 		BPageVO vo = pService.getPageVO(page,amount);
@@ -104,12 +105,16 @@ public class BlogController {
 	public String noticeRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
 								@RequestParam(value="query", defaultValue="") String query,Model model) {
 		String url = null;
-		boolean flag = service.increasCount(postNo);
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("notice");
+		boolean flag = service.increasCount(infoDTO);
+		System.out.println(flag);
 		if(flag){
-			BPostDTO post = service.readPost(postNo);
+			BPostDTO post = service.readPost(infoDTO);
 			model.addAttribute("post", post);
 			model.addAttribute("page", page);
-			List<BReplyDTO> list = rService.getReplyListAll(postNo);
+			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
 			model.addAttribute("list", list);
 			model.addAttribute("query", query);
 			url = "blog/notice/detailNotice";
@@ -120,10 +125,63 @@ public class BlogController {
 	@RequestMapping(value="/notice/remove", method=RequestMethod.POST)
 	public String noticeRemove(@RequestParam("postNo") int postNo, @RequestParam("page") int page) {
 		String url = null;
-		boolean flag = service.remove(postNo);
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("notice");
+		boolean flag = service.remove(infoDTO);
 		if(flag) {
-			url = "redirect:/blog/board/listAll?page="+page;
+			url = "redirect:/blog/notice/listAll?page="+page;
 		}
+		return url;
+	}
+	
+	@RequestMapping(value="/notice/viewModify", method=RequestMethod.POST)
+	public String viewNoticeModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+		model.addAttribute("post",post);
+		model.addAttribute("postNo",postNo);
+		model.addAttribute("page",page);
+		return "blog/notice/noticeModify";
+	}
+	
+	@RequestMapping(value="/notice/modify", method=RequestMethod.POST)
+	public String modifyNotice(BPostDTO post, Model model, @RequestParam("page") int page) {
+		String url = null;
+		post.setBoardName("notice");
+		boolean flag = service.modify(post);
+		int postNo = post.getPostNo();
+		String qs = "?postNo="+postNo+"&page="+page;
+		if(flag) {
+			url = "redirect:/blog/notice/read"+qs;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="notice/reply", method=RequestMethod.POST)
+	public String replyNotice(BReplyDTO reply, @RequestParam("page") int page) {
+		String url = null;
+		int postNo = reply.getPostNo();
+		boolean flag = rService.insertReply(reply);
+		if(flag) {
+			String qs = "?postNo="+postNo+"&page="+page;
+			url = "redirect:/blog/notice/read"+qs;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/notice/search", method=RequestMethod.POST)
+	public String searchNotice(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page, Model model) {
+		String url = null;
+		int amount = 15;
+		BSearchVO searchVO = new BSearchVO();
+		searchVO.setQuery(query);
+		searchVO.setVo(pService.getPageVO(page, amount));
+		List<BPostDTO> list = service.listSearchBookAll(searchVO);
+		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
+		model.addAttribute("list",list); 
+		model.addAttribute("pList",pList);
+		model.addAttribute("page",page);
+		model.addAttribute("search",searchVO);
+		url = "blog/notice/searchList";
 		return url;
 	}
 	
@@ -190,6 +248,8 @@ public class BlogController {
 		}
 		return url;
 	}
+	
+	
 	//*****************************************************************
 	
 	@RequestMapping(value="/file", method = RequestMethod.GET)
@@ -233,12 +293,15 @@ public class BlogController {
 	public String read(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
 								@RequestParam(value="query", defaultValue="") String query,Model model) {
 		String url = null;
-		boolean flag = service.increasCount(postNo);
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("free");
+		boolean flag = service.increasCount(infoDTO);
 		if(flag){
-			BPostDTO post = service.readPost(postNo);
+			BPostDTO post = service.readPost(infoDTO);
 			model.addAttribute("post", post);
 			model.addAttribute("page", page);
-			List<BReplyDTO> list = rService.getReplyListAll(postNo);
+			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
 			model.addAttribute("list", list);
 			model.addAttribute("query", query);
 			url = "blog/board/detailPost";
@@ -249,7 +312,10 @@ public class BlogController {
 	@RequestMapping(value="/board/remove", method=RequestMethod.POST)
 	public String remove(@RequestParam("postNo") int postNo, @RequestParam("page") int page) {
 		String url = null;
-		boolean flag = service.remove(postNo);
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("free");
+		boolean flag = service.remove(infoDTO);
 		if(flag) {
 			url = "redirect:/blog/board/listAll?page="+page;
 		}
@@ -268,6 +334,7 @@ public class BlogController {
 	@RequestMapping(value="/board/modify", method=RequestMethod.POST)
 	public String modify(BPostDTO post, Model model, @RequestParam("page") int page) {
 		String url = null;
+		post.setBoardName("free");
 		boolean flag = service.modify(post);
 		int postNo = post.getPostNo();
 		String qs = "?postNo="+postNo+"&page="+page;

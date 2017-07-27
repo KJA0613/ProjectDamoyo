@@ -46,7 +46,7 @@
 <!-- JQuery -->
 <script type="text/javascript">
 
-	//01. [초기화] Input 태그에 입력한 내용 전체 초기화 시키기
+	/* //01. [초기화] Input 태그에 입력한 내용 전체 초기화 시키기
 	$(document).ready(function() {
 		$('#btnReset').click(function() {
 			$('#dataset').each(function() {
@@ -55,7 +55,7 @@
 			});
 		});		
 	});
-	
+	 */
 	// 02. [데이터 유효성 체크] 로그인 폼 > 아이디, 비밀번호 미입력 > 경고창 생성
     $(document).ready(function() {
 		$('#btnLogin').click(function() {			
@@ -84,6 +84,25 @@
 		});
 	});		
 	
+ // [개인회원, 기업회원 선택 ] 
+    function LoginChoiceSubmit(type) {
+       
+       // 폼 안에 있는 데이터들 사용하려고 셋팅
+       var lc = document.getElementById('loginForm');      
+       
+       // "개인" 회원가입 폼 이동
+       if(type == A) {         
+          // 개인회원 : value = A > 값 찍기
+          var person = document.getElementById('person').value;
+          
+        } 
+       if(type == B){
+    	   
+    	  var company = document.getElementById('company').value;
+       }
+      
+       document.loginForm.action = "/member/PersonLogin";	
+    }
 </script>
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
@@ -108,13 +127,13 @@
 				</c:if>
 				<h1>로그인</h1>
 				<br>
-				
+				<form action="" method="POST" id="dataset" name="loginForm">
 					<div class="radio">
-						<label><input type="radio" name="person">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<label><input type="radio" name="guserCode" value="A">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
-						<label><input type="radio" name="company">기업회원</label>
+						<label><input type="radio" name="guserCode" value="B">기업회원</label>
 					</div>
-					<form action="" method="POST" id="dataset" name="loginForm">
+					
 					<div class="form-group">
 						<label for="guserId">아이디 입력 &nbsp;
 							<small>
@@ -134,7 +153,7 @@
 					</div>
 					<br>	
 					<div class="form-group pull-right">
-						<button type="submit" class="btn btn-default" id="btnReset" tabindex="7">초기화</button>		<!-- 메인페이지로 이동 -->								
+													
 						<button type="submit" class="btn btn-primary" id="btnLogin" tabindex="3">로그인</button>		<!-- 로그인 되면: 메인페이지로 이동(아이디 세션 유지) / 로그인 안 되면(Javascript 경고창) -->
 					</div>
 					<br>
