@@ -166,28 +166,21 @@ public class MemberJoinController {
 	public String checkDuplicatePersonIdAjax(@RequestParam("guserId") String guserId, Model model) {
 		String url = null;
 		String result = null;
-		
-		// 받아온 데이터 처리 > DataType: Json
-		//JSONPObject json = new JSONPObject();
 
-		System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + guserId);
+		//System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + guserId);
 
 		// DB에 저장된 아이디랑 비교
-		result = memberService.checkDuplicatePersonId(guserId);
-		
-		System.out.println("[TEST] DB Data(DB에 저장된 결과): " + result);
+		result = memberService.checkDuplicatePersonId(guserId);		
+		//System.out.println("[TEST] DB Data(DB에 저장된 결과): " + result);
 		
 		// 입력한 id = DB에 조회한 id
-		if (result == null) {						// 일치(중복)
-			model.addAttribute("OK", "OK");
-		} else {											// 불일치
-			model.addAttribute("FAIL", "FAIL");
+		if (result == null) {							// 가입 가능한 아이디
+			result = "OK";
+		} else {										// 중복 된 아이디
+			result = "FAIL";
 		}
 		
-		// 결과값 저장해서 데이터 전송
-		url = "join/JoinPersonInto";
-		
-		return url;		
+		return result;		
 	}
 
 }
