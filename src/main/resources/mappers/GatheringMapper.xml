@@ -112,7 +112,7 @@
 	<select id="existAddons" resultType="int" parameterType="com.bitschool.dto.GatherAddonsDTO">
 		select count(*) 
 		from gatheraddons
-		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and guserId = #{guserId}
+		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and guserId = #{guserId} and gatheraddonswriter = #{gatherAddonsWriter}
 	</select>
 	
 	<insert id="insertAddons" parameterType="com.bitschool.dto.GatherAddonsDTO">
@@ -136,116 +136,10 @@
 		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and gatheraddonswriter = #{gatherAddonsWriter} and guserId = #{guserId}
 	</delete>
 	
+	<select id="attendGather" resultType="com.bitschool.dto.GatheringDTO" parameterType="String">
+		select *
+		from gather a
+		where a.gatherno in (select b.gatherno as gatherno  from GATHERADDONS b where b.guserid = #{guserId} and b.gatheraddonscode = '관심')
+	</select>
 
-<!-- 
-	<update id="mergeList" parameterType="java.util.List">
-		
-		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
-	        select recommgatherseq.nextval from dual
-	    </selectKey>
-	
-		<foreach collection="list" item="recomm" open="(" close=")" >
- 
-			merge into recommgather 
-			using dual
-			on (recommgathername = #{recomm.recommgatherName} and recommgathercode = #{recomm.recommgatherCode} and guserid = #{recomm.guserId})
-			when matched then
-				update set
-					recommgathercnt = recommgathercnt + 1
-			when not matched then 
-				insert (recommgatherno, recommgathername, recommgathercode, recommgathercnt, guserid, recommgatherdate)
-				values (#{seq}, #{recomm.recommgatherName}, #{recomm.recommgatherCode}, 0, '망망2', sysdate)
-			
-		</foreach>	
-		
-	</update>	
-	 -->
-
-	
-	<!-- 아래꺼는 되는 문법
-		merge into recommgather 
-			using dual
-			on (recommgathername = '토익' and recommgathercode = '카테고리' and guserid = '망망2')
-			when matched then
-				update set
-					recommgathercnt = recommgathercnt+1
-			when not matched then
-				insert (recommgatherno, recommgathername, recommgathercode, recommgathercnt, guserid, recommgatherdate)
-				values (1, '토익', '카테고리', 0, '망망2', sysdate);
-	 -->
-	
-	
-	
-	
-	<!-- 
-	insert into gather (gatherno, gathersubject, gathercode, gatherwrite, gathersdate, gatheredate, gatherarea, gatherparti, gathercontent, gatherimg, guserid, gatherstime, gatheretime)
-	values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCode}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherParti}, #{gath.gatherContent}, #{gath.gatherImg}, '망망2', to_date( #{gath.gatherStime},'yyyy-mm-dd hh24:mi'), to_date( #{gath.gatherEtime},'yyyy-mm-dd hh24:mi'))
-		
-	 -->
-	
-	<!-- 
-	to_date( ,'yyyy-mm-dd hh24:mi:ss')
-	insert into gather (gatherno, gathersubject, gathercode, gatherwrite, gathersdate, gatheredate, gatherarea, gatherparti, gathercontent, gatherimg, guserid, gatherstime, gatheretime, gatherday)
-		value(seq, #{gath.gatherSubject}, #{gath.gatherCode}, sysdate, #{gath.gatherSdate}, #{gath.gatherEdate}, #{gath.gatherArea}, #{gath.gatherParti}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherStime}, #{gath.gatherEtime}, #{gath.gatherDay}
-	 -->
-	
-	<!-- 
-		
-	<insert id="insert" parameterType="BoardDTO">
-		<selectKey keyProperty="boardNo" order="BEFORE" resultType="Integer">
-			select board_seq.nextval from dual
-		</selectKey>
-		insert into board(boardno,writer,subject,message,groupno,upload) 
-		values (#{boardNo},#{writer},#{subject},#{message},#{boardNo},#{upload})
-	</insert>
-	<select id="selectAll" resultType="BoardDTO">
-		select * from
-			(select rownum as num, temp.* from
-			(select * from board order by boardno desc) temp)
-		where num between 1 and 10
-	</select>
-	<select id="selectRange" resultType="BoardDTO" parameterType="PageVO">
-		select * from
-			(select rownum as num, temp.* from
-			(select * from board order by groupno desc,orderno) temp)
-		where num between #{start} and #{end}
-	</select>
-	<select id="selectSearch" resultType="BoardDTO" parameterType="SearchVO">
-		select * from
-			(select rownum as num, temp.* from
-			(select * from board  
-				<if test="type==0"></if>
-				<if test="type==1">where writer like '%'||#{query}||'%'</if>
-				<if test="type==2">where subject like '%'||#{query}||'%'</if>
-				<if test="type==3">where subject like '%'||#{query}||'%' or message = '%'||#{query}||'%'</if>
-		    ) temp)
-		 where num between #{vo.start} and #{vo.end}
-		 order by num desc
-	</select>
-	<select id="select" parameterType="Integer" resultType="BoardDTO">
-		select * from board where boardno = #{boardNo}
-	</select>
-	<delete id="delete" parameterType="Integer">
-		delete from board where boardno = #{boardNo}
-	</delete>
-	<update id="updateCount" parameterType="Integer">
-		update board set readcount = readcount + 1 where boardno = #{boardNo}
-	</update>
-	<update id="updateContent" parameterType="BoardDTO">
-		update board set subject = #{subject} , message = #{message} 
-		where boardno = #{boardNo} 
-	</update>
-	<update id="updateOrder" parameterType="java.util.Map">
-		update board set orderno = orderno+1 
-		<![CDATA[where groupno = #{groupNo} and orderno >= #{orderNo}]]>
-	</update>
-	<insert id="insertReply" parameterType="BoardDTO">
-		<selectKey keyProperty="boardNo" order="BEFORE" resultType="Integer">
-			select board_seq.nextval from dual
-		</selectKey>
-		insert into board(boardno,writer,subject,message,groupno,parentno,orderno,depth) 
-		values (#{boardNo},#{writer},#{subject},#{message},#{groupNo},#{parentNo},#{orderNo},#{depth})
-	</insert> 
-	
-	-->
 </mapper>

@@ -903,7 +903,7 @@ $(function() {
 		var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
 		var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
 		var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
-		var id = href.data('id'); /*  href태그에서 data- 값을 변수에 저장 */
+		var id = href.data('id'); 
 		
 		var DATA = {
 			"category" : category,
@@ -2134,7 +2134,9 @@ $(function() {
 					</div>
 					
 					<div class="modal-body" id="modal-body-no" style="display:none;"></div>
+					<!-- 로그인 중인 사용자  == guser-->
 					<div class="modal-body" id="modal-body-guser" style="display:none;">${pdto.guserId eq '' ? '' : pdto.guserId}</div>
+					
 				</div>
 			</div>
 		</div>
