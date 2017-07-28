@@ -91,7 +91,7 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/notice/noticeRegist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String noticeList(BPostDTO post) {
+	public String noticeRegist(BPostDTO post) {
 		String url = null;
 		post.setBoardName("notice");
 		boolean flag = service.registPost(post);
@@ -156,10 +156,11 @@ public class BlogController {
 		return url;
 	}
 	
-	@RequestMapping(value="notice/reply", method=RequestMethod.POST)
+	@RequestMapping(value="/notice/reply", method=RequestMethod.POST)
 	public String replyNotice(BReplyDTO reply, @RequestParam("page") int page) {
 		String url = null;
 		int postNo = reply.getPostNo();
+		reply.setBoardName("notice");
 		boolean flag = rService.insertReply(reply);
 		if(flag) {
 			String qs = "?postNo="+postNo+"&page="+page;
@@ -175,6 +176,7 @@ public class BlogController {
 		BSearchVO searchVO = new BSearchVO();
 		searchVO.setQuery(query);
 		searchVO.setVo(pService.getPageVO(page, amount));
+		searchVO.setBoardName("notice");
 		List<BPostDTO> list = service.listSearchBookAll(searchVO);
 		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
 		model.addAttribute("list",list); 
@@ -279,7 +281,7 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/board/boardRegist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String boardList(BPostDTO post) {
+	public String boardRegist(BPostDTO post) {
 		String url = null;
 		post.setBoardName("free");
 		boolean flag = service.registPost(post);
@@ -344,10 +346,11 @@ public class BlogController {
 		return url;
 	}
 	
-	@RequestMapping(value="board/reply", method=RequestMethod.POST)
+	@RequestMapping(value="/board/reply", method=RequestMethod.POST)
 	public String reply(BReplyDTO reply, @RequestParam("page") int page) {
 		String url = null;
 		int postNo = reply.getPostNo();
+		reply.setBoardName("free");
 		boolean flag = rService.insertReply(reply);
 		if(flag) {
 			String qs = "?postNo="+postNo+"&page="+page;
@@ -363,6 +366,7 @@ public class BlogController {
 		BSearchVO searchVO = new BSearchVO();
 		searchVO.setQuery(query);
 		searchVO.setVo(pService.getPageVO(page, amount));
+		searchVO.setBoardName("free");
 		List<BPostDTO> list = service.listSearchBookAll(searchVO);
 		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
 		model.addAttribute("list",list);
@@ -375,14 +379,14 @@ public class BlogController {
 	
 	//*****************************************************************
 	
-	@RequestMapping(value="photo/viewModifyPhoto", method=RequestMethod.POST)
+	@RequestMapping(value="/photo/viewModifyPhoto", method=RequestMethod.POST)
 	public String viewModifyImage(@RequestParam("imgNo") int imageNo, Model model) {
 		BGalleryDTO gallery = gService.getPhoto(imageNo);
 		model.addAttribute("gallery", gallery);
 		return "blog/photo/viewModifyPhoto";
 	}
 	
-	@RequestMapping(value="photo/removePhoto", method=RequestMethod.POST)
+	@RequestMapping(value="/photo/removePhoto", method=RequestMethod.POST)
 	public String removePhoto(@RequestParam("imgNo") int imageNo) {
 		String url = null;
 		boolean flag = gService.removePhoto(imageNo);
@@ -392,7 +396,7 @@ public class BlogController {
 		return url;
 	}
 	
-	@RequestMapping(value="photo/viewPhoto", method = RequestMethod.GET)
+	@RequestMapping(value="/photo/viewPhoto", method = RequestMethod.GET)
 	public String viewPhoto(Model model) {
 		String url = "blog/photo/viewPhoto";
 		List<BGalleryDTO> list = gService.getImageList();
@@ -400,13 +404,13 @@ public class BlogController {
 		return url;
 	}
 	
-	@RequestMapping(value="photo/viewUploadPhoto", method = RequestMethod.GET)
+	@RequestMapping(value="/photo/viewUploadPhoto", method = RequestMethod.GET)
 	public String viewUploadPhoto() {
 		String url = "blog/photo/viewUploadPhoto";
 		return url;
 	}
 	
-	@RequestMapping(value="photo/uploadPhoto", method = RequestMethod.POST)
+	@RequestMapping(value="/photo/uploadPhoto", method = RequestMethod.POST)
 	public String uploadPhoto(HttpServletRequest req) {
 		String url = null;
 		BGalleryDTO gallery = new BGalleryDTO();
@@ -468,12 +472,123 @@ public class BlogController {
 	}
 	
 	//*****************************************************************
-	@RequestMapping(value="/mission", method = RequestMethod.GET)
-	public String mission() {
-		
-		return "blog/mission/mission";
+	
+	@RequestMapping(value="/comments/listAll", method = {RequestMethod.POST, RequestMethod.GET})
+	public String commentsListAll(@RequestParam(value="page",defaultValue="0") int page, Model model) {
+		int amount = 15;
+		BPageVO vo = pService.getPageVO(page,amount);
+		vo.setBoardName("comments");
+		List<BPostDTO> list = service.getListAll(vo);
+		ArrayList<String> pList = pService.makePageList(page, amount);
+		model.addAttribute("list",list);
+		model.addAttribute("pList",pList);
+		model.addAttribute("page",page);
+		return "blog/comments/commentsList";
 	}
 	
+	@RequestMapping(value="/comments/viewRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String viewCommentsRegist() {
+		return "blog/comments/commentsRegist";
+	}
+	
+	@RequestMapping(value="/comments/noticeRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String commentsRegist(BPostDTO post) {
+		String url = null;
+		post.setBoardName("comments");
+		boolean flag = service.registPost(post);
+		if(flag) {
+			url = "redirect:/blog/comments/listAll";
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/comments/read", method = RequestMethod.GET)
+	public String commentsRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
+								@RequestParam(value="query", defaultValue="") String query,Model model) {
+		String url = null;
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("comments");
+		boolean flag = service.increasCount(infoDTO);
+		System.out.println(flag);
+		if(flag){
+			BPostDTO post = service.readPost(infoDTO);
+			model.addAttribute("post", post);
+			model.addAttribute("page", page);
+			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
+			model.addAttribute("list", list);
+			model.addAttribute("query", query);
+			url = "blog/comments/detailComments";
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/comments/remove", method=RequestMethod.POST)
+	public String commentsRemove(@RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+		String url = null;
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("comments");
+		boolean flag = service.remove(infoDTO);
+		if(flag) {
+			url = "redirect:/blog/comments/listAll?page="+page;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/comments/viewModify", method=RequestMethod.POST)
+	public String viewCommentsModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+		model.addAttribute("post",post);
+		model.addAttribute("postNo",postNo);
+		model.addAttribute("page",page);
+		return "blog/comments/commentsModify";
+	}
+	
+	@RequestMapping(value="/comments/modify", method=RequestMethod.POST)
+	public String modifyComments(BPostDTO post, Model model, @RequestParam("page") int page) {
+		String url = null;
+		post.setBoardName("comments");
+		boolean flag = service.modify(post);
+		int postNo = post.getPostNo();
+		String qs = "?postNo="+postNo+"&page="+page;
+		if(flag) {
+			url = "redirect:/blog/comments/read"+qs;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/comments/reply", method=RequestMethod.POST)
+	public String replyComments(BReplyDTO reply, @RequestParam("page") int page) {
+		String url = null;
+		int postNo = reply.getPostNo();
+		reply.setBoardName("comments");
+		boolean flag = rService.insertReply(reply);
+		if(flag) {
+			String qs = "?postNo="+postNo+"&page="+page;
+			url = "redirect:/blog/comments/read"+qs;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/comments/search", method=RequestMethod.POST)
+	public String searchComments(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page, Model model) {
+		String url = null;
+		int amount = 15;
+		BSearchVO searchVO = new BSearchVO();
+		searchVO.setQuery(query);
+		searchVO.setVo(pService.getPageVO(page, amount));
+		searchVO.setBoardName("comments");
+		List<BPostDTO> list = service.listSearchBookAll(searchVO);
+		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
+		model.addAttribute("list",list); 
+		model.addAttribute("pList",pList);
+		model.addAttribute("page",page);
+		model.addAttribute("search",searchVO);
+		url = "blog/comments/searchList";
+		return url;
+	}
+	
+	//*****************************************************************
 	@RequestMapping(value="/contact", method = RequestMethod.GET)
 	public String contact() {
 		
