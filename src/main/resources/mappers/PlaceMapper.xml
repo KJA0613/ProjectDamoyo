@@ -9,10 +9,12 @@
 		<selectKey keyProperty="placeNo" resultType="int" order="BEFORE">
 			select placeSeq.nextval from dual
 		</selectKey>
-		
-			
+			insert into place(placeNo, placeImage, placeType, placeName, placeIntro, placeAdr1, placeAdr2, placeAdr3, 
+								placeeTel, placeURL, placePerCnt, placeUseTime, placeUseDay, placeCost, placeCostChoice, placeParking, placeContent, 
+								placeCreateDate, comId) 
+			values(#{placeNo}, #{placeImage}, #{placeType}, #{placeName}, #{placeIntro}, #{placeAdr1}, #{placeAdr2}, #{placeAdr3},
+				   #{placeeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, 
+				   #{placeCreateDate}, #{comId})			
 	</insert>		
-
-
 
 </mapper>
