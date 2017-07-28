@@ -10,8 +10,8 @@
 		order by gatherwrite desc
 	</select>
 	
-	<select id="recommAll" parameterType="String" resultType="com.bitschool.dto.GatheringDTO">
-		select * 
+	<select id="recommAll" parameterType="java.lang.String" resultType="com.bitschool.dto.GatheringDTO">
+		select b.* 
 		from (  select *
 		        from (  select * 
 		                from RECOMMGATHER 
@@ -78,13 +78,13 @@
 	</insert>
 	
 	
-	<select id="partiList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
+	<select id="partiList" parameterType="java.lang.String" resultType="com.bitschool.dto.GatheringDTO" >
 	    select * 
 		from gather a 
 		where exists (select gatherno from gatherparti b where gatherpartiid = #{guserId} and b.gatherparticode = '가입' and a.gatherno = b.gatherno)
 	</select>
 	
-	<select id="makeList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
+	<select id="makeList" parameterType="java.lang.String" resultType="com.bitschool.dto.GatheringDTO" >
 		select * from gather where guserid = #{guserId}
 	</select>
 	
@@ -136,7 +136,7 @@
 		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and gatheraddonswriter = #{gatherAddonsWriter} and guserId = #{guserId}
 	</delete>
 	
-	<select id="attendGather" resultType="com.bitschool.dto.GatheringDTO" parameterType="String">
+	<select id="attendGather" resultType="com.bitschool.dto.GatheringDTO" parameterType="java.lang.String">
 		select *
 		from gather a
 		where a.gatherno in (select b.gatherno as gatherno  from GATHERADDONS b where b.guserid = #{guserId} and b.gatheraddonscode = '관심')

@@ -79,5 +79,10 @@
 	<delete id="deletePerson" parameterType="PersonDTO">
 		delete from guser where guserId = #{guserId} and guserPw = #{guserPw}
 	</delete>		
-
+	
+	<!-- [개인회원] 마이페이지 - 관심모임 삭제  -->
+	<delete id="deleteAttend" parameterType="GatherAddonsDTO">
+		delete from gatheraddons
+		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and gatheraddonswriter = #{gatherAddonsWriter} and guserId = #{guserId}
+	</delete>
 </mapper>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.bitschool.dao.IMemberDAO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.PersonDTO;
 
 // [개인&기업회원] 로직처리
@@ -227,6 +228,15 @@ public class MemberService implements IMemberService {
 			e.printStackTrace();
 		}
 
+		return flag;
+	}
+
+	// [개인회원] 마이페이지 - 관심모임 삭제
+	@Override
+	public boolean deleteAttend(GatherAddonsDTO gadto) {
+
+		boolean flag = personDAO.deleteAttend(gadto);
+		
 		return flag;
 	}
 

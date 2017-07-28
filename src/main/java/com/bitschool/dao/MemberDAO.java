@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.PersonDTO;
 
 @Repository
@@ -191,6 +192,20 @@ public class MemberDAO implements IMemberDAO {
 		int aCnt = session.delete(namespace+".deletePerson", pdto);
 		
 		if(aCnt > 0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	// [개인회원] 마이페이지 - 관심모임 삭제
+	@Override
+	public boolean deleteAttend(GatherAddonsDTO gadto) {
+
+		boolean flag = false;
+		int result = session.delete(namespace+".deleteAttend", gadto);
+		
+		if(result>0){
 			flag = true;
 		}
 		

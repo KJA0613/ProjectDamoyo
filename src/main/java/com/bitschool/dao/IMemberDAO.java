@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.PersonDTO;
 
 public interface IMemberDAO {
@@ -46,5 +47,8 @@ public interface IMemberDAO {
 	
 	// [개인회원] 마이페이지 - 회원 탈퇴 > 정보 삭제
 	public boolean deletePerson(PersonDTO pdto) throws SQLException;
+
+	// [개인회원] 마이페이지 - 관심모임 삭제
+	public boolean deleteAttend(GatherAddonsDTO gadto);
 
 }
