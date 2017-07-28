@@ -18,10 +18,8 @@
 <!-- 헤더 전체 CSS -->
 <style type="text/css">
    .navbar-inverse {
-       /* background-color: #2bb7d5; */
-       /* background-color: #074069; */
-       /* background-color: #3399ff; */		/* 잡코리아 배경색 */
-       background-color: #40b4e5;			/* 모꼬지 배경색 */
+   	   background-color: #03a9f4;	
+       /* background-color: #40b4e5; */			/* 모꼬지 배경색 */
        border-color: #00a3cc;
    }
    .navbar {
@@ -102,15 +100,8 @@
 		height: 35px; 
 		border: 3px solid #ffff00;
 	    text-align:center;
-	    /* line-height:2px; */
-/*     right: 158px;
-    top: 19px;
-    */ 
-
     }
 </style>
-
-<script type="text/javascript"></script>
 
 </head>
 <body>
@@ -119,7 +110,7 @@
 	<nav class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
 		<!-- clearfix: 어긋난 칼럼들 보정 -->
-		<div class="clearfix">
+		<div class="clearfix">		
 			<!-- 01-01. 로고 -->
 			<div class="navbar-header">
 				<a href="/" class="navbar-brand navbar-brand-center">DAMOYO</a>
@@ -144,7 +135,7 @@
 								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
 							</c:when>					
 							<c:otherwise>
-								<li style="padding-right: 4px;"><a href="/" class="btn_link_host" style="padding: 7px 7px 10px 7px;" id="s_color">공간 등록하기</a></li>&nbsp;
+								<li style="padding-right: 4px;"><a href="#" class="btn_link_host" style="padding: 7px 7px 10px 7px;" id="s_color">공간 등록하기</a></li>&nbsp;
 								<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
 								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
 							</c:otherwise>

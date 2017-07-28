@@ -10,7 +10,7 @@ public class MainController {
 	
 	//------------------------------------ 메 인 페 이 지  ------------------------------------//
 
-	// 00. 메인 폼 (Connection URL)
+	// 01. 개인회원 메인 폼 (Connection URL)
 	@RequestMapping(value = "/", method = { RequestMethod.POST, RequestMethod.GET })
 	public String DamoyoMain() {
 		String url = "DamoyoMain";
@@ -18,4 +18,12 @@ public class MainController {
 		return url;
 	}
 	
+	
+	// 02. 광고주회원 메인 폼 (Connection URL)
+	@RequestMapping(value = "/PartnerMain", method = { RequestMethod.POST, RequestMethod.GET })
+	public String PartnerMain() {
+		String url = "PartnerMain";
+		
+		return url;		
+	}	
 }

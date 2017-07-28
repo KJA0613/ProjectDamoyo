@@ -33,42 +33,6 @@
 		color: white;
 		font-size: 50px;
 	}
-	
-</style>
-
-<style type="text/css">
-   .navbar-inverse {
-       background-color: #2bb7d5;
-       border-color: #00a3cc;
-   }
-   
-   .navbar {
-       margin: 0;
-       border: none;
-       border-bottom: 2px solid #95daea;
-       border-radius: 0;
-   }
-   
-   .navbar .navbar-brand{
-       color: #fff;
-       font-size: 28px;
-       font-weight: bold;
-   }   
-   
-   .navbar-inverse .navbar-nav > li > a {
-       color: white;
-   }   
-   
-   .h4 {
-   	   font-size: 18px;
-   	   margin-top: 10px;
-   	   margin-bottom: 10px;
-   	   color: inherit;
-   }
-      
-   .li {
-   	  font-color: black;
-   }
 </style>
 
 <!-- 주제 이미지 효과  CSS -->
@@ -87,7 +51,7 @@
 		display: inline-block;
 	    width: 400px;
 	    height: 41px;
-	    border: 2px solid #40b4e5;
+	    border: 2px solid #03a9f4;
 	    background: #fff;
 	}
 	.input_text {
@@ -106,7 +70,7 @@
 		height: 41px;	 
 		position: absolute;
 		border: 0;
-	    background: #40b4e5;
+	    background: #03a9f4;
 		overflow: visible;    
 	}
 	.img_srh{
@@ -119,14 +83,14 @@
 		/* position: absolute; */
  		width: 120px;
 		height: 41px;	 
-		border: 2px solid #40b4e5;   
+		border: 2px solid #03a9f4;   
 	    background: #fff;
 	}
 	#choice_area2 {
 		/* position: absolute; */
  		width: 120px;
 		height: 41px;	 
-		border: 2px solid #40b4e5;   
+		border: 2px solid #03a9f4;   
 	    background: #fff;
 /* 	    left: 100px; */
 	}
@@ -181,14 +145,6 @@
 	    color: #666464;
 	}
 	 
-/* 	a {
-	    margin: 0;
-	    padding: 0;
-	    font-size: 100%;
-	    vertical-align: baseline;
-	    background: transparent;
-    } */
-
 	.wrapper ul li .property_details.title a{
 	    color: #666464;
 	    font-size: 28%;

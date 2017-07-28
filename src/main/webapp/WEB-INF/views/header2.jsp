@@ -18,8 +18,8 @@
 <!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
 <style type="text/css">
    .navbar-inverse {
-       /* background-color: #2bb7d5; */
-       background-color: #40b4e5;
+       /* background-color: #40b4e5; */			/* 모꼬지 배경색 */
+       background-color: #03a9f4;
        border-color: #00a3cc;
    }
    .navbar {
@@ -43,7 +43,7 @@
 </head>
 <body>
 
-	<!-- 1.[Header] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
+	<!-- [Header] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
 	<nav class="navbar navbar-inverse navbar-static-top"> <!-- [헤더 영역] 컨테이너 생성 -->
 	<!-- [컨테이너1] -->
 	<div class="container">
