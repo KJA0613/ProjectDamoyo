@@ -15,7 +15,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>공지사항</title>
+<title>Simple Sidebar - Start Bootstrap Template</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/resources/blog/css/bootstrap.min.css" rel="stylesheet">
@@ -34,15 +34,15 @@
 
 		<table class="table" style="width: 800px; border-top: 1px solid #383838;">
 			<tr>
-				<td colspan="2" style="border-style: hidden;"><h4>공지사항</h4></td>
+				<td colspan="2" style="border-style: hidden;"><h4>자유게시판</h4></td>
 				<td colspan="3" style="border-style: hidden;">
-					<button class="btn btn-primary" onclick="location.href='/blog/notice/viewRegist'" style="float: right;">새 글 쓰기</button>
+					<button class="btn btn-primary" onclick="location.href='/blog/comments/viewRegist'" style="float: right;">새 글 쓰기</button>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="5">
 					<div class="category-filter-wrapper" style="width: 300px; float: right;">
-						<form action="/blog/notice/search" method="post">
+						<form action="/blog/comments/search" method="post">
 							<div class="input-group input-group-sm">
 								<input type="search" name="query" class="form-control" placeholder="검색어" value=""/> <span class="input-group-btn">
 									<button type="submit" class="btn btn-default">
@@ -64,7 +64,7 @@
 			<c:forEach var="post" items="${list}">
 				<tr>
 					<td style="text-align: center">${post.postNo}</td>
-					<td><a href="/blog/notice/read?postNo=${post.postNo}&page=${page}">${post.postTitle}</a></td>
+					<td><a href="/blog/comments/read?postNo=${post.postNo}&page=${page}&query=${search.query}">${post.postTitle}</a></td>
 					<td style="text-align: center">${post.userId}</td>
 					<td style="text-align: center"><fmt:formatDate
 							value="${post.postDate}" pattern="YYYY-MM-dd" /></td>
@@ -78,7 +78,7 @@
 			</tr> --%>
 			
 		</table>
-		<div style="text-align: center; margin-right: 850px">
+		<div style="text-align: center; margin-right: 800px">
 			<ul class="pagination" style="margin-top: 0px; padding: 0px;" >
 				<c:forEach var="number" items="${pList}">
 					<li>${number}</li>

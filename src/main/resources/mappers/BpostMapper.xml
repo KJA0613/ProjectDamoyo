@@ -42,7 +42,7 @@
 		select * from
 			(select rownum as num, temp.* from
 			(select * from post where postTitle like '%'||#{query}||'%' or postContents = '%'||#{query}||'%') temp)
-		 where num between #{vo.start} and #{vo.end}
+		 where num between #{vo.start} and #{vo.end} and boardName = #{boardName}
 		 order by num desc
 	</select>
 </mapper>

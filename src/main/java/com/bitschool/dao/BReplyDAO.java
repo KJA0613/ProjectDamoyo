@@ -18,8 +18,11 @@ public class BReplyDAO {
 
 	public boolean insertReply(BReplyDTO reply) {
 		boolean flag = false;
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
 		int postNo = reply.getPostNo();
-		int aCnt = session.update(namespace+".updateReplyCount", postNo);
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName(reply.getBoardName());
+		int aCnt = session.update(namespace+".updateReplyCount", infoDTO);
 		if(aCnt > 0) {
 			aCnt = session.insert(namespace+".insertReply", reply);
 			if(aCnt > 0) {
