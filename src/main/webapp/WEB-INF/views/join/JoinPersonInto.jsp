@@ -160,7 +160,6 @@ function checkId(result) {
 <body>
 	<!-- [Content] 개인 회원가입 폼 내용부분 -->
 	<div class="container">
-		<!-- clearfix: 어긋난 칼럼들 보정 -->
 		<div class="clearfix">
 			<div class="col-md-8 col-md-offset-2 mbrRegist">	
 				<h1>개인 회원가입</h1>				

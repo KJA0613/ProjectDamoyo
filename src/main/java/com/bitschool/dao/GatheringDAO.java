@@ -141,6 +141,8 @@ public class GatheringDAO implements IGatheringDAO {
 		
 		int result=-1;
 		
+		System.out.println(gadto);
+		
 		if(state.equals("insert")){// 이미 값이 존재하면 delete
 			result = session.insert(namespace+".insertAddons", gadto);// 이미 값이 존재할 경우 0 리턴
 			System.out.println("insert 들어옴 : "+result);
@@ -170,6 +172,16 @@ public class GatheringDAO implements IGatheringDAO {
 		}
 		
 		return flag;
+	}
+
+	@Override
+	public List<GatheringDTO> getAttendList(String guserId) {
+
+		List<GatheringDTO> attendList = null;
+		
+		attendList = session.selectList(namespace+".attendGather", guserId);
+		
+		return attendList;
 	}
 	
 }

@@ -30,5 +30,7 @@ public interface IGatheringDAO {
 	public boolean manageAddons(GatherAddonsDTO gadto, String state);
 
 	public boolean existAddons(GatherAddonsDTO gadto);
+
+	public List<GatheringDTO> getAttendList(String guserId);
 	
 }

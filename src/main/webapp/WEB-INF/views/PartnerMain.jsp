@@ -242,8 +242,6 @@
 	<div class="box_search">
 		<div class="box_inner">
 			<div class="period_search">
-				<div class="flex_wrap">
-					지역 검색
 					<dl class="flex_box">
 						<dt class="flex tit">
 							<label for="category1">지역별 검색</label>
@@ -283,6 +281,8 @@
 							</div>
 						</dd>
 					</dl>		
+			
+					<br><br><br>
 			
 					<!-- 카테고리 검색 -->
 					<dl class="flex_box">

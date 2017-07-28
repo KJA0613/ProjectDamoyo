@@ -118,6 +118,13 @@ public class GatheringService implements IGatheringService {
 		return flag;
 	}
 
+	@Override
+	public List<GatheringDTO> getAttendList(String guserId) {
+		List<GatheringDTO> attendList = gDao.getAttendList(guserId);
+		
+		return attendList;
+	}
+
 	
 
 }
