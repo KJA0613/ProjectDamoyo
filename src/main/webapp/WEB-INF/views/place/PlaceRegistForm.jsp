@@ -32,12 +32,11 @@
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
-						<div class="col-md-6">
+						<div class="col-md-8">
 							<input type="text" name="placeImage" class="form-control">						
 						</div>
-						<div></div>
-						<div class="col-md-4">
-							<button type="button" class="btn btn-grey">사진 올리기</button>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-grey">사진등록</button>
 						</div>
 					</div>
 
@@ -82,10 +81,13 @@
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">주소</label>
-						<div class="col-md-10">
-							<button type="button" class="btn btn-grey">주소 검색</button><br>
-							<input type="text" name="placeAdr1" class="form-control"><br>
-							<input type="text" name="placeAdr2" class="form-control">						
+						<div class="col-md-8">
+							<input type="text" name="placeAdr1" class="form-control" placeholder="도로명 주소"><br>
+							<input type="text" name="placeAdr2" class="form-control" placeholder="지번 주소"><br>
+							<input type="text" name="placeAdr3" class="form-control" placeholder="상세 주소를 입력해주세요.">						
+						</div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-grey">주소 검색</button><br>							
 						</div>
 					</div>		
 	
@@ -98,26 +100,29 @@
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">비용</label>
-						<div class="col-md-10">
-							<input type="radio" name="placeCostChoice" value="1">시간단위
-							<input type="radio" name="placeCostChoice" value="2">일단위
-							<input type="radio" name="placeCostChoice" value="3">월간단위
-							<input type="radio" name="placeCostChoice" value="4">무료
-							<input type="text" name="placeCost" class="form-control" placeholder="www.naver.com">						
+						<div class="col-md-2">
+							<input type="text" name="placeCost" class="form-control" placeholder="2,500원">
 						</div>
+						<div class="col-md-6">
+							<input type="radio" name="placeCostChoice" value="1">시간단위 &nbsp;
+							<input type="radio" name="placeCostChoice" value="2">일단위 &nbsp;
+							<input type="radio" name="placeCostChoice" value="3">월간단위 &nbsp;
+							<input type="radio" name="placeCostChoice" value="4">무료					
+						</div>
+						
 					</div>
 										
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">이용시간</label>
-						<div class="col-md-10">
-							<input type="text" name="placeUseTime" class="form-control">						
+						<div class="col-md-10"> 
+							<input type="text" name="placeUseTime" class="form-control" placeholder="10:00 ~ 18:00">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">수용인원</label>
 						<div class="col-md-2">
-							<input type="text" name="placePerCnt" class="form-control">						
+							<input type="text" name="placePerCnt" class="form-control" placeholder="6명">						
 						</div>
 						<h4>명</h4>
 					</div>							
@@ -125,7 +130,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">주차</label>
 						<div class="col-md-10">
-							<input type="radio" name="placeParking" value="1">유
+							<input type="radio" name="placeParking" value="1">유	&nbsp;
 							<input type="radio" name="placeParking" value="2">무					
 						</div>
 					</div>
@@ -133,7 +138,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">정기휴무</label>
 						<div class="col-md-10">
-							<input type="checkbox" name="placeUseDay" value="월">&nbsp;<h3>월</h3>			&nbsp;
+							<input type="checkbox" name="placeUseDay" value="월">&nbsp;월			&nbsp;
 							<input type="checkbox" name="placeUseDay" value="화">&nbsp;화			&nbsp;
 							<input type="checkbox" name="placeUseDay" value="수">&nbsp;수			&nbsp;
 							<input type="checkbox" name="placeUseDay" value="목">&nbsp;목			&nbsp;

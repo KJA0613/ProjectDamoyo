@@ -25,7 +25,7 @@ public class PlaceService implements IPlaceService {
 		boolean flag = false;
 		
 		if(flag) {
-			//flag = 
+			flag = PlaceDAO.insertPlaceRegist(pl_dto);
 		}
 		
 		return flag;
