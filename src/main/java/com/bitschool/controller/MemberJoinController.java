@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.service.IMemberService;
 
@@ -45,15 +46,9 @@ public class MemberJoinController {
 
 	// 01. 회원가입 유형 > 개인회원: value = A (name값: 'person' 넘어옴)
 	@RequestMapping(value="/JoinChoiceCheck", method=RequestMethod.POST)
-	public String JoinChoiceCheck(@RequestParam("person") String person, PersonDTO pdto, Model model) {
+	public String JoinChoiceCheck(@RequestParam("person") String person, PersonDTO pdto,Model model) {
 		String url = null;
-		
-		//System.out.println("[TEST-회원가입(개인:A)] 회원가입 유형: " + person);
-		
-		/*------------------------- [2차 처리 예정] ------------------------
-		1) company : B 체크 했을 때도 처리하는 단계 만들기 (if-else문)
-		 --------------------------------------------------------------*/
-		
+	
 		// pdto에 guserCode값(A) > 새로 저장
 		pdto.setGuserCode(person);
 
@@ -66,8 +61,24 @@ public class MemberJoinController {
 		return url;
 	}
 	
+	//01-1. 회원가입 유형 > 기업회원: value = B (name값: 'company' 넘어옴)
+	@RequestMapping(value="/JoinChoiceCheck2", method=RequestMethod.POST)
+	public String JoinChoiceCheck2(@RequestParam("company") String company, CompanyDTO cdto,Model model){
+		String url = null;
+		
+		// cdto에 comCode값(B) > 새로 저장
+		cdto.setComCode(company);
+		
+		// 기업회원 > value = B 저장해서 값 넘김 (hidden > 코드값 받아올 예정이므로 model에 저장)
+		model.addAttribute("cdto",cdto);
+		
+		// cdto에 B값 저장한 상태로 "회원가입 1단계 폼"으로 이동		
+		url = "join/JoinCompanyInto";
+		
+		return url;
+	}
 	
-	// 02. [회원가입-1단계] 회원가입 1단계에 입력한 값 저장 후 > 지역, 카테고리 선택하는 폼으로 넘기기
+	// 02. [개인회원가입-1단계] 개인회원가입 1단계에 입력한 값 저장 후 > 지역, 카테고리 선택하는 폼으로 넘기기
 	@RequestMapping(value="/PersonDataRegist", method=RequestMethod.POST)
 	public String PersonDataRegist(PersonDTO pdto, Model model) {
 		String url = null;
@@ -84,6 +95,22 @@ public class MemberJoinController {
 		return url;
 	}
 	
+	// 02-1. [기업회원가입-1단계] 회원가입 1단계에 입력한 값 저장 후 >상세정보입력하는 폼으로 넘기기
+		@RequestMapping(value="/CompanyDataRegist", method=RequestMethod.POST)
+		public String CompanyDataRegist(CompanyDTO cdto, Model model) {
+			String url = null;
+			
+			//System.out.println("[TEST-회원가입(1)] 1단계 입력 전 Code값(A): " + pdto.getGuserCode());	
+			//System.out.println("[TEST-회원가입(개인:A)] 회원 전체 정보: " + pdto);
+			
+			// 2단계 가기 전, pdto 전체 데이터 저장
+			model.addAttribute("cdto", cdto);
+				
+			// 기업상세정보선택"회원가입 2단계 폼"으로 이동
+			url = "join/JoinCompanyDetail";
+			
+			return url;
+		}
 	
 	// 03. [회원가입-2단계] 지역 및 카테고리 등록	
 	@RequestMapping(value = "/PersonDatailRegist", method = { RequestMethod.GET, RequestMethod.POST })
