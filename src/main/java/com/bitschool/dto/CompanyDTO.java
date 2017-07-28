@@ -16,8 +16,9 @@ public class CompanyDTO implements Serializable{
 	 private String comManager; 			   /* 기업담당자명  */
 	 private int comSaNo; 					   /* 기업사업자번호 */
 	 private int comZoneCode; 				   /* 기업우편번호  */
-	 private int comRoadAddress;               /* 기업주소(길) */ 
-	 private int comJibunAddress; 			   /* 기업상세주소(지번) */
+	 private String comRoadAddress;               /* 기업신주소(길) */ 
+	 private String comJibunAddress; 			   /* 기업구주소(지번) */
+	 private String comDetailAddress;          /* 기업상세주소 */
 	 private String comCeoName; 			   /* 기업대표명 */
 	 private Timestamp comDate; 			   /* 기업가입일 */
 	 private String comCode;                   /* 기업 구분 코드 > 개인회원: A, 광고주(기업): B */
@@ -95,19 +96,19 @@ public class CompanyDTO implements Serializable{
 			this.comZoneCode = comZoneCode;
 		}
 	
-		public int getComRoadAddress() {
+		public String getComRoadAddress() {
 			return comRoadAddress;
 		}
 	
-		public void setComRoadAddress(int comRoadAddress) {
+		public void setComRoadAddress(String comRoadAddress) {
 			this.comRoadAddress = comRoadAddress;
 		}
 	
-		public int getComJibunAddress() {
+		public String getComJibunAddress() {
 			return comJibunAddress;
 		}
 	
-		public void setComJibunAddress(int comJibunAddress) {
+		public void setComJibunAddress(String comJibunAddress) {
 			this.comJibunAddress = comJibunAddress;
 		}
 	
@@ -134,16 +135,28 @@ public class CompanyDTO implements Serializable{
 		public void setComCode(String comCode) {
 			this.comCode = comCode;
 		}
+		
+		
 	
+		public String getComDetailAddress() {
+			return comDetailAddress;
+		}
+
+		public void setComDetailAddress(String comDetailAddress) {
+			this.comDetailAddress = comDetailAddress;
+		}
+
 		@Override
 		public String toString() {
 			return "CompanyDTO [comNo=" + comNo + ", comId=" + comId + ", comPw=" + comPw + ", comName=" + comName
 					+ ", comPhone=" + comPhone + ", comEmail=" + comEmail + ", comManager=" + comManager + ", comSaNo="
-					+ comSaNo + ", comZoneCode=" + comZoneCode + ", comRoadAddress=" + comRoadAddress + ", comJibunAddress="
-					+ comJibunAddress + ", comCeoName=" + comCeoName + ", comDate=" + comDate + ", comCode=" + comCode
-					+ "]";
+					+ comSaNo + ", comZoneCode=" + comZoneCode + ", comRoadAddress=" + comRoadAddress
+					+ ", comJibunAddress=" + comJibunAddress + ", comDetailAddress=" + comDetailAddress
+					+ ", comCeoName=" + comCeoName + ", comDate=" + comDate + ", comCode=" + comCode + "]";
 		}
-	 
+
+		
+		
 	 	 
 	 
 }

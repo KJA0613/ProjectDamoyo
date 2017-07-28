@@ -6,9 +6,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.bitschool.dao.ICompanyDAO;
 import com.bitschool.dao.IMemberDAO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PersonDTO;
 
 // [개인&기업회원] 로직처리
@@ -20,6 +22,9 @@ public class MemberService implements IMemberService {
 	// [주입] DAO 인터페이스
 	@Inject
 	private IMemberDAO personDAO;	
+	
+	@Inject
+	private ICompanyDAO companyDAO;
 	
 	
 	//----------------------------------------------- 로 그 인 -----------------------------------------------//
@@ -227,6 +232,15 @@ public class MemberService implements IMemberService {
 			e.printStackTrace();
 		}
 
+		return flag;
+	}
+
+	@Override
+	public boolean CompanyRegist(CompanyDTO cdto) {
+		boolean flag = false;
+		
+		flag = companyDAO.companyRegist(cdto);
+		
 		return flag;
 	}
 
