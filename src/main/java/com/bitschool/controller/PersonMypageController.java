@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.service.IGatheringService;
@@ -320,12 +321,12 @@ public class PersonMypageController {
 		
 		List<GatheringDTO> attendList = null;
 		
-		
 		model.addAttribute("pdto", pdto);
 			
 		String guserId = pdto.getGuserId();
 		attendList = gatherService.getAttendList(guserId); // 참여중인 모임
-			
+		System.out.println("내가 찜한 모임 : "+attendList);
+		
 		url="mypage/MyPageGood";
 		
 		if(attendList!=null){
@@ -335,6 +336,45 @@ public class PersonMypageController {
 		return url;
 	}
 
+	// 04-1. [개인회원] 마이페이지 - 내가 찜한 모임 삭제
+	@RequestMapping(value="/attendDelete")
+	public String attendDelete(
+			@RequestParam("writer") String gatherAddonsWriter,
+			@RequestParam("no") int gatherNo,
+			@RequestParam("code") String gatherAddonsCode,
+			HttpSession session
+			){
+		
+			String url="default";
+			
+			
+			PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+			
+			System.out.println("내가 찜한 모임 삭제 : "+pdto);
+			
+			if(pdto!=null){
+				GatherAddonsDTO gadto = new GatherAddonsDTO();
+				gadto.setGatherNo(gatherNo);
+				gadto.setGatherAddonsWriter(gatherAddonsWriter);
+				gadto.setGatherAddonsCode(gatherAddonsCode);
+				gadto.setGuserId(pdto.getGuserId());
+				
+				System.out.println("내가 찜한 모임 삭제 : "+gadto);
+				
+				boolean flag = memberService.deleteAttend(gadto);
+				
+				System.out.println("내가 찜한 모임 삭제 : "+flag);
+				
+				if(flag){
+					url="redirect:/mypage/MyPageGood";	
+				}
+			}
+			
+			
+			
+			return url;
+		}
+	
 	// 05. [개인회원] 마이페이지 - 내가 올린 자료
 	@RequestMapping(value = "/MyPageUploadFile", method = RequestMethod.GET)
 	public String MyPageUploadFile() {

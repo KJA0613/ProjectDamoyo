@@ -40,8 +40,18 @@
 <!-- JavaScript -->
 <script type="text/javascript">
 	function btn_attend(writer, no) {
-		alert('해당 스크랩을 취소하시겠습니까?');
+		var res = confirm('해당 스크랩을 취소하시겠습니까?');
+						
+		if(res===true){ // 확인 == 삭제
+			var writer = $('#writer').text();
+			var no = $('#no').text();
+			
+			location.href="/mypage/attendDelete?writer="+writer+"&no="+no+"&code=관심";
+		}else{ // 취소 == 그냥
+			location.href="/mypage/MyPageGood";
+		}
 		
+		/* 거만하게 ajax로 할려다가 아니다 싶어서 바꿈 
 		// 확인 버튼 클릭 > 리스트 목록에서 삭제 
 		var DATA = {
 				"no" : no,
@@ -69,7 +79,7 @@
 					alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
 				}
 		 	});
-		
+		 */
 	}	
 </script>
 
@@ -144,14 +154,15 @@
 								
 							<c:forEach var="attend" items="${attendList}">
 								<tr>
-							        <td>${attend.gatherNo}</td>
+							        <td id="no">${attend.gatherNo}</td>
 							        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
 							        <td><a href='#'>${attend.gatherSubject}</a></td>
-							        <td>${attend.guserId}</td>
+							        <td id="writer">${attend.guserId}</td>
 							        <td>${attend.gatherParti}</td>
 							        <td>${fn:substring(attend.gatherEdate, 0, 10)}</td>
 							        <td>20(디비값 아님)</td>
-							        <td><span class="glyphicon glyphicon-heart" onclick="btn_attend('${attend.guserId}','${attend.gatherNo}')"></span></td>
+							        <td><span class="glyphicon glyphicon-heart" onclick="btn_attend()"></span></td>
+							        <%-- <td><span class="glyphicon glyphicon-heart" onclick="btn_attend('${attend.guserId}','${attend.gatherNo}')"></span></td> --%>
 								</tr>
 							</c:forEach>
 						</tbody>

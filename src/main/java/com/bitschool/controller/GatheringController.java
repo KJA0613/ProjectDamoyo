@@ -380,18 +380,22 @@ public class GatheringController {
 			RecommGatherDTO regather = null;
 			if(!category.equals("")){
 				regather = new RecommGatherDTO();
+				regather.setGatherNo(gatherNo);
 				regather.setRecommgatherName(category);
 				regather.setRecommgatherCode("카테고리");
-				regather.setGuserId(pdto.getGuserId());
+				regather.setGuserId(pdto.getGuserId()); // RecommgatherDTO 의 
 				recommgatherList.add(regather);
 			}
 			if(!area.equals("")){
 				regather = new RecommGatherDTO();
+				regather.setGatherNo(gatherNo);
 				regather.setRecommgatherName(area);
 				regather.setRecommgatherCode("지역");
 				regather.setGuserId(pdto.getGuserId());
 				recommgatherList.add(regather);
 			}
+			
+			System.out.println("추천 dto "+recommgatherList);
 			
 			session.setAttribute("recommgatherList", recommgatherList);	
 		
@@ -407,6 +411,9 @@ public class GatheringController {
 		
 		if(pdto!=null){
 		
+			System.out.println("관심글 등록에 작성자아디 : "+guserId);
+			System.out.println("관심글 등록에 로그인아디 : "+pdto.getGuserId());
+			
 			// 초기에 모달에 심장무늬를 뿌릴때 여기서는 gatherNo를 가지고 디비에 조회하여 값의 유무를 비교하여 yes or no 를 보내는 메서드
 			GatherAddonsDTO gadto = new GatherAddonsDTO();
 			gadto.setGatherNo(gatherNo);  // 게시글 번호
@@ -444,6 +451,8 @@ public class GatheringController {
 		gadto.setGatherAddonsWriter(gatherAddonsWriter);
 		gadto.setGatherAddonsCode(gatherAddonsCode);
 		
+		System.out.println("게시글 정보 : "+gadto);
+		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		if(pdto!=null){
 			gadto.setGuserId(pdto.getGuserId());
@@ -461,5 +470,7 @@ public class GatheringController {
 		
 		return map;
 	}
+	
+	
 
 }

@@ -3,6 +3,7 @@ package com.bitschool.dto;
 public class RecommGatherDTO {
 
 	private int recommgatherNo;
+	private int gatherNo;
 	private String recommgatherName;
 	private String recommgatherCode;
 	private String recommgatherDate;
@@ -53,6 +54,14 @@ public class RecommGatherDTO {
 
 	public void setRecommgatherNo(int recommgatherNo) {
 		this.recommgatherNo = recommgatherNo;
+	}
+
+	public int getGatherNo() {
+		return gatherNo;
+	}
+
+	public void setGatherNo(int gatherNo) {
+		this.gatherNo = gatherNo;
 	}
 	
 
