@@ -46,9 +46,13 @@
 						<input type="radio" name="chk_info" value="day">시간단위
 					</div>
 					
+					<br><br>
 					
 					<!-- 3. 기타 입력 -->
-					
+					<div class="form-group">
+						<label for="type" class="col-md-3 control-label">공간명</label>
+						<input type="text" name="spaceName" class="form-control" placeholder="10자 이내로 입력해주세요.">						
+					</div>
 					
 					공간 정보
 					공간명

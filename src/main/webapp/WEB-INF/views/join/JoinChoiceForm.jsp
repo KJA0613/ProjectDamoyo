@@ -76,15 +76,17 @@
    			// 개인(person: A) / 기업(company: B) 
 			var url = "/join/JoinChoiceCheck?person="+person;
 			
+		
+		}
 		// "기업" 회원가입 폼 이동
-		} /* else if (type == 2) {
-			//var company = document.getElementById('company').value;
-			var company = document.getElementByName('company').value;
-			alert('[TEST-기업회원(B)] : ' + company);		// B
+		 else if (type == 2) {
 			
-			var url = "/join/PersonInto";
+			var company = document.getElementById('company').value;
+			
+			
+			var url = "/join/JoinChoiceCheck2?company="+company;
 			//var url = "#";
-		}  */
+		} 
 		
 		// 해당되는 url로 이동
 		bc.action = url;

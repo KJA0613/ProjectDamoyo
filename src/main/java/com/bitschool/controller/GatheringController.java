@@ -364,7 +364,7 @@ public class GatheringController {
 			@RequestParam(value = "category", defaultValue="") String category,
 			@RequestParam(value = "area", defaultValue="") String area,
 			@RequestParam(value = "no") int gatherNo,
-			@RequestParam("id") String guserId,
+			@RequestParam(value = "id") String guserId, // id이지만 모집글을 쓴사람
 			HttpSession session
 			) {
 				
@@ -397,18 +397,26 @@ public class GatheringController {
 		
 		}
 		
+		
+		/* 여기서부터는 관심글 유무를 구분함 */
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("result", "no");
+		
+		map.put("result", "no"); // 값이 없을때는 no, result에 디폴트값으로 no를 넣는 이유는 로그인 안했을때에는 1가 나와야함으로
+		
+		System.out.println(pdto);
 		
 		if(pdto!=null){
 		
 			// 초기에 모달에 심장무늬를 뿌릴때 여기서는 gatherNo를 가지고 디비에 조회하여 값의 유무를 비교하여 yes or no 를 보내는 메서드
 			GatherAddonsDTO gadto = new GatherAddonsDTO();
-			gadto.setGatherNo(gatherNo);
-			gadto.setGuserId(guserId);
+			gadto.setGatherNo(gatherNo);  // 게시글 번호
+			gadto.setGatherAddonsWriter(guserId);	// 게시글 작성자
+			gadto.setGuserId(pdto.getGuserId()); // 관심글로 등록한 사람의 아이디
 			gadto.setGatherAddonsCode("관심"); // 우선은 관심or앵콜
 			
 			boolean flag = gService.existAddons(gadto);
+			
+			System.out.println("true면  값이 있는것임, 즉 true == yes : "+flag);
 			
 			if(flag){
 				map.put("result", "yes");

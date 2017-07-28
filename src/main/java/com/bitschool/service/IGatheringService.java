@@ -32,5 +32,7 @@ public interface IGatheringService {
 
 	public boolean existAddons(GatherAddonsDTO gadto);
 
+	public List<GatheringDTO> getAttendList(String guserId);
+
 
 }

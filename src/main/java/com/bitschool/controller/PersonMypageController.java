@@ -310,9 +310,28 @@ public class PersonMypageController {
 
 	// 04. [개인회원] 마이페이지 - 내가 찜한 모임
 	@RequestMapping(value = "/MyPageGood", method = RequestMethod.GET)
-	public String MyPageGood() {
-		String url = "mypage/MyPageGood";
+	public String MyPageGood(
+			Model model,
+			HttpSession session
+			) {
+		String url = "default";
 
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
+		List<GatheringDTO> attendList = null;
+		
+		
+		model.addAttribute("pdto", pdto);
+			
+		String guserId = pdto.getGuserId();
+		attendList = gatherService.getAttendList(guserId); // 참여중인 모임
+			
+		url="mypage/MyPageGood";
+		
+		if(attendList!=null){
+			model.addAttribute("attendList", attendList);
+		}
+		
 		return url;
 	}
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,10 +39,36 @@
 
 <!-- JavaScript -->
 <script type="text/javascript">
-	function btn_heart() {
+	function btn_attend(writer, no) {
 		alert('해당 스크랩을 취소하시겠습니까?');
 		
 		// 확인 버튼 클릭 > 리스트 목록에서 삭제 
+		var DATA = {
+				"no" : no,
+				"writer" : writer,
+				"state" : 'delete',
+				"code" : '관심'
+			};
+			
+			// 여기서 클릭했을 때 recommend를 해주는 컨트롤러로 이동해야함
+			// 클릭한글을 디비에 저장하여 추천 값을 받음 , 아이디와, no, 코드(관심글 -- 이건 메서드안에서 하기) 보냄
+			
+			// + 여기다 추가로 관심글 받아오는 것도 함, 그럴려면 값을 받아올때 디비에 관심글이 있는지 없는지 확인하여 그에대한 값을 해야함
+			
+			var modal = $(this);
+			
+			$.ajax({
+				url : '/gather/gatherAddons',
+				dataType : 'json',
+				type : 'POST',
+				cache : false,
+				data : DATA,
+				success : function(data) {
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+				}
+		 	});
 		
 	}	
 </script>
@@ -106,23 +134,26 @@
 							<tr>
 						        <td>1</td>
 						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-						        <td>자바 모임</td>
+						        <td><a href='#'>자바 모임</a></td>
 						        <td>가나다</td>
 						        <td>3/4</td>
 						        <td>2017/06/20</td>
 						        <td>20</td>
 						        <td><span class="glyphicon glyphicon-heart" onclick="btn_heart()"></span></td>
 							</tr>
-							<tr>
-						        <td>2</td>
-						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-						        <td>스프링 모임</td>
-						        <td>라마바</td>
-						        <td>3/4</td>
-						        <td>2017/06/20</td>
-						        <td>20</td>
-						        <td><span class="glyphicon glyphicon-heart" onclick="btn_heart()"></span></td>
-							</tr>
+								
+							<c:forEach var="attend" items="${attendList}">
+								<tr>
+							        <td>${attend.gatherNo}</td>
+							        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
+							        <td><a href='#'>${attend.gatherSubject}</a></td>
+							        <td>${attend.guserId}</td>
+							        <td>${attend.gatherParti}</td>
+							        <td>${fn:substring(attend.gatherEdate, 0, 10)}</td>
+							        <td>20(디비값 아님)</td>
+							        <td><span class="glyphicon glyphicon-heart" onclick="btn_attend('${attend.guserId}','${attend.gatherNo}')"></span></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>	
 				</div>
