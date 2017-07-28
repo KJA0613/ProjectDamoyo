@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 	
-	//------------------------------------ 메 인 페 이 지  ------------------------------------//
+	//---------------------------------------- 메 인 페 이 지  ----------------------------------------//
 
 	// 01. 개인회원 메인 폼 (Connection URL)
 	@RequestMapping(value = "/", method = { RequestMethod.POST, RequestMethod.GET })
