@@ -135,7 +135,7 @@
 								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
 							</c:when>					
 							<c:otherwise>
-								<li style="padding-right: 4px;"><a href="/space/SpaceRegistForm" class="btn_link_host" style="padding: 7px 7px 10px 7px;" id="s_color">공간 등록하기</a></li>&nbsp;
+								<li style="padding-right: 4px;"><a href="/place/PlaceRegistForm" class="btn_link_host" style="padding: 7px 7px 10px 7px;" id="s_color">공간 등록하기</a></li>&nbsp;
 								<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
 								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
 							</c:otherwise>
