@@ -187,7 +187,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">전화</label>
 						<div class="col-md-10">
-							<input type="text" name="placeeTel" class="form-control" placeholder="02-123-4567" required>						
+							<input type="text" name="placeTel" class="form-control" placeholder="02-123-4567" required>						
 						</div>
 					</div>
 					
@@ -277,21 +277,21 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">이름</label>
 						<div class="col-md-10">
-							<input type="text" name="comName" class="form-control" placeholder="실명을 입력해주세요." required>						
+							<input type="text" name="comName" class="form-control" placeholder="실명을 입력해주세요." value="${cdto.comName}" disabled>						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">E-mail</label>
 						<div class="col-md-10">
-							<input type="text" name="comEmail" class="form-control" placeholder="abc@gmail.com" required>						
+							<input type="text" name="comEmail" class="form-control" placeholder="abc@gmail.com" value="${cdto.comEmail}" disabled>						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">휴대폰</label>
 						<div class="col-md-10">
-							<input type="text" name="comPhone" class="form-control" placeholder="010-1234-5678" required>						
+							<input type="text" name="comPhone" class="form-control" placeholder="010-1234-5678" value="${cdto.comPhone}" disabled>						
 						</div>
 					</div>	
 					<br><br>

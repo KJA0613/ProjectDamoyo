@@ -227,7 +227,7 @@
 				<a href="#" class="btn space_total">전체 공간보기</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="#" class="btn space_regist">공간 등록하기</a>
+				<a href="/place/PlaceRegistForm" onclick="" class="btn space_regist">공간 등록하기</a>
 			</div>
 			<div class="btn_wrap">
 				<a href="#" class="btn my_space">나의 공간 관리</a>
@@ -310,8 +310,6 @@
 				</div>
 			</div>
 		</div>
-		
-	</div>
 
 
 	<div>
