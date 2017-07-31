@@ -286,6 +286,44 @@ public class MemberService implements IMemberService {
 			
 			return flag;
 		}
+		
+		//기업회원 아이디 찾기
+		@Override
+		public CompanyDTO getfindComID(String comEmail,String comName) {
+			// TODO Auto-generated method stub
+			CompanyDTO cdto = null;
+			
+			
+			try {
+				cdto = companyDAO.findComId(comEmail);
+						
+				
+				if(cdto!=null && cdto.getComName().equals(comName)){
+					
+					return cdto;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
+			return cdto;
+		}
+
+		@Override
+		public CompanyDTO comfindPW(String comEmail, String comId) {
+			
+			CompanyDTO cdto = null;
+			
+			cdto = companyDAO.comfindPW(comId);
+			
+			if(cdto!=null&&cdto.getComId().equals(comId)){
+				
+				return cdto;
+			}
+			
+			return cdto;
+		}
 	
 
 

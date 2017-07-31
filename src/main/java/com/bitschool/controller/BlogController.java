@@ -254,10 +254,119 @@ public class BlogController {
 	
 	//*****************************************************************
 	
-	@RequestMapping(value="/file", method = RequestMethod.GET)
-	public String file() {
-		
-		return "blog/file/file";
+	@RequestMapping(value="/file/listAll", method = {RequestMethod.POST, RequestMethod.GET})
+	public String fileListAll(@RequestParam(value="page",defaultValue="0") int page, Model model) {
+		int amount = 15;
+		BPageVO vo = pService.getPageVO(page,amount);
+		vo.setBoardName("file");
+		List<BPostDTO> list = service.getListAll(vo);
+		ArrayList<String> pList = pService.makePageList(page, amount);
+		model.addAttribute("list",list);
+		model.addAttribute("pList",pList);
+		model.addAttribute("page",page);
+		return "blog/file/fileList";
+	}
+	
+	@RequestMapping(value="/file/viewRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String viewFileRegist() {
+		return "blog/file/fileRegist";
+	}
+	
+	@RequestMapping(value="/file/fileRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String fileRegist(BPostDTO post) {
+		String url = null;
+		post.setBoardName("file");
+		boolean flag = service.registPost(post);
+		if(flag) {
+			url = "redirect:/blog/file/listAll";
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/file/read", method = RequestMethod.GET)
+	public String fileRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
+								@RequestParam(value="query", defaultValue="") String query,Model model) {
+		String url = null;
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("file");
+		boolean flag = service.increasCount(infoDTO);
+		if(flag){
+			BPostDTO post = service.readPost(infoDTO);
+			model.addAttribute("post", post);
+			model.addAttribute("page", page);
+			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
+			model.addAttribute("list", list);
+			model.addAttribute("query", query);
+			url = "blog/file/detailFile";
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/file/remove", method=RequestMethod.POST)
+	public String fileRemove(@RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+		String url = null;
+		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
+		infoDTO.setPostNo(postNo);
+		infoDTO.setBoardName("file");
+		boolean flag = service.remove(infoDTO);
+		if(flag) {
+			url = "redirect:/blog/file/listAll?page="+page;
+		}
+		return url;
+	}
+	
+	
+	@RequestMapping(value="/file/viewModify", method=RequestMethod.POST)
+	public String viewFileModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+		model.addAttribute("post",post);
+		model.addAttribute("postNo",postNo);
+		model.addAttribute("page",page);
+		return "blog/file/fileModify";
+	}
+	
+	@RequestMapping(value="/file/modify", method=RequestMethod.POST)
+	public String modifyFile(BPostDTO post, Model model, @RequestParam("page") int page) {
+		String url = null;
+		post.setBoardName("file");
+		boolean flag = service.modify(post);
+		int postNo = post.getPostNo();
+		String qs = "?postNo="+postNo+"&page="+page;
+		if(flag) {
+			url = "redirect:/blog/file/read"+qs;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/file/reply", method=RequestMethod.POST)
+	public String replyFile(BReplyDTO reply, @RequestParam("page") int page) {
+		String url = null;
+		int postNo = reply.getPostNo();
+		reply.setBoardName("file");
+		boolean flag = rService.insertReply(reply);
+		if(flag) {
+			String qs = "?postNo="+postNo+"&page="+page;
+			url = "redirect:/blog/file/read"+qs;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/file/search", method=RequestMethod.POST)
+	public String searchFile(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page, Model model) {
+		String url = null;
+		int amount = 15;
+		BSearchVO searchVO = new BSearchVO();
+		searchVO.setQuery(query);
+		searchVO.setVo(pService.getPageVO(page, amount));
+		searchVO.setBoardName("file");
+		List<BPostDTO> list = service.listSearchBookAll(searchVO);
+		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
+		model.addAttribute("list",list);
+		model.addAttribute("pList",pList);
+		model.addAttribute("page",page);
+		model.addAttribute("search",searchVO);
+		url = "blog/file/searchList";
+		return url;
 	}
 	
 	//*****************************************************************

@@ -16,9 +16,11 @@ public interface IMemberService {
 
 	public PersonDTO getfindPW(String guserEmail, String guserId);
 	
-	// [기업회원] 로그인
-	
+	// [기업회원] 로그인	
 	public CompanyDTO CompanyLogin(String comId,String comPw);
+	
+	
+	
 	// ---------------------------------------- [개인회원] 회 원 가 입 ----------------------------------------//
 	// [개인회원] 회원가입 - 1단계  + 코드값 > 입력한 내용 삽입
 	public boolean PersonDataRegist(PersonDTO pdto);
@@ -57,6 +59,12 @@ public interface IMemberService {
 	
 	// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
 	public boolean CompanyRegist(CompanyDTO cdto);
+	
+	//기업회원 비번찾기
+	public CompanyDTO comfindPW(String comEmail, String comId);
+	
+	//기업회원 아이디 찾기	
+    public CompanyDTO getfindComID(String comEmail,String comName);
 
 
 

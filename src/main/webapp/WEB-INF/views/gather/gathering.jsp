@@ -22,6 +22,18 @@
 <script src="/resources/assets/js/ie-emulation-modes-warning.js"></script>
 
 <style type="text/css">
+.price {
+	    position: absolute;
+	    top: 0px;
+	    left: 15px;
+	    padding: 0px 0px;
+	    background: #ffffff;
+	    color: #514d4d;
+	    font-size: 16px;
+	    font-weight: bold;
+	    letter-spacing: 1px;
+    }
+
 ul {
 	list-style: none;
 	padding: 0;
@@ -187,6 +199,9 @@ a:visited {
 				$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
 
 				$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
+
+					var subject = gList.gatherSubject;
+					subject = subject.substring(0,11) +' ...';
 					
 					var write = gList.gatherWrite;
 					write = write.substring(0,16);
@@ -201,12 +216,6 @@ a:visited {
 						edate = '추후 협의';
 					}
 					
-					var stime = gList.gatherStime;
-					stime = stime.substring(10,16);
-					
-					var etime = gList.gatherEtime;
-					etime = etime.substring(10,16);	
-					
 					var day = gList.gatherDay;
 					if(day===null){
 						day = '추후 협의';
@@ -216,7 +225,6 @@ a:visited {
 					if(img===null){
 						img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
 					}
-					
 					
 					var str = "";
 					str += "<div class='col-xs-4 col-lg-3' id='gather'>";
@@ -229,29 +237,20 @@ a:visited {
 														"'  data-area='"+gList.gatherArea+
 														"'  data-parti='"+gList.gatherParti+
 														"'  data-content='"+gList.gatherContent+
-														"'  data-img='"+gList.gatherImg+
+														"'  data-img='"+img+
 														"'  data-id='"+gList.guserId+
-														"'  data-stime='"+stime+
-														"'  data-etime='"+etime+
-														"'  data-day='"+gList.gatherDay+
+														"'  data-day='"+day+
+														"'  data-state='"+gList.gatherState+
 														"' >"
 							
-					str += "<img width='213px' height='120px' src='" + img + "'>";
-					str += "<h4 align='center'>"
-							+ gList.gatherSubject
-							+ "</h4>";
-					str += "<h5>기간 : "
-							+ sdate + " ~ " + edate
-							+ "<br>";
-					str += "요일 : "
-							+ day
-							+ "<br>" ;
-					str += "지역 : "
-							+ gList.gatherArea
-							+ "<br>";
-					str += "신청인원 : "
-							+ gList.gatherParti
-							+ "</h5>";
+					str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
+					str += "<span class='price'>"+gList.gatherState+"</span>"
+					str += "<h4 align='center'>" + subject + "</h4>";
+					str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
+					str += "요일 : " + day + "<br>" ;
+					str += "지역 : " + gList.gatherArea + "<br>";
+					str += "신청인원 : " + gList.gatherParti + "</h5>";
+					/* str += "상태 : " + gList.gatherState + "</h5>"; */
 					str += "</a>";
 					str += "</div>";
 
@@ -810,12 +809,14 @@ $(function() {
 					data : DATA,
 					success : function(gath) {
 						var count = Object.keys(gath).length
-						console.log(gath.gList);
-
+						
 						$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
 
 						$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
-															
+													
+							var subject = gList.gatherSubject;
+							subject = subject.substring(0,11) +' ...';
+							
 							var write = gList.gatherWrite;
 							write = write.substring(0,16);
 							
@@ -828,12 +829,6 @@ $(function() {
 							}else{
 								edate = '추후 협의';
 							}
-							
-							var stime = gList.gatherStime;
-							stime = stime.substring(10,16);
-							
-							var etime = gList.gatherEtime;
-							etime = etime.substring(10,16);	
 							
 							var day = gList.gatherDay;
 							if(day===null){
@@ -859,29 +854,42 @@ $(function() {
 							"'  data-content='"+gList.gatherContent+
 							"'  data-img='"+img+
 							"'  data-id='"+gList.guserId+
-							"'  data-stime='"+stime+
-							"'  data-etime='"+etime+
 							"'  data-day='"+day+
+							"'  data-state='"+gList.gatherState+
 							"' >"
 							
-							str += "<img width='213px' height='120px' src='" + img + "'>";
-							str += "<h4 align='center'>" + gList.gatherSubject + "</h4>";
+							str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
+							str += "<span class='price'>"+gList.gatherState+"</span>"
+							str += "<h4 align='center'>" + subject + "</h4>";
 							str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
 							str += "요일 : " + day + "<br>" ;
 							str += "지역 : " + gList.gatherArea + "<br>";
 							str += "신청인원 : " + gList.gatherParti + "</h5>";
+							/* str += "상태 : " + gList.gatherState + "</h5>"; */
 							str += "</a>";
 							str += "</div>";
 
 							$("#gatherSelect").append(str);
-
+							
 						})
 					},
 					error : function(request, status, error) {
 						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
 			});
+			
+			
 		});
+	
+		/* var src;
+		
+		$('.gatherimg').mouseover( function() { 
+			src = $(this).attr('src');
+			$(this).attr( 'src', "/resources/image/icon/Apply.jpg" );
+		} )
+	    .mouseout( function() {
+	    	$(this).attr( 'src', src );
+	    });  */
 });
 </script>
 
@@ -897,13 +905,12 @@ $(function() {
 		var write = href.data('write');
 		var sdate = href.data('sdate');
 		var edate = href.data('edate');
-		var stime = href.data('stime');
-		var etime = href.data('etime');
 		var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
 		var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
 		var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
 		var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
 		var id = href.data('id'); 
+		var state = href.data('state'); 
 		
 		var DATA = {
 			"category" : category,
@@ -952,7 +959,7 @@ $(function() {
 		modal.find('#modal-body-content').text("상세인원 ] " + content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		$('#modalImg').attr('src', img);
 		modal.find('#modal-body-id').text("작성자 ] " + id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-time').text("시간 ] " + stime + " ~ " + etime); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-state').text("상태 ] " + state); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 	});
 });
 
@@ -1020,8 +1027,6 @@ $(function() {
 
 </script>
 
-
-
 <!-- 모달의 좋아요 버튼 눌렀을 때 그림 바꾸기 -->
 <script type="text/javascript">
 	
@@ -1042,6 +1047,26 @@ $(function() {
 	}
 
 </script>
+
+<!-- 마우스 올렸을때 신청하기로 바꾸기 -->
+
+<script type="text/javascript">
+$(function() {
+	
+	var src;
+		
+	$('.col-lg-3').mouseover( function() { 
+		src = $(this).attr('src');
+		$(this).attr( 'src', "/resources/image/icon/Apply.jpg" );
+	} )
+    .mouseout( function() {
+    	$(this).attr( 'src', src );
+    }); 
+	
+});
+</script>
+
+ 
 <%@include file="../header.jsp"%>
 
 </head>
@@ -2017,7 +2042,7 @@ $(function() {
 				</div>
 				<div class="row" id="gatherRecommed">
 					<c:forEach var="recomm" items="${recomm}">
-						<div class="col-xs-4 col-lg-3" id="gather">
+						<div class="col-lg-3" id="gather">
 							<a 
 							data-toggle='modal' href='#myModal' 
 							data-no='${recomm.gatherNo}'  
@@ -2031,17 +2056,26 @@ $(function() {
 							data-content='${recomm.gatherContent}'  
 							data-img='${recomm.gatherImg}'  
 							data-id='${recomm.guserId}'  
-							data-stime="${fn:substring(recomm.gatherStime, 10, 16)}"
-							data-etime="${fn:substring(recomm.gatherEtime, 10, 16)}"
-							data-etime='${recomm.gatherEtime}' 
+							data-state='${recomm.gatherState}'
 							>
-								<img width="213px" height="120px" src='${recomm.gatherImg}'>
-								<h4 align="center">${recomm.gatherSubject}</h4> 
+								<img class='gatherimg' width="213px" height="120px" src='${recomm.gatherImg}'>
+								<span class="price">${recomm.gatherState}</span>
+								<h4 align="center">
+									<c:choose>
+									    <c:when test="${fn:length(recomm.gatherSubject) > 9}">
+									        ${fn:substring(recomm.gatherSubject, 0, 11)} ...
+									    </c:when>
+									    <c:otherwise>
+									        ${recomm.gatherSubject}
+									    </c:otherwise>
+									</c:choose>
+								</h4> 
 								<h5>
 								기간 : ${fn:substring(recomm.gatherSdate, 0, 10)} ~ ${fn:substring(recomm.gatherEdate, 0, 10)}<br>
 								요일 : ${recomm.gatherDay}<br>
 								지역 : ${recomm.gatherArea}<br>
-								신청인원 : ${recomm.gatherParti} 
+								신청인원 : ${recomm.gatherParti}<br>
+								<%-- 상태 : ${recomm.gatherState} --%>
 								</h5>
 							</a>
 						</div>
@@ -2055,7 +2089,7 @@ $(function() {
 				<div>
 					<h3>검색 결과</h3>
 				</div>
-
+				
 				<!-- 여기는 자바 스크립트에서 함 -->
 				<div class="row" id="gatherSelect">
 					<c:forEach var="gath" items="${gath}">
@@ -2063,7 +2097,7 @@ $(function() {
 							<a 
 							data-toggle='modal' href='#myModal' 
 							data-no='${gath.gatherNo}'  
-							data-subject='${gath.gatherSubject}'  
+							data-subject="${gath.gatherSubject}"  
 							data-category='${gath.gatherCategory}'  
 							data-write="${fn:substring(gath.gatherWrite, 0, 16)}" 
 							data-sdate="${fn:substring(gath.gatherSdate, 0, 10)}" 
@@ -2072,18 +2106,26 @@ $(function() {
 							data-parti='${gath.gatherParti}'  
 							data-content='${gath.gatherContent}'  
 							data-img='${gath.gatherImg}'  
-							data-id='${gath.guserId}'  
-							data-stime="${fn:substring(gath.gatherStime, 10, 16)}"
-							data-etime="${fn:substring(gath.gatherEtime, 10, 16)}"
-							data-etime='${gath.gatherEtime}' 
+							data-id='${gath.guserId}' 
+							data-state='${gath.gatherState}'
 							>
-								<img width="213px" height="120px" src='${gath.gatherImg}'>
-								<h4 align="center">${gath.gatherSubject}</h4> 
+								<img class='gatherimg' width="213px" height="120px" src='${gath.gatherImg}'>
+								<span class="price">${gath.gatherState}</span>
+								<h4 align="center">
+									<c:choose>
+									    <c:when test="${fn:length(gath.gatherSubject) > 9}">
+									        ${fn:substring(gath.gatherSubject, 0, 11)} ...
+									    </c:when>
+									    <c:otherwise>
+									        ${gath.gatherSubject}
+									    </c:otherwise>
+									</c:choose>
+								</h4> 
 								<h5>
 								기간 : ${fn:substring(gath.gatherSdate, 0, 10)} ~ ${fn:substring(gath.gatherEdate, 0, 10)}<br>
 								요일 : ${gath.gatherDay}<br>
 								지역 : ${gath.gatherArea}<br>
-								신청인원 : ${gath.gatherParti} 
+								신청인원 : ${gath.gatherParti}<br> 
 								</h5>
 							</a>
 						</div>
@@ -2121,10 +2163,10 @@ $(function() {
 						<img class='img-responsive' width="598px" height="350px"  id='modalImg'
 							 style="margin-left: auto; margin-right: auto; display: block;">
 					</div>
+					<div class="modal-body" id="modal-body-state"></div>
 					<div class="modal-body" id="modal-body-id"></div>
 					<div class="modal-body" id="modal-body-category"></div>
 					<div class="modal-body" id="modal-body-date"></div>
-					<div class="modal-body" id="modal-body-time"></div>
 					<div class="modal-body" id="modal-body-area"></div>
 					<div class="modal-body" id="modal-body-content"></div>
 					<div class="modal-footer">

@@ -72,8 +72,8 @@
 	        select gatherseq.nextval from dual
 	    </selectKey>
 
-		insert into gather (gatherno, gathersubject, gatherCategory, gatherwrite, gathersdate, gatheredate, gatherarea, gatherparti, gathercontent, gatherimg, guserid, gatherstime, gatheretime, gatherday)
-		values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCategory}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherParti}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, to_date( #{gath.gatherStime},'yyyy-mm-dd hh24:mi'), to_date( #{gath.gatherEtime},'yyyy-mm-dd hh24:mi'), #{gath.gatherDay, jdbcType=VARCHAR})
+		insert into gather (gatherno, gathersubject, gatherCategory, gatherwrite, gathersdate, gatheredate, gatherarea, gatherparti, gathercontent, gatherimg, guserid, gatherday, gatherstate)
+		values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCategory}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherParti}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherDay}, '모집중')
 	
 	</insert>
 	
