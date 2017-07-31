@@ -50,5 +50,27 @@ public class CompanyDAO implements ICompanyDAO {
 				
 				return cdto;
 			}
+		
+		//기업회원아이디찾기
+		@Override
+		public CompanyDTO findComId(String comEmail) throws SQLException {
+			
+			CompanyDTO cdto = null;
+			
+			cdto=(CompanyDTO) session.selectOne(namespace+".findComId", comEmail);
+			
+			
+			return cdto;
+		}
+
+		@Override
+		public CompanyDTO comfindPW(String comId) {
+
+			CompanyDTO cdto = null;
+					
+			cdto = (CompanyDTO)session.selectOne(namespace+".comfindPW", comId);
+			
+			return cdto;
+		}
 
 }

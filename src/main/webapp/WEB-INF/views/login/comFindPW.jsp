@@ -75,7 +75,7 @@
 <body>
 
 	<!-- 01.[Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
-	<%@include file="header2.jsp"%>
+	<%@include file="../header2.jsp"%>
 
 
 	<!-- 02. [Content] 로그인 폼 내용부분 -->
@@ -97,7 +97,7 @@
 				<form action="" method="POST" id="dataset" name="findPWForm">
 
 					<div class="form-group">
-						<label for="guserName">이름 입력 &nbsp;&nbsp; </label>
+						<label for="guserName">아이디 입력 &nbsp;&nbsp; </label>
 						<!-- tabindex: Tab 키 사용시, 포커스의 이동 순서를 임의로 조정 가능 -->
 						<input type="text" id="input_guserId" name="guserId"
 							class="form-control" placeholder="아이디를 입력하세요." tabindex="1">
@@ -116,26 +116,25 @@
 						<button type="submit" class="btn btn-primary" id="btnfindPW"
 							tabindex="3">로그인으로이동</button>
 					</div>
-					<br> <br>
+					<br> <br><br>
 
 					<div class="result">
-						
-						<c:choose>
-                        <c:when test = "${empty pdto.guserPw}">
-                  <font size="4" color="#F15F5F">맞는 조건의 비밀번호가 없습니다. 다시 확인 해 주세요.</font><br>
-               </c:when>
-               
-               <c:otherwise>
-                  <font size="4" color="#5D5D5D">회원님의 비밀번호는 ${pdto.guserPw}입니다.</font><br>
-
-               </c:otherwise>
-            </c:choose>
-						<%-- <font size="4" color="#5D5D5D">회원님의 아이디는
-							${pdto.guserId}입니다.</font><br>--%>
+				
+					<c:choose>
+							<c:when test="${empty pdto.guserId}and${empty cdto.comId}">
+								<font size="4" color="#F15F5F">맞는 조건의 비밀번호가 없습니다. 다시 확인 해주세요.</font>
+								<br>
+							</c:when>
+							 <c:otherwise>
+								<font size="3" color="#F15F5F">회원님의 비밀번호가${pdto.guserEmail} ${cdto.comEmail}로 전송되었습니다.이메일을 확인 해주세요.</font>
+								<br>
+							</c:otherwise>
+							
+						</c:choose>
 
 					</div> 
 	
-
+					<br>
 					<!-- 회원가입 선택 페이지로 이동 -->
 					<a href="/join/JoinChoiceForm" tabindex="4"> 처음 오셨나요? 지금 바로
 						회원가입 하실 수 있습니다^^</a>
@@ -146,7 +145,7 @@
 
 		<!-- 03. [Footer] 페이지 하단 -->
 		<hr>
-		<%@include file="footer.jsp"%>
+		<%@include file="../footer.jsp"%>
 
 	</div>
 

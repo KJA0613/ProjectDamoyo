@@ -94,14 +94,14 @@
 				<br>
 				<form action="" method="POST" id="dataset" name="findIdForm">
 					<div class="form-group">
-						<label for="guserName">이름 입력 &nbsp;&nbsp;
+						<label for="guserName">개인회원은 이름을  기업회원은 기업명을 입력해주세요.  &nbsp;&nbsp;
 							
 						</label>
 						<!-- tabindex: Tab 키 사용시, 포커스의 이동 순서를 임의로 조정 가능 -->
-						<input type="text" id="input_guserName" name="guserName" class="form-control" placeholder="이름을 입력하세요." tabindex="1" required>
+						<input type="text" id="input_guserName" name="guserName" class="form-control" placeholder="가입시 입력한 이름 또는 회사명을 입력하세요." tabindex="1" required>
 					</div>
 					<div class="form-group">
-						<label for="guserEmail">이메일 입력 &nbsp;&nbsp;
+						<label for="guserEmail">이메일  &nbsp;&nbsp;
 							
 						</label>
 						<input type="text" id="input_guserEmail" name="guserEmail" class="form-control" placeholder="가입시 입력한 이메일 주소를 입력하세요." tabindex="2" required>

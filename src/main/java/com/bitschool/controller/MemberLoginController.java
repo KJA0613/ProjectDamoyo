@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bitschool.dto.CompanyDTO;
@@ -132,7 +131,6 @@ public class MemberLoginController {
 		// 사용자가 로그인 폼에 입력한 데이터 > DB에 있는 데이터인지 여부 확인
 		CompanyDTO cdto = memberService.CompanyLogin(comId,comPw);
 
-		System.out.println("[TEST-로그인(개인)/세션유지] 세션에 저장된 회원 정보 확인: " + cdto);
 
 		// 로그인 성공 (DB에 해당 데이터 있음)
 		if(cdto != null) {
@@ -153,14 +151,7 @@ public class MemberLoginController {
 			
 			//System.out.println("4번째: " + loginReferer[4]);
 			
-			// 메인페이지 이동 (reload)
-			//url = "redirect:/member/" + loginReferer[4].toString();
-			
-			/*if(cdto.getComCode().equals("B")) {
-				url = "redirect:/";
-			} else {
-				url = "/PartnerMain";
-			}*/
+
 			url = "/PartnerMain";
 			model.addAttribute("cdto",cdto);
 		// 로그인 실패 (DB에 해당 데이터 없음)
@@ -220,10 +211,30 @@ public class MemberLoginController {
 		String url = null;
 
 		PersonDTO pdto = memberService.getfindID(guserEmail, guserName);
-
+				
+		
+		// 기업회원아이디찾기
+		if(pdto==null){
+			
+			String comEmail = guserEmail;			
+			String comName = guserName;
+			
+			CompanyDTO cdto = memberService.getfindComID(comEmail,comName);
+			
+			
+			
+			model.addAttribute("cdto", cdto);
+			
+			url = "login/comFindID";
+		}
+		
+		else{
+		
 		model.addAttribute("pdto", pdto);
 
 		url = "login/comFindID";
+		
+		}
 
 		return url;
 	}
@@ -245,31 +256,71 @@ public class MemberLoginController {
 	private EmailDTO email;
 
 	@RequestMapping(value = "/sendEmailAction", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView sendEmailAction(@RequestParam("guserEmail") String guserEmail,
-										@RequestParam("guserId") String guserId) {
-		ModelAndView mav;
+	public String sendEmailAction(@RequestParam("guserEmail") String guserEmail,
+										@RequestParam("guserId") String guserId,Model model) {
+		/*ModelAndView mav;
+		ModelAndView mavT;*/
 		String url = null;
 
 		PersonDTO pdto = memberService.getfindPW(guserEmail, guserId);
-
+		//기업회원비번찾기
+		if(pdto==null){
+			
+			String comEmail = guserEmail;
+			String comId = guserId;
+			
+			CompanyDTO cdto = memberService.comfindPW(comEmail,comId);
+			
+			String comPw = cdto.getComPw();
+			String cid = cdto.getComId();
+			
+				if(comPw != null){
+					email.setContent("다모여를 이용해 주셔서 감사합니다.\n\n"+cid+"님이 요청하신 비밀번호는 " + comPw + " 입니다.\n\n"+"감사합니다.\n");
+					email.setReceiver(cdto.getComEmail());
+					email.setSubject(cdto.getComId()+"님 비밀번호 찾기 메일입니다.");
+					
+					 try {
+						emailSender.SendEmail(email);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//mavT = new ModelAndView("redirect:/member/LoginForm");
+					 model.addAttribute("cdto", cdto);
+						
+					url = "login/comFindPW";
+					 
+					 return url;
+					} 
+				else {
+					 	//mavT= new ModelAndView("redirect:/");
+						url = "redirect:/";
+					 	return url;
+					 }
+				
+				}			
+		//개인회원비번찾기			
 		String pw = pdto.getGuserPw();
-
-		// System.out.println(pw);
-		if (pw != null) {
-			email.setContent("비밀번호는 " + pw + " 입니다.");
-			email.setReceiver(pdto.getGuserEmail());
-			email.setSubject(pdto.getGuserId() + "님 비밀번호 찾기 메일입니다.");
-			try {
-				emailSender.SendEmail(email);
-			} catch (Exception e) {
-				e.printStackTrace();
+		String id = pdto.getGuserId();
+			if (pw != null) {
+				email.setContent("다모여를 이용해 주셔서 감사합니다.\n\n"+id+"님이 요청하신 비밀번호는 " + pw + " 입니다.\n\n"+"감사합니다.\n");
+				email.setReceiver(pdto.getGuserEmail());
+				email.setSubject(pdto.getGuserId() + "님 비밀번호 찾기 메일입니다.");
+				try {
+					emailSender.SendEmail(email);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				//mav = new ModelAndView("redirect:/member/LoginForm");
+				 model.addAttribute("pdto", pdto);
+				 url = "login/comFindPW";
+				 
+				return url;
+			} else {
+				//mav = new ModelAndView("redirect:/");
+				url = "redirect:/";
+				return url;
 			}
-			mav = new ModelAndView("redirect:/member/LoginForm");
-			return mav;
-		} else {
-			mav = new ModelAndView("redirect:/");
-			return mav;
+	
 		}
-
-	}
 }
