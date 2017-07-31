@@ -85,10 +85,11 @@ function checkName() {
 
 
 // [Check_02] 아이디
-function checkId(result) {
+function checkId() {
 	
 	// [데이터 유효성 검사1] 입력여부 확인
 	var id = document.getElementById('guserId').value;			// 아이디 값
+	var tempId = document.getElementById('guserId');
 	id = id.trim();												// 공백 제거
 	var oMsg = document.getElementById('idMsg');				// 보낼 에러 메세지
 	
@@ -100,7 +101,7 @@ function checkId(result) {
 		return false;
 	}
 	
-	// [데이터 유효성 검사2] 비밀번호 입력값 확인
+	// [데이터 유효성 검사2]
 	var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
 	
     if (!isID.test(id)) {
@@ -120,24 +121,18 @@ function checkId(result) {
 	$.ajax({
 			type : "POST",														// 서버에 반환되는 데이터 타입
 			data : checkId,														// 서버로 보낼 데이터
-			dataType: "JSON",													// 받을 데이터 포맷 형식													
+			dataType: "text",													// 받을 데이터 포맷 형식													
 			url : "/join/checkDuplicatePersonIdAjax",							// 정보 요청할 URL
 			success : function(result) {										// 요청 성공하면 실행될 콜백함수
-				console.log(result);
-			
 				if (result == "OK") {
-					//document.getElementById("idcheck").innerHTML="사용가능";
-					//alert(result);
-					Msg.className = "error gm";
+					oMsg.className = "error gm";
 					oMsg.innerHTML = "멋진 아이디네요!";
 					document.getElementById("guserId").style.color = "blue";
 				} else {
-					//document.getElementById("idcheck").innerHTML="중복된아이디";
-					//document.getElementById("idcheck").style.color="red";
-					Msg.className = "error";
+					oMsg.className = "error";
 					oMsg.innerHTML = "이미 사용중이거나 탈퇴한 아이디입니다.";
-					id.value = "";
-					id.focus();
+					tempId.value = "";
+					tempId.focus();
 				}
 			},error : function() {
 				alert("통신오류가 발생하였습니다. 재시도 해주세요");

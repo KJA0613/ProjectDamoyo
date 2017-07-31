@@ -263,7 +263,7 @@ function checkId(result) {
 					</div>
 					
 					<!-- [hidden] 사용자 코드값(개인: A, 기업: B) -->
-					<input type="hidden" name="comCode" value="${cdto.comCode}">
+					<input type="hidden" name="comCode" value="B">
 					
 				</form>
 			</div>

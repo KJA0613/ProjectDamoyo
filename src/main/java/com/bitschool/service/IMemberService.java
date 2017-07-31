@@ -2,6 +2,7 @@ package com.bitschool.service;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -46,7 +47,14 @@ public interface IMemberService {
 	// [개인회원] 마이페이지 - 회원 탈퇴 > 정보 삭제
 	public boolean PersonQuit(PersonDTO pdto);
 
+
+	// --------------------------------------- [기업회원] 회원가입  ---------------------------------------//
+	
+	// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
+	public boolean CompanyRegist(CompanyDTO cdto);
+
 	// [개인회원] 마이페이지 - 관심모임 삭제
 	public boolean deleteAttend(GatherAddonsDTO gadto);
+
 	
 }

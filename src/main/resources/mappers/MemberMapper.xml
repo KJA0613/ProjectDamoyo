@@ -80,9 +80,22 @@
 		delete from guser where guserId = #{guserId} and guserPw = #{guserPw}
 	</delete>		
 	
+
+	
+	<!-- [기업회원] 회원가입 - 1단계  + 2단계 -->		
+	<insert id="insertCompanyRegist" parameterType="CompanyDTO">
+		<selectKey keyProperty="comNo" resultType="int" order="BEFORE">
+			select companySeq.nextval from dual
+		</selectKey>
+		insert into company(comNo, comId, comPw, comName, comPhone,  comEmail, comManager,comSaNo,comZoneCode,comRoadAddress,comJibunAddress,comDetailAddress,comCeoName,comCode) 
+		values(#{comNo}, #{comId}, #{comPw}, #{comName}, #{comPhone},  #{comEmail}, #{comManager}, #{comSaNo},#{comZoneCode},#{comRoadAddress},#{comJibunAddress},#{comDetailAddress},#{comCeoName},#{comCode})
+	</insert>
+
+
 	<!-- [개인회원] 마이페이지 - 관심모임 삭제  -->
 	<delete id="deleteAttend" parameterType="GatherAddonsDTO">
 		delete from gatheraddons
 		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and gatheraddonswriter = #{gatherAddonsWriter} and guserId = #{guserId}
 	</delete>
+
 </mapper>

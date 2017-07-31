@@ -7,7 +7,14 @@ public class BSearchVO {
 	private String query;
 	private BPageVO vo;
 	private String utfQuery;
+	private String boardName;
 	
+	public String getBoardName() {
+		return boardName;
+	}
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
 	public String getQuery() {
 		return query;
 	}

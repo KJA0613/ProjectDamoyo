@@ -148,18 +148,58 @@ function checkId(result) {
 	
 </script>
 
-<!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-    //load함수를 이용하여 core스크립트의 로딩이 완료된 후, 우편번호 서비스를 실행합니다.
-    daum.postcode.load(function(){
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('comZoneCode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('comRoadAddress').value = fullRoadAddr;
+                document.getElementById('comJibunAddress').value = data.jibunAddress;
+
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+
+                } else {
+                    document.getElementById('guide').innerHTML = '';
+                }
             }
         }).open();
-    });
+    }
 </script>
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
@@ -183,7 +223,7 @@ function checkId(result) {
 				<!-- 폼 가운데에 놓기 위해 디브추가함-->
 				<!-- 회원가입입력폼 : 1단계 -->
 				<!-- onblur: 요소가 마우스나 키보드 등의 컨트롤러에 의해 포커스를 잃을 때 발생 -->
-				<form action="/join/CompanyDataRegist" method="post" class="form-horizontal">
+				<form action="/join/CompanyDetailRegist" method="post" class="form-horizontal">
 					
 					<!-- 기업명 -->
 					<div class="form-group">
@@ -216,25 +256,53 @@ function checkId(result) {
 						</div>						
 					</div>
 					
-					<!-- 비밀번호 -->
+					<!-- 사업자번호 -->
 					<div class="form-group">
 						<label for="comSaNo" class="col-md-2 control-label">사업자번호</label>
 						<div class="col-md-10">
 							<input type="text" class="form-control" name="comSaNo" placeholder="사업자번호">
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="pwMsg" class="error"></div>
+						
 					</div>
 					
+					<!-- 기업주소우편번호검색버튼 -->
+					<div class="form-group">
+						<label for="comJuNo" class="col-md-2 control-label">기업주소</label>
+							<div class="col-md-10">
+								<input type="button"class="btn btn-grey" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">								
+									</div></div>
 					
-						<!-- 경고 메세지 -->
-						<div id="mobileMsg" class="error"></div>
-				
+					<!-- 기업주소우편번호노출창 -->
+					<div class="form-group">					
+						<label for="comZoneCode" class="col-md-2 control-label"></label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="comZoneCode" name="comZoneCode" placeholder="우편번호">
+									</div></div>
 					
-				
+					<!-- 선택된기업주소도로명 -->
+					<div class="form-group">					
+						<label for="comRoadAddress" class="col-md-2 control-label"></label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="comRoadAddress" name="comRoadAddress" placeholder="도로명주소"> 
+									</div></div>
+					
+					<!-- 선택된기업주소지번 -->
+					<div class="form-group">					
+						<label for="comJibunAddress" class="col-md-2 control-label"></label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="comJibunAddress" name="comJibunAddress" placeholder="지번주소">
+									</div></div>
+					
+					<!-- 기업주소상세정보입력 -->
+					<div class="form-group">					
+						<label for="comDetailAddress" class="col-md-2 control-label"></label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="ComDetailAddress" name="comDetailAddress" placeholder="상세주소를입력해주세요"> 
+									</div></div>
+					
 					<hr>						
 
-					<!-- 1단계 확인 버튼 -->
+					<!-- 2단계 확인 버튼 -->
 					<div class="clear-fix">
 						<p class="pull-left">
 							<small>
@@ -243,12 +311,12 @@ function checkId(result) {
 							</small>
 						</p>
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary">1단계 완료</button>
+							<button type="submit" class="btn btn-primary">완료</button>
 						</div>
 					</div>
 					
 					<!-- [hidden] 사용자 코드값(개인: A, 기업: B) -->
-					<input type="hidden" name="comCode" value="${cdto.comCode}">
+					<%-- <input type="hidden" name="comCode" value="${cdto.comCode}"> --%>
 					
 				</form>
 			</div>

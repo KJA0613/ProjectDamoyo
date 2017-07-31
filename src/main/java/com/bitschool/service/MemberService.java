@@ -6,9 +6,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.bitschool.dao.ICompanyDAO;
 import com.bitschool.dao.IMemberDAO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -21,6 +23,9 @@ public class MemberService implements IMemberService {
 	// [주입] DAO 인터페이스
 	@Inject
 	private IMemberDAO personDAO;	
+	
+	@Inject
+	private ICompanyDAO companyDAO;
 	
 	
 	//----------------------------------------------- 로 그 인 -----------------------------------------------//
@@ -231,6 +236,16 @@ public class MemberService implements IMemberService {
 		return flag;
 	}
 
+
+	@Override
+	public boolean CompanyRegist(CompanyDTO cdto) {
+		boolean flag = false;
+		
+		flag = companyDAO.companyRegist(cdto);
+		
+		return flag;
+	}
+	
 	// [개인회원] 마이페이지 - 관심모임 삭제
 	@Override
 	public boolean deleteAttend(GatherAddonsDTO gadto) {

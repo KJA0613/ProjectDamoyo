@@ -1,6 +1,7 @@
 package com.bitschool.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,9 +84,6 @@ public class MemberJoinController {
 	public String PersonDataRegist(PersonDTO pdto, Model model) {
 		String url = null;
 		
-		//System.out.println("[TEST-회원가입(1)] 1단계 입력 전 Code값(A): " + pdto.getGuserCode());	
-		//System.out.println("[TEST-회원가입(개인:A)] 회원 전체 정보: " + pdto);
-		
 		// 2단계 가기 전, pdto 전체 데이터 저장
 		model.addAttribute("pdto", pdto);
 			
@@ -97,15 +95,12 @@ public class MemberJoinController {
 	
 	// 02-1. [기업회원가입-1단계] 회원가입 1단계에 입력한 값 저장 후 >상세정보입력하는 폼으로 넘기기
 		@RequestMapping(value="/CompanyDataRegist", method=RequestMethod.POST)
-		public String CompanyDataRegist(CompanyDTO cdto, Model model) {
+		public String CompanyDataRegist(CompanyDTO cfdto, HttpSession session) {
 			String url = null;
 			
-			//System.out.println("[TEST-회원가입(1)] 1단계 입력 전 Code값(A): " + pdto.getGuserCode());	
-			//System.out.println("[TEST-회원가입(개인:A)] 회원 전체 정보: " + pdto);
-			
-			// 2단계 가기 전, pdto 전체 데이터 저장
-			model.addAttribute("cdto", cdto);
-				
+			// 2단계 가기 전,cdto 전체 데이터 저장
+			session.setAttribute("cfdto", cfdto);
+					
 			// 기업상세정보선택"회원가입 2단계 폼"으로 이동
 			url = "join/JoinCompanyDetail";
 			
@@ -141,6 +136,29 @@ public class MemberJoinController {
 		return url;
 	}
 	
+	// 03-1. [기업회원가입-2단계] 기업상세정보 등록	
+	@RequestMapping(value = "/CompanyDetailRegist", method = { RequestMethod.GET, RequestMethod.POST })
+	public String CompanyDetailRegist(CompanyDTO cdto ,HttpSession session){
+		
+		CompanyDTO cfdto = (CompanyDTO) session.getAttribute("cfdto");
+		
+		cdto.setComManager(cfdto.getComManager());
+		cdto.setComId(cfdto.getComId());
+		cdto.setComPw(cfdto.getComPw());
+		cdto.setComEmail(cfdto.getComEmail());
+		cdto.setComPhone(cfdto.getComPhone());
+		cdto.setComCode(cfdto.getComCode());
+		
+		String url = null;
+		
+		boolean flagInsert = memberService.CompanyRegist(cdto);
+		
+		if(flagInsert){
+			url="redirect:/";
+		}
+		return url;
+	}
+	
 	
 	// 04. [회원가입 - 데이터 유효성 검사] 아이디 중복 체크
 	@ResponseBody 
@@ -148,28 +166,21 @@ public class MemberJoinController {
 	public String checkDuplicatePersonIdAjax(@RequestParam("guserId") String guserId, Model model) {
 		String url = null;
 		String result = null;
-		
-		// 받아온 데이터 처리 > DataType: Json
-		//JSONPObject json = new JSONPObject();
 
-		System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + guserId);
+		//System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + guserId);
 
 		// DB에 저장된 아이디랑 비교
-		result = memberService.checkDuplicatePersonId(guserId);
-		
-		System.out.println("[TEST] DB Data(DB에 저장된 결과): " + result);
+		result = memberService.checkDuplicatePersonId(guserId);		
+		//System.out.println("[TEST] DB Data(DB에 저장된 결과): " + result);
 		
 		// 입력한 id = DB에 조회한 id
-		if (result == null) {						// 일치(중복)
-			model.addAttribute("OK", "OK");
-		} else {											// 불일치
-			model.addAttribute("FAIL", "FAIL");
+		if (result == null) {							// 가입 가능한 아이디
+			result = "OK";
+		} else {										// 중복 된 아이디
+			result = "FAIL";
 		}
 		
-		// 결과값 저장해서 데이터 전송
-		url = "join/JoinPersonInto";
-		
-		return url;		
+		return result;		
 	}
 
 }

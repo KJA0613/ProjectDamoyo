@@ -4,12 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitschool.basic.ReplyMapper">
 
-	<update id="updateReplyCount" parameterType="Integer">
-		update post set replyCounts = replyCounts + 1 where postNo = #{postNo}
+	<update id="updateReplyCount" parameterType="BPostNoInfoDTO">
+		update post set replyCounts = replyCounts + 1 where postNo = #{postNo} and boardName = #{boardName}
 	</update>
 	
 	<insert id="insertReply" parameterType="BReplyDTO">
-		insert into reply(replyNo,replyContents,postNo,replyUserId) values(#{replyNo},#{replyContents},#{postNo},#{replyUserId})
+		insert into reply(replyNo,replyContents,postNo,replyUserId,boardName) values(#{replyNo},#{replyContents},#{postNo},#{replyUserId},#{boardName})
 	</insert>
 	
 	<select id="selectReply" resultType="BReplyDTO" parameterType="BPostNoInfoDTO">
