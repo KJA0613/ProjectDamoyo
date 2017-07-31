@@ -10,11 +10,8 @@ import com.bitschool.dao.ICompanyDAO;
 import com.bitschool.dao.IMemberDAO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
-<<<<<<< HEAD
 import com.bitschool.dto.CompanyDTO;
-=======
 import com.bitschool.dto.GatherAddonsDTO;
->>>>>>> cb7a9209848287f7b7f63aa994251a8f7e262781
 import com.bitschool.dto.PersonDTO;
 
 // [개인&기업회원] 로직처리
@@ -238,22 +235,25 @@ public class MemberService implements IMemberService {
 
 		return flag;
 	}
+	// [개인회원] 마이페이지 - 관심모임 삭제
+		@Override
+		public boolean deleteAttend(GatherAddonsDTO gadto) {
 
-<<<<<<< HEAD
+			boolean flag = personDAO.deleteAttend(gadto);
+
+			
+			return flag;
+		}
+		// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
 	@Override
 	public boolean CompanyRegist(CompanyDTO cdto) {
 		boolean flag = false;
 		
 		flag = companyDAO.companyRegist(cdto);
-=======
-	// [개인회원] 마이페이지 - 관심모임 삭제
-	@Override
-	public boolean deleteAttend(GatherAddonsDTO gadto) {
-
-		boolean flag = personDAO.deleteAttend(gadto);
->>>>>>> cb7a9209848287f7b7f63aa994251a8f7e262781
 		
-		return flag;
+			return flag;
 	}
+
+	
 
 }
