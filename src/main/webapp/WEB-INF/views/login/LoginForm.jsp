@@ -129,9 +129,9 @@
 				<br>
 				<form action="" method="POST" id="dataset" name="loginForm">
 					<div class="radio">
-						<label><input type="radio" name="guserCode" value="A">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<label><input type="radio" name="guserCode" value="A" required>개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
-						<label><input type="radio" name="guserCode" value="B">기업회원</label>
+						<label><input type="radio" name="guserCode" value="B" required>기업회원</label>
 					</div>
 					
 					<div class="form-group">

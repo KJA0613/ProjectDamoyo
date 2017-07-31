@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitschool.basic.PlaceMapper">
+		
+	<!-- [광고주] 모임공간 등록 -->
+	<insert id="insertPlaceRegist" parameterType="PlaceDTO">
+		<selectKey keyProperty="placeNo" resultType="int" order="BEFORE">
+			select placeSeq.nextval from dual
+		</selectKey>
+			insert into place(placeNo, placeImage, placeType, placeName, placeIntro, placeAdr1, placeAdr2, placeAdr3, 
+								placeeTel, placeURL, placePerCnt, placeUseTime, placeUseDay, placeCost, placeCostChoice, placeParking, placeContent, 
+								placeCreateDate, comId) 
+			values(#{placeNo}, #{placeImage}, #{placeType}, #{placeName}, #{placeIntro}, #{placeAdr1}, #{placeAdr2}, #{placeAdr3},
+				   #{placeeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, 
+				   #{placeCreateDate}, #{comId})			
+	</insert>		
+
+</mapper>

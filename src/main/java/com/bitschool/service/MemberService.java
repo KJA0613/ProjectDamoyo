@@ -241,15 +241,31 @@ public class MemberService implements IMemberService {
 
 			boolean flag = personDAO.deleteAttend(gadto);
 
+<<<<<<< HEAD
 			
 			return flag;
 		}
 		// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
+=======
+
+>>>>>>> 2a9b174a125cd49c5ee53c16653310e8571bfb94
 	@Override
 	public boolean CompanyRegist(CompanyDTO cdto) {
 		boolean flag = false;
 		
 		flag = companyDAO.companyRegist(cdto);
+<<<<<<< HEAD
+=======
+		
+		return flag;
+	}
+	
+	// [개인회원] 마이페이지 - 관심모임 삭제
+	@Override
+	public boolean deleteAttend(GatherAddonsDTO gadto) {
+
+		boolean flag = personDAO.deleteAttend(gadto);
+>>>>>>> 2a9b174a125cd49c5ee53c16653310e8571bfb94
 		
 			return flag;
 	}

@@ -49,7 +49,7 @@ public class GatheringController {
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 		
 		List<GatheringDTO> recommList = gService.getRecommDefault();
-		
+				
 		if(pdto!=null){ // 로그인 중이면
 			model.addAttribute("pdto", pdto);
 			
@@ -57,7 +57,7 @@ public class GatheringController {
 			// 사용자 정보에 따른 추천글 가져옴
 			// 그리고 jsp로 모델을 보냄
 			
-			if(recommList == null){ // 사용자 추천 리스트가 업으면
+			if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
 				recommList = gService.getRecommDefault();// 디폴트 추천검색
 			}
 		}

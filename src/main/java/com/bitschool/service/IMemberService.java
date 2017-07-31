@@ -51,10 +51,20 @@ public interface IMemberService {
 		public boolean deleteAttend(GatherAddonsDTO gadto);
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2a9b174a125cd49c5ee53c16653310e8571bfb94
 	// --------------------------------------- [기업회원] 회원가입  ---------------------------------------//
 	
 	// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
 	public boolean CompanyRegist(CompanyDTO cdto);
 
+<<<<<<< HEAD
+=======
+	// [개인회원] 마이페이지 - 관심모임 삭제
+	public boolean deleteAttend(GatherAddonsDTO gadto);
+
+>>>>>>> 2a9b174a125cd49c5ee53c16653310e8571bfb94
 	
 }
