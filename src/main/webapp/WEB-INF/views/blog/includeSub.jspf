@@ -33,7 +33,7 @@
 				<li class="sidebar-brand" style="padding-bottom: 180px; padding-top: 50px; font-weight: bold; text-align: left;"><a href="/blog/home" style="font-size: 22px">자바 뽀개기</a></li>
 				<li style="line-height: 50px"><a href="/blog/notice/listAll"><i class="fa fa-bullhorn" aria-hidden="true" style="padding: 10px"></i>공지사항</a></li>
 				<li style="line-height: 50px"><a href="/blog/schedule/viewSchedule"><i class="fa fa-calendar" aria-hidden="true" style="padding: 10px"></i>일정관리</a></li>
-				<li style="line-height: 50px"><a href="/blog/file"><i class="fa fa-cloud-download" aria-hidden="true" style="padding: 10px"></i>자료실</a></li>
+				<li style="line-height: 50px"><a href="/blog/file/listAll"><i class="fa fa-cloud-download" aria-hidden="true" style="padding: 10px"></i>자료실</a></li>
 				<li style="line-height: 50px"><a href="/blog/board/listAll"><i class="fa fa-smile-o" aria-hidden="true" style="padding: 10px"></i>자유게시판</a></li>
 				<li style="line-height: 50px"><a href="/blog/photo/viewPhoto"><i class="fa fa-picture-o" aria-hidden="true" style="padding: 10px"></i>사진첩</a></li>
 				<li style="line-height: 50px"><a href="/blog/comments/listAll"><i class="fa fa-users" aria-hidden="true" style="padding: 10px"></i>후기게시판</a></li>
