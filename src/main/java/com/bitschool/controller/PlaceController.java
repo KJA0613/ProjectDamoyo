@@ -1,6 +1,7 @@
 package com.bitschool.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
 import com.bitschool.service.IPlaceService;
 
@@ -36,13 +38,14 @@ public class PlaceController {
 	}
 	
 	
-	// 광고주 dto 넣기
 	// 01. 모임공간 등록 
 	@RequestMapping(value = "/PlaceRegist",  method = RequestMethod.POST)
-	public String PlaceRegist(PlaceDTO pl_dto) {
+	public String PlaceRegist(PlaceDTO pl_dto, CompanyDTO cdto, HttpSession session) {
 		String url = null;
 		
 		boolean flag = placeService.PlaceRegist(pl_dto);
+	
+		System.out.println(pl_dto);
 		
 		if(flag) {
 			url = "/PartnerMain";			

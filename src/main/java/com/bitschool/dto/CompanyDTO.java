@@ -16,8 +16,8 @@ public class CompanyDTO implements Serializable{
 	 private String comManager; 			   /* 기업담당자명  */
 	 private int comSaNo; 					   /* 기업사업자번호 */
 	 private int comZoneCode; 				   /* 기업우편번호  */
-	 private String comRoadAddress;               /* 기업신주소(길) */ 
-	 private String comJibunAddress; 			   /* 기업구주소(지번) */
+	 private String comRoadAddress;            /* 기업신주소(길) */ 
+	 private String comJibunAddress; 		   /* 기업구주소(지번) */
 	 private String comDetailAddress;          /* 기업상세주소 */
 	 private String comCeoName; 			   /* 기업대표명 */
 	 private Timestamp comDate; 			   /* 기업가입일 */
