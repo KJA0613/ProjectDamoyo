@@ -57,11 +57,15 @@
 	});
 	 */
 	// 02. [데이터 유효성 체크] 로그인 폼 > 아이디, 비밀번호 미입력 > 경고창 생성
-    $(document).ready(function() {
+   /*  $(document).ready(function() {
+    	//test
+		
+    	
 		$('#btnLogin').click(function() {			
 			// tag.val() > 태그에 입력된 값 가져오기 (input 태그 안 > "id값"으로 가져옴)
 			var guserId = $('#input_guserId').val();
 			var guserPw = $('#input_guserPw').val();
+
 			
 			// 아이디 미입력 > 아이디 다시 입력하게 경고창 및 포커스두기
 			if(guserId == '') {
@@ -77,32 +81,56 @@
 				return false;			// 함수 종료
 			} 	
 			
-			//alert('[TEST-로그인] 아이디/비밀번호: ' + guserId + ' / ' + guserPw);
-			
 			// 로그인 폼 입력한 ID, PW > 로그인 데이터 확인하는 URL로 전송
-			document.loginForm.action = "/member/PersonLogin";	
-		});
-	});		
+			// document.loginForm.action = "/member/PersonLogin";	
+			
 	
- // [개인회원, 기업회원 선택 ] 
+
+		});
+	});		 */
+	
+  // [개인회원, 기업회원 선택 ] 
     function LoginChoiceSubmit(type) {
        
        // 폼 안에 있는 데이터들 사용하려고 셋팅
-       var lc = document.getElementById('loginForm');      
+      /*  var lc = document.getElementById('dataset');     */  
        
+      var guserId = $('#input_guserId').val();
+			var guserPw = $('#input_guserPw').val();
+
+			
+			// 아이디 미입력 > 아이디 다시 입력하게 경고창 및 포커스두기
+			if(guserId == '') {
+				alert("아이디를 입력하세요");
+				$('#guserId').focus();
+				return false;
+			}		
+	
+			// 패스워드 미입력 > 아이디 다시 입력하게 경고창 및 포커스두기
+			if(guserPw == '') {
+				alert('비밀번호를 입력하세요');
+				$('#guserPw').focus();
+				return false;			// 함수 종료
+			} 	
+      
        // "개인" 회원가입 폼 이동
-       if(type == A) {         
+       if(type.value === 'A') {         
           // 개인회원 : value = A > 값 찍기
-          var person = document.getElementById('person').value;
+          //var person = document.getElementById('person').value;
+          document.loginForm.action = "/member/PersonLogin";
+          document.loginForm.submit();   
+
           
         } 
-       if(type == B){
+       if(type.value === 'B'){
     	   
-    	  var company = document.getElementById('company').value;
+    	  //var company = document.getElementById('company').value;
+    	  document.loginForm.action = "/member/CompanyLogin";	
+    	  document.loginForm.submit();   
        }
       
-       document.loginForm.action = "/member/PersonLogin";	
-    }
+       
+    } 
 </script>
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
@@ -127,11 +155,12 @@
 				</c:if>
 				<h1>로그인</h1>
 				<br>
-				<form action="" method="POST" id="dataset" name="loginForm">
+				
+				<form method="POST" id="dataset" name="loginForm">
 					<div class="radio">
-						<label><input type="radio" name="guserCode" value="A">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<label><input type="radio" name="guserCode" value="A" checked="checked">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
-						<label><input type="radio" name="guserCode" value="B">기업회원</label>
+						<label><input type="radio" name="guserCode" value="B" >기업회원</label>
 					</div>
 					
 					<div class="form-group">
@@ -154,7 +183,7 @@
 					<br>	
 					<div class="form-group pull-right">
 													
-						<button type="submit" class="btn btn-primary" id="btnLogin" tabindex="3">로그인</button>		<!-- 로그인 되면: 메인페이지로 이동(아이디 세션 유지) / 로그인 안 되면(Javascript 경고창) -->
+						<button type="button" class="btn btn-primary" onclick="LoginChoiceSubmit(guserCode)" id="btnLogin" tabindex="3">로그인</button>		<!-- 로그인 되면: 메인페이지로 이동(아이디 세션 유지) / 로그인 안 되면(Javascript 경고창) -->
 					</div>
 					<br>
 					<br>
@@ -162,6 +191,8 @@
 					<!-- 회원가입 선택 페이지로 이동 -->
 					<a href="/join/JoinChoiceForm" tabindex="4">처음 오셨나요? 지금 바로 회원가입을 하실 수  있습니다^^</a>	
 				</form>
+				
+				
 			</div>
 		</div>
 		

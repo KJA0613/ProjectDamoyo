@@ -334,7 +334,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('foreign');" style="position: absolute;">		
 						<div class="cutter foreign">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>	<!-- #ABD8EB -->
+							<div class="img"><img src="resources/image/main/english.png"></div>	<!-- #ABD8EB -->
 						</div>
 					</div>
 				</div>
