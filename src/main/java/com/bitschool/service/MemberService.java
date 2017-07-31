@@ -52,6 +52,31 @@ public class MemberService implements IMemberService {
 
 		return null;
 	}
+	
+	// [기업회원] 로그인
+		@Override
+		public CompanyDTO CompanyLogin(String comId, String comPw) {
+			CompanyDTO cdto = null;
+
+			try {
+				// [1차 확인] DB > 기업회원 "아이디" 유무 확인
+				cdto = companyDAO.selectCompanyLogin(comId);
+
+				// [2차-1 확인] 1차 확인 시(DB에 아이디 있음), 해당 아이디와 "관련된 정보들 있으면" > 개인회원
+				// [2차-2 확인] DB에 있는 비밀번호 == 사용자가 입력한 비밀번호 > 개인회원
+				if (cdto != null && cdto.getComPw().equals(comPw)) {
+					return cdto;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			// System.out.println("[TEST-로그인(개인)] DB 데이터 확인: " + pdto);
+
+			return null;
+		}
+	
+	
 
 	@Override
 	public PersonDTO getfindID(String guserEmail, String guserName) {
@@ -90,6 +115,8 @@ public class MemberService implements IMemberService {
 		
 		return pdto;
 	}
+	
+	
 	
 	
 	// ---------------------------------------- [개인회원] 회 원 가 입 ----------------------------------------//
@@ -235,24 +262,33 @@ public class MemberService implements IMemberService {
 
 		return flag;
 	}
-
-
-	@Override
-	public boolean CompanyRegist(CompanyDTO cdto) {
-		boolean flag = false;
-		
-		flag = companyDAO.companyRegist(cdto);
-		
-		return flag;
-	}
-	
 	// [개인회원] 마이페이지 - 관심모임 삭제
-	@Override
-	public boolean deleteAttend(GatherAddonsDTO gadto) {
+		@Override
+		public boolean deleteAttend(GatherAddonsDTO gadto) {
 
-		boolean flag = personDAO.deleteAttend(gadto);
+			boolean flag = personDAO.deleteAttend(gadto);
+
+
+			
+			return flag;
+		}
 		
-		return flag;
-	}
+	// ---------------------------------------- [ 기업회원] 회 원 가 입 ----------------------------------------//	
+		
+		// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
+
+		@Override
+		public boolean CompanyRegist(CompanyDTO cdto) {
+			boolean flag = false;
+			
+			flag = companyDAO.companyRegist(cdto);
+	
+			
+			return flag;
+		}
+	
+
+
+	
 
 }

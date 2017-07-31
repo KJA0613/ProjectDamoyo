@@ -16,7 +16,9 @@ public interface IMemberService {
 
 	public PersonDTO getfindPW(String guserEmail, String guserId);
 	
+	// [기업회원] 로그인
 	
+	public CompanyDTO CompanyLogin(String comId,String comPw);
 	// ---------------------------------------- [개인회원] 회 원 가 입 ----------------------------------------//
 	// [개인회원] 회원가입 - 1단계  + 코드값 > 입력한 내용 삽입
 	public boolean PersonDataRegist(PersonDTO pdto);
@@ -46,6 +48,9 @@ public interface IMemberService {
 
 	// [개인회원] 마이페이지 - 회원 탈퇴 > 정보 삭제
 	public boolean PersonQuit(PersonDTO pdto);
+	
+	// [개인회원] 마이페이지 - 관심모임 삭제
+	public boolean deleteAttend(GatherAddonsDTO gadto);
 
 
 	// --------------------------------------- [기업회원] 회원가입  ---------------------------------------//
@@ -53,8 +58,7 @@ public interface IMemberService {
 	// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
 	public boolean CompanyRegist(CompanyDTO cdto);
 
-	// [개인회원] 마이페이지 - 관심모임 삭제
-	public boolean deleteAttend(GatherAddonsDTO gadto);
+
 
 	
 }
