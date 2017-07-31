@@ -2141,7 +2141,6 @@ $(function() {
 			</div>
 		</div>
 
-
 		<!-- [Footer] 페이지 하단 -->
 		<hr>
 		<%@include file = "../footer.jsp"%>
