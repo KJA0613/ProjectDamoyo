@@ -12,8 +12,6 @@ public class GatheringDTO {
 	private String gatherWrite;
 	private String gatherSdate;
 	private String gatherEdate;
-	private String gatherStime;
-	private String gatherEtime;
 	
 	private String gatherDay;
 	private String gatherArea;
@@ -21,6 +19,8 @@ public class GatheringDTO {
 	private String gatherContent;
 	private String gatherImg;
 	private String guserId;
+	
+	private String gatherState;
 	
 	public int getGatherNo() {
 		return gatherNo;
@@ -73,24 +73,6 @@ public class GatheringDTO {
 	}
 
 	
-	public String getGatherStime() {
-		return gatherStime;
-	}
-
-	public void setGatherStime(String gatherStime) {
-		this.gatherStime = gatherStime;
-	}
-
-	public String getGatherEtime() {
-		return gatherEtime;
-	}
-
-	public void setGatherEtime(String gatherEtime) {
-		this.gatherEtime = gatherEtime;
-	}
-	
-	
-	
 
 	public String getGatherDay() {
 		return gatherDay;
@@ -141,8 +123,7 @@ public class GatheringDTO {
 	}
 
 	public String getDate(String sdate, int code){
-		
-		
+				
 		if(code==1){
 			sdate = sdate.substring(0,16);	
 		}else if(code==2){
@@ -154,15 +135,24 @@ public class GatheringDTO {
 		return sdate;
 	}
 	
+	public String getGatherState() {
+		return gatherState;
+	}
+
+	public void setGatherState(String gatherState) {
+		this.gatherState = gatherState;
+	}
 
 	@Override
 	public String toString() {
-		return "GatheringDTO [gatherNo=" + gatherNo + ", gatherSubject=" + gatherSubject + ", gatherCategory=" + gatherCategory
-				+ ", gatherWrite=" + gatherWrite + ", gatherSdate=" + gatherSdate + ", gatherEdate=" + gatherEdate
-				+ ", gatherStime=" + gatherStime + ", gatherEtime=" + gatherEtime + ", gatherDay=" + gatherDay
-				+ ", gatherArea=" + gatherArea + ", gatherParti=" + gatherParti + ", gatherContent=" + gatherContent
-				+ ", gatherImg=" + gatherImg + ", guserId=" + guserId + "]";
+		return "GatheringDTO [gatherNo=" + gatherNo + ", gatherSubject=" + gatherSubject + ", gatherCategory="
+				+ gatherCategory + ", gatherWrite=" + gatherWrite + ", gatherSdate=" + gatherSdate + ", gatherEdate="
+				+ gatherEdate + ", gatherDay=" + gatherDay + ", gatherArea=" + gatherArea + ", gatherParti="
+				+ gatherParti + ", gatherContent=" + gatherContent + ", gatherImg=" + gatherImg + ", guserId=" + guserId
+				+ ", gatherState=" + gatherState + "]";
 	}
+	
+	
 
 
 }
