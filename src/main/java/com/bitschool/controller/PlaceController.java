@@ -54,14 +54,13 @@ public class PlaceController {
 				
 		// 광고주 > 세션에 저장된 정보 가져오기
 		cdto = (CompanyDTO) session.getAttribute("cdto");
-		System.out.println(cdto);
+		//System.out.println(cdto);
 		
 		// 세션에 저장된 광고주 id 장소 등록 테이블에 담기
 		pl_dto.setComId(cdto.getComId());
 		
-		//boolean flag1 = placeService.CompanyRegist(cdto);
 		boolean flag = placeService.PlaceRegist(pl_dto);
-		System.out.println(pl_dto);
+		//System.out.println(pl_dto);
 		
 		model.addAttribute("pl_dto", pl_dto);
 		

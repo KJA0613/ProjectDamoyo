@@ -217,10 +217,10 @@
 							<input type="text" name="placeCost" class="form-control" placeholder="2,500" required>
 						</div>
 						<div class="col-md-6">
-							<input type="radio" name="placeCostChoice" value="perTime" checked="checked">시간단위 &nbsp;
-							<input type="radio" name="placeCostChoice" value="perDay">일단위 &nbsp;
-							<input type="radio" name="placeCostChoice" value="perMonth">월간단위 &nbsp;
-							<input type="radio" name="placeCostChoice" value="free">무료					
+							<input type="radio" name="placeCostChoice" value="1 hour" checked="checked">시간단위 &nbsp;
+							<input type="radio" name="placeCostChoice" value="1 day">일단위 &nbsp;
+							<input type="radio" name="placeCostChoice" value="1 month">월간단위 &nbsp;
+							<input type="radio" name="placeCostChoice" value="Free">무료					
 						</div>
 						
 					</div>
