@@ -6,7 +6,7 @@
 				
 	<!-- [광고주] 모임공간 등록 -->
 	
-	<!-- 
+
 	<insert id="insertPlaceRegist" parameterType="PlaceDTO">
 		<selectKey keyProperty="placeNo" resultType="int" order="BEFORE">
 			select placeSeq.nextval from dual
@@ -16,5 +16,5 @@
 			values(#{placeNo}, #{placeImage}, #{placeType}, #{placeName}, #{placeIntro}, #{placeAddr1}, #{placeAddr2}, #{placeAddr3}, #{placeAddr4}, 
 			#{placeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeNotUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, #{comId})			
 	</insert>		
- -->
+
 </mapper>
