@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.EmailDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
@@ -63,8 +64,10 @@ public class MemberLoginController {
 	// 01. [개인회원] 로그인
 	// "쿠키"와 "세션" 설명 : http://88240.tistory.com/190 > [1차 처리] 세션 > [2차 처리 고민] 스프링 제공
 	@RequestMapping(value = "/PersonLogin", method = {RequestMethod.POST, RequestMethod.GET})
-	public String LoginCheck(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, @RequestParam("guserCode") String guserCode,HttpSession session, Model model, 
-							 HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	public String PersonLogin(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, 
+							 //@RequestParam("guserCode") String guserCode,
+							HttpSession session, Model model, 
+							HttpServletRequest request, RedirectAttributes redirectAttributes) {
 							
 		String url = null;
 
@@ -74,7 +77,7 @@ public class MemberLoginController {
 		System.out.println("[TEST-로그인(개인)/세션유지] 세션에 저장된 회원 정보 확인: " + pdto);
 
 		// 로그인 성공 (DB에 해당 데이터 있음)
-		if(pdto != null && pdto.getGuserCode().equals(guserCode)) {
+		if(pdto != null) {
 			
 			// 세션에 사용자 정보 저장
 			session.setAttribute("pdto", pdto);			
@@ -94,14 +97,19 @@ public class MemberLoginController {
 			
 			// 메인페이지 이동 (reload)
 			//url = "redirect:/member/" + loginReferer[4].toString();
-			if(pdto.getGuserCode().equals("A")) {
+			
+			/*if(pdto.getGuserCode().equals("A")) {
 				url = "redirect:/";
 			} else {
 				url = "/PartnerMain";
-			}
+			}*/
 			
+			url = "redirect:/";
+			model.addAttribute("pdto",pdto);
 		// 로그인 실패 (DB에 해당 데이터 없음)
-		} else {	
+		} 
+		
+		else {	
 			// 에러 메세지 > 로그인 폼 페이지로 전송
 			model.addAttribute("loginErrorMsg", "※ 아이디 또는 비밀번호를 잘못 입력하셨습니다. 다시 입력해주세요!");
 			
@@ -111,7 +119,63 @@ public class MemberLoginController {
 
 		return url;
 	}
+	
+	//01-1. [기업회원] 로그인
+	@RequestMapping(value = "/CompanyLogin", method = {RequestMethod.POST, RequestMethod.GET})
+	public String CompanyLogin(@RequestParam("guserId") String comId, @RequestParam("guserPw") String comPw, 
+							// @RequestParam("comCode") String guserCode,
+							 HttpSession session, Model model, 
+							 HttpServletRequest request, RedirectAttributes redirectAttributes) {
+							
+		String url = null;
 
+		// 사용자가 로그인 폼에 입력한 데이터 > DB에 있는 데이터인지 여부 확인
+		CompanyDTO cdto = memberService.CompanyLogin(comId,comPw);
+
+		System.out.println("[TEST-로그인(개인)/세션유지] 세션에 저장된 회원 정보 확인: " + cdto);
+
+		// 로그인 성공 (DB에 해당 데이터 있음)
+		if(cdto != null) {
+			
+			// 세션에 사용자 정보 저장
+			session.setAttribute("cdto", cdto);			
+			
+			/*List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
+			session.setAttribute("recommgatherList", recommgatherList);*/
+			
+			//redirectAttributes.addFlashAttribute("pdto", pdto);
+			//System.out.println("리다이렉트 값: " + pdto);
+			
+			// 이전 페이지로 복귀
+			//String referer = request.getHeader("Referer");
+			//System.out.println("페이지 경로명: " + referer);		// [출력] http://localhost:5050/member/LoginForm		
+			//String[] loginReferer = referer.split("/");
+			
+			//System.out.println("4번째: " + loginReferer[4]);
+			
+			// 메인페이지 이동 (reload)
+			//url = "redirect:/member/" + loginReferer[4].toString();
+			
+			/*if(cdto.getComCode().equals("B")) {
+				url = "redirect:/";
+			} else {
+				url = "/PartnerMain";
+			}*/
+			url = "/PartnerMain";
+			model.addAttribute("cdto",cdto);
+		// 로그인 실패 (DB에 해당 데이터 없음)
+		} 
+		
+		else {	
+			// 에러 메세지 > 로그인 폼 페이지로 전송
+			model.addAttribute("loginErrorMsg", "※ 아이디 또는 비밀번호를 잘못 입력하셨습니다. 다시 입력해주세요!");
+
+			// 로그인 폼 페이지 이동
+			url = "login/LoginForm";
+		}
+
+		return url;
+	}
 	
 	// 02. [개인&기업회원] 로그아웃 (세션 유지 해제)
 	@RequestMapping(value = "/Logout", method = RequestMethod.GET)

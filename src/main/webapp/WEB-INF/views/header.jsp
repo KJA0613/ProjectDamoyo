@@ -122,26 +122,58 @@
 				<!-- 1) [비회원] 로그인 안 된 상태 (session에 저장된 id가 없을 때) -->
 				<!-- 2) [회원 - 개인(A)/광고주(B)]로그인이 된 상태 (session에 저장된 id가 있을 때) -->
 				
-				<c:choose>
+				<%-- <c:choose>
+				
 					<c:when test = "${empty pdto.guserId}">
+						<li><a href="/member/LoginForm" class="code_view actionBtn7" id="f_color">로그인</a></li>
+						<li><a href="/join/JoinChoiceForm" class="code_view actionBtn7" id="f_color">회원가입</a></li>
+					</c:when>				
+					
+					<c:when test = "${empty cdto.comId}">
 						<li><a href="/member/LoginForm" class="code_view actionBtn7" id="f_color">로그인</a></li>
 						<li><a href="/join/JoinChoiceForm" class="code_view actionBtn7" id="f_color">회원가입</a></li>
 					</c:when>
 					
 					<c:otherwise>
 						<c:choose>
+						
 							<c:when test = "${pdto.guserCode eq 'A'}">	
 								<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
 								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
-							</c:when>					
-							<c:otherwise>
+							</c:when>	
+											
+							<c:when test = "${cdto.comCode eq 'B'}">
 								<li style="padding-right: 4px;"><a href="/place/PlaceRegistForm" class="btn_link_host" style="padding: 7px 7px 10px 7px;" id="s_color">공간 등록하기</a></li>&nbsp;
-								<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
+								<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${cdto.comId}님 마이페이지</a></li>
 								<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
-							</c:otherwise>
+							</c:when>
 						</c:choose>
-					</c:otherwise>
+					</c:otherwise>				
+					
+				</c:choose> --%>
+				
+				<c:choose>
+				
+					<c:when test = "${null ne pdto.guserId}">
+						<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
+						<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
+					</c:when>				
+					
+					<c:when test = "${null ne cdto.comId}">
+						<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${cdto.comId}님 마이페이지</a></li>
+						<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
+					</c:when>
+					
+					<c:otherwise>
+						<li><a href="/member/LoginForm" class="code_view actionBtn7" id="f_color">로그인</a></li>
+						<li><a href="/join/JoinChoiceForm" class="code_view actionBtn7" id="f_color">회원가입</a></li>
+					</c:otherwise>				
+					
 				</c:choose>
+				
+				
+					
+				
 			</ul>
 		</div>
 	</div>
