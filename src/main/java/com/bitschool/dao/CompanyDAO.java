@@ -1,5 +1,7 @@
 package com.bitschool.dao;
 
+import java.sql.SQLException;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -35,6 +37,18 @@ public class CompanyDAO implements ICompanyDAO {
 				}
 				
 				return flag;
+			}
+
+		// ----------------------------------------- [기업회원] 로그인 -----------------------------------------//	
+			
+		@Override
+			public CompanyDTO selectCompanyLogin(String comId) throws SQLException {
+			
+				CompanyDTO cdto = null;
+				
+				cdto = session.selectOne(namespace+".selectCompanyLogin", comId);
+				
+				return cdto;
 			}
 
 }
