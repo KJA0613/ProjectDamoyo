@@ -5,6 +5,8 @@
 <mapper namespace="com.bitschool.basic.PlaceMapper">
 		
 	<!-- [광고주] 모임공간 등록 -->
+	
+	<!-- 
 	<insert id="insertPlaceRegist" parameterType="PlaceDTO">
 		<selectKey keyProperty="placeNo" resultType="int" order="BEFORE">
 			select placeSeq.nextval from dual
@@ -16,5 +18,5 @@
 				   #{placeeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, 
 				   #{placeCreateDate}, #{comId})			
 	</insert>		
-
+ -->
 </mapper>

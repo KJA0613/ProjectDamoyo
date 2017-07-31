@@ -295,20 +295,6 @@ function categoryMidChange(item){
 							</div>
 						</div>
 
-						<!-- 시간 -->
-						<div class="form-group">
-							<label for="Email" class="col-sm-2 control-label">시간</label>
-							<div class="col-sm-2">
-								<input type="time" class="form-control" name="gatherStime">
-							</div>
-							<div class="col-sm-1">부터</div>
-
-							<div class="col-sm-2">
-								<input type="time" class="form-control" name="gatherEtime">
-							</div>
-							<div class="col-sm-1">까지</div>
-						</div>
-
 						<!-- 지역  -->
 						<div class="form-group">
 							<label for="Name" class="col-sm-2 control-label">지역</label>
