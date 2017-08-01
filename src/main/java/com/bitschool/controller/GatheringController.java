@@ -62,10 +62,14 @@ public class GatheringController {
 			}
 		}
 		
-		
 		if (gList != null) {
 			model.addAttribute("gath", gList);
 		}		
+		
+		/*if(!search.equals("")){
+			model.addAttribute("search",search);
+			System.out.println(search);
+		}*/
 		
 		model.addAttribute("recomm", recommList);
 		

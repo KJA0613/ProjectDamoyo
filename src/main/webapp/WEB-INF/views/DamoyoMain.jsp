@@ -190,8 +190,10 @@
 <script>
 	// 검색어 체크된 상태로 검색되게 작업하기
 	function subject(type) {
-		if(type == 'foreign') {
-			document.location.href='gather/gathering';
+
+		document.location.href="gather/gathering?type="+type;
+		/* if(type == 'foreign') {
+			document.location.href="gather/gathering?type="+type+"";
 		} else if (type == 'eng') {
 			document.location.href='gather/gathering';
 		} else if (type == 'music') {
@@ -212,13 +214,13 @@
 			document.location.href='gather/gathering';
 		} else if (type == 'etc') {
 			document.location.href='gather/gathering';
-		}
+		} */
 	}
 </script>
 
 
 <!-- 위치 선택 -->
-<script>
+<!-- <script>
 	var area0 = new Array("-선택-","");
 	var area1 = new Array("강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구");
 	var area2 = new Array("가평군","고양시덕양구","고양시일산동구","고양시일산서구","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시소사구","부천시오정구","부천시원미구","성남시분당구","성남시수정구","성남시중원구","수원시권선구","수원시영통구","수원시장안구","수원시팔달구","시흥시","안산시단원구","안산시상록구","안성시","안양시동안구","안양시만안구","양주시","양평군","여주시","연천군","오산시","용인시기흥구","용인시수지구","용인시처인구","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시");
@@ -256,7 +258,7 @@
 	    temp.options[0].selected=true;
 	    return true;
 	}
-</script>
+</script> -->
 
 
 <!-- [Header] 공통 헤더 -->
@@ -272,7 +274,7 @@
 		<!-- 01-01. 위치 검색 (위치 선택)-->
 		<div class="from-group">
 		<br><br><br><br>		
-			<div class="col-md-3 col-md-offset-2">
+			<!-- <div class="col-md-3 col-md-offset-2">
 				<form action="" method="POST" name="signform">
 					<select name="bigarea1"
 						onChange="areachange(this.options.selectedIndex)" id="choice_area1">
@@ -300,7 +302,7 @@
 						<option value=""></option>
 					</select>
 				</form>
-			</div>		
+			</div>		 -->
 		
 			<!-- 01-02. 주제어 검색 -->
 			<div class="col-md-5">
@@ -332,7 +334,7 @@
 		<br>
 				<!-- 1. 외국어 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('foreign');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox1');" style="position: absolute;">		
 						<div class="cutter foreign">
 							<div class="img"><img src="resources/image/main/english.png"></div>	<!-- #ABD8EB -->
 						</div>
@@ -341,7 +343,7 @@
 				
 				<!-- 2. 영어 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('eng');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox2');" style="position: absolute;">		
 						<div class="cutter eng">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -350,7 +352,7 @@
 				
 				<!-- 3. 음악/공연 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('music');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox3');" style="position: absolute;">		
 						<div class="cutter music">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -359,7 +361,7 @@
 				
 				<!-- 4. 라이프 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('life');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox4');" style="position: absolute;">		
 						<div class="cutter life">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -368,7 +370,7 @@
 				
 				<!-- 5. 취업 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('job');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox5');" style="position: absolute;">		
 						<div class="cutter job">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -377,7 +379,7 @@
 				
 				<!-- 6. 게임 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('game');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox6');" style="position: absolute;">		
 						<div class="cutter game">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -392,7 +394,7 @@
 		<div class="images2">
 				<!-- 7. 스포츠 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('sports');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox7');" style="position: absolute;">		
 						<div class="cutter sports">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>	<!-- #ABD8EB -->
 						</div>
@@ -401,7 +403,7 @@
 				
 				<!-- 8. 뷰티/미용 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('beauty');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox8');" style="position: absolute;">		
 						<div class="cutter beauty">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -410,7 +412,7 @@
 				
 				<!-- 9. 컴퓨터 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('computer');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox9');" style="position: absolute;">		
 						<div class="cutter computer">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -419,7 +421,7 @@
 				
 				<!-- 10. 공무원 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('life');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox10');" style="position: absolute;">		
 						<div class="cutter life">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -428,7 +430,7 @@
 				
 				<!-- 11. 디자인/미술 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('art');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox11');" style="position: absolute;">		
 						<div class="cutter art">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -437,7 +439,7 @@
 				
 				<!-- 12. 기타 -->
 				<div class="col-md-2">
-					<div class="boxm col1 masonry-brick" onclick="subject('etc');" style="position: absolute;">		
+					<div class="boxm col1 masonry-brick" onclick="subject('cbox12');" style="position: absolute;">		
 						<div class="cutter etc">
 							<div class="img"><img src="resources/image/main/heart(1).png"></div>
 						</div>
@@ -459,7 +461,7 @@
 			<ul class="properties_list">
 				<li>
 					<a href="/">
-						<img src="resources/image/main/english_space.png" alt title class="property_img">
+						<img src="resources/image/main/english_space.png" class="property_img">
 					</a>
 					<span class="price">1 hour: 2,500</span>
 					<div class="property_details">
@@ -481,7 +483,7 @@
 				
 				<li>
 					<a href="/">
-						<img src="resources/image/main/english_space.png" alt title class="property_img">
+						<img src="resources/image/main/english_space.png"class="property_img">
 					</a>
 					<span class="price">1 hour: 2,500</span>
 					<div class="property_details">
@@ -503,7 +505,7 @@
 				
 				<li>
 					<a href="/">
-						<img src="resources/image/main/english_space.png" alt title class="property_img">
+						<img src="resources/image/main/english_space.png"class="property_img">
 					</a>
 					<span class="price">1 hour: 2,500</span>
 					<div class="property_details">
@@ -529,7 +531,7 @@
 			<ul class="properties_list">
 				<li>
 					<a href="/">
-						<img src="resources/image/main/english_space.png" alt title class="property_img">
+						<img src="resources/image/main/english_space.png" class="property_img">
 					</a>
 					<span class="price">1 hour: 2,500</span>
 					<div class="property_details">
@@ -551,7 +553,7 @@
 				
 				<li>
 					<a href="/">
-						<img src="resources/image/main/english_space.png" alt title class="property_img">
+						<img src="resources/image/main/english_space.png" class="property_img">
 					</a>
 					<span class="price">1 hour: 2,500</span>
 					<div class="property_details">
@@ -573,7 +575,7 @@
 				
 				<li>
 					<a href="/">
-						<img src="resources/image/main/english_space.png" alt title class="property_img">
+						<img src="resources/image/main/english_space.png" class="property_img">
 					</a>
 					<span class="price">1 hour: 2,500</span>
 					<div class="property_details">
