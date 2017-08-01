@@ -54,7 +54,7 @@ public class PlaceController {
 	@RequestMapping(value = "/PlaceRegist",  method = { RequestMethod.POST, RequestMethod.GET })
 	public String PlaceRegist(PlaceDTO pl_dto, CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;		
-				
+
 		// 광고주 > 세션에 저장된 정보 가져오기
 		cdto = (CompanyDTO) session.getAttribute("cdto");
 		//System.out.println(cdto);
@@ -63,7 +63,7 @@ public class PlaceController {
 		pl_dto.setComId(cdto.getComId());
 		
 		boolean flag = placeService.PlaceRegist(pl_dto);
-		//System.out.println(pl_dto);
+		System.out.println("[TEST] pl_dto : " + pl_dto);
 		
 		model.addAttribute("pl_dto", pl_dto);
 		
@@ -72,7 +72,7 @@ public class PlaceController {
 		} else {
 			url = "default";
 		}
-		
+
 		return url;
 	}
 	

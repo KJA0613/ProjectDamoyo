@@ -140,7 +140,7 @@
 				<br><br>
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceRegist" method="POST" class="form-horizontal" enctype="multipart/form-data">					
+				<form action="/place/PlaceRegist" method="POST" class="form-horizontal">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
