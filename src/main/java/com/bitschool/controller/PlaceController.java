@@ -74,7 +74,9 @@ public class PlaceController {
 	}
 	
 	
+	// 02. 모임 전체 조회
 	
+
 	
 	
 }
