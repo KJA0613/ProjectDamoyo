@@ -40,9 +40,10 @@
 		<%@ include file="../includeSub.jspf" %>
 
 		<!-- Page Content -->
-		<div class="container" style="margin-left: 20px;">
-			<form action="/blog/file/fileRegist" method="POST" style="width:600px; margin-top: 70px">
-				<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc; padding-top: 100px">
+		<div class="container" style="margin-left: 20px; background-color: #f1f1f1; height: 1000px; width: 2000px;">
+			<h4 style="margin-top: 50px; margin-left: 50px;">자료실 글쓰기</h4>
+			<form action="/blog/file/fileRegist" method="POST" style="width:600px; margin-top: 20px;">
+				<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; padding-top: 100px">
 						<tr>
 							<td height="80px;" style="border: solid 1px #ccc; border-right-style: none;">
 									<input type="text" class="form-control" placeholder="writer" name="userId" style="height: 70px">
@@ -61,7 +62,7 @@
 							</td>
 						</tr>
 				</table>
-				<div style="margin-left: 20px; width: 700px;">
+				<div style="margin-left: 50px; width: 700px;">
 					<button type="button" class="btn btn-default" onclick="location.href='/blog/file/listAll'">취소</button>
 					<button type="submit" class="btn btn-primary" style="float: right;">작성</button>
 				</div>

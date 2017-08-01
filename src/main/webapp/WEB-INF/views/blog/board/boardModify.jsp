@@ -40,9 +40,10 @@
 		<%@ include file="../includeSub.jspf" %>
 
 		<!-- Page Content -->
-		<div class="container" style="margin-left: 20px;">
-			<form action="/blog/board/modify" method="POST" style="width:600px; margin-top: 70px">
-				<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc; padding-top: 100px">
+		<div class="container" style="margin-left: 20px; background-color: #f1f1f1; height: 1000px; width: 2000px;">
+			<h4 style="margin-top: 50px; margin-left: 50px;">자유게시판 글수정</h4>
+			<form action="/blog/board/modify" method="POST" style="width:600px; margin-top: 20px">
+				<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; padding-top: 100px">
 						<tr>
 							<td height="60px;" style="border: solid 1px #ccc; border-right-style: none; padding-left: 15px;">
 								<div>#${post.postNo}</div>
