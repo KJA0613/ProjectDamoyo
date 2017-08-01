@@ -306,14 +306,16 @@
 		
 			<!-- 01-02. 주제어 검색 -->
 			<div class="col-md-5">
+				<form action="/gather/damoyoSearch" method="get" >
 					<span class="blue_search">
-						<input type="text" title="검색어 입력" class="input_text" placeholder="주제어를 검색해주세요.">
+						<input type="text" name="sSTR" class="input_text" placeholder="주제어를 검색해주세요.">
 					</span>
-					<button type="button" class="btn_search" onclick="">
+					<button type="submit" class="btn_search">
 						<span class="img_srh">
 							<img src="resources/image/main/btn_srh.png">		 
 						</span>
 					</button>
+				</form>
 			</div>		
 		
 			<!-- 01-03. 인기 검색 -->

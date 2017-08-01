@@ -29,6 +29,23 @@ public class GatheringDAO implements IGatheringDAO {
 	}
 
 	@Override
+	public List<GatheringDTO> getGatheringAll(String sSTR) {
+		List<GatheringDTO> gList = null;
+		
+		System.out.println("dao 까지 잘 들옴 : "+sSTR);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("sSTR", sSTR);
+		
+		gList = session.selectList(namespace+".damoyoAll", map);
+		
+		System.out.println(gList.size());
+		
+		return gList;
+	}
+	
+
+	@Override
 	public GatheringDTO getGathering(int gatherNo) {
 		
 		GatheringDTO gdto = null;
@@ -183,5 +200,4 @@ public class GatheringDAO implements IGatheringDAO {
 		
 		return attendList;
 	}
-	
 }

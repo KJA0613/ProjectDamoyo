@@ -140,7 +140,7 @@ a:visited {
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 
-<!-- 쿼리스트링 분리하여 인덱스에 적용시키기, 갓 triger가 날 살렸다!!!! -->
+<!-- 쿼리스트링 분리하여 원하는값 체크하기, 갓 triger가 날 살렸다!!!! -->
 <script type="text/javascript">
 $(window).load(function(){
 	
@@ -169,7 +169,6 @@ $(window).load(function(){
 	}
 });
 </script>
-
 
 <!-- 체크박스 전체체크-락, 체크해제-언락 -->
 <script type="text/javascript">
@@ -1096,11 +1095,9 @@ $(function() {
 </script>
 
 
-
-
 <!-- 마우스 올렸을때 신청하기로 바꾸기-->
 <script type="text/javascript">
-/* $(function() {
+ $(function() {
 	
 	var src;
 		
@@ -1112,7 +1109,7 @@ $(function() {
     	$(this).attr( 'src', src );
     }); 
 	
-}); */
+});
 </script>
 
  
@@ -2191,7 +2188,7 @@ $(function() {
 			<!--/.col-xs-12.col-sm-9-->
 		</div>
 		<!--/row-->
-
+		<br><br><br>
 		<hr>
 
 <!-- ************************************** 모달  -->
