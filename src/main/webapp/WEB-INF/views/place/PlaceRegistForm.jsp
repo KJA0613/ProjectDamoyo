@@ -69,13 +69,13 @@
 </script>
 
 
-<!-- 이미지 업로드 -->
+<!-- 이미지 업로드 유효성 검사 -->
 <script>
 	function img_upload(obj) {
 		var pathPoint = obj.value.lastIndexOf('.');		
 		filePoint = obj.value.substring(pathPoint + 1, obj.length);
-		fileType = filePoint.toLowerCase();
-
+		fileType = filePoint.toLowerCase();		// 소문자로 변경
+		
 		if(fileType == 'jpg' || fileType == 'gif' || fileType == 'png' || fileType == 'jpeg' || fileType == 'bmp') {
 			
 		} else {
@@ -120,6 +120,24 @@
 				var dayList = $(this).val();
 			});
 	        
+	        
+	        // 파일 업로드만 처리 > 비동기식으로 진행 
+			var form = new FormData(document.getElementById('placeImage')); 
+			$.ajax({
+				url: "/", 
+				data: form, 
+				dataType: 'text', 
+				processData: false, 
+				contentType: false, 
+				type: 'POST', 
+				success: function (response) { 
+					console.log('success'); console.log(response); 
+				}, error: function (jqXHR) { 
+					console.log('error'); 
+				}
+			}
+
+			
 	    });
 	}); 
 </script>
@@ -145,7 +163,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-8">
-							<input type="file" name="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">						
+							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">						
 						</div>
 						<!-- <div class="col-md-2">
 							<button type="button" class="btn btn-grey">사진등록</button>

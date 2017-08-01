@@ -15,6 +15,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <title>광고주 메인페이지</title>
 
 <!-- 소개글 CSS -->
@@ -405,7 +408,7 @@
 	<!-- 모임공간 광고  -->
     <div class="wrapper">
   	   <h1>모임 공간</h1>
-   	   <hr>
+   	   <hr style="border: solid 1px #b3b3b3;">
        <br>
    	   <c:forEach var="plist" items="${placeList}">	
 			<ul class="properties_list">		
@@ -440,6 +443,6 @@
    <%-- <hr>
    <%@include file = "footer.jsp"%> --%>
 
-   <br><br>
+   <br><br><br><br>
 </body>
 </html>
