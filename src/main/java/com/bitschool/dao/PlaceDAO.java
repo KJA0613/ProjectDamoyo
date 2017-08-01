@@ -20,13 +20,13 @@ public class PlaceDAO implements IPlaceDAO {
 	private SqlSession session;
 	
 	
-	//----------------------------------------------- 모임공간 -----------------------------------------------//
+	//----------------------------------------------- 모임공간 -----------------------------------------------//	
 	
 	// [광고주 회원] 모임공간 등록
 	@Override
 	public boolean insertPlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
-		
+
 		int aCnt = session.insert(namespace+".insertPlaceRegist", pl_dto);
 		
 		if(aCnt > 0) {
@@ -34,6 +34,7 @@ public class PlaceDAO implements IPlaceDAO {
 		}
 		
 		return flag;
-	}	
+	}
+
 	
 }

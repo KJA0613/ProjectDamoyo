@@ -246,14 +246,7 @@ public class GatheringController {
 					} else if(item.getFieldName().equals("gatherEdate")){
 						gath.setGatherEdate(item.getString("UTF-8"));
 					} 
-					
-					else if(item.getFieldName().equals("gatherStime")){
-						gath.setGatherStime("2017-12-31 "+item.getString("UTF-8"));
-					} 
-					else if(item.getFieldName().equals("gatherEtime")){
-						gath.setGatherEtime("2017-12-31 "+item.getString("UTF-8"));
-					} 
-					
+										
 					else if(item.getFieldName().equals("gatherDay")){
 						
 						if(cnt==0){
@@ -266,6 +259,10 @@ public class GatheringController {
 
 					}
 					
+					else if(item.getFieldName().equals("gatherState")){
+						gath.setGatherState(item.getString("UTF-8"));
+					}
+					
 					
 					else if(item.getFieldName().equals("areaMid")){
 						gath.setGatherArea(item.getString("UTF-8"));
@@ -276,8 +273,6 @@ public class GatheringController {
 					} else if(item.getFieldName().equals("guserId")){
 						gath.setGuserId(item.getString("UTF-8"));
 					}
-					
-					
 				}
 			} // 파일 뽑아내는 while문 쓰기
 			

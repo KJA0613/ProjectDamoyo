@@ -14,5 +14,11 @@ public interface ICompanyDAO {
 	
 	//[기업회원]로그인
 	public CompanyDTO selectCompanyLogin(String comId) throws SQLException;
+	
+	//[기업회원]아이디찾기	
+	public CompanyDTO findComId(String comEmail) throws SQLException;
+
+	//[기업회원]비번찾기
+	public CompanyDTO comfindPW(String comId);
 
 }

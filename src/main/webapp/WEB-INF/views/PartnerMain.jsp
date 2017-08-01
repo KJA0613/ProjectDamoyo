@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- JSTL -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,14 +64,14 @@
 	}
 	
 	.btn_wrap a{
-		font-size: 22px;
+		font-size: 26px;
 		font-weight: bold;
 	}
 	
 	.btn {
 	    width: 270px;
 	    height: 50px;
-    	padding: 30px 7px 10px 24px;
+    	padding: 35px 7px 7px 24px;
 		text-align: center;
 		border-radius: 0;
 	}
@@ -98,7 +101,7 @@
 	    background: #fff;
 	    padding: 147px 50px 80px;
 	    width: 1150px;
-	    height: 500;
+	    height: 200;
 	    margin: 0 auto;
 	    vertical-align: middle;
 	}
@@ -157,6 +160,92 @@
 	}
 </style>
 
+<!-- 장소 광고 CSS -->
+<style>
+	.wrapper {
+	    max-width: 1100px;
+	    margin: 0 auto;
+	    position: relative;
+	}
+	
+	.wrapper ul.properties_list li {
+	    display: block;
+	    width: 30%;
+	    height: auto;
+	    position: relative;
+	    float: left;	    
+	    margin: 0 3% 3% 0;
+	}
+	
+	.wrapper ul.properties_list li img.property_img {
+	    width: 100%;
+	    height: auto!important;
+	    vertical-align: top;
+	}
+	
+	.wrapper ul.properties_list li .price {
+	    position: absolute;
+	    top: 10px;
+	    left: 10px;
+	    padding: 15px 20px;
+	    background: #ffffff;
+	    color: #514d4d;
+	    font-size: 16px;
+	    font-weight: bold;
+	    letter-spacing: 1px;
+    }
+    
+    .wrapper ul li .property_details {
+	    width: 100%;
+	    padding: 2.9% 5.8% 4.1% 5.8%;
+	    border-bottom: 1px solid #f2f1f1;
+	    border-left: 1px solid #f2f1f1;
+	    border-right: 1px solid #f2f1f1;
+    }
+    
+    .wrapper ul li .property_details h1 a {
+	    text-decoration: none;
+	    color: #666464;
+	}
+	 
+	.wrapper ul li .property_details.title a{
+	    color: #666464;
+	    font-size: 28%;
+	    font-weight: bold;
+	    margin-left: 0px;
+	    margin-bottom: 5px;
+	    line-height: 28px;
+	    vertical-align: baseline;
+	    background: transparent;
+	}
+	
+	.property_details h3 {
+		color: #40b4e5;
+		margin-left: 0px;
+	    margin-bottom: 5px;
+	    line-height: 25px;
+	}
+	
+	.details {
+		margin-left: 0;
+	}
+	
+	#s1 {
+	margin-left: 0px;
+		color: #777;
+		font-weight: bold;
+		font-size: 16px;
+		    /* display: inline-block; */
+    	/* padding: 0px 5px 0; */
+	}
+	#s2 {
+	margin-left: 0px;
+		color: #777;
+		font-size: 16px;
+		font-weight: normal;
+	}	
+
+</style>
 
 <!-- 모임공간 검색창1 CSS -->
 <style type="text/css">
@@ -227,7 +316,7 @@
 				<a href="#" class="btn space_total">전체 공간보기</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="#" class="btn space_regist">공간 등록하기</a>
+				<a href="/place/PlaceRegistForm" onclick="" class="btn space_regist">공간 등록하기</a>
 			</div>
 			<div class="btn_wrap">
 				<a href="#" class="btn my_space">나의 공간 관리</a>
@@ -310,12 +399,158 @@
 				</div>
 			</div>
 		</div>
-		
-	</div>
 
 
 	<div>
-		
+	
+	<!-- 03. 광고  -->
+	   <h1>모임 공간</h1>
+	   <hr>
+	   <br>
+   
+   	   <div class="wrapper">
+   	   <c:forEach var="plist" items="${pl_dto}">	
+			<ul class="properties_list">		
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">${plist.placeCostChoice} : ${plist.placeCost}</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">${plist.placeName}</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">${plist.placeAddr2}</span>
+							<br>
+							<span id="s1">유형</span>&nbsp;&nbsp;
+							<span id="s2">${plist.placeType}</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">${plist.placeUseTime}</span>
+						</div>
+					</div>
+				</li>	
+				
+				<!-- <li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	 -->
+			</ul>
+			</c:forEach>
+			
+			<br>
+			
+			<!-- <ul class="properties_list">
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+			</ul> -->
+   	   </div>	
+	
+				
 	</div>
 </body>
 </html>
