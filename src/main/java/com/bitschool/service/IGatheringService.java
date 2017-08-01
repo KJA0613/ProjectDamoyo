@@ -34,5 +34,7 @@ public interface IGatheringService {
 
 	public List<GatheringDTO> getAttendList(String guserId);
 
+	public List<GatheringDTO> getGatheringAll(String sSTR);
+
 
 }

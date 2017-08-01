@@ -7,8 +7,20 @@
 	<select id="getherAll" resultType="com.bitschool.dto.GatheringDTO">
 		select * 
 		from gather 
-		order by gatherwrite desc
+		order by gatherWrite desc
 	</select>
+	
+	<select id="damoyoAll" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
+		select * 
+		from gather 
+		
+		<if test="sSTR != ''">
+			where gatherSubject like '%'||#{sSTR}||'%' or gatherContent like '%'||#{sSTR}||'%'
+		</if>
+		
+		order by gatherWrite desc
+	</select>
+	
 	
 	<select id="recommAll" parameterType="String" resultType="com.bitschool.dto.GatheringDTO">
 		select b.* 
