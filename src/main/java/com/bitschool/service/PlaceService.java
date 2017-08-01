@@ -26,7 +26,7 @@ public class PlaceService implements IPlaceService {
 	@Override
 	public boolean PlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
-		System.out.println("서비스");
+
 		try {
 			flag = PlaceDAO.insertPlaceRegist(pl_dto);
 		} catch (SQLException e) {
