@@ -135,26 +135,59 @@ a:visited {
 </style>
 
 <!-- jquery를 이용하여 뿌리기 -->
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-3.2.0.min.js"></script>
-<script
-	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+
+<!-- 쿼리스트링 분리하여 인덱스에 적용시키기, 갓 triger가 날 살렸다!!!! -->
+<script type="text/javascript">
+$(window).load(function(){
+	
+	var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
+	
+	if(_tempUrl.indexOf('=')>0){
+		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
+		
+				for(var i = 0; _tempArray.length; i++) { 
+			var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+			
+			if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
+				 // _keyValuePair[1] : 파라미터 값 
+				
+				var box = _keyValuePair[1]; // 쿼리스트링으로 type에 값을 저장해 보내서 box 에 담고
+				var boxNum = box.substring(4); // 숫자만 짤라서 필요한 것을 받음
+				
+				var boxAll  = '.cAll' +boxNum;
+				var boxTag = '.cateChk' +boxNum
+				
+				$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
+				$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
+				
+			} 
+		}
+	}
+});
+</script>
 
 
 <!-- 체크박스 전체체크-락, 체크해제-언락 -->
 <script type="text/javascript">
+
 	function checkAllFunc(obj, box) {
+		
 		$("[name=" + box + "]").each(function() {
 			if (obj.checked == true) {
 				$("[name=" + box + "]").attr("disabled", true)//는 input 요소 설정 을 disabled
 			} else {
 				$("[name=" + box + "]").attr("disabled", false)//제거 input 요소를 disabled 속성
-
 			}
+
 			this.checked = obj.checked;
 		})
 	};
+	
+	
 </script>
 
 <!-- 검색 버튼 눌렀을때 체크박스 값들 and 조건하고 검색하여 db에서 체크된조건의 모집글 가져오기 -->
@@ -284,6 +317,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk2').click(function() {
@@ -298,6 +332,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk3').click(function() {
@@ -312,6 +347,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk4').click(function() {
@@ -326,6 +362,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk5').click(function() {
@@ -340,6 +377,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk6').click(function() {
@@ -354,6 +392,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk7').click(function() {
@@ -368,6 +407,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk8').click(function() {
@@ -382,6 +422,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk9').click(function() {
@@ -396,6 +437,7 @@ a:visited {
 			$('#cateChk1').hide();
 			$('#cateChk10').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk10').click(function() {
@@ -410,6 +452,7 @@ a:visited {
 			$('#cateChk9').hide();
 			$('#cateChk1').hide();
 			$('#cateChk11').hide();
+			$('#cateChk12').hide();
 		});
 
 		$('.cateChk11').click(function() {
@@ -423,6 +466,22 @@ a:visited {
 			$('#cateChk8').hide();
 			$('#cateChk9').hide();
 			$('#cateChk10').hide();
+			$('#cateChk1').hide();
+			$('#cateChk12').hide();
+		});
+
+		$('.cateChk12').click(function() {
+			$('#cateChk12').show();
+			$('#cateChk2').hide();
+			$('#cateChk3').hide();
+			$('#cateChk4').hide();
+			$('#cateChk5').hide();
+			$('#cateChk6').hide();
+			$('#cateChk7').hide();
+			$('#cateChk8').hide();
+			$('#cateChk9').hide();
+			$('#cateChk10').hide();
+			$('#cateChk11').hide();
 			$('#cateChk1').hide();
 		});
 
@@ -877,19 +936,7 @@ $(function() {
 						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					}
 			});
-			
-			
 		});
-	
-		/* var src;
-		
-		$('.gatherimg').mouseover( function() { 
-			src = $(this).attr('src');
-			$(this).attr( 'src', "/resources/image/icon/Apply.jpg" );
-		} )
-	    .mouseout( function() {
-	    	$(this).attr( 'src', src );
-	    });  */
 });
 </script>
 
@@ -1048,10 +1095,12 @@ $(function() {
 
 </script>
 
-<!-- 마우스 올렸을때 신청하기로 바꾸기 -->
 
+
+
+<!-- 마우스 올렸을때 신청하기로 바꾸기-->
 <script type="text/javascript">
-$(function() {
+/* $(function() {
 	
 	var src;
 		
@@ -1063,12 +1112,12 @@ $(function() {
     	$(this).attr( 'src', src );
     }); 
 	
-});
+}); */
 </script>
 
  
 <%@include file="../header.jsp"%>
-
+ 
 </head>
 
 <body>
@@ -1101,15 +1150,14 @@ $(function() {
 						<li class="cateChk9" id="9" style="width: 100px"><a href="#">컴퓨터</a></li>
 						<li class="cateChk10" id="10" style="width: 100px"><a href="#">국가고시/공무원</a></li>
 						<li class="cateChk11" id="11" style="width: 100px"><a href="#">디자인/미술</a></li>
-						<li class="cateChk12" id="12" style="width: 100px"><a href="#"></a></li>
+						<li class="cateChk12" id="12" style="width: 100px"><a href="#">기타</a></li>
 					</ul>
 
 					<ul class="checkbox-style" id="cateChk1">
-						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" name="cbox" class="all"
-									onclick="checkAllFunc(this, 'cbox1')">전체</label></span></li>
-						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" value="중국어" name="cbox1">중국어</label></span></li>
+						<li><span class="chkbox"><label class="chkbox-btn">
+							<input type="checkbox" name="cbox" class="cAll1" onclick="checkAllFunc(this, 'cbox1')">전체</label></span></li>
+						<li><span class="chkbox"><label class="chkbox-btn">
+							<input type="checkbox" value="중국어" name="cbox1">중국어</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="일본어" name="cbox1">일본어</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
@@ -1132,7 +1180,7 @@ $(function() {
 
 					<ul class="checkbox-style" id="cateChk2" style="display: none;">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll2" name="cbox"
 									onclick="checkAllFunc(this, 'cbox2')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="토익" name="cbox2">토익</label></span></li>
@@ -1156,7 +1204,7 @@ $(function() {
 
 					<ul class="checkbox-style" style="display: none;" id="cateChk3">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll3" name="cbox"
 									onclick="checkAllFunc(this, 'cbox3')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="기타/우크렐라" name="cbox3">기타/우크렐라</label></span></li>
@@ -1181,7 +1229,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk4">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll4" name="cbox"
 									onclick="checkAllFunc(this, 'cbox4')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="육아" name="cbox4">육아</label></span></li>
@@ -1210,7 +1258,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk5">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll5" name="cbox"
 									onclick="checkAllFunc(this, 'cbox5')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="자소서/면접" name="cbox5">자소서/면접</label></span></li>
@@ -1231,7 +1279,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk6">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll6" name="cbox"
 									onclick="checkAllFunc(this, 'cbox6')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="리그오브레전드" name="cbox6">리그오브레전드</label></span></li>
@@ -1256,7 +1304,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk7">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll7" name="cbox"
 									onclick="checkAllFunc(this, 'cbox7')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="축구" name="cbox7">축구</label></span></li>
@@ -1291,7 +1339,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk8">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll8" name="cbox"
 									onclick="checkAllFunc(this, 'cbox8')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="헤어" name="cbox8">헤어</label></span></li>
@@ -1310,7 +1358,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk9">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll9" name="cbox"
 									onclick="checkAllFunc(this, 'cbox9')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="알고리즘" name="cbox9">알고리즘</label></span></li>
@@ -1337,7 +1385,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk10">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll10" name="cbox"
 									onclick="checkAllFunc(this, 'cbox10')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="행정" name="cbox10">행정</label></span></li>
@@ -1362,7 +1410,7 @@ $(function() {
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk11">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" class="all" name="cbox"
+									type="checkbox" class="cAll11" name="cbox"
 									onclick="checkAllFunc(this, 'cbox11')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="웹/모바일 디자인" name="cbox11">웹/모바일 디자인</label></span></li>
@@ -1386,6 +1434,12 @@ $(function() {
 									type="checkbox" value="회화" name="cbox11">회화</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="디자인/미술 기타" name="cbox11">디자인/미술 기타</label></span></li>
+					</ul>
+					<ul class="checkbox-style" id="cateChk12" style="display: none;">
+						<li><span class="chkbox"><label class="chkbox-btn">
+								<input type="checkbox" class="cAll12" name="cbox" onclick="checkAllFunc(this, 'cbox12')">전체</label>
+							</span>
+						</li>
 					</ul>
 					<br>
 				</div>
