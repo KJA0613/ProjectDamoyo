@@ -15,9 +15,20 @@
 	</select>
 
 	<insert id="insert" parameterType="BPostDTO">
-		<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
-			select postNo.nextval from dual
-		</selectKey>
+			<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+				<if test="boardName == 'free'">
+					select postNo.nextval from dual
+				</if>
+				<if test="boardName == 'notice'">
+					select noticeNo.nextval from dual
+				</if>
+				<if test="boardName == 'file'">
+					select fileNo.nextval from dual
+				</if>
+				<if test="boardName == 'comments'">
+					select commentsNo.nextval from dual
+				</if>
+			</selectKey>
 		insert into post(postNo,postTitle,postContents,userId,boardName) values
 		(#{postNo},#{postTitle},#{postContents},#{userId},#{boardName})
 	</insert>
