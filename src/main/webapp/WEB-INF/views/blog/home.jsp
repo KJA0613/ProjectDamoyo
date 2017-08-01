@@ -27,7 +27,7 @@
 		<%@ include file="./includeSub.jspf" %>
 
 		<!-- Page Content -->
-		<div id="page-content-wrapper">
+		<div id="page-content-wrapper" style="background: #f1f1f1; padding-left: 100px; height: 1040px;">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">

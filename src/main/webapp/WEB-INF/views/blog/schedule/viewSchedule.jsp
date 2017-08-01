@@ -14,7 +14,7 @@ body {
 
 #calendar {
 	max-width: 900px;
-	margin: 0px 280px;
+	margin: 0px 330px;
 	overflow: hidden;
 	height: auto;
 }
@@ -53,11 +53,11 @@ body {
 			dayClick : function(date) {
 				var openWin;
 				var fDate = date.format();
-			    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1230, top=130, width=440, height=600';
+			    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1300, top=130, width=440, height=600';
 			    window.open("viewRegistSchedule?fDate="+fDate, "childForm", popupOption);
 			},
 			eventClick: function(event) { 
-			    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1230, top=130, width=440, height=600';
+			    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1300, top=130, width=440, height=600';
 			    window.open("viewDetailSchedule?sid="+event.id, "childForm", popupOption);
 				//event.backgroundColor = 'yellow';
 				//$('#mycalendar').fullCalendar('rerenderEvents');

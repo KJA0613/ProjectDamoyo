@@ -29,12 +29,12 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 	
-	<div id=table_section style="margin-left: 270px; padding-top: 30px">
+	<div id=table_section style="margin-left: 280px; padding-top: 30px; background-color: #f1f1f1; height: 1000px" >
 		<!-- Page Content -->
 
-		<table class="table" style="width: 800px; border-top: 1px solid #383838;">
+		<table class="table" style="width: 900px; border-top: 1px solid #383838; margin-left: 25px; background-color: #ffffff;">
 			<tr>
-				<td colspan="2" style="border-style: hidden;"><h4>자유게시판</h4></td>
+				<td colspan="2" style="border-style: hidden;"><h4>자료실</h4></td>
 				<td colspan="3" style="border-style: hidden;">
 					<button class="btn btn-primary" onclick="location.href='/blog/file/viewRegist'" style="float: right;">새 글 쓰기</button>
 				</td>
