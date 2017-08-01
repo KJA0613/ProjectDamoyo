@@ -1,5 +1,7 @@
 package com.bitschool.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -47,11 +49,12 @@ public class PlaceController {
 	}
 	
 	
-	// 01. 모임공간 등록 
+	
+	// 01. 모임 공간 등록 
 	@RequestMapping(value = "/PlaceRegist",  method = { RequestMethod.POST, RequestMethod.GET })
 	public String PlaceRegist(PlaceDTO pl_dto, CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;		
-				
+
 		// 광고주 > 세션에 저장된 정보 가져오기
 		cdto = (CompanyDTO) session.getAttribute("cdto");
 		//System.out.println(cdto);
@@ -60,21 +63,35 @@ public class PlaceController {
 		pl_dto.setComId(cdto.getComId());
 		
 		boolean flag = placeService.PlaceRegist(pl_dto);
-		//System.out.println(pl_dto);
+		System.out.println("[TEST] pl_dto : " + pl_dto);
 		
 		model.addAttribute("pl_dto", pl_dto);
 		
 		if(flag) {
-			url = "PartnerMain";			
+			url = "redirect:/place/PlaceListAll";			// 전체 조회 (Reload) : Insert 후, 최신 정보로 업뎃		
 		} else {
 			url = "default";
 		}
-		
+
 		return url;
 	}
 	
 	
 	
+	// 02. 모임 전체 조회
+	@RequestMapping(value = "/PlaceListAll",  method = { RequestMethod.POST, RequestMethod.GET })
+	public String PlaceListAll(Model model) {
+		String url = null;
+		
+		List<PlaceDTO> placeList = placeService.getPlaceListAll();		
+		System.out.println("[TEST] 전체조회: " + placeList);
+		
+		model.addAttribute("placeList", placeList);
+		
+		url = "PartnerMain";
+		
+		return url;
+	}
 	
 	
 }
