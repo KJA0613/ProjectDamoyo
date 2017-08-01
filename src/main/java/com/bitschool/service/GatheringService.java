@@ -32,6 +32,16 @@ public class GatheringService implements IGatheringService {
 	}
 
 	@Override
+	public List<GatheringDTO> getGatheringAll(String sSTR) {
+		
+		List<GatheringDTO> gList = gDao.getGatheringAll(sSTR);
+		fData = new FormatData();
+		gList = fData.formatData(gList);
+
+		return gList;
+	}
+
+	@Override
 	public GatheringDTO getGathering(int gatherNo) {
 		
 		GatheringDTO gdto = gDao.getGathering(gatherNo);

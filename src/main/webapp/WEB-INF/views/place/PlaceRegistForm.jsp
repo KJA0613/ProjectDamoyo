@@ -14,7 +14,7 @@
 </style>
 
 
-<!-- 주소 > 다음 API (여진짱!!!) -->
+<!-- [여진양 짱!!!!!!] 주소 > 다음 API-->
 <!-- [참고 사이트] http://postcode.map.daum.net/guide-->
 <script>
     function search_corpAddr() {
@@ -140,7 +140,7 @@
 				<br><br>
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceRegist" method="POST" class="form-horizontal">					
+				<form action="/place/PlaceRegist" method="POST" class="form-horizontal" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>

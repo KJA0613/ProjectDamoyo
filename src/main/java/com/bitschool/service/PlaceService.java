@@ -1,6 +1,7 @@
 package com.bitschool.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -21,11 +22,11 @@ public class PlaceService implements IPlaceService {
 	
 	//----------------------------------------------- 모임공간 -----------------------------------------------//
 		
-	// 모임공간 등록
+	// 모임 공간 등록
 	@Override
 	public boolean PlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
-		
+
 		try {
 			flag = PlaceDAO.insertPlaceRegist(pl_dto);
 		} catch (SQLException e) {
@@ -34,6 +35,21 @@ public class PlaceService implements IPlaceService {
 		
 		
 		return flag;
+	}
+
+	
+	// 모임 전체 조회
+	@Override
+	public List<PlaceDTO> getPlaceListAll() {
+		List<PlaceDTO> placeList = null;
+		
+		try {
+			placeList = PlaceDAO.selectPlaceListAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return placeList;
 	}
 	
 }

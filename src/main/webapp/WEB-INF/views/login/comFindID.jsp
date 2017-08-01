@@ -126,13 +126,13 @@
 							</c:when>
 							 <c:otherwise>
 								<font size="4" color="#5D5D5D">회원님의 아이디는
-									"${pdto.guserId}or${cdto.comId}"입니다.</font>
-								<br>
+									${pdto.guserId} ${cdto.comId}입니다.</font>
+								
 							</c:otherwise>
 							
 						</c:choose>
 						
-					</div> 
+					</div> <br>
 	
 
 					<!-- 회원가입 선택 페이지로 이동 -->

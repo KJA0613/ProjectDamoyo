@@ -62,10 +62,14 @@ public class GatheringController {
 			}
 		}
 		
-		
 		if (gList != null) {
 			model.addAttribute("gath", gList);
 		}		
+		
+		/*if(!search.equals("")){
+			model.addAttribute("search",search);
+			System.out.println(search);
+		}*/
 		
 		model.addAttribute("recomm", recommList);
 		
@@ -164,7 +168,6 @@ public class GatheringController {
 		
 		return map;
 	}
-
 	
 	// 모집글 쓰는 페이지로 이동하는 메서드
 	@RequestMapping(value = "/gatheringMake", method = { RequestMethod.GET, RequestMethod.POST })
@@ -177,7 +180,6 @@ public class GatheringController {
 		
 		return url;
 	}
-	
 	
 	// 모집글 디비에 삽입하는 메서드
 	@RequestMapping(value="/gatheringInsert",method={RequestMethod.GET, RequestMethod.POST})
@@ -355,7 +357,7 @@ public class GatheringController {
 	// 게시글 클릭했을때 사용자 클릭한 게시글의 카테고리와 지역을 db 추천테이블에 넣는것
 	// + 추가로 여기다 게시글 클릭했을때 모달로 띄우기전, 관심글 체크 유무 여부를 불러와서 리턴해야함
 	@RequestMapping(value = "/gatheringRecomm", method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody  HashMap<String, String>  gatheringRecomm(
+	public @ResponseBody HashMap<String, String>  gatheringRecomm(
 			@RequestParam(value = "category", defaultValue="") String category,
 			@RequestParam(value = "area", defaultValue="") String area,
 			@RequestParam(value = "no") int gatherNo,
@@ -466,6 +468,48 @@ public class GatheringController {
 		return map;
 	}
 	
+	
+	
+	@RequestMapping(value = "/damoyoSearch", method = { RequestMethod.GET, RequestMethod.POST })
+	public String damoyoSearch(
+			@RequestParam(value = "sSTR", defaultValue="") String sSTR,
+			Model model,
+			HttpSession session
+			) {
+			
+		String url = "gather/gathering";
+		
+		// 현재 세션에 저장된 정보 > pdto에 저장 
+		// 즉, 로그인된 사용자의 정보를 나타냄
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		List<GatheringDTO> gList = gService.getGatheringAll(sSTR); // 전체게시글 가져옴
+		
+		List<GatheringDTO> recommList = gService.getRecommDefault();
+		
+		
+		if(pdto!=null){ // 로그인 중이면
+			model.addAttribute("pdto", pdto);
+			
+			List<GatheringDTO> recommListCopy = recommList;
+			
+			recommList = gService.getRecommendUser(pdto.getGuserId()); //사용자 추천 리스트
+			// 사용자 정보에 따른 추천글 가져옴
+			// 그리고 jsp로 모델을 보냄
+			
+			if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
+				recommList = recommListCopy;// 디폴트 추천검색
+			}
+		}
+		
+		if (gList != null) {
+			model.addAttribute("gath", gList);
+		}
+		
+		model.addAttribute("recomm", recommList);
+		
+		return url;
+		
+	}
 	
 
 }

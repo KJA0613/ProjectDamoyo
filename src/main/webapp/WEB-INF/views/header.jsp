@@ -109,7 +109,6 @@
 	<!-- 01.[Header] Navigation Bar로 구현 -->
 	<nav class="navbar navbar-inverse navbar-static-top">
 	<div class="container">
-		<!-- clearfix: 어긋난 칼럼들 보정 -->
 		<div class="clearfix">		
 			<!-- 01-01. 로고 -->
 			<div class="navbar-header">
