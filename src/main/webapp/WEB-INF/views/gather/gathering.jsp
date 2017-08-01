@@ -1094,10 +1094,9 @@ $(function() {
 
 </script>
 
-
 <!-- 마우스 올렸을때 신청하기로 바꾸기-->
 <script type="text/javascript">
- $(function() {
+/*  $(function() {
 	
 	var src;
 		
@@ -1109,7 +1108,7 @@ $(function() {
     	$(this).attr( 'src', src );
     }); 
 	
-});
+}); */
 </script>
 
  
@@ -2076,11 +2075,11 @@ $(function() {
 						<label>상세검색&nbsp;&nbsp;</label>
 						<div class="form-group">
 							<select class="form-control" id="serach_garhering">
-								<option>제목</option>
-								<option>지역</option>
+								<option id="subject">제목</option>
+								<option id="subject2">지역</option>
 								<option>카테고리</option>
 							</select> 
-							<input type="text" class="form-control" id="search_text">
+							<input type="text" class="form-control" id="search_text" value="${sSTR eq '' ? '' : sSTR}">
 							<button type="button" class="btn btn-default" onclick="search_click()">검색</button>
 						</div>
 					</form>
