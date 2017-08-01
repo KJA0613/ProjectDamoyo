@@ -25,6 +25,8 @@ public class PlaceDTO {
 	private String placeContent;				/* 상세 설명 */
 	private Timestamp placeCreateDate;			/* 장소 개설일 */
 	private String comId;						/* 광고주 아이디 */
+	
+	
 	public int getPlaceNo() {
 		return placeNo;
 	}

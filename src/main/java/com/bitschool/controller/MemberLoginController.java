@@ -152,7 +152,7 @@ public class MemberLoginController {
 			//System.out.println("4번째: " + loginReferer[4]);
 			
 
-			url = "/PartnerMain";
+			url = "PartnerMain";
 			model.addAttribute("cdto",cdto);
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} 

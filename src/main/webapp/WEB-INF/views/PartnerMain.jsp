@@ -322,13 +322,12 @@
 				<a href="#" class="btn my_space">나의 공간 관리</a>
 			</div>
 		</div>		
-	</div>
-			
+	</div>			
 	<hr>
-	<br><br>
+	<br>
 	
 	<!-- 검색 -->	
-	<div class="box_search">
+ 	<!--<div class="box_search">
 		<div class="box_inner">
 			<div class="period_search">
 					<dl class="flex_box">
@@ -373,7 +372,7 @@
 			
 					<br><br><br>
 			
-					<!-- 카테고리 검색 -->
+					카테고리 검색
 					<dl class="flex_box">
 						<dt class="flex tit">
 							<label for="category1">카테고리 검색</label>
@@ -400,16 +399,15 @@
 			</div>
 		</div>
 
+	<div> -->
 
-	<div>
 	
-	<!-- 03. 광고  -->
-	   <h1>모임 공간</h1>
-	   <hr>
-	   <br>
-   
-   	   <div class="wrapper">
-   	   <c:forEach var="plist" items="${pl_dto}">	
+	<!-- 모임공간 광고  -->
+    <div class="wrapper">
+  	   <h1>모임 공간</h1>
+   	   <hr>
+       <br>
+   	   <c:forEach var="plist" items="${placeList}">	
 			<ul class="properties_list">		
 				<li>
 					<a href="/">
@@ -432,125 +430,16 @@
 						</div>
 					</div>
 				</li>	
-				
-				<!-- <li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	 -->
 			</ul>
-			</c:forEach>
+		</c:forEach>			
+		<br>
+	</div>		
 			
-			<br>
-			
-			<!-- <ul class="properties_list">
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-			</ul> -->
-   	   </div>	
-	
-				
-	</div>
+
+   <!-- [Footer] 페이지 하단 (고정화면) -->
+   <%-- <hr>
+   <%@include file = "footer.jsp"%> --%>
+
+   <br><br>
 </body>
 </html>
