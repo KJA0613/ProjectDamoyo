@@ -120,20 +120,18 @@
 
 					<div class="result">
 						<c:choose>
-							<c:when test="${empty pdto.guserId}">
-								<font size="4" color="#F15F5F">맞는 조건의 아이디가 없습니다. 다시 확인 해
-									주세요.</font>
+							<c:when test="${empty pdto.guserId}and${empty cdto.comEmail}">
+								<font size="4" color="#F15F5F">맞는 조건의 아이디가 없습니다. 다시 확인 해주세요.</font>
 								<br>
 							</c:when>
-
-							<c:otherwise>
+							 <c:otherwise>
 								<font size="4" color="#5D5D5D">회원님의 아이디는
-									${pdto.guserId}입니다.</font>
+									"${pdto.guserId}or${cdto.comId}"입니다.</font>
 								<br>
-
 							</c:otherwise>
+							
 						</c:choose>
-						<%-- <font size="4" color="#5D5D5D">회원님의 아이디는 ${pdto.guserId}입니다.</font><br>--%>
+						
 					</div> 
 	
 

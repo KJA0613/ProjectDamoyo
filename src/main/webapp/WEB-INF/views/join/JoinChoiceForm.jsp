@@ -81,8 +81,7 @@
 		// "기업" 회원가입 폼 이동
 		 else if (type == 2) {
 			
-			var company = document.getElementById('company').value;
-			
+			var company = document.getElementById('company').value;			
 			
 			var url = "/join/JoinChoiceCheck2?company="+company;
 			//var url = "#";

@@ -100,6 +100,16 @@
 	<select id="selectCompanyLogin" parameterType="String" resultType="CompanyDTO">
 		select * from company where comId = #{comId}
 	</select>
+	
+	<!-- [기업회원] 로그인 페이지에서 ID찾기 (이름,이메일받아와서비교) -->
+	<select resultType="CompanyDTO" parameterType="String" id="findComId">
+		select * from company where comEmail = #{comEmail}
+	</select>
+	
+	<!-- [기업회원] 로그인 페이지에서 비번찾기 (아이디받아와서비교) -->
+	<select resultType="CompanyDTO" parameterType="String" id="comfindPW">
+		select * from company where comId = #{comId}
+	</select>
 
 
 
