@@ -109,7 +109,6 @@ public class BlogController {
 		infoDTO.setPostNo(postNo);
 		infoDTO.setBoardName("notice");
 		boolean flag = service.increasCount(infoDTO);
-		System.out.println(flag);
 		if(flag){
 			BPostDTO post = service.readPost(infoDTO);
 			model.addAttribute("post", post);
@@ -619,7 +618,6 @@ public class BlogController {
 		infoDTO.setPostNo(postNo);
 		infoDTO.setBoardName("comments");
 		boolean flag = service.increasCount(infoDTO);
-		System.out.println(flag);
 		if(flag){
 			BPostDTO post = service.readPost(infoDTO);
 			model.addAttribute("post", post);
