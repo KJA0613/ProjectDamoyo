@@ -166,7 +166,7 @@
 <!-- 장소 광고 CSS -->
 <style>
 	.wrapper {
-	    max-width: 1100px;
+	    max-width: 1200px;
 	    margin: 0 auto;
 	    position: relative;
 	}
@@ -409,12 +409,12 @@
     <div class="wrapper">
   	   <h1>모임 공간</h1>
    	   <hr style="border: solid 1px #b3b3b3;">
-       <br>
+	    
    	   <c:forEach var="plist" items="${placeList}">	
 			<ul class="properties_list">		
 				<li>
 					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
+						<img src="/resources/image/placeImage/noImage.png" class="property_img">
 					</a>
 					<span class="price">${plist.placeCostChoice} : ${plist.placeCost}</span>
 					<div class="property_details">

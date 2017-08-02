@@ -244,9 +244,9 @@
 					</div>
 										
 					<div class="form-group">
-						<label for="type" class="col-md-2 control-label">이용시간</label>
+						<label for="type" class="col-md-2 control-label">영업시간</label>
 						<div class="col-md-10"> 
-							<input type="text" name="placeUseTime" class="form-control" placeholder="10:00 ~ 18:00" required>						
+							<input type="text" name="placeUseTime" class="form-control" placeholder="09:00 ~ 18:00" required>						
 						</div>
 					</div>
 					

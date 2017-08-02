@@ -44,7 +44,7 @@ public class PlaceDAO implements IPlaceDAO {
 	@Override
 	public List<PlaceDTO> selectPlaceListAll() {
 		List<PlaceDTO> placeList = null;
-		
+
 		placeList = session.selectList(namespace+".selectPlaceListAll");
 		
 		return placeList;
