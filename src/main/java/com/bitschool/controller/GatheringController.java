@@ -162,6 +162,8 @@ public class GatheringController {
 		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, sSelect, sSTR);
 		HashMap<String, List<GatheringDTO>> map = new HashMap<String, List<GatheringDTO>>();
 		
+		System.out.println("max받는지 - "+gList);
+		
 		if (gList != null) {
 			map.put("gList", gList);
 		}
@@ -393,7 +395,6 @@ public class GatheringController {
 				recommgatherList.add(regather);
 			}
 			
-			System.out.println("추천 dto "+recommgatherList);
 			
 			session.setAttribute("recommgatherList", recommgatherList);	
 		
@@ -404,9 +405,7 @@ public class GatheringController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("result", "no"); // 값이 없을때는 no, result에 디폴트값으로 no를 넣는 이유는 로그인 안했을때에는 1가 나와야함으로
-		
-		System.out.println(pdto);
-		
+						
 		if(pdto!=null){
 		
 			System.out.println("관심글 등록에 작성자아디 : "+guserId);
