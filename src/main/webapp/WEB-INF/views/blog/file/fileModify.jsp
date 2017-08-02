@@ -40,7 +40,7 @@
 		<%@ include file="../includeSub.jspf" %>
 
 		<!-- Page Content -->
-		<div class="container" style="margin-left: 20px; background-color: #f1f1f1; height: 1000px; width: 2000px;">
+		<div class="container" style="margin-left: 20px;">
 			<h4 style="margin-top: 50px; margin-left: 50px;">자료실 글수정</h4>
 			<form action="/blog/file/modify" method="POST" style="width:600px; margin-top: 20px">
 				<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; padding-top: 100px">

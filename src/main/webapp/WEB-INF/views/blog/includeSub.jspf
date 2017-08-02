@@ -42,7 +42,7 @@ div {
 				<li style="line-height: 40px"><a href="/blog/board/listAll">자유게시판</a></li>
 				<li style="line-height: 40px"><a href="/blog/photo/viewPhoto">사진첩</a></li>
 				<li style="line-height: 40px"><a href="/blog/comments/listAll">후기게시판</a></li>
-				<li style="line-height: 40px"><a href="/blog/contact">연락처</a></li>
+				<!-- <li style="line-height: 40px"><a href="/blog/contact">연락처</a></li> -->
 			</ul>
 		</div>
 	</div>

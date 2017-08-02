@@ -29,7 +29,7 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 	
-	<div id=table_section style="margin-left: 280px; padding-top: 30px; background-color: #f1f1f1; height: 1000px" >
+	<div id=table_section style="margin-left: 280px; padding-top: 30px;" >
 		<!-- Page Content -->
 
 		<table class="table" style="width: 900px; border-top: 1px solid #383838; margin-left: 25px; background-color: #ffffff;">

@@ -58,7 +58,7 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 
-	<div id=table_section style="margin-left: 270px; padding-top: 20px; background-color: #f1f1f1; height: 1000px; width: 2000px;">
+	<div id=table_section style="margin-left: 270px; padding-top: 20px;">
 
 		<!-- Page Content -->
 		<form action="" method="POST" id="dataset">
