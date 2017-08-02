@@ -21,13 +21,12 @@
 <link href="/resources/blog/css/bootstrap.min.css" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="/resources/blog/css/simple-sidebar.css" rel="stylesheet">
-
 </head>
 
 <body>
 	<div id=wrapper class="toggled">
-		<%@ include file="../includeSub.jspf"%>
 	</div>
+	<%@ include file="../includeSub.jspf"%>
 	
 	<div id=table_section style="margin-left: 280px; padding-top: 30px;" >
 		<!-- Page Content -->
