@@ -58,14 +58,13 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 
-	<div id=table_section style="margin-left: 270px; padding-top: 20px">
+	<div id=table_section style="margin-left: 270px; padding-top: 20px; background-color: #f1f1f1; height: 1000px; width: 2000px;">
 
-		<%@ include file="../includeSub.jspf"%>
 		<!-- Page Content -->
 		<form action="" method="POST" id="dataset">
-			<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc;">
+			<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; background-color: #ffffff">
 				<tr>
-					<td style="border-left-style: hidden; border-top-style: hidden;"><h4>공지사항</h4></td>
+					<td style="border-left-style: hidden; border-top-style: hidden;"><h4>자료실</h4></td>
 					<td style="border-right-style: hidden; border-top-style: hidden; padding-right: 0px;">
 						<a href="/blog/file/viewRegist"><button type="button" class="btn btn-primary" style="float: right;">새 글 쓰기</button></a>
 					</td>
@@ -98,7 +97,7 @@
 			<input type="hidden" name="postTitle" value="${post.postTitle}"/> 
 			<input type="hidden" name="postContents" value="${post.postContents}"/> 
 			<input type="hidden" name="query" id="query" value="${query}">
-			<div style="padding-left: 19px">
+			<div style="padding-left: 19px; margin-left: 30px">
 				<button class="btn btn-success" onclick="go_url(1)">목록</button>
 				<button class="btn btn-warning" onclick="go_url(2)">수정</button>
 				<button class="btn btn-danger" onclick="go_url(3)">삭제</button>
@@ -107,7 +106,7 @@
 		
 		<br/><br/>
 		
-		<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc;">
+		<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; background-color: #ffffff">
 			<tr>
 				<td style="border: solid 2px #ccc; border-right-style: none;">답변</td>
 				<td style="border: solid 2px #ccc; border-left-style: none;"></td>
@@ -128,7 +127,7 @@
 		</table>
 		
 		<form action="/blog/file/reply" method="POST" style="margin-top: 70px">
-			<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc;">
+			<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc;">
 				<tr>
 					<td style="border: solid 1px #ccc; width: 600px;">
 						<input type="text" name="replyUserId" style="margin-bottom: 10px">

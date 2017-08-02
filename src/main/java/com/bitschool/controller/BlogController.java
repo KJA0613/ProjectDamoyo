@@ -599,7 +599,7 @@ public class BlogController {
 		return "blog/comments/commentsRegist";
 	}
 	
-	@RequestMapping(value="/comments/noticeRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/comments/commentsRegist", method = {RequestMethod.GET, RequestMethod.POST})
 	public String commentsRegist(BPostDTO post) {
 		String url = null;
 		post.setBoardName("comments");

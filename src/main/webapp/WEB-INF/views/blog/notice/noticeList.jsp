@@ -15,7 +15,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>공지사항</title>
+<title>Simple Sidebar - Start Bootstrap Template</title>
 
 <!-- Bootstrap Core CSS -->
 <link href="/resources/blog/css/bootstrap.min.css" rel="stylesheet">
@@ -29,10 +29,10 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 	
-	<div id=table_section style="margin-left: 270px; padding-top: 30px">
+	<div id=table_section style="margin-left: 280px; padding-top: 30px; background-color: #f1f1f1; height: 1000px" >
 		<!-- Page Content -->
 
-		<table class="table" style="width: 800px; border-top: 1px solid #383838;">
+		<table class="table" style="width: 900px; border-top: 1px solid #383838; margin-left: 25px; background-color: #ffffff;">
 			<tr>
 				<td colspan="2" style="border-style: hidden;"><h4>공지사항</h4></td>
 				<td colspan="3" style="border-style: hidden;">
