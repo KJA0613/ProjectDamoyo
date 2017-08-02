@@ -221,7 +221,7 @@ function categoryMidChange(item){
 				<div class="row">
 			
 <!-- ********************************* 폼테그 시작 -->
-					<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringModify" method="post" enctype="multipart/form-data">
+					<form class="form-horizontal" action="/gather/gatheringModify" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
 
 						<!-- 주제 -->
@@ -363,7 +363,7 @@ function categoryMidChange(item){
 
 						<!-- 이미지 올리기  -->
 						<div class="form-group">
-							<label for="Name" class="col-sm-2 control-label">썸네일(오늘) 사진</label>
+							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
 							<div class="col-sm-7">
 								<input id="fileName" type="file" name="gatherImg" >
 							</div>
