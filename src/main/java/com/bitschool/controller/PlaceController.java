@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
@@ -70,15 +71,16 @@ public class PlaceController {
 		pl_dto.setComId(cdto.getComId());
 		
 		
-		// [이미지 파일 저장]		
-		String aPath = req.getSession().getServletContext().getRealPath("/");	 
-		System.out.println("aPath : " + aPath);					// D:\dev\spring_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DAMOYO_Project\
-		String rPath =  "\\resources\\image\\place\\";			// 저장할 파일의 절대 경로		
-		System.out.println("rPath : " + rPath);					// \resources\image\place\
+		// 파일 > 실제 서버에 저장
+		// 웹서비스 root 경로
+		String aPath = req.getSession().getServletContext().getRealPath("/");	// 저장할 파일의 상대 경로	 
+		System.out.println("aPath : " + aPath);									// D:\dev\spring_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DAMOYO_Project\
+		String rPath =  "\\resources\\image\\place\\";							// 저장할 파일의 절대 경로		
+		System.out.println("rPath : " + rPath);									// \resources\image\place\
 		
 		DiskFileItemFactory fac = new DiskFileItemFactory(); 	// 파일 업로드 핸들러를 생성
 		ServletFileUpload sfu = new ServletFileUpload(fac); 	// 클라이언트로 부터 우리가 지정한 곳으로 연결시키는 역활
-		sfu.setFileSizeMax(5*1024*1024);						// 업로드할 파일의 제한 크기를 정함
+		sfu.setFileSizeMax(50*1024*1024);						// 업로드할 파일의 제한 크기를 정함
 		sfu.setHeaderEncoding("UTF-8"); 						// 업로드할 파일을 UTF-8로 설정하여 글자가 깨지는것을 방지
  		String fileName = null;
  		
@@ -93,6 +95,7 @@ public class PlaceController {
 			
 			while(iter.hasNext()){ // 이터레이터식 데이터 꺼내기, 다음이 있으면 true
 				item = iter.next(); // iter에 값을 현재 값을 넣고 커서를 다음으로 넘김
+				
 				if(!item.isFormField()){// isFormField()는 일방적인 데이터 정보를 뜻하고 앞에 ! 붙은 !isFormField는 파일정보를 뜻함
 					// !formfield는 파일정보
 					String temp = item.getName();
@@ -150,23 +153,26 @@ public class PlaceController {
 						pl_dto.setComId(item.getString("UTF-8"));				
 					} else if(item.getFieldName().equals("placePerCnt")){		// 수용인원
 						pl_dto.setPlacePerCnt(Integer.parseInt(item.getString("UTF-8")));				
-					}  
+					} /*else if(item.getFieldName().equals("placeImage")){		// 수용인원
+						pl_dto.setPlaceImage(item.getString("UTF-8"));				
+					} */ 
 				}
 			}
 			
-			// 파일이름이 있고, 공백제거한 파일이름이 ""(널)이 아니면, 즉 성송했으면
+			// 파일이름이 있고, 공백제거한 파일이름이 ""(널)이 아니면, 즉 성공했으면
 			if(fileName!=null && !fileName.trim().equals("")){
 				// 저장할 파일의 경로
-				fileName = rPath + fileName; 
+				fileName = rPath + fileName; 						// \resources\image\place\xxx.png
 				// 파일경로 DB에 저장
 				pl_dto.setPlaceImage(fileName);
+				System.out.println("최종 fileName" + fileName);
 				
 				// 실제 파일 경로
-				fileName = aPath + fileName;
+				fileName = aPath + fileName;						// D:\dev\spring_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DAMOYO_Project\resources\image\place\xxx.png
 				item.write(new File(fileName)); 					//upload, 즉 저장할 파일의 경로로 item을 저장함
 			} else {
 				// 파일이름이 널이면 빈값저장
-				pl_dto.setPlaceImage(rPath + "\\noImage.png");		// \\resources\\image\\place\\noImage.png
+				pl_dto.setPlaceImage(rPath + "noImage.png");		// \\resources\\image\\place\\noImage.png
 			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -178,6 +184,7 @@ public class PlaceController {
 		System.out.println("[TEST-DB Insert] pl_dto : " + pl_dto);
 		
 		model.addAttribute("pl_dto", pl_dto);
+		model.addAttribute("cdto", cdto);	
 		
 		if(flag) {
 			url = "redirect:/place/PlaceListAll";			// 전체 조회 (Reload) : Insert 후, 최신 정보로 업뎃		
@@ -192,13 +199,16 @@ public class PlaceController {
 	
 	// 02. 모임 전체 조회
 	@RequestMapping(value = "/PlaceListAll",  method = { RequestMethod.POST, RequestMethod.GET })
-	public String PlaceListAll(Model model) {
+	public String PlaceListAll(CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;
 		
-		List<PlaceDTO> placeList = placeService.getPlaceListAll();		
-		System.out.println("[TEST] 전체조회: " + placeList);
+		// 광고주 > 로그인 세션정보
+		cdto = (CompanyDTO) session.getAttribute("cdto");
+		List<PlaceDTO> placeList = placeService.getPlaceListAll();	
+		//System.out.println("[TEST] 전체조회: " + placeList);
 		
-		model.addAttribute("placeList", placeList);
+		model.addAttribute("plList", placeList);
+		model.addAttribute("cdto", cdto);
 		
 		url = "PartnerMain";
 		
@@ -206,5 +216,22 @@ public class PlaceController {
 	}
 	
 	
+
+	// 03. 선택한 모임 상세 조회
+	@RequestMapping(value = "/PlaceDetail",  method = RequestMethod.GET)
+	public String PlaceDetail(@RequestParam("placeNo") int placeNo, CompanyDTO cdto, HttpSession session, Model model) {
+		String url = null;
+		
+		// 광고주 > 로그인 세션정보
+		cdto = (CompanyDTO) session.getAttribute("cdto");
+		PlaceDTO pl_dto = placeService.getplaceDetail(placeNo);
+		
+		model.addAttribute("pl_dto", pl_dto);
+		model.addAttribute("cdto", cdto);
+		
+		url = "place/PlaceDetail";
+		
+		return url;
+	}
 	
 }

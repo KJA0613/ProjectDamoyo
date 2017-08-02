@@ -20,4 +20,10 @@
 		select * from place order by placeNo desc
 	</select>
 	
+	
+	<!-- [광고주] 선택한 모임 상세 조회 -->
+	<select id="selectPlaceDetail" parameterType="int" resultType="PlaceDTO">
+		select * from place, company where placeNo = #{placeNo}
+	</select>
+	
 </mapper>

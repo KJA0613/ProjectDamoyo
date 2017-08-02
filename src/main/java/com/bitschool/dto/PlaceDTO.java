@@ -17,7 +17,7 @@ public class PlaceDTO {
 	private String placeTel;					/* 장소 전화번호 */
 	private String placeURL;					/* 장소 홈페이지 주소*/
 	private int placePerCnt;					/* 수용 인원 */
-	private String placeUseTime;				/* 이용가능 시간 */
+	private String placeUseTime;				/* 영업 시간 */
 	private String placeNotUseDay;				/* 정기휴무 */
 	private String placeCost;					/* 비용 : 시간단위/일단위/월단위/무료 > 널가능, 비워났을 때, 돈 입력 안해놨을 때, 사실 애매함*/	
 	private String placeCostChoice;				/* 비용: 시간단위/일단위/월단위/무료 > 체크박스 선택*/

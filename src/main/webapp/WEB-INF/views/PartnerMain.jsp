@@ -410,26 +410,26 @@
   	   <h1>모임 공간</h1>
    	   <hr style="border: solid 1px #b3b3b3;">
 	    
-   	   <c:forEach var="plist" items="${placeList}">	
+   	   <c:forEach var="plList" items="${plList}">	
 			<ul class="properties_list">		
 				<li>
-					<a href="/">
-						<img src="${plist.placeImage}" class="property_img">
+					<a href="/place/PlaceDetail?placeNo=${plList.placeNo}">
+						<img src="${plList.placeImage}" class="property_img">
 					</a>
-					<span class="price">${plist.placeCostChoice} : ${plist.placeCost}</span>
+					<span class="price">${plList.placeCostChoice} : ${plList.placeCost}</span>
 					<div class="property_details">
 						<div class="title">
-							<h3><a href="">${plist.placeName}</a></h3>
+							<h3><a href="/place/PlaceDetail?placeNo=${plList.placeNo}">${plList.placeName}</a></h3>
 						</div>
 						<div class="details">
 							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">${plist.placeAddr2}</span>
+							<span id="s2">${plList.placeAddr2}</span>
 							<br>
 							<span id="s1">유형</span>&nbsp;&nbsp;
-							<span id="s2">${plist.placeType}</span>
+							<span id="s2">${plList.placeType}</span>
 							<br>
 							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">${plist.placeUseTime}</span>
+							<span id="s2">${plList.placeUseTime}</span>
 						</div>
 					</div>
 				</li>	

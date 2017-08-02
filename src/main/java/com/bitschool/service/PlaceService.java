@@ -51,5 +51,20 @@ public class PlaceService implements IPlaceService {
 		
 		return placeList;
 	}
+
+
+	// 선택한 모임 상세 조회
+	@Override
+	public PlaceDTO getplaceDetail(int placeNo) {
+		PlaceDTO pl_dto = null;
+		
+		try {
+			pl_dto = PlaceDAO.selectPlaceDetail(placeNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return pl_dto;
+	}
 	
 }
