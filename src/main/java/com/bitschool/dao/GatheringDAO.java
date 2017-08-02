@@ -173,8 +173,6 @@ public class GatheringDAO implements IGatheringDAO {
 		boolean flag = false;
 		
 		int result = session.selectOne(namespace+".existAddons", gadto);
-		System.out.println("select 결과 : "+result);
-		
 		
 		if(result>0){ // 값이 존재하면
 			flag = true; // true == 값이 존재
