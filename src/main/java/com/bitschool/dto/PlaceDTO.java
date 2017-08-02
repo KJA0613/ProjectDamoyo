@@ -6,14 +6,14 @@ import java.sql.Timestamp;
 public class PlaceDTO {
 	
 	private int placeNo;						/* 장소 번호 */
-	private String placeImage; 					/* 장소 이미지 */
+	private String placeImage; 					/* 장소 이미지 (null 가능) */
 	private String placeType; 					/* 장소 유형 */
 	private String placeName;					/* 장소 이름 */
 	private String placeIntro;					/* 장소 소개 */
 	private String placeAddr1;					/* 주소1, 우편번호 */
 	private String placeAddr2;					/* 주소2, 도로명  */
-	private String placeAddr3;					/* 주소2, 지번  */
-	private String placeAddr4;					/* 주소3, 상세주소 (null 가능)  */
+	private String placeAddr3;					/* 주소3, 지번 (null 가능) */
+	private String placeAddr4;					/* 주소4, 상세주소 (null 가능)  */
 	private String placeTel;					/* 장소 전화번호 */
 	private String placeURL;					/* 장소 홈페이지 주소*/
 	private int placePerCnt;					/* 수용 인원 */
@@ -25,6 +25,7 @@ public class PlaceDTO {
 	private String placeContent;				/* 상세 설명 */
 	private Timestamp placeCreateDate;			/* 장소 개설일 */
 	private String comId;						/* 광고주 아이디 */
+	
 	
 	
 	public int getPlaceNo() {

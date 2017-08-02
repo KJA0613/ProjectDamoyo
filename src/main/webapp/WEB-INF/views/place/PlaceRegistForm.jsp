@@ -76,7 +76,7 @@
 		filePoint = obj.value.substring(pathPoint + 1, obj.length);
 		fileType = filePoint.toLowerCase();		// 소문자로 변경
 		
-		if(fileType == 'jpg' || fileType == 'gif' || fileType == 'png' || fileType == 'jpeg' || fileType == 'bmp') {
+		if(fileType == 'jpg' || fileType == 'gif' || fileType == 'png' || fileType == 'jpeg' || fileType != 'bmp') {
 			
 		} else {
 			 alert('이미지 파일만 선택할 수 있습니다.');
@@ -120,24 +120,6 @@
 				var dayList = $(this).val();
 			});
 	        
-	        
-	        // 파일 업로드만 처리 > 비동기식으로 진행 
-			var form = new FormData(document.getElementById('placeImage')); 
-			$.ajax({
-				url: "/", 
-				data: form, 
-				dataType: 'text', 
-				processData: false, 
-				contentType: false, 
-				type: 'POST', 
-				success: function (response) { 
-					console.log('success'); console.log(response); 
-				}, error: function (jqXHR) { 
-					console.log('error'); 
-				}
-			}
-
-			
 	    });
 	}); 
 </script>

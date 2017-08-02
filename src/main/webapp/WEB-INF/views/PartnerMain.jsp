@@ -414,7 +414,7 @@
 			<ul class="properties_list">		
 				<li>
 					<a href="/">
-						<img src="/resources/image/placeImage/noImage.png" class="property_img">
+						<img src="${plist.placeImage}" class="property_img">
 					</a>
 					<span class="price">${plist.placeCostChoice} : ${plist.placeCost}</span>
 					<div class="property_details">

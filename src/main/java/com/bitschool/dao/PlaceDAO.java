@@ -28,8 +28,8 @@ public class PlaceDAO implements IPlaceDAO {
 	@Override
 	public boolean insertPlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
-
-		System.out.println(pl_dto);
+			
+		System.out.println("dao: " + pl_dto);
 		int aCnt = session.insert(namespace+".insertPlaceRegist", pl_dto);
 		
 		if(aCnt > 0) {
