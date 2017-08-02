@@ -506,6 +506,7 @@ public class GatheringController {
 		}
 		
 		model.addAttribute("recomm", recommList);
+		model.addAttribute("sSTR", sSTR);
 		
 		return url;
 		

@@ -15,7 +15,8 @@
 		from gather 
 		
 		<if test="sSTR != ''">
-			where gatherSubject like '%'||#{sSTR}||'%' or gatherContent like '%'||#{sSTR}||'%'
+			where gatherSubject like '%'||#{sSTR}||'%'
+			<!-- where gatherSubject like '%'||#{sSTR}||'%' or gatherContent like '%'||#{sSTR}||'%' -->
 		</if>
 		
 		order by gatherWrite desc

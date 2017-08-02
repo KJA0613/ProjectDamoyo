@@ -51,9 +51,13 @@ public class PlaceController {
 	
 	
 	// 01. 모임 공간 등록 
-	@RequestMapping(value = "/PlaceRegist",  method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/PlaceRegist",  method = RequestMethod.POST)
 	public String PlaceRegist(PlaceDTO pl_dto, CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;		
+		boolean flag = false;
+		
+		// 파일 업로드만 할 경우 > 비동기식으로 진행
+		//http://blog.naver.com/PostView.nhn?blogId=sh_park0107&logNo=130175661601
 
 		// 광고주 > 세션에 저장된 정보 가져오기
 		cdto = (CompanyDTO) session.getAttribute("cdto");
@@ -62,7 +66,7 @@ public class PlaceController {
 		// 세션에 저장된 광고주 id 장소 등록 테이블에 담기
 		pl_dto.setComId(cdto.getComId());
 		
-		boolean flag = placeService.PlaceRegist(pl_dto);
+		flag = placeService.PlaceRegist(pl_dto);
 		System.out.println("[TEST] pl_dto : " + pl_dto);
 		
 		model.addAttribute("pl_dto", pl_dto);
@@ -89,6 +93,17 @@ public class PlaceController {
 		model.addAttribute("placeList", placeList);
 		
 		url = "PartnerMain";
+		
+		return url;
+	}
+	
+	
+	// 03. 모임 대표 이미지 등록
+	@RequestMapping(value = "/registPlaceImage",  method = RequestMethod.POST)
+	public String registPlaceImage() {
+		String url = null;
+		
+		
 		
 		return url;
 	}
