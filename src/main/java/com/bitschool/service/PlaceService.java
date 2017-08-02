@@ -42,7 +42,7 @@ public class PlaceService implements IPlaceService {
 	@Override
 	public List<PlaceDTO> getPlaceListAll() {
 		List<PlaceDTO> placeList = null;
-		
+
 		try {
 			placeList = PlaceDAO.selectPlaceListAll();
 		} catch (SQLException e) {
