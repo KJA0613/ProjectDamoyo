@@ -202,13 +202,10 @@ public class PlaceController {
 	public String PlaceListAll(CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;
 		
-		// 광고주 > 로그인 세션정보
-		cdto = (CompanyDTO) session.getAttribute("cdto");
 		List<PlaceDTO> placeList = placeService.getPlaceListAll();	
 		//System.out.println("[TEST] 전체조회: " + placeList);
 		
 		model.addAttribute("plList", placeList);
-		model.addAttribute("cdto", cdto);
 		
 		url = "PartnerMain";
 		
@@ -221,14 +218,16 @@ public class PlaceController {
 	@RequestMapping(value = "/PlaceDetail",  method = RequestMethod.GET)
 	public String PlaceDetail(@RequestParam("placeNo") int placeNo, CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;
+
+		// 모임 클릭 > 상세정보
+		PlaceDTO pl_dto = placeService.getPlaceDetail(placeNo);
 		
-		// 광고주 > 로그인 세션정보
-		cdto = (CompanyDTO) session.getAttribute("cdto");
-		PlaceDTO pl_dto = placeService.getplaceDetail(placeNo);
+		// 모임 클릭 > 작성자 정보
+		cdto = placeService.getPalaceCompanyInfo(placeNo);
 		
 		model.addAttribute("pl_dto", pl_dto);
 		model.addAttribute("cdto", cdto);
-		
+
 		url = "place/PlaceDetail";
 		
 		return url;

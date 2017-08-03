@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IPlaceDAO;
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
 
 @Service
@@ -53,9 +54,9 @@ public class PlaceService implements IPlaceService {
 	}
 
 
-	// 선택한 모임 상세 조회
+	// 모임 클릭 > 상세정보
 	@Override
-	public PlaceDTO getplaceDetail(int placeNo) {
+	public PlaceDTO getPlaceDetail(int placeNo) {
 		PlaceDTO pl_dto = null;
 		
 		try {
@@ -65,6 +66,21 @@ public class PlaceService implements IPlaceService {
 		}
 		
 		return pl_dto;
+	}
+
+
+	// 모임 클릭 > 작성자 정보
+	@Override
+	public CompanyDTO getPalaceCompanyInfo(int placeNo) {
+		CompanyDTO cdto = null;
+		
+		try {
+			cdto = PlaceDAO.selectPalaceCompanyInfo(placeNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cdto;
 	}
 	
 }
