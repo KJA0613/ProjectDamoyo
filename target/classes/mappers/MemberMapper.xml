@@ -110,9 +110,25 @@
 	<select resultType="CompanyDTO" parameterType="String" id="comfindPW">
 		select * from company where comId = #{comId}
 	</select>
+	
+	<!-- [기업회원] 마이페이지 회원정보수정 -->
+	<update id="updateCompanyInfo" parameterType="CompanyDTO">
+		update company set comName = #{comName}, comPhone = #{comPhone}, comEmail = #{comEmail},comManager = #{comManager},
+						   comSaNo = #{comSaNo}, comZoneCode = #{comZoneCode},comRoadAddress = #{comRoadAddress}, comJibunAddress = #{comJibunAddress},
+						   comDetailAddress = #{comDetailAddress}, comCeoName = #{comCeoName}
+		where comId = #{comId}
+	</update>
+	
+	<!-- [기업회원] 마이페이지 비밀번호 변경 -->	
+	<update id="CompanyPwModify" parameterType="CompanyDTO">
+		update company set comPw = #{comPw}
+		where comId = #{comId}	
+	</update>
 
-
-
+	<!-- [기업회원] 마이페이지 회원탈퇴 -->	
+ 	<delete id="CompanyQuit" parameterType="CompanyDTO">
+ 	delete from company where comId = #{comId} and comPw = #{comPw}
+ 	</delete>
 	
 	
 

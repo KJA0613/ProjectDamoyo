@@ -27,13 +27,13 @@
 		select b.* 
 		from (  select *
 		        from (  select * 
-		                from RECOMMGATHER 
+		                from recommgather 
 		                where guserid = #{guserId} 
-		                order by RECOMMGATHERCNT desc
+		                order by recommgathercnt desc
 		              )
 		        <![CDATA[where rownum <= 1]]>) a, GATHER b
 		
-		 <![CDATA[where rownum <=4]]> and (b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName)
+		 <![CDATA[where rownum <=4]]> and (b.gathercategorybot = a.recommGatherName or b.gatherarea = a.recommGatherName)
 	</select>
 	
 	<select id="recommDefault" resultType="com.bitschool.dto.GatheringDTO">
@@ -45,7 +45,7 @@
 		              )
 	   <![CDATA[where rownum <= 1]]>) a, GATHER b
 		
-		 <![CDATA[where rownum <=4]]> and (b.GATHERCATEGORY = a.recommGatherName or b.GATHERAREA = a.recommGatherName)
+		 <![CDATA[where rownum <=4]]> and (b.GATHERCATEGORYBot = a.recommGatherName or b.GATHERAREA = a.recommGatherName)
 	</select>
 	
 	<select id="getherCheck" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
@@ -56,7 +56,7 @@
 		
 		<if test="cList!=null">
 			<foreach collection="cList" item="cdata"  open=" and (" close=")" separator="or">
-            	gatherCategory like #{cdata}
+            	gatherCategoryBot like #{cdata}
         	</foreach>
         </if>
         <if test="aList!=null">
@@ -68,7 +68,7 @@
         <if test="sSTR!=null">
 	       	<if test="sSelect=='제목'"> and gathersubject like '%'||#{sSTR}||'%' </if> 
 			<if test="sSelect=='지역'"> and gatherarea like '%'||#{sSTR}||'%' </if> 
-			<if test="sSelect=='카테고리'"> and gatherCategory like #{sSTR} </if>
+			<if test="sSelect=='카테고리'"> and gatherCategoryBot like #{sSTR} </if>
 		</if>
 		
 		order by gatherwrite desc
@@ -85,8 +85,8 @@
 	        select gatherseq.nextval from dual
 	    </selectKey>
 
-		insert into gather (gatherno, gathersubject, gatherCategory, gatherwrite, gathersdate, gatheredate, gatherarea, gatherparti, gathercontent, gatherimg, guserid, gatherday, gatherstate)
-		values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCategory}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherParti}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherDay}, '모집중')
+		insert into gather (gatherno, gathersubject, gatherCategoryTop, gatherCategoryMid, gatherCategoryBot, gatherwrite, gathersdate, gatheredate, gatherarea, gatherparti, gatherpartimax, gathercontent, gatherimg, guserid, gatherday, gatherstate)
+		values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCategoryTop}, #{gath.gatherCategoryMid}, #{gath.gatherCategoryBot}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherParti}, #{gath.gatherPartiMax}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherDay}, '모집중')
 	
 	</insert>
 	
@@ -153,6 +153,10 @@
 		select *
 		from gather a
 		where a.gatherno in (select b.gatherno as gatherno  from GATHERADDONS b where b.guserid = #{guserId} and b.gatheraddonscode = '관심')
+	</select>
+	
+	<select id="comMakeList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
+		select * from gather where guserid = #{guserId}
 	</select>
 
 </mapper>

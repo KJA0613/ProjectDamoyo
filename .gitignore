@@ -1,3 +1,7 @@
 /target/
+<<<<<<< HEAD
+*.properties
+=======
 *.properties
 *.MF
+>>>>>>> c60ca5a853b931df996f68c1cc4f6838620d2f78

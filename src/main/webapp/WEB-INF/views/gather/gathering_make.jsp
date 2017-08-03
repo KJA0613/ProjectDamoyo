@@ -156,7 +156,7 @@ function categoryTopChange(item){
     var temp, i=0, j=0;
     var ccount, cselect;
 
-    temp = document.makeGathering.categoryMid;
+    temp = document.makeGathering.gatherCategoryMid;
     
 
     for (i=(temp.options.length-1) ; i>0 ; i--){
@@ -180,7 +180,7 @@ function categoryMidChange(item){
     var temp, i=0, j=0;
     var ccount, cselect;
     
-    temp = document.makeGathering.categoryBot;
+    temp = document.makeGathering.gatherCategoryBot;
 
     for (i=(temp.options.length-1) ; i>0 ; i--){
        temp.options[i] = null; 
@@ -221,8 +221,13 @@ function categoryMidChange(item){
 				<div class="row">
 			
 <!-- ********************************* 폼테그 시작 -->
+<<<<<<< HEAD
 					<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringModify" method="post" enctype="multipart/form-data">
+						<input type="hidden" name="guserId" value="${pdto.guserId} ${cdto.comId}" />
+=======
+					<form class="form-horizontal" id="gMake" name="makeGathering" action="/gather/gatheringInsert" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
+>>>>>>> 9c6569912e532bee4f856b9c72a7f551cf78434a
 
 						<!-- 주제 -->
 						<div class="form-group">
@@ -239,7 +244,7 @@ function categoryMidChange(item){
 							
 							<div class="dropdown">
 								<div class="col-sm-3">
-									<select class="form-control" name="categoryTop" onChange="categoryTopChange(this.options.selectedIndex)">
+									<select class="form-control" name="gatherCategoryTop" onChange="categoryTopChange(this.options.selectedIndex)">
 										<option selected value="">-선택-</option>
 										<option value="스터디">스터디</option>
 										<option value="동호회">동호회</option>
@@ -248,14 +253,14 @@ function categoryMidChange(item){
 								</div>	
 								
 								<div class="col-sm-3">
-									<select class="form-control" name="categoryMid" onChange="categoryMidChange(this.options.selectedIndex)">
+									<select class="form-control" name="gatherCategoryMid" onChange="categoryMidChange(this.options.selectedIndex)">
 										<option selected value="">-선택-</option>
 										<option value=""></option>
 									</select>
 								</div>	
 								
 								<div class="col-sm-3">							
-									<select class="form-control" name="categoryBot">
+									<select class="form-control" name="gatherCategoryBot">
 											<option selected value="">-선택-</option>
 											<option value=""></option>
 									</select>
@@ -363,7 +368,7 @@ function categoryMidChange(item){
 
 						<!-- 이미지 올리기  -->
 						<div class="form-group">
-							<label for="Name" class="col-sm-2 control-label">썸네일(오늘) 사진</label>
+							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
 							<div class="col-sm-7">
 								<input id="fileName" type="file" name="gatherImg" >
 							</div>

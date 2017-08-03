@@ -19,9 +19,7 @@
 
 div {
 	 font-family: 'Noto Sans', sans-serif;
-}
-
-	
+}	
 </style>
 
 
@@ -35,17 +33,10 @@ div {
 	<!-- Sidebar -->
 	<div id="wrapper">
 		<div id="sidebar-wrapper" style="width: 280px; background-color:#ffffff; border-right-style:ridge;">
-			<ul class="sidebar-wrapper">
-				<li class="sidebar-brand" style="padding-bottom: 90px; padding-top: 90px; text-align: left; padding-left: 35px;"><a href="/blog/home" style="font-size: 22px">자바 뽀개기</a></li>
-				<li style="line-height: 40px"><a href="/blog/notice/listAll">공지사항</a></li>
-				<li style="line-height: 40px"><a href="/blog/schedule/viewSchedule">일정관리</a></li>
-				<li style="line-height: 40px"><a href="/blog/file/listAll">자료실</a></li>
-				<li style="line-height: 40px"><a href="/blog/board/listAll">자유게시판</a></li>
-				<li style="line-height: 40px"><a href="/blog/photo/viewPhoto">사진첩</a></li>
-				<li style="line-height: 40px"><a href="/blog/comments/listAll">후기게시판</a></li>
-				<!-- <li style="line-height: 40px"><a href="/blog/contact">연락처</a></li> -->
-			</ul>
-			<div style="margin-top: 300px;">
+			<div style="width: 300px; height: 50px; background-color: #03a9f4;">
+				<a href="/" class="navbar-brand navbar-brand-center" style="margin-left: 70px; margin-top: 0px; font-size: 25px; font-weight: bold; color: #fff">DAMOYO</a>
+			</div>
+			<div style="border-bottom-style: ridge; padding-left: 35px; padding-top: 10px;">
 				<ul>
 				<c:choose>
 					<c:when test = "${null ne pdto.guserId}">
@@ -59,11 +50,22 @@ div {
 					</c:when>
 					
 					<c:otherwise>
-						<li><a href="/member/LoginForm">로그인</a></li>
+						<li><a href="/member/LoginForm" style="margin-left: 40px;">로그인</a></li>
 					</c:otherwise>
 				</c:choose>
 				</ul>
 			</div>
+
+			<ul class="sidebar-wrapper">
+				<li class="sidebar-brand" style="padding-bottom: 90px; padding-top: 40px; text-align: left; padding-left: 35px;"><a href="/blog/home" style="font-size: 22px">자바 뽀개기</a></li>
+				<li style="line-height: 40px"><a href="/blog/notice/listAll">공지사항</a></li>
+				<li style="line-height: 40px"><a href="/blog/schedule/viewSchedule">일정관리</a></li>
+				<li style="line-height: 40px"><a href="/blog/file/listAll">자료실</a></li>
+				<li style="line-height: 40px"><a href="/blog/board/listAll">자유게시판</a></li>
+				<li style="line-height: 40px"><a href="/blog/photo/viewPhoto">사진첩</a></li>
+				<li style="line-height: 40px"><a href="/blog/comments/listAll">후기게시판</a></li>
+				<!-- <li style="line-height: 40px"><a href="/blog/contact">연락처</a></li> -->
+			</ul>
 		</div>
 	</div>
 	<!-- /#sidebar-wrapper -->
