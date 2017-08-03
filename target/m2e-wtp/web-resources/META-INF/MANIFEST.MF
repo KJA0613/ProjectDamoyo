@@ -1,5 +1,23 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: bit
+=======
+<<<<<<< HEAD
+Built-By: bit-user
+=======
+Built-By: bit
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< HEAD
+Built-By: bit
+=======
+Built-By: BIT
+>>>>>>> e0428eb710b54dadd73b4c11e6d2fd2f6d63d1e6
+>>>>>>> c60ca5a853b931df996f68c1cc4f6838620d2f78
+>>>>>>> 178cdd42d678e77456a2adcab58f5e4013e68d2a
+>>>>>>> e9a92aca5b542e1e1ced78e600ced2960e8fffab
+>>>>>>> 9c6569912e532bee4f856b9c72a7f551cf78434a
 Build-Jdk: 1.8.0_131
 Created-By: Maven Integration for Eclipse
 
