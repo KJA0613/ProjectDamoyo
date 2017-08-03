@@ -35,6 +35,9 @@ public interface IGatheringService {
 	public List<GatheringDTO> getAttendList(String guserId);
 
 	public List<GatheringDTO> getGatheringAll(String sSTR);
+	
+	//기업회원내가만든모임
+	public List<GatheringDTO> getComMakeList(String guserId);
 
 
 }

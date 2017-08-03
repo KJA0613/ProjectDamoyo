@@ -190,4 +190,15 @@ public class GatheringDAO implements IGatheringDAO {
 		
 		return attendList;
 	}
+	
+	//기업회원 내가 만든 모임
+	@Override
+	public List<GatheringDTO> selectComMakeList(String guserId) {
+		
+		List<GatheringDTO> mlist = null;
+		
+		mlist = session.selectList(namespace+".comMakeList", guserId);
+		
+		return mlist;
+	}
 }

@@ -222,7 +222,7 @@ function categoryMidChange(item){
 			
 <!-- ********************************* 폼테그 시작 -->
 					<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringModify" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="guserId" value="${pdto.guserId}" />
+						<input type="hidden" name="guserId" value="${pdto.guserId} ${cdto.comId}" />
 
 						<!-- 주제 -->
 						<div class="form-group">
