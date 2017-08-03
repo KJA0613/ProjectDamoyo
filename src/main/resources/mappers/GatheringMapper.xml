@@ -154,5 +154,9 @@
 		from gather a
 		where a.gatherno in (select b.gatherno as gatherno  from GATHERADDONS b where b.guserid = #{guserId} and b.gatheraddonscode = '관심')
 	</select>
+	
+	<select id="comMakeList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
+		select * from gather where guserid = #{guserId}
+	</select>
 
 </mapper>

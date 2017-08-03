@@ -336,6 +336,32 @@ public class MemberService implements IMemberService {
 		
 			return flag;
 		}
+		
+		//기업회원비밀번호수정
+		@Override
+		public boolean CompanyPwModify(CompanyDTO cdto) {
+			boolean flag = false;
+			
+			flag = companyDAO.CompanyPwModify(cdto);
+			
+			return flag;
+		}
+		
+		//기업회원 회원탈퇴
+		@Override
+		public boolean CompanyQuit(CompanyDTO cdto) {
+
+			boolean flag = false;
+			
+			try {
+				flag = companyDAO.CompanyQuit(cdto);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return flag;
+		}
 	
 
 

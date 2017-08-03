@@ -134,6 +134,18 @@ public class GatheringService implements IGatheringService {
 		
 		return attendList;
 	}
+	
+	//기업회원내가만든모임
+	@Override
+	public List<GatheringDTO> getComMakeList(String guserId) {
+
+		List<GatheringDTO> mlist = gDao.selectComMakeList(guserId);
+		
+		fData = new FormatData();
+		mlist = fData.formatData(mlist);
+		
+		return mlist;
+	}
 
 	
 

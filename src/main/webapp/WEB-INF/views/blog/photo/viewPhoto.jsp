@@ -80,9 +80,9 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 	<div class="container" style="margin-left: 300px;">
-		<button class="btn btn-primary" onclick="location.href='viewUploadPhoto'" style="float: right; margin-top: 15px;">이미지 업로드</button>
-		<h2>사진첩</h2>
-		<div class="row">
+		<button class="btn btn-primary" onclick="location.href='viewUploadPhoto'" style="float: right; margin-top: 50px;">이미지 업로드</button>
+		<h4 style="margin-top: 50px;">사진첩</h4>
+		<div class="row" style="margin-top: 40px;">
 			<c:forEach var="image" items="${imgList}">
 				<div class="col-md-4">
 					<a href="#myModal" class="thumbnail" data-toggle="modal" onclick="data_send(${image.imageNo})">
