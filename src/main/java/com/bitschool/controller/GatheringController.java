@@ -115,8 +115,6 @@ public class GatheringController {
 			}
 		}
 		
-		
-		
 		List<String> cList = null;
 		List<String> aList = null;
 
