@@ -98,6 +98,10 @@
 
 </style>
 
+
+<!-- 네이버 지도 -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=qkgcjYwfM5TDGCjc1KDY&submodules=geocoder"></script>
+
 <!-- [Header] 공통 헤더 -->
 <%@include file="../header.jsp"%>
 </head>

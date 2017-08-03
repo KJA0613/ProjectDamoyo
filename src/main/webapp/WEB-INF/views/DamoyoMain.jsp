@@ -98,7 +98,7 @@
 </style>
 
 <!-- 장소 광고 CSS -->
-<style>
+<!-- <style>
 	.wrapper {
 	    max-width: 1100px;
 	    margin: 0 auto;
@@ -182,7 +182,7 @@
 		font-weight: normal;
 	}	
 
-</style>
+</style> -->
 
 
 <!-- JavaScript -->
@@ -364,7 +364,8 @@
 	   <br>
    
    	   <div class="wrapper">
-			<ul class="properties_list">
+   	   		<%@include file="place/PlaceAll.jsp"%>  
+			<!--<ul class="properties_list">
 				<li>
 					<a href="/">
 						<img src="resources/image/main/english_space.png" class="property_img">
@@ -500,7 +501,7 @@
 						</div>
 					</div>
 				</li>	
-			</ul>
+			</ul> -->
    	   </div>
 		
    <br><br><br>		
