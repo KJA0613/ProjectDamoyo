@@ -211,7 +211,7 @@
 		<br><br><br><br>		
 					
 			<!-- 01-02. 주제어 검색 -->
-			<div class="col-md-5">
+			<div class="col-md-12">
 				<form action="/gather/damoyoSearch" method="get" >
 					<span class="blue_search">
 						<input type="text" name="sSTR" class="input_text" placeholder="주제어를 검색해주세요.">
