@@ -240,7 +240,11 @@ $(window).load(function(){
 					write = write.substring(0,16);
 					
 					var sdate = gList.gatherSdate;
-					sdate = sdate.substring(0,10);
+					if(sdate != null){
+						sdate = sdate.substring(0,10);
+					}else{
+						sdate = '몰름';
+					}
 						 
 					var edate = gList.gatherEdate;
 					if(edate != null){
@@ -263,7 +267,9 @@ $(window).load(function(){
 					str += "<div class='col-xs-4 col-lg-3' id='gather'>";
 					str += "<a data-toggle='modal' href='#GatherModalInfo' data-no='"+gList.gatherNo+
 					 									"'  data-subject='"+gList.gatherSubject+
-														"'  data-category='"+gList.gatherCategory+
+														"'  data-categorytop='"+gList.gatherCategoryTop+
+														"'  data-categorymid='"+gList.gatherCategoryMid+
+														"'  data-categorybot='"+gList.gatherCategoryBot+
 														"'  data-parti='"+gList.gatherParti+
 														"'  data-write='"+write+
 														"'  data-sdate='"+sdate+
@@ -859,7 +865,7 @@ $(function() {
 				"cDATA" : cDATA,
 				"aDATA" : aDATA
 			};
-
+			
 			/* 이거는 #execute를 클릭하면 일어나는 ajax */
 			$.ajax({
 					url : '/gather/gatheringSearch',
@@ -881,7 +887,11 @@ $(function() {
 							write = write.substring(0,16);
 							
 							var sdate = gList.gatherSdate;
-							sdate = sdate.substring(0,10);
+							if(sdate != null){
+								sdate = sdate.substring(0,10);
+							}else{
+								sdate = '몰름';
+							}
 								 
 							var edate = gList.gatherEdate;
 							if(edate != null){
@@ -898,14 +908,15 @@ $(function() {
 							var img = gList.gatherImg;
 							if(img===null){
 								img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
-							}
-							
+							}							
 							
 							var str = "";
 							str += "<div class='col-xs-4 col-lg-3' id='gather'>";
 							str += "<a data-toggle='modal' href='#GatherModalInfo' data-no='"+gList.gatherNo+
 							"'  data-subject='"+gList.gatherSubject+
-							"'  data-category='"+gList.gatherCategory+
+							"'  data-categorytop='"+gList.gatherCategoryTop+
+							"'  data-categorymid='"+gList.gatherCategoryMid+
+							"'  data-categorybot='"+gList.gatherCategoryBot+
 							"'  data-parti='"+gList.gatherParti+
 							"'  data-write='"+write+
 							"'  data-sdate='"+sdate+
@@ -950,7 +961,9 @@ $(function() {
 		var href = $(event.relatedTarget); /* 모달 윈도우를 오픈하는 버튼 */
 		var no = href.data('no'); /*  href태그에서 data- 값을 변수에 저장 */
 		var subject = href.data('subject'); /*  href태그에서 data- 값을 변수에 저장 */
-		var category = href.data('category'); /*  href태그에서 data- 값을 변수에 저장 */
+		var categorytop = href.data('categorytop'); /*  href태그에서 data- 값을 변수에 저장 */
+		var categorymid = href.data('categorymid'); /*  href태그에서 data- 값을 변수에 저장 */
+		var categorybot = href.data('categorybot'); /*  href태그에서 data- 값을 변수에 저장 */
 		var write = href.data('write');
 		var sdate = href.data('sdate');
 		var edate = href.data('edate');
@@ -966,7 +979,7 @@ $(function() {
 		var state = href.data('state'); 
 		
 		var DATA = {
-			"category" : category,
+			"category" : categorybot,
 			"area" : area,
 			"no" : no,
 			"id" : id,
@@ -1013,9 +1026,10 @@ $(function() {
 		
 		modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-subject').text(subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-category').text(category); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-categorybot').text(categorybot); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-write').text(write); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-date').text(sdate + " ~ " + edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-sdate').text(sdate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-edate').text(edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-area').text(area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-parti').text(parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-day').text(day); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
@@ -1118,10 +1132,11 @@ $(function(){
 		
 		//값 받아서 저장
 		var subject = $('#modal-body-subject').text();
-		var date = $('#modal-body-date').text();
+		var sdate = $('#modal-body-sdate').text();
+		var edate = $('#modal-body-edate').text();
 		var day = $('#modal-body-day').text();
-		var date = $('#modal-body-day').text();
 		var partimax = $('#modal-body-partimax').text();
+		var content = $('#modal-body-content').text();
 		
 		
 		
@@ -1130,7 +1145,13 @@ $(function(){
 		$('#gatherModify').attr('data-toggle','modal');
 		$('#gatherModify').attr('data-target','#GatherModalModify');
 		
+		// 키울때 기존값을 추가해줌
 		$('#gatherSubject').val(subject);
+		$('#gatherSdate').val(sdate);
+		$('#gatherEdate').val(edate);
+		$('#gatherPartiMax').val(partimax);
+		$('#gatherContent').val(content);
+		
 		
 	});
 });
@@ -2273,7 +2294,9 @@ function categoryMidChange(item){
 							<a data-toggle='modal' href='#GatherModalInfo'
 								data-no='${recomm.gatherNo}'
 								data-subject='${recomm.gatherSubject}'
-								data-category='${recomm.gatherCategory}'
+								data-categorytop='${recomm.gatherCategoryTop}'
+								data-categorymid='${recomm.gatherCategoryMid}'
+								data-categorybot='${recomm.gatherCategoryBot}'
 								data-write="${fn:substring(recomm.gatherWrite, 0, 16)}"
 								data-sdate="${fn:substring(recomm.gatherSdate, 0, 10)}"
 								data-edate="${fn:substring(recomm.gatherEdate, 0, 10)}"
@@ -2318,7 +2341,9 @@ function categoryMidChange(item){
 						<div class="col-xs-4 col-lg-3" id="gather">
 							<a data-toggle='modal' href='#GatherModalInfo' data-no='${gath.gatherNo}'
 								data-subject="${gath.gatherSubject}"
-								data-category='${gath.gatherCategory}'
+								data-categorytop='${gath.gatherCategoryTop}'
+								data-categorymid='${gath.gatherCategoryMid}'
+								data-categorybot='${gath.gatherCategoryBot}'
 								data-write="${fn:substring(gath.gatherWrite, 0, 16)}"
 								data-sdate="${fn:substring(gath.gatherSdate, 0, 10)}"
 								data-edate="${fn:substring(gath.gatherEdate, 0, 10)}"
@@ -2404,17 +2429,19 @@ function categoryMidChange(item){
 		
 							<!-- 모집분류  -->
 							<div class="form-group">
-								<label for="modal-body-category" class="col-sm-2 control-label">모집분류</label>
+								<label for="modal-body-categorybot" class="col-sm-2 control-label">모집분류</label>
 								<div class="col-sm-8">
-									<div class="modal-body" id="modal-body-category"></div>
+									<div class="modal-body" id="modal-body-categorybot"></div>
 								</div>
 							</div>
 		
 							<!-- 기간 -->
 							<div class="form-group">
 								<label for="modal-body-date" class="col-sm-2 control-label">기간</label>
-								<div class="col-sm-8">
-									<div class="modal-body" id="modal-body-date"></div>
+								<div class="col-sm-8">	
+								<div class="modal-body">					
+									<span id="modal-body-sdate" ></span> ~ <span id="modal-body-edate"></span>
+								</div>
 								</div>
 							</div>
 		
@@ -2463,9 +2490,7 @@ function categoryMidChange(item){
 							</div>
 						
 						</form>
-					</div>
-					<!-- 모임상태  -->
-					
+					</div>					
 				
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
@@ -2502,7 +2527,7 @@ function categoryMidChange(item){
 							<!-- 입력항목이름 -->
 							<label for="ID" class="col-sm-2 control-label">제목</label>
 							<div class="col-sm-5">
-								<input type="text" class="form-control" name="gatherSubject" id="gatherSubject"placeholder="제목를 작성해 주세영">
+								<input type="text" class="form-control" name="gatherSubject" id="gatherSubject" placeholder="제목를 작성해 주세영">
 							</div>
 						</div>
 
@@ -2512,7 +2537,7 @@ function categoryMidChange(item){
 							
 							<div class="dropdown">
 								<div class="col-sm-3">
-									<select class="form-control" name="categoryTop" onChange="categoryTopChange(this.options.selectedIndex)">
+									<select class="form-control" name="gatherCategoryTop" onChange="categoryTopChange(this.options.selectedIndex)">
 										<option selected value="">-선택-</option>
 										<option value="스터디">스터디</option>
 										<option value="동호회">동호회</option>
@@ -2521,14 +2546,14 @@ function categoryMidChange(item){
 								</div>	
 								
 								<div class="col-sm-3">
-									<select class="form-control" name="categoryMid" onChange="categoryMidChange(this.options.selectedIndex)">
+									<select class="form-control" name="gatherCategoryMid" onChange="categoryMidChange(this.options.selectedIndex)">
 										<option selected value="">-선택-</option>
 										<option value=""></option>
 									</select>
 								</div>	
 								
 								<div class="col-sm-3">							
-									<select class="form-control" name="categoryBot">
+									<select class="form-control" name="gatherCategoryBot">
 											<option selected value="">-선택-</option>
 											<option value=""></option>
 									</select>
@@ -2648,7 +2673,7 @@ function categoryMidChange(item){
 					
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary">수정</button>
+						<button type="button" class="btn btn-primary">저장</button>
 					</div>
 					
 					

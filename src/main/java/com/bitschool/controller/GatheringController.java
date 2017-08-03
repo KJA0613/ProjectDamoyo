@@ -50,15 +50,20 @@ public class GatheringController {
 		
 		List<GatheringDTO> recommList = gService.getRecommDefault();
 				
+		
+		System.out.println(gList);
+		System.out.println(recommList);
+		
 		if(pdto!=null){ // 로그인 중이면
 			model.addAttribute("pdto", pdto);
+			List<GatheringDTO> recommListCopy = recommList;
 			
 			recommList = gService.getRecommendUser(pdto.getGuserId()); //사용자 추천 리스트
 			// 사용자 정보에 따른 추천글 가져옴
 			// 그리고 jsp로 모델을 보냄
 			
 			if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
-				recommList = gService.getRecommDefault();// 디폴트 추천검색
+				recommList = recommListCopy;// 디폴트 추천검색
 			}
 		}
 		
@@ -159,11 +164,10 @@ public class GatheringController {
 		System.out.println(recommgatherList);
 		session.setAttribute("recommgatherList", recommgatherList);
 		
+		
 		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, sSelect, sSTR);
 		HashMap<String, List<GatheringDTO>> map = new HashMap<String, List<GatheringDTO>>();
-		
-		System.out.println("max받는지 - "+gList);
-		
+				
 		if (gList != null) {
 			map.put("gList", gList);
 		}
@@ -192,7 +196,6 @@ public class GatheringController {
 		GatheringDTO gath = new GatheringDTO();
 		
 		String aPath = req.getSession().getServletContext().getRealPath("/");
-		System.out.println(aPath);
 		String rPath =  "\\resources\\image\\mozip\\";
 
 		boolean flag = false;
@@ -242,8 +245,12 @@ public class GatheringController {
 						gath.setGatherSubject(item.getString("UTF-8"));
 						/*cate.setGatherSubject(item.getString("UTF-8"));
 						area.setGatherSubject(item.getString("UTF-8"));*/
-					} else if(item.getFieldName().equals("categoryBot")){
-						gath.setGatherCategory(item.getString("UTF-8"));
+					} else if(item.getFieldName().equals("gatherCategoryTop")){
+						gath.setGatherCategoryTop(item.getString("UTF-8"));
+					} else if(item.getFieldName().equals("gatherCategoryMid")){
+						gath.setGatherCategoryMid(item.getString("UTF-8"));
+					} else if(item.getFieldName().equals("gatherCategoryBot")){
+						gath.setGatherCategoryBot(item.getString("UTF-8"));
 					} else if(item.getFieldName().equals("gatherWrite")){
 						gath.setGatherWrite(item.getString("UTF-8"));
 					} else if(item.getFieldName().equals("gatherSdate")){
@@ -266,13 +273,11 @@ public class GatheringController {
 					
 					else if(item.getFieldName().equals("gatherState")){
 						gath.setGatherState(item.getString("UTF-8"));
-					}
-					
-					
+					}					
 					else if(item.getFieldName().equals("areaMid")){
 						gath.setGatherArea(item.getString("UTF-8"));
-					} else if(item.getFieldName().equals("gatherParti")){
-						gath.setGatherParti(Integer.parseInt(item.getString("UTF-8")));
+					} else if(item.getFieldName().equals("gatherPartiMax")){
+						gath.setGatherPartiMax(Integer.parseInt(item.getString("UTF-8")));
 					} else if(item.getFieldName().equals("gatherContent")){
 						gath.setGatherContent(item.getString("UTF-8"));
 					} else if(item.getFieldName().equals("guserId")){
@@ -306,9 +311,7 @@ public class GatheringController {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 						
 			map.put("gath", gath);
-			
-			System.out.println("삽입 성공 : "+gath);
-			
+			System.out.println("삽입전 완성된 gath"+gath);
 			flag = gService.GatheringInsert(map);
 		}
 		
