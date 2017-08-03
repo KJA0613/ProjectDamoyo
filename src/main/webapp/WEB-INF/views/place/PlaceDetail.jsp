@@ -116,8 +116,8 @@
 				<hr style="border: solid 1px #b3b3b3;">
 				<br>				
 				
-				<!-- 구글 애드센스 광고 -->
-				<div class="google-middle-add-center"></div>
+				<!-- 구글 애드센스 광고 : 도메인 등록해야하는ㅠ -->
+				<!-- <div class="google-middle-add-center"></div> -->
 				
 				<!-- 모임공간 등록 폼 -->
 				<form action="/place/PlaceListAll" method="POST" class="form-horizontal" enctype="multipart/form-data">					

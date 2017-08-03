@@ -26,7 +26,7 @@
 	}
 	
 	.wrapper ul.properties_list li img.property_img {
-	    width: 100%;
+	    width: 105%;
 	    height: auto!important;
 	    vertical-align: top;
 	}
@@ -44,7 +44,7 @@
     }
     
     .wrapper ul li .property_details {
-	    width: 100%;
+	    width: 105%;
 	    padding: 2.9% 5.8% 4.1% 5.8%;
 	    border-bottom: 1px solid #f2f1f1;
 	    border-left: 1px solid #f2f1f1;
@@ -79,20 +79,20 @@
 	}
 	
 	#s1 {
-	margin-left: 0px;
+		margin-left: 0px;
 		color: #777;
 		font-weight: bold;
 		font-size: 16px;
-		    /* display: inline-block; */
+		/* display: inline-block; */
     	/* padding: 0px 5px 0; */
 	}
+	
 	#s2 {
 	margin-left: 0px;
 		color: #777;
 		font-size: 16px;
 		font-weight: normal;
 	}	
-
 </style>
 
 </head>
