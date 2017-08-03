@@ -310,6 +310,7 @@ public class MemberService implements IMemberService {
 			return cdto;
 		}
 
+		//기업회원 비번 찾기
 		@Override
 		public CompanyDTO comfindPW(String comEmail, String comId) {
 			
@@ -323,6 +324,17 @@ public class MemberService implements IMemberService {
 			}
 			
 			return cdto;
+		}
+
+		//기업회원 회원정보 수정	
+		@Override
+		public boolean updateComInfo(CompanyDTO cdto) {
+			
+			boolean flag = false;
+			
+			flag = companyDAO.updatecomInfo(cdto);
+		
+			return flag;
 		}
 	
 

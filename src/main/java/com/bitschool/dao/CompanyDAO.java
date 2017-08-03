@@ -62,7 +62,8 @@ public class CompanyDAO implements ICompanyDAO {
 			
 			return cdto;
 		}
-
+		
+		//기업회원비번찾기
 		@Override
 		public CompanyDTO comfindPW(String comId) {
 
@@ -71,6 +72,21 @@ public class CompanyDAO implements ICompanyDAO {
 			cdto = (CompanyDTO)session.selectOne(namespace+".comfindPW", comId);
 			
 			return cdto;
+		}
+		
+		//기업회원 회원정보 수정 
+		@Override
+		public boolean updatecomInfo(CompanyDTO cdto) {
+			
+			boolean flag = false;
+			
+			int aCnt = session.update(namespace+".updateCompanyInfo",cdto);
+			
+			if(aCnt > 0) {
+				flag = true;
+			}
+			
+			return flag;
 		}
 
 }

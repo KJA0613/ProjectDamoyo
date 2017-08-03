@@ -230,14 +230,11 @@ function checkId(result) {
 						<label for="Name" class="col-md-2 control-label">기업명</label>
 						<div class="col-md-10">
 							<input type="text" class="form-control" id="comName" name="comName" maxlength="20" placeholder="기업명" onblur="checkName()">
-							<!-- 경고 메세지 -->
-							<div id="nameMsg" class="error">
-								<!-- 에러 메세지 적용되는 부분 -->
-							</div>
+							
 						</div>
 					</div>
 					
-					<!-- 아이디 -->
+				
 					<div class="form-group">
 						<!-- 입력항목이름 -->
 						<label for="Id" class="col-md-2 control-label">대표명</label>
@@ -245,14 +242,7 @@ function checkId(result) {
 						<div class="col-md-10">
 							<!-- 입력칸크기 -->
 							<input type="text" class="form-control" id="comCeoName" name="comCeoName" placeholder="대표명" onblur="checkId()">
-							<!-- 경고 메세지 -->
-							<div id="idMsg" class="error">
-								<!-- 에러 메세지 적용되는 부분 -->
-							</div>
-							<div id="idMsg" class="error gm">
-								<!-- 에러 메세지 적용되는 부분 -->
-							</div>		
-							
+														
 						</div>						
 					</div>
 					
