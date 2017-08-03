@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
@@ -30,7 +31,7 @@ public class PersonMypageController {
 	//----------------------------------------------- 설 정 -----------------------------------------------//
 	
 	// [로깅]
-	private static final Logger logger = LoggerFactory.getLogger(MemberLoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(PersonMypageController.class);
 
 	// [주입] 서비스 인터페이스
 	@Inject
@@ -53,33 +54,57 @@ public class PersonMypageController {
 	
 
 	
-	// 01-01-01. [개인회원] 마이페이지 - 개인정보 수정 > 비밀번호 확인 후, "수정할 수 있는 페이지로 이동"
+	// 01-01-01. [개인회원],[기업회원] 마이페이지 - 개인정보 수정 > 비밀번호 확인 후, "수정할 수 있는 페이지로 이동"
 	@RequestMapping(value="/PersonFirstModify", method = RequestMethod.POST)
 	public String PersonFirstModify(@RequestParam("guserInfoPw") String guserInfoPw, HttpSession session, Model model){
 		String url = null;
+		boolean flag = false;
 		
-		// 현재 세션에 저장된 정보 > pdto에 저장
+		// 현재 세션에 저장된 정보 > pdto에 저장(개인회원경우)
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-			
-		//System.out.println("[TEST-회원정보 수정(비밀번호 확인)] 세션에 저장된 비밀번호: " + pdto.getGuserPw());
-		//System.out.println("[TEST-회원정보 수정(비밀번호 확인)] 폼에 입력한 현재 비밀번호: " + guserInfoPw);
+		// 현재 세션에 저장된 정보 > cdto에 저장(기업회원경우)
+		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");
+		
 		
 		// 세션에 저장되어있는 현재 비밀번호 == 입력한 현재 비밀번호
-		if(guserInfoPw != null && pdto.getGuserPw().equals(guserInfoPw)) {	
-			
-			// pdto 모델에 저장 (세션과 확인한 비밀번호를 가진 사용자 > 회원가입 데이터 불러와야하기 때문에)
-			model.addAttribute("pdto", pdto);
+		
+		//개인회원
+		if(pdto!=null){
+			if(guserInfoPw != null && pdto.getGuserPw().equals(guserInfoPw)) {	
+				
+				// pdto 모델에 저장 (세션과 확인한 비밀번호를 가진 사용자 > 회원가입 데이터 불러와야하기 때문에)
+				model.addAttribute("pdto", pdto);
+							
 						
-			//System.out.println("[TEST-회원정보 수정(비밀번호 확인)] 1단계 수정 전 > 데이터: " + pdto);				
-			// 회원가입한 정보 > 수정 가능한 페이지로 이동	(기존 정보 뿌려주기)
-			url = "mypage/PersonInfoFirstModify";
-			
-		} else {
+				// 회원가입한 정보 > 수정 가능한 페이지로 이동	(기존 정보 뿌려주기)
+				url = "mypage/PersonInfoFirstModify";
+				
+			}
+		}
+		
+		//기업회원
+		if(cdto!=null){
+			if(guserInfoPw != null && cdto.getComPw().equals(guserInfoPw)) {	
+				
+				// cdto 모델에 저장 (세션과 확인한 비밀번호를 가진 사용자 > 회원가입 데이터 불러와야하기 때문에)
+				model.addAttribute("cdto", cdto);
+							
+				
+				// 회원가입한 정보 > 수정 가능한 페이지로 이동	(기존 정보 뿌려주기)
+				url = "mypage/CompanyInfoFirstModify";
+				
+				
+			}
+		}
+		
+		
+		else{
 			/*------------------- [2차 처리 예정] ------------------
 				2) 비밀번호들 일치 안 할 경우 > 예외처리 > 에러 메세지
  	 	     ---------------------------------------------------*/
 			url = "redirect:/mypage/MyPageManagement";
 		}		
+		
 		
 		return url;
 	}
@@ -121,6 +146,27 @@ public class PersonMypageController {
 		return url;
 	}
 	
+	// 01-01-02-1. [기업회원] 마이페이지 - 1단계 > 개인정보 수정 
+		// [1단계] 아이디, 패스워드 > hidden으로 값 받아오기
+		// [2단계] CompanyInfoFirstModify.jsp > hidden > guserId값 가져오기 
+	@RequestMapping(value = "/CompanySecondModify", method = RequestMethod.POST)
+	public String CompanySecondModify(CompanyDTO cdto,Model model){
+		
+		String url = null;
+		boolean flag = false;
+		
+		System.out.println(cdto);
+		
+		flag = memberService.updateComInfo(cdto);	
+		
+		if(flag==true){
+			
+			url = "redirect:/mypage/MyPageManagement";
+		}
+		
+		return url;
+		
+	}
 	
 	// 01-01-03. [개인회원] 마이페이지 - 2단계 > 희망지역 및 카테고리 > 전체 조회
 	@RequestMapping(value="/PersonFinalCheck", method=RequestMethod.POST)
@@ -157,10 +203,6 @@ public class PersonMypageController {
 
 		// 로그인 된 세션 정보 받아와서 > pdto에 저장
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-
-		//System.out.println("[TEST-비밀번호 변경(개인)] 세션에 저장되어있는 사용자 정보: " + pdto);
-		//System.out.println("[TEST-비밀번호 변경(개인)] 폼에 입력한 현재 비밀번호: " + guserCurPw);
-		//System.out.println("[TEST-비밀번호 변경(개인)] 폼에 입력한 새 비밀번호: " + guserNewPwCheck);
 
 		// 세션에 사용자 정보가 있으면 > 수정 가능
 		if (pdto != null) {

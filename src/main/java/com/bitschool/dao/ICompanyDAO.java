@@ -21,4 +21,7 @@ public interface ICompanyDAO {
 	//[기업회원]비번찾기
 	public CompanyDTO comfindPW(String comId);
 
+	//[기업회원]회원정보수정
+	public boolean updatecomInfo(CompanyDTO cdto);
+
 }

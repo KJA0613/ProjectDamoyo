@@ -11,5 +11,8 @@ public interface IPlaceService {
 
 	// 모임 전체 조회
 	public List<PlaceDTO> getPlaceListAll();
+
+	// 선택한 모임 상세 조회
+	public PlaceDTO getplaceDetail(int placeNo);
 	
 }
