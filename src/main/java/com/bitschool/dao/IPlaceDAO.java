@@ -13,5 +13,8 @@ public interface IPlaceDAO {
 	// 모임 전체 조회
 	public List<PlaceDTO> selectPlaceListAll() throws SQLException;
 
+	// 선택한 모임 상세 조회
+	public PlaceDTO selectPlaceDetail(int placeNo) throws SQLException;
+
 	
 }

@@ -66,8 +66,9 @@
 		<%@ include file="../includeSub.jspf" %>
 				
 		<div class="container" style="margin-left: 20px;">
-			<form action="/blog/photo/uploadPhoto" method="POST" enctype="multipart/form-data" style="width:600px; margin-top: 70px">
-				<table class="table" style="width: 700px; margin-left: 20px; border: solid 1px #ccc; padding-top: 100px">
+			<h4 style="margin-top: 50px; margin-left: 50px;">이미지 업로드</h4>
+			<form action="/blog/photo/uploadPhoto" method="POST" enctype="multipart/form-data" style="width:600px; margin-top: 20px">
+				<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; padding-top: 40px">
 						<tr>
 							<td height="80px;" style="border: solid 1px #ccc; border-right-style: none;">
 									<input type="text" class="form-control" placeholder="writer" name="userId" style="height: 70px">
@@ -94,8 +95,8 @@
 					<button type="button" class="btn btn-default" onclick="location.href='/blog/board/listAll'">취소</button>
 					<button type="submit" class="btn btn-primary" style="float: right;">작성</button>
 				</div>
+				</form>
 		</div>
-	</div>
 	
 	
 

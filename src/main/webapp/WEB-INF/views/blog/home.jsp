@@ -36,7 +36,6 @@
 						<p>
 							블로그 메인
 						</p>
-						<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 					</div>
 				</div>
 			</div>
@@ -51,14 +50,6 @@
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="/resources/blog/js/bootstrap.min.js"></script>
-
-	<!-- Menu Toggle Script -->
-<!-- 	<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script> -->
 
 </body>
 

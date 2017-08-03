@@ -91,8 +91,6 @@ public class GatheringDAO implements IGatheringDAO {
 		
 		glist = session.selectList(namespace+".partiList", guserId);
 		
-		System.out.println("dao의 : "+glist);
-		
 		return glist;
 	}
 
@@ -102,8 +100,6 @@ public class GatheringDAO implements IGatheringDAO {
 		
 		mlist = session.selectList(namespace+".makeList", guserId);
 		
-		System.out.println("dao의 : "+mlist);
-		
 		return mlist;
 	}
 
@@ -111,10 +107,6 @@ public class GatheringDAO implements IGatheringDAO {
 	public boolean mergeList(List<RecommGatherDTO> recommgatherList) {
 
 		boolean flag = false;
-		/*
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("recommgatherList", recommgatherList);
-		*/
 		
 		System.out.println("사용자 누른 갯수 : "+recommgatherList.size());
 		
@@ -181,8 +173,6 @@ public class GatheringDAO implements IGatheringDAO {
 		boolean flag = false;
 		
 		int result = session.selectOne(namespace+".existAddons", gadto);
-		System.out.println("select 결과 : "+result);
-		
 		
 		if(result>0){ // 값이 존재하면
 			flag = true; // true == 값이 존재

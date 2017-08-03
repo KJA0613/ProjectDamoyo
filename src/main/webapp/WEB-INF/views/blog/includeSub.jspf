@@ -24,6 +24,7 @@ div {
 	
 </style>
 
+
 <!-- Bootstrap Core CSS -->
 <link href="/resources/blog/css/bootstrap.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
@@ -42,8 +43,27 @@ div {
 				<li style="line-height: 40px"><a href="/blog/board/listAll">자유게시판</a></li>
 				<li style="line-height: 40px"><a href="/blog/photo/viewPhoto">사진첩</a></li>
 				<li style="line-height: 40px"><a href="/blog/comments/listAll">후기게시판</a></li>
-				<li style="line-height: 40px"><a href="/blog/contact">연락처</a></li>
+				<!-- <li style="line-height: 40px"><a href="/blog/contact">연락처</a></li> -->
 			</ul>
+			<div style="margin-top: 300px;">
+				<ul>
+				<c:choose>
+					<c:when test = "${null ne pdto.guserId}">
+						<li><a href="/mypage/MyPageManagement">${pdto.guserId}님 마이페이지</a></li>
+						<li><a href="/member/Logout">로그아웃</a></li>
+					</c:when>				
+					
+					<c:when test = "${null ne cdto.comId}">
+						<li><a href="/mypage/MyPageManagement">${cdto.comId}님 마이페이지</a></li>
+						<li><a href="/member/Logout">로그아웃</a></li>
+					</c:when>
+					
+					<c:otherwise>
+						<li><a href="/member/LoginForm">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<!-- /#sidebar-wrapper -->

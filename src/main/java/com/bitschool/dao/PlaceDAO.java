@@ -1,5 +1,6 @@
 package com.bitschool.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,8 +29,8 @@ public class PlaceDAO implements IPlaceDAO {
 	@Override
 	public boolean insertPlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
-
-		System.out.println(pl_dto);
+			
+		System.out.println("dao: " + pl_dto);
 		int aCnt = session.insert(namespace+".insertPlaceRegist", pl_dto);
 		
 		if(aCnt > 0) {
@@ -44,10 +45,21 @@ public class PlaceDAO implements IPlaceDAO {
 	@Override
 	public List<PlaceDTO> selectPlaceListAll() {
 		List<PlaceDTO> placeList = null;
-		
+
 		placeList = session.selectList(namespace+".selectPlaceListAll");
 		
 		return placeList;
+	}
+
+
+	// 선택한 모임 상세 조회
+	@Override
+	public PlaceDTO selectPlaceDetail(int placeNo) throws SQLException {
+		PlaceDTO pl_dto = null;
+		
+		pl_dto = session.selectOne(namespace+".selectPlaceDetail", placeNo);
+		
+		return pl_dto;
 	}
 
 	

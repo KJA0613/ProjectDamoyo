@@ -219,13 +219,12 @@ function categoryMidChange(item){
 			<br> <br> <br> <br>
 			<div class="col-xs-12 col-sm-10">
 				<div class="row">
-				
-				
+			
 <!-- ********************************* 폼테그 시작 -->
-					<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringInsert" method="post" enctype="multipart/form-data">
+					<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringModify" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
 
-												<!-- 주제 -->
+						<!-- 주제 -->
 						<div class="form-group">
 							<!-- 입력항목이름 -->
 							<label for="ID" class="col-sm-2 control-label">제목</label>
@@ -349,7 +348,7 @@ function categoryMidChange(item){
 						<div class="form-group">
 							<label for="Name" class="col-sm-2 control-label">인원</label>
 							<div class="col-sm-1">
-								<input type="text" id="gParti" class="form-control" name="gatherParti" placeholder="인원수">
+								<input type="text" id="gParti" class="form-control" name="gatherPartiMax" placeholder="인원수">
 							</div>명
 						</div>
 

@@ -16,6 +16,7 @@ public class GatheringDTO {
 	private String gatherDay;
 	private String gatherArea;
 	private int gatherParti;
+	private int gatherPartiMax;
 	private String gatherContent;
 	private String gatherImg;
 	private String guserId;
@@ -143,13 +144,21 @@ public class GatheringDTO {
 		this.gatherState = gatherState;
 	}
 
+	public int getGatherPartiMax() {
+		return gatherPartiMax;
+	}
+
+	public void setGatherPartiMax(int gatherPartiMax) {
+		this.gatherPartiMax = gatherPartiMax;
+	}
+
 	@Override
 	public String toString() {
 		return "GatheringDTO [gatherNo=" + gatherNo + ", gatherSubject=" + gatherSubject + ", gatherCategory="
 				+ gatherCategory + ", gatherWrite=" + gatherWrite + ", gatherSdate=" + gatherSdate + ", gatherEdate="
 				+ gatherEdate + ", gatherDay=" + gatherDay + ", gatherArea=" + gatherArea + ", gatherParti="
-				+ gatherParti + ", gatherContent=" + gatherContent + ", gatherImg=" + gatherImg + ", guserId=" + guserId
-				+ ", gatherState=" + gatherState + "]";
+				+ gatherParti + ", gatherPartiMax=" + gatherPartiMax + ", gatherContent=" + gatherContent
+				+ ", gatherImg=" + gatherImg + ", guserId=" + guserId + ", gatherState=" + gatherState + "]";
 	}
 	
 	

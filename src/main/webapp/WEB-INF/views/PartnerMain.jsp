@@ -15,6 +15,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <title>광고주 메인페이지</title>
 
 <!-- 소개글 CSS -->
@@ -163,7 +166,7 @@
 <!-- 장소 광고 CSS -->
 <style>
 	.wrapper {
-	    max-width: 1100px;
+	    max-width: 1200px;
 	    margin: 0 auto;
 	    position: relative;
 	}
@@ -405,28 +408,28 @@
 	<!-- 모임공간 광고  -->
     <div class="wrapper">
   	   <h1>모임 공간</h1>
-   	   <hr>
-       <br>
-   	   <c:forEach var="plist" items="${placeList}">	
+   	   <hr style="border: solid 1px #b3b3b3;">
+	    
+   	   <c:forEach var="plList" items="${plList}">	
 			<ul class="properties_list">		
 				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
+					<a href="/place/PlaceDetail?placeNo=${plList.placeNo}">
+						<img src="${plList.placeImage}" class="property_img">
 					</a>
-					<span class="price">${plist.placeCostChoice} : ${plist.placeCost}</span>
+					<span class="price">${plList.placeCostChoice} : ${plList.placeCost}</span>
 					<div class="property_details">
 						<div class="title">
-							<h3><a href="">${plist.placeName}</a></h3>
+							<h3><a href="/place/PlaceDetail?placeNo=${plList.placeNo}">${plList.placeName}</a></h3>
 						</div>
 						<div class="details">
 							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">${plist.placeAddr2}</span>
+							<span id="s2">${plList.placeAddr2}</span>
 							<br>
 							<span id="s1">유형</span>&nbsp;&nbsp;
-							<span id="s2">${plist.placeType}</span>
+							<span id="s2">${plList.placeType}</span>
 							<br>
 							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">${plist.placeUseTime}</span>
+							<span id="s2">${plList.placeUseTime}</span>
 						</div>
 					</div>
 				</li>	
@@ -440,6 +443,6 @@
    <%-- <hr>
    <%@include file = "footer.jsp"%> --%>
 
-   <br><br>
+   <br><br><br><br>
 </body>
 </html>

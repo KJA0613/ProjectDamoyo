@@ -162,6 +162,8 @@ public class GatheringController {
 		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, sSelect, sSTR);
 		HashMap<String, List<GatheringDTO>> map = new HashMap<String, List<GatheringDTO>>();
 		
+		System.out.println("max받는지 - "+gList);
+		
 		if (gList != null) {
 			map.put("gList", gList);
 		}
@@ -190,6 +192,7 @@ public class GatheringController {
 		GatheringDTO gath = new GatheringDTO();
 		
 		String aPath = req.getSession().getServletContext().getRealPath("/");
+		System.out.println(aPath);
 		String rPath =  "\\resources\\image\\mozip\\";
 
 		boolean flag = false;
@@ -283,7 +286,7 @@ public class GatheringController {
 			// 파일이름이 있고, 공백제거한 파일이름이 ""(널)이 아니면, 즉 성공했으면
 				// 보드에 파일이름을 저장
 				fileName = rPath + fileName; // 저장할 파일의 경로
-				gath.setGatherImg(fileName);
+				gath.setGatherImg(fileName); // 여기서 dto에 넣어서 db에 저장
 				fileName = aPath + fileName; // 실제 파일의 경로
 				item.write(new File(fileName)); //upload, 즉 저장할 파일의 경로로 item을 저장함
 			} else {
@@ -392,7 +395,6 @@ public class GatheringController {
 				recommgatherList.add(regather);
 			}
 			
-			System.out.println("추천 dto "+recommgatherList);
 			
 			session.setAttribute("recommgatherList", recommgatherList);	
 		
@@ -403,9 +405,7 @@ public class GatheringController {
 		HashMap<String, String> map = new HashMap<String, String>();
 		
 		map.put("result", "no"); // 값이 없을때는 no, result에 디폴트값으로 no를 넣는 이유는 로그인 안했을때에는 1가 나와야함으로
-		
-		System.out.println(pdto);
-		
+						
 		if(pdto!=null){
 		
 			System.out.println("관심글 등록에 작성자아디 : "+guserId);
