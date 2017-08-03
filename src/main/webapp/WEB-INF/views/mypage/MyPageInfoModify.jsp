@@ -93,7 +93,7 @@
 							<div class="form-group">
 								<label for="guserId" class="control-label col-md-2">아이디 </label>
 								<div class="col-md-8">		
-									<input type="text" class="form-control" name="guserId" id="guserId" value="${pdto.guserId}" disabled>
+									<input type="text" class="form-control" name="guserId" id="guserId" value="${pdto.guserId}${cdto.comId}" disabled>
 								</div>
 							</div>
 							

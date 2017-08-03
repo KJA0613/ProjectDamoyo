@@ -111,6 +111,12 @@
 		select * from company where comId = #{comId}
 	</select>
 
+	<update id="updateCompanyInfo" parameterType="CompanyDTO">
+		update company set comName = #{comName}, comPhone = #{comPhone}, comEmail = #{comEmail},comManager = #{comManager},
+						   comSaNo = #{comSaNo}, comZoneCode = #{comZoneCode},comRoadAddress = #{comRoadAddress}, comJibunAddress = #{comJibunAddress},
+						   comDetailAddress = #{comDetailAddress}, comCeoName = #{comCeoName}
+		where comId = #{comId}
+	</update>
 
 
 	

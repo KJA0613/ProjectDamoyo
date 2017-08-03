@@ -66,6 +66,9 @@ public interface IMemberService {
 	//기업회원 아이디 찾기	
     public CompanyDTO getfindComID(String comEmail,String comName);
 
+    //기업회원 회원정보 수정
+	public boolean updateComInfo(CompanyDTO cdto);
+
 
 
 
