@@ -71,12 +71,12 @@
 
 <!-- 이미지 업로드 유효성 검사 -->
 <script>
-	function img_upload(obj) {
+	/* function img_upload(obj) {
 		var pathPoint = obj.value.lastIndexOf('.');		
 		filePoint = obj.value.substring(pathPoint + 1, obj.length);
 		fileType = filePoint.toLowerCase();		// 소문자로 변경
 		
-		if(fileType == 'jpg' || fileType == 'gif' || fileType == 'png' || fileType == 'jpeg' || fileType != 'bmp') {
+		if(fileType != 'jpg' || fileType != 'gif' || fileType != 'png' || fileType != 'jpeg' || fileType != 'bmp') {
 			
 		} else {
 			 alert('이미지 파일만 선택할 수 있습니다.');
@@ -89,7 +89,23 @@
 			upload = confirm('BMP 파일은 웹상에서 사용하기엔 적절한 포맷이 아닙니다. \n 그래도 계속 하시겠습니까?');
 			if(!upload) return false; 
 		}
-	}
+	} */
+	$(function() {
+		$("#placeImage").change(function(){
+					
+			if($("#placeImage").val() != ""){
+				var ext = $("#placeImage").val().split('.').pop().toLowerCase();
+				
+				/* .split('.')을 하면 return 값을 String 배열로 들어가고, pop은 스택인데 마지막 값(확장자 gif, jpg, 등등 확장자)을 빼냄, tolowerCase()는 문자열을 소문자로 바꿈 */
+				
+				if($.inArray(ext, ["gif","jpg","jpeg","png","bmp"]) == -1){
+						alert("jpg, png, gif, bmp 만 업로드 가능합니다.");
+						$("#fileName").val("");
+						return false;
+				}
+			}
+		});
+	});	
 </script>
 
 <!-- [체크한 값 가져오기] 라디오/체크박스 -->

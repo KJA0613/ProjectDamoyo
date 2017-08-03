@@ -181,8 +181,7 @@
 						<input type="password" id="input_guserPw" name="guserPw" class="form-control" placeholder="비밀번호를 입력하세요." tabindex="2" required>
 					</div>
 					<br>	
-					<div class="form-group pull-right">
-													
+					<div class="form-group pull-right">													
 						<button type="button" class="btn btn-primary" onclick="LoginChoiceSubmit(guserCode)" id="btnLogin" tabindex="3">로그인</button>		<!-- 로그인 되면: 메인페이지로 이동(아이디 세션 유지) / 로그인 안 되면(Javascript 경고창) -->
 					</div>
 					<br>
