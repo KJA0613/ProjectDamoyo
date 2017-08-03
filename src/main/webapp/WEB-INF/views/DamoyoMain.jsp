@@ -242,7 +242,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox1');" style="position: absolute;">		
 						<div class="cutter foreign">
-							<div class="img"><img src="resources/image/main/english.png"></div>	<!-- #ABD8EB -->
+							<div class="img"><img src="resources/image/main/foreign.png"></div>	<!-- #ABD8EB -->
 						</div>
 					</div>
 				</div>
@@ -251,7 +251,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox2');" style="position: absolute;">		
 						<div class="cutter eng">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/english.png"></div>
 						</div>
 					</div>
 				</div>
@@ -260,7 +260,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox3');" style="position: absolute;">		
 						<div class="cutter music">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/music.png"></div>
 						</div>
 					</div>
 				</div>
@@ -269,7 +269,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox4');" style="position: absolute;">		
 						<div class="cutter life">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/life.png"></div>
 						</div>
 					</div>
 				</div>
@@ -278,7 +278,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox5');" style="position: absolute;">		
 						<div class="cutter job">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/job.png"></div>
 						</div>
 					</div>
 				</div>
@@ -287,7 +287,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox6');" style="position: absolute;">		
 						<div class="cutter game">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/game.png"></div>
 						</div>
 					</div>
 				</div>
@@ -302,7 +302,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox7');" style="position: absolute;">		
 						<div class="cutter sports">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>	<!-- #ABD8EB -->
+							<div class="img"><img src="resources/image/main/sports.png"></div>	<!-- #ABD8EB -->
 						</div>
 					</div>
 				</div>
@@ -311,7 +311,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox8');" style="position: absolute;">		
 						<div class="cutter beauty">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/beauty.png"></div>
 						</div>
 					</div>
 				</div>
@@ -320,7 +320,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox9');" style="position: absolute;">		
 						<div class="cutter computer">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/computer.png"></div>
 						</div>
 					</div>
 				</div>
@@ -328,8 +328,8 @@
 				<!-- 10. 공무원 -->
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox10');" style="position: absolute;">		
-						<div class="cutter life">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+						<div class="cutter civil">
+							<div class="img"><img src="resources/image/main/civil.png"></div>
 						</div>
 					</div>
 				</div>
@@ -338,7 +338,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox11');" style="position: absolute;">		
 						<div class="cutter art">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/art.png"></div>
 						</div>
 					</div>
 				</div>
@@ -347,7 +347,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox12');" style="position: absolute;">		
 						<div class="cutter etc">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/etc.png"></div>
 						</div>
 					</div>
 				</div>
