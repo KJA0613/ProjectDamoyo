@@ -80,7 +80,7 @@ public class PlaceController {
 		
 		DiskFileItemFactory fac = new DiskFileItemFactory(); 	// 파일 업로드 핸들러를 생성
 		ServletFileUpload sfu = new ServletFileUpload(fac); 	// 클라이언트로 부터 우리가 지정한 곳으로 연결시키는 역활
-		sfu.setFileSizeMax(50*1024*1024);						// 업로드할 파일의 제한 크기를 정함
+		sfu.setFileSizeMax(100*1024*1024);						// 업로드할 파일의 제한 크기를 정함
 		sfu.setHeaderEncoding("UTF-8"); 						// 업로드할 파일을 UTF-8로 설정하여 글자가 깨지는것을 방지
  		String fileName = null;
  		
