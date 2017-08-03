@@ -155,7 +155,7 @@ public class PlaceController {
 						pl_dto.setPlacePerCnt(Integer.parseInt(item.getString("UTF-8")));				
 					} /*else if(item.getFieldName().equals("placeImage")){		// 수용인원
 						pl_dto.setPlaceImage(item.getString("UTF-8"));				
-					} */ 
+					} */
 				}
 			}
 			

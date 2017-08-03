@@ -36,7 +36,7 @@ public class GatheringController {
 	private IGatheringService gService;
 		
 
-	@RequestMapping(value = "/gathering", method =  { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gathering(
 			Model model,
 			HttpSession session
@@ -52,7 +52,7 @@ public class GatheringController {
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 		
 		List<GatheringDTO> recommList = gService.getRecommDefault();
-<<<<<<< HEAD
+		
 		if(cdto==null){		
 			if (pdto != null) { // 로그인 중이면
 				model.addAttribute("pdto", pdto);
@@ -70,11 +70,10 @@ public class GatheringController {
 
 			if (gList != null) {
 				model.addAttribute("gath", gList);
-=======
-				
+			}
 		
 		System.out.println(gList);
-		System.out.println(recommList);
+		System.out.println(recommList);}
 		
 		if(pdto!=null){ // 로그인 중이면
 			model.addAttribute("pdto", pdto);
@@ -86,7 +85,7 @@ public class GatheringController {
 			
 			if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
 				recommList = recommListCopy;// 디폴트 추천검색
->>>>>>> 9c6569912e532bee4f856b9c72a7f551cf78434a
+
 			}
 
 			/*
@@ -128,7 +127,7 @@ public class GatheringController {
 	}
 
 	
-	@RequestMapping(value = "/gatheringSearch", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/gatheringSearch",  method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody HashMap<String, List<GatheringDTO>> gatheringSearch(
 			@RequestParam(value = "cDATA", defaultValue="") String cData,
 			@RequestParam(value = "aDATA", defaultValue="") String aData,
