@@ -1253,8 +1253,7 @@ $(function() {
 			data : DATA,
 			success : function(data) {
 				if(data.result==='yes'){
-					alert('수정되었습니다.');
-					
+					location.reload();					
 				}else{
 					alert('실패하였습니다.');
 				}
@@ -1265,7 +1264,7 @@ $(function() {
 		});
 		
 
-/* 		$('#gatherModifyClose').trigger("click"); */
+		alert('수정되었습니다.');
 	
  	});
  });
@@ -2789,8 +2788,8 @@ function categoryMidChange(item){
 					</div>
 					
 					<div class="modal-footer">
-						<button type="button" id="gatherModifyClose" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
-						<button type="button" id="gatherModifyCommit" class="btn btn-primary" >저장</button>
+						<button type="button" id="gatherModifyClose" class="btn btn-danger pull-left" data-dismiss="modal">취소</button>
+						<button type="button" id="gatherModifyCommit" class="btn btn-primary" data-dismiss="modal">저장</button>
 					</div>
 					
 					
