@@ -5,6 +5,7 @@ public class GatheringDTO {
 
 	private int gatherNo;
 	private String gatherSubject;
+	
 	private String gatherCategoryTop;
 	private String gatherCategoryMid;
 	private String gatherCategoryBot;
@@ -14,9 +15,13 @@ public class GatheringDTO {
 	private String gatherEdate;
 	
 	private String gatherDay;
+	
 	private String gatherArea;
+	private String gatherAreaTop;
+	
 	private int gatherParti;
 	private int gatherPartiMax;
+	
 	private String gatherContent;
 	private String gatherImg;
 	private String guserId;
@@ -119,18 +124,23 @@ public class GatheringDTO {
 	public void setGatherState(String gatherState) {
 		this.gatherState = gatherState;
 	}
+	public String getGatherAreaTop() {
+		return gatherAreaTop;
+	}
+	public void setGatherAreaTop(String gatherAreaTop) {
+		this.gatherAreaTop = gatherAreaTop;
+	}
 	
 	@Override
 	public String toString() {
 		return "GatheringDTO [gatherNo=" + gatherNo + ", gatherSubject=" + gatherSubject + ", gatherCategoryTop="
 				+ gatherCategoryTop + ", gatherCategoryMid=" + gatherCategoryMid + ", gatherCategoryBot="
 				+ gatherCategoryBot + ", gatherWrite=" + gatherWrite + ", gatherSdate=" + gatherSdate + ", gatherEdate="
-				+ gatherEdate + ", gatherDay=" + gatherDay + ", gatherArea=" + gatherArea + ", gatherParti="
-				+ gatherParti + ", gatherPartiMax=" + gatherPartiMax + ", gatherContent=" + gatherContent
-				+ ", gatherImg=" + gatherImg + ", guserId=" + guserId + ", gatherState=" + gatherState + "]";
+				+ gatherEdate + ", gatherDay=" + gatherDay + ", gatherArea=" + gatherArea + ", gatherAreaTop="
+				+ gatherAreaTop + ", gatherParti=" + gatherParti + ", gatherPartiMax=" + gatherPartiMax
+				+ ", gatherContent=" + gatherContent + ", gatherImg=" + gatherImg + ", guserId=" + guserId
+				+ ", gatherState=" + gatherState + "]";
 	}
-
-	
 	
 	
 }
