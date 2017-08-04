@@ -372,8 +372,7 @@ public class GatheringController {
 			HttpSession session
 			){
 		
-		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");		
 		
 		String url = "default";	
 		
