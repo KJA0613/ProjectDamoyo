@@ -3,6 +3,7 @@ package com.bitschool.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
 import com.bitschool.service.IPlaceService;
 
@@ -48,8 +50,14 @@ public class MainController {
 	
 	// 02. 광고주회원 메인 폼 (Connection URL)
 	@RequestMapping(value = "/PartnerMain", method = { RequestMethod.POST, RequestMethod.GET })
-	public String PartnerMain() {
-		String url = "PartnerMain";
+	public String PartnerMain(HttpSession session, Model model) {
+		String url = null;
+		
+		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");
+				
+		model.addAttribute("cdto", cdto);
+		
+		url = "PartnerMain";
 		
 		return url;		
 	}	

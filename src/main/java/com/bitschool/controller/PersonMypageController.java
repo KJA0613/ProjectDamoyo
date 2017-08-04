@@ -19,8 +19,10 @@ import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.PlaceDTO;
 import com.bitschool.service.IGatheringService;
 import com.bitschool.service.IMemberService;
+import com.bitschool.service.IPlaceService;
 
 //[개인회원] - 마이페이지
 //회원(Member) = 개인(Person) + 기업(Company)
@@ -39,6 +41,9 @@ public class PersonMypageController {
 	
 	@Inject
 	private IGatheringService gatherService;
+	
+	@Inject
+	private IPlaceService PlaceService;
 	
 	
 	// --------------------------------------- [개인회원] 마 이 페 이 지  ---------------------------------------//
@@ -348,7 +353,7 @@ public class PersonMypageController {
 	
 	
 	
-	// 02. [개인/기업회원] 마이페이지 - 내가 개설한 모임
+	// 02. [개인/기업회원] 마이페이지 - 내가 개설한 모임 / 모임장소
 	@RequestMapping(value = "/MyPageCreateMeeting", method = RequestMethod.GET)
 	public String MyPageCreateMeeting(HttpSession session,Model model) {
 
@@ -357,7 +362,9 @@ public class PersonMypageController {
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");
 		
-		List<GatheringDTO> mlist = null;
+		List<GatheringDTO> mlist = null;			// 모임
+		List<PlaceDTO> placeList = null;			// 광고주(장소)
+		
 		if(cdto==null){
 			if (pdto != null) { // 로그인 체크
 
@@ -374,12 +381,17 @@ public class PersonMypageController {
 			}
 		}
 		
+
 		if(pdto==null){
 			if(cdto!=null){
 				model.addAttribute("cdto",cdto);
 				String guserId = cdto.getComId();
 				
-				mlist = gatherService.getComMakeList(guserId);
+				mlist = gatherService.getComMakeList(guserId);				// 개인 > 내가 개설한 "모임"
+				placeList = PlaceService.getPlaceMakeList(guserId);			// 광고주 > 내가 개설한 "모임장소"
+				
+				model.addAttribute("plList", placeList);
+				
 				url = "mypage/MyPageCreateMeeting";
 			}
 			if (mlist != null) {
@@ -389,9 +401,6 @@ public class PersonMypageController {
 		
 		return url; 
 	}
-
-	
-	
 	
 	
 	// 03. [개인회원] 마이페이지 - 내가 참여중인 모임

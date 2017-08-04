@@ -15,22 +15,26 @@
 			#{placeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeNotUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, #{comId})			
 	</insert>		
 
+
 	<!-- 모임 전체 조회 (오름차순) -->
 	<select id="selectPlaceListAll" resultType="PlaceDTO">
 		select * from place order by placeNo desc
 	</select>
+	
 	
 	<!-- 선택한 모임 > 상세 조회 -->
 	<select id="selectPlaceDetail" parameterType="int" resultType="PlaceDTO">
 		select * from place where placeNo = #{placeNo}
 	</select>
 	
+	
 	<!-- 선택한 모임 > 작성자 정보 조회 -->
 	<select id="selectPalaceCompanyInfo" parameterType="int" resultType="CompanyDTO">
 		select * from company where comId = (select comId from place where placeNo = #{placeNo})
 	</select>
 	
-	<!-- 메인페이지에 모임 장소 최신날짜로 6개 가져오기   -->
+	
+	<!-- 메인페이지에 모임 장소 최근날짜로 6개 가져오기   -->
 	<select id="selectPlaceRecentInfo" resultType="PlaceDTO">
 	 select * 
 	 from (select rownum as num, temp.* 
@@ -38,5 +42,10 @@
 	 where num between 1 and 6
 	</select>
 	
+	
+	<!-- [광고주 > 마이페이지] 내가 개설한 모임장소  -->
+	<select id="selectPlaceMakeList" parameterType="String" resultType="PlaceDTO">
+		select * from place where comId = (select comId from company where comId=#{comId})
+	</select>
 	
 </mapper>

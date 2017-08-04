@@ -244,7 +244,8 @@
 
 					<!-- 다음 지도 -->
 					<div class="form-group">
-					<div id="map" style="width:500px;height:400px;"></div>
+					<h3 style="color: blue"> 다음 지도 API 넣을 예정 </h3>
+					<!-- <div id="map" style="width:500px;height:400px;"></div>
 						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=808e992783fa7a2691f58ef6a4ae0ed4"></script>
 						<script>
 						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -255,7 +256,7 @@
 						
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new daum.maps.Map(mapContainer, mapOption); 
-						</script>
+						</script> -->
 					</div>					
 
 				<div class="clear-fix pull-right">

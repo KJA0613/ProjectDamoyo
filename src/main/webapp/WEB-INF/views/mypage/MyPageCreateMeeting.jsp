@@ -30,19 +30,10 @@
 	}
 </style>
 
-<!-- JavaScript -->
-<script>
-	function meeting_delete() {
-		alert('해당 모임을 삭제하시겠습니까?');
-		
-		// 확인 버튼 클릭 > 해당 자료 삭제 코드 작성하기
-	}
-</script>
-
-
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
 </head>
+
 <body>
 	
 	 <div class="container">
@@ -63,16 +54,16 @@
 					<!-- 검색 -->
 				    <div class="col-md-4 col-md-offset-8">
 						<form action="#" method="POST" class="search-form">
-							<div class="form-group has-feedback">
+							<!-- <div class="form-group has-feedback">
 				           		<label for="search" class="sr-only">search</label>
 				           		<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력해주세요.">
-				             		<!-- 돋보기 모양 -->
+				             		돋보기 모양
 				            	<span class="glyphicon glyphicon-search form-control-feedback"></span>
-				           	</div>
+				           	</div> -->
 						</form>
 					</div>
-					<!-- 내용 -->
 					
+					<!-- 개인 > 개설한 모임 목록  -->					
 					<div class="row">
 						<c:forEach var="make" items="${mlist}">
 							<div class="col-xs-6 col-lg-6" id="gather">
@@ -89,22 +80,14 @@
 								</a>
 							</div>
 						</c:forEach>
-
 					</div>
-							
-					<!-- 
-						순번
-						모임명
-						작성자
-						참여인원 현황
-						등록일
-						조회수
-						삭제
-					-->
 					
-					<!-- 삭제 체크 클릭시 JS -->
-					<!-- <input type="checkbox" name="chk_delete" value="delete" onclick="meeting_delete()"> -->
-	
+					
+					<!-- 광고주 > 개설한 모임 장소 -->
+					<div class="wrapper">
+			   	   		<%@include file="../place/PlaceAll.jsp"%>			
+			   	    </div>
+			   	    			
 				</div>
 			</div>
 		</div>
