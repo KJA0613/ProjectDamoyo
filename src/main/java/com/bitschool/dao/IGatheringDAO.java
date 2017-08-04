@@ -37,5 +37,7 @@ public interface IGatheringDAO {
 	
 	//기업회원내가만든모임
 	public List<GatheringDTO> selectComMakeList(String guserId);
+
+	public boolean updateModalGathering(GatheringDTO gdto);
 	
 }
