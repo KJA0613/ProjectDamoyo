@@ -18,5 +18,8 @@ public interface IPlaceService {
 
 	// 모임 클릭 > 작성자 정보
 	public CompanyDTO getPalaceCompanyInfo(int placeNo);
+
+	// 메인페이지에 모임 장소 최신날짜로 6개 가져오기
+	public List<PlaceDTO> getPlaceRecentInfo();
 	
 }

@@ -362,155 +362,17 @@
 	   <h1>모임 공간</h1>
 	   <hr>
 	   <br>
-   
    	   <div class="wrapper">
-   	   		<%@include file="place/PlaceAll.jsp"%>  
-			<!--<ul class="properties_list">
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png"class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png"class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-			</ul>
-			
-			<br>
-			
-			<ul class="properties_list">
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-			</ul> -->
+   	   		<%@include file="place/PlaceAll.jsp"%>			
    	   </div>
 		
-   <br><br><br>		
-   <!-- hidden -->
-   <input type="hidden" name="guserId" value="${pdto.guserId}">
-   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
+	   <br><br><br>		
+	   <!-- hidden -->
+	   <input type="hidden" name="guserId" value="${pdto.guserId}">
+	   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
 
 
-   <br><br><br>
+   	   <br><br><br>
    
    <!-- [Footer] 페이지 하단 (고정화면) -->
    <hr>

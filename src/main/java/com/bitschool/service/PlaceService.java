@@ -82,5 +82,19 @@ public class PlaceService implements IPlaceService {
 		
 		return cdto;
 	}
+
+	// 메인페이지에 모임 장소 최신날짜로 6개 가져오기
+	@Override
+	public List<PlaceDTO> getPlaceRecentInfo() {
+		List<PlaceDTO> placeList = null;
+		
+		try {
+			placeList = PlaceDAO.selectPlaceRecentInfo();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return placeList;
+	}
 	
 }
