@@ -95,7 +95,7 @@
 		insert into company(comNo, comId, comPw, comName, comPhone,  comEmail, comManager,comSaNo,comZoneCode,comRoadAddress,comJibunAddress,comDetailAddress,comCeoName,comCode) 
 		values(#{comNo}, #{comId}, #{comPw}, #{comName}, #{comPhone},  #{comEmail}, #{comManager}, #{comSaNo},#{comZoneCode},#{comRoadAddress},#{comJibunAddress},#{comDetailAddress},#{comCeoName},#{comCode})
 	</insert>
-	
+
 	<!-- [기업회원] 로그인 > 사용자가 입력한 "아이디" > 유무 조회 -->
 	<select id="selectCompanyLogin" parameterType="String" resultType="CompanyDTO">
 		select * from company where comId = #{comId}

@@ -282,7 +282,6 @@ public class MemberService implements IMemberService {
 			boolean flag = false;
 			
 			flag = companyDAO.companyRegist(cdto);
-	
 			
 			return flag;
 		}

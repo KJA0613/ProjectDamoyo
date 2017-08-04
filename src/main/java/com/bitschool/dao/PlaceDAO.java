@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
 
 @Repository
@@ -52,14 +53,36 @@ public class PlaceDAO implements IPlaceDAO {
 	}
 
 
-	// 선택한 모임 상세 조회
+	// 모임 클릭 > 상세정보
 	@Override
 	public PlaceDTO selectPlaceDetail(int placeNo) throws SQLException {
 		PlaceDTO pl_dto = null;
-		
+
 		pl_dto = session.selectOne(namespace+".selectPlaceDetail", placeNo);
 		
 		return pl_dto;
+	}
+
+
+	// 모임 클릭 > 작성자 정보 
+	@Override
+	public CompanyDTO selectPalaceCompanyInfo(int placeNo) throws SQLException {
+		CompanyDTO cdto = null;
+		
+		cdto = session.selectOne(namespace+".selectPalaceCompanyInfo", placeNo);
+		
+		return cdto;
+	}
+
+	
+	// 메인페이지에 모임 장소 최신날짜로 6개 가져오기  
+	@Override
+	public List<PlaceDTO> selectPlaceRecentInfo() throws SQLException {
+		List<PlaceDTO> placeList = null;
+		
+		placeList = session.selectList(namespace+".selectPlaceRecentInfo");
+		
+		return placeList;
 	}
 
 	

@@ -80,7 +80,7 @@ public class PlaceController {
 		
 		DiskFileItemFactory fac = new DiskFileItemFactory(); 	// 파일 업로드 핸들러를 생성
 		ServletFileUpload sfu = new ServletFileUpload(fac); 	// 클라이언트로 부터 우리가 지정한 곳으로 연결시키는 역활
-		sfu.setFileSizeMax(50*1024*1024);						// 업로드할 파일의 제한 크기를 정함
+		sfu.setFileSizeMax(100*1024*1024);						// 업로드할 파일의 제한 크기를 정함
 		sfu.setHeaderEncoding("UTF-8"); 						// 업로드할 파일을 UTF-8로 설정하여 글자가 깨지는것을 방지
  		String fileName = null;
  		
@@ -155,7 +155,7 @@ public class PlaceController {
 						pl_dto.setPlacePerCnt(Integer.parseInt(item.getString("UTF-8")));				
 					} /*else if(item.getFieldName().equals("placeImage")){		// 수용인원
 						pl_dto.setPlaceImage(item.getString("UTF-8"));				
-					} */ 
+					} */
 				}
 			}
 			
@@ -202,13 +202,10 @@ public class PlaceController {
 	public String PlaceListAll(CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;
 		
-		// 광고주 > 로그인 세션정보
-		cdto = (CompanyDTO) session.getAttribute("cdto");
 		List<PlaceDTO> placeList = placeService.getPlaceListAll();	
 		//System.out.println("[TEST] 전체조회: " + placeList);
 		
 		model.addAttribute("plList", placeList);
-		model.addAttribute("cdto", cdto);
 		
 		url = "PartnerMain";
 		
@@ -221,14 +218,16 @@ public class PlaceController {
 	@RequestMapping(value = "/PlaceDetail",  method = RequestMethod.GET)
 	public String PlaceDetail(@RequestParam("placeNo") int placeNo, CompanyDTO cdto, HttpSession session, Model model) {
 		String url = null;
+
+		// 모임 클릭 > 상세정보
+		PlaceDTO pl_dto = placeService.getPlaceDetail(placeNo);
 		
-		// 광고주 > 로그인 세션정보
-		cdto = (CompanyDTO) session.getAttribute("cdto");
-		PlaceDTO pl_dto = placeService.getplaceDetail(placeNo);
+		// 모임 클릭 > 작성자 정보
+		cdto = placeService.getPalaceCompanyInfo(placeNo);
 		
 		model.addAttribute("pl_dto", pl_dto);
 		model.addAttribute("cdto", cdto);
-		
+
 		url = "place/PlaceDetail";
 		
 		return url;

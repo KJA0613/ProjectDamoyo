@@ -226,7 +226,6 @@ function categoryMidChange(item){
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
 						<input type="hidden" name="comId" value="${cdto.comId}" />
 
-
 						<!-- 주제 -->
 						<div class="form-group">
 							<!-- 입력항목이름 -->

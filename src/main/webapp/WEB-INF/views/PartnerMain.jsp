@@ -163,92 +163,7 @@
 	}
 </style>
 
-<!-- 장소 광고 CSS -->
-<style>
-	.wrapper {
-	    max-width: 1200px;
-	    margin: 0 auto;
-	    position: relative;
-	}
-	
-	.wrapper ul.properties_list li {
-	    display: block;
-	    width: 30%;
-	    height: auto;
-	    position: relative;
-	    float: left;	    
-	    margin: 0 3% 3% 0;
-	}
-	
-	.wrapper ul.properties_list li img.property_img {
-	    width: 100%;
-	    height: auto!important;
-	    vertical-align: top;
-	}
-	
-	.wrapper ul.properties_list li .price {
-	    position: absolute;
-	    top: 10px;
-	    left: 10px;
-	    padding: 15px 20px;
-	    background: #ffffff;
-	    color: #514d4d;
-	    font-size: 16px;
-	    font-weight: bold;
-	    letter-spacing: 1px;
-    }
-    
-    .wrapper ul li .property_details {
-	    width: 100%;
-	    padding: 2.9% 5.8% 4.1% 5.8%;
-	    border-bottom: 1px solid #f2f1f1;
-	    border-left: 1px solid #f2f1f1;
-	    border-right: 1px solid #f2f1f1;
-    }
-    
-    .wrapper ul li .property_details h1 a {
-	    text-decoration: none;
-	    color: #666464;
-	}
-	 
-	.wrapper ul li .property_details.title a{
-	    color: #666464;
-	    font-size: 28%;
-	    font-weight: bold;
-	    margin-left: 0px;
-	    margin-bottom: 5px;
-	    line-height: 28px;
-	    vertical-align: baseline;
-	    background: transparent;
-	}
-	
-	.property_details h3 {
-		color: #40b4e5;
-		margin-left: 0px;
-	    margin-bottom: 5px;
-	    line-height: 25px;
-	}
-	
-	.details {
-		margin-left: 0;
-	}
-	
-	#s1 {
-	margin-left: 0px;
-		color: #777;
-		font-weight: bold;
-		font-size: 16px;
-		    /* display: inline-block; */
-    	/* padding: 0px 5px 0; */
-	}
-	#s2 {
-	margin-left: 0px;
-		color: #777;
-		font-size: 16px;
-		font-weight: normal;
-	}	
 
-</style>
 
 <!-- 모임공간 검색창1 CSS -->
 <style type="text/css">
@@ -297,11 +212,19 @@
 	}
 </script>
 
+<script>
+    function fnMove(seq){
+        var offset = $("#div" + seq).offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+    }
+</script>
+
 <!-- [Header] 공통 헤더 -->
 <%@include file="header.jsp"%>
 </head>
 
 <body>
+
 	<!-- 소개글 -->
 	<div class="intro_wrap">
 		<h2>
@@ -316,18 +239,18 @@
 		
 		<div class="btn_area">
 			<div class="btn_wrap">
-				<a href="#" class="btn space_total">전체 공간보기</a>
+				<a class="btn space_total" onclick="fnMove('1')">전체 모임 공간</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="/place/PlaceRegistForm" onclick="" class="btn space_regist">공간 등록하기</a>
+				<a href="/place/PlaceRegistForm" onclick="" class="btn space_regist">모임 공간 등록</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="#" class="btn my_space">나의 공간 관리</a>
+				<a href="#" class="btn my_space">나의 모임 공간</a>
 			</div>
 		</div>		
 	</div>			
 	<hr>
-	<br>
+	
 	
 	<!-- 검색 -->	
  	<!--<div class="box_search">
@@ -406,43 +329,18 @@
 
 	
 	<!-- 모임공간 광고  -->
-    <div class="wrapper">
+    <div class="wrapper" id="div1">
+    <br>
   	   <h1>모임 공간</h1>
    	   <hr style="border: solid 1px #b3b3b3;">
-	    
-   	   <c:forEach var="plList" items="${plList}">	
-			<ul class="properties_list">		
-				<li>
-					<a href="/place/PlaceDetail?placeNo=${plList.placeNo}">
-						<img src="${plList.placeImage}" class="property_img">
-					</a>
-					<span class="price">${plList.placeCostChoice} : ${plList.placeCost}</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="/place/PlaceDetail?placeNo=${plList.placeNo}">${plList.placeName}</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">${plList.placeAddr2}</span>
-							<br>
-							<span id="s1">유형</span>&nbsp;&nbsp;
-							<span id="s2">${plList.placeType}</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">${plList.placeUseTime}</span>
-						</div>
-					</div>
-				</li>	
-			</ul>
-		</c:forEach>			
+	    	<%@include file="place/PlaceAll.jsp"%>   	   		
 		<br>
 	</div>		
-			
-
-   <!-- [Footer] 페이지 하단 (고정화면) -->
-   <%-- <hr>
-   <%@include file = "footer.jsp"%> --%>
-
-   <br><br><br><br>
+	<br><br><br><br>	
+    
+    <!-- [Footer] 페이지 하단 (고정화면) -->
+    <%-- <hr>
+    <%@include file = "footer.jsp"%> --%>
+    
 </body>
 </html>
