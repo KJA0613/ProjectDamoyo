@@ -232,7 +232,7 @@
    
 		<!-- 02. 테마  -->
 		<h1>테마별 검색</h1>
-		<hr>
+		<hr style="border: solid 1px #b3b3b3;">
 		<br>
 		
 		<!-- 1행 -->
@@ -356,12 +356,16 @@
 	
 
 		
-	   <br><br><br> <br><br><br>  <br><br><br><br><br>
+	   <br><br><br><br><br><br><br><br><br><br><br><br>
 	   
 	   <!-- 03. 광고  -->
 	   <h1>모임 공간</h1>
-	   <hr>
+	   <hr style="border: solid 1px #b3b3b3;">
+	  <!--  <p class="help-block">
+			&nbsp;<small>※ 최근에 개설된 모임순입니다.^^</small>
+	   </p> -->
 	   <br>
+	   
    	   <div class="wrapper">
    	   		<%@include file="place/PlaceAll.jsp"%>			
    	   </div>
