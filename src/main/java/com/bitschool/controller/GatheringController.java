@@ -16,7 +16,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.servlet.ServletRequestContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -139,6 +138,7 @@ public class GatheringController {
 		RecommGatherDTO regather = null;
 		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
 		
 		if(!sSTR.equals("")){
 			if(pdto!=null){ // 로그인 안했을때

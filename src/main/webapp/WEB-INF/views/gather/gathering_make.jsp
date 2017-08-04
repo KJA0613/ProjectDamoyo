@@ -224,7 +224,7 @@ function categoryMidChange(item){
 
 					<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringInsert" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
-						<input type="hidden" name="guserId" value="${cdto.comId}" />
+						<input type="hidden" name="comId" value="${cdto.comId}" />
  
 
 
