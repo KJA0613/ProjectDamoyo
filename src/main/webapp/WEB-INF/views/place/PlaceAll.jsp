@@ -26,7 +26,7 @@
 	}
 	
 	.wrapper ul.properties_list li img.property_img {
-	    width: 105%;
+	    width: 100%;
 	    height: auto!important;
 	    vertical-align: top;
 	}
@@ -44,7 +44,7 @@
     }
     
     .wrapper ul li .property_details {
-	    width: 105%;
+	    width: 100%;
 	    padding: 2.9% 5.8% 4.1% 5.8%;
 	    border-bottom: 1px solid #f2f1f1;
 	    border-left: 1px solid #f2f1f1;
@@ -95,14 +95,42 @@
 	}	
 </style>
 
+<style type="text/css">
+	img {
+	    -webkit-transform:scale(1);
+	    -moz-transform:scale(1);
+	    -ms-transform:scale(1); 
+	    -o-transform:scale(1);  
+	    transform:scale(1);
+	    -webkit-transition:.3s;
+	    -moz-transition:.3s;
+	    -ms-transition:.3s;
+	    -o-transition:.3s;
+	    transition:.3s;
+	}
+	.sample_image:hover img {
+	    -webkit-transform:scale(1.2);
+	    -moz-transform:scale(1.2);
+	    -ms-transform:scale(1.2);   
+	    -o-transform:scale(1.2);
+	    transform:scale(1.2);
+	}
+	.sample_image {
+		overflow: hidden;
+	}
+</style>
 </head>
 <body>
-	<c:forEach var="plList" items="${plList}">
+
+	<c:forEach var="plList" items="${plList}">	
 		<ul class="properties_list">
-			<li><a href="/place/PlaceDetail?placeNo=${plList.placeNo}">
-					<img src="${plList.placeImage}" class="property_img">
-			</a> <span class="price">${plList.placeCostChoice} :
-					${plList.placeCost}</span>
+			<li>
+				<div class="sample_image">
+					<a href="/place/PlaceDetail?placeNo=${plList.placeNo}">
+					<img src="${plList.placeImage}" class="property_img"> 	</a>			
+					<span class="price">${plList.placeCostChoice} :	${plList.placeCost}</span>		
+				</div>		
+				
 				<div class="property_details">
 					<div class="title">
 						<h3>
@@ -110,12 +138,14 @@
 						</h3>
 					</div>
 					<div class="details">
-						<span id="s1">지역</span>&nbsp;&nbsp; <span id="s2">${plList.placeAddr2}</span>
+						<span id="s1">지역</span>&nbsp;&nbsp; <span id="s2">${plList.placeAddr3}</span>
 						<br> <span id="s1">유형</span>&nbsp;&nbsp; <span id="s2">${plList.placeType}</span>
 						<br> <span id="s1">영업시간</span>&nbsp;&nbsp; <span id="s2">${plList.placeUseTime}</span>
 					</div>
-				</div></li>
+				</div>
+			</li>
 		</ul>
 	</c:forEach>
+	
 </body>
 </html>

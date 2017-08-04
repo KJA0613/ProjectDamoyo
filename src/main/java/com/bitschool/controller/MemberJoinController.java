@@ -141,10 +141,10 @@ public class MemberJoinController {
 	
 	// 03-1. [기업회원가입-2단계] 기업상세정보 등록	
 	@RequestMapping(value = "/CompanyDetailRegist", method = { RequestMethod.GET, RequestMethod.POST })
-	public String CompanyDetailRegist(CompanyDTO cdto ,HttpSession session){
+	public String CompanyDetailRegist(CompanyDTO cdto ,HttpSession session, Model model){
 
 		CompanyDTO cfdto = (CompanyDTO) session.getAttribute("cfdto");
-		System.out.println("test 2단계 cfdto: " + cfdto);
+	
 		cdto.setComManager(cfdto.getComManager());
 		cdto.setComId(cfdto.getComId());
 		cdto.setComPw(cfdto.getComPw());
@@ -155,8 +155,7 @@ public class MemberJoinController {
 		String url = null;
 		
 		boolean flagInsert = memberService.CompanyRegist(cdto);
-		System.out.println("test 2단계 : " + flagInsert);
-		System.out.println("test 2단계 cdto: " + cdto);
+				
 		if(flagInsert){
 			url="redirect:/";
 		}

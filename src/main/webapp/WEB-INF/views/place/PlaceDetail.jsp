@@ -99,12 +99,10 @@
 </style>
 
 
-<!-- 네이버 지도 -->
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=qkgcjYwfM5TDGCjc1KDY&submodules=geocoder"></script>
-
 <!-- [Header] 공통 헤더 -->
 <%@include file="../header.jsp"%>
 </head>
+
 <body>
 	<br>
 	<div class="container">
@@ -126,7 +124,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-6">
-							<img src="${pl_dto.placeImage}" class="property_img">					
+							<img src="${pl_dto.placeImage}" width="50%" height="auto" class="property_img">					
 						</div>
 					</div>
 
@@ -224,7 +222,7 @@
 					 <div class="form-group">
 						<label for="type" class="col-md-2 control-label">이름</label>
 						<div class="col-md-10">
-							${cdto.comName}						
+							${cdto.comManager}						
 						</div>
 					</div>
 					
@@ -244,10 +242,23 @@
 					<br><br>
 					
 
-					<!-- 지도 -->
+					<!-- 다음 지도 -->
+					<div class="form-group">
+					<div id="map" style="width:500px;height:400px;"></div>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=808e992783fa7a2691f58ef6a4ae0ed4"></script>
+						<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						    mapOption = { 
+						        center: new daum.maps.LatLng(37.537123, 127.005523), // 지도의 중심좌표
+						        level: 3 // 지도의 확대 레벨
+						    };
+						
+						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+						var map = new daum.maps.Map(mapContainer, mapOption); 
+						</script>
+					</div>					
 
-
-					<div class="clear-fix pull-right">
+				<div class="clear-fix pull-right">
 						<div class="col-md-4" style="text-align:center;">
 							<button type="submit" class="btn btn-primary" id="submitAfterCheck">전체 목록보기</button>
 						</div>

@@ -212,6 +212,13 @@
 	}
 </script>
 
+<script>
+    function fnMove(seq){
+        var offset = $("#div" + seq).offset();
+        $('html, body').animate({scrollTop : offset.top}, 400);
+    }
+</script>
+
 <!-- [Header] 공통 헤더 -->
 <%@include file="header.jsp"%>
 </head>
@@ -232,18 +239,18 @@
 		
 		<div class="btn_area">
 			<div class="btn_wrap">
-				<a href="#" class="btn space_total">전체 공간보기</a>
+				<a class="btn space_total" onclick="fnMove('1')">전체 모임 공간</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="/place/PlaceRegistForm" onclick="" class="btn space_regist">공간 등록하기</a>
+				<a href="/place/PlaceRegistForm" onclick="" class="btn space_regist">모임 공간 등록</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="#" class="btn my_space">나의 공간 관리</a>
+				<a href="#" class="btn my_space">나의 모임 공간</a>
 			</div>
 		</div>		
 	</div>			
 	<hr>
-	<br>
+	
 	
 	<!-- 검색 -->	
  	<!--<div class="box_search">
@@ -322,7 +329,8 @@
 
 	
 	<!-- 모임공간 광고  -->
-    <div class="wrapper">
+    <div class="wrapper" id="div1">
+    <br>
   	   <h1>모임 공간</h1>
    	   <hr style="border: solid 1px #b3b3b3;">
 	    	<%@include file="place/PlaceAll.jsp"%>   	   		

@@ -394,7 +394,7 @@ function catMidChangeThr(item){
 				<br>
 				
 				<!-- 회원가입입력폼 : 2단계 -->
-				<form action="/join/PersonDatailRegist" method="post" name="signform" id="per">
+				<form action="join/PersonDatailRegist" method="post" name="signform" id="per">
 			         <h4><strong>모임 희망 지역</strong></h4>	
 			         <div id=list1>
 			            <div class="dropdown">

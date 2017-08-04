@@ -155,12 +155,13 @@
 				</p>								
 				<br><br>
 				
+				
 				<!-- 모임공간 등록 폼 -->
 				<form action="/place/PlaceRegist" method="POST" class="form-horizontal" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
-						<div class="col-md-8">
+						<div class="col-md-10">
 							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">						
 						</div>
 						<!-- <div class="col-md-2">
@@ -223,7 +224,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">URL</label>
 						<div class="col-md-10">
-							<input type="text" name="placeURL" class="form-control" placeholder="www.naver.com" required>						
+							<input type="text" name="placeURL" class="form-control" placeholder="www.damoyo.com" required>						
 						</div>
 					</div>
 					
@@ -285,15 +286,14 @@
 						</div>
 					</div>
 									
-					<br>
-					
-
-					<hr>					
-					<h3>담당자 정보</h3><br>
+					<br><br>		
+										
+					<h3>담당자 정보</h3>
+					<hr>
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">이름</label>
 						<div class="col-md-10">
-							<input type="text" name="comName" class="form-control" placeholder="실명을 입력해주세요." value="${cdto.comName}" disabled>						
+							<input type="text" name="comManager" class="form-control" placeholder="실명을 입력해주세요." value="${cdto.comName}" disabled>						
 						</div>
 					</div>
 					
@@ -328,7 +328,8 @@
    <!-- [Footer] 페이지 하단 (고정화면) -->
    <hr>
    <%@include file = "../footer.jsp"%>
-   
+
    </div>
+   <br><br>   
 </body>
 </html>
