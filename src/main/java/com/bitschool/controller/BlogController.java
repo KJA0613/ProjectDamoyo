@@ -702,4 +702,16 @@ public class BlogController {
 		return "blog/contact/contact";
 	}
 	
+	@RequestMapping(value="/member/LoginForm", method = {RequestMethod.GET, RequestMethod.POST})
+	public String login() {
+		String url = "login/LoginForm";
+		
+		/*-------------------------- [2차 처리 예정] --------------------------
+			1) 개인/기업 > 체크박스 추가 	2) 개인/기업 > DB등록된 코드값 비교해서 로그인 처리 
+			3) 로그인 유지 > 체크박스 추가
+		 ------------------------------------------------------------------*/
+
+		return url;
+	}
+	
 }
