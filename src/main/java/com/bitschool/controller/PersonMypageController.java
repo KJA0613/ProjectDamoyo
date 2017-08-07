@@ -19,8 +19,10 @@ import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.PlaceDTO;
 import com.bitschool.service.IGatheringService;
 import com.bitschool.service.IMemberService;
+import com.bitschool.service.IPlaceService;
 
 //[개인회원] - 마이페이지
 //회원(Member) = 개인(Person) + 기업(Company)
@@ -39,6 +41,9 @@ public class PersonMypageController {
 	
 	@Inject
 	private IGatheringService gatherService;
+	
+	@Inject
+	private IPlaceService PlaceService;
 	
 	
 	// --------------------------------------- [개인회원] 마 이 페 이 지  ---------------------------------------//
@@ -77,9 +82,14 @@ public class PersonMypageController {
 							
 						
 				// 회원가입한 정보 > 수정 가능한 페이지로 이동	(기존 정보 뿌려주기)
-				url = "mypage/PersonInfoFirstModify";
-				
+				url = "mypage/PersonInfoFirstModify";				
 			}
+			else{
+				/*------------------- [2차 처리 예정] ------------------
+					2) 비밀번호들 일치 안 할 경우 > 예외처리 > 에러 메세지
+	 	 	     ---------------------------------------------------*/
+				url = "redirect:/mypage/MyPageManagement";
+			}	
 		}
 		
 		//기업회원
@@ -91,19 +101,16 @@ public class PersonMypageController {
 							
 				
 				// 회원가입한 정보 > 수정 가능한 페이지로 이동	(기존 정보 뿌려주기)
-				url = "mypage/CompanyInfoFirstModify";
-				
+				url = "mypage/CompanyInfoFirstModify";				
 				
 			}
+			else{
+				/*------------------- [2차 처리 예정] ------------------
+					2) 비밀번호들 일치 안 할 경우 > 예외처리 > 에러 메세지
+	 	 	     ---------------------------------------------------*/
+				url = "redirect:/mypage/MyPageManagement";
+			}
 		}
-		
-		
-		else{
-			/*------------------- [2차 처리 예정] ------------------
-				2) 비밀번호들 일치 안 할 경우 > 예외처리 > 에러 메세지
- 	 	     ---------------------------------------------------*/
-			url = "redirect:/mypage/MyPageManagement";
-		}		
 		
 		
 		return url;
@@ -203,8 +210,9 @@ public class PersonMypageController {
 
 		// 로그인 된 세션 정보 받아와서 > pdto에 저장
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-
+		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");
 		// 세션에 사용자 정보가 있으면 > 수정 가능
+		
 		if (pdto != null) {
 			// [수정 처리] 세션에 저장되어있는 pw = 현재 비밀번호 입력란에 입력한 pw
 			if (pdto.getGuserPw().equals(guserCurPw)) {
@@ -212,40 +220,67 @@ public class PersonMypageController {
 				pdto.setGuserPw(guserNewPwCheck);
 
 				flag = memberService.PersonPwModify(pdto);
+			}
+			// 비밀번호 수정 성공
+			if (flag) {
+				// 세션 초기화
+				session.invalidate();
 
-				//System.out.println("[TEST-비밀번호 변경(개인)] 수정 여부: " + flag);
-				//System.out.println("[TEST-비밀번호 변경(개인)] 비밀번호가 변경된 세션 정보: " + pdto);
+				// 로그아웃 된 상태의 메인페이지로 이동 (2차 수정 예정 --- 1번 참조)
+				url = "redirect:/";
+			
+			// 비밀번호 수정 미성공 
+			} else {
+				
+				/*-------------------------- [2차 처리 예정] -------------------------
+					1) 비밀번호 수정 성공 > 팝업 > 로그인 화면 or 메인 화면 선택
+					2) 비밀번호들 일치 안 할 경우 > 로그아웃 시키면서 메인 페이지로 이동 X > 예외처리
+					3) [MyPageInfoModify.jsp] 
+					   > 현재 비밀번호, 새 비밀번호 = 새 비밀번호 확인 > 예외처리
+					4) html > required 태그 미적용되는 이유 알아보기
+		 	 	 -----------------------------------------------------------------*/
+				
+				// 마이페이지 관리 폼으로 이동 (reload)
+				url = "redirect:/mypage/MyPageManagement";
 			}
 		}	
 		
-		// 비밀번호 수정 성공
-		if (flag) {
-			// 세션 초기화
-			session.invalidate();
+		if(cdto!=null){
+			if(cdto.getComPw().equals(guserCurPw)){
+				cdto.setComPw(guserNewPwCheck);
+				flag = memberService.CompanyPwModify(cdto);
+			}
+			// 비밀번호 수정 성공
+						if (flag) {
+							// 세션 초기화
+							session.invalidate();
 
-			// 로그아웃 된 상태의 메인페이지로 이동 (2차 수정 예정 --- 1번 참조)
-			url = "redirect:/";
+							// 로그아웃 된 상태의 메인페이지로 이동 (2차 수정 예정 --- 1번 참조)
+							url = "redirect:/";
+						
+						// 비밀번호 수정 미성공 
+						} else {
+							
+							/*-------------------------- [2차 처리 예정] -------------------------
+								1) 비밀번호 수정 성공 > 팝업 > 로그인 화면 or 메인 화면 선택
+								2) 비밀번호들 일치 안 할 경우 > 로그아웃 시키면서 메인 페이지로 이동 X > 예외처리
+								3) [MyPageInfoModify.jsp] 
+								   > 현재 비밀번호, 새 비밀번호 = 새 비밀번호 확인 > 예외처리
+								4) html > required 태그 미적용되는 이유 알아보기
+					 	 	 -----------------------------------------------------------------*/
+							
+							// 마이페이지 관리 폼으로 이동 (reload)
+							url = "redirect:/mypage/MyPageManagement";
+						}
 		
-		// 비밀번호 수정 미성공 
-		} else {
-			
-			/*-------------------------- [2차 처리 예정] -------------------------
-				1) 비밀번호 수정 성공 > 팝업 > 로그인 화면 or 메인 화면 선택
-				2) 비밀번호들 일치 안 할 경우 > 로그아웃 시키면서 메인 페이지로 이동 X > 예외처리
-				3) [MyPageInfoModify.jsp] 
-				   > 현재 비밀번호, 새 비밀번호 = 새 비밀번호 확인 > 예외처리
-				4) html > required 태그 미적용되는 이유 알아보기
-	 	 	 -----------------------------------------------------------------*/
-			
-			// 마이페이지 관리 폼으로 이동 (reload)
-			url = "redirect:/mypage/MyPageManagement";
 		}
 		
 		return url;
 	}
 	
-	 
-	// 01-03. [개인회원] 마이페이지 - 회원 탈퇴
+		 
+	
+	// 01-03. [개인회원,기업회원] 마이페이지 - 회원 탈퇴
 	@RequestMapping(value = "/PersonQuit", method = RequestMethod.POST)
 	public String PersonQuit(@RequestParam("guserPw") String guserPw, HttpSession session) {
 		String url = null;
@@ -253,74 +288,121 @@ public class PersonMypageController {
 
 		// 로그인 된 세션 정보 가져와서 > pdto에 저장
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		
+		CompanyDTO cdto = (CompanyDTO)session.getAttribute("cdto");
 		//System.out.println("[TEST-회원탈퇴] 저장된 세션 정보 읽기: " + pdto);
 		
 		// DB에 있는 비밀번호 == 사용자가 입력한 비밀번호 > 개인회원 > 삭제 가능
-		if(pdto.getGuserPw().equals(guserPw)) {
-			// 삭제 여부 판단
-			// 매개변수로 pdto를 넘기는 이유 > 회원가입시, 비밀번호 중복처리 안 함 > 다른 사용자끼리 같은 비밀번호 발생 할 수 있음 > 아이디, 비밀번호 동시에 확인 후 > 삭제 처리
-			flag = memberService.PersonQuit(pdto);
+		if(pdto!=null){
+			if (pdto.getGuserPw().equals(guserPw)) {
+				// 삭제 여부 판단
+				// 매개변수로 pdto를 넘기는 이유 > 회원가입시, 비밀번호 중복처리 안 함 > 다른 사용자끼리 같은 비밀번호
+				// 발생 할 수 있음 > 아이디, 비밀번호 동시에 확인 후 > 삭제 처리
+				flag = memberService.PersonQuit(pdto);
+		
+				// 삭제 성공 시 > 세션 초기화 및 홈으로 이동
+				if (flag) {
+					// 세션 초기화
+					session.invalidate();
 
-			//System.out.println("[TEST-회원탈퇴] 삭제된 세션 정보 읽기: " + pdto);
-			
-			// 삭제 성공 시 > 세션 초기화 및 홈으로 이동
-			if (flag) {
-				// 세션 초기화
-				session.invalidate();
+					// 삭제 후, 메인페이지로 이동 (reload)
+					url = "redirect:/";
+				} else {
 
-				// 삭제 후, 메인페이지로 이동 (reload)
-				url = "redirect:/";
+					/*-------------------------- [2차 처리 예정] -------------------------
+						1) 마이페이지 관리 폼 reload 처리가 아닌 > 회원탈퇴 페이지 > 입력 내용 Reset
+						2) MyPageInfoModify.jsp > 입력폼 입력 및 체크 유효성 소스코드 작성
+						3) html > required 태그 미적용되는 이유 알아보기
+					 -----------------------------------------------------------------*/
+
+					// 마이페이지 관리 폼으로 이동 (reload)
+					url = "redirect:/mypage/MyPageManagement";
+				}
 			}	
-			
-		// DB에 있는 비밀번호 != 사용자가 입력한 비밀번호	
-		} else {
-			
-			/*-------------------------- [2차 처리 예정] -------------------------
-				1) 마이페이지 관리 폼 reload 처리가 아닌 > 회원탈퇴 페이지 > 입력 내용 Reset
-				2) MyPageInfoModify.jsp > 입력폼 입력 및 체크 유효성 소스코드 작성
-				3) html > required 태그 미적용되는 이유 알아보기
-			 -----------------------------------------------------------------*/
-			
-			// 마이페이지 관리 폼으로 이동 (reload)
-			url = "redirect:/mypage/MyPageManagement";
-		}		
+		
+		} 
+		//기업회원탈퇴
+		if(cdto!=null){
+			if (cdto.getComPw().equals(guserPw)) {
+								
+				flag = memberService.CompanyQuit(cdto);
+				
+				// 삭제 성공 시 > 세션 초기화 및 홈으로 이동
+				if (flag) {
+					// 세션 초기화
+					session.invalidate();
+
+					// 삭제 후, 메인페이지로 이동 (reload)
+					url = "redirect:/";
+				} else {
+
+					/*-------------------------- [2차 처리 예정] -------------------------
+						1) 마이페이지 관리 폼 reload 처리가 아닌 > 회원탈퇴 페이지 > 입력 내용 Reset
+						2) MyPageInfoModify.jsp > 입력폼 입력 및 체크 유효성 소스코드 작성
+						3) html > required 태그 미적용되는 이유 알아보기
+					 -----------------------------------------------------------------*/
+
+					// 마이페이지 관리 폼으로 이동 (reload)
+					url = "redirect:/mypage/MyPageManagement";
+				}
+			}	
+		
+		} 
 
 		return url;
 	}
 	
 	
 	
-	// 02. [개인회원] 마이페이지 - 내가 개설한 모임
+	// 02. [개인/기업회원] 마이페이지 - 내가 개설한 모임 / 모임장소
 	@RequestMapping(value = "/MyPageCreateMeeting", method = RequestMethod.GET)
-	public String MyPageCreateMeeting(
-			HttpSession session,
-			Model model
-			) {
+	public String MyPageCreateMeeting(HttpSession session,Model model) {
 
 		String url = "default";	
 
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");
 		
-		List<GatheringDTO> mlist = null;
+		List<GatheringDTO> mlist = null;			// 모임
+		List<PlaceDTO> placeList = null;			// 광고주(장소)
 		
-		if(pdto!=null){ // 로그인 체크
-			
-			model.addAttribute("pdto", pdto);
-			
-			String guserId = pdto.getGuserId();
-			mlist = gatherService.getmakeList(guserId); // 내가 만든 모임
-			
-			url="mypage/MyPageCreateMeeting";
+		if(cdto==null){
+			if (pdto != null) { // 로그인 체크
+
+				model.addAttribute("pdto", pdto);
+
+				String guserId = pdto.getGuserId();
+				mlist = gatherService.getmakeList(guserId); // 내가 만든 모임
+
+				url = "mypage/MyPageCreateMeeting";
+			}
+
+			if (mlist != null) {
+				model.addAttribute("mlist", mlist);
+			}
 		}
 		
-		if(mlist!=null){
-			model.addAttribute("mlist", mlist);
+
+		if(pdto==null){
+			if(cdto!=null){
+				model.addAttribute("cdto",cdto);
+				String guserId = cdto.getComId();
+				
+				mlist = gatherService.getComMakeList(guserId);				// 개인 > 내가 개설한 "모임"
+				placeList = PlaceService.getPlaceMakeList(guserId);			// 광고주 > 내가 개설한 "모임장소"
+				
+				model.addAttribute("plList", placeList);
+				
+				url = "mypage/MyPageCreateMeeting";
+			}
+			if (mlist != null) {
+				model.addAttribute("mlist", mlist);
+			}
 		}
 		
 		return url; 
 	}
-
+	
+	
 	// 03. [개인회원] 마이페이지 - 내가 참여중인 모임
 	@RequestMapping(value = "/MyPageParticipation", method = RequestMethod.GET)
 	public String MyPageParticipation(

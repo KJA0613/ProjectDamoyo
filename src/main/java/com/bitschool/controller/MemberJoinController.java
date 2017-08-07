@@ -95,12 +95,15 @@ public class MemberJoinController {
 	
 	// 02-1. [기업회원가입-1단계] 회원가입 1단계에 입력한 값 저장 후 >상세정보입력하는 폼으로 넘기기
 		@RequestMapping(value="/CompanyDataRegist", method=RequestMethod.POST)
-		public String CompanyDataRegist(CompanyDTO cfdto, HttpSession session) {
+		public String CompanyDataRegist(CompanyDTO cfdto, HttpSession session, Model model) {
 			String url = null;
 			
 			// 2단계 가기 전,cdto 전체 데이터 저장
 			session.setAttribute("cfdto", cfdto);
 			System.out.println("[TEST 1단계]" + cfdto);
+			
+			model.addAttribute("cfdto", cfdto);
+			
 			// 기업상세정보선택"회원가입 2단계 폼"으로 이동
 			url = "join/JoinCompanyDetail";
 			
@@ -138,10 +141,10 @@ public class MemberJoinController {
 	
 	// 03-1. [기업회원가입-2단계] 기업상세정보 등록	
 	@RequestMapping(value = "/CompanyDetailRegist", method = { RequestMethod.GET, RequestMethod.POST })
-	public String CompanyDetailRegist(CompanyDTO cdto ,HttpSession session){
+	public String CompanyDetailRegist(CompanyDTO cdto ,HttpSession session, Model model){
 
 		CompanyDTO cfdto = (CompanyDTO) session.getAttribute("cfdto");
-		
+	
 		cdto.setComManager(cfdto.getComManager());
 		cdto.setComId(cfdto.getComId());
 		cdto.setComPw(cfdto.getComPw());
@@ -152,7 +155,7 @@ public class MemberJoinController {
 		String url = null;
 		
 		boolean flagInsert = memberService.CompanyRegist(cdto);
-
+				
 		if(flagInsert){
 			url="redirect:/";
 		}

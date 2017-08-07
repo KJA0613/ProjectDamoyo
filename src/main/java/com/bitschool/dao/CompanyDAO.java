@@ -89,4 +89,32 @@ public class CompanyDAO implements ICompanyDAO {
 			return flag;
 		}
 
+		//기업회원 비밀번호 수정
+		@Override
+		public boolean CompanyPwModify(CompanyDTO cdto) {
+			
+			boolean flag = false;
+			
+			int aCnt = session.update(namespace+".CompanyPwModify",cdto);
+			
+			if(aCnt>0){
+				flag = true;
+			}		
+			
+			return flag;
+		}
+		
+		//기업회원 탈퇸
+		@Override
+		public boolean CompanyQuit(CompanyDTO cdto) throws SQLException {
+			boolean flag =  false;
+			
+			int aCnt = session.delete(namespace+".CompanyQuit",cdto);
+			
+			if(aCnt>0){
+				flag = true;
+			}
+			return flag;
+		}
+
 }

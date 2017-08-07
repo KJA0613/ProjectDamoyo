@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
@@ -35,7 +36,8 @@ public class GatheringController {
 	private IGatheringService gService;
 		
 
-	@RequestMapping(value = "/gathering", method =  { RequestMethod.GET, RequestMethod.POST })
+	// gathering.jsp 의 정보를 뿌리는 메서드
+	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gathering(
 			Model model,
 			HttpSession session
@@ -46,13 +48,31 @@ public class GatheringController {
 		// 현재 세션에 저장된 정보 > pdto에 저장 
 		// 즉, 로그인된 사용자의 정보를 나타냄
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		CompanyDTO cdto = (CompanyDTO)session.getAttribute("cdto");
+		
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 		
 		List<GatheringDTO> recommList = gService.getRecommDefault();
-				
 		
-		System.out.println(gList);
-		System.out.println(recommList);
+		if(cdto==null){		
+			if (pdto != null) { // 로그인 중이면
+				model.addAttribute("pdto", pdto);
+
+				recommList = gService.getRecommendUser(pdto.getGuserId()); // 사용자
+																			// 추천
+																			// 리스트
+				// 사용자 정보에 따른 추천글 가져옴
+				// 그리고 jsp로 모델을 보냄
+
+				if (recommList.size() == 0) { // 사용자 추천 리스트가 없으면
+					recommList = gService.getRecommDefault();// 디폴트 추천검색
+				}
+			}
+
+			if (gList != null) {
+				model.addAttribute("gath", gList);
+			}
+		}
 		
 		if(pdto!=null){ // 로그인 중이면
 			model.addAttribute("pdto", pdto);
@@ -64,25 +84,39 @@ public class GatheringController {
 			
 			if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
 				recommList = recommListCopy;// 디폴트 추천검색
+
 			}
+
+			model.addAttribute("recomm", recommList);
 		}
 		
-		if (gList != null) {
-			model.addAttribute("gath", gList);
-		}		
-		
-		/*if(!search.equals("")){
-			model.addAttribute("search",search);
-			System.out.println(search);
-		}*/
-		
-		model.addAttribute("recomm", recommList);
+		if(pdto==null){
+			if (cdto != null) { // 로그인 중이면
+				model.addAttribute("cdto", cdto);
+
+				recommList = gService.getRecommendUser(cdto.getComId()); // 사용자
+																			// 추천
+																			// 리스트
+				// 사용자 정보에 따른 추천글 가져옴
+				// 그리고 jsp로 모델을 보냄
+
+				if (recommList.size() == 0) { // 사용자 추천 리스트가 없으면
+					recommList = gService.getRecommDefault();// 디폴트 추천검색
+				}
+			}
+
+			if (gList != null) {
+				model.addAttribute("gath", gList);
+			}
+
+			model.addAttribute("recomm", recommList);
+		}
 		
 		return url;
 	}
 
-	
-	@RequestMapping(value = "/gatheringSearch", method = { RequestMethod.GET, RequestMethod.POST })
+	// gathering.jsp에서 ajax로 접근하여 체크된값 and 검색한 값 출력
+	@RequestMapping(value = "/gatheringSearch",  method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody HashMap<String, List<GatheringDTO>> gatheringSearch(
 			@RequestParam(value = "cDATA", defaultValue="") String cData,
 			@RequestParam(value = "aDATA", defaultValue="") String aData,
@@ -105,6 +139,7 @@ public class GatheringController {
 		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
+		
 		if(!sSTR.equals("")){
 			if(pdto!=null){ // 로그인 안했을때
 				regather = new RecommGatherDTO();
@@ -114,8 +149,6 @@ public class GatheringController {
 				recommgatherList.add(regather);
 			}
 		}
-		
-		
 		
 		List<String> cList = null;
 		List<String> aList = null;
@@ -161,7 +194,6 @@ public class GatheringController {
 			}
 		}
 		
-		System.out.println(recommgatherList);
 		session.setAttribute("recommgatherList", recommgatherList);
 		
 		
@@ -180,10 +212,20 @@ public class GatheringController {
 	public String gathering_make(HttpSession session,Model model) {
 		String url = "gather/gathering_make";
 		
-		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		model.addAttribute("pdto", pdto);
 		
+		CompanyDTO cdto = (CompanyDTO)session.getAttribute("cdto");
+		
+		if (cdto == null) {
+
+			model.addAttribute("pdto", pdto);
+		}
+		
+		if (pdto == null) {
+
+			model.addAttribute("cdto", cdto);
+		}
+
 		return url;
 	}
 	
@@ -232,7 +274,6 @@ public class GatheringController {
 						// temp를 fileName에 저장함
 						fileName = temp;
 					}
-					System.out.println(fileName);
 				} else {
 					// FormField는 일방적인 데이터 정보
 					
@@ -274,7 +315,9 @@ public class GatheringController {
 					else if(item.getFieldName().equals("gatherState")){
 						gath.setGatherState(item.getString("UTF-8"));
 					}					
-					else if(item.getFieldName().equals("areaMid")){
+					else if(item.getFieldName().equals("areaTop")){
+						gath.setGatherAreaTop(item.getString("UTF-8"));
+					}else if(item.getFieldName().equals("areaMid")){
 						gath.setGatherArea(item.getString("UTF-8"));
 					} else if(item.getFieldName().equals("gatherPartiMax")){
 						gath.setGatherPartiMax(Integer.parseInt(item.getString("UTF-8")));
@@ -309,9 +352,8 @@ public class GatheringController {
 		if(!flag){
 			// 성공했으면 reigstBook으로 가서 등록하고 listAll로 감
 			HashMap<String, Object> map = new HashMap<String, Object>();
-						
+			System.out.println(gath);			
 			map.put("gath", gath);
-			System.out.println("삽입전 완성된 gath"+gath);
 			flag = gService.GatheringInsert(map);
 		}
 		
@@ -323,14 +365,14 @@ public class GatheringController {
 		return url;
 	}
 	
+	// 마이페이지의 참여중인 모임 뿌리기
 	@RequestMapping(value="/gatheringParti", method={RequestMethod.GET, RequestMethod.POST})
 	public String gatherParti(
 			Model model,
 			HttpSession session
 			){
 		
-		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");		
 		
 		String url = "default";	
 		
@@ -422,13 +464,10 @@ public class GatheringController {
 			gadto.setGatherAddonsCode("관심"); // 우선은 관심or앵콜
 			
 			boolean flag = gService.existAddons(gadto);
-			
-			System.out.println("true면  값이 있는것임, 즉 true == yes : "+flag);
-			
+						
 			if(flag){
 				map.put("result", "yes");
 			}
-			System.out.println("맵 결과 : "+map.get("result"));
 		}
 		
 		return map;
@@ -450,9 +489,7 @@ public class GatheringController {
 		gadto.setGatherNo(gatherNo);
 		gadto.setGatherAddonsWriter(gatherAddonsWriter);
 		gadto.setGatherAddonsCode(gatherAddonsCode);
-		
-		System.out.println("게시글 정보 : "+gadto);
-		
+				
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		if(pdto!=null){
 			gadto.setGuserId(pdto.getGuserId());
@@ -470,8 +507,6 @@ public class GatheringController {
 		
 		return map;
 	}
-	
-	
 	
 	@RequestMapping(value = "/damoyoSearch", method = { RequestMethod.GET, RequestMethod.POST })
 	public String damoyoSearch(
@@ -515,5 +550,25 @@ public class GatheringController {
 		
 	}
 	
+	@RequestMapping(value="/gatheringModalModify",  method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody HashMap<String, Object> gatheringModalModify(
+			GatheringDTO gdto
+			){
+		
+		System.out.println(gdto);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("result", "no");
+		
+		boolean flag = gService.updateModalGathering(gdto);
+		
+		if(flag){
+			map.put("result", "yes");
+		}
+		
+		
+		return map;
+	}
 
 }

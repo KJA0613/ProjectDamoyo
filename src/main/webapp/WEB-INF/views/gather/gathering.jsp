@@ -274,6 +274,7 @@ $(window).load(function(){
 														"'  data-write='"+write+
 														"'  data-sdate='"+sdate+
 														"'  data-edate='"+edate+
+														"'  data-areatop='"+gList.gatherAreaTop+
 														"'  data-area='"+gList.gatherArea+
 														"'  data-parti='"+gList.gatherParti+
 														"'  data-partimax='"+gList.gatherPartiMax+
@@ -921,6 +922,7 @@ $(function() {
 							"'  data-write='"+write+
 							"'  data-sdate='"+sdate+
 							"'  data-edate='"+edate+
+							"'  data-areatop='"+gList.gatherAreaTop+
 							"'  data-area='"+gList.gatherArea+
 							"'  data-parti='"+gList.gatherParti+
 							"'  data-partimax='"+gList.gatherPartiMax+
@@ -961,18 +963,23 @@ $(function() {
 		var href = $(event.relatedTarget); /* 모달 윈도우를 오픈하는 버튼 */
 		var no = href.data('no'); /*  href태그에서 data- 값을 변수에 저장 */
 		var subject = href.data('subject'); /*  href태그에서 data- 값을 변수에 저장 */
+		
 		var categorytop = href.data('categorytop'); /*  href태그에서 data- 값을 변수에 저장 */
 		var categorymid = href.data('categorymid'); /*  href태그에서 data- 값을 변수에 저장 */
 		var categorybot = href.data('categorybot'); /*  href태그에서 data- 값을 변수에 저장 */
+		
 		var write = href.data('write');
 		var sdate = href.data('sdate');
 		var edate = href.data('edate');
-
-		var day = href.data('day');
-		var partimax = href.data('partimax');
 		
-		var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
+		var day = href.data('day');
+		
 		var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
+		var partimax = href.data('partimax');
+
+		var areatop = href.data('areatop'); /*  href태그에서 data- 값을 변수에 저장 */
+		var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
+		
 		var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
 		var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
 		var id = href.data('id'); 
@@ -1026,15 +1033,18 @@ $(function() {
 		
 		modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-subject').text(subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-categorytop').text(categorytop); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-categorymid').text(categorymid); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-categorybot').text(categorybot); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-write').text(write); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-sdate').text(sdate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-edate').text(edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-areatop').text(areatop); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-area').text(area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-parti').text(parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-day').text(day); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-content').text(content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		$('#modalImg').attr('src', img);
+		$('#modal-body-img').attr('src', img);
 		modal.find('#modal-body-id').text(id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-state').text(state); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-partimax').text(partimax); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
@@ -1137,6 +1147,25 @@ $(function(){
 		var day = $('#modal-body-day').text();
 		var partimax = $('#modal-body-partimax').text();
 		var content = $('#modal-body-content').text();
+		var categorytop = $('#modal-body-categorytop').text();
+		var categorymid = $('#modal-body-categorymid').text();
+		var categorybot = $('#modal-body-categorybot').text();
+		var areatop = $('#modal-body-areatop').text();
+		var area = $('#modal-body-area').text();
+		var img = $('#modal-body-img').attr('src');
+		
+		var id = $('#modal-body-id').text();
+		var no = $('#modal-body-no').text();
+		var state = $('#modal-body-state').text();
+		
+		var splitDay = day.split(',');
+		
+		$('.gatherDay').prop('checked',false);
+		
+		for(var i in splitDay){
+			var sday = splitDay[i].trim();
+			$('[value='+sday+']').prop('checked', true);
+		}
 		
 		
 		
@@ -1152,23 +1181,107 @@ $(function(){
 		$('#gatherPartiMax').val(partimax);
 		$('#gatherContent').val(content);
 		
+
+		$('#guserId').val(id);
+		$('#gatherNo').val(no);
+		$('#gatherState').val(state);
+
+ 		$('#gatherCategoryTop').val(categorytop).trigger("change"); // ex) 스터디 태그를 선택하는 트리거 
+ 		$('#gatherCategoryMid').val(categorymid).trigger("change"); // ex) 영어 태그를 선택하는 트리거 
+ 		$('#gatherCategoryBot').val(categorybot).trigger("change"); // ex) 토익를 선택하는 트리거 
+		
+
+ 		$('#gatherAreaTop').val(areatop).trigger("change"); // ex) 스터디 태그를 선택하는 트리거 
+ 		$('#gatherArea').val(area).trigger("change"); // ex) 스터디 태그를 선택하는 트리거 
 		
 	});
 });
 </script>	
 
+<!-- 수정버튼 후 저장버튼 누르면 변경사항 업데이트하기 -->
+<script type="text/javascript">
+
+$(function() {
+ 	$('#gatherModifyCommit').click(function(){
+
+		var no = $('#gatherNo').val();
+		var subject = $('#gatherSubject').val();
+		var cetegorytop = $('#gatherCategoryTop option:selected').text();
+		var cetegorymid = $('#gatherCategoryMid option:selected').text();
+		var cetegorybot = $('#gatherCategoryBot option:selected').text();
+		var sdate = $('#gatherSdate').val();
+		var edate = $('#gatherEdate').val();
+		var write = $('#gatherWrite').val();
+		var areatop = $('#gatherAreaTop').val();
+		var area = $('#gatherArea').val();
+		var partimax = $('#gatherPartiMax').val();
+		var content = $('#gatherContent').val();
+		var img = $('#gatherImg').val();
+		var id = $('#guserId').val();
+		var state = $('#gatherState').val();
+		
+		var day ;
+		$("input[id='gatherDay']:checked").each(function(){
+			day += ','+$(this).val() ;
+		});
+		day = day.substring(10);
+		
+		var DATA = {
+			"gatherNo" : no,  
+			"gatherSubject" : subject,
+			"gatherCategoryTop" : cetegorytop,
+			"gatherCategoryMid" : cetegorymid,
+			"gatherCategoryBot" : cetegorybot,
+			"gatherSdate" : sdate,
+			"gatherEdate" : edate,
+			"gatherWrite" : write,
+			"gatherDay" : day,
+			"gatherAreaTop" : areatop,
+			"gatherArea" : area,
+			"gatherPartiMax" : partimax,
+			"gatherContent" : content,
+			/* "gatherImg" : img, */
+			"guserId" : id,
+			"gatherState" : state
+		}
+		
+		$.ajax({
+			url : '/gather/gatheringModalModify',
+			dataType : 'json',
+			type : 'POST',
+			cache : false,
+			data : DATA,
+			success : function(data) {
+				if(data.result==='yes'){
+					location.reload();					
+				}else{
+					alert('실패하였습니다.');
+				}
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+			}
+		});
+		
+
+		alert('수정되었습니다.');
+	
+ 	});
+ });
+</script>
 <!-- ==================================================================================================== -->
 
+<!-- 이미지파일만 올리게 하기 -->
 <script type="text/javascript">
  	$(function() {
-		$("#fileName").change(function(){
+		$("#gatherImg").change(function(){
 					
-			if($("#fileName").val() != ""){
-				var ext = $("#fileName").val().split('.').pop().toLowerCase();
+			if($("#gatherImg").val() != ""){
+				var ext = $("#gatherImg").val().split('.').pop().toLowerCase();
 				
 				if($.inArray(ext, ["gif","jpg","jpeg","png","bmp"]) == -1){
 						alert("jpg, png, gif, bmp 만 업로드 가능합니다.");
-						$("#fileName").val("");
+						$("#gatherImg").val("");
 						return false;
 				}
 			}
@@ -1176,6 +1289,7 @@ $(function(){
 	});	
 </script>
 
+<!-- 빈칸 입력 못하게 하기 -->
 <script type="text/javascript">
  function form_check(){
 	 var content = $("#gatherContent").val();
@@ -1260,7 +1374,7 @@ function categoryTopChange(item){
     var temp, i=0, j=0;
     var ccount, cselect;
 
-    temp = document.makeGathering.categoryMid;
+    temp = document.makeGathering.gatherCategoryMid;
     
 
     for (i=(temp.options.length-1) ; i>0 ; i--){
@@ -1283,7 +1397,7 @@ function categoryMidChange(item){
     var temp, i=0, j=0;
     var ccount, cselect;
     
-    temp = document.makeGathering.categoryBot;
+    temp = document.makeGathering.gatherCategoryBot;
 
     for (i=(temp.options.length-1) ; i>0 ; i--){
        temp.options[i] = null; 
@@ -1367,7 +1481,7 @@ function categoryMidChange(item){
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="베트남어" name="cbox1">베트남어</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" value="베트남어" name="cbox1">외국어 기타</label></span></li>
+									type="checkbox" value="외국어 기타" name="cbox1">외국어 기타</label></span></li>
 					</ul>
 
 					<ul class="checkbox-style" id="cateChk2" style="display: none;">
@@ -1391,7 +1505,7 @@ function categoryMidChange(item){
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="미드" name="cbox2">미드</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" value="영어기타" name="cbox2">영어 기타</label></span></li>
+									type="checkbox" value="영어 기타" name="cbox2">영어 기타</label></span></li>
 					</ul>
 
 					<ul class="checkbox-style" style="display: none;" id="cateChk3">
@@ -1447,6 +1561,8 @@ function categoryMidChange(item){
 									type="checkbox" value="요리/베이킹" name="cbox4">요리/베이킹</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="인테리어" name="cbox4">인테리어</label></span></li>
+						<li><span class="chkbox"><label class="chkbox-btn"><input
+									type="checkbox" value="라이프 기타" name="cbox4">라이프 기타</label></span></li>
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk5">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
@@ -1631,9 +1747,8 @@ function categoryMidChange(item){
 					</ul>
 					<ul class="checkbox-style" id="cateChk12" style="display: none;">
 						<li><span class="chkbox"><label class="chkbox-btn">
-									<input type="checkbox" class="cAll12" name="cbox"
-									onclick="checkAllFunc(this, 'cbox12')">전체
-							</label> </span></li>
+								<input type="checkbox" class="cAll12" name="cbox" onclick="checkAllFunc(this, 'cbox12')">전체
+							</label></span></li>
 					</ul>
 					<br>
 				</div>
@@ -2302,6 +2417,7 @@ function categoryMidChange(item){
 								data-edate="${fn:substring(recomm.gatherEdate, 0, 10)}"
 								data-day='${recomm.gatherDay}'
 								data-area='${recomm.gatherArea}'
+								data-areatop='${recomm.gatherAreaTop}'
 								data-parti='${recomm.gatherParti}'
 								data-partimax='${recomm.gatherPartiMax}'
 								data-content='${recomm.gatherContent}'
@@ -2348,6 +2464,7 @@ function categoryMidChange(item){
 								data-sdate="${fn:substring(gath.gatherSdate, 0, 10)}"
 								data-edate="${fn:substring(gath.gatherEdate, 0, 10)}"
 								data-area='${gath.gatherArea}' 
+								data-areatop='${gath.gatherAreaTop}'
 								data-parti='${gath.gatherParti}'
 								data-partimax='${gath.gatherPartiMax}'
 								data-content='${gath.gatherContent}'
@@ -2403,22 +2520,17 @@ function categoryMidChange(item){
 					
 					<div class="modal-body">
 						<form class="form-horizontal">
-	
-							<div class="form-group">
-								<label for="modal-body-state" class="col-sm-2 control-label">모임 현황</label>
-								<div class="col-sm-8">
-									<div class="modal-body" id="modal-body-state"></div>
-								</div>
+	 
+		 					<div class="modal-body">
+								<img class='img-responsive' id="modal-body-img" style="display:none;">
+								<div class="modal-body" id="modal-body-categorymid" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-categorytop" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-areatop" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-id" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-no" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-state" style="display:none;"></div>
 							</div>
-		
-							<div class="form-group">
-								<label for="modal-body-id" class="col-sm-2 control-label">작성자</label>
-								<div class="col-sm-8">
-									<div class="modal-body" id="modal-body-id"></div>
-								</div>
-							</div>
-		
-		
+	 		
 							<!-- 입력항목이름 -->
 							<div class="form-group">
 								<label for="modal-body-subject" class="col-sm-2 control-label">제목</label>
@@ -2459,7 +2571,6 @@ function categoryMidChange(item){
 								<div class="col-sm-8">
 									<div class="modal-body" id="modal-body-area"></div>
 								</div>
-		
 							</div>
 		
 							<!-- 장소  -->
@@ -2468,7 +2579,6 @@ function categoryMidChange(item){
 								<div class="col-sm-8">
 									<div class="modal-body" id="modal-body-place"></div>
 								</div>
-		
 							</div>
 		
 							<!-- 인원  -->
@@ -2501,6 +2611,8 @@ function categoryMidChange(item){
 										
 					<!-- style="display:none;"은 히든과 같음 -->
 					<div class="modal-body" id="modal-body-no" style="display:none;"></div>
+					<div class="modal-body" id="modal-body-state" style="display:none;"></div>
+					<div class="modal-body" id="modal-body-state" style="display:none;"></div>
 					<!-- 로그인 중인 사용자  == guser-->
 					<div class="modal-body" id="modal-body-guser" style="display:none;">${empty pdto.guserId ? '' : pdto.guserId}</div>
 				</div>
@@ -2522,6 +2634,10 @@ function categoryMidChange(item){
 					
 					<div class="modal-body">
 						<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringModify" method="post" enctype="multipart/form-data">
+							<input type="hidden" class="form-control" name="guserId" id="guserId">
+							<input type="hidden" class="form-control" name="gatherState" id="gatherState">
+							<input type="hidden" class="form-control" name="gatherNo" id="gatherNo">
+							
 							
 						<div class="form-group">
 							<!-- 입력항목이름 -->
@@ -2537,7 +2653,7 @@ function categoryMidChange(item){
 							
 							<div class="dropdown">
 								<div class="col-sm-3">
-									<select class="form-control" name="gatherCategoryTop" onChange="categoryTopChange(this.options.selectedIndex)">
+									<select class="form-control" id="gatherCategoryTop" name="gatherCategoryTop" onChange="categoryTopChange(this.options.selectedIndex)">
 										<option selected value="">-선택-</option>
 										<option value="스터디">스터디</option>
 										<option value="동호회">동호회</option>
@@ -2546,14 +2662,14 @@ function categoryMidChange(item){
 								</div>	
 								
 								<div class="col-sm-3">
-									<select class="form-control" name="gatherCategoryMid" onChange="categoryMidChange(this.options.selectedIndex)">
+									<select class="form-control" id="gatherCategoryMid" name="gatherCategoryMid" onChange="categoryMidChange(this.options.selectedIndex)">
 										<option selected value="">-선택-</option>
 										<option value=""></option>
 									</select>
 								</div>	
 								
 								<div class="col-sm-3">							
-									<select class="form-control" name="gatherCategoryBot">
+									<select class="form-control" id="gatherCategoryBot" name="gatherCategoryBot">
 											<option selected value="">-선택-</option>
 											<option value=""></option>
 									</select>
@@ -2581,13 +2697,13 @@ function categoryMidChange(item){
 							<label for="Gender" class="col-sm-2 control-label">요일</label>
 							<div class="col-sm-10">
 								<div class="checkbox">
-									<label><input type="checkbox" name="gatherDay" value="월">월&nbsp; </label> 
-									<label><input type="checkbox" name="gatherDay" value="화">화&nbsp; </label> 
-									<label><input type="checkbox" name="gatherDay" value="수">수&nbsp; </label> 
-									<label><input type="checkbox" name="gatherDay" value="목">목&nbsp; </label> 
-									<label><input type="checkbox" name="gatherDay" value="금">금&nbsp; </label> 
-									<label><input type="checkbox" name="gatherDay" value="토">토&nbsp; </label> 
-									<label><input type="checkbox" name="gatherDay" value="일">일&nbsp; </label>
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="월">월&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="화">화&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="수">수&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="목">목&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="금">금&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="토">토&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="일">일&nbsp; </label>
 								</div>
 							</div>
 						</div>
@@ -2597,7 +2713,7 @@ function categoryMidChange(item){
 							<label for="Name" class="col-sm-2 control-label">지역</label>
 							<div class="dropdown">
 								<div class="col-sm-3">
-									<select class="form-control" name="areaTop" onChange="areachange(this.options.selectedIndex)"> <!-- this.options.selectedIndex 선택된 인덱스를 가져옴  -->
+									<select class="form-control" id="gatherAreaTop" name="areaTop" onChange="areachange(this.options.selectedIndex)"> <!-- this.options.selectedIndex 선택된 인덱스를 가져옴  -->
 										<option selected value="">-선택-</option>
 										<option value="서울특별시">서울특별시</option>
 										<option value="경기도">경기도</option>
@@ -2620,7 +2736,7 @@ function categoryMidChange(item){
 								</div>
 								
 								<div class="col-sm-3">
-									<select class="form-control" name="areaMid">
+									<select class="form-control" id="gatherArea" name="areaMid">
 										<option selected value="">-선택-</option>
 										<option value=""></option>
 									</select>
@@ -2659,12 +2775,12 @@ function categoryMidChange(item){
 						</div>
 
 						<!-- 이미지 올리기  -->
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
 							<div class="col-sm-7">
-								<input id="fileName" type="file" name="gatherImg" >
+								<input id="gatherImg" type="file" name="gatherImg" >
 							</div>
-						</div>
+						</div> -->
 
 						<br>
 						
@@ -2672,8 +2788,8 @@ function categoryMidChange(item){
 					</div>
 					
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary">저장</button>
+						<button type="button" id="gatherModifyClose" class="btn btn-danger pull-left" data-dismiss="modal">취소</button>
+						<button type="button" id="gatherModifyCommit" class="btn btn-primary" data-dismiss="modal">저장</button>
 					</div>
 					
 					

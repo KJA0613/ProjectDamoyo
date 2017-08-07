@@ -151,9 +151,9 @@ public class MemberLoginController {
 			
 			//System.out.println("4번째: " + loginReferer[4]);
 			
-
-			url = "redirect:/place/PlaceListAll";
 			model.addAttribute("cdto",cdto);
+			url = "redirect:/place/PlaceListAll";
+			
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} 
 		

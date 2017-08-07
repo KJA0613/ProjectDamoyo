@@ -98,7 +98,7 @@
 </style>
 
 <!-- 장소 광고 CSS -->
-<style>
+<!-- <style>
 	.wrapper {
 	    max-width: 1100px;
 	    margin: 0 auto;
@@ -182,7 +182,7 @@
 		font-weight: normal;
 	}	
 
-</style>
+</style> -->
 
 
 <!-- JavaScript -->
@@ -211,7 +211,7 @@
 		<br><br><br><br>		
 					
 			<!-- 01-02. 주제어 검색 -->
-			<div class="col-md-5">
+			<div class="col-md-12">
 				<form action="/gather/damoyoSearch" method="get" >
 					<span class="blue_search">
 						<input type="text" name="sSTR" class="input_text" placeholder="주제어를 검색해주세요.">
@@ -232,7 +232,7 @@
    
 		<!-- 02. 테마  -->
 		<h1>테마별 검색</h1>
-		<hr>
+		<hr style="border: solid 1px #b3b3b3;">
 		<br>
 		
 		<!-- 1행 -->
@@ -242,7 +242,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox1');" style="position: absolute;">		
 						<div class="cutter foreign">
-							<div class="img"><img src="resources/image/main/english.png"></div>	<!-- #ABD8EB -->
+							<div class="img"><img src="resources/image/main/foreign.png"></div>	<!-- #ABD8EB -->
 						</div>
 					</div>
 				</div>
@@ -251,7 +251,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox2');" style="position: absolute;">		
 						<div class="cutter eng">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/english.png"></div>
 						</div>
 					</div>
 				</div>
@@ -260,7 +260,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox3');" style="position: absolute;">		
 						<div class="cutter music">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/music.png"></div>
 						</div>
 					</div>
 				</div>
@@ -269,7 +269,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox4');" style="position: absolute;">		
 						<div class="cutter life">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/life.png"></div>
 						</div>
 					</div>
 				</div>
@@ -278,7 +278,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox5');" style="position: absolute;">		
 						<div class="cutter job">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/job.png"></div>
 						</div>
 					</div>
 				</div>
@@ -287,7 +287,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox6');" style="position: absolute;">		
 						<div class="cutter game">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/game.png"></div>
 						</div>
 					</div>
 				</div>
@@ -302,7 +302,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox7');" style="position: absolute;">		
 						<div class="cutter sports">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>	<!-- #ABD8EB -->
+							<div class="img"><img src="resources/image/main/sports.png"></div>	<!-- #ABD8EB -->
 						</div>
 					</div>
 				</div>
@@ -311,7 +311,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox8');" style="position: absolute;">		
 						<div class="cutter beauty">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/beauty.png"></div>
 						</div>
 					</div>
 				</div>
@@ -320,7 +320,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox9');" style="position: absolute;">		
 						<div class="cutter computer">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/computer.png"></div>
 						</div>
 					</div>
 				</div>
@@ -328,8 +328,8 @@
 				<!-- 10. 공무원 -->
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox10');" style="position: absolute;">		
-						<div class="cutter life">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+						<div class="cutter civil">
+							<div class="img"><img src="resources/image/main/civil.png"></div>
 						</div>
 					</div>
 				</div>
@@ -338,7 +338,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox11');" style="position: absolute;">		
 						<div class="cutter art">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/art.png"></div>
 						</div>
 					</div>
 				</div>
@@ -347,7 +347,7 @@
 				<div class="col-md-2">
 					<div class="boxm col1 masonry-brick" onclick="subject('cbox12');" style="position: absolute;">		
 						<div class="cutter etc">
-							<div class="img"><img src="resources/image/main/heart(1).png"></div>
+							<div class="img"><img src="resources/image/main/etc.png"></div>
 						</div>
 					</div>
 				</div>
@@ -356,160 +356,26 @@
 	
 
 		
-	   <br><br><br> <br><br><br>  <br><br><br><br><br>
+	   <br><br><br><br><br><br><br><br><br><br><br><br>
 	   
 	   <!-- 03. 광고  -->
 	   <h1>모임 공간</h1>
-	   <hr>
+	   
+	   <hr style="border: solid 1px #b3b3b3;">
+	   	    <div class="more" align="right"><a href="/place/PlaceListAll">최근에 개설된 모임들입니다. 더 궁금하다면? ▷▶</a></div>
 	   <br>
-   
+
    	   <div class="wrapper">
-			<ul class="properties_list">
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png"class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png"class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-			</ul>
-			
-			<br>
-			
-			<ul class="properties_list">
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-				
-				<li>
-					<a href="/">
-						<img src="resources/image/main/english_space.png" class="property_img">
-					</a>
-					<span class="price">1 hour: 2,500</span>
-					<div class="property_details">
-						<div class="title">
-							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
-						</div>
-						<div class="details">
-							<span id="s1">지역</span>&nbsp;&nbsp;
-							<span id="s2">서울시 | 강남구</span>
-							<br>
-							<span id="s1">위치</span>&nbsp;&nbsp;
-							<span id="s2">강남역 2번출구 200m</span>
-							<br>
-							<span id="s1">영업시간</span>&nbsp;&nbsp;
-							<span id="s2">주말 제외</span>
-						</div>
-					</div>
-				</li>	
-			</ul>
+   	   		<%@include file="place/PlaceAll.jsp"%>			
    	   </div>
 		
-   <br><br><br>		
-   <!-- hidden -->
-   <input type="hidden" name="guserId" value="${pdto.guserId}">
-   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
+	   <br><br><br>		
+	   <!-- hidden -->
+	   <input type="hidden" name="guserId" value="${pdto.guserId}">
+	   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
 
 
-   <br><br><br>
+   	   <br><br><br>
    
    <!-- [Footer] 페이지 하단 (고정화면) -->
    <hr>

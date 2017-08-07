@@ -31,15 +31,11 @@ public class GatheringDAO implements IGatheringDAO {
 	@Override
 	public List<GatheringDTO> getGatheringAll(String sSTR) {
 		List<GatheringDTO> gList = null;
-		
-		System.out.println("dao 까지 잘 들옴 : "+sSTR);
-		
+				
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("sSTR", sSTR);
 		
 		gList = session.selectList(namespace+".damoyoAll", map);
-		
-		System.out.println(gList.size());
 		
 		return gList;
 	}
@@ -107,9 +103,7 @@ public class GatheringDAO implements IGatheringDAO {
 	public boolean mergeList(List<RecommGatherDTO> recommgatherList) {
 
 		boolean flag = false;
-		
-		System.out.println("사용자 누른 갯수 : "+recommgatherList.size());
-		
+				
 		int cnt = 0;
 		
 //		이부분 강사님께 여쭤보기
@@ -150,14 +144,10 @@ public class GatheringDAO implements IGatheringDAO {
 		
 		int result=-1;
 		
-		System.out.println(gadto);
-		
 		if(state.equals("insert")){// 이미 값이 존재하면 delete
 			result = session.insert(namespace+".insertAddons", gadto);// 이미 값이 존재할 경우 0 리턴
-			System.out.println("insert 들어옴 : "+result);
 		}else{
 			result = session.delete(namespace+".deleteAddons", gadto);
-			System.out.println("delete 들어옴 : "+result);
 		}
 		
 		if(result>=0){
@@ -189,5 +179,34 @@ public class GatheringDAO implements IGatheringDAO {
 		attendList = session.selectList(namespace+".attendGather", guserId);
 		
 		return attendList;
+	}
+	
+	//기업회원 내가 만든 모임
+	@Override
+	public List<GatheringDTO> selectComMakeList(String guserId) {
+		
+		List<GatheringDTO> mlist = null;
+		
+		mlist = session.selectList(namespace+".comMakeList", guserId);
+		
+		return mlist;
+	}
+
+	@Override
+	public boolean updateModalGathering(GatheringDTO gdto) {
+		
+		boolean flag= false;
+		
+		int result = session.update(namespace+".updateModalGather", gdto);
+		
+		System.out.println(result);
+		
+		if(result>-1){
+			flag = true;
+		}
+
+		System.out.println(flag);
+		
+		return flag;
 	}
 }
