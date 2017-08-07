@@ -148,5 +148,14 @@ public class GatheringService implements IGatheringService {
 	}
 
 	
+	@Override
+	public boolean updateModalGathering(GatheringDTO gdto) {
+		
+		boolean flag = gDao.updateModalGathering(gdto);
+		
+		return flag;
+	}
+
+	
 
 }

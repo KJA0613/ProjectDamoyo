@@ -85,8 +85,8 @@
 	        select gatherseq.nextval from dual
 	    </selectKey>
 
-		insert into gather (gatherno, gathersubject, gatherCategoryTop, gatherCategoryMid, gatherCategoryBot, gatherwrite, gathersdate, gatheredate, gatherarea, gatherparti, gatherpartimax, gathercontent, gatherimg, guserid, gatherday, gatherstate)
-		values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCategoryTop}, #{gath.gatherCategoryMid}, #{gath.gatherCategoryBot}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherParti}, #{gath.gatherPartiMax}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherDay}, '모집중')
+		insert into gather (gatherno, gathersubject, gatherCategoryTop, gatherCategoryMid, gatherCategoryBot, gatherwrite, gathersdate, gatheredate, gatherarea, gatherareatop, gatherparti, gatherpartimax, gathercontent, gatherimg, guserid, gatherday, gatherstate)
+		values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCategoryTop}, #{gath.gatherCategoryMid}, #{gath.gatherCategoryBot}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherAreaTop}, #{gath.gatherParti}, #{gath.gatherPartiMax}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherDay}, '모집중')
 	
 	</insert>
 	
@@ -158,5 +158,25 @@
 	<select id="comMakeList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
 		select * from gather where guserid = #{guserId}
 	</select>
+	
+	<update id="updateModalGather" parameterType="com.bitschool.dto.GatheringDTO" >
+		update gather 
+		set gatherSubject = #{gatherSubject}, 
+			gatherCategoryTop = #{gatherCategoryTop}, 
+			gatherCategoryMid = #{gatherCategoryMid}, 
+			gatherCategoryBot = #{gatherCategoryBot}, 
+			gatherSdate = to_date( #{gatherSdate},'yyyy-mm-dd'), 
+			gatherEdate = to_date( #{gatherEdate},'yyyy-mm-dd'), 
+			gatherArea = #{gatherArea},
+			gatherAreaTop = #{gatherAreaTop}, 
+			gatherParti = #{gatherParti}, 
+			gatherPartiMax = #{gatherPartiMax}, 
+			gatherContent = #{gatherContent}, 
+			<!-- gatherImg = #{gatherImg},  -->
+			guserId = #{guserId}, 
+			gatherDay = #{gatherDay}, 
+			gatherState = #{gatherState}
+		where gatherNo = #{gatherNo}
+	</update>
 
 </mapper>

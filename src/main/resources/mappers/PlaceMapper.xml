@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitschool.basic.PlaceMapper">
 				
-	<!-- [광고주] 모임공간 등록 -->
+	<!-- 모임공간 등록 -->
 	<insert id="insertPlaceRegist" parameterType="PlaceDTO">
 		<selectKey keyProperty="placeNo" resultType="int" order="BEFORE">
 			select placeSeq.nextval from dual
@@ -15,15 +15,37 @@
 			#{placeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeNotUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, #{comId})			
 	</insert>		
 
-	<!-- [광고주] 모임 전체 조회 -->
+
+	<!-- 모임 전체 조회 (오름차순) -->
 	<select id="selectPlaceListAll" resultType="PlaceDTO">
 		select * from place order by placeNo desc
 	</select>
 	
 	
-	<!-- [광고주] 선택한 모임 상세 조회 -->
+	<!-- 선택한 모임 > 상세 조회 -->
 	<select id="selectPlaceDetail" parameterType="int" resultType="PlaceDTO">
-		select * from place, company where placeNo = #{placeNo}
+		select * from place where placeNo = #{placeNo}
+	</select>
+	
+	
+	<!-- 선택한 모임 > 작성자 정보 조회 -->
+	<select id="selectPalaceCompanyInfo" parameterType="int" resultType="CompanyDTO">
+		select * from company where comId = (select comId from place where placeNo = #{placeNo})
+	</select>
+	
+	
+	<!-- 메인페이지에 모임 장소 최근날짜로 6개 가져오기   -->
+	<select id="selectPlaceRecentInfo" resultType="PlaceDTO">
+	 select * 
+	 from (select rownum as num, temp.* 
+	 from (select * from place order by placeCreateDate desc) temp)	
+	 where num between 1 and 6
+	</select>
+	
+	
+	<!-- [광고주 > 마이페이지] 내가 개설한 모임장소  -->
+	<select id="selectPlaceMakeList" parameterType="String" resultType="PlaceDTO">
+		select * from place where comId = (select comId from company where comId=#{comId})
 	</select>
 	
 </mapper>

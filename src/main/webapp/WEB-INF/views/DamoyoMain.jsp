@@ -98,7 +98,7 @@
 </style>
 
 <!-- 장소 광고 CSS -->
-<style>
+<!-- <style>
 	.wrapper {
 	    max-width: 1100px;
 	    margin: 0 auto;
@@ -182,7 +182,7 @@
 		font-weight: normal;
 	}	
 
-</style>
+</style> -->
 
 
 <!-- JavaScript -->
@@ -232,7 +232,7 @@
    
 		<!-- 02. 테마  -->
 		<h1>테마별 검색</h1>
-		<hr>
+		<hr style="border: solid 1px #b3b3b3;">
 		<br>
 		
 		<!-- 1행 -->
@@ -356,12 +356,15 @@
 	
 
 		
-	   <br><br><br> <br><br><br>  <br><br><br><br><br>
+	   <br><br><br><br><br><br><br><br><br><br><br><br>
 	   
 	   <!-- 03. 광고  -->
 	   <h1>모임 공간</h1>
-	   <hr>
+	   
+	   <hr style="border: solid 1px #b3b3b3;">
+	   	    <div class="more" align="right"><a href="/place/PlaceListAll">최근에 개설된 모임들입니다. 더 궁금하다면? ▷▶</a></div>
 	   <br>
+<<<<<<< HEAD
    	<div class="more" align="right">more</div>
    	   <div class="wrapper">
    	   	
@@ -502,15 +505,20 @@
 					</div>
 				</li>	
 			</ul>
+=======
+
+   	   <div class="wrapper">
+   	   		<%@include file="place/PlaceAll.jsp"%>			
+>>>>>>> 58f38cb25a3735d9c4e43eb055cb6c65c64faf2a
    	   </div>
 		
-   <br><br><br>		
-   <!-- hidden -->
-   <input type="hidden" name="guserId" value="${pdto.guserId}">
-   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
+	   <br><br><br>		
+	   <!-- hidden -->
+	   <input type="hidden" name="guserId" value="${pdto.guserId}">
+	   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
 
 
-   <br><br><br>
+   	   <br><br><br>
    
    <!-- [Footer] 페이지 하단 (고정화면) -->
    <hr>
