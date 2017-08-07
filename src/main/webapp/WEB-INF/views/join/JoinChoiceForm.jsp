@@ -114,7 +114,7 @@
 </script>
 
 <!-- [Header] 공통 헤더 -->
-<%@include file = "../header2.jsp"%>
+<%@include file = "../header.jsp"%>
 </head>
 
 <body>	

@@ -220,12 +220,13 @@
     }
 </script>
 
+<!-- 모임공간등록, 나의모임공간 > 기업회원만 접근가능 -->
 <script>
 	function member_chk(chk_id) {
 		if(chk_id == null) {
-			alert('기업회원만 작성 가능합니다^^');
-			
-			$('#memberChk').attr("href","#");
+			alert('기업회원만 작성 가능합니다.^^');			
+			$('#memberChk1').removeAttr("href");
+			$('#memberChk2').removeAttr("href");
 		}
 	}
 </script>
@@ -253,10 +254,10 @@
 				<a class="btn space_total" onclick="fnMove('1')">전체 모임 공간</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="/place/PlaceRegistForm" id="memberChk" onclick="member_chk(${cdto.comId})" class="btn space_regist">모임 공간 등록</a>
+				<a href="/place/PlaceRegistForm" id="memberChk1" onclick="member_chk(${cdto.comId})" class="btn space_regist">모임 공간 등록</a>
 			</div>
 			<div class="btn_wrap">
-				<a href="/mypage/MyPageCreateMeeting" onclick="member_chk(${cdto.comId})" class="btn my_space">나의 모임 공간</a>
+				<a href="/mypage/MyPageCreateMeeting" id="memberChk2" onclick="member_chk(${cdto.comId})" class="btn my_space">나의 모임 공간</a>
 			</div>
 		</div>		
 	</div>			
