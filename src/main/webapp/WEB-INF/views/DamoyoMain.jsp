@@ -362,8 +362,9 @@
 	   <h1>모임 공간</h1>
 	   <hr>
 	   <br>
-   
+   	<div class="more" align="right">more</div>
    	   <div class="wrapper">
+   	   	
 			<ul class="properties_list">
 				<li>
 					<a href="/">
