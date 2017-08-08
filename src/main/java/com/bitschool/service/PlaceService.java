@@ -112,5 +112,35 @@ public class PlaceService implements IPlaceService {
 		
 		return placeList;
 	}
+
+
+	// [광고주 > 마이페이지 & 상세페이지] 선택한 모임 삭제
+	@Override
+	public boolean PlaceDeleteAll(int placeNo) {
+		boolean flag = false;
+		
+		try {
+			flag = PlaceDAO.deletePlaceDelete(placeNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
+
+
+	// 선택한 모임 상세내용 수정 
+	@Override
+	public PlaceDTO PlaceDetailModify(int placeNo) {
+		PlaceDTO pl_dto = null;
+		
+		try {
+			pl_dto = PlaceDAO.updatePlaceDetail(placeNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return pl_dto;
+	}
 	
 }

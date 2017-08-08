@@ -24,5 +24,11 @@ public interface IPlaceService {
 
 	// [광고주 > 마이페이지] 내가 개설한 모임장소
 	public List<PlaceDTO> getPlaceMakeList(String comId);
+
+	// [광고주 > 마이페이지 & 상세페이지] 선택한 모임 삭제
+	public boolean PlaceDeleteAll(int placeNo);
+
+	// 선택한 모임 상세내용 수정
+	public PlaceDTO PlaceDetailModify(int placeNo);
 	
 }

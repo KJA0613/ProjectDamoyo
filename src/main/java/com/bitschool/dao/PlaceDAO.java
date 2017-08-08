@@ -96,5 +96,38 @@ public class PlaceDAO implements IPlaceDAO {
 		return placeList;
 	}
 
+
+	// [광고주 > 마이페이지 & 상세페이지] 선택한 모임 삭제
+	@Override
+	public boolean deletePlaceDelete(int placeNo) throws SQLException {
+		boolean flag = false;
+		
+		int aCnt = session.delete(namespace+".deletePlaceDelete", placeNo);
+		
+		if(aCnt > 0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+
+
+	@Override
+	public PlaceDTO updatePlaceDetail(int placeNo) throws SQLException {
+		PlaceDTO pl_dto = null;
+		return pl_dto;
+	}
+
+
+	// 선택한 모임 상세내용 수정 
+	/*@Override
+	public PlaceDTO updatePlaceDetail(int placeNo) throws SQLException {
+		PlaceDTO pl_dto = null;
+		
+		pl_dto = session.update(namespace+".updatePlaceDetail", placeNo);
+		
+		return pl_dto;
+	}*/
+
 	
 }
