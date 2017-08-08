@@ -64,12 +64,12 @@ public class MemberLoginController {
 	// "쿠키"와 "세션" 설명 : http://88240.tistory.com/190 > [1차 처리] 세션 > [2차 처리 고민] 스프링 제공
 	@RequestMapping(value = "/PersonLogin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String PersonLogin(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, 
-							 //@RequestParam("guserCode") String guserCode,
+							 @RequestParam("preURL") String preURL,
 							HttpSession session, Model model, 
 							HttpServletRequest request, RedirectAttributes redirectAttributes) {
 							
 		String url = null;
-
+		//System.out.println(preURL);
 		// 사용자가 로그인 폼에 입력한 데이터 > DB에 있는 데이터인지 여부 확인
 		PersonDTO pdto = memberService.PersonLogin(guserId, guserPw);
 
@@ -84,26 +84,14 @@ public class MemberLoginController {
 			List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
 			session.setAttribute("recommgatherList", recommgatherList);
 			
-			//redirectAttributes.addFlashAttribute("pdto", pdto);
-			//System.out.println("리다이렉트 값: " + pdto);
+			int idx = preURL.indexOf('/',7);
+			String goURI = preURL.substring(idx);
+			if(goURI.length() == 2) {
+				goURI = "/";
+			}
+			url = "redirect:" + goURI;
+			//로그인하고나서 바로 전 페이지로 돌아가기
 			
-			// 이전 페이지로 복귀
-			//String referer = request.getHeader("Referer");
-			//System.out.println("페이지 경로명: " + referer);		// [출력] http://localhost:5050/member/LoginForm		
-			//String[] loginReferer = referer.split("/");
-			
-			//System.out.println("4번째: " + loginReferer[4]);
-			
-			// 메인페이지 이동 (reload)
-			//url = "redirect:/member/" + loginReferer[4].toString();
-			
-			/*if(pdto.getGuserCode().equals("A")) {
-				url = "redirect:/";
-			} else {
-				url = "/PartnerMain";
-			}*/
-			
-			url = "redirect:/";
 			model.addAttribute("pdto",pdto);
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} 
@@ -115,7 +103,6 @@ public class MemberLoginController {
 			// 로그인 폼 페이지 이동
 			url = "login/LoginForm";
 		}
-
 		return url;
 	}
 	

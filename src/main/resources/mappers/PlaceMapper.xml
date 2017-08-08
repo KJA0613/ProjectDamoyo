@@ -54,8 +54,14 @@
 		delete from place where placeNo = #{placeNo}
 	</delete>
 	
-	<update id="updatePlaceDetail" parameterType="int">
-	
-	</update>
+	<update id="updatePlaceModify" parameterType="PlaceDTO">
+		update place set 
+		placeImage = #{placeImage}, placeType = #{placeType}, placeName = #{placeName}, placeIntro = #{placeIntro}, 
+		placeAddr1 = #{placeAddr1}, placeAddr2 = #{placeAddr2}, placeAddr3 = #{placeAddr3}, placeAddr4 = #{placeAddr4}, 
+		placeTel = #{placeTel}, placeURL = #{placeURL}, placePerCnt = #{placePerCnt}, placeUseTime = #{placeUseTime}, 
+		placeNotUseDay = #{placeNotUseDay}, placeCost = #{placeCost}, placeCostChoice = #{placeCostChoice}, 
+		placeParking = #{placeParking}, placeContent = #{placeContent} 
+		where placeNo = #{placeNo}
+	</update>	
 	
 </mapper>

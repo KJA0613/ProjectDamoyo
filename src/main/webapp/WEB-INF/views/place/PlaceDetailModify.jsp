@@ -117,11 +117,9 @@
 	 		
 	 		// [radio] 주차 유무
 	        var park_radioYn = $("input:radio[name='placeParking']:checked").val();    	        
-	        
 	 		
 	        // [radio] 비용단위
 	        var cost_radioYn = $("input:radio[name='placeCostChoice']:checked").val();    
-	        
 	    	
 	        // [checkbox] 공간유형
 			var space_chb = $("input:checkbox[name='placeType']").each(function() {
@@ -137,6 +135,17 @@
 	    });
 	}); 
 </script>
+
+<!-- 수정 완료 후, URL 이동 -->
+<!-- <script>
+	function go_url() {
+		var ds = document.getElementById("dataset");
+		var url = "/place/PlaceModifyProcess";
+		
+		ds.action = url;
+		ds.submit();		
+	}
+</script> -->
 
 
 <!-- [Header] 공통 헤더 -->
@@ -155,12 +164,13 @@
 				
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceDetailModify" method="POST" class="form-horizontal" enctype="multipart/form-data">					
+				<form action="/place/PlaceModifyProcess" method="POST" class="form-horizontal" id="dataset" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-10">
-							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png" value="${pl_dto.placeImage}">						
+							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png" value="${pl_dto.placeImage}">					
+							${pl_dto.placeImage}
 						</div>
 						<!-- <div class="col-md-2">
 							<button type="button" class="btn btn-grey">사진등록</button>
@@ -171,17 +181,17 @@
 						<label for="type" class="col-md-2 control-label">공간유형</label>
 						
 						<div class="col-md-10">
-							<input type="checkbox" name="placeType" value="스터디룸">스터디룸		&nbsp;
-							<input type="checkbox" name="placeType" value="세미나룸">세미나룸		&nbsp;
-							<input type="checkbox" name="placeType" value="다목적홀">다목적홀		&nbsp;
-							<input type="checkbox" name="placeType" value="파티룸">파티룸		&nbsp;
-							<input type="checkbox" name="placeType" value="카페">카페			&nbsp;
-							<input type="checkbox" name="placeType" value="레저시설">레저시설		&nbsp;
-							<input type="checkbox" name="placeType" value="공연장">공연장		&nbsp;<br>
-							<input type="checkbox" name="placeType" value="엠티장소">엠티장소		&nbsp;
-							<input type="checkbox" name="placeType" value="작업실">작업실		&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name="placeType" value="연습실">연습실		&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name="placeType" value="기타">기타
+							<input type="checkbox" name="placeType" value="스터디룸" <c:if test="${pl_dto.placeType eq '스터디룸'}">checked="checked"</c:if>>스터디룸		&nbsp;
+							<input type="checkbox" name="placeType" value="세미나룸" <c:if test="${pl_dto.placeType eq '세미나룸'}">checked="checked"</c:if>>세미나룸		&nbsp;
+							<input type="checkbox" name="placeType" value="다목적홀" <c:if test="${pl_dto.placeType eq '다목적홀'}">checked="checked"</c:if>>다목적홀		&nbsp;
+							<input type="checkbox" name="placeType" value="파티룸"  <c:if test="${pl_dto.placeType eq '파티룸'}">checked="checked"</c:if>>파티룸		&nbsp;
+							<input type="checkbox" name="placeType" value="카페" <c:if test="${pl_dto.placeType eq '카페'}">checked="checked"</c:if>>카페			&nbsp;
+							<input type="checkbox" name="placeType" value="레저시설" <c:if test="${pl_dto.placeType eq '레저시설'}">checked="checked"</c:if>>레저시설		&nbsp;
+							<input type="checkbox" name="placeType" value="공연장" <c:if test="${pl_dto.placeType eq '공연장'}">checked="checked"</c:if>>공연장		&nbsp;<br>
+							<input type="checkbox" name="placeType" value="엠티장소" <c:if test="${pl_dto.placeType eq '엠티장소'}">checked="checked"</c:if>>엠티장소		&nbsp;
+							<input type="checkbox" name="placeType" value="작업실" <c:if test="${pl_dto.placeType eq '작업실'}">checked="checked"</c:if>>작업실		&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name="placeType" value="연습실" <c:if test="${pl_dto.placeType eq '연습실'}">checked="checked"</c:if>>연습실		&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name="placeType" value="기타" <c:if test="${pl_dto.placeType eq '기타'}">checked="checked"</c:if>>기타
 						</div>
 					</div>
 					
@@ -236,8 +246,7 @@
 							<input type="radio" name="placeCostChoice" value="1 day">일단위 &nbsp;
 							<input type="radio" name="placeCostChoice" value="1 month">월간단위 &nbsp;
 							<input type="radio" name="placeCostChoice" value="Free">무료					
-						</div>
-						
+						</div>						
 					</div>
 										
 					<div class="form-group">
@@ -258,22 +267,22 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label" id="parkRadio">주차</label>
 						<div class="col-md-10">
-							<input type="radio" name="placeParking" value="무" checked="checked">무 &nbsp;	 
-							<input type="radio" name="placeParking" value="유">유											
+							<input type="radio" name="placeParking" value="무" <c:if test="${pl_dto.placeParking eq '무'}">checked="checked"</c:if>>무 &nbsp;	 
+							<input type="radio" name="placeParking" value="유" <c:if test="${pl_dto.placeParking eq '유'}">checked="checked"</c:if> >유											
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">정기휴무</label>
 						<div class="col-md-10">
-							<input type="checkbox" name="placeNotUseDay" value="월">&nbsp;월			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="화">&nbsp;화			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="수">&nbsp;수			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="목">&nbsp;목			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="금">&nbsp;금			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="토">&nbsp;토			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="일">&nbsp;일			&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="공휴일">&nbsp;공휴일		&nbsp;					
+							<input type="checkbox" name="placeNotUseDay" value="월" <c:if test="${pl_dto.placeNotUseDay eq '월'}">checked="checked"</c:if>>&nbsp;월			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="화" <c:if test="${pl_dto.placeNotUseDay eq '화'}">checked="checked"</c:if>>&nbsp;화			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="수" <c:if test="${pl_dto.placeNotUseDay eq '수'}">checked="checked"</c:if>>&nbsp;수			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="목" <c:if test="${pl_dto.placeNotUseDay eq '목'}">checked="checked"</c:if>>&nbsp;목			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="금" <c:if test="${pl_dto.placeNotUseDay eq '금'}">checked="checked"</c:if>>&nbsp;금			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="토" <c:if test="${pl_dto.placeNotUseDay eq '토'}">checked="checked"</c:if>>&nbsp;토			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="일" <c:if test="${pl_dto.placeNotUseDay eq '일'}">checked="checked"</c:if>>&nbsp;일			&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="공휴일" <c:if test="${pl_dto.placeNotUseDay eq '공휴일'}">checked="checked"</c:if>>&nbsp;공휴일		&nbsp;					
 						</div>
 					</div>
 					
@@ -291,21 +300,21 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">이름</label>
 						<div class="col-md-10">
-							<input type="text" name="comManager" class="form-control" placeholder="실명을 입력해주세요." value="${cdto.comName}">						
+							<input type="text" name="comManager" class="form-control" placeholder="실명을 입력해주세요." value="${cdto.comName}" disabled>						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">E-mail</label>
 						<div class="col-md-10">
-							<input type="text" name="comEmail" class="form-control" placeholder="abc@gmail.com" value="${cdto.comEmail}">						
+							<input type="text" name="comEmail" class="form-control" placeholder="abc@gmail.com" value="${cdto.comEmail}" disabled>						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">휴대폰</label>
 						<div class="col-md-10">
-							<input type="text" name="comPhone" class="form-control" placeholder="010-1234-5678" value="${cdto.comPhone}">						
+							<input type="text" name="comPhone" class="form-control" placeholder="010-1234-5678" value="${cdto.comPhone}" disabled>						
 						</div>
 					</div>	
 					<br><br>
@@ -313,10 +322,10 @@
 
 					<div class="clear-fix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" id="submitModify">수정완료</button>
+							<button type="submit" class="btn btn-primary" onclick="go_url()">수정완료</button>
 						</div>
 					</div>
-				
+			
 				</form>
 			</div>
    		</div>

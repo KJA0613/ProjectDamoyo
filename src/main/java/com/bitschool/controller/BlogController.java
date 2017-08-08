@@ -9,6 +9,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -31,11 +32,17 @@ import com.bitschool.dto.BReplyDTO;
 import com.bitschool.dto.BScheduleDTO;
 import com.bitschool.dto.BScheduleFormatDTO;
 import com.bitschool.dto.BSearchVO;
+import com.bitschool.dto.BTempDTO;
+import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.PersonDTO;
+import com.bitschool.helper.Gathering;
+import com.bitschool.helper.Recommend;
 import com.bitschool.service.BGalleryService;
 import com.bitschool.service.BPageService;
 import com.bitschool.service.BPostService;
 import com.bitschool.service.BReplyService;
 import com.bitschool.service.BScheduleService;
+import com.bitschool.service.BTempService;
 import com.google.gson.Gson;
 
 /**
@@ -61,11 +68,22 @@ public class BlogController {
 	@Inject
 	private BGalleryService gService;
 	
+	@Inject
+	private BTempService tService;
+	
+	@Inject
+	Recommend recom;
+	
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home(Model model, HttpSession session) {
+//		List<BTempDTO> list = tService.listAll();
+//		List<Gathering> list2 = recom.startReccomend();
+//		model.addAttribute("list2", list2);
+//		model.addAttribute("list", list);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
 		
 		return "blog/home";
 	}
@@ -713,5 +731,7 @@ public class BlogController {
 
 		return url;
 	}
+	
+	
 	
 }

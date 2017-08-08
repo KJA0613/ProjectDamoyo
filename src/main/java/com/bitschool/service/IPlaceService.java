@@ -29,6 +29,6 @@ public interface IPlaceService {
 	public boolean PlaceDeleteAll(int placeNo);
 
 	// 선택한 모임 상세내용 수정
-	public PlaceDTO PlaceDetailModify(int placeNo);
+	public boolean PlaceModifyProcess(PlaceDTO pl_dto);
 	
 }

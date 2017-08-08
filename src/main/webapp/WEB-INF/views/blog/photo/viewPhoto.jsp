@@ -93,7 +93,7 @@
 					</a>
 				</div>
 			</c:forEach>
-			 
+			 <!-- 	지연이좀 혼내주세요  -->
 			
 			<div class="modal fade" id="myModal" role="dialog">
 				<div class="modal-dialog">
