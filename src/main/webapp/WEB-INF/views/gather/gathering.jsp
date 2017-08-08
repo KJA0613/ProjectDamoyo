@@ -1254,10 +1254,11 @@ $(function() {
 			success : function(data) {
 				if(data.result==='yes'){
 					alert('수정되었습니다.');
-					
 				}else{
 					alert('실패하였습니다.');
 				}
+				
+				
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
@@ -1265,6 +1266,7 @@ $(function() {
 		});
 		
 
+		location.reload();
 /* 		$('#gatherModifyClose').trigger("click"); */
 	
  	});
@@ -2789,8 +2791,8 @@ function categoryMidChange(item){
 					</div>
 					
 					<div class="modal-footer">
-						<button type="button" id="gatherModifyClose" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
-						<button type="button" id="gatherModifyCommit" class="btn btn-primary" >저장</button>
+						<button type="button" id="gatherModifyClose" class="btn btn-danger pull-left" data-dismiss="modal">취소</button>
+						<button type="button" id="gatherModifyCommit" class="btn btn-primary" data-dismiss="modal">저장</button>
 					</div>
 					
 					
