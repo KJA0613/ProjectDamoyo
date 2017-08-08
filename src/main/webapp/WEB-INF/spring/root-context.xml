@@ -51,5 +51,5 @@
 	<!-- Service, DAO 패키지 등록 -->	
 	<context:component-scan base-package="com.bitschool.service" />
 	<context:component-scan base-package="com.bitschool.dao" />
-			
+		<context:component-scan base-package="com.bitschool.helper" />	
 </beans>

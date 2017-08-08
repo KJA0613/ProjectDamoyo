@@ -135,6 +135,9 @@
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
 <%@include file = "../header2.jsp"%>
+<%
+	String temp = request.getHeader("referer");
+%>
 
 </head>
 
@@ -179,6 +182,7 @@
 							</small>
 						</label>
 						<input type="password" id="input_guserPw" name="guserPw" class="form-control" placeholder="비밀번호를 입력하세요." tabindex="2" required>
+						<input type="hidden" name="preURL" value=<%=temp%>/>
 					</div>
 					<br>	
 					<div class="form-group pull-right">													
