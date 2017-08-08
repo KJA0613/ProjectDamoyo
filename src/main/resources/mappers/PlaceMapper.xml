@@ -55,7 +55,13 @@
 	</delete>
 	
 	<update id="updatePlaceDetail" parameterType="int">
-	
-	</update>
+		update place set 
+		placeImage = #{placeImage}, placeType = #{placeType}, placeName = #{placeName}, placeIntro = #{placeIntro}, 
+		placeTel = #{placeTel}, placeAddr1 = #{placeAddr1}, placeAddr2 = #{placeAddr2}, placeAddr3 = #{placeAddr3}, 
+		placeAddr4 = #{placeAddr4}, placeURL = #{placeURL}, placeCost = #{placeCost}, placeCostChoice = #{placeCostChoice}, 
+		placeUseTime = #{placeUseTime}, placePerCnt = #{placePerCnt}, placeParking = #{placeParking}, 
+		placeNotUseDay = #{placeNotUseDay}, placeContent = #{placeContent} 
+		where placeNo = #{placeNo}
+	</update>	
 	
 </mapper>

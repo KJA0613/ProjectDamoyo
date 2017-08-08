@@ -131,16 +131,16 @@ public class PlaceService implements IPlaceService {
 
 	// 선택한 모임 상세내용 수정 
 	@Override
-	public PlaceDTO PlaceDetailModify(int placeNo) {
-		PlaceDTO pl_dto = null;
+	public boolean PlaceDetailModify(int placeNo) {
+		boolean flag = false;
 		
 		try {
-			pl_dto = PlaceDAO.updatePlaceDetail(placeNo);
+			flag = PlaceDAO.updatePlaceDetail(placeNo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return pl_dto;
+		return flag;
 	}
 	
 }

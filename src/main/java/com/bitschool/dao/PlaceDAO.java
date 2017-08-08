@@ -112,22 +112,19 @@ public class PlaceDAO implements IPlaceDAO {
 	}
 
 
-	@Override
-	public PlaceDTO updatePlaceDetail(int placeNo) throws SQLException {
-		PlaceDTO pl_dto = null;
-		return pl_dto;
-	}
-
-
 	// 선택한 모임 상세내용 수정 
-	/*@Override
-	public PlaceDTO updatePlaceDetail(int placeNo) throws SQLException {
-		PlaceDTO pl_dto = null;
+	@Override
+	public boolean updatePlaceDetail(int placeNo) throws SQLException {
+		boolean flag = false;
 		
-		pl_dto = session.update(namespace+".updatePlaceDetail", placeNo);
+		int aCnt = session.update(namespace+".updatePlaceDetail", placeNo);
 		
-		return pl_dto;
-	}*/
+		if(aCnt > 0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
 
 	
 }
