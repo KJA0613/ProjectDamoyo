@@ -240,41 +240,38 @@ public class PlaceController {
 	}
 	
 	
-	// 04-01. 선택한 모임장소 > 글 불러와서 수정하기
-	@RequestMapping(value="/PlaceDetailOne", method = { RequestMethod.POST, RequestMethod.GET })
-	public String PlaceDetailOne(@RequestParam("placeNo") int placeNo, Model model) {
+	// 04-01. 선택한 모임장소 > 글 불러오기
+	@RequestMapping(value="/PlaceModify", method = { RequestMethod.POST, RequestMethod.GET })
+	public String PlaceModify(@RequestParam("placeNo") int placeNo, Model model) {
 		String url = null;
 				
 		// 선택한 글 번호에 해당되는 내용 읽어오기
-		PlaceDTO pl_dto = placeService.getPlaceDetail(placeNo);
+		PlaceDTO pl_dto = placeService.getPlaceDetail(placeNo);		// 예: 68번 글 상세내용
 		System.out.println("[TEST] 변경 전 pl_dto: " + pl_dto);
 		
-		model.addAttribute("pl_dto", pl_dto);	
-		
-		url = "place/PlaceDetailModify";
+		if(pl_dto != null) {
+			model.addAttribute("pl_dto", pl_dto);		
+			
+			url = "place/PlaceDetailModify";	
+		}		
 		
 		return url;
 	}
 	
 	
 	// 04-02. 수정완료 버튼 누르면 > PlaceDetailModify 파일 Reload
-	@RequestMapping(value = "/PlaceDetailModify", method = { RequestMethod.POST, RequestMethod.GET })
-	public String PlaceDetailModify(PlaceDTO pl_dto, @RequestParam("placeNo") int placeNo, Model model) {
+	@RequestMapping(value = "/PlaceModifyProcess", method = RequestMethod.POST)
+	public String PlaceModifyProcess(PlaceDTO pl_dto, Model model) {
 		String url = null;
-		
-		System.out.println("수정한 placeNo: " + placeNo);
-		System.out.println("JS 전 pl_dto: " + pl_dto);
-		
+		System.out.println("pre data" + pl_dto);				
 		// 선택한 글 번호에 해당되는 내용 읽어오기
-		boolean flag = placeService.PlaceDetailModify(placeNo);
+		boolean flag = placeService.PlaceModifyProcess(pl_dto);		
 		
 		System.out.println(flag);
+		System.out.println("after data" + pl_dto);
 
-		if(flag) {
-			model.addAttribute("pl_dto", pl_dto);
-			System.out.println("[TEST] 변경 후 pl_dto: " + pl_dto);
-			
-			url = "redirect:/place/PlaceDetail?placeNo"+placeNo;
+		if(flag) {		
+			url = "PartnerMain";
 		}		
 
 		return url;

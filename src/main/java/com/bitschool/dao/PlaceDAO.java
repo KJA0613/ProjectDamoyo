@@ -31,7 +31,6 @@ public class PlaceDAO implements IPlaceDAO {
 	public boolean insertPlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
 			
-		System.out.println("dao: " + pl_dto);
 		int aCnt = session.insert(namespace+".insertPlaceRegist", pl_dto);
 		
 		if(aCnt > 0) {
@@ -114,11 +113,12 @@ public class PlaceDAO implements IPlaceDAO {
 
 	// 선택한 모임 상세내용 수정 
 	@Override
-	public boolean updatePlaceDetail(int placeNo) throws SQLException {
+	public boolean updatePlaceModify(PlaceDTO pl_dto) throws SQLException {
 		boolean flag = false;
-		
-		int aCnt = session.update(namespace+".updatePlaceDetail", placeNo);
-		
+		System.out.println("dao");
+		int aCnt = session.update(namespace+".updatePlaceModify", pl_dto);
+		System.out.println("aCnt: " + aCnt);
+		System.out.println("dao pl_dto: " + pl_dto);
 		if(aCnt > 0) {
 			flag = true;
 		}

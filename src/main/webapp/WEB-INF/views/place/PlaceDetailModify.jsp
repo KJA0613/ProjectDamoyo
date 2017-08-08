@@ -138,9 +138,9 @@
 
 <!-- 수정 완료 후, URL 이동 -->
 <!-- <script>
-	function modifyComplete(placeNo) {
+	function go_url() {
 		var ds = document.getElementById("dataset");
-		var url = "/place/PlaceDetailModify?placeNo="+placeNo;
+		var url = "/place/PlaceModifyProcess";
 		
 		ds.action = url;
 		ds.submit();		
@@ -164,12 +164,13 @@
 				
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceDetailModify" method="POST" class="form-horizontal" id="dataset" enctype="multipart/form-data">					
+				<form action="/place/PlaceModifyProcess" method="POST" class="form-horizontal" id="dataset" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-10">
 							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png" value="${pl_dto.placeImage}">					
+							${pl_dto.placeImage}
 						</div>
 						<!-- <div class="col-md-2">
 							<button type="button" class="btn btn-grey">사진등록</button>
@@ -266,8 +267,8 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label" id="parkRadio">주차</label>
 						<div class="col-md-10">
-							<input type="radio" name="placeParking" value="N" <c:if test="${pl_dto.placeParking eq 'N'}">checked="checked"</c:if>>무 &nbsp;	 
-							<input type="radio" name="placeParking" value="Y" <c:if test="${pl_dto.placeParking eq 'Y'}">checked="checked"</c:if> >유											
+							<input type="radio" name="placeParking" value="무" <c:if test="${pl_dto.placeParking eq '무'}">checked="checked"</c:if>>무 &nbsp;	 
+							<input type="radio" name="placeParking" value="유" <c:if test="${pl_dto.placeParking eq '유'}">checked="checked"</c:if> >유											
 						</div>
 					</div>
 					
@@ -321,10 +322,10 @@
 
 					<div class="clear-fix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" id="submitModify" onclick="modifyComplete(${pl_dto.placeNo})">수정완료</button>
+							<button type="submit" class="btn btn-primary" onclick="go_url()">수정완료</button>
 						</div>
 					</div>
-				
+			
 				</form>
 			</div>
    		</div>

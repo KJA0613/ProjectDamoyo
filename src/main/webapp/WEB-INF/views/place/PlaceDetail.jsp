@@ -108,7 +108,7 @@
 		var mod = confirm("해당 장소를 수정 하시겠습니까?");
 		
 		if(mod == true) {
-			location.href="/place/PlaceDetailOne?placeNo="+placeNo;
+			location.href="/place/PlaceModify?placeNo="+placeNo;
 		} else {
 			history.go(0);		// 현재 페이지 유지
 		}
@@ -299,6 +299,9 @@
 							<button type="submit" class="btn btn-primary" id="submitAfterCheck">전체 목록보기</button>
 						</div>
 					</div>
+					
+					
+					<input type="hidden" name="" value="">
 
 				</form>
 			</div>
