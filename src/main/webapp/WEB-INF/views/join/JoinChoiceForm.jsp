@@ -74,13 +74,10 @@
 			//alert('[TEST-개인회원(A)] : '+ person); 			// A
    						
    			// 개인(person: A) / 기업(company: B) 
-			var url = "/join/JoinChoiceCheck?person="+person;
-			
-		
+			var url = "/join/JoinChoiceCheck?person="+person;		
 		}
 		// "기업" 회원가입 폼 이동
-		 else if (type == 2) {
-			
+		 else if (type == 2) {			
 			var company = document.getElementById('company').value;			
 			
 			var url = "/join/JoinChoiceCheck2?company="+company;
@@ -114,7 +111,7 @@
 </script>
 
 <!-- [Header] 공통 헤더 -->
-<%@include file = "../header2.jsp"%>
+<%@include file = "../header.jsp"%>
 </head>
 
 <body>	

@@ -1253,10 +1253,12 @@ $(function() {
 			data : DATA,
 			success : function(data) {
 				if(data.result==='yes'){
+					alert('수정되었습니다.');
 					location.reload();					
 				}else{
 					alert('실패하였습니다.');
 				}
+				
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
@@ -1264,7 +1266,6 @@ $(function() {
 		});
 		
 
-		alert('수정되었습니다.');
 	
  	});
  });

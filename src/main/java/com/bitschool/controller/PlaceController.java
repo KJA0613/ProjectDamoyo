@@ -46,8 +46,7 @@ public class PlaceController {
 		String url = null;
 	
 		// 광고주 > 세션에 저장된 정보 가져오기
-		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");
-		System.out.println("[TEST-세션에 저장된 정보] cdto : " + cdto);		
+		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");	
 	
 		model.addAttribute("cdto", cdto);
 		
@@ -74,9 +73,9 @@ public class PlaceController {
 		// 파일 > 실제 서버에 저장
 		// 웹서비스 root 경로
 		String aPath = req.getSession().getServletContext().getRealPath("/");	// 저장할 파일의 상대 경로	 
-		System.out.println("aPath : " + aPath);									// D:\dev\spring_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DAMOYO_Project\
+		//System.out.println("aPath : " + aPath);									// D:\dev\spring_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DAMOYO_Project\
 		String rPath =  "\\resources\\image\\place\\";							// 저장할 파일의 절대 경로		
-		System.out.println("rPath : " + rPath);									// \resources\image\place\
+		//System.out.println("rPath : " + rPath);									// \resources\image\place\
 		
 		DiskFileItemFactory fac = new DiskFileItemFactory(); 	// 파일 업로드 핸들러를 생성
 		ServletFileUpload sfu = new ServletFileUpload(fac); 	// 클라이언트로 부터 우리가 지정한 곳으로 연결시키는 역활
@@ -110,7 +109,7 @@ public class PlaceController {
 						// temp를 fileName에 저장함
 						fileName = temp;
 					}
-					System.out.println("fileName: " + fileName);
+					//System.out.println("fileName: " + fileName);
 				} else {
 					// FormField는 일방적인 데이터 정보					
 					// getFileName()은  <input> 태그의 name값을 가져옴, <input name="zz"> 에서는 zz를 가져옴.
@@ -165,7 +164,7 @@ public class PlaceController {
 				fileName = rPath + fileName; 						// \resources\image\place\xxx.png
 				// 파일경로 DB에 저장
 				pl_dto.setPlaceImage(fileName);
-				System.out.println("최종 fileName" + fileName);
+				//System.out.println("최종 fileName" + fileName);
 				
 				// 실제 파일 경로
 				fileName = aPath + fileName;						// D:\dev\spring_workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\DAMOYO_Project\resources\image\place\xxx.png
@@ -181,7 +180,7 @@ public class PlaceController {
 		
 		// [서비스] 모임장소 등록
 		flag = placeService.PlaceRegist(pl_dto);
-		System.out.println("[TEST-DB Insert] pl_dto : " + pl_dto);
+		//System.out.println("[TEST-DB Insert] pl_dto : " + pl_dto);
 		
 		model.addAttribute("pl_dto", pl_dto);
 		model.addAttribute("cdto", cdto);	
@@ -225,12 +224,66 @@ public class PlaceController {
 		// 모임 클릭 > 작성자 정보
 		cdto = placeService.getPalaceCompanyInfo(placeNo);
 		
+		// 로그인 한 > 사용자 정보
+		CompanyDTO login_cdto = (CompanyDTO) session.getAttribute("cdto");
+		
 		model.addAttribute("pl_dto", pl_dto);
 		model.addAttribute("cdto", cdto);
+		model.addAttribute("login_cdto", login_cdto);
+		
+		//System.out.println("[TEST] 로그인 한 사람: " + login_cdto.getComId());
+		//System.out.println("[TEST] 글 쓴 사람: " + pl_dto.getComId());
 
 		url = "place/PlaceDetail";
 		
 		return url;
 	}
 	
+	
+	// 04-01. 선택한 모임장소 > 글 불러와서 수정하기
+	@RequestMapping(value="/PlaceDetailOne", method = RequestMethod.GET)
+	public String PlaceDetailOne(@RequestParam("placeNo") int placeNo, Model model) {
+		String url = null;
+				
+		// 선택한 글 번호에 해당되는 내용 읽어오기
+		PlaceDTO pl_dto = placeService.getPlaceDetail(placeNo);
+		System.out.println(pl_dto);
+		
+		model.addAttribute("pl_dto", pl_dto);	
+		
+		url = "place/PlaceDetailModify";
+		
+		return url;
+	}
+	
+	
+	// 04-02. 수정완료 버튼 누르면 > PlaceDetailModify 파일 Reload
+	@RequestMapping(value = "/PlaceDetailModify", method = RequestMethod.GET)
+	public String PlaceDetailModify(@RequestParam("placeNo") int placeNo, Model model) {
+		String url = null;
+
+		// 선택한 글 번호에 해당되는 내용 읽어오기
+		PlaceDTO pl_dto = placeService.PlaceDetailModify(placeNo);
+
+		model.addAttribute("pl_dto", pl_dto);
+
+		url = "place/PlaceDetailModify";
+
+		return url;
+	}
+	
+	
+	// 05. 선택한 모임 삭제
+	@RequestMapping(value="/PlaceDeleteAll", method = RequestMethod.GET)
+	public String PlaceDeleteAll(@RequestParam("placeNo") int placeNo) {
+		String url = null;
+		
+		boolean flag = placeService.PlaceDeleteAll(placeNo);
+		
+		if(flag) {
+			url = "redirect:/mypage/MyPageCreateMeeting";
+		}
+		
+		return url;
+	}
 }

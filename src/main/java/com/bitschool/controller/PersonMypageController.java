@@ -141,9 +141,7 @@ public class PersonMypageController {
 		model.addAttribute("pdto", pdto);
 		model.addAttribute("adto", adto);
 		model.addAttribute("cdto", cdto);
-		
-		System.out.println("참/거짓: "+ flag);
-		
+			
 		// 희망지역, 카테고리 > 2단계 수정페이지에 데이터들 뿌려주기
 		if(flag) {	
 			// 희망지역, 카테고리 변경 가능한 페이지로 이동
@@ -154,15 +152,13 @@ public class PersonMypageController {
 	}
 	
 	// 01-01-02-1. [기업회원] 마이페이지 - 1단계 > 개인정보 수정 
-		// [1단계] 아이디, 패스워드 > hidden으로 값 받아오기
-		// [2단계] CompanyInfoFirstModify.jsp > hidden > guserId값 가져오기 
+	// [1단계] 아이디, 패스워드 > hidden으로 값 받아오기
+	// [2단계] CompanyInfoFirstModify.jsp > hidden > guserId값 가져오기 
 	@RequestMapping(value = "/CompanySecondModify", method = RequestMethod.POST)
 	public String CompanySecondModify(CompanyDTO cdto,Model model){
 		
 		String url = null;
 		boolean flag = false;
-		
-		System.out.println(cdto);
 		
 		flag = memberService.updateComInfo(cdto);	
 		
@@ -355,7 +351,7 @@ public class PersonMypageController {
 	
 	// 02. [개인/기업회원] 마이페이지 - 내가 개설한 모임 / 모임장소
 	@RequestMapping(value = "/MyPageCreateMeeting", method = RequestMethod.GET)
-	public String MyPageCreateMeeting(HttpSession session,Model model) {
+	public String MyPageCreateMeeting(HttpSession session, Model model) {
 
 		String url = "default";	
 

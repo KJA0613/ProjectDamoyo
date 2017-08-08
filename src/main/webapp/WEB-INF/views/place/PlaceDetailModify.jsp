@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<title>모임공간 등록</title>
+<title>해당 모임장소 상세정보 수정</title>
 
 <style type="text/css">
 	.control-label {
@@ -113,7 +113,7 @@
 <!-- [참고 사이트] http://lng1982.tistory.com/80 -->
 <script>
 	$(document).ready(function() {	    
-	 	$("#submitAfterCheck").click(function(){	 		
+	 	$("#submitModify").click(function(){	 		
 	 		
 	 		// [radio] 주차 유무
 	        var park_radioYn = $("input:radio[name='placeParking']:checked").val();    	        
@@ -155,12 +155,12 @@
 				
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceRegist" method="POST" class="form-horizontal" enctype="multipart/form-data">					
+				<form action="/place/PlaceDetailModify" method="POST" class="form-horizontal" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-10">
-							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">						
+							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png" value="${pl_dto.placeImage}">						
 						</div>
 						<!-- <div class="col-md-2">
 							<button type="button" class="btn btn-grey">사진등록</button>
@@ -188,31 +188,31 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간명</label>
 						<div class="col-md-10">
-							<input type="text" name="placeName" class="form-control" placeholder="10자 이내로 입력해주세요." required>						
+							<input type="text" name="placeName" class="form-control" placeholder="10자 이내로 입력해주세요." value="${pl_dto.placeName}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간 소개</label>
 						<div class="col-md-10">
-							<input type="text" name="placeIntro" class="form-control" placeholder="20자 이내로 입력해주세요." required>						
+							<input type="text" name="placeIntro" class="form-control" placeholder="20자 이내로 입력해주세요." value="${pl_dto.placeIntro}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">전화</label>
 						<div class="col-md-10">
-							<input type="text" name="placeTel" class="form-control" placeholder="02-123-4567" required>						
+							<input type="text" name="placeTel" class="form-control" placeholder="02-123-4567" value="${pl_dto.placeTel}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">주소</label>
 						<div class="col-md-8">
-							<input type="text" name="placeAddr1" id="placeAddr1" class="form-control" placeholder="우편번호"><br>
-							<input type="text" name="placeAddr2" id="placeAddr2" class="form-control" placeholder="도로명 주소"><br>
-							<input type="text" name="placeAddr3" id="placeAddr3" class="form-control" placeholder="지번 주소"><br>
-							<input type="text" name="placeAddr4" id="placeAddr4" class="form-control" placeholder="상세 주소">						
+							<input type="text" name="placeAddr1" id="placeAddr1" class="form-control" placeholder="우편번호" value="${pl_dto.placeAddr1}"><br>
+							<input type="text" name="placeAddr2" id="placeAddr2" class="form-control" placeholder="도로명 주소" value="${pl_dto.placeAddr2}"><br>							
+							<input type="text" name="placeAddr3" id="placeAddr3" class="form-control" placeholder="지번 주소" value="${pl_dto.placeAddr3}"><br>
+							<input type="text" name="placeAddr4" id="placeAddr4" class="form-control" placeholder="상세 주소" value="${pl_dto.placeAddr4}">						
 						</div>
 						<div class="col-md-2">
 							<button type="button" class="btn btn-grey" onclick="search_corpAddr()">주소 검색</button><br>							
@@ -222,14 +222,14 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">URL</label>
 						<div class="col-md-10">
-							<input type="text" name="placeURL" class="form-control" placeholder="www.damoyo.com" required>						
+							<input type="text" name="placeURL" class="form-control" placeholder="www.damoyo.com" value="${pl_dto.placeURL}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">비용</label>
 						<div class="col-md-2">
-							<input type="text" name="placeCost" class="form-control" placeholder="2,500" required>
+							<input type="text" name="placeCost" class="form-control" placeholder="2,500" value="${pl_dto.placeCost}">
 						</div>
 						<div class="col-md-6">
 							<input type="radio" name="placeCostChoice" value="1 hour" checked="checked">시간단위 &nbsp;
@@ -243,14 +243,14 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">영업시간</label>
 						<div class="col-md-10"> 
-							<input type="text" name="placeUseTime" class="form-control" placeholder="09:00 ~ 18:00" required>						
+							<input type="text" name="placeUseTime" class="form-control" placeholder="09:00 ~ 18:00" value="${pl_dto.placeUseTime}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">수용인원</label>
 						<div class="col-md-2">
-							<input type="text" name="placePerCnt" class="form-control" placeholder="6" required>						
+							<input type="text" name="placePerCnt" class="form-control" placeholder="6" value="${pl_dto.placePerCnt}">						
 						</div>
 						<h4>명</h4>
 					</div>		 					
@@ -280,7 +280,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">상세설명</label>
 						<div class="col-md-10">
-							<textarea rows="5" cols="10" name="placeContent" class="form-control" required></textarea>				
+							<textarea rows="5" cols="10" name="placeContent" class="form-control" required>${pl_dto.placeContent}</textarea>				
 						</div>
 					</div>
 									
@@ -291,21 +291,21 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">이름</label>
 						<div class="col-md-10">
-							<input type="text" name="comManager" class="form-control" placeholder="실명을 입력해주세요." value="${cdto.comName}" disabled>						
+							<input type="text" name="comManager" class="form-control" placeholder="실명을 입력해주세요." value="${cdto.comName}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">E-mail</label>
 						<div class="col-md-10">
-							<input type="text" name="comEmail" class="form-control" placeholder="abc@gmail.com" value="${cdto.comEmail}" disabled>						
+							<input type="text" name="comEmail" class="form-control" placeholder="abc@gmail.com" value="${cdto.comEmail}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">휴대폰</label>
 						<div class="col-md-10">
-							<input type="text" name="comPhone" class="form-control" placeholder="010-1234-5678" value="${cdto.comPhone}" disabled>						
+							<input type="text" name="comPhone" class="form-control" placeholder="010-1234-5678" value="${cdto.comPhone}">						
 						</div>
 					</div>	
 					<br><br>
@@ -313,7 +313,7 @@
 
 					<div class="clear-fix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" id="submitAfterCheck">모임공간 등록하기</button>
+							<button type="submit" class="btn btn-primary" id="submitModify">수정완료</button>
 						</div>
 					</div>
 				

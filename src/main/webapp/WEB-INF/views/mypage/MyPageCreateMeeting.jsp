@@ -61,7 +61,8 @@
 				            	<span class="glyphicon glyphicon-search form-control-feedback"></span>
 				           	</div> -->
 						</form>
-					</div>
+					</div>					
+
 					
 					<!-- 개인 > 개설한 모임 목록  -->					
 					<div class="row">
@@ -85,7 +86,19 @@
 					
 					<!-- 광고주 > 개설한 모임 장소 -->
 					<div class="wrapper">
-			   	   		<%@include file="../place/PlaceAll.jsp"%>			
+					<c:choose>
+						<c:when test="${empty plList}">							
+							<div class="alert alert-info">
+								<div class="form-group" style="margin-top: 13px; margin-bottom: 5px;">
+									<h4>개설한 모임 장소가 없습니다.
+									<a href="/place/PlaceRegistForm" class="pull-right" style = "font-weight : bold;">모임 장소 개설하기 ></a></h4>
+								</div>
+							</div>							
+						</c:when>
+						<c:otherwise>
+			   	   			<%@include file="../place/PlaceAll.jsp"%>
+			   	   		</c:otherwise>	
+			   	   	</c:choose>		
 			   	    </div>
 			   	    			
 				</div>
