@@ -131,6 +131,7 @@ a:visited {
 #gather {
 	margin-bottom: 20px;
 }
+
 </style>
 
 <!-- jquery를 이용하여 뿌리기 -->
@@ -2382,7 +2383,14 @@ function categoryMidChange(item){
 					<br>
 				</div>
 
-				<br><br>
+				<br>
+				<div class="center-block">
+					<input type="checkbox" id="gatherCategoryTop" name="gatherCategoryTop" value="동호회" >동호회
+					<input type="checkbox" id="gatherCategoryTop" name="gatherCategoryTop" value="스터디" >스터디
+					<input type="checkbox" id="gatherCategoryTop" name="gatherCategoryTop" value="컨퍼런스" >컨퍼런스
+				</div>
+				
+				<br>
 				<div class="col-md-offset-3">
 					<form class="form-inline">
 						<label>상세검색&nbsp;&nbsp;</label>
@@ -2391,10 +2399,9 @@ function categoryMidChange(item){
 								<option id="subject">제목</option>
 								<option id="subject2">지역</option>
 								<option>카테고리</option>
-							</select> <input type="text" class="form-control" id="search_text"
-								value="${sSTR eq '' ? '' : sSTR}">
-							<button type="button" class="btn btn-default"
-								onclick="search_click()">검색</button>
+							</select> 
+							<input type="text" class="form-control" id="search_text" value="${sSTR eq '' ? '' : sSTR}">
+							<button type="button" class="btn btn-default" onclick="search_click()">검색</button>
 						</div>
 					</form>
 				</div>
