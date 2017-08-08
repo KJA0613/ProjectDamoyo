@@ -50,9 +50,9 @@ public class GatheringService implements IGatheringService {
 	}
 
 	@Override
-	public List<GatheringDTO> getGatheringCheck(List<String> cList, List<String> aList, String sSelect, String sSTR) {
+	public List<GatheringDTO> getGatheringCheck(List<String> cList, List<String> aList,  List<String> tList, String sSelect, String sSTR) {
 		
-		List<GatheringDTO> gList = gDao.getGatheringCheck(cList, aList, sSelect, sSTR);
+		List<GatheringDTO> gList = gDao.getGatheringCheck(cList, aList, tList, sSelect, sSTR);
 		
 		return gList;
 	}

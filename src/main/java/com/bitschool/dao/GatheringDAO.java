@@ -51,11 +51,12 @@ public class GatheringDAO implements IGatheringDAO {
 	}
 
 	@Override
-	public List<GatheringDTO> getGatheringCheck(List<String> cList, List<String> aList, String sSelect, String sSTR) {
+	public List<GatheringDTO> getGatheringCheck(List<String> cList, List<String> aList,  List<String> tList, String sSelect, String sSTR) {
 
 		HashMap<String, Object> list = new HashMap<String, Object>();
 		list.put("cList", cList);
 		list.put("aList", aList);
+		list.put("tList", tList);
 		list.put("sSelect", sSelect);
 		list.put("sSTR", sSTR);
 		
