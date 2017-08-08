@@ -360,12 +360,11 @@
 	   
 	   <!-- 03. 광고  -->
 	   <h1>모임 공간</h1>
-	   <hr style="border: solid 1px #b3b3b3;">
-	  <!--  <p class="help-block">
-			&nbsp;<small>※ 최근에 개설된 모임순입니다.^^</small>
-	   </p> -->
-	   <br>
 	   
+	   <hr style="border: solid 1px #b3b3b3;">
+	   	    <div class="more" align="right"><a href="/place/PlaceListAll">최근에 개설된 모임들입니다. 더 궁금하다면? ▷▶</a></div>
+	   <br>
+
    	   <div class="wrapper">
    	   		<%@include file="place/PlaceAll.jsp"%>			
    	   </div>

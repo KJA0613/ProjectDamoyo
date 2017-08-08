@@ -69,11 +69,11 @@
 						</form>
 					</div>	
 
-					<div class="row">
+					<div class="row">			
 						<c:forEach var="parti" items="${plist}">
 							<div class="col-xs-6 col-lg-6" id="gather">
 								<a href=""> <img width="408px" height="300px" src='${parti.gatherImg}'>
-									<h3 align="center">${parti.gatherSubject}</h4>
+									<h3 align="center">${parti.gatherSubject}</h3>
 									<h4>
 										기간 : ${fn:substring(parti.gatherSdate, 0, 10)} ~ ${fn:substring(parti.gatherEdate, 0, 10)}<br> 
 										최근 글 : 12<br>
@@ -85,7 +85,6 @@
 								</a>
 							</div>
 						</c:forEach>
-
 					</div>        
 
 				</div>

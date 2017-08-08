@@ -141,7 +141,7 @@ var categoryMid3 = new Array("외국어","영어","음악/공연","라이프","�
 var categoryBot0 = new Array("중국어","일본어","독일어","아랍어","태국어","스페인어","러시아어","프랑스어","베트남어","외국어 기타");
 var categoryBot1 = new Array("토익","토플","텝스","토스","영어회화","작문/독해","번역","미드","영어 기타");
 var categoryBot2 = new Array("기타/우쿠렐라","피아노/키보드","보컬/음악이론","작사/작곡","밴드","국악","연기/연극/뮤지컬","댄스무용","진행/행사","마술/음악공연 기타");
-var categoryBot3 = new Array("육아","반려동물","금융/재테크","상담/컨설팅","건강/웰빙","사주/타로","독서/글쓰기","사진/영상","키덜트","생활공예","요리/베이킹","인테리어", "라이프 기타");
+var categoryBot3 = new Array("육아","반려동물","금융/재테크","상담/컨설팅","건강/웰빙","사주/타로","독서/글쓰기","사진/영상","키덜트","생활공예","요리/베이킹","인테리어");
 var categoryBot4 = new Array("자소서/면접","인적성","스피치","자격증","기업공채","공모전/대외활동","창업/스타트업","취업 기타");
 var categoryBot5 = new Array("리그오브레전드","도타","피파온라인","오버워치","서든어택","온라인게임","PC게임","모바일게임","보드게임","게임 기타");
 var categoryBot6 = new Array("축구","야구","농구","테니스","배드민턴","골프","등산","수영","자전거","스케이트/보드","요가/에어로빅","헬스/다이어트","무예/무술","시즌스포츠","스포츠 기타");
@@ -222,9 +222,11 @@ function categoryMidChange(item){
 			
 <!-- ********************************* 폼테그 시작 -->
 
-					<form class="form-horizontal" id="gMake" name="makeGathering" action="/gather/gatheringInsert" method="post" enctype="multipart/form-data">
+					<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringInsert" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
 						<input type="hidden" name="comId" value="${cdto.comId}" />
+ 
+
 
 						<!-- 주제 -->
 						<div class="form-group">

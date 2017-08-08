@@ -75,12 +75,23 @@ public class PlaceDAO implements IPlaceDAO {
 	}
 
 	
-	// 메인페이지에 모임 장소 최신날짜로 6개 가져오기  
+	// 메인페이지에 모임 장소 최근날짜로 6개 가져오기  
 	@Override
 	public List<PlaceDTO> selectPlaceRecentInfo() throws SQLException {
 		List<PlaceDTO> placeList = null;
 		
 		placeList = session.selectList(namespace+".selectPlaceRecentInfo");
+		
+		return placeList;
+	}
+
+
+	// [광고주 > 마이페이지] 내가 개설한 모임장소 
+	@Override
+	public List<PlaceDTO> selectPlaceMakeList(String comId) throws SQLException {
+		List<PlaceDTO> placeList = null;
+		
+		placeList = session.selectList(namespace+".selectPlaceMakeList", comId);
 		
 		return placeList;
 	}

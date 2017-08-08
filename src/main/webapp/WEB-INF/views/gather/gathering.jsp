@@ -1254,10 +1254,10 @@ $(function() {
 			success : function(data) {
 				if(data.result==='yes'){
 					alert('수정되었습니다.');
+					location.reload();					
 				}else{
 					alert('실패하였습니다.');
 				}
-				
 				
 			},
 			error : function(request, status, error) {
@@ -1266,8 +1266,6 @@ $(function() {
 		});
 		
 
-		location.reload();
-/* 		$('#gatherModifyClose').trigger("click"); */
 	
  	});
  });

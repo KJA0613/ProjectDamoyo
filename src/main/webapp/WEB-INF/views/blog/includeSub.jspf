@@ -50,7 +50,7 @@ div {
 					</c:when>
 					
 					<c:otherwise>
-						<li><a href="/member/LoginForm" style="margin-left: 40px;">로그인</a></li>
+						<li><a href="/blog/member/LoginForm" style="margin-left: 40px;">로그인</a></li>
 					</c:otherwise>
 				</c:choose>
 				</ul>
