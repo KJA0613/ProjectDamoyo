@@ -134,14 +134,10 @@
 </script>
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
-<<<<<<< HEAD
-<%@include file = "../header2.jsp"%>
+<%@include file = "../header.jsp"%>
 <%
 	String temp = request.getHeader("referer");
 %>
-=======
-<%@include file = "../header.jsp"%>
->>>>>>> f8ef86e194d8779c7403ab4a986292bf67746a31
 
 </head>
 
