@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- JSTL -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -99,6 +102,32 @@
 </style>
 
 
+<!-- 장소 수정 여부 -->
+<script>
+	function placeModify(placeNo) {
+		var mod = confirm("해당 장소를 수정 하시겠습니까?");
+		
+		if(mod == true) {
+			location.href="/place/PlaceModify?placeNo="+placeNo;
+		} else {
+			history.go(0);		// 현재 페이지 유지
+		}
+	}
+</script>
+
+<!-- 장소 삭제 여부  -->
+<script>
+	function placeDelete(placeNo) {
+		var del = confirm("해당 장소를 정말 삭제하시겠습니까?")
+
+		if(del == true) {
+			location.href="/place/PlaceDeleteAll?placeNo="+placeNo;		// 사용자(로그인)가 쓴 글 번호 넘겨서 삭제
+		} else {
+			history.go(0);
+		}
+	}
+</script>
+
 <!-- [Header] 공통 헤더 -->
 <%@include file="../header.jsp"%>
 </head>
@@ -107,15 +136,18 @@
 	<br>
 	<div class="container">
 		<div class="clearfix">
-				<h1>${pl_dto.placeName}</h1>				
-				<!-- <p class="help-block">
-					&nbsp;<small>* 모임공간에 오신걸 환영합니다.</small>
-				</p> -->								
-				<hr style="border: solid 1px #b3b3b3;">
-				<br>				
-				
-				<!-- 구글 애드센스 광고 : 도메인 등록해야하는ㅠ -->
-				<!-- <div class="google-middle-add-center"></div> -->
+			<h1>${pl_dto.placeName}</h1>
+			<div class="form-group pull-right">	
+			
+			<!-- [광고주] 수정하기 / 삭제하기 > 로그인 한 사람 = 글 쓴 사람-->		
+			<c:if test="${login_cdto.comId eq pl_dto.comId}">
+				<button type="submit" class="btn btn-warning" id="place_modify" onclick="placeModify(${pl_dto.placeNo})">수정하기</button>
+				<button type="submit" class="btn btn-danger" id="place_delete" onclick="placeDelete(${pl_dto.placeNo})">삭제하기</button>
+			</c:if>
+			
+			</div>
+			<hr style="border: solid 1px #b3b3b3;">
+			<br>										
 				
 				<!-- 모임공간 등록 폼 -->
 				<form action="/place/PlaceListAll" method="POST" class="form-horizontal" enctype="multipart/form-data">					
@@ -257,13 +289,19 @@
 						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 						var map = new daum.maps.Map(mapContainer, mapOption); 
 						</script> -->
-					</div>					
+					</div>		
+					
+					<!-- 구글 애드센스 광고 : 도메인 등록해야하는ㅠ -->
+					<!-- <div class="google-middle-add-center"></div> -->			
 
-				<div class="clear-fix pull-right">
+					<div class="clear-fix pull-right">
 						<div class="col-md-4" style="text-align:center;">
 							<button type="submit" class="btn btn-primary" id="submitAfterCheck">전체 목록보기</button>
 						</div>
 					</div>
+					
+					
+					<!-- <input type="hidden" name="" value=""> -->
 
 				</form>
 			</div>

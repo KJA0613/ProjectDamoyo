@@ -64,6 +64,11 @@
 	            gatherarea like #{adata}
 	        </foreach>
         </if>
+        <if test="tList!=null">
+ 			<foreach collection="tList" item="tdata"  open=" and (" close=")" separator="or">
+	            gathercategorytop like #{tdata}
+	        </foreach>
+        </if>
               
         <if test="sSTR!=null">
 	       	<if test="sSelect=='제목'"> and gathersubject like '%'||#{sSTR}||'%' </if> 

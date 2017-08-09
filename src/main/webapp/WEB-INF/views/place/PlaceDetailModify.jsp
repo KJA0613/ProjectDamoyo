@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<title>모임공간 등록</title>
+<title>해당 모임장소 상세정보 수정</title>
 
 <style type="text/css">
 	.control-label {
@@ -113,15 +113,13 @@
 <!-- [참고 사이트] http://lng1982.tistory.com/80 -->
 <script>
 	$(document).ready(function() {	    
-	 	$("#submitAfterCheck").click(function(){	 		
+	 	$("#submitModify").click(function(){	 		
 	 		
 	 		// [radio] 주차 유무
 	        var park_radioYn = $("input:radio[name='placeParking']:checked").val();    	        
-	        
 	 		
 	        // [radio] 비용단위
 	        var cost_radioYn = $("input:radio[name='placeCostChoice']:checked").val();    
-	        
 	    	
 	        // [checkbox] 공간유형
 			var space_chb = $("input:checkbox[name='placeType']").each(function() {
@@ -136,6 +134,17 @@
 	        
 	    });
 	}); 
+</script>
+
+<!-- 수정 완료 후, URL 이동 -->
+<script>
+	function go_url(placeNo) {
+		var ds = document.getElementById("dataset");
+		var url = "/place/PlaceModifyProcess?placeNo="+placeNo;
+		
+		ds.action = url;
+		ds.submit();		
+	}
 </script>
 
 
@@ -155,64 +164,62 @@
 				
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceRegist" method="POST" class="form-horizontal" enctype="multipart/form-data">					
+				<form action="" method="POST" class="form-horizontal" id="dataset" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-10">
-							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">						
+							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">					
+							${pl_dto.placeImage}
 						</div>
-						<!-- <div class="col-md-2">
-							<button type="button" class="btn btn-grey">사진등록</button>
-						</div> -->
 					</div>
 
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간유형</label>
 						
 						<div class="col-md-10">
-							<input type="checkbox" name="placeType" value="스터디룸">스터디룸		&nbsp;
-							<input type="checkbox" name="placeType" value="세미나룸">세미나룸		&nbsp;
-							<input type="checkbox" name="placeType" value="다목적홀">다목적홀		&nbsp;
-							<input type="checkbox" name="placeType" value="파티룸">파티룸		&nbsp;
-							<input type="checkbox" name="placeType" value="카페">카페			&nbsp;
-							<input type="checkbox" name="placeType" value="레저시설">레저시설		&nbsp;
-							<input type="checkbox" name="placeType" value="공연장">공연장		&nbsp;<br>
-							<input type="checkbox" name="placeType" value="엠티장소">엠티장소		&nbsp;
-							<input type="checkbox" name="placeType" value="작업실">작업실		&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name="placeType" value="연습실">연습실		&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name="placeType" value="기타">기타
+							<input type="checkbox" name="placeType" value="스터디룸" <c:if test="${pl_dto.placeType eq '스터디룸'}">checked="checked"</c:if>>스터디룸		&nbsp;
+							<input type="checkbox" name="placeType" value="세미나룸" <c:if test="${pl_dto.placeType eq '세미나룸'}">checked="checked"</c:if>>세미나룸		&nbsp;
+							<input type="checkbox" name="placeType" value="다목적홀" <c:if test="${pl_dto.placeType eq '다목적홀'}">checked="checked"</c:if>>다목적홀		&nbsp;
+							<input type="checkbox" name="placeType" value="파티룸"  <c:if test="${pl_dto.placeType eq '파티룸'}">checked="checked"</c:if>>파티룸		&nbsp;
+							<input type="checkbox" name="placeType" value="카페" <c:if test="${pl_dto.placeType eq '카페'}">checked="checked"</c:if>>카페			&nbsp;
+							<input type="checkbox" name="placeType" value="레저시설" <c:if test="${pl_dto.placeType eq '레저시설'}">checked="checked"</c:if>>레저시설		&nbsp;
+							<input type="checkbox" name="placeType" value="공연장" <c:if test="${pl_dto.placeType eq '공연장'}">checked="checked"</c:if>>공연장		&nbsp;<br>
+							<input type="checkbox" name="placeType" value="엠티장소" <c:if test="${pl_dto.placeType eq '엠티장소'}">checked="checked"</c:if>>엠티장소		&nbsp;
+							<input type="checkbox" name="placeType" value="작업실" <c:if test="${pl_dto.placeType eq '작업실'}">checked="checked"</c:if>>작업실		&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name="placeType" value="연습실" <c:if test="${pl_dto.placeType eq '연습실'}">checked="checked"</c:if>>연습실		&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name="placeType" value="기타" <c:if test="${pl_dto.placeType eq '기타'}">checked="checked"</c:if>>기타
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간명</label>
 						<div class="col-md-10">
-							<input type="text" name="placeName" class="form-control" placeholder="10자 이내로 입력해주세요." required>						
+							<input type="text" name="placeName" class="form-control" placeholder="10자 이내로 입력해주세요." value="${pl_dto.placeName}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간 소개</label>
 						<div class="col-md-10">
-							<input type="text" name="placeIntro" class="form-control" placeholder="20자 이내로 입력해주세요." required>						
+							<input type="text" name="placeIntro" class="form-control" placeholder="20자 이내로 입력해주세요." value="${pl_dto.placeIntro}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">전화</label>
 						<div class="col-md-10">
-							<input type="text" name="placeTel" class="form-control" placeholder="02-123-4567" required>						
+							<input type="text" name="placeTel" class="form-control" placeholder="02-123-4567" value="${pl_dto.placeTel}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">주소</label>
 						<div class="col-md-8">
-							<input type="text" name="placeAddr1" id="placeAddr1" class="form-control" placeholder="우편번호"><br>
-							<input type="text" name="placeAddr2" id="placeAddr2" class="form-control" placeholder="도로명 주소"><br>
-							<input type="text" name="placeAddr3" id="placeAddr3" class="form-control" placeholder="지번 주소"><br>
-							<input type="text" name="placeAddr4" id="placeAddr4" class="form-control" placeholder="상세 주소">						
+							<input type="text" name="placeAddr1" id="placeAddr1" class="form-control" placeholder="우편번호" value="${pl_dto.placeAddr1}"><br>
+							<input type="text" name="placeAddr2" id="placeAddr2" class="form-control" placeholder="도로명 주소" value="${pl_dto.placeAddr2}"><br>							
+							<input type="text" name="placeAddr3" id="placeAddr3" class="form-control" placeholder="지번 주소" value="${pl_dto.placeAddr3}"><br>
+							<input type="text" name="placeAddr4" id="placeAddr4" class="form-control" placeholder="상세 주소" value="${pl_dto.placeAddr4}">						
 						</div>
 						<div class="col-md-2">
 							<button type="button" class="btn btn-grey" onclick="search_corpAddr()">주소 검색</button><br>							
@@ -222,35 +229,34 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">URL</label>
 						<div class="col-md-10">
-							<input type="text" name="placeURL" class="form-control" placeholder="www.damoyo.com" required>						
+							<input type="text" name="placeURL" class="form-control" placeholder="www.damoyo.com" value="${pl_dto.placeURL}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">비용</label>
 						<div class="col-md-2">
-							<input type="text" name="placeCost" class="form-control" placeholder="2,500" required>
+							<input type="text" name="placeCost" class="form-control" placeholder="2,500" value="${pl_dto.placeCost}">
 						</div>
 						<div class="col-md-6">
 							<input type="radio" name="placeCostChoice" value="1 hour" checked="checked">시간단위 &nbsp;
 							<input type="radio" name="placeCostChoice" value="1 day">일단위 &nbsp;
 							<input type="radio" name="placeCostChoice" value="1 month">월간단위 &nbsp;
 							<input type="radio" name="placeCostChoice" value="Free">무료					
-						</div>
-						
+						</div>						
 					</div>
 										
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">영업시간</label>
 						<div class="col-md-10"> 
-							<input type="text" name="placeUseTime" class="form-control" placeholder="09:00 ~ 18:00" required>						
+							<input type="text" name="placeUseTime" class="form-control" placeholder="09:00 ~ 18:00" value="${pl_dto.placeUseTime}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">수용인원</label>
 						<div class="col-md-2">
-							<input type="text" name="placePerCnt" class="form-control" placeholder="6" required>						
+							<input type="text" name="placePerCnt" class="form-control" placeholder="6" value="${pl_dto.placePerCnt}">						
 						</div>
 						<h4>명</h4>
 					</div>		 					
@@ -258,29 +264,29 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label" id="parkRadio">주차</label>
 						<div class="col-md-10">
-							<input type="radio" name="placeParking" value="무" checked="checked">무 &nbsp;	 
-							<input type="radio" name="placeParking" value="유">유											
+							<input type="radio" name="placeParking" value="무" <c:if test="${pl_dto.placeParking eq '무'}">checked="checked"</c:if>>무 &nbsp;	 
+							<input type="radio" name="placeParking" value="유" <c:if test="${pl_dto.placeParking eq '유'}">checked="checked"</c:if> >유											
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">정기휴무</label>
 						<div class="col-md-10">
-							<input type="checkbox" name="placeNotUseDay" value="월">&nbsp;월			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="화">&nbsp;화			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="수">&nbsp;수			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="목">&nbsp;목			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="금">&nbsp;금			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="토">&nbsp;토			&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="일">&nbsp;일			&nbsp;&nbsp;&nbsp;
-							<input type="checkbox" name="placeNotUseDay" value="공휴일">&nbsp;공휴일		&nbsp;					
+							<input type="checkbox" name="placeNotUseDay" value="월" <c:if test="${pl_dto.placeNotUseDay eq '월'}">checked="checked"</c:if>>&nbsp;월			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="화" <c:if test="${pl_dto.placeNotUseDay eq '화'}">checked="checked"</c:if>>&nbsp;화			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="수" <c:if test="${pl_dto.placeNotUseDay eq '수'}">checked="checked"</c:if>>&nbsp;수			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="목" <c:if test="${pl_dto.placeNotUseDay eq '목'}">checked="checked"</c:if>>&nbsp;목			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="금" <c:if test="${pl_dto.placeNotUseDay eq '금'}">checked="checked"</c:if>>&nbsp;금			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="토" <c:if test="${pl_dto.placeNotUseDay eq '토'}">checked="checked"</c:if>>&nbsp;토			&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="일" <c:if test="${pl_dto.placeNotUseDay eq '일'}">checked="checked"</c:if>>&nbsp;일			&nbsp;&nbsp;&nbsp;
+							<input type="checkbox" name="placeNotUseDay" value="공휴일" <c:if test="${pl_dto.placeNotUseDay eq '공휴일'}">checked="checked"</c:if>>&nbsp;공휴일		&nbsp;					
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">상세설명</label>
 						<div class="col-md-10">
-							<textarea rows="5" cols="10" name="placeContent" class="form-control" required></textarea>				
+							<textarea rows="5" cols="10" name="placeContent" class="form-control" required>${pl_dto.placeContent}</textarea>				
 						</div>
 					</div>
 									
@@ -313,10 +319,10 @@
 
 					<div class="clear-fix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" id="submitAfterCheck">모임공간 등록하기</button>
+							<button type="submit" class="btn btn-primary" onclick="go_url(${pl_dto.placeNo})">수정완료</button>
 						</div>
 					</div>
-				
+			
 				</form>
 			</div>
    		</div>

@@ -120,6 +120,7 @@ public class GatheringController {
 	public @ResponseBody HashMap<String, List<GatheringDTO>> gatheringSearch(
 			@RequestParam(value = "cDATA", defaultValue="") String cData,
 			@RequestParam(value = "aDATA", defaultValue="") String aData,
+			@RequestParam(value = "tDATA", defaultValue="") String tData,
 			@RequestParam(value = "sSTR", defaultValue="") String sSTR,
 			@RequestParam(value = "sSelect", defaultValue="") String sSelect,
 			HttpSession session
@@ -152,9 +153,11 @@ public class GatheringController {
 		
 		List<String> cList = null;
 		List<String> aList = null;
+		List<String> tList = null;
 
 		String[] aaList = aData.split(",");
 		String[] ccList = cData.split(",");
+		String[] ttList = tData.split(",");
 		
 		
 		
@@ -194,10 +197,28 @@ public class GatheringController {
 			}
 		}
 		
+		if(ttList.length>1){
+			tList = new ArrayList<String>();
+			for (int i = 0; i < ttList.length; i++) {
+				tList.add(ttList[i]);
+
+				if(i==ttList.length-1&&recommgatherList!=null){
+					if(!ttList[i].equals("")){
+						regather = new RecommGatherDTO();
+						regather.setRecommgatherName(ttList[i]);
+						regather.setRecommgatherCode("타입");
+						regather.setGuserId(pdto.getGuserId());
+						recommgatherList.add(regather);
+					}
+				}
+			}
+		}
+		
 		session.setAttribute("recommgatherList", recommgatherList);
 		
+		System.out.println(tList);
 		
-		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, sSelect, sSTR);
+		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, tList, sSelect, sSTR);
 		HashMap<String, List<GatheringDTO>> map = new HashMap<String, List<GatheringDTO>>();
 				
 		if (gList != null) {

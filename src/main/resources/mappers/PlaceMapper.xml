@@ -43,9 +43,25 @@
 	</select>
 	
 	
-	<!-- [광고주 > 마이페이지] 내가 개설한 모임장소  -->
+	<!-- [광고주 > 마이페이지] 내가 개설한 모임장소 -->
 	<select id="selectPlaceMakeList" parameterType="String" resultType="PlaceDTO">
 		select * from place where comId = (select comId from company where comId=#{comId})
 	</select>
+	
+	
+	<!-- [광고주 > 마이페이지 & 상세페이지] 선택한 모임 삭제  -->
+	<delete id="deletePlaceDelete" parameterType="int">
+		delete from place where placeNo = #{placeNo}
+	</delete>
+	
+	<update id="updatePlaceModify" parameterType="PlaceDTO">
+		update place set 
+		placeImage = #{placeImage}, placeType = #{placeType}, placeName = #{placeName}, placeIntro = #{placeIntro}, 
+		placeAddr1 = #{placeAddr1}, placeAddr2 = #{placeAddr2}, placeAddr3 = #{placeAddr3}, placeAddr4 = #{placeAddr4}, 
+		placeTel = #{placeTel}, placeURL = #{placeURL}, placePerCnt = #{placePerCnt}, placeUseTime = #{placeUseTime}, 
+		placeNotUseDay = #{placeNotUseDay}, placeCost = #{placeCost}, placeCostChoice = #{placeCostChoice}, 
+		placeParking = #{placeParking}, placeContent = #{placeContent} 
+		where placeNo = #{placeNo}
+	</update>	
 	
 </mapper>

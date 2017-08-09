@@ -27,7 +27,7 @@ public class PlaceService implements IPlaceService {
 	@Override
 	public boolean PlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
-		System.out.println("service");
+		
 		try {
 			flag = PlaceDAO.insertPlaceRegist(pl_dto);
 		} catch (SQLException e) {
@@ -111,6 +111,36 @@ public class PlaceService implements IPlaceService {
 		}
 		
 		return placeList;
+	}
+
+
+	// [광고주 > 마이페이지 & 상세페이지] 선택한 모임 삭제
+	@Override
+	public boolean PlaceDeleteAll(int placeNo) {
+		boolean flag = false;
+		
+		try {
+			flag = PlaceDAO.deletePlaceDelete(placeNo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
+
+
+	// 선택한 모임 상세내용 수정 
+	@Override
+	public boolean PlaceModifyProcess(PlaceDTO pl_dto) {
+		boolean flag = false;
+
+		try {
+			flag = PlaceDAO.updatePlaceModify(pl_dto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 	
 }

@@ -26,5 +26,11 @@ public interface IPlaceDAO {
 	// [광고주 > 마이페이지] 내가 개설한 모임장소 
 	public List<PlaceDTO> selectPlaceMakeList(String comId) throws SQLException;
 
+	// [광고주 > 마이페이지 & 상세페이지] 선택한 모임 삭제
+	public boolean deletePlaceDelete(int placeNo) throws SQLException;
+
+	// 선택한 모임 상세내용 수정 
+	public boolean updatePlaceModify(PlaceDTO pl_dto) throws SQLException;
+
 	
 }
