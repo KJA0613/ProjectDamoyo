@@ -14,7 +14,7 @@ public interface IGatheringService {
 
 	public GatheringDTO getGathering(int gatherNo);
 
-	public List<GatheringDTO> getGatheringCheck(List<String> cList, List<String> aList, String sSelect, String sSTR);
+	public List<GatheringDTO> getGatheringCheck(List<String> cList, List<String> aList, List<String> tList, String sSelect, String sSTR);
 
 	public boolean GatheringInsert(HashMap<String, Object> map);
 

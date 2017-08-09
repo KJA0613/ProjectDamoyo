@@ -6,7 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<!-- <meta charset="utf-8">  -->
+<!-- <meta charset="utf-8"> -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
@@ -189,6 +189,126 @@ $(window).load(function(){
 	};
 	
 	
+</script>
+
+<!-- 검색 버튼 눌렀을때 체크박스 값들 and 조건하고 검색하여 db에서 체크된조건의 모집글 가져오기 -->
+<script type="text/javascript">
+	function search_click(){
+		
+		var cDATA = "";
+		$("input[name*='cbox']").each(
+				function() {
+					if ($(this).is(':checked')
+							&& $(this).val() != "on")
+						cDATA += "," + ($(this).val());
+		});
+
+		var aDATA = "";
+		$("input[name*='abox']").each(
+				function() {
+					if ($(this).is(':checked')
+							&& $(this).val() != "on")
+						aDATA += "," + ($(this).val());
+				});
+
+		var sSelect = $("#serach_garhering").val();
+		var sSTR = $("#search_text").val();
+					
+		var DATA = {
+			"cDATA" : cDATA,
+			"aDATA" : aDATA,
+			"sSTR" : sSTR,
+			"sSelect" : sSelect
+		};
+
+		$.ajax({
+			url : '/gather/gatheringSearch',
+			dataType : 'json',
+			type : 'POST',
+			cache : false,
+			data : DATA,
+			success : function(gath) {
+				console.log(gath.gList);
+
+				$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
+
+				$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
+
+					var subject = gList.gatherSubject;
+					subject = subject.substring(0,11) +' ...';
+					
+					var write = gList.gatherWrite;
+					write = write.substring(0,16);
+					
+					var sdate = gList.gatherSdate;
+					if(sdate != null){
+						sdate = sdate.substring(0,10);
+					}else{
+						sdate = '몰름';
+					}
+						 
+					var edate = gList.gatherEdate;
+					if(edate != null){
+						edate = edate.substring(0,10);
+					}else{
+						edate = '추후 협의';
+					}
+					
+					var day = gList.gatherDay;
+					if(day===null){
+						day = '추후 협의';
+					}
+					
+					var img = gList.gatherImg;
+					if(img===null){
+						img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
+					}
+										
+					var str = "";
+					str += "<div class='col-xs-4 col-lg-3' id='gather'>";
+					str += "<a data-toggle='modal' href='#GatherModalInfo' data-no='"+gList.gatherNo+
+					 									"'  data-subject='"+gList.gatherSubject+
+														"'  data-categorytop='"+gList.gatherCategoryTop+
+														"'  data-categorymid='"+gList.gatherCategoryMid+
+														"'  data-categorybot='"+gList.gatherCategoryBot+
+														"'  data-parti='"+gList.gatherParti+
+														"'  data-write='"+write+
+														"'  data-sdate='"+sdate+
+														"'  data-edate='"+edate+
+														"'  data-areatop='"+gList.gatherAreaTop+
+														"'  data-area='"+gList.gatherArea+
+														"'  data-parti='"+gList.gatherParti+
+														"'  data-partimax='"+gList.gatherPartiMax+
+														"'  data-content='"+gList.gatherContent+
+														"'  data-img='"+img+
+														"'  data-id='"+gList.guserId+
+														"'  data-day='"+day+
+														"'  data-state='"+gList.gatherState+
+														"' >"
+							
+					str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
+					str += "<span class='price'>"+gList.gatherState+"</span>"
+					str += "<h4 align='center'>" + subject + "</h4>";
+					str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
+					str += "요일 : " + day + "<br>" ;
+					str += "지역 : " + gList.gatherArea + "<br>";
+					str += "신청인원 : " + gList.gatherParti + "</h5>";
+					str += "</a>";
+					str += "</div>";
+
+					$("#gatherSelect").append(str);
+
+				})
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status
+						+ "\n" + "message:"
+						+ request.responseText
+						+ "\n" + "error:" + error);
+			} 
+
+		});
+	}
 </script>
 
 <!-- 카테고리 선택 -->
@@ -718,126 +838,6 @@ $(window).load(function(){
 	});
 </script>
 
-<!-- 검색 버튼 눌렀을때 체크박스 값들 and 조건하고 검색하여 db에서 체크된조건의 모집글 가져오기 -->
-<script type="text/javascript">
-	function search_click(){
-		
-		var cDATA = "";
-		$("input[name*='cbox']").each(
-				function() {
-					if ($(this).is(':checked')
-							&& $(this).val() != "on")
-						cDATA += "," + ($(this).val());
-		});
-
-		var aDATA = "";
-		$("input[name*='abox']").each(
-				function() {
-					if ($(this).is(':checked')
-							&& $(this).val() != "on")
-						aDATA += "," + ($(this).val());
-				});
-
-		var sSelect = $("#serach_garhering").val();
-		var sSTR = $("#search_text").val();
-					
-		var DATA = {
-			"cDATA" : cDATA,
-			"aDATA" : aDATA,
-			"sSTR" : sSTR,
-			"sSelect" : sSelect
-		};
-
-		$.ajax({
-			url : '/gather/gatheringSearch',
-			dataType : 'json',
-			type : 'POST',
-			cache : false,
-			data : DATA,
-			success : function(gath) {
-				console.log(gath.gList);
-
-				$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
-
-				$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
-
-					var subject = gList.gatherSubject;
-					subject = subject.substring(0,11) +' ...';
-					
-					var write = gList.gatherWrite;
-					write = write.substring(0,16);
-					
-					var sdate = gList.gatherSdate;
-					if(sdate != null){
-						sdate = sdate.substring(0,10);
-					}else{
-						sdate = '몰름';
-					}
-						 
-					var edate = gList.gatherEdate;
-					if(edate != null){
-						edate = edate.substring(0,10);
-					}else{
-						edate = '추후 협의';
-					}
-					
-					var day = gList.gatherDay;
-					if(day===null){
-						day = '추후 협의';
-					}
-					
-					var img = gList.gatherImg;
-					if(img===null){
-						img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
-					}
-										
-					var str = "";
-					str += "<div class='col-xs-4 col-lg-3' id='gather'>";
-					str += "<a data-toggle='modal' href='#GatherModalInfo' data-no='"+gList.gatherNo+
-					 									"'  data-subject='"+gList.gatherSubject+
-														"'  data-categorytop='"+gList.gatherCategoryTop+
-														"'  data-categorymid='"+gList.gatherCategoryMid+
-														"'  data-categorybot='"+gList.gatherCategoryBot+
-														"'  data-parti='"+gList.gatherParti+
-														"'  data-write='"+write+
-														"'  data-sdate='"+sdate+
-														"'  data-edate='"+edate+
-														"'  data-areatop='"+gList.gatherAreaTop+
-														"'  data-area='"+gList.gatherArea+
-														"'  data-parti='"+gList.gatherParti+
-														"'  data-partimax='"+gList.gatherPartiMax+
-														"'  data-content='"+gList.gatherContent+
-														"'  data-img='"+img+
-														"'  data-id='"+gList.guserId+
-														"'  data-day='"+day+
-														"'  data-state='"+gList.gatherState+
-														"' >"
-							
-					str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
-					str += "<span class='price'>"+gList.gatherState+"</span>"
-					str += "<h4 align='center'>" + subject + "</h4>";
-					str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
-					str += "요일 : " + day + "<br>" ;
-					str += "지역 : " + gList.gatherArea + "<br>";
-					str += "신청인원 : " + gList.gatherParti + "</h5>";
-					str += "</a>";
-					str += "</div>";
-
-					$("#gatherSelect").append(str);
-
-				})
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status
-						+ "\n" + "message:"
-						+ request.responseText
-						+ "\n" + "error:" + error);
-			} 
-
-		});
-	}
-</script>
-
 <!-- 체크박스 체크된값 가져오기, db에서 체크된조건의 모집글 가져오기 -->
 <script type="text/javascript">
 $(function() {
@@ -862,19 +862,10 @@ $(function() {
 								&& $(this).val() != "on")
 							aDATA += "," + ($(this).val());
 					});
-			
-			var tDATA = "";
-			$("input[name='tbox']").each(
-					function() {
-						if ($(this).is(':checked')
-								&& $(this).val() != "on")
-							tDATA += "," + ($(this).val());
-					});
-			
+
 			var DATA = {
 				"cDATA" : cDATA,
-				"aDATA" : aDATA,
-				"tDATA" : tDATA
+				"aDATA" : aDATA
 			};
 			
 			/* 이거는 #execute를 클릭하면 일어나는 ajax */
@@ -1440,7 +1431,7 @@ function categoryMidChange(item){
 		<!-- <div class="row row-offcanvas row-offcanvas-right"> -->
 		<div class="row pull-right">
 		
-			<%@ include file="./gathering_sidebar.jspf"%>
+			<%-- <%@ include file="./gathering_sidebar.jspf"%> --%>
 			
 			<br><br><br>
 			
@@ -2393,10 +2384,10 @@ function categoryMidChange(item){
 				</div>
 
 				<br>
-				<div class="center-block" style="text-align: center;">
-					<input type="checkbox" id="ctop1" name="tbox" value="동호회" ><label for="ctop1">동호회&nbsp;&nbsp;&nbsp;</label>
-					<input type="checkbox" id="ctop2" name="tbox" value="스터디" ><label for="ctop2">스터디&nbsp;&nbsp;&nbsp;</label>
-					<input type="checkbox" id="ctop3" name="tbox" value="컨퍼런스"><label for="ctop3">컨퍼런스</label>
+				<div class="center-block">
+					<input type="checkbox" id="gatherCategoryTop" name="gatherCategoryTop" value="동호회" >동호회
+					<input type="checkbox" id="gatherCategoryTop" name="gatherCategoryTop" value="스터디" >스터디
+					<input type="checkbox" id="gatherCategoryTop" name="gatherCategoryTop" value="컨퍼런스" >컨퍼런스
 				</div>
 				
 				<br>
@@ -2409,10 +2400,9 @@ function categoryMidChange(item){
 								<option id="subject2">지역</option>
 								<option>카테고리</option>
 							</select> 
-							<input type="text" class="form-control" id="search_text" onkeypress="if(event.keyCode==13) {search_click(); return false;}" value="${sSTR eq '' ? '' : sSTR}">
+							<input type="text" class="form-control" id="search_text" value="${sSTR eq '' ? '' : sSTR}">
 							<button type="button" class="btn btn-default" onclick="search_click()">검색</button>
 						</div>
-						
 					</form>
 				</div>
 
