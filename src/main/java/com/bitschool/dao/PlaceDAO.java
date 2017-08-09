@@ -115,10 +115,9 @@ public class PlaceDAO implements IPlaceDAO {
 	@Override
 	public boolean updatePlaceModify(PlaceDTO pl_dto) throws SQLException {
 		boolean flag = false;
-		System.out.println("dao");
+
 		int aCnt = session.update(namespace+".updatePlaceModify", pl_dto);
-		System.out.println("aCnt: " + aCnt);
-		System.out.println("dao pl_dto: " + pl_dto);
+
 		if(aCnt > 0) {
 			flag = true;
 		}

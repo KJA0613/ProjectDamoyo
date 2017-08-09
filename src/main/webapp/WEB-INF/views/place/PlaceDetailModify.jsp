@@ -137,15 +137,15 @@
 </script>
 
 <!-- 수정 완료 후, URL 이동 -->
-<!-- <script>
-	function go_url() {
+<script>
+	function go_url(placeNo) {
 		var ds = document.getElementById("dataset");
-		var url = "/place/PlaceModifyProcess";
+		var url = "/place/PlaceModifyProcess?placeNo="+placeNo;
 		
 		ds.action = url;
 		ds.submit();		
 	}
-</script> -->
+</script>
 
 
 <!-- [Header] 공통 헤더 -->
@@ -164,17 +164,14 @@
 				
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceModifyProcess" method="POST" class="form-horizontal" id="dataset" enctype="multipart/form-data">					
+				<form action="" method="POST" class="form-horizontal" id="dataset" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-10">
-							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png" value="${pl_dto.placeImage}">					
+							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">					
 							${pl_dto.placeImage}
 						</div>
-						<!-- <div class="col-md-2">
-							<button type="button" class="btn btn-grey">사진등록</button>
-						</div> -->
 					</div>
 
 					<div class="form-group">
@@ -322,7 +319,7 @@
 
 					<div class="clear-fix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" onclick="go_url()">수정완료</button>
+							<button type="submit" class="btn btn-primary" onclick="go_url(${pl_dto.placeNo})">수정완료</button>
 						</div>
 					</div>
 			

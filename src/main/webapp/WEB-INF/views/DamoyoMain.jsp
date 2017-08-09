@@ -364,9 +364,152 @@
 	   <hr style="border: solid 1px #b3b3b3;">
 	   	    <div class="more" align="right"><a href="/place/PlaceListAll">최근에 개설된 모임들입니다. 더 궁금하다면? ▷▶</a></div>
 	   <br>
+<<<<<<< HEAD
+   	<div class="more" align="right">more</div>
+   	   <div class="wrapper">
+   	   	
+			<ul class="properties_list">
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png"class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png"class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+			</ul>
+			
+			<br>
+			
+			<ul class="properties_list">
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+				
+				<li>
+					<a href="/">
+						<img src="resources/image/main/english_space.png" class="property_img">
+					</a>
+					<span class="price">1 hour: 2,500</span>
+					<div class="property_details">
+						<div class="title">
+							<h3><a href="">24시간 상쾌한 회회공간</a></h3>
+						</div>
+						<div class="details">
+							<span id="s1">지역</span>&nbsp;&nbsp;
+							<span id="s2">서울시 | 강남구</span>
+							<br>
+							<span id="s1">위치</span>&nbsp;&nbsp;
+							<span id="s2">강남역 2번출구 200m</span>
+							<br>
+							<span id="s1">영업시간</span>&nbsp;&nbsp;
+							<span id="s2">주말 제외</span>
+						</div>
+					</div>
+				</li>	
+			</ul>
+=======
 
    	   <div class="wrapper">
    	   		<%@include file="place/PlaceAll.jsp"%>			
+>>>>>>> 58f38cb25a3735d9c4e43eb055cb6c65c64faf2a
    	   </div>
 		
 	   <br><br><br>		
