@@ -22,10 +22,10 @@ public interface IPlaceService {
 	// 메인페이지에 모임 장소 최근날짜로 6개 가져오기
 	public List<PlaceDTO> getPlaceRecentInfo();
 
-	// [광고주 > 마이페이지] 내가 개설한 모임장소
+	// [마이페이지] 내가 개설한 모임장소
 	public List<PlaceDTO> getPlaceMakeList(String comId);
 
-	// [광고주 > 마이페이지 & 상세페이지] 선택한 모임 삭제
+	// [마이페이지 & 상세페이지] 선택한 모임 삭제
 	public boolean PlaceDeleteAll(int placeNo);
 
 	// 선택한 모임 상세내용 수정

@@ -133,7 +133,7 @@ public class PlaceService implements IPlaceService {
 	@Override
 	public boolean PlaceModifyProcess(PlaceDTO pl_dto) {
 		boolean flag = false;
-		System.out.println("service");
+
 		try {
 			flag = PlaceDAO.updatePlaceModify(pl_dto);
 		} catch (SQLException e) {
