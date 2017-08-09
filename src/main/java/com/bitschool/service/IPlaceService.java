@@ -30,5 +30,7 @@ public interface IPlaceService {
 
 	// 선택한 모임 상세내용 수정
 	public boolean PlaceModifyProcess(PlaceDTO pl_dto);
+
+	public List<PlaceDTO> searchMap(String keyWord);
 	
 }

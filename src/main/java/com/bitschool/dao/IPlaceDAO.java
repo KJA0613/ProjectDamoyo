@@ -32,5 +32,7 @@ public interface IPlaceDAO {
 	// 선택한 모임 상세내용 수정 
 	public boolean updatePlaceModify(PlaceDTO pl_dto) throws SQLException;
 
+	public List<PlaceDTO> searchMap(String keyWord);
+
 	
 }

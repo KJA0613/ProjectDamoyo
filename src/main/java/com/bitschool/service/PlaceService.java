@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bitschool.dao.IPlaceDAO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
+import com.bitschool.util.MapLocation;
 
 @Service
 public class PlaceService implements IPlaceService {
@@ -20,6 +21,8 @@ public class PlaceService implements IPlaceService {
 	@Inject
 	private IPlaceDAO PlaceDAO;	
 
+	// util에서 객체 생성
+	private MapLocation mLcation = new MapLocation();
 	
 	//----------------------------------------------- 모임공간 -----------------------------------------------//
 		
@@ -27,6 +30,9 @@ public class PlaceService implements IPlaceService {
 	@Override
 	public boolean PlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
+		
+		pl_dto = mLcation.GetDatum(pl_dto);
+		System.out.println(pl_dto);
 		
 		try {
 			flag = PlaceDAO.insertPlaceRegist(pl_dto);
@@ -141,6 +147,16 @@ public class PlaceService implements IPlaceService {
 		}
 		
 		return flag;
+	}
+
+
+	// 민규. 다음맵 연습
+	@Override
+	public List<PlaceDTO> searchMap(String keyWord) {
+
+		 List<PlaceDTO> mapList = PlaceDAO.searchMap(keyWord);
+		
+		return mapList;
 	}
 	
 }

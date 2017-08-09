@@ -1,6 +1,7 @@
 package com.bitschool.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
@@ -290,5 +292,29 @@ public class PlaceController {
 		}
 		
 		return url;
+	}
+	
+	// 민규. 이건 연습 페이지
+	@RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
+	public String home() {
+		
+		return "place/PlaceMap";
+	}
+	
+	// 민규. 모집글 쓸때 장소 추천 해주기
+	@RequestMapping(value="/searchPlace", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody HashMap<String, List<PlaceDTO>> selectPlace(
+			@RequestParam("keyword") String keyWord){
+		
+		System.out.println(keyWord);
+		HashMap<String, List<PlaceDTO>> map = new HashMap<String, List<PlaceDTO>>();
+		
+		List<PlaceDTO> mapList = placeService.searchMap(keyWord);
+		
+		if(mapList != null){
+			map.put("mapList", mapList);
+		}
+		
+		return map;
 	}
 }
