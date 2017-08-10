@@ -57,8 +57,6 @@ public class PlaceController {
 		return url;		
 	}
 	
-	
-	
 	// 01. 모임 공간 등록 
 	@RequestMapping(value = "/PlaceRegist",  method = RequestMethod.POST)
 	public String PlaceRegist(PlaceDTO pl_dto, CompanyDTO cdto, HttpSession session, HttpServletRequest req, Model model) {
@@ -182,9 +180,7 @@ public class PlaceController {
 
 		return url;
 	}
-	
-	
-	
+		
 	// 02. 모임 전체 조회
 	@RequestMapping(value = "/PlaceListAll",  method = { RequestMethod.POST, RequestMethod.GET })
 	public String PlaceListAll(CompanyDTO cdto, HttpSession session, Model model) {
@@ -200,8 +196,6 @@ public class PlaceController {
 		return url;
 	}
 	
-	
-
 	// 03. 선택한 모임 상세 조회
 	@RequestMapping(value = "/PlaceDetail",  method = RequestMethod.GET)
 	public String PlaceDetail(@RequestParam("placeNo") int placeNo, CompanyDTO cdto, HttpSession session, Model model) {
@@ -219,7 +213,7 @@ public class PlaceController {
 		model.addAttribute("pl_dto", pl_dto);
 		model.addAttribute("cdto", cdto);
 		model.addAttribute("login_cdto", login_cdto);
-		
+				
 		//System.out.println("[TEST] 로그인 한 사람: " + login_cdto.getComId());
 		//System.out.println("[TEST] 글 쓴 사람: " + pl_dto.getComId());
 
@@ -227,7 +221,6 @@ public class PlaceController {
 		
 		return url;
 	}
-	
 	
 	// 04-01. 수정 전, 선택한 모임장소 > 글 불러오기
 	@RequestMapping(value="/PlaceModify", method = { RequestMethod.POST, RequestMethod.GET })
@@ -246,7 +239,6 @@ public class PlaceController {
 		
 		return url;
 	}
-	
 	
 	// 04-02. 데이터 수정 후 > DB 수정
 	@RequestMapping(value = "/PlaceModifyProcess", method = RequestMethod.POST)
@@ -367,7 +359,6 @@ public class PlaceController {
 		return url;
 	}
 	
-	
 	// 05. 선택한 모임 삭제
 	@RequestMapping(value="/PlaceDeleteAll", method = RequestMethod.GET)
 	public String PlaceDeleteAll(@RequestParam("placeNo") int placeNo) {
@@ -383,26 +374,28 @@ public class PlaceController {
 	}
 	
 	// 민규. 이건 연습 페이지
-	@RequestMapping(value = "/home", method = {RequestMethod.GET, RequestMethod.POST})
-	public String home() {
-		
+	@RequestMapping(value = "/placeMap", method = {RequestMethod.GET, RequestMethod.POST})
+	public String placeMap(Model model) {
+				
 		return "place/PlaceMap";
+	
 	}
 	
-	// 민규. 모집글 쓸때 장소 추천 해주기
+/*	안쓸꺼같음
+ * 	// 민규. 모집글 쓸때 장소 추천 해주기
 	@RequestMapping(value="/searchPlace", method = {RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody HashMap<String, List<PlaceDTO>> selectPlace(
-			@RequestParam("keyword") String keyWord){
+			@RequestParam("keyword") String keyword){
 		
-		System.out.println(keyWord);
+		System.out.println(keyword);
 		HashMap<String, List<PlaceDTO>> map = new HashMap<String, List<PlaceDTO>>();
 		
-		List<PlaceDTO> mapList = placeService.searchMap(keyWord);
+		List<PlaceDTO> mapList = placeService.searchMap(keyword);
 		
 		if(mapList != null){
 			map.put("mapList", mapList);
 		}
 		
 		return map;
-	}
+	}*/
 }

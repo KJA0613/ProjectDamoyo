@@ -149,10 +149,33 @@ $(window).load(function(){
 	var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
 	
 	if(_tempUrl.indexOf('=')>0){
-		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
+		var _tempArray;
 		
-				for(var i = 0; _tempArray.length; i++) { 
-			var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+		if(_tempUrl.indexOf('&')>0){
+			_tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
+			
+			for(var i = 0; _tempArray.length; i++) { 
+				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+				
+				if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
+					 // _keyValuePair[1] : 파라미터 값 
+					
+					var box = _keyValuePair[1]; // 쿼리스트링으로 type에 값을 저장해 보내서 box 에 담고
+					var boxNum = box.substring(4); // 숫자만 짤라서 필요한 것을 받음
+					
+					var boxAll  = '.cAll' +boxNum;
+					var boxTag = '.cateChk' +boxNum
+					
+					$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
+					$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
+					
+				} 
+				
+			}
+		}else{
+			_tempArray = _tempUrl;
+			
+			var _keyValuePair = _tempArray[i].split('=');
 			
 			if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
 				 // _keyValuePair[1] : 파라미터 값 
@@ -168,6 +191,8 @@ $(window).load(function(){
 				
 			} 
 		}
+		
+		
 	}
 });
 </script>
@@ -2591,14 +2616,6 @@ function categoryMidChange(item){
 								</div>
 							</div>
 		
-							<!-- 장소  -->
-							<div class="form-group">
-								<label for="modal-body-place" class="col-sm-2 control-label">장소</label>
-								<div class="col-sm-8">
-									<div class="modal-body" id="modal-body-place"></div>
-								</div>
-							</div>
-		
 							<!-- 인원  -->
 							<div class="form-group">
 								<label for="modal-body-partimax" class="col-sm-2 control-label">인원</label>
@@ -2759,18 +2776,6 @@ function categoryMidChange(item){
 										<option value=""></option>
 									</select>
 								</div>
-							</div>
-
-						</div>
-
-						<!-- 장소  -->
-						<div class="form-group">
-							<label for="Name" class="col-sm-2 control-label">장소</label>
-							<div class="col-sm-5">
-								<input type="text" id="gatherPlace" class="form-control" name="gatherPlace" placeholder="지역을 입력해주세영? 뭔지 잘 몰것음">
-							</div>
-							<div class="col-sm-2">
-								<input type="button" class="btn btn-default" value="장소추천">
 							</div>
 
 						</div>

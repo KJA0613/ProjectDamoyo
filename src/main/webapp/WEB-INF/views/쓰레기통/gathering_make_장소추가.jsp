@@ -198,6 +198,31 @@ function categoryMidChange(item){
 
 </script>
 
+<!-- 장소 추천 클릭시 새창 띄우는 스크립트 -->
+<script type="text/javascript">
+
+function placeRecommend(){
+	var top = $('#aTop option:selected').val();
+	var mid = $('#aMid option:selected').val();
+	
+	if(top.length==4){ // ex) 충청남도 ==> 충남, 전라북도 ==> 전북, 경상남도 ==> 전남으로 바꾸겠다
+		top = top.substring(0,1) + top.substring(2,3);
+	}else if(top.length<6){ // 위를 제외한, 제주특별자치도 & 세종특별자치시 제외한, 강원도 ==> 강원, 경기도 ==> 경기, 울산광역시 ==> 울산 으로 바꾸겠다
+		top = top.substring(0,2);
+	}
+		
+	if(top =='' || mid ==''){
+		alert("지역을 선택해 주세요~~");
+		return false;
+	}
+	
+	var area = (top+" "+mid);
+	window.open("/place/placeMap?keyword="+area, "", "scrollbars=no,toolbar=no, location=no, resizable=no, status=no, menubar=no, width=400, height=300, left=200, top=200");
+	
+}
+	
+</script>
+
 <!-- 공통 헤더 -->
 <%@include file="../header.jsp"%>
 
@@ -211,7 +236,7 @@ function categoryMidChange(item){
 		<!-- row는 수평 horizen과 같음, 왼쪽부터 배치하겠다  -->
 		<div class="row row-offcanvas row-offcanvas-right">
 			
-			<%@ include file="./gathering_sidebar.jspf"%>
+			<%-- <%@ include file="./gathering_sidebar.jspf"%> --%>
 			
 			<!--/.sidebar-offcanvas-->
 
@@ -329,6 +354,18 @@ function categoryMidChange(item){
 										<option value=""></option>
 									</select>
 								</div>
+							</div>
+
+						</div>
+
+						<!-- 장소  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">장소</label>
+							<div class="col-sm-5">
+								<input type="text" id="gPlace" class="form-control" name="gatherPlace" placeholder="지역을 선택한 후 클릭해 주세영~~">
+							</div>
+							<div class="col-sm-2">
+								<input type="button" class="btn btn-default"  onclick="placeRecommend()" value="장소추천">
 							</div>
 
 						</div>

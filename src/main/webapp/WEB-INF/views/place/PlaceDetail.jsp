@@ -247,11 +247,82 @@
 							${pl_dto.placeContent}				
 						</div>
 					</div>
+					
+					<!-- 다음 지도 -->
+					<div class="form-group">
+						<label for="type" class="col-md-2 control-label">위치</label>
+						<div class="col-md-6" id="map" style="width:700px;height:400px;"></div>
+					</div>
+					
+					<!-- 내 키값 -->
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7d8e5d495b6455649d08379c3f21296&libraries=services"></script>
+					<script>
+						// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+						var infowindow = new daum.maps.InfoWindow({zIndex:1});
+						
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+						mapOption = {
+							center : new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+							level : 3 // 지도의 확대 레벨
+						};
+				
+						// 지도를 생성합니다    
+						var map = new daum.maps.Map(mapContainer, mapOption);
+				
+						// 장소 검색 객체를 생성합니다
+						var ps = new daum.maps.services.Places();
+				
+						// 검색을 요청하는 함수입니다
+						ps.keywordSearch('${pl_dto.placeAddr3}', placesSearchCB); // placesSearchCB는 지도의 위치를 나타내줌, ex) 서울특별시 강남구면 강남구를 뿌려줌.
+										
+						// 검색 위치에 맞는 지도를 뿌려주는 
+						function placesSearchCB(data, status, pagination) { // state는 성공 했을때 
+							
+							if (status === daum.maps.services.Status.OK) {
+								
+								// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+						        // LatLngBounds 객체에 좌표를 추가합니다
+						        var bounds = new daum.maps.LatLngBounds();
+				
+					            displayMarker();    
+					            bounds.extend(new daum.maps.LatLng(${pl_dto.placeY}, ${pl_dto.placeX}));
+						              
+						        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+						        map.setBounds(bounds);
+												
+							} else if (status === daum.maps.services.Status.ZERO_RESULT) {
+						        alert('존재하지 않습니다.');
+						        return;
+							} else if (status === daum.maps.services.Status.ERROR) {
+								alert('오류가 발생했습니다.');
+								return;
+							}
+							
+						}
+				
+						// 마커찍는부분
+						function displayMarker() {
+						    
+						    // 마커를 생성하고 지도에 표시합니다
+						    var marker = new daum.maps.Marker({
+						        map: map,
+						        position: new daum.maps.LatLng(${pl_dto.placeY}, ${pl_dto.placeX})
+						    });
+				
+						    // 마커에 클릭이벤트를 등록합니다
+						    daum.maps.event.addListener(marker, 'click', function() {
+						        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+						        infowindow.setContent('<div style="padding:5px;font-size:12px;">${pl_dto.placeName}</div>');
+						        infowindow.open(map, marker);
+						    });
+						}			
+					</script>
+					
 									
 					<br><br>
 														
 					<h3>담당자 정보</h3><hr>
-					 <div class="form-group">
+					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">이름</label>
 						<div class="col-md-10">
 							${cdto.comManager}						
@@ -272,25 +343,7 @@
 						</div>
 					</div> 
 					<br><br>
-					
-
-					<!-- 다음 지도 -->
-					<div class="form-group">
-					<h3 style="color: blue"> 다음 지도 API 넣을 예정 </h3>
-					<!-- <div id="map" style="width:500px;height:400px;"></div>
-						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=808e992783fa7a2691f58ef6a4ae0ed4"></script>
-						<script>
-						var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-						    mapOption = { 
-						        center: new daum.maps.LatLng(37.537123, 127.005523), // 지도의 중심좌표
-						        level: 3 // 지도의 확대 레벨
-						    };
-						
-						// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-						var map = new daum.maps.Map(mapContainer, mapOption); 
-						</script> -->
-					</div>		
-					
+										
 					<!-- 구글 애드센스 광고 : 도메인 등록해야하는ㅠ -->
 					<!-- <div class="google-middle-add-center"></div> -->			
 
