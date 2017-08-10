@@ -213,7 +213,7 @@ public class PlaceController {
 		model.addAttribute("pl_dto", pl_dto);
 		model.addAttribute("cdto", cdto);
 		model.addAttribute("login_cdto", login_cdto);
-				
+		
 		//System.out.println("[TEST] 로그인 한 사람: " + login_cdto.getComId());
 		//System.out.println("[TEST] 글 쓴 사람: " + pl_dto.getComId());
 
@@ -373,13 +373,13 @@ public class PlaceController {
 		return url;
 	}
 	
-	// 민규. 이건 연습 페이지
+/*	// 민규. 이건 연습 페이지
 	@RequestMapping(value = "/placeMap", method = {RequestMethod.GET, RequestMethod.POST})
 	public String placeMap(Model model) {
 				
 		return "place/PlaceMap";
 	
-	}
+	}*/
 	
 /*	안쓸꺼같음
  * 	// 민규. 모집글 쓸때 장소 추천 해주기
