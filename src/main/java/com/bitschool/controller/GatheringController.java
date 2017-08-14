@@ -142,7 +142,7 @@ public class GatheringController {
 		
 		
 		if(!sSTR.equals("")){
-			if(pdto!=null){ // 로그인 안했을때
+			if(pdto!=null){ // 로그인 했을때
 				regather = new RecommGatherDTO();
 				regather.setRecommgatherName(sSTR);
 				regather.setRecommgatherCode(sSelect);
@@ -440,7 +440,7 @@ public class GatheringController {
 		// 로그인 사용자 정보
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
-		// 사용자가 클릭한 모집글의 값을 dto에 담에 디비로 넣음
+		// 사용자가 클릭한 모집글의 값을 dto에 담음
 		if(recommgatherList!=null){
 		
 			RecommGatherDTO regather = null;
@@ -496,7 +496,6 @@ public class GatheringController {
 	
 	// 여기서는 모달차잉 띄어지고 하트모양을 눌렀을때 유무체크 판단하여 뿌리기
 	// 모임 찜하기 or 앵콜요청 (아직은 여기까지, 추가로 더 들어갈 수 있음 )
-	// Json 사용하땐 @ResponseBody
 	@RequestMapping(value="/gatherAddons", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody HashMap<String, String> gatherAddons(
 			@RequestParam(value="no") int gatherNo,
