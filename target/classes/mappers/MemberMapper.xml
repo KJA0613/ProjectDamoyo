@@ -129,7 +129,22 @@
  	<delete id="CompanyQuit" parameterType="CompanyDTO">
  	delete from company where comId = #{comId} and comPw = #{comPw}
  	</delete>
+ 	
+ 	<!-- [관리자]전체개인회원리스트-->	
+ 	<select resultType="PersonDTO" id="getPerson">
+			select * from (select rownum as num, temp.* 
+      from (select * from guser order by guserNo desc) temp)
+	 where num between 1 and 10
+	</select>
 	
+	<!-- [관리자]전체기업회원리스트-->	
+ 	<select resultType="CompanyDTO" id="getCompany">
+		select * from (select rownum as num, temp.* 
+      from (select * from company order by comNo desc) temp)
+	 where num between 1 and 10
+	</select>
+	
+
 	
 
 </mapper>
