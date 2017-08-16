@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +32,6 @@ import com.bitschool.dto.BScheduleDTO;
 import com.bitschool.dto.BScheduleFormatDTO;
 import com.bitschool.dto.BSearchVO;
 import com.bitschool.dto.BTempDTO;
-import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.helper.Gathering;
 import com.bitschool.helper.Recommend;
@@ -83,7 +81,7 @@ public class BlogController {
 //		model.addAttribute("list2", list2);
 //		model.addAttribute("list", list);
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		
+		model.addAttribute("pdto", pdto);
 		
 		return "blog/home";
 	}
@@ -91,12 +89,14 @@ public class BlogController {
 	//*****************************************************************
 	
 	@RequestMapping(value="/notice/listAll", method = {RequestMethod.GET, RequestMethod.POST})
-	public String notice(@RequestParam(value="page",defaultValue="0") int page,Model model) {
+	public String notice(@RequestParam(value="page",defaultValue="0") int page,Model model, HttpSession session) {
 		int amount = 15;
 		BPageVO vo = pService.getPageVO(page,amount);
 		vo.setBoardName("notice");
 		List<BPostDTO> list = service.getListAll(vo);
 		ArrayList<String> pList = pService.makePageList(page, amount);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("list",list);
 		model.addAttribute("pList",pList);
 		model.addAttribute("page",page);
@@ -104,7 +104,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/notice/viewRegist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String viewNoticeRegist() {
+	public String viewNoticeRegist(HttpSession session, Model model) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		return "blog/notice/noticeRegist";
 	}
 	
@@ -121,14 +123,23 @@ public class BlogController {
 	
 	@RequestMapping(value="/notice/read", method = RequestMethod.GET)
 	public String noticeRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
-								@RequestParam(value="query", defaultValue="") String query,Model model) {
+								@RequestParam(value="query", defaultValue="") String query,Model model, HttpSession session) {
 		String url = null;
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
 		infoDTO.setPostNo(postNo);
 		infoDTO.setBoardName("notice");
 		boolean flag = service.increasCount(infoDTO);
+		boolean authFlag = false;
 		if(flag){
 			BPostDTO post = service.readPost(infoDTO);
+			if(pdto != null) {
+				if(post.getUserId().equals(pdto.getGuserId())) {
+					authFlag = true;
+					model.addAttribute("authFlag", authFlag);
+				}
+			}
+			model.addAttribute("pdto", pdto);
 			model.addAttribute("post", post);
 			model.addAttribute("page", page);
 			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
@@ -153,8 +164,11 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/notice/viewModify", method=RequestMethod.POST)
-	public String viewNoticeModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+	public String viewNoticeModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo
+						,@RequestParam("page") int page, HttpSession session) {
 		model.addAttribute("post",post);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("postNo",postNo);
 		model.addAttribute("page",page);
 		return "blog/notice/noticeModify";
@@ -187,7 +201,8 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/notice/search", method=RequestMethod.POST)
-	public String searchNotice(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page, Model model) {
+	public String searchNotice(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page,
+											Model model, HttpSession session) {
 		String url = null;
 		int amount = 15;
 		BSearchVO searchVO = new BSearchVO();
@@ -196,6 +211,8 @@ public class BlogController {
 		searchVO.setBoardName("notice");
 		List<BPostDTO> list = service.listSearchBookAll(searchVO);
 		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("list",list); 
 		model.addAttribute("pList",pList);
 		model.addAttribute("page",page);
@@ -207,8 +224,9 @@ public class BlogController {
 	//*****************************************************************
 	
 	@RequestMapping(value="/schedule/viewSchedule", method = {RequestMethod.GET,RequestMethod.POST})
-	public String viewSchedule() {
-		
+	public String viewSchedule(HttpSession session, Model model) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		return "blog/schedule/viewSchedule";
 	}
 	
@@ -272,12 +290,14 @@ public class BlogController {
 	//*****************************************************************
 	
 	@RequestMapping(value="/file/listAll", method = {RequestMethod.POST, RequestMethod.GET})
-	public String fileListAll(@RequestParam(value="page",defaultValue="0") int page, Model model) {
+	public String fileListAll(@RequestParam(value="page",defaultValue="0") int page, Model model, HttpSession session) {
 		int amount = 15;
 		BPageVO vo = pService.getPageVO(page,amount);
 		vo.setBoardName("file");
 		List<BPostDTO> list = service.getListAll(vo);
 		ArrayList<String> pList = pService.makePageList(page, amount);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("list",list);
 		model.addAttribute("pList",pList);
 		model.addAttribute("page",page);
@@ -285,7 +305,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/file/viewRegist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String viewFileRegist() {
+	public String viewFileRegist(Model model, HttpSession session) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		return "blog/file/fileRegist";
 	}
 	
@@ -302,14 +324,23 @@ public class BlogController {
 	
 	@RequestMapping(value="/file/read", method = RequestMethod.GET)
 	public String fileRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
-								@RequestParam(value="query", defaultValue="") String query,Model model) {
+								@RequestParam(value="query", defaultValue="") String query,Model model, HttpSession session) {
 		String url = null;
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
 		infoDTO.setPostNo(postNo);
 		infoDTO.setBoardName("file");
 		boolean flag = service.increasCount(infoDTO);
+		boolean authFlag = false;
 		if(flag){
 			BPostDTO post = service.readPost(infoDTO);
+			if(pdto != null) {
+				if(post.getUserId().equals(pdto.getGuserId())) {
+					authFlag = true;
+					model.addAttribute("authFlag", authFlag);
+				}
+			}
+			model.addAttribute("pdto", pdto);
 			model.addAttribute("post", post);
 			model.addAttribute("page", page);
 			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
@@ -335,7 +366,10 @@ public class BlogController {
 	
 	
 	@RequestMapping(value="/file/viewModify", method=RequestMethod.POST)
-	public String viewFileModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+	public String viewFileModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo,
+											@RequestParam("page") int page, HttpSession session) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("post",post);
 		model.addAttribute("postNo",postNo);
 		model.addAttribute("page",page);
@@ -369,7 +403,8 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/file/search", method=RequestMethod.POST)
-	public String searchFile(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page, Model model) {
+	public String searchFile(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page,
+										Model model, HttpSession session) {
 		String url = null;
 		int amount = 15;
 		BSearchVO searchVO = new BSearchVO();
@@ -378,6 +413,8 @@ public class BlogController {
 		searchVO.setBoardName("file");
 		List<BPostDTO> list = service.listSearchBookAll(searchVO);
 		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("list",list);
 		model.addAttribute("pList",pList);
 		model.addAttribute("page",page);
@@ -389,12 +426,14 @@ public class BlogController {
 	//*****************************************************************
 	
 	@RequestMapping(value="/board/listAll", method = {RequestMethod.POST, RequestMethod.GET})
-	public String listAll(@RequestParam(value="page",defaultValue="0") int page, Model model) {
+	public String listAll(@RequestParam(value="page",defaultValue="0") int page, Model model, HttpSession session) {
 		int amount = 15;
 		BPageVO vo = pService.getPageVO(page,amount);
 		vo.setBoardName("free");
 		List<BPostDTO> list = service.getListAll(vo);
 		ArrayList<String> pList = pService.makePageList(page, amount);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("list",list);
 		model.addAttribute("pList",pList);
 		model.addAttribute("page",page);
@@ -402,7 +441,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/board/viewRegist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String viewRegist() {
+	public String viewRegist(Model model, HttpSession session) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		return "blog/board/boardRegist";
 	}
 	
@@ -419,14 +460,23 @@ public class BlogController {
 	
 	@RequestMapping(value="/board/read", method = RequestMethod.GET)
 	public String read(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
-								@RequestParam(value="query", defaultValue="") String query,Model model) {
+								@RequestParam(value="query", defaultValue="") String query,Model model, HttpSession session) {
 		String url = null;
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
 		infoDTO.setPostNo(postNo);
 		infoDTO.setBoardName("free");
 		boolean flag = service.increasCount(infoDTO);
+		boolean authFlag = false;
 		if(flag){
 			BPostDTO post = service.readPost(infoDTO);
+			if(pdto != null) {
+				if(post.getUserId().equals(pdto.getGuserId())) {
+					authFlag = true;
+					model.addAttribute("authFlag", authFlag);
+				}
+			}
+			model.addAttribute("pdto", pdto);
 			model.addAttribute("post", post);
 			model.addAttribute("page", page);
 			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
@@ -452,7 +502,9 @@ public class BlogController {
 	
 	
 	@RequestMapping(value="/board/viewModify", method=RequestMethod.POST)
-	public String viewModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+	public String viewModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page, HttpSession session) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("post",post);
 		model.addAttribute("postNo",postNo);
 		model.addAttribute("page",page);
@@ -480,6 +532,24 @@ public class BlogController {
 		boolean flag = rService.insertReply(reply);
 		if(flag) {
 			String qs = "?postNo="+postNo+"&page="+page;
+			url = "redirect:/blog/board/read"+qs;
+		}
+		return url;
+	}
+	
+	@RequestMapping(value="/board/modifyReply", method=RequestMethod.POST)
+	public String modifyReply(BReplyDTO reply, @RequestParam("page") int page) {
+		String url = null;
+
+		return url;
+	}
+	
+	@RequestMapping(value="/board/removeReply", method=RequestMethod.POST)
+	public String removeReply(BReplyDTO reply, @RequestParam("page") int page) {
+		String url = null;
+		boolean flag = rService.removeReply(reply);
+		if(flag) {
+			String qs = "?postNo="+reply.getPostNo()+"&page="+page;
 			url = "redirect:/blog/board/read"+qs;
 		}
 		return url;
@@ -523,9 +593,11 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/photo/viewPhoto", method = RequestMethod.GET)
-	public String viewPhoto(Model model) {
+	public String viewPhoto(Model model, HttpSession session) {
 		String url = "blog/photo/viewPhoto";
 		List<BGalleryDTO> list = gService.getImageList();
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("imgList", list);
 		return url;
 	}
@@ -600,12 +672,14 @@ public class BlogController {
 	//*****************************************************************
 	
 	@RequestMapping(value="/comments/listAll", method = {RequestMethod.POST, RequestMethod.GET})
-	public String commentsListAll(@RequestParam(value="page",defaultValue="0") int page, Model model) {
+	public String commentsListAll(@RequestParam(value="page",defaultValue="0") int page, Model model, HttpSession session) {
 		int amount = 15;
 		BPageVO vo = pService.getPageVO(page,amount);
 		vo.setBoardName("comments");
 		List<BPostDTO> list = service.getListAll(vo);
 		ArrayList<String> pList = pService.makePageList(page, amount);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("list",list);
 		model.addAttribute("pList",pList);
 		model.addAttribute("page",page);
@@ -613,7 +687,9 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/comments/viewRegist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String viewCommentsRegist() {
+	public String viewCommentsRegist(Model model, HttpSession session) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		return "blog/comments/commentsRegist";
 	}
 	
@@ -630,14 +706,25 @@ public class BlogController {
 	
 	@RequestMapping(value="/comments/read", method = RequestMethod.GET)
 	public String commentsRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
-								@RequestParam(value="query", defaultValue="") String query,Model model) {
+								@RequestParam(value="query", defaultValue="") String query,Model model, HttpSession session) {
 		String url = null;
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		System.out.println(pdto);
 		BPostNoInfoDTO infoDTO = new BPostNoInfoDTO();
 		infoDTO.setPostNo(postNo);
 		infoDTO.setBoardName("comments");
 		boolean flag = service.increasCount(infoDTO);
+		boolean authFlag = false;
 		if(flag){
 			BPostDTO post = service.readPost(infoDTO);
+			if(pdto != null) {
+				if(post.getUserId().equals(pdto.getGuserId())) {
+					authFlag = true;
+					model.addAttribute("authFlag", authFlag);
+				}
+			}
+			System.out.println(authFlag);
+			model.addAttribute("pdto", pdto);
 			model.addAttribute("post", post);
 			model.addAttribute("page", page);
 			List<BReplyDTO> list = rService.getReplyListAll(infoDTO);
@@ -662,7 +749,10 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/comments/viewModify", method=RequestMethod.POST)
-	public String viewCommentsModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo, @RequestParam("page") int page) {
+	public String viewCommentsModify(BPostDTO post, Model model, @RequestParam("postNo") int postNo,
+														@RequestParam("page") int page, HttpSession session) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("post",post);
 		model.addAttribute("postNo",postNo);
 		model.addAttribute("page",page);
@@ -696,7 +786,8 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/comments/search", method=RequestMethod.POST)
-	public String searchComments(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page, Model model) {
+	public String searchComments(@RequestParam("query") String query, @RequestParam(value="page",defaultValue="0") int page,
+													Model model, HttpSession session) {
 		String url = null;
 		int amount = 15;
 		BSearchVO searchVO = new BSearchVO();
@@ -705,6 +796,8 @@ public class BlogController {
 		searchVO.setBoardName("comments");
 		List<BPostDTO> list = service.listSearchBookAll(searchVO);
 		ArrayList<String> pList = pService.makeSerachList(page, amount,searchVO);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("list",list); 
 		model.addAttribute("pList",pList);
 		model.addAttribute("page",page);

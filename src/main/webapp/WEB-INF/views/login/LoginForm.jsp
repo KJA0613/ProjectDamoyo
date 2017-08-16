@@ -122,7 +122,6 @@
 
 		}
 		if (type.value === 'B') {
-
 			//var company = document.getElementById('company').value;
 			document.loginForm.action = "/member/CompanyLogin";
 			document.loginForm.submit();
@@ -157,7 +156,7 @@
 				<h1>로그인</h1>
 				<br>
 				
-				<form action= "" method="POST" id="dataset" name="loginForm" onsubmit="return false;">
+				<form method="POST" id="dataset" name="loginForm" onKeyPress="if(event.keyCode == 13) {LoginChoiceSubmit(guserCode);}">
 					<div class="radio">
 						<label><input type="radio" name="guserCode" value="A" checked="checked">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
@@ -184,8 +183,7 @@
 					</div>
 					<br>	
 					<div class="form-group pull-right">													
-						<button type="button" class="btn btn-primary" onclick="LoginChoiceSubmit(guserCode)" id="btnLogin" tabindex="3">로그인</button>		<!-- 로그인 되면: 메인페이지로 이동(아이디 세션 유지) / 로그인 안 되면(Javascript 경고창) -->
-						<!-- <button type="submit" class="btn btn-primary" onKeyDown="LoginChoiceSubmit(guserCode)" id="btnLogin" tabindex="3">로그인</button> -->
+						<button type="button" class="btn btn-primary" onclick="LoginChoiceSubmit(guserCode)" id="btnLogin" tabindex="3">로그인</button>		<!-- 로그인 되면: 메인페이지로 이동(아이디 세션 유지) / 로그인 안 되면(Javascript 경고창) --> 
 					</div>
 					<br>
 					<br>

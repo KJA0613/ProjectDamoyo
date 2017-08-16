@@ -27,4 +27,10 @@ public class BReplyService {
 		list = dao.selectReply(infoDTO);
 		return list;
 	}
+
+	public boolean removeReply(BReplyDTO reply) {
+		boolean flag = false;
+		flag = dao.deleteReply(reply);
+		return flag;
+	}
 }
