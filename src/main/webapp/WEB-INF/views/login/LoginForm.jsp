@@ -90,47 +90,45 @@
 	});		 */
 	
   // [개인회원, 기업회원 선택 ] 
-    function LoginChoiceSubmit(type) {
+  function LoginChoiceSubmit(type) {
        
        // 폼 안에 있는 데이터들 사용하려고 셋팅
-      /*  var lc = document.getElementById('dataset');     */  
+       // var lc = document.getElementById('dataset');   
        
-      var guserId = $('#input_guserId').val();
-			var guserPw = $('#input_guserPw').val();
+		//if(event.keyCode == 13) {
+		var guserId = $('#input_guserId').val();
+		var guserPw = $('#input_guserPw').val();
 
-			
-			// 아이디 미입력 > 아이디 다시 입력하게 경고창 및 포커스두기
-			if(guserId == '') {
-				alert("아이디를 입력하세요");
-				$('#guserId').focus();
-				return false;
-			}		
-	
-			// 패스워드 미입력 > 아이디 다시 입력하게 경고창 및 포커스두기
-			if(guserPw == '') {
-				alert('비밀번호를 입력하세요');
-				$('#guserPw').focus();
-				return false;			// 함수 종료
-			} 	
-      
-       // "개인" 회원가입 폼 이동
-       if(type.value === 'A') {         
-          // 개인회원 : value = A > 값 찍기
-          //var person = document.getElementById('person').value;
-          document.loginForm.action = "/member/PersonLogin";
-          document.loginForm.submit();   
+		// 아이디 미입력 > 아이디 다시 입력하게 경고창 및 포커스두기
+		if (guserId == '') {
+			alert("아이디를 입력하세요");
+			$('#guserId').focus();
+			return false;
+		}
 
-          
-        } 
-       if(type.value === 'B'){
-    	   
-    	  //var company = document.getElementById('company').value;
-    	  document.loginForm.action = "/member/CompanyLogin";	
-    	  document.loginForm.submit();   
-       }
-      
-       
-    } 
+		// 패스워드 미입력 > 아이디 다시 입력하게 경고창 및 포커스두기
+		if (guserPw == '') {
+			alert('비밀번호를 입력하세요');
+			$('#guserPw').focus();
+			return false; // 함수 종료
+		}
+
+		// "개인" 회원가입 폼 이동
+		if (type.value === 'A') {
+			// 개인회원 : value = A > 값 찍기
+			//var person = document.getElementById('person').value;
+			document.loginForm.action = "/member/PersonLogin";
+			document.loginForm.submit();
+
+		}
+		if (type.value === 'B') {
+
+			//var company = document.getElementById('company').value;
+			document.loginForm.action = "/member/CompanyLogin";
+			document.loginForm.submit();
+		}
+		//}
+	}
 </script>
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
@@ -159,7 +157,7 @@
 				<h1>로그인</h1>
 				<br>
 				
-				<form method="POST" id="dataset" name="loginForm">
+				<form action= "" method="POST" id="dataset" name="loginForm" onsubmit="return false;">
 					<div class="radio">
 						<label><input type="radio" name="guserCode" value="A" checked="checked">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
@@ -187,6 +185,7 @@
 					<br>	
 					<div class="form-group pull-right">													
 						<button type="button" class="btn btn-primary" onclick="LoginChoiceSubmit(guserCode)" id="btnLogin" tabindex="3">로그인</button>		<!-- 로그인 되면: 메인페이지로 이동(아이디 세션 유지) / 로그인 안 되면(Javascript 경고창) -->
+						<!-- <button type="submit" class="btn btn-primary" onKeyDown="LoginChoiceSubmit(guserCode)" id="btnLogin" tabindex="3">로그인</button> -->
 					</div>
 					<br>
 					<br>
