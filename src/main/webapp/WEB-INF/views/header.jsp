@@ -79,7 +79,6 @@
 	} 
 </style>
 
-
 <!-- 장소링크 CSS -->
 <style type="text/css">
 	#f_color {

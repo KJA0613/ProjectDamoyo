@@ -30,7 +30,9 @@ public interface IPlaceDAO {
 	public boolean deletePlaceDelete(int placeNo) throws SQLException;
 
 	// 선택한 모임 상세내용 수정 
-	public PlaceDTO updatePlaceDetail(int placeNo) throws SQLException;
+	public boolean updatePlaceModify(PlaceDTO pl_dto) throws SQLException;
+
+	public List<PlaceDTO> searchMap(String keyWord);
 
 	
 }

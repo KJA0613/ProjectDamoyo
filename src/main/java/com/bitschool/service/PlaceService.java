@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bitschool.dao.IPlaceDAO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
+import com.bitschool.util.MapLocation;
 
 @Service
 public class PlaceService implements IPlaceService {
@@ -20,6 +21,8 @@ public class PlaceService implements IPlaceService {
 	@Inject
 	private IPlaceDAO PlaceDAO;	
 
+	// util에서 객체 생성
+	private MapLocation mLcation = new MapLocation();
 	
 	//----------------------------------------------- 모임공간 -----------------------------------------------//
 		
@@ -27,7 +30,10 @@ public class PlaceService implements IPlaceService {
 	@Override
 	public boolean PlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
-		System.out.println("service");
+		
+		pl_dto = mLcation.GetDatum(pl_dto);
+		System.out.println(pl_dto);
+		
 		try {
 			flag = PlaceDAO.insertPlaceRegist(pl_dto);
 		} catch (SQLException e) {
@@ -131,16 +137,26 @@ public class PlaceService implements IPlaceService {
 
 	// 선택한 모임 상세내용 수정 
 	@Override
-	public PlaceDTO PlaceDetailModify(int placeNo) {
-		PlaceDTO pl_dto = null;
-		
+	public boolean PlaceModifyProcess(PlaceDTO pl_dto) {
+		boolean flag = false;
+
 		try {
-			pl_dto = PlaceDAO.updatePlaceDetail(placeNo);
+			flag = PlaceDAO.updatePlaceModify(pl_dto);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return pl_dto;
+		return flag;
+	}
+
+
+	// 민규. 다음맵 연습
+	@Override
+	public List<PlaceDTO> searchMap(String keyWord) {
+
+		 List<PlaceDTO> mapList = PlaceDAO.searchMap(keyWord);
+		
+		return mapList;
 	}
 	
 }

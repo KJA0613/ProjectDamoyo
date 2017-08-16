@@ -31,7 +31,6 @@ public class PlaceDAO implements IPlaceDAO {
 	public boolean insertPlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
 			
-		System.out.println("dao: " + pl_dto);
 		int aCnt = session.insert(namespace+".insertPlaceRegist", pl_dto);
 		
 		if(aCnt > 0) {
@@ -112,22 +111,32 @@ public class PlaceDAO implements IPlaceDAO {
 	}
 
 
+	// 선택한 모임 상세내용 수정 
 	@Override
-	public PlaceDTO updatePlaceDetail(int placeNo) throws SQLException {
-		PlaceDTO pl_dto = null;
-		return pl_dto;
+	public boolean updatePlaceModify(PlaceDTO pl_dto) throws SQLException {
+		boolean flag = false;
+
+		int aCnt = session.update(namespace+".updatePlaceModify", pl_dto);
+
+		if(aCnt > 0) {
+			flag = true;
+		}
+		
+		return flag;
 	}
 
 
-	// 선택한 모임 상세내용 수정 
-	/*@Override
-	public PlaceDTO updatePlaceDetail(int placeNo) throws SQLException {
-		PlaceDTO pl_dto = null;
+	@Override
+	public List<PlaceDTO> searchMap(String keyWord) {
+
+		List<PlaceDTO> mapList = null;
 		
-		pl_dto = session.update(namespace+".updatePlaceDetail", placeNo);
+		mapList = session.selectList(namespace+".searchMap", keyWord);
 		
-		return pl_dto;
-	}*/
+		System.out.println(mapList);
+		
+		return mapList;
+	}
 
 	
 }

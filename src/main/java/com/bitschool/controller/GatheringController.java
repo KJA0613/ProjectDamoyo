@@ -120,6 +120,7 @@ public class GatheringController {
 	public @ResponseBody HashMap<String, List<GatheringDTO>> gatheringSearch(
 			@RequestParam(value = "cDATA", defaultValue="") String cData,
 			@RequestParam(value = "aDATA", defaultValue="") String aData,
+			@RequestParam(value = "tDATA", defaultValue="") String tData,
 			@RequestParam(value = "sSTR", defaultValue="") String sSTR,
 			@RequestParam(value = "sSelect", defaultValue="") String sSelect,
 			HttpSession session
@@ -141,7 +142,7 @@ public class GatheringController {
 		
 		
 		if(!sSTR.equals("")){
-			if(pdto!=null){ // 로그인 안했을때
+			if(pdto!=null){ // 로그인 했을때
 				regather = new RecommGatherDTO();
 				regather.setRecommgatherName(sSTR);
 				regather.setRecommgatherCode(sSelect);
@@ -152,9 +153,11 @@ public class GatheringController {
 		
 		List<String> cList = null;
 		List<String> aList = null;
+		List<String> tList = null;
 
 		String[] aaList = aData.split(",");
 		String[] ccList = cData.split(",");
+		String[] ttList = tData.split(",");
 		
 		
 		
@@ -194,10 +197,28 @@ public class GatheringController {
 			}
 		}
 		
+		if(ttList.length>1){
+			tList = new ArrayList<String>();
+			for (int i = 0; i < ttList.length; i++) {
+				tList.add(ttList[i]);
+
+				if(i==ttList.length-1&&recommgatherList!=null){
+					if(!ttList[i].equals("")){
+						regather = new RecommGatherDTO();
+						regather.setRecommgatherName(ttList[i]);
+						regather.setRecommgatherCode("타입");
+						regather.setGuserId(pdto.getGuserId());
+						recommgatherList.add(regather);
+					}
+				}
+			}
+		}
+		
 		session.setAttribute("recommgatherList", recommgatherList);
 		
+		System.out.println(tList);
 		
-		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, sSelect, sSTR);
+		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, tList, sSelect, sSTR);
 		HashMap<String, List<GatheringDTO>> map = new HashMap<String, List<GatheringDTO>>();
 				
 		if (gList != null) {
@@ -419,7 +440,7 @@ public class GatheringController {
 		// 로그인 사용자 정보
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
-		// 사용자가 클릭한 모집글의 값을 dto에 담에 디비로 넣음
+		// 사용자가 클릭한 모집글의 값을 dto에 담음
 		if(recommgatherList!=null){
 		
 			RecommGatherDTO regather = null;
@@ -475,7 +496,6 @@ public class GatheringController {
 	
 	// 여기서는 모달차잉 띄어지고 하트모양을 눌렀을때 유무체크 판단하여 뿌리기
 	// 모임 찜하기 or 앵콜요청 (아직은 여기까지, 추가로 더 들어갈 수 있음 )
-	// Json 사용하땐 @ResponseBody
 	@RequestMapping(value="/gatherAddons", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody HashMap<String, String> gatherAddons(
 			@RequestParam(value="no") int gatherNo,

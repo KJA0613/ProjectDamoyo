@@ -29,6 +29,7 @@
 	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<!-- 이미지 파일만 업로드 할 수 있게 하는 스크립트 -->
 <script type="text/javascript">
  	$(function() {
 		$("#fileName").change(function(){
@@ -48,6 +49,7 @@
 	});	
 </script>
 
+<!-- 빈칸 입력시 알림창 띄우는 스크립트 -->
 <script type="text/javascript">
  function form_check(){
 	 var content = $("#gContent").val();
@@ -125,9 +127,6 @@ function areachange(item){
 }
 </script>
 
-
-<!-- ========================================================================================================================== -->
-
 <!-- 카테고리 코드 셀렉트 박스 스크립트 -->
 <script type="text/javascript">
 
@@ -140,7 +139,7 @@ var categoryMid3 = new Array("외국어","영어","음악/공연","라이프","�
 /* <!-- 카테고리 그룹 1차 소분류 선택 배열 --> */
 var categoryBot0 = new Array("중국어","일본어","독일어","아랍어","태국어","스페인어","러시아어","프랑스어","베트남어","외국어 기타");
 var categoryBot1 = new Array("토익","토플","텝스","토스","영어회화","작문/독해","번역","미드","영어 기타");
-var categoryBot2 = new Array("기타/우쿠렐라","피아노/키보드","보컬/음악이론","작사/작곡","밴드","국악","연기/연극/뮤지컬","댄스무용","진행/행사","마술/음악공연 기타");
+var categoryBot2 = new Array("기타/우크렐라","피아노/키보드","보컬/음악이론","작사/작곡","밴드","국악","연기/연극/뮤지컬","댄스무용","진행/행사","마술/음악공연 기타");
 var categoryBot3 = new Array("육아","반려동물","금융/재테크","상담/컨설팅","건강/웰빙","사주/타로","독서/글쓰기","사진/영상","키덜트","생활공예","요리/베이킹","인테리어");
 var categoryBot4 = new Array("자소서/면접","인적성","스피치","자격증","기업공채","공모전/대외활동","창업/스타트업","취업 기타");
 var categoryBot5 = new Array("리그오브레전드","도타","피파온라인","오버워치","서든어택","온라인게임","PC게임","모바일게임","보드게임","게임 기타");
@@ -226,8 +225,6 @@ function categoryMidChange(item){
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
 						<input type="hidden" name="comId" value="${cdto.comId}" />
  
-
-
 						<!-- 주제 -->
 						<div class="form-group">
 							<!-- 입력항목이름 -->
@@ -304,7 +301,7 @@ function categoryMidChange(item){
 							<div class="dropdown">
 								
 								<div class="col-sm-3">
-									<select class="form-control" name="areaTop" onChange="areachange(this.options.selectedIndex)"> <!-- this.options.selectedIndex 선택된 인덱스를 가져옴  -->
+									<select class="form-control" id="aTop" name="areaTop" onChange="areachange(this.options.selectedIndex)"> <!-- this.options.selectedIndex 선택된 인덱스를 가져옴  -->
 										<option selected value="">-선택-</option>
 										<option value="서울특별시">서울특별시</option>
 										<option value="경기도">경기도</option>
@@ -327,23 +324,11 @@ function categoryMidChange(item){
 								</div>
 								
 								<div class="col-sm-3">
-									<select class="form-control" name="areaMid">
+									<select class="form-control" id="aMid" name="areaMid">
 										<option selected value="">-선택-</option>
 										<option value=""></option>
 									</select>
 								</div>
-							</div>
-
-						</div>
-
-						<!-- 장소  -->
-						<div class="form-group">
-							<label for="Name" class="col-sm-2 control-label">장소</label>
-							<div class="col-sm-5">
-								<input type="text" id="gPlace" class="form-control" name="gatherPlace" placeholder="지역을 입력해주세영? 뭔지 잘 몰것음">
-							</div>
-							<div class="col-sm-2">
-								<input type="button" class="btn btn-default" value="장소추천">
 							</div>
 
 						</div>
