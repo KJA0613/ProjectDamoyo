@@ -193,9 +193,11 @@ $(function() {
 		
 		
 		// 기존모달 종료하고 새로운 모달 키움
-		$('#gatherModify').attr('data-dismiss','modal');
-		$('#gatherModify').attr('data-toggle','modal');
-		$('#gatherModify').attr('data-target','#GatherModalModify');
+//		$('#gatherModify').attr('data-dismiss','modal');
+		/*$('#gatherModify').attr('data-toggle','modal');
+		$('#gatherModify').attr('data-target','#GatherModalModify');*/
+		$('#GatherModalModify').modal('show');
+//		$('#GatherModalModify').modal('data-toggle');
 		
 		// 키울때 기존값을 추가해줌
 		$('#gatherSubject').val(subject);
