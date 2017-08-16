@@ -234,16 +234,12 @@ public class GatheringController {
 		String url = "gather/gathering_make";
 		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		
 		CompanyDTO cdto = (CompanyDTO)session.getAttribute("cdto");
 		
 		if (cdto == null) {
-
 			model.addAttribute("pdto", pdto);
 		}
-		
 		if (pdto == null) {
-
 			model.addAttribute("cdto", cdto);
 		}
 
@@ -259,7 +255,7 @@ public class GatheringController {
 		GatheringDTO gath = new GatheringDTO();
 		
 		String aPath = req.getSession().getServletContext().getRealPath("/");
-		String rPath =  "\\resources\\image\\mozip\\";
+		String rPath = "\\resources\\image\\mozip\\";
 
 		boolean flag = false;
 		DiskFileItemFactory fac = new DiskFileItemFactory(); // 파일 업로드 핸들러를 생성
