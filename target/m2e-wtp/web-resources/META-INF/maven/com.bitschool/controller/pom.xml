@@ -119,7 +119,7 @@
 
 		<!-- ADD -->
 		<!-- 파일 업로드, 다운로드를 하기 위한 라이브러리 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2</version>
@@ -128,6 +128,18 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.0.1</version>
+		</dependency> -->
+		
+		<!-- 네이버 스마트에디터를 쓰기위한 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
 		</dependency>
 		
 		<!-- org.springframework -->

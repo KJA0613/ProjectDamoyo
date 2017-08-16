@@ -31,7 +31,7 @@
 
 <!-- 네이버 스마트  -->
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <!-- 이미지 파일만 업로드 할 수 있게 하는 스크립트 -->
 <script type="text/javascript">
@@ -210,8 +210,8 @@ function categoryMidChange(item){
       //스마트에디터 프레임생성
       nhn.husky.EZCreator.createInIFrame({
           oAppRef: obj,
-          elPlaceHolder: "editor",
-          sSkinURI: "./resources/editor/SmartEditor2Skin.html",
+          elPlaceHolder: "gContent",
+          sSkinURI: "/resources/editor/SmartEditor2Skin.html",
           htParams : {
               // 툴바 사용 여부
               bUseToolbar : true,            
@@ -224,7 +224,7 @@ function categoryMidChange(item){
       //전송버튼
       $("#insertBoard").click(function(){
           //id가 smarteditor인 textarea에 에디터에서 대입
-          obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
+          obj.getById["gContent"].exec("UPDATE_CONTENTS_FIELD", []);
           //폼 submit
           $("#gMake").submit();
       });
@@ -258,6 +258,15 @@ function categoryMidChange(item){
 						<input type="hidden" name="guserId" value="${pdto.guserId}" />
 						<input type="hidden" name="comId" value="${cdto.comId}" />
  
+ 
+ 						<!-- 이미지 올리기  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
+							<div class="col-sm-7">
+								<input id="fileName" type="file" name="gatherImg" >
+							</div>
+						</div>
+						
 						<!-- 주제 -->
 						<div class="form-group">
 							<!-- 입력항목이름 -->
@@ -377,17 +386,9 @@ function categoryMidChange(item){
 						<!-- 모집분류  -->
 						<div class="form-group">
 							<label for="Name" class="col-sm-2 control-label">상세정보</label>
-							<div class="col-sm-7">
+							<div class="col-sm-10">
 								<textarea id="gContent" class="form-control" rows="5" name="gatherContent"
 									placeholder="상세내용을 입력해 주세영" style="width: 700px; height: 400px;"></textarea>
-							</div>
-						</div>
-
-						<!-- 이미지 올리기  -->
-						<div class="form-group">
-							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
-							<div class="col-sm-7">
-								<input id="fileName" type="file" name="gatherImg" >
 							</div>
 						</div>
 
@@ -411,7 +412,6 @@ function categoryMidChange(item){
 		<!-- [Footer] 페이지 하단 -->
 		<hr>
 		<%@include file = "../footer.jsp"%>
-
 	</div>
 	<!--/.container-->
 

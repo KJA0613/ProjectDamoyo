@@ -257,8 +257,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">상세설명</label>
 						<div class="col-md-10">
-						<div id="summernote">Hello Summernote</div>
-							<!-- <textarea rows="5" cols="10" name="placeContent" class="form-control" required></textarea>	 -->			
+							<textarea rows="5" cols="10" name="placeContent" class="form-control" required></textarea>			
 						</div>
 					</div>
 									

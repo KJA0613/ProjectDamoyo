@@ -1,6 +1,9 @@
 package com.bitschool.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -246,6 +249,48 @@ public class GatheringController {
 		return url;
 	}
 	
+	// 올린파일을 내부에 저장하는 메서드
+	@RequestMapping(value = "/gatherImg", method = RequestMethod.POST)
+	public @ResponseBody String multiplePhotoUpload(HttpServletRequest request) {
+		// 파일정보
+		StringBuffer sb = new StringBuffer();
+		try {
+			// 파일명을 받는다 - 일반 원본파일명
+			String oldName = request.getHeader("file-name");
+			
+			// 파일 기본경로 _ 상세경로
+			//D:\dev\git\src
+			String aPath = "D:/dev/git/src/main/webapp";
+			String rPath = "\\resources\\image\\mozip\\";
+			String filePath = aPath+rPath;
+			System.out.println("파일경로 : "+filePath);
+			
+			// 여기서 oldName은 그냥 파일 이름 확장자
+			String saveName = sb.append(oldName).toString();
+			System.out.println(saveName);
+			InputStream is = request.getInputStream();
+			OutputStream os = new FileOutputStream(filePath + saveName);
+			int numRead;
+			byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
+			while ((numRead = is.read(b, 0, b.length)) != -1) {
+				os.write(b, 0, numRead);
+			}
+			os.flush();
+			os.close();
+			
+			// 정보 출력
+			sb = new StringBuffer();
+			sb.append("&bNewLine=true").append("&sFileName=").append(oldName).append("&sFileURL=")
+					.append("http://localhost:5050/resources/image/mozip/").append(saveName);
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+	
+	
 	// 모집글 디비에 삽입하는 메서드
 	@RequestMapping(value="/gatheringInsert",method={RequestMethod.GET, RequestMethod.POST})
 	public String gatheringInsert(HttpServletRequest req){
@@ -457,9 +502,7 @@ public class GatheringController {
 				recommgatherList.add(regather);
 			}
 			
-			
-			session.setAttribute("recommgatherList", recommgatherList);	
-		
+			session.setAttribute("recommgatherList", recommgatherList);
 		}
 		
 		
