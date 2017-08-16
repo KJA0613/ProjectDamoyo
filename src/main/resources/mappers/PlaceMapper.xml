@@ -10,9 +10,9 @@
 			select placeSeq.nextval from dual
 		</selectKey>
 			insert into place(placeNo, placeImage, placeType, placeName, placeIntro, placeAddr1, placeAddr2, placeAddr3, placeAddr4, 
-			placeTel, placeURL, placePerCnt, placeUseTime, placeNotUseDay, placeCost, placeCostChoice, placeParking, placeContent, comId) 
+			placeTel, placeURL, placePerCnt, placeUseTime, placeNotUseDay, placeCost, placeCostChoice, placeParking, placeContent, comId, placeX, placeY) 
 			values(#{placeNo}, #{placeImage}, #{placeType}, #{placeName}, #{placeIntro}, #{placeAddr1}, #{placeAddr2}, #{placeAddr3}, #{placeAddr4}, 
-			#{placeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeNotUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, #{comId})			
+			#{placeTel}, #{placeURL}, #{placePerCnt}, #{placeUseTime}, #{placeNotUseDay}, #{placeCost}, #{placeCostChoice}, #{placeParking}, #{placeContent}, #{comId}, #{placeX}, #{placeY})	
 	</insert>		
 
 
@@ -64,4 +64,10 @@
 		where placeNo = #{placeNo}
 	</update>	
 	
+	<!-- 민규 맵 조회 쿼리 -->
+	<select id="searchMap" parameterType="String" resultType="PlaceDTO">
+		select * 
+		from place 
+		where placeAddr3 like '%'||#{keyWord}||'%'
+	</select>
 </mapper>

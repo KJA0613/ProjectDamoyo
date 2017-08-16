@@ -3,7 +3,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<!-- jquery를 이용하여 뿌리기 -->
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script
+	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 
 <title>모임공간 등록</title>
 
@@ -16,6 +23,8 @@
 
 <!-- [여진양 짱!!!!!!] 주소 > 다음 API-->
 <!-- [참고 사이트] http://postcode.map.daum.net/guide-->
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function search_corpAddr() {
         new daum.Postcode({
@@ -50,47 +59,15 @@
                 document.getElementById('placeAddr2').value = fullRoadAddr;
                 document.getElementById('placeAddr3').value = data.jibunAddress;
 
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
-                } else {
-                    document.getElementById('guide').innerHTML = '';
-                }
-            }
+           	}
         }).open();
+     		
     }
 </script>
 
 
 <!-- 이미지 업로드 유효성 검사 -->
 <script>
-	/* function img_upload(obj) {
-		var pathPoint = obj.value.lastIndexOf('.');		
-		filePoint = obj.value.substring(pathPoint + 1, obj.length);
-		fileType = filePoint.toLowerCase();		// 소문자로 변경
-		
-		if(fileType != 'jpg' || fileType != 'gif' || fileType != 'png' || fileType != 'jpeg' || fileType != 'bmp') {
-			
-		} else {
-			 alert('이미지 파일만 선택할 수 있습니다.');
-			 parentObj = obj.parentNode;
-			 node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
-			 return false; 
-		}
-
-		if(fileType == 'bmp') {
-			upload = confirm('BMP 파일은 웹상에서 사용하기엔 적절한 포맷이 아닙니다. \n 그래도 계속 하시겠습니까?');
-			if(!upload) return false; 
-		}
-	} */
-	
 	$(function() {
 		$("#placeImage").change(function(){
 					
@@ -160,7 +137,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-10">
-							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">						
+							<input type="file" name="placeImage" id="placeImage" class="form-control" accept="image/gif, image/jpg, image/jpeg, image/png">						
 						</div>
 						<!-- <div class="col-md-2">
 							<button type="button" class="btn btn-grey">사진등록</button>
