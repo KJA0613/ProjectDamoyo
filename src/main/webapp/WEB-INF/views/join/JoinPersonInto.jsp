@@ -62,58 +62,86 @@ a {
 }
 </style>
 
+
 <!-- [회원가입 - 데이터 유효성 검사] -->	
+<!-- [참고 사이트] http://tonks.tistory.com/20 -->
 <script>
 
-// [Check] Caps Lock
+// [Check_00] CapsLock
 
 
-// [Check_01] 이름
+// [Check_01] 이름 (중복 허용)
 function checkName() {
-	var name = document.getElementById('guserName').value;		// 이름 값
-	name = name.trim();											// 공백 제거
-	var oMsg = document.getElementById('nameMsg');				// 보낼 에러 메세지
+	var name = document.getElementById('guserName').value;						// 이름 값
+	var tempName = document.getElementById('guserName');
+	name = name.trim();															// 공백 제거
+	var oMsg = document.getElementById('nameMsg');								// 보낼 에러 메세지
 	
+	// [데이터 유효성 검사1] 입력여부 확인
 	if(name == "") {
-		//oMsg.style.display = "block";
+		oMsg.style.display = "block";
 	    oMsg.className = "error";
 		oMsg.innerHTML = "필수 정보입니다."
 	
 		return false;
 	}		
+	
+	
+	// [데이터 유효성 검사2] 유효 문자 제한 (한글과 영문만 가능)
+	//var isName = /^[0-9]*$/;
+	var isName = /^[가-힣a-zA-Z]+$/;
+	
+	if(!isName.test(name)) {
+		oMsg.style.display = "block";
+        oMsg.className = "error";
+        oMsg.innerHTML = "한글과 영문만 입력 가능합니다.";
+        document.getElementById("nameMsg").style.color = "red";
+        
+        tempName.value = "";
+        tempName.focus();
+	} else {
+		oMsg.style.display = "none";											// 메세지 안 보여주기
+		//oMsg.className = "error gm";
+		//oMsg.innerHTML = "멋진 이름이네요!";
+		//document.getElementById("nameMsg").style.color = "blue";
+	}
+	
 }
 
 
 // [Check_02] 아이디
 function checkId() {
 	
-	// [데이터 유효성 검사1] 입력여부 확인
-	var id = document.getElementById('guserId').value;			// 아이디 값
+	var id = document.getElementById('guserId').value;							// 아이디 값
 	var tempId = document.getElementById('guserId');
-	id = id.trim();												// 공백 제거
-	var oMsg = document.getElementById('idMsg');				// 보낼 에러 메세지
+	id = id.trim();																// 공백 제거
+	var oMsg = document.getElementById('idMsg');								// 보낼 메세지 (에러/성공)
 	
+	
+	// [데이터 유효성 검사1] 입력여부 확인
 	if(id == "") {
-		oMsg.style.display = "block";
+		oMsg.style.display = "block";											// 메세지 보여주기
 	    oMsg.className = "error";
 		oMsg.innerHTML = "필수 정보입니다."
 	
 		return false;
 	}
 	
-	// [데이터 유효성 검사2]
-	var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
 	
+	// [데이터 유효성 검사2] 유효 문자 제한
+	var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+		
     if (!isID.test(id)) {
 		oMsg.style.display = "block";
         oMsg.className = "error";
         oMsg.innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+        document.getElementById("idMsg").style.color = "red";
     
         return false;
     }
     
+    
     // [데이터 유효성 검사3] DB에 아이디 있는지 여부 판단 
-    // 서버에 보낼 데이터
     var checkId = "guserId=" + $("#guserId").val();
         
     // Ajax: 비동기식 데이터 전송 방식 (URL 이동 없이 데이터만 확인해서 결과 출력 가능)
@@ -125,25 +153,135 @@ function checkId() {
 			url : "/join/checkDuplicatePersonIdAjax",							// 정보 요청할 URL
 			success : function(result) {										// 요청 성공하면 실행될 콜백함수
 				if (result == "OK") {
+					oMsg.style.display = "block";
 					oMsg.className = "error gm";
 					oMsg.innerHTML = "멋진 아이디네요!";
-					document.getElementById("guserId").style.color = "blue";
+					document.getElementById("idMsg").style.color = "blue";
 				} else {
 					oMsg.className = "error";
 					oMsg.innerHTML = "이미 사용중이거나 탈퇴한 아이디입니다.";
+					document.getElementById("idMsg").style.color = "red";
 					tempId.value = "";
 					tempId.focus();
 				}
 			},error : function() {
-				alert("통신오류가 발생하였습니다. 재시도 해주세요");
+				alert("오류 발생! 재시도 해주세요!");
 			}
 	});
 }
 
 
-// [Check_03] 이메일
+// [Check_03-1] 비밀번호
+function checkPw1() {
+	
+	var pw = document.getElementById('guserPw').value;							// 비밀번호 값
+	var tempPw = document.getElementById('guserPw');
+	pw = pw.trim();																// 공백 제거
+	var oMsg = document.getElementById('pwMsg');								// 보낼 메세지 (에러/성공)
 
 	
+	// [데이터 유효성 검사1] 입력여부 확인
+	if(pw == "") {
+		oMsg.style.display = "block";											
+	    oMsg.className = "error";
+		oMsg.innerHTML = "필수 정보입니다."
+	
+		return false;
+	}
+
+}
+
+
+//[Check_03-1] 비밀번호 재입력
+function checkPw2() {	
+	
+	var pwCnf = document.getElementById('guserPwConfirm').value;				// 비밀번호 재입력 값
+	var tempPwCnf = document.getElementById('guserPwConfirm');
+	pwCnf = pwCnf.trim();														// 공백 제거
+	var oMsg = document.getElementById('pwCnfMsg');								// 보낼 메세지 (에러/성공)
+	
+	
+	if(pwCnf = "") {
+		oMsg.style.display = "block";											
+	    oMsg.className = "error";
+		oMsg.innerHTML = "필수 정보입니다."
+	
+		return false;	
+	}
+}
+
+
+
+// [Check_04] 이메일
+function checkEmail() {
+	var email = document.getElementById('guserEmail').value;					// 이메일 값
+	var tempEmail = document.getElementById('guserEmail');
+	email = email.trim();														// 공백 제거
+	var oMsg = document.getElementById('emailMsg');								// 보낼 메세지 (에러/성공)
+	
+	
+	// [데이터 유효성 검사1] 입력여부 확인
+	if(email == "") {
+		oMsg.style.display = "block";											
+	    oMsg.className = "error";
+		oMsg.innerHTML = "필수 정보입니다."
+	
+		return false;
+	}	
+	
+	
+	// [데이터 유효성 검사2] 이메일 정규식
+	var isEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	
+	if (!isEmail.test(email)) {
+		oMsg.style.display = "block";
+	    oMsg.className = "error";
+	    oMsg.innerHTML = "@를 포함한 이메일 양식에 맞는 주소로 입력해주세요.";
+	    document.getElementById("emailMsg").style.color = "red";
+	        
+	    tempEmail.value = "";
+	    tempEmail.focus();
+	} else {
+	    	oMsg.style.display = "none";
+	}	
+	
+}
+
+	
+// [Check_05] 휴대폰 번호
+function checkPhone() {
+	var phone = document.getElementById('guserPhone').value;					// 휴대폰 번호 값
+	var tempPhone = document.getElementById('guserPhone');
+	phone = phone.trim();														// 공백 제거
+	var oMsg = document.getElementById('mobileMsg');							// 보낼 메세지 (에러/성공)
+	
+	
+	// [데이터 유효성 검사1] 입력여부 확인
+	if(phone == "") {
+		oMsg.style.display = "block";											
+	    oMsg.className = "error";
+		oMsg.innerHTML = "필수 정보입니다."
+	
+		return false;
+	}	
+	
+	// [데이터 유효성 검사2] 숫자만 가능 (XXX-XXX-XXXX or XXX-XXXX-XXXX)
+	var isPhone =  /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+		
+    if (!isPhone.test(phone)) {
+		oMsg.style.display = "block";
+        oMsg.className = "error";
+        oMsg.innerHTML = "실제 본인 휴대폰 번호만 입력 가능합니다.";
+        document.getElementById("mobileMsg").style.color = "red";
+        
+        tempPhone.value = "";
+        tempPhone.focus();
+    } else {
+    	oMsg.style.display = "none";
+    }		
+	
+}
+
 </script>
 
 
@@ -191,12 +329,8 @@ function checkId() {
 							<input type="text" class="form-control" id="guserId" name="guserId" placeholder="아이디" onblur="checkId()">
 							<!-- 경고 메세지 -->
 							<div id="idMsg" class="error">
-								<!-- 에러 메세지 적용되는 부분 -->
-							</div>
-							<div id="idMsg" class="error gm">
-								<!-- 에러 메세지 적용되는 부분 -->
-							</div>		
-							
+								<!-- 에러 메세지 출력 부분 -->
+							</div>							
 						</div>						
 					</div>
 					
@@ -204,40 +338,40 @@ function checkId() {
 					<div class="form-group">
 						<label for="Password" class="col-md-2 control-label">비밀번호</label>
 						<div class="col-md-10">
-							<input type="password" class="form-control" name="guserPw" placeholder="비밀번호">
+							<input type="password" class="form-control" id="guserPw" name="guserPw" placeholder="비밀번호" onblur="checkPw1()">
+							<!-- 경고 메세지 -->
+							<div id="pwMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="pwMsg" class="error"></div>
 					</div>
 					
 					<!-- 비밀번호 확인 -->
 					<div class="form-group">
 						<label for="Password" class="col-md-2 control-label">비밀번호 확인</label>
 						<div class="col-md-10">
-							<input type="password" class="form-control" name="guserPwConfirm" placeholder="비밀번호 재입력" onkeydown="blank_key_check()" required>
+							<input type="password" class="form-control" id="guserPwConfirm" name="guserPwConfirm" placeholder="비밀번호 재입력" onblur="checkPw2()">
+							<!-- 경고 메세지 -->
+							<div id="pwCnfMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="pwConfirmMsg" class="error"></div>
 					</div>		
 										
 					<!-- 이메일 -->
 					<div class="form-group">
 						<label for="Email" class="col-md-2 control-label">이메일</label>
 						<div class="col-md-10">
-							<input type="email" class="form-control" name="guserEmail" placeholder="abc@gmail.com" required>
+							<input type="email" class="form-control" id="guserEmail" name="guserEmail" placeholder="abc@gmail.com" onblur="checkEmail()">
+							<!-- 경고 메세지 -->
+							<div id="emailMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="emailMsg" class="error"></div>
 					</div>
 					
 					<!-- 핸드폰 번호 -->
 					<div class="form-group">
 						<label for="Phone" class="col-md-2 control-label">휴대폰 번호</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="guserPhone" placeholder="01012345678" required>
+							<input type="text" class="form-control" id="guserPhone" name="guserPhone" placeholder="01012345678" onblur="checkPhone()">
+							<!-- 경고 메세지 -->
+							<div id="mobileMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="mobileMsg" class="error"></div>
 					</div>
 					
 					<!-- 성별 -->
@@ -248,9 +382,9 @@ function checkId() {
 								<label><input type="radio" name="guserGender" value="W" checked="checked"> 여 </label> 
 								&nbsp;&nbsp; <label><input type="radio" name="guserGender" value="M"> 남 </label>
 							</div>
+							<!-- 경고 메세지 -->
+							<div id="sexMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="sexMsg" class="error"></div>
 					</div>
 					<hr>						
 
