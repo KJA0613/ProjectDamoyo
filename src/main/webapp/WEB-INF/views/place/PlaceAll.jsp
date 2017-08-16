@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- JSTL -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,7 +28,7 @@
 	
 	.wrapper ul.properties_list li img.property_img {
 	    width: 100%;
-	    height: auto!important;
+	    height: 350px;
 	    vertical-align: top;
 	}
 	
@@ -128,7 +129,7 @@
 				<div class="sample_image">
 					<a href="/place/PlaceDetail?placeNo=${plList.placeNo}">
 					<img src="${plList.placeImage}" class="property_img"> 	</a>			
-					<span class="price">${plList.placeCostChoice} :	${plList.placeCost}</span>		
+					<span class="price">${plList.placeCostChoice} :	<fmt:formatNumber value="${plList.placeCost}" pattern="#,###,###원"/></span>		
 				</div>		
 				
 				<div class="property_details">
