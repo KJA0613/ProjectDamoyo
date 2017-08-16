@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<!-- <meta charset="utf-8"> -->
+<!-- <meta charset="utf-8">  -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
@@ -23,16 +23,16 @@
 
 <style type="text/css">
 .price {
-	    position: absolute;
-	    top: 0px;
-	    left: 15px;
-	    padding: 0px 0px;
-	    background: #ffffff;
-	    color: #514d4d;
-	    font-size: 16px;
-	    font-weight: bold;
-	    letter-spacing: 1px;
-    }
+	position: absolute;
+	top: 0px;
+	left: 15px;
+	padding: 0px 0px;
+	background: #ffffff;
+	color: #514d4d;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
 
 ul {
 	list-style: none;
@@ -109,7 +109,7 @@ a:visited {
 }
 
 /* checkbox 부분 관리 */
-.checkbox-style{
+.checkbox-style {
 	margin-top: 10px;
 }
 
@@ -128,1019 +128,47 @@ a:visited {
 }
 
 /* 글 한칸씩 띄우는거 */
-#gather{
+#gather {
 	margin-bottom: 20px;
 }
 
 </style>
 
 <!-- jquery를 이용하여 뿌리기 -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.2.0.min.js"></script>
-<script src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script
+	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<!-- 체크박스와 관련된 스크립트를 가지고 있는 js -->
+<script type="text/javascript" src="/resources/script/js/gatherCheckbox.js"></script>
 
-<!-- 쿼리스트링 분리하여 원하는값 체크하기, 갓 triger가 날 살렸다!!!! -->
-<script type="text/javascript">
-$(window).load(function(){
-	
-	var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
-	
-	if(_tempUrl.indexOf('=')>0){
-		var _tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
-		
-				for(var i = 0; _tempArray.length; i++) { 
-			var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
-			
-			if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
-				 // _keyValuePair[1] : 파라미터 값 
-				
-				var box = _keyValuePair[1]; // 쿼리스트링으로 type에 값을 저장해 보내서 box 에 담고
-				var boxNum = box.substring(4); // 숫자만 짤라서 필요한 것을 받음
-				
-				var boxAll  = '.cAll' +boxNum;
-				var boxTag = '.cateChk' +boxNum
-				
-				$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
-				$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
-				
-			} 
-		}
-	}
-});
-</script>
+<!-- 모달과 관련된 스크립트를 가지고 있는 js -->
+<script type="text/javascript" src="/resources/script/js/gatherModal.js"></script>
 
-<!-- 체크박스 전체체크-락, 체크해제-언락 -->
-<script type="text/javascript">
+<!-- 카테고리/지역 정보, 스크립트가 들어있는 js -->
+<script type="text/javascript" src="/resources/script/js/gatherACselectBox.js"></script>
 
-	function checkAllFunc(obj, box) {
-		
-		$("[name=" + box + "]").each(function() {
-			if (obj.checked == true) {
-				$("[name=" + box + "]").attr("disabled", true)//는 input 요소 설정 을 disabled
-			} else {
-				$("[name=" + box + "]").attr("disabled", false)//제거 input 요소를 disabled 속성
-			}
-
-			this.checked = obj.checked;
-		})
-	};
-	
-	
-</script>
-
-<!-- 검색 버튼 눌렀을때 체크박스 값들 and 조건하고 검색하여 db에서 체크된조건의 모집글 가져오기 -->
-<script type="text/javascript">
-	function search_click(){
-		
-		var cDATA = "";
-		$("input[name*='cbox']").each(
-				function() {
-					if ($(this).is(':checked')
-							&& $(this).val() != "on")
-						cDATA += "," + ($(this).val());
-		});
-
-		var aDATA = "";
-		$("input[name*='abox']").each(
-				function() {
-					if ($(this).is(':checked')
-							&& $(this).val() != "on")
-						aDATA += "," + ($(this).val());
-				});
-
-		var sSelect = $("#serach_garhering").val();
-		var sSTR = $("#search_text").val();
-					
-		var DATA = {
-			"cDATA" : cDATA,
-			"aDATA" : aDATA,
-			"sSTR" : sSTR,
-			"sSelect" : sSelect
-		};
-
-		$.ajax({
-			url : '/gather/gatheringSearch',
-			dataType : 'json',
-			type : 'POST',
-			cache : false,
-			data : DATA,
-			success : function(gath) {
-				console.log(gath.gList);
-
-				$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
-
-				$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
-
-					var subject = gList.gatherSubject;
-					subject = subject.substring(0,11) +' ...';
-					
-					var write = gList.gatherWrite;
-					write = write.substring(0,16);
-					
-					var sdate = gList.gatherSdate;
-					sdate = sdate.substring(0,10);
-						 
-					var edate = gList.gatherEdate;
-					if(edate != null){
-						edate = edate.substring(0,10);
-					}else{
-						edate = '추후 협의';
-					}
-					
-					var day = gList.gatherDay;
-					if(day===null){
-						day = '추후 협의';
-					}
-					
-					var img = gList.gatherImg;
-					if(img===null){
-						img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
-					}
-					
-					var str = "";
-					str += "<div class='col-xs-4 col-lg-3' id='gather'>";
-					str += "<a data-toggle='modal' href='#myModal' data-no='"+gList.gatherNo+
-					 									"'  data-subject='"+gList.gatherSubject+
-														"'  data-category='"+gList.gatherCategory+
-														"'  data-write='"+write+
-														"'  data-sdate='"+sdate+
-														"'  data-edate='"+edate+
-														"'  data-area='"+gList.gatherArea+
-														"'  data-parti='"+gList.gatherParti+
-														"'  data-content='"+gList.gatherContent+
-														"'  data-img='"+img+
-														"'  data-id='"+gList.guserId+
-														"'  data-day='"+day+
-														"'  data-state='"+gList.gatherState+
-														"' >"
-							
-					str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
-					str += "<span class='price'>"+gList.gatherState+"</span>"
-					str += "<h4 align='center'>" + subject + "</h4>";
-					str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
-					str += "요일 : " + day + "<br>" ;
-					str += "지역 : " + gList.gatherArea + "<br>";
-					str += "신청인원 : " + gList.gatherParti + "</h5>";
-					/* str += "상태 : " + gList.gatherState + "</h5>"; */
-					str += "</a>";
-					str += "</div>";
-
-					$("#gatherSelect").append(str);
-
-				})
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status
-						+ "\n" + "message:"
-						+ request.responseText
-						+ "\n" + "error:" + error);
-			} 
-
-		});
-	}
-</script>
-
-<!-- 카테고리 선택 -->
-<script type="text/javascript">
-	$(function() {
-		$('.cateChk1').click(function() {
-			$('#cateChk1').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk2').click(function() {
-			$('#cateChk2').show();
-			$('#cateChk1').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk3').click(function() {
-			$('#cateChk3').show();
-			$('#cateChk2').hide();
-			$('#cateChk1').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk4').click(function() {
-			$('#cateChk4').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk1').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk5').click(function() {
-			$('#cateChk5').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk1').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk6').click(function() {
-			$('#cateChk6').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk1').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk7').click(function() {
-			$('#cateChk7').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk1').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk8').click(function() {
-			$('#cateChk8').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk1').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk9').click(function() {
-			$('#cateChk9').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk1').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk10').click(function() {
-			$('#cateChk10').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk1').hide();
-			$('#cateChk11').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk11').click(function() {
-			$('#cateChk11').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk1').hide();
-			$('#cateChk12').hide();
-		});
-
-		$('.cateChk12').click(function() {
-			$('#cateChk12').show();
-			$('#cateChk2').hide();
-			$('#cateChk3').hide();
-			$('#cateChk4').hide();
-			$('#cateChk5').hide();
-			$('#cateChk6').hide();
-			$('#cateChk7').hide();
-			$('#cateChk8').hide();
-			$('#cateChk9').hide();
-			$('#cateChk10').hide();
-			$('#cateChk11').hide();
-			$('#cateChk1').hide();
-		});
-
-		/* 지역 선택 */
-		$('.areaChk1').click(function() {
-			$('#areaChk1').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk2').click(function() {
-			$('#areaChk2').show();
-			$('#areaChk1').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk3').click(function() {
-			$('#areaChk3').show();
-			$('#areaChk2').hide();
-			$('#areaChk1').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk4').click(function() {
-			$('#areaChk4').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk1').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk5').click(function() {
-			$('#areaChk5').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk1').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk6').click(function() {
-			$('#areaChk6').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk1').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk7').click(function() {
-			$('#areaChk7').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk1').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk8').click(function() {
-			$('#areaChk8').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk1').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk9').click(function() {
-			$('#areaChk9').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk1').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk10').click(function() {
-			$('#areaChk10').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk1').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk11').click(function() {
-			$('#areaChk11').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk1').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk12').click(function() {
-			$('#areaChk12').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk1').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk13').click(function() {
-			$('#areaChk13').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk1').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk14').click(function() {
-			$('#areaChk14').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk1').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk15').click(function() {
-			$('#areaChk15').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk1').hide();
-			$('#areaChk16').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk16').click(function() {
-			$('#areaChk16').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk1').hide();
-			$('#areaChk17').hide();
-		});
-
-		$('.areaChk17').click(function() {
-			$('#areaChk17').show();
-			$('#areaChk2').hide();
-			$('#areaChk3').hide();
-			$('#areaChk4').hide();
-			$('#areaChk5').hide();
-			$('#areaChk6').hide();
-			$('#areaChk7').hide();
-			$('#areaChk8').hide();
-			$('#areaChk9').hide();
-			$('#areaChk10').hide();
-			$('#areaChk11').hide();
-			$('#areaChk12').hide();
-			$('#areaChk13').hide();
-			$('#areaChk14').hide();
-			$('#areaChk15').hide();
-			$('#areaChk16').hide();
-			$('#areaChk1').hide();
-		});
-		
-	});
-</script>
-
-<!-- 체크박스 체크된값 가져오기, db에서 체크된조건의 모집글 가져오기 -->
-<script type="text/javascript">
-$(function() {
-	
-	/* $("input[name*='box']");  ->  우선 모든 input 테그를 검색하고 속성 name 중에 ‘box’ 라는 문자열이 포함 되어 있다면 무조건 반환 하라. */
-	
-	$("input[name*='box']").change(
-		function(){
-
-			var cDATA = "";
-			$("input[name*='cbox']").each(
-					function() {
-						if ($(this).is(':checked')
-								&& $(this).val() != "on")
-							cDATA += "," + ($(this).val());
-					});
-
-			var aDATA = "";
-			$("input[name*='abox']").each(
-					function() {
-						if ($(this).is(':checked')
-								&& $(this).val() != "on")
-							aDATA += "," + ($(this).val());
-					});
-
-			var DATA = {
-				"cDATA" : cDATA,
-				"aDATA" : aDATA
-			};
-
-			/* 이거는 #execute를 클릭하면 일어나는 ajax */
-			$.ajax({
-					url : '/gather/gatheringSearch',
-					dataType : 'json',
-					type : 'POST',
-					cache : false,
-					data : DATA,
-					success : function(gath) {
-						var count = Object.keys(gath).length
-						
-						$("#gatherSelect").html(""); // idv를 일단 공백으로 초기화 해줌, 매번 받아올때마다 다른것을 불러와야 하니까, 이전에 있는건 지워져야함
-
-						$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
-													
-							var subject = gList.gatherSubject;
-							subject = subject.substring(0,11) +' ...';
-							
-							var write = gList.gatherWrite;
-							write = write.substring(0,16);
-							
-							var sdate = gList.gatherSdate;
-							sdate = sdate.substring(0,10);
-								 
-							var edate = gList.gatherEdate;
-							if(edate != null){
-								edate = edate.substring(0,10);
-							}else{
-								edate = '추후 협의';
-							}
-							
-							var day = gList.gatherDay;
-							if(day===null){
-								day = '추후 협의';
-							}
-							
-							var img = gList.gatherImg;
-							if(img===null){
-								img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
-							}
-							
-							
-							var str = "";
-							str += "<div class='col-xs-4 col-lg-3' id='gather'>";
-							str += "<a data-toggle='modal' href='#myModal' data-no='"+gList.gatherNo+
-							"'  data-subject='"+gList.gatherSubject+
-							"'  data-category='"+gList.gatherCategory+
-							"'  data-write='"+write+
-							"'  data-sdate='"+sdate+
-							"'  data-edate='"+edate+
-							"'  data-area='"+gList.gatherArea+
-							"'  data-parti='"+gList.gatherParti+
-							"'  data-content='"+gList.gatherContent+
-							"'  data-img='"+img+
-							"'  data-id='"+gList.guserId+
-							"'  data-day='"+day+
-							"'  data-state='"+gList.gatherState+
-							"' >"
-							
-							str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
-							str += "<span class='price'>"+gList.gatherState+"</span>"
-							str += "<h4 align='center'>" + subject + "</h4>";
-							str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
-							str += "요일 : " + day + "<br>" ;
-							str += "지역 : " + gList.gatherArea + "<br>";
-							str += "신청인원 : " + gList.gatherParti + "</h5>";
-							/* str += "상태 : " + gList.gatherState + "</h5>"; */
-							str += "</a>";
-							str += "</div>";
-
-							$("#gatherSelect").append(str);
-							
-						})
-					},
-					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					}
-			});
-		});
-});
-</script>
-
-<!-- 글 클릭시 모달창 띄우기 -->
-<script type="text/javascript">
-
-$(function() {
-	$('#myModal').on('show.bs.modal', function(event) { /*  myModal 윈도우가 오픈할때 아래의 옵션을 적용 */
-		var href = $(event.relatedTarget); /* 모달 윈도우를 오픈하는 버튼 */
-		var no = href.data('no'); /*  href태그에서 data- 값을 변수에 저장 */
-		var subject = href.data('subject'); /*  href태그에서 data- 값을 변수에 저장 */
-		var category = href.data('category'); /*  href태그에서 data- 값을 변수에 저장 */
-		var write = href.data('write');
-		var sdate = href.data('sdate');
-		var edate = href.data('edate');
-		var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
-		var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
-		var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
-		var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
-		var id = href.data('id'); 
-		var state = href.data('state'); 
-		
-		var DATA = {
-			"category" : category,
-			"area" : area,
-			"no" : no,
-			"id" : id,
-		};
-		
-		// 여기서 클릭했을 때 recommend를 해주는 컨트롤러로 이동
-		// 클릭한글을 디비에 저장하여 추천 값을 받음 , 아이디와, no, 코드(관심글 -- 이건 메서드안에서 하기) 보냄
-		// 관심모집인지 확인하여 빈하트/하트를 뿌려주는 ajax
-		var modal = $(this);
-		
-		 $.ajax({
-			url : '/gather/gatheringRecomm',
-			dataType : 'json',
-			type : 'POST',
-			cache : false,
-			data : DATA,
-			success : function(data) {
-				var changeImg;
-				
-				if(data.result === 'yes'){
-					changeImg ="/resources/image/icon/img_heart_after.png";
-				}else{
-					changeImg = "/resources/image/icon/img_heart_before.png";
-				}
-
-				$('#imgchange').attr('src', changeImg);
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
-			}
-		});
-		
-		
-		// 작성자와 로그인유저와 비교하여 같으면 수정하기 버튼를 생성하는 
-		var loginId = '${pdto.guserId}';
-		
-		alert('${pdto.guserId}' + ' === ' + id);
-		
-		if('${!empty pdto.guserId}'){ // 값이 비어있지 않고
-			if('${pdto.guserId}' == id){
-				$('#gatherModify').show();
-			}
-		}
-		 
-		
-		modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-subject').text("제  목 ] " + subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-category').text("분  야 ] " + category); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-write').text("작성자 ] " + write); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-date').text("기  간 ] " + sdate + " ~ " + edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-area').text("지  역 ] " + area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-parti').text("인  원 ] " + parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-content').text("상세인원 ] " + content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		$('#modalImg').attr('src', img);
-		modal.find('#modal-body-id').text("작성자 ] " + id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-state').text("상태 ] " + state); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-	});
-});
-
-</script>
-
-<!-- 모달이 종료될때 클릭된 상태를 DB에 저장 -->
-<script type="text/javascript">
-
-$(function() {
-	$('#myModal').on('hidden.bs.modal', function(event) { /*  myModal 윈도우가 오픈할때 아래의 옵션을 적용 */
-		
-		/* var img = document.getElementById('imgchange'); */
-	
-		var modal = $(this);
-		
-		var guserId = modal.find('#modal-body-guser').text();
-		
-		if(guserId != ''){ // 로그인 중일떄만 실행
-		
-			var img = $('#imgchange').attr('src');
-			
-			var no = modal.find('#modal-body-no').text();
-			var writer = modal.find('#modal-body-id').text(); // 모달에 텍스트를 가져옴
-			writer = writer.substring(6,9);
-			
-			var state;
-			
-			if(img.match("heart_before")){
-				state = 'delete';
-			}else {
-				state = 'insert';
-			}
-			
-			var DATA = {
-				"no" : no,
-				"writer" : writer,
-				"state" : state,
-				"code" : '관심'
-			};
-			
-			// 여기서 클릭했을 때 recommend를 해주는 컨트롤러로 이동해야함
-			// 클릭한글을 디비에 저장하여 추천 값을 받음 , 아이디와, no, 코드(관심글 -- 이건 메서드안에서 하기) 보냄
-			
-			// + 여기다 추가로 관심글 받아오는 것도 함, 그럴려면 값을 받아올때 디비에 관심글이 있는지 없는지 확인하여 그에대한 값을 해야함
-			
-			var modal = $(this);
-			
-			$.ajax({
-				url : '/gather/gatherAddons',
-				dataType : 'json',
-				type : 'POST',
-				cache : false,
-				data : DATA,
-				success : function(data) {
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
-				}
-		 	});
-		
-		}
-	
-	});
-});
-
-</script>
-
-<!-- 모달의 좋아요 버튼 눌렀을 때 그림 바꾸기 -->
-<script type="text/javascript">
-	
-	function imgChange(guser){
-		
-		if(guser===''){
-			alert('로그인 후 이용 가능합니다.');
-			return false;
-		}
-		 
-		var img = document.getElementById('imgchange');
-		
-		if(img.src.match("heart_before")){
-			img.src = "/resources/image/icon/img_heart_after.png";
-		}else {
-			img.src = "/resources/image/icon/img_heart_before.png";
-		} 
-	}
-
-</script>
-
-<!-- 마우스 올렸을때 신청하기로 바꾸기-->
-<script type="text/javascript">
-/*  $(function() {
-	
-	var src;
-		
-	$('.col-lg-3').mouseover( function() { 
-		src = $(this).attr('src');
-		$(this).attr( 'src', "/resources/image/icon/Apply.jpg" );
-	} )
-    .mouseout( function() {
-    	$(this).attr( 'src', src );
-    }); 
-	
-}); */
-</script>
-
- 
 <%@include file="../header.jsp"%>
- 
+
 </head>
 
 <body>
-
+	<input type="hidden" id="loginGuser" value="${pdto.guserId}">
 	<!-- 부트스트랩을 감싸는 컨테이너 -->
 	<div class="container">
-		
+
 		<!-- row는 수평 horizen과 같음, 왼쪽부터 배치하겠다  -->
 		<!-- <div class="row row-offcanvas row-offcanvas-right"> -->
 		<div class="row pull-right">
 		
 			<%-- <%@ include file="./gathering_sidebar.jspf"%> --%>
-
-
+			
 			<br><br><br>
+			
 			<div class="col-xs-12 col-sm-10">
-				
+
 				<div class="li-table">
 					<ul class="horizontal-style-category" id="box-style">
 						<li class="cateChk1" id="1" style="width: 100px"><a href="#">외국어</a></li>
@@ -1154,16 +182,22 @@ $(function() {
 						<li class="cateChk7" id="7" style="width: 100px"><a href="#">스포츠</a></li>
 						<li class="cateChk8" id="8" style="width: 100px"><a href="#">뷰티/미용</a></li>
 						<li class="cateChk9" id="9" style="width: 100px"><a href="#">컴퓨터</a></li>
-						<li class="cateChk10" id="10" style="width: 100px"><a href="#">국가고시/공무원</a></li>
-						<li class="cateChk11" id="11" style="width: 100px"><a href="#">디자인/미술</a></li>
-						<li class="cateChk12" id="12" style="width: 100px"><a href="#">기타</a></li>
+						<li class="cateChk10" id="10" style="width: 100px"><a
+							href="#">국가고시/공무원</a></li>
+						<li class="cateChk11" id="11" style="width: 100px"><a
+							href="#">디자인/미술</a></li>
+						<li class="cateChk12" id="12" style="width: 100px"><a
+							href="#">기타</a></li>
 					</ul>
 
 					<ul class="checkbox-style" id="cateChk1">
 						<li><span class="chkbox"><label class="chkbox-btn">
-							<input type="checkbox" name="cbox" class="cAll1" onclick="checkAllFunc(this, 'cbox1')">전체</label></span></li>
+									<input type="checkbox" name="cbox" class="cAll1"
+									onclick="checkAllFunc(this, 'cbox1')">전체
+							</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn">
-							<input type="checkbox" value="중국어" name="cbox1">중국어</label></span></li>
+									<input type="checkbox" value="중국어" name="cbox1">중국어
+							</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="일본어" name="cbox1">일본어</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
@@ -1181,7 +215,7 @@ $(function() {
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="베트남어" name="cbox1">베트남어</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" value="베트남어" name="cbox1">외국어 기타</label></span></li>
+									type="checkbox" value="외국어 기타" name="cbox1">외국어 기타</label></span></li>
 					</ul>
 
 					<ul class="checkbox-style" id="cateChk2" style="display: none;">
@@ -1205,7 +239,7 @@ $(function() {
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="미드" name="cbox2">미드</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" value="영어기타" name="cbox2">영어 기타</label></span></li>
+									type="checkbox" value="영어 기타" name="cbox2">영어 기타</label></span></li>
 					</ul>
 
 					<ul class="checkbox-style" style="display: none;" id="cateChk3">
@@ -1261,6 +295,8 @@ $(function() {
 									type="checkbox" value="요리/베이킹" name="cbox4">요리/베이킹</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="인테리어" name="cbox4">인테리어</label></span></li>
+						<li><span class="chkbox"><label class="chkbox-btn"><input
+									type="checkbox" value="라이프 기타" name="cbox4">라이프 기타</label></span></li>
 					</ul>
 					<ul class="checkbox-style" style="display: none;" id="cateChk5">
 						<li><span class="chkbox"><label class="chkbox-btn"><input
@@ -1419,7 +455,8 @@ $(function() {
 									type="checkbox" class="cAll11" name="cbox"
 									onclick="checkAllFunc(this, 'cbox11')">전체</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" value="웹/모바일 디자인" name="cbox11">웹/모바일 디자인</label></span></li>
+									type="checkbox" value="웹/모바일 디자인" name="cbox11">웹/모바일
+									디자인</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="일러스트/삽화" name="cbox11">일러스트/삽화</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
@@ -1439,19 +476,18 @@ $(function() {
 						<li><span class="chkbox"><label class="chkbox-btn"><input
 									type="checkbox" value="회화" name="cbox11">회화</label></span></li>
 						<li><span class="chkbox"><label class="chkbox-btn"><input
-									type="checkbox" value="디자인/미술 기타" name="cbox11">디자인/미술 기타</label></span></li>
+									type="checkbox" value="디자인/미술 기타" name="cbox11">디자인/미술
+									기타</label></span></li>
 					</ul>
 					<ul class="checkbox-style" id="cateChk12" style="display: none;">
 						<li><span class="chkbox"><label class="chkbox-btn">
-								<input type="checkbox" class="cAll12" name="cbox" onclick="checkAllFunc(this, 'cbox12')">전체</label>
-							</span>
-						</li>
+								<input type="checkbox" class="cAll12" name="cbox" onclick="checkAllFunc(this, 'cbox12')">전체
+							</label></span></li>
 					</ul>
 					<br>
 				</div>
 
-				<br> <br>
-
+				<br><br>
 				<div class="li-table">
 					<ul class="horizontal-style-area" id="box-style">
 						<li class="areaChk1" id="1" style="width: 40px"><a href="#">강원</a></li>
@@ -2079,7 +1115,14 @@ $(function() {
 					<br>
 				</div>
 
-				<br> <br>
+				<br>
+				<div class="center-block" style="text-align: center;">
+					<input type="checkbox" id="ctop1" name="tbox" value="동호회" ><label for="ctop1">동호회&nbsp;&nbsp;&nbsp;</label>
+					<input type="checkbox" id="ctop2" name="tbox" value="스터디" ><label for="ctop2">스터디&nbsp;&nbsp;&nbsp;</label>
+					<input type="checkbox" id="ctop3" name="tbox" value="컨퍼런스"><label for="ctop3">컨퍼런스</label>
+				</div>
+				
+				<br>
 				<div class="col-md-offset-3">
 					<form class="form-inline">
 						<label>상세검색&nbsp;&nbsp;</label>
@@ -2089,102 +1132,104 @@ $(function() {
 								<option id="subject2">지역</option>
 								<option>카테고리</option>
 							</select> 
-							<input type="text" class="form-control" id="search_text" value="${sSTR eq '' ? '' : sSTR}">
+							<input type="text" class="form-control" id="search_text" onkeypress="if(event.keyCode==13) {search_click(); return false;}" value="${sSTR eq '' ? '' : sSTR}">
 							<button type="button" class="btn btn-default" onclick="search_click()">검색</button>
 						</div>
+						
 					</form>
 				</div>
-
 
 				<br>
 				<div>
 					<h3>추천 모임</h3>
 				</div>
+				
 				<div class="row" id="gatherRecommed">
 					<c:forEach var="recomm" items="${recomm}">
 						<div class="col-lg-3" id="gather">
-							<a 
-							data-toggle='modal' href='#myModal' 
-							data-no='${recomm.gatherNo}'  
-							data-subject='${recomm.gatherSubject}'  
-							data-category='${recomm.gatherCategory}'  
-							data-write="${fn:substring(recomm.gatherWrite, 0, 16)}" 
-							data-sdate="${fn:substring(recomm.gatherSdate, 0, 10)}" 
-							data-edate="${fn:substring(recomm.gatherEdate, 0, 10)}" 
-							data-area='${recomm.gatherArea}'  
-							data-parti='${recomm.gatherParti}'  
-							data-content='${recomm.gatherContent}'  
-							data-img='${recomm.gatherImg}'  
-							data-id='${recomm.guserId}'  
-							data-state='${recomm.gatherState}'
-							>
-								<img class='gatherimg' width="213px" height="120px" src='${recomm.gatherImg}'>
-								<span class="price">${recomm.gatherState}</span>
+							<a data-toggle='modal' href='#GatherModalInfo'
+								data-no='${recomm.gatherNo}'
+								data-subject='${recomm.gatherSubject}'
+								data-categorytop='${recomm.gatherCategoryTop}'
+								data-categorymid='${recomm.gatherCategoryMid}'
+								data-categorybot='${recomm.gatherCategoryBot}'
+								data-write="${fn:substring(recomm.gatherWrite, 0, 16)}"
+								data-sdate="${fn:substring(recomm.gatherSdate, 0, 10)}"
+								data-edate="${fn:substring(recomm.gatherEdate, 0, 10)}"
+								data-day='${recomm.gatherDay}'
+								data-area='${recomm.gatherArea}'
+								data-areatop='${recomm.gatherAreaTop}'
+								data-parti='${recomm.gatherParti}'
+								data-partimax='${recomm.gatherPartiMax}'
+								data-content='${recomm.gatherContent}'
+								data-img='${recomm.gatherImg}' data-id='${recomm.guserId}'
+								data-state='${recomm.gatherState}'> 
+								<img class='gatherimg' width="213px" height="120px" src='${recomm.gatherImg}'> <span class="price">${recomm.gatherState}</span>
 								<h4 align="center">
 									<c:choose>
-									    <c:when test="${fn:length(recomm.gatherSubject) > 9}">
+										<c:when test="${fn:length(recomm.gatherSubject) > 9}">
 									        ${fn:substring(recomm.gatherSubject, 0, 11)} ...
 									    </c:when>
-									    <c:otherwise>
+										<c:otherwise>
 									        ${recomm.gatherSubject}
 									    </c:otherwise>
 									</c:choose>
-								</h4> 
+								</h4>
 								<h5>
-								기간 : ${fn:substring(recomm.gatherSdate, 0, 10)} ~ ${fn:substring(recomm.gatherEdate, 0, 10)}<br>
-								요일 : ${recomm.gatherDay}<br>
-								지역 : ${recomm.gatherArea}<br>
-								신청인원 : ${recomm.gatherParti}<br>
+									기간 : ${fn:substring(recomm.gatherSdate, 0, 10)} ~ ${fn:substring(recomm.gatherEdate, 0, 10)}<br> 
+									요일 : ${recomm.gatherDay}<br> 
+									지역 : ${recomm.gatherArea}<br>
+									신청인원 : ${recomm.gatherParti}<br>
 								</h5>
 							</a>
 						</div>
 					</c:forEach>
-					<!--/.col-xs-6.col-lg-4-->
 				</div>
-				<!--/row-->
 
 				<hr>
 
 				<div>
 					<h3>검색 결과</h3>
 				</div>
-				
+
 				<!-- 여기는 자바 스크립트에서 함 -->
 				<div class="row" id="gatherSelect">
 					<c:forEach var="gath" items="${gath}">
 						<div class="col-xs-4 col-lg-3" id="gather">
-							<a 
-							data-toggle='modal' href='#myModal' 
-							data-no='${gath.gatherNo}'  
-							data-subject="${gath.gatherSubject}"  
-							data-category='${gath.gatherCategory}'  
-							data-write="${fn:substring(gath.gatherWrite, 0, 16)}" 
-							data-sdate="${fn:substring(gath.gatherSdate, 0, 10)}" 
-							data-edate="${fn:substring(gath.gatherEdate, 0, 10)}" 
-							data-area='${gath.gatherArea}'  
-							data-parti='${gath.gatherParti}'  
-							data-content='${gath.gatherContent}'  
-							data-img='${gath.gatherImg}'  
-							data-id='${gath.guserId}' 
-							data-state='${gath.gatherState}'
-							>
-								<img class='gatherimg' width="213px" height="120px" src='${gath.gatherImg}'>
-								<span class="price">${gath.gatherState}</span>
+							<a data-toggle='modal' href='#GatherModalInfo' data-no='${gath.gatherNo}'
+								data-subject="${gath.gatherSubject}"
+								data-categorytop='${gath.gatherCategoryTop}'
+								data-categorymid='${gath.gatherCategoryMid}'
+								data-categorybot='${gath.gatherCategoryBot}'
+								data-write="${fn:substring(gath.gatherWrite, 0, 16)}"
+								data-sdate="${fn:substring(gath.gatherSdate, 0, 10)}"
+								data-edate="${fn:substring(gath.gatherEdate, 0, 10)}"
+								data-area='${gath.gatherArea}' 
+								data-areatop='${gath.gatherAreaTop}'
+								data-parti='${gath.gatherParti}'
+								data-partimax='${gath.gatherPartiMax}'
+								data-content='${gath.gatherContent}'
+								data-day='${gath.gatherDay}'
+								data-img='${gath.gatherImg}' 
+								data-id='${gath.guserId}'
+								data-state='${gath.gatherState}'> <img
+								class='gatherimg' width="213px" height="120px"
+								src='${gath.gatherImg}'> <span class="price">${gath.gatherState}</span>
 								<h4 align="center">
 									<c:choose>
-									    <c:when test="${fn:length(gath.gatherSubject) > 9}">
+										<c:when test="${fn:length(gath.gatherSubject) > 9}">
 									        ${fn:substring(gath.gatherSubject, 0, 11)} ...
 									    </c:when>
-									    <c:otherwise>
+										<c:otherwise>
 									        ${gath.gatherSubject}
 									    </c:otherwise>
 									</c:choose>
-								</h4> 
+								</h4>
 								<h5>
-								기간 : ${fn:substring(gath.gatherSdate, 0, 10)} ~ ${fn:substring(gath.gatherEdate, 0, 10)}<br>
-								요일 : ${gath.gatherDay}<br>
-								지역 : ${gath.gatherArea}<br>
-								신청인원 : ${gath.gatherParti}<br> 
+									기간 : ${fn:substring(gath.gatherSdate, 0, 10)} ~
+									${fn:substring(gath.gatherEdate, 0, 10)}<br> 요일 :
+									${gath.gatherDay}<br> 지역 : ${gath.gatherArea}<br>
+									신청인원 : ${gath.gatherParti}<br>
 								</h5>
 							</a>
 						</div>
@@ -2200,64 +1245,294 @@ $(function() {
 		<hr>
 
 <!-- ************************************** 모달  -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="GatherModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					
 					<div class="modal-header">
 						<div class="col-xs-2 col-md-12">
-					    	<div class="modal-body" id="modal-body-attention">
-								<img 
-								class='img-responsive' 
-								width="80px" height="80px"  
-								id="imgchange" 
-								onclick="imgChange('${pdto.guserId eq '' ? '' : pdto.guserId}')" 
-								style="margin-left: auto; margin-right: auto; display: block;">
+							<div class="modal-body" id="modal-body-attention">
+								<img class='img-responsive' width="80px" height="80px" id="imgchange"
+									onclick="imgChange('${pdto.guserId eq '' ? '' : pdto.guserId}')"
+									style="margin-left: auto; margin-right: auto; display: block;">
 							</div>
-				    	
-				    	</div>
+						</div>
 					</div>
 					
-					<div class="modal-body" id="modal-body-img">
-						<img class='img-responsive' width="598px" height="350px"  id='modalImg'
-							 style="margin-left: auto; margin-right: auto; display: block;">
-					</div>
-					<div class="modal-body" id="modal-body-state"></div>
-					<div class="modal-body" id="modal-body-id"></div>
-					<div class="modal-body" id="modal-body-category"></div>
-					<div class="modal-body" id="modal-body-date"></div>
-					<div class="modal-body" id="modal-body-area"></div>
-					<div class="modal-body" id="modal-body-content"></div>
+					<div class="modal-body">
+						<form class="form-horizontal">
+	 
+		 					<div class="modal-body">
+								<img class='img-responsive' id="modal-body-img" style="display:none;">
+								<div class="modal-body" id="modal-body-categorymid" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-categorytop" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-areatop" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-id" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-no" style="display:none;"></div>
+								<div class="modal-body" id="modal-body-state" style="display:none;"></div>
+							</div>
+	 		
+							<!-- 입력항목이름 -->
+							<div class="form-group">
+								<label for="modal-body-subject" class="col-sm-2 control-label">제목</label>
+								<div class="col-sm-8">
+									<div class="modal-body" id="modal-body-subject"></div>
+								</div>
+							</div>
+		
+							<!-- 모집분류  -->
+							<div class="form-group">
+								<label for="modal-body-categorybot" class="col-sm-2 control-label">모집분류</label>
+								<div class="col-sm-8">
+									<div class="modal-body" id="modal-body-categorybot"></div>
+								</div>
+							</div>
+		
+							<!-- 기간 -->
+							<div class="form-group">
+								<label for="modal-body-date" class="col-sm-2 control-label">기간</label>
+								<div class="col-sm-8">	
+								<div class="modal-body">					
+									<span id="modal-body-sdate" ></span> ~ <span id="modal-body-edate"></span>
+								</div>
+								</div>
+							</div>
+		
+							<!-- 요일 -->
+							<div class="form-group">
+								<label for="modal-body-day" class="col-sm-2 control-label">요일</label>
+								<div class="col-sm-8">
+									<div class="modal-body" id="modal-body-day"></div>
+								</div>
+							</div>
+		
+							<!-- 지역  -->
+							<div class="form-group">
+								<label for="modal-body-area" class="col-sm-2 control-label">지역</label>
+								<div class="col-sm-8">
+									<div class="modal-body" id="modal-body-area"></div>
+								</div>
+							</div>
+		
+							<!-- 인원  -->
+							<div class="form-group">
+								<label for="modal-body-partimax" class="col-sm-2 control-label">인원</label>
+								<div class="col-sm-8">
+								<div class="modal-body">
+									<span id="modal-body-parti" ></span> / <span id="modal-body-partimax"></span>
+								</div>
+								</div>
+							</div>
+		
+							<!-- 상세정보  -->
+							<div class="form-group">
+								<label for="modal-body-content" class="col-sm-2 control-label">상세정보</label>
+								<div class="col-sm-8">
+									<div class="modal-body" id="modal-body-content"></div>
+								</div>
+							</div>
+						
+						</form>
+					</div>					
+				
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
-						<button id='gatherModify' type="button" class="btn btn-warning pull-left" style="display:none;">수정하기</button>
-						<button type="button" class="btn btn-info">블로그 가기</button>
+						<button id='gatherModify' type="button" class="btn btn-warning pull-left" style="display: none;">수정하기</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal">블로그 가기</button>
 						<button type="button" class="btn btn-primary">신청</button>
-					</div>
-					
+					</div>				
+										
 					<!-- style="display:none;"은 히든과 같음 -->
 					<div class="modal-body" id="modal-body-no" style="display:none;"></div>
-					<!-- 로그인 중인 사용자  == guser-->
-					<div class="modal-body" id="modal-body-guser" style="display:none;">${empty pdto.guserId ? '' : pdto.guserId}</div>
+					<div class="modal-body" id="modal-body-state" style="display:none;"></div>
+					<div class="modal-body" id="modal-body-state" style="display:none;"></div>
 					
 				</div>
 			</div>
 		</div>
 
-		<!-- [Footer] 페이지 하단 -->
-		<hr>
-		<%@include file = "../footer.jsp"%>
-	</div>
-	<!--/.container-->
 
+<!-- 모달 수정창 ******************************************************  -->
+
+		<div class="modal fade" id="GatherModalModify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					
+					<div class="modal-header">
+						<div class="col-xs-2 col-md-12">
+							<h1>수정</h1>
+						</div>
+					</div>
+					
+					<div class="modal-body">
+						<form id="gMake" name="makeGathering" class="form-horizontal" action="/gather/gatheringModify" method="post" enctype="multipart/form-data">
+							<input type="hidden" class="form-control" name="guserId" id="guserId">
+							<input type="hidden" class="form-control" name="gatherState" id="gatherState">
+							<input type="hidden" class="form-control" name="gatherNo" id="gatherNo">
+							
+							
+						<div class="form-group">
+							<!-- 입력항목이름 -->
+							<label for="ID" class="col-sm-2 control-label">제목</label>
+							<div class="col-sm-5">
+								<input type="text" class="form-control" name="gatherSubject" id="gatherSubject" placeholder="제목를 작성해 주세영">
+							</div>
+						</div>
+
+						<!-- 모집분류  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">모집분류</label>
+							
+							<div class="dropdown">
+								<div class="col-sm-3">
+									<select class="form-control" id="gatherCategoryTop" name="gatherCategoryTop" onChange="categoryTopChange(this.options.selectedIndex)">
+										<option selected value="">-선택-</option>
+										<option value="스터디">스터디</option>
+										<option value="동호회">동호회</option>
+										<option value="컨퍼런스">컨퍼런스</option>
+									</select>
+								</div>	
+								
+								<div class="col-sm-3">
+									<select class="form-control" id="gatherCategoryMid" name="gatherCategoryMid" onChange="categoryMidChange(this.options.selectedIndex)">
+										<option selected value="">-선택-</option>
+										<option value=""></option>
+									</select>
+								</div>	
+								
+								<div class="col-sm-3">							
+									<select class="form-control" id="gatherCategoryBot" name="gatherCategoryBot">
+											<option selected value="">-선택-</option>
+											<option value=""></option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<!-- 기간 -->
+						<div class="form-group">
+							<label for="date" class="col-sm-2 control-label">기간</label>
+
+							<div class="col-sm-3">
+								<input type="date" class="form-control" id="gatherSdate" name="gatherSdate">
+							</div>
+							<div class="col-sm-1">부터</div>
+							
+							<div class="col-sm-3">
+								<input type="date" class="form-control" id="gatherEdate" name="gatherEdate">
+							</div>
+							<div class="col-sm-1">까지 </div>
+						</div>
+
+						<!-- 요일 -->
+						<div class="form-group">
+							<label for="Gender" class="col-sm-2 control-label">요일</label>
+							<div class="col-sm-10">
+								<div class="checkbox">
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="월">월&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="화">화&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="수">수&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="목">목&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="금">금&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="토">토&nbsp; </label> 
+									<label><input type="checkbox" class="gatherDay" id="gatherDay" name="gatherDay" value="일">일&nbsp; </label>
+								</div>
+							</div>
+						</div>
+
+						<!-- 지역  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">지역</label>
+							<div class="dropdown">
+								<div class="col-sm-3">
+									<select class="form-control" id="gatherAreaTop" name="areaTop" onChange="areachange(this.options.selectedIndex)"> <!-- this.options.selectedIndex 선택된 인덱스를 가져옴  -->
+										<option selected value="">-선택-</option>
+										<option value="서울특별시">서울특별시</option>
+										<option value="경기도">경기도</option>
+										<option value="인천광역시">인천광역시</option>
+										<option value="강원도">강원도</option>
+										<option value="대전광역시">대전광역시</option>
+										<option value="세종특별자치시">세종특별자치시</option>
+										<option value="충청남도">충청남도</option>
+										<option value="충청북도">충청북도</option>
+										<option value="부산광역시">부산광역시</option>
+										<option value="울산광역시">울산광역시</option>
+										<option value="경상남도">경상남도</option>
+										<option value="경상북도">경상북도</option>
+										<option value="대구광역시">대구광역시</option>
+										<option value="광주광역시">광주광역시</option>
+										<option value="전라남도">전라남도</option>
+										<option value="전라북도">전라북도</option>
+										<option value="제주특별자치도">제주특별자치도</option>
+									</select>
+								</div>
+								
+								<div class="col-sm-3">
+									<select class="form-control" id="gatherArea" name="areaMid">
+										<option selected value="">-선택-</option>
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- 인원  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">인원</label>
+							<div class="col-sm-1">
+								<input type="text" id="gatherPartiMax" class="form-control"  name="gatherPartiMax" placeholder="인원수">
+							</div>명
+						</div>
+
+						<!-- 모집분류  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">상세정보</label>
+							<div class="col-sm-7">
+								<textarea id="gatherContent" class="form-control" rows="5" name="gatherContent"
+									placeholder="상세내용을 입력해 주세영"></textarea>
+							</div>
+						</div>
+
+						<!-- 이미지 올리기  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
+							<div class="col-sm-7">
+								<input id="gatherImg" type="file" name="gatherImg" >
+							</div>
+						</div>
+
+						<br>
+						
+						</form>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" id="gatherModifyClose" class="btn btn-danger pull-left" data-dismiss="modal">취소</button>
+						<button type="button" id="gatherModifyCommit" class="btn btn-primary" data-dismiss="modal">저장</button>
+					</div>
+					
+					
+					<!-- style="display:none;"은 히든과 같음 -->
+					<div class="modal-body" id="modal-body-no" style="display:none;"></div>
+				</div>
+			</div>
+		</div>
+
+	<!-- [Footer] 페이지 하단 -->
+	<hr>
+	<%@include file="../footer.jsp"%>
+	<!--/.container-->
+	</div>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="/resources/dist/js/bootstrap.min.js"></script>
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="/resources/assets/js/ie10-viewport-bug-workaround.js"></script> -->
+	<script src="/resources/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 	<script src="/resources/examples/offcanvas/offcanvas.js"></script>
 </body>

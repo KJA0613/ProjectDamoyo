@@ -1,6 +1,7 @@
 package com.bitschool.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
@@ -54,8 +56,6 @@ public class PlaceController {
 		
 		return url;		
 	}
-	
-	
 	
 	// 01. 모임 공간 등록 
 	@RequestMapping(value = "/PlaceRegist",  method = RequestMethod.POST)
@@ -180,9 +180,7 @@ public class PlaceController {
 
 		return url;
 	}
-	
-	
-	
+		
 	// 02. 모임 전체 조회
 	@RequestMapping(value = "/PlaceListAll",  method = { RequestMethod.POST, RequestMethod.GET })
 	public String PlaceListAll(CompanyDTO cdto, HttpSession session, Model model) {
@@ -198,8 +196,6 @@ public class PlaceController {
 		return url;
 	}
 	
-	
-
 	// 03. 선택한 모임 상세 조회
 	@RequestMapping(value = "/PlaceDetail",  method = RequestMethod.GET)
 	public String PlaceDetail(@RequestParam("placeNo") int placeNo, CompanyDTO cdto, HttpSession session, Model model) {
@@ -226,7 +222,6 @@ public class PlaceController {
 		return url;
 	}
 	
-	
 	// 04-01. 수정 전, 선택한 모임장소 > 글 불러오기
 	@RequestMapping(value="/PlaceModify", method = { RequestMethod.POST, RequestMethod.GET })
 	public String PlaceModify(@RequestParam("placeNo") int placeNo, Model model) {
@@ -244,7 +239,6 @@ public class PlaceController {
 		
 		return url;
 	}
-	
 	
 	// 04-02. 데이터 수정 후 > DB 수정
 	@RequestMapping(value = "/PlaceModifyProcess", method = RequestMethod.POST)
@@ -365,7 +359,6 @@ public class PlaceController {
 		return url;
 	}
 	
-	
 	// 05. 선택한 모임 삭제
 	@RequestMapping(value="/PlaceDeleteAll", method = RequestMethod.GET)
 	public String PlaceDeleteAll(@RequestParam("placeNo") int placeNo) {
@@ -379,4 +372,30 @@ public class PlaceController {
 		
 		return url;
 	}
+	
+/*	// 민규. 이건 연습 페이지
+	@RequestMapping(value = "/placeMap", method = {RequestMethod.GET, RequestMethod.POST})
+	public String placeMap(Model model) {
+				
+		return "place/PlaceMap";
+	
+	}*/
+	
+/*	안쓸꺼같음
+ * 	// 민규. 모집글 쓸때 장소 추천 해주기
+	@RequestMapping(value="/searchPlace", method = {RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody HashMap<String, List<PlaceDTO>> selectPlace(
+			@RequestParam("keyword") String keyword){
+		
+		System.out.println(keyword);
+		HashMap<String, List<PlaceDTO>> map = new HashMap<String, List<PlaceDTO>>();
+		
+		List<PlaceDTO> mapList = placeService.searchMap(keyword);
+		
+		if(mapList != null){
+			map.put("mapList", mapList);
+		}
+		
+		return map;
+	}*/
 }

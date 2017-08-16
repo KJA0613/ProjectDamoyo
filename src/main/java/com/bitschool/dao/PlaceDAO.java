@@ -125,5 +125,18 @@ public class PlaceDAO implements IPlaceDAO {
 		return flag;
 	}
 
+
+	@Override
+	public List<PlaceDTO> searchMap(String keyWord) {
+
+		List<PlaceDTO> mapList = null;
+		
+		mapList = session.selectList(namespace+".searchMap", keyWord);
+		
+		System.out.println(mapList);
+		
+		return mapList;
+	}
+
 	
 }

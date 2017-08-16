@@ -25,6 +25,8 @@ public class PlaceDTO {
 	private String placeContent;				/* 상세 설명 */
 	private Timestamp placeCreateDate;			/* 장소 개설일 */
 	private String comId;						/* 광고주 아이디 */
+	private String placeX;						/* 좌표값 x */
+	private String placeY;						/* 좌표값 y */
 	
 	
 	
@@ -148,8 +150,18 @@ public class PlaceDTO {
 	public void setComId(String comId) {
 		this.comId = comId;
 	}
-	
-	
+	public String getPlaceX() {
+		return placeX;
+	}
+	public void setPlaceX(String placeX) {
+		this.placeX = placeX;
+	}
+	public String getPlaceY() {
+		return placeY;
+	}
+	public void setPlaceY(String placeY) {
+		this.placeY = placeY;
+	}
 	
 	@Override
 	public String toString() {
@@ -159,7 +171,10 @@ public class PlaceDTO {
 				+ ", placeTel=" + placeTel + ", placeURL=" + placeURL + ", placePerCnt=" + placePerCnt
 				+ ", placeUseTime=" + placeUseTime + ", placeNotUseDay=" + placeNotUseDay + ", placeCost=" + placeCost
 				+ ", placeCostChoice=" + placeCostChoice + ", placeParking=" + placeParking + ", placeContent="
-				+ placeContent + ", placeCreateDate=" + placeCreateDate + ", comId=" + comId + "]";
+				+ placeContent + ", placeCreateDate=" + placeCreateDate + ", comId=" + comId + ", placeX=" + placeX
+				+ ", placeY=" + placeY + "]";
 	}
+	
+	
 	
 }

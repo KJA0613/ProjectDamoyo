@@ -139,7 +139,7 @@ var categoryMid3 = new Array("외국어","영어","음악/공연","라이프","�
 /* <!-- 카테고리 그룹 1차 소분류 선택 배열 --> */
 var categoryBot0 = new Array("중국어","일본어","독일어","아랍어","태국어","스페인어","러시아어","프랑스어","베트남어","외국어 기타");
 var categoryBot1 = new Array("토익","토플","텝스","토스","영어회화","작문/독해","번역","미드","영어 기타");
-var categoryBot2 = new Array("기타/우크렐라","피아노/키보드","보컬/음악이론","작사/작곡","밴드","국악","연기/연극/뮤지컬","댄스무용","진행/행사","마술/음악공연 기타");
+var categoryBot2 = new Array("기타/우쿠렐라","피아노/키보드","보컬/음악이론","작사/작곡","밴드","국악","연기/연극/뮤지컬","댄스무용","진행/행사","마술/음악공연 기타");
 var categoryBot3 = new Array("육아","반려동물","금융/재테크","상담/컨설팅","건강/웰빙","사주/타로","독서/글쓰기","사진/영상","키덜트","생활공예","요리/베이킹","인테리어");
 var categoryBot4 = new Array("자소서/면접","인적성","스피치","자격증","기업공채","공모전/대외활동","창업/스타트업","취업 기타");
 var categoryBot5 = new Array("리그오브레전드","도타","피파온라인","오버워치","서든어택","온라인게임","PC게임","모바일게임","보드게임","게임 기타");
@@ -198,6 +198,31 @@ function categoryMidChange(item){
 
 </script>
 
+<!-- 장소 추천 클릭시 새창 띄우는 스크립트 -->
+<script type="text/javascript">
+
+function placeRecommend(){
+	var top = $('#aTop option:selected').val();
+	var mid = $('#aMid option:selected').val();
+	
+	if(top.length==4){ // ex) 충청남도 ==> 충남, 전라북도 ==> 전북, 경상남도 ==> 전남으로 바꾸겠다
+		top = top.substring(0,1) + top.substring(2,3);
+	}else if(top.length<6){ // 위를 제외한, 제주특별자치도 & 세종특별자치시 제외한, 강원도 ==> 강원, 경기도 ==> 경기, 울산광역시 ==> 울산 으로 바꾸겠다
+		top = top.substring(0,2);
+	}
+		
+	if(top =='' || mid ==''){
+		alert("지역을 선택해 주세요~~");
+		return false;
+	}
+	
+	var area = (top+" "+mid);
+	window.open("/place/placeMap?keyword="+area, "", "scrollbars=no,toolbar=no, location=no, resizable=no, status=no, menubar=no, width=400, height=300, left=200, top=200");
+	
+}
+	
+</script>
+
 <!-- 공통 헤더 -->
 <%@include file="../header.jsp"%>
 
@@ -211,7 +236,7 @@ function categoryMidChange(item){
 		<!-- row는 수평 horizen과 같음, 왼쪽부터 배치하겠다  -->
 		<div class="row row-offcanvas row-offcanvas-right">
 			
-			<%@ include file="./gathering_sidebar.jspf"%>
+			<%-- <%@ include file="./gathering_sidebar.jspf"%> --%>
 			
 			<!--/.sidebar-offcanvas-->
 
@@ -329,6 +354,18 @@ function categoryMidChange(item){
 										<option value=""></option>
 									</select>
 								</div>
+							</div>
+
+						</div>
+
+						<!-- 장소  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">장소</label>
+							<div class="col-sm-5">
+								<input type="text" id="gPlace" class="form-control" name="gatherPlace" placeholder="지역을 선택한 후 클릭해 주세영~~">
+							</div>
+							<div class="col-sm-2">
+								<input type="button" class="btn btn-default"  onclick="placeRecommend()" value="장소추천">
 							</div>
 
 						</div>
