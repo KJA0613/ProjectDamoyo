@@ -155,29 +155,12 @@ $(function() {
     //전역변수
 	var obj = [];              
     //스마트에디터 프레임생성
-	nhn.husky.EZCreator.createInIFrame({
-        oAppRef: obj,
-        elPlaceHolder: "gatherContent",
-        sSkinURI: "/resources/editor/SmartEditor2Skin.html",
-        htParams : {
-            // 툴바 사용 여부
-            bUseToolbar : true,            
-            // 입력창 크기 조절바 사용 여부
-            bUseVerticalResizer : true,    
-            // 모드 탭(Editor | HTML | TEXT) 사용 여부
-            bUseModeChanger : false,
-            
-            
-        }
-	});
+	
     	
 	
 	
 	/* 수정버튼 눌렀을때 수정하는 모달 켜기 */
 	$('#gatherModify').click(function() {
-		
-
-		
 		
 		//값 받아서 저장
 		var subject = $('#modal-body-subject').text();
@@ -221,10 +204,23 @@ $(function() {
 		$('#gatherPartiMax').val(partimax);
 		$('#gatherContent').val(content);
 		
-		alert(content);
-		
-	/*	$('.se2_inputarea').text(content);
-		$('#gatherContent').text(content);*/
+		nhn.husky.EZCreator.createInIFrame({
+	        oAppRef: obj,
+	        elPlaceHolder: "gatherContent",
+	        sSkinURI: "/resources/editor/SmartEditor2Skin.html",
+	        htParams : {
+	            // 툴바 사용 여부
+	            bUseToolbar : true,            
+	            // 입력창 크기 조절바 사용 여부
+	            bUseVerticalResizer : true,    
+	            // 모드 탭(Editor | HTML | TEXT) 사용 여부
+	            bUseModeChanger : true,   
+	        },
+	        fOnAppLoad : function() {
+	        	//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+	        	oEditors.getById["gatherContent"].exec("PASTE_HTML", [content]);
+	    	},
+		});
 		
 		
 		$('#guserId').val(id);
@@ -238,11 +234,7 @@ $(function() {
 
  		$('#gatherAreaTop').val(areatop).trigger("change"); // ex) 스터디 태그를 선택하는 트리거 
  		$('#gatherArea').val(area).trigger("change"); // ex) 스터디 태그를 선택하는 트리거 
- 		
-
-		document.getElementsByClassName('se2_inputarea')[0].innerHTML = content;
-		//$("iframe[class='smart_editor2_inputarea.html']").contents().find('body').html(content);
-		
+	
 	});
 	
 
