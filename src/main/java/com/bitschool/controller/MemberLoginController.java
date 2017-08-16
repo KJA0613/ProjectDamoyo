@@ -90,6 +90,11 @@ public class MemberLoginController {
 				goURI = "/";
 			}
 			url = "redirect:" + goURI;
+			url = url.substring(0, url.length()-1);
+			//System.out.println(url);
+			if(url.length() == 9) {
+				url = url + "/";
+			}
 			//로그인하고나서 바로 전 페이지로 돌아가기
 			
 			model.addAttribute("pdto",pdto);
@@ -157,7 +162,7 @@ public class MemberLoginController {
 	
 	// 02. [개인&기업회원] 로그아웃 (세션 유지 해제)
 	@RequestMapping(value = "/Logout", method = RequestMethod.GET)
-	public String Logout(HttpSession session) {
+	public String Logout(HttpSession session, @RequestParam("preURL") String preURL) {
 		String url = null;
 
 		// guser가 선택한 것을 담아놓은 dto를 db에 넣음
@@ -170,13 +175,24 @@ public class MemberLoginController {
 			
 			if(flag){
 				System.out.println("성공했다 짜식아");
+				int idx = preURL.indexOf('/',7);
+				String goURI = preURL.substring(idx);
+				if(goURI.length() == 2) {
+					goURI = "/";
+				}
+				url = "redirect:" + goURI;
+				url = url.substring(0, url.length()-1);
+				//System.out.println(url);
+				if(url.length() == 9) {
+					url = url + "/";
+				}
 			}
 		}
 		// 세션 초기화		
 		session.invalidate();
 
 		// 로그아웃 된 상태로 메인 페이지 이동 (reload)
-		url = "redirect:/";
+		//url = "redirect:/";
 
 		return url;
 	}

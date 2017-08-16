@@ -46,7 +46,7 @@
 				<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; padding-top: 100px">
 						<tr>
 							<td height="80px;" style="border: solid 1px #ccc; border-right-style: none;">
-									<input type="text" class="form-control" placeholder="writer" name="userId" style="height: 70px">
+									<input type="text" class="form-control" value="${pdto.guserId}" name="userId" style="height: 70px" readonly="readonly">
 							</td>
 						</tr>
 						<tr>
