@@ -8,7 +8,7 @@
 	<link rel="icon" type="image/png" href="/resources/admin/img/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Material Dashboard by Creative Tim</title>
+	<title>관리자페이지 메인 대쉬보드</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -31,7 +31,7 @@
 
 	<div class="wrapper">
 
-	    <div class="sidebar" data-color="purple" data-image="/resources/admin/img/sidebar-1.jpg">
+	    <div class="sidebar" data-color="blue" data-image="/resources/admin/img/sidebar-1.jpg">
 			<!--
 		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -47,25 +47,25 @@
 	    	<div class="sidebar-wrapper">
 	            <ul class="nav">
 	                <li class="active">
-	                    <a href="dashboard.jsp">
+	                    <a href="/dashbord">
 	                        <i class="material-icons">dashboard</i>
 	                        <p>Dashboard</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="user.jsp">
+	                    <a href="/PeopleTable">
 	                        <i class="material-icons">person</i>
 	                        <p>회원관리</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="table.jsp">
+	                    <a href="/">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>게시판관리</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="typography.jsp">
+	                    <a href="/category">
 	                        <i class="material-icons">library_books</i>
 	                        <p>카테고리관리</p>
 	                    </a>
