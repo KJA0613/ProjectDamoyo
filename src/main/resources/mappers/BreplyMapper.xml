@@ -16,4 +16,7 @@
 		select * from reply where postNo = #{postNo} and boardName = #{boardName} order by replyNo
 	</select>
 	
+	<delete id="deleteReply" parameterType="BReplyDTO">
+		delete from reply where replyNo = #{replyNo} and boardName = #{boardName} and postNo = #{postNo}
+	</delete>
 </mapper>
