@@ -350,6 +350,11 @@ function catMidChangeThr(item){
 }
 </script>
 
+
+<script>
+	
+</script>
+
 <title>개인회원가입2차상세페이지</title>
 
 <!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->

@@ -301,7 +301,8 @@ public class MemberLoginController {
 					 	return url;
 					 }
 				
-				}			
+				}		
+		
 		//개인회원비번찾기			
 		String pw = pdto.getGuserPw();
 		String id = pdto.getGuserId();

@@ -120,15 +120,15 @@ public class MemberJoinController {
 		
 		
 		// [Flag_01] 유저 코드값(A) + 회원가입 1단계 데이터
-		//System.out.println("[TEST-회원가입(2)] 1단계에서 받아온 데이터: " + pdto);		
+		System.out.println("[TEST-회원가입(2)] 1단계에서 받아온 데이터: " + pdto);		
 		boolean flagInfo = memberService.PersonDataRegist(pdto);		
 		
 		// [Flag_02] 희망 지역 삽입
-		//System.out.println("[TEST-회원가입(2)] 2단계 희망 지역: " + adto);		
+		System.out.println("[TEST-회원가입(2)] 2단계 희망 지역: " + adto);		
 		boolean flagArea = memberService.PersonAreaRegist(adto);
 		
 		// [Flag_03] 희망 카테고리 삽입 
-		//System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cdto);		
+		System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cdto);		
 		boolean flagCtg = memberService.PersonCategoryRegist(cdto);
 		
 		// [모두 TRUE] 회원가입 완료 > 메인 페이지
