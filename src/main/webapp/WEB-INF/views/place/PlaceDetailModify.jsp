@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,7 +70,7 @@
 </script>
 
 
-<!-- 이미지 업로드 유효성 검사 -->
+<!-- 이미지 업로드 유효성 검사, 안씀 혹시 몰라서 냅둠 -->
 <script>
 	/* function img_upload(obj) {
 		var pathPoint = obj.value.lastIndexOf('.');		
@@ -91,50 +92,15 @@
 		}
 	} */
 	
-	$(function() {
-		$("#placeImage").change(function(){
-					
-			if($("#placeImage").val() != ""){
-				var ext = $("#placeImage").val().split('.').pop().toLowerCase();
-				
-				/* .split('.')을 하면 return 값을 String 배열로 들어가고, pop은 스택인데 마지막 값(확장자 gif, jpg, 등등 확장자)을 빼냄, tolowerCase()는 문자열을 소문자로 바꿈 */
-				
-				if($.inArray(ext, ["gif","jpg","jpeg","png","bmp"]) == -1){
-						alert("jpg, png, gif, bmp 만 업로드 가능합니다.");
-						$("#fileName").val("");
-						return false;
-				}
-			}
-		});
-	});	
 </script>
 
 <!-- [체크한 값 가져오기] 라디오/체크박스 -->
 <!-- [참고 사이트] http://lng1982.tistory.com/80 -->
-<script>
-	$(document).ready(function() {	    
-	 	$("#submitModify").click(function(){	 		
-	 		
-	 		// [radio] 주차 유무
-	        var park_radioYn = $("input:radio[name='placeParking']:checked").val();    	        
-	 		
-	        // [radio] 비용단위
-	        var cost_radioYn = $("input:radio[name='placeCostChoice']:checked").val();    
-	    	
-	        // [checkbox] 공간유형
-			var space_chb = $("input:checkbox[name='placeType']").each(function() {
-				var spaceList = $(this).val();
-			});
-	        
-	        
-	        // [checkbox] 정기휴무	         
-			var day_chb = $("input:checkbox[name='placeNotUseDay']").each(function() {
-				var dayList = $(this).val();
-			});
-	        
-	    });
-	}); 
-</script>
+
+<!-- 네이버 스마트  -->
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="/resources/editor_place/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 
 <!-- 수정 완료 후, URL 이동 -->
 <script>
@@ -147,6 +113,87 @@
 	}
 </script>
 
+<script type="text/javascript">
+$(function() {
+	
+	$("#submitModify").click(function(){	 		
+ 		
+ 		// [radio] 주차 유무
+        var park_radioYn = $("input:radio[name='placeParking']:checked").val();    	        
+ 		
+        // [radio] 비용단위
+        var cost_radioYn = $("input:radio[name='placeCostChoice']:checked").val();    
+    	
+        // [checkbox] 공간유형
+		var space_chb = $("input:checkbox[name='placeType']").each(function() {
+			var spaceList = $(this).val();
+		});
+        
+        
+        // [checkbox] 정기휴무	         
+		var day_chb = $("input:checkbox[name='placeNotUseDay']").each(function() {
+			var dayList = $(this).val();
+		});
+        
+    });
+
+	/* 이미지 업로드 유효성 검사 */
+	$("#placeImage").change(function(){
+		
+		if($("#placeImage").val() != ""){
+			var ext = $("#placeImage").val().split('.').pop().toLowerCase();
+			
+			/* .split('.')을 하면 return 값을 String 배열로 들어가고, pop은 스택인데 마지막 값(확장자 gif, jpg, 등등 확장자)을 빼냄, tolowerCase()는 문자열을 소문자로 바꿈 */
+			
+			if($.inArray(ext, ["gif","jpg","jpeg","png","bmp"]) == -1){
+					alert("jpg, png, gif, bmp 만 업로드 가능합니다.");
+					$("#fileName").val("");
+					return false;
+			}
+		}
+	});
+	
+	
+	var obj = [];              
+    
+	<c:set value="${pl_dto.placeContent}" var = "placeContent"/>
+
+	
+	nhn.husky.EZCreator.createInIFrame({
+        oAppRef: obj,
+        elPlaceHolder: "placeContent",
+        sSkinURI: "/resources/editor_place/SmartEditor2Skin.html",
+        htParams : {
+            // 툴바 사용 여부
+            bUseToolbar : true,            
+            // 입력창 크기 조절바 사용 여부
+            bUseVerticalResizer : true,    
+            // 모드 탭(Editor | HTML | TEXT) 사용 여부
+            bUseModeChanger : true,   
+        },
+        fOnAppLoad : function() {
+        	//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+        	/* var placeContent = "<c:out value='${placeContent}'/>"; */
+        	oEditors.getById["placeContent"].exec("PASTE_HTML", []);
+    	},
+	});
+	
+	/* 완료버튼 클릭시 */
+	$('#complite').click(function(){
+		
+		obj.getById["placeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		var no = $('#placeNo').val();
+		var url = "/place/PlaceModifyProcess?placeNo="+no;
+		
+		alert(no);
+		
+		$('#dataset').attr('action', url);
+		$('#dataset').submit();
+	});
+	
+});
+</script>
 
 <!-- [Header] 공통 헤더 -->
 <%@include file="../header.jsp"%>
@@ -155,7 +202,7 @@
 
 	<div class="container">
 		<div class="clearfix">
-			<div class="col-md-8 col-md-offset-2">	
+			<div class="col-md-12">	<!-- col-md-8 col-md-offset-2 -->
 				<h1>모임공간 등록</h1>				
 				<p class="help-block">
 					&nbsp;<small>* 회원님의 모임공간 등록에 필요한 사항을 모두 입력해주세요.</small>
@@ -165,10 +212,10 @@
 				
 				<!-- 모임공간 등록 폼 -->
 				<form action="" method="POST" class="form-horizontal" id="dataset" enctype="multipart/form-data">					
-					
+					<input type="hidden" id="placeNo" value="${pl_dto.placeNo}">
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="file" name="placeImage" id="placeImage" class="form-control" onchange="img_upload(this)" accept="image/gif, image/jpg, image/jpeg, image/png">					
 							${pl_dto.placeImage}
 						</div>
@@ -194,21 +241,21 @@
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간명</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeName" class="form-control" placeholder="10자 이내로 입력해주세요." value="${pl_dto.placeName}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간 소개</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeIntro" class="form-control" placeholder="20자 이내로 입력해주세요." value="${pl_dto.placeIntro}">						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">전화</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeTel" class="form-control" placeholder="02-123-4567" value="${pl_dto.placeTel}">						
 						</div>
 					</div>
@@ -228,7 +275,7 @@
 	
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">URL</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeURL" class="form-control" placeholder="www.damoyo.com" value="${pl_dto.placeURL}">						
 						</div>
 					</div>
@@ -248,7 +295,7 @@
 										
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">영업시간</label>
-						<div class="col-md-10"> 
+						<div class="col-md-8"> 
 							<input type="text" name="placeUseTime" class="form-control" placeholder="09:00 ~ 18:00" value="${pl_dto.placeUseTime}">						
 						</div>
 					</div>
@@ -271,7 +318,7 @@
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">정기휴무</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="checkbox" name="placeNotUseDay" value="월" <c:if test="${pl_dto.placeNotUseDay eq '월'}">checked="checked"</c:if>>&nbsp;월			&nbsp;
 							<input type="checkbox" name="placeNotUseDay" value="화" <c:if test="${pl_dto.placeNotUseDay eq '화'}">checked="checked"</c:if>>&nbsp;화			&nbsp;
 							<input type="checkbox" name="placeNotUseDay" value="수" <c:if test="${pl_dto.placeNotUseDay eq '수'}">checked="checked"</c:if>>&nbsp;수			&nbsp;
@@ -286,7 +333,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">상세설명</label>
 						<div class="col-md-10">
-							<textarea rows="5" cols="10" name="placeContent" class="form-control" required>${pl_dto.placeContent}</textarea>				
+							<textarea rows="5" cols="10" id="placeContent" name="placeContent" class="form-control" required>${pl_dto.placeContent}</textarea>				
 						</div>
 					</div>
 									
@@ -319,7 +366,7 @@
 
 					<div class="clear-fix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" onclick="go_url(${pl_dto.placeNo})">수정완료</button>
+							<button type="button" id="complite" class="btn btn-primary">수정완료</button>
 						</div>
 					</div>
 			
