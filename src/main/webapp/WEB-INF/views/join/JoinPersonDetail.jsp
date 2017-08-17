@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,12 +13,6 @@
 
 <!-- JQuery CDN -->
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-
-<script type="text/javascript">
-   function TwoSubmit() {
-   		document.signform.submit();
-   }
-</script>
 
 
 <!--지역상세스크립트  -->
@@ -91,16 +84,22 @@ function areachange(item){
     var ccount, cselect;
 
     temp = document.signform.area;
-
-    for (i=(temp.options.length-1) ; i>0 ; i--){ temp.options[i] = null; }
-    eval('ccount = area' + item + '.length');
+	   
+ 	// 서울특별시 구 몇 개인지 찍힘
+    for (i=(temp.options.length-1) ; i>0 ; i--){ 
+    	temp.options[i] = null;
+    }
+    eval('ccount = area' + item + '.length');			
    
-    
+    //alert(temp.options.length);		// 1 서울특별시
+    //alert('ccount' + ccount);	// 25개
+
+    // 선택한 지역
     for (j=0 ; j<ccount ; j++) {
         eval('cselect = area' + item + '[' + j + '];');
         temp.options[j]= new Option(cselect,cselect); 
     }
-    
+
     temp.options[0].selected=true;
     return true;
 }
@@ -351,9 +350,6 @@ function catMidChangeThr(item){
 </script>
 
 
-<script>
-	
-</script>
 
 <title>개인회원가입2차상세페이지</title>
 
@@ -399,7 +395,7 @@ function catMidChangeThr(item){
 				<br>
 				
 				<!-- 회원가입입력폼 : 2단계 -->
-				<form action="/join/PersonDatailRegist" method="post" name="signform" id="per">
+				<form action="" method="post" name="signform" id="per">
 			         <h4><strong>모임 희망 지역</strong></h4>	
 			         <div id=list1>
 			            <div class="dropdown">
@@ -411,7 +407,7 @@ function catMidChangeThr(item){
 			                  </tr>
 			                  <tr>
 			                     <!--1차지역선택  -->
-			                     <td><select name="bigarea1" class="form-control" onChange="areachange(this.options.selectedIndex)">
+			                     <td><select name="bigarea1" id="bigarea1" class="form-control" onChange="areachange(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=1>서울특별시</option>
 			                           <option value=2>경기도</option>
@@ -442,7 +438,7 @@ function catMidChangeThr(item){
 			                  </tr>
 			                  <tr>
 			                     <!--2차지역선택  -->
-			                     <td><select name="bigarea2" class="form-control" onChange="areachange2(this.options.selectedIndex)">
+			                     <td><select name="bigarea2" id="bigarea2" class="form-control" onChange="areachange2(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=1>서울특별시</option>
 			                           <option value=2>경기도</option>
@@ -472,7 +468,7 @@ function catMidChangeThr(item){
 			                  </tr>
 			                  <tr>
 			                     <!--3차지역선택  -->
-			                     <td><select name="bigarea3" class="form-control" onChange="areachange3(this.options.selectedIndex)">
+			                     <td><select name="bigarea3" id="bigarea3" class="form-control" onChange="areachange3(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=1>서울특별시</option>
 			                           <option value=2>경기도</option>
@@ -521,7 +517,7 @@ function catMidChangeThr(item){
 			                  </tr>
 			                  <tr>
 			                     <!--1차카테고리선택  -->
-			                     <td><select name="catTopOne" class="form-control" onChange="catChangeOne(this.options.selectedIndex)">
+			                     <td><select name="catTopOne" id="catTopOne" class="form-control" onChange="catChangeOne(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=1>스터디(취업/시험 대비)</option>
 			                           <option value=2>동호회(취미)</option>
@@ -529,12 +525,12 @@ function catMidChangeThr(item){
 			
 			                     </select></td>
 			                     <!--2차카테고리선택  -->
-			                     <td><select name="catMidOne" size=1 class="form-control" onChange="catMidChangeOne(this.options.selectedIndex)">
+			                     <td><select name="catMidOne" id="catMidOne" size=1 class="form-control" onChange="catMidChangeOne(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=""></option>
 			                     </select></td>
 			                     <!--3차카테고리선택  -->
-			                     <td><select name="catBotOne" class="form-control" size=1>
+			                     <td><select name="catBotOne" id="catBotOne" class="form-control" size=1> 
 			                           <option selected value="">-선택-</option>
 			                           <option value=""></option>
 			                     </select></td>
@@ -550,7 +546,7 @@ function catMidChangeThr(item){
 			                  </tr>
 			                  <tr>
 			                     <!--1차카테고리선택  -->
-			                     <td><select name="catTopTwo" class="form-control" onChange="catChangeTwo(this.options.selectedIndex)">
+			                     <td><select name="catTopTwo" id="catTopTwo" class="form-control" onChange="catChangeTwo(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=1>스터디(취업/시험 대비)</option>
 			                           <option value=2>동호회(취미)</option>
@@ -558,12 +554,12 @@ function catMidChangeThr(item){
 			
 			                     </select></td>
 			                     <!--2차카테고리선택  -->
-			                     <td><select name="catMidTwo" class="form-control" size=1 onChange="catMidChangeTwo(this.options.selectedIndex)">
+			                     <td><select name="catMidTwo" id="catMidTwo" class="form-control" size=1 onChange="catMidChangeTwo(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=""></option>
 			                     </select></td>
 			                     <!--3차카테고리선택  -->
-			                     <td><select name="catBotTwo" class="form-control" size=1>
+			                     <td><select name="catBotTwo" id="catBotTwo" class="form-control" size=1>
 			                           <option selected value="">-선택-</option>
 			                           <option value=""></option>
 			                     </select></td>
@@ -579,7 +575,7 @@ function catMidChangeThr(item){
 			                  </tr>
 			                  <tr>
 			                     <!--1차카테고리선택  -->
-			                     <td><select name="catTopThr" class="form-control" onChange="catChangeThr(this.options.selectedIndex)">
+			                     <td><select name="catTopThr" id="catTopThr" class="form-control" onChange="catChangeThr(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=1>스터디(취업/시험 대비)</option>
 			                           <option value=2>동호회(취미)</option>
@@ -587,12 +583,12 @@ function catMidChangeThr(item){
 			
 			                     </select></td>
 			                     <!--2차카테고리선택  -->
-			                     <td><select name="catMidThr" size=1 class="form-control" onChange="catMidChangeThr(this.options.selectedIndex)">
+			                     <td><select name="catMidThr" id="catMidThr" size=1 class="form-control" onChange="catMidChangeThr(this.options.selectedIndex)">
 			                           <option selected value="">-선택-</option>
 			                           <option value=""></option>
 			                     </select></td>
 			                     <!--3차카테고리선택  -->
-			                     <td><select name="catBotThr" class="form-control"size=1>
+			                     <td><select name="catBotThr" id="catBotThr" class="form-control"size=1>
 			                           <option selected value="">-선택-</option>
 			                           <option value=""></option>
 			                     </select></td>
@@ -616,7 +612,7 @@ function catMidChangeThr(item){
 							</small>
 						</p>
 						<div class="pull-right">
-							<button type="submit" onClick="javascript:TwoSubmit()" class="btn btn-primary">2단계 완료</button>
+							<button type="submit" onClick="TwoSubmit(); return false;" class="btn btn-primary">2단계 완료</button>
 						</div>
 					 </div>
 					 
@@ -634,6 +630,9 @@ function catMidChangeThr(item){
       	</div>
 	</div>
 	
+	
+	<!-- [회원가입 2단계 JS - 데이터 유효성 검사] -->	
+	<script src="/resources/script/js/joinPersonDetailValidation.js"></script>
 	
     <!-- [Footer] 페이지 하단 (고정화면) -->
 	<hr>
