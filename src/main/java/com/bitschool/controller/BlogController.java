@@ -70,7 +70,7 @@ public class BlogController {
 	private BTempService tService;
 	
 	@Inject
-	Recommend recom;
+	private Recommend recom;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BlogController.class);
 	

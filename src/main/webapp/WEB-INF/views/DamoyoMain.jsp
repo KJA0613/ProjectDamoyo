@@ -207,12 +207,12 @@
    <div class="container text-center">
 		<!-- 01. 검색 -->
 		<!-- 01-01. 위치 검색 (위치 선택)-->
-		<div class="from-group">
+		<div class="from-group"  style="height: 0px;">
 		<br><br><br><br>		
 					
 			<!-- 01-02. 주제어 검색 -->
-			<div class="col-md-12">
-				<form action="/gather/damoyoSearch" method="get" >
+			<div class="col-md-12" style="width: 1px;">
+				<form action="/gather/damoyoSearch" method="get" style="width: 450px; margin-left: 320px;">
 					<span class="blue_search">
 						<input type="text" name="sSTR" class="input_text" placeholder="주제어를 검색해주세요.">
 					</span>
@@ -226,7 +226,22 @@
 		
 			<!-- 01-03. 인기 검색 -->
 			
+<%-- 		<div>
+			<c:forEach var="gathering" items="${list2}">
+				<li>${gathering.name}</li><br/>
+			</c:forEach>
+		</div> --%>
+
+		<!-- Page Content -->
 		</div>	
+		
+		 <div style="margin-left: 830px; border-style: solid; border-color: #b3b3b3;">
+		 	<ol>
+			<c:forEach var="dto" items="${list}">
+				<li style="text-align: left;">${dto.gatherSubject}</li>
+			</c:forEach>
+			</ol>
+		</div>
 
   		<br><br><br><br><br><br><br><br>	
    
