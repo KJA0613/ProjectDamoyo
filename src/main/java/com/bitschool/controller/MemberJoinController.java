@@ -163,7 +163,10 @@ public class MemberJoinController {
 	}
 	
 	
-	// 04. [회원가입 - 데이터 유효성 검사] 아이디 중복 체크
+	
+	// ---------------------------------------- [개인&기업 회원] 아이디 중복 체크 ----------------------------------------//
+	
+	// 04-01. [개인회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
 	@ResponseBody 
 	@RequestMapping(value="/checkDuplicatePersonIdAjax", method=RequestMethod.POST)
 	public String checkDuplicatePersonIdAjax(@RequestParam("guserId") String guserId, Model model) {
@@ -183,6 +186,29 @@ public class MemberJoinController {
 		}
 		
 		return result;		
+	}
+	
+	
+	// 04-02. [기업회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/checkDuplicateCompanyIdAjax", method = RequestMethod.POST)
+	public String checkDuplicateCompanyIdAjax(@RequestParam("comId") String comId, Model model) {
+		String result = null;
+
+		//System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + comId);
+
+		// DB에 저장된 아이디랑 비교
+		result = memberService.checkDuplicateCompanyId(comId);
+		//System.out.println("[TEST] DB Data(DB에 저장된 결과): " + result);
+
+		// 입력한 id = DB에 조회한 id
+		if (result == null) { // 가입 가능한 아이디
+			result = "OK";
+		} else { // 중복 된 아이디
+			result = "FAIL";
+		}
+
+		return result;
 	}
 
 }

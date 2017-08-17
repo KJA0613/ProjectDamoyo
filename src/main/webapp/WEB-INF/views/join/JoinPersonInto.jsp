@@ -175,6 +175,8 @@ a {
 							</small>
 						</p>
 						<div class="pull-right">
+							<!-- return=false > 기본 속성 무시
+						  	     check_info1() 함수에서 데이터 유효성 만족하면 페이지 넘어가는걸로 만듬 -->
 							<button type="submit" class="btn btn-primary" onclick="check_info1(); return false;">1단계 완료</button>
 						</div>
 					</div>
@@ -187,7 +189,7 @@ a {
 		</div>
 	
 	
-		<!-- [회원가입 1단계 JS - 데이터 유효성 검사] -->	
+		<!-- [회원가입(개인) 1단계 JS - 데이터 유효성 검사] -->	
 		<script src="/resources/script/js/joinPersonIntoValidation.js"></script>
 		
 		

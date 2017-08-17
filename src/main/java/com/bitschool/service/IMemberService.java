@@ -60,23 +60,23 @@ public interface IMemberService {
 	// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
 	public boolean CompanyRegist(CompanyDTO cdto);
 	
-	//기업회원 비번찾기
+	// [기업회원] 비번찾기
 	public CompanyDTO comfindPW(String comEmail, String comId);
 	
-	//기업회원 아이디 찾기	
+	// [기업회원] 아이디 찾기	
     public CompanyDTO getfindComID(String comEmail,String comName);
 
-    //기업회원 회원정보 수정    
+    // [기업회원] 회원정보 수정    
 	public boolean updateComInfo(CompanyDTO cdto);
 
-	 //기업회원 비밀번호 수정    
+	// [기업회원] 비밀번호 수정    
 	public boolean CompanyPwModify(CompanyDTO cdto);
 	
-	//기업회원 회원탈퇴
+	// [기업회원] 회원탈퇴
 	public boolean CompanyQuit(CompanyDTO cdto);
 
-
-
+	// 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
+	public String checkDuplicateCompanyId(String comId);
 
 	
 }

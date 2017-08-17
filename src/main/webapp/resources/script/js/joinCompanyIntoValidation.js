@@ -1,8 +1,8 @@
 /**
- *  [개인] 회원가입 1단계 > 데이터 유효성 검사
+ *  [기업] 회원가입 1단계 > 데이터 유효성 검사
  */
 
-// 1단계 유효성 전체 함수 관리
+//1단계 유효성 전체 함수 관리
 function check_info1() {
 	// 유효성 체크 함수들
 	checkName();
@@ -17,7 +17,7 @@ function check_info1() {
 	
 	// 유효성에 적합한 값 입력 시, 2단계로 데이터 전송
 	if(checkName() && checkId() && checkPw1() && checkPw2() && checkEmail() && checkPhone()) {
-		var url = '/join/PersonDataRegist';
+		var url = '/join/CompanyDataRegist';
 		
 		data.action = url;
 		data.submit();
@@ -27,8 +27,8 @@ function check_info1() {
 
 // [Check_01] 이름 (중복 허용)
 function checkName() {
-	var name = document.getElementById('guserName').value;						// 이름 값
-	var tempName = document.getElementById('guserName');
+	var name = document.getElementById('comManager').value;						// 이름 값
+	var tempName = document.getElementById('comManager');
 	name = name.trim();															// 공백 제거
 	var oMsg = document.getElementById('nameMsg');								// 보낼 에러 메세지
 	
@@ -67,8 +67,8 @@ function checkName() {
 // [Check_02] 아이디
 function checkId() {
 	
-	var id = document.getElementById('guserId').value;							// 아이디 값
-	var tempId = document.getElementById('guserId');
+	var id = document.getElementById('comId').value;							// 아이디 값
+	var tempId = document.getElementById('comId');
 	id = id.trim();																
 	var oMsg = document.getElementById('idMsg');								
 	
@@ -97,7 +97,7 @@ function checkId() {
     
     
     // [데이터 유효성 검사3] DB에 아이디 있는지 여부 판단 
-    var checkId = "guserId=" + $("#guserId").val();
+    var checkId = "comId=" + $("#comId").val();
         
     // Ajax: 비동기식 데이터 전송 방식 (URL 이동 없이 데이터만 확인해서 결과 출력 가능)
     // [참고 사이트] : http://marobiana.tistory.com/77
@@ -105,7 +105,7 @@ function checkId() {
 			type : "POST",														// 서버에 반환되는 데이터 타입
 			data : checkId,														// 서버로 보낼 데이터
 			dataType: "text",													// 받을 데이터 포맷 형식													
-			url : "/join/checkDuplicatePersonIdAjax",							// 정보 요청할 URL
+			url : "/join/checkDuplicateCompanyIdAjax",							// 정보 요청할 URL
 			success : function(result) {										// 요청 성공하면 실행될 콜백함수
 				if (result == "OK") {
 					oMsg.style.display = "block";
@@ -133,8 +133,8 @@ function checkId() {
 // [Check_03-1] 비밀번호
 function checkPw1() {
 	
-	var pw = document.getElementById('guserPw').value;							// 비밀번호 값
-	var tempPw = document.getElementById('guserPw');
+	var pw = document.getElementById('comPw').value;							// 비밀번호 값
+	var tempPw = document.getElementById('comPw');
 	pw = pw.trim();																
 	var oMsg = document.getElementById('pwMsg1');								
 
@@ -174,10 +174,10 @@ function checkPw1() {
 //[Check_03-1] 비밀번호 재입력
 function checkPw2() {	
 	
-	var pw = document.getElementById('guserPw').value;
-	var pwCnf = document.getElementById('guserPwConfirm').value;				// 비밀번호 재입력 값
+	var pw = document.getElementById('comPw').value;
+	var pwCnf = document.getElementById('comPwConfirm').value;				// 비밀번호 재입력 값
 	
-	var tempPwCnf = document.getElementById('guserPwConfirm');
+	var tempPwCnf = document.getElementById('comPwConfirm');
 
 	pw = pw.trim();
 	pwCnf = pwCnf.trim();	
@@ -216,8 +216,8 @@ function checkPw2() {
 
 // [Check_04] 이메일
 function checkEmail() {
-	var email = document.getElementById('guserEmail').value;					// 이메일 값
-	var tempEmail = document.getElementById('guserEmail');
+	var email = document.getElementById('comEmail').value;					// 이메일 값
+	var tempEmail = document.getElementById('comEmail');
 	email = email.trim();														
 	var oMsg = document.getElementById('emailMsg');								
 	
@@ -254,10 +254,10 @@ function checkEmail() {
 }
 
 	
-// [Check_05] 휴대폰 번호
+// [Check_05] 기업 번호 혹은 핸드폰 번호
 function checkPhone() {
-	var phone = document.getElementById('guserPhone').value;					// 휴대폰 번호 값
-	var tempPhone = document.getElementById('guserPhone');
+	var phone = document.getElementById('comPhone').value;					// 휴대폰 번호 값
+	var tempPhone = document.getElementById('comPhone');
 	phone = phone.trim();														
 	var oMsg = document.getElementById('mobileMsg');							
 	
@@ -271,13 +271,13 @@ function checkPhone() {
 		return false;
 	}	
 	
-	// [데이터 유효성 검사2] 숫자만 가능
-	var isPhone =  /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;
+	// [데이터 유효성 검사2] 회사 번호 혹은 핸드폰 번호
+	var isPhone =  /^0([1-9]{2,3})?([0-9]{3,4})?([0-9]{4})$/;
 		
     if (!isPhone.test(phone)) {
 		oMsg.style.display = "block";
         oMsg.className = "error";
-        oMsg.innerHTML = "실제 본인 휴대폰 번호만 입력 가능합니다.";
+        oMsg.innerHTML = "회사번호 혹은 개인 연락처만 입력 가능합니다. (숫자)";
         document.getElementById("mobileMsg").style.color = "red";
         
         tempPhone.value = "";

@@ -53,44 +53,42 @@ public class MemberService implements IMemberService {
 		return null;
 	}
 	
+	
 	// [기업회원] 로그인
-		@Override
-		public CompanyDTO CompanyLogin(String comId, String comPw) {
-			CompanyDTO cdto = null;
+	@Override
+	public CompanyDTO CompanyLogin(String comId, String comPw) {
+		CompanyDTO cdto = null;
 
-			try {
-				// [1차 확인] DB > 기업회원 "아이디" 유무 확인
-				cdto = companyDAO.selectCompanyLogin(comId);
+		try {
+			// [1차 확인] DB > 기업회원 "아이디" 유무 확인
+			cdto = companyDAO.selectCompanyLogin(comId);
 
-				// [2차-1 확인] 1차 확인 시(DB에 아이디 있음), 해당 아이디와 "관련된 정보들 있으면" > 개인회원
-				// [2차-2 확인] DB에 있는 비밀번호 == 사용자가 입력한 비밀번호 > 개인회원
-				if (cdto != null && cdto.getComPw().equals(comPw)) {
-					return cdto;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			// [2차-1 확인] 1차 확인 시(DB에 아이디 있음), 해당 아이디와 "관련된 정보들 있으면" > 개인회원
+			// [2차-2 확인] DB에 있는 비밀번호 == 사용자가 입력한 비밀번호 > 개인회원
+			if (cdto != null && cdto.getComPw().equals(comPw)) {
+				return cdto;
 			}
-
-			// System.out.println("[TEST-로그인(개인)] DB 데이터 확인: " + pdto);
-
-			return null;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-	
+
+		// System.out.println("[TEST-로그인(개인)] DB 데이터 확인: " + pdto);
+
+		return null;
+	}
 	
 
+	// [기업회원] 아이디
 	@Override
 	public PersonDTO getfindID(String guserEmail, String guserName) {
 		PersonDTO pdto = null;
 		
-		try {
-			
+		try {			
 			pdto = personDAO.findId(guserEmail);
 			
 			if(pdto!=null && pdto.getGuserName().equals(guserName)){
 				return pdto;
-			}
-			
-			
+			}		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -99,6 +97,7 @@ public class MemberService implements IMemberService {
 	}
 
 
+	// [기업회원] 비밀번호
 	@Override
 	public PersonDTO getfindPW(String guserEmail, String guserId) {
 		PersonDTO pdto = null;
@@ -168,6 +167,7 @@ public class MemberService implements IMemberService {
 		return flag;
 	}
 
+	
 	// [개인회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크	
 	@Override
 	public String checkDuplicatePersonId(String guserId) {
@@ -182,6 +182,8 @@ public class MemberService implements IMemberService {
 		
 		return result;
 	}
+	
+	
 	
 	// ---------------------------------------- [개인회원] 마 이 페 이 지 ----------------------------------------//
 	
@@ -231,6 +233,7 @@ public class MemberService implements IMemberService {
 		
 		return cdto;
 	}
+	
 
 	// [개인회원] 마이페이지 - 비밀번호 변경
 	@Override
@@ -262,108 +265,133 @@ public class MemberService implements IMemberService {
 
 		return flag;
 	}
+	
+	
 	// [개인회원] 마이페이지 - 관심모임 삭제
-		@Override
-		public boolean deleteAttend(GatherAddonsDTO gadto) {
+	@Override
+	public boolean deleteAttend(GatherAddonsDTO gadto) {
+		boolean flag = personDAO.deleteAttend(gadto);
 
-			boolean flag = personDAO.deleteAttend(gadto);
-
-
-			
-			return flag;
-		}
+		return flag;
+	}
 		
-	// ---------------------------------------- [ 기업회원] 회 원 가 입 ----------------------------------------//	
 		
-		// [기업회원] 회원가입 - 1단계  + 2단계> 입력한 내용 삽입
+		
+	// ---------------------------------------- [기업회원] 회 원 가 입 ----------------------------------------//	
+		
+	// [기업회원] 회원가입 - 1단계 + 2단계> 입력한 내용 삽입
+	@Override
+	public boolean CompanyRegist(CompanyDTO cdto) {
+		boolean flag = false;
 
-		@Override
-		public boolean CompanyRegist(CompanyDTO cdto) {
-			boolean flag = false;
-			
+		try {
 			flag = companyDAO.companyRegist(cdto);
-			
-			return flag;
-		}
-		
-		//기업회원 아이디 찾기
-		@Override
-		public CompanyDTO getfindComID(String comEmail,String comName) {
-			// TODO Auto-generated method stub
-			CompanyDTO cdto = null;
-			
-			
-			try {
-				cdto = companyDAO.findComId(comEmail);
-						
-				
-				if(cdto!=null && cdto.getComName().equals(comName)){
-					
-					return cdto;
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-					
-			return cdto;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
-		//기업회원 비번 찾기
-		@Override
-		public CompanyDTO comfindPW(String comEmail, String comId) {
-			
-			CompanyDTO cdto = null;
-			
-			cdto = companyDAO.comfindPW(comId);
-			
-			if(cdto!=null&&cdto.getComId().equals(comId)){
-				
+		return flag;
+	}
+
+	// [기업회원] 아이디 찾기
+	@Override
+	public CompanyDTO getfindComID(String comEmail, String comName) {
+		CompanyDTO cdto = null;
+
+		try {
+			cdto = companyDAO.findComId(comEmail);
+
+			if (cdto != null && cdto.getComName().equals(comName)) {
 				return cdto;
 			}
-			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return cdto;
+	}
+
+	
+	// [기업회원] 비번 찾기
+	@Override
+	public CompanyDTO comfindPW(String comEmail, String comId) {
+
+		CompanyDTO cdto = null;
+
+		try {
+			cdto = companyDAO.comfindPW(comId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (cdto != null && cdto.getComId().equals(comId)) {
 			return cdto;
 		}
 
-		//기업회원 회원정보 수정	
-		@Override
-		public boolean updateComInfo(CompanyDTO cdto) {
-			
-			boolean flag = false;
-			
+		return cdto;
+	}
+
+	
+	// [기업회원] 회원정보 수정
+	@Override
+	public boolean updateComInfo(CompanyDTO cdto) {
+
+		boolean flag = false;
+
+		try {
 			flag = companyDAO.updatecomInfo(cdto);
-		
-			return flag;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		//기업회원비밀번호수정
-		@Override
-		public boolean CompanyPwModify(CompanyDTO cdto) {
-			boolean flag = false;
-			
+
+		return flag;
+	}
+
+	
+	// [기업회원] 비밀번호수정
+	@Override
+	public boolean CompanyPwModify(CompanyDTO cdto) {
+		boolean flag = false;
+
+		try {
 			flag = companyDAO.CompanyPwModify(cdto);
-			
-			return flag;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+
+		return flag;
+	}
+
+	
+	// [기업회원] 회원탈퇴
+	@Override
+	public boolean CompanyQuit(CompanyDTO cdto) {
+
+		boolean flag = false;
+
+		try {
+			flag = companyDAO.CompanyQuit(cdto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return flag;
+	}
+
+
+	// [기업회원] 데이터 유효성 검사 > 아이디 중복 체크	
+	@Override
+	public String checkDuplicateCompanyId(String comId) {
+		String result = null;
 		
-		//기업회원 회원탈퇴
-		@Override
-		public boolean CompanyQuit(CompanyDTO cdto) {
-
-			boolean flag = false;
-			
-			try {
-				flag = companyDAO.CompanyQuit(cdto);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			return flag;
+		try {
+			result = companyDAO.selectDuplicateCompanyId(comId);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-	
+				
+		return result;
+	}
 
-
-	
 
 }
