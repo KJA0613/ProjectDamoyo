@@ -90,7 +90,8 @@ $(function() {
 		modal.find('#modal-body-area').text(area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-parti').text(parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-day').text(day); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-content').text(content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-content').html(content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		//$('#modal-body-content').attr('text', content);
 		$('#modal-body-img').attr('src', img);
 		modal.find('#modal-body-id').text(id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-state').text(state); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
@@ -150,6 +151,13 @@ $(function() {
 	
 	});
 	
+	/* 수정버튼 눌렀을때 수정하는 모달 켜기 */
+    //전역변수
+	var obj = [];              
+    //스마트에디터 프레임생성
+	
+    	
+	
 	
 	/* 수정버튼 눌렀을때 수정하는 모달 켜기 */
 	$('#gatherModify').click(function() {
@@ -160,7 +168,9 @@ $(function() {
 		var edate = $('#modal-body-edate').text();
 		var day = $('#modal-body-day').text();
 		var partimax = $('#modal-body-partimax').text();
-		var content = $('#modal-body-content').text();
+		
+		var content = $('#modal-body-content').html();
+		
 		var categorytop = $('#modal-body-categorytop').text();
 		var categorymid = $('#modal-body-categorymid').text();
 		var categorybot = $('#modal-body-categorybot').text();
@@ -182,11 +192,12 @@ $(function() {
 		}
 		
 		
-		
 		// 기존모달 종료하고 새로운 모달 키움
-		$('#gatherModify').attr('data-dismiss','modal');
-		$('#gatherModify').attr('data-toggle','modal');
-		$('#gatherModify').attr('data-target','#GatherModalModify');
+//		$('#gatherModify').attr('data-dismiss','modal');
+		/*$('#gatherModify').attr('data-toggle','modal');
+		$('#gatherModify').attr('data-target','#GatherModalModify');*/
+		$('#GatherModalModify').modal('show');
+//		$('#GatherModalModify').modal('data-toggle');
 		
 		// 키울때 기존값을 추가해줌
 		$('#gatherSubject').val(subject);
@@ -195,7 +206,25 @@ $(function() {
 		$('#gatherPartiMax').val(partimax);
 		$('#gatherContent').val(content);
 		
-
+		nhn.husky.EZCreator.createInIFrame({
+	        oAppRef: obj,
+	        elPlaceHolder: "gatherContent",
+	        sSkinURI: "/resources/editor/SmartEditor2Skin.html",
+	        htParams : {
+	            // 툴바 사용 여부
+	            bUseToolbar : true,            
+	            // 입력창 크기 조절바 사용 여부
+	            bUseVerticalResizer : true,    
+	            // 모드 탭(Editor | HTML | TEXT) 사용 여부
+	            bUseModeChanger : true,   
+	        },
+	        fOnAppLoad : function() {
+	        	//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+	        	oEditors.getById["gatherContent"].exec("PASTE_HTML", [content]);
+	    	},
+		});
+		
+		
 		$('#guserId').val(id);
 		$('#gatherNo').val(no);
 		$('#gatherState').val(state);
@@ -207,14 +236,19 @@ $(function() {
 
  		$('#gatherAreaTop').val(areatop).trigger("change"); // ex) 스터디 태그를 선택하는 트리거 
  		$('#gatherArea').val(area).trigger("change"); // ex) 스터디 태그를 선택하는 트리거 
-		
+	
 	});
 	
+
 	
+
 	
 	/* 수정버튼 후 저장버튼 누르면 변경사항 업데이트하기 */
 	$('#gatherModifyCommit').click(function(){
 
+	    //id가 smarteditor인 textarea에 에디터에서 대입
+		obj.getById["gatherContent"].exec("UPDATE_CONTENTS_FIELD", []);
+	   		
 		var no = $('#gatherNo').val();
 		var subject = $('#gatherSubject').val();
 		var cetegorytop = $('#gatherCategoryTop option:selected').text();

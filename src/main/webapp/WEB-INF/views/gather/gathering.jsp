@@ -141,6 +141,12 @@ a:visited {
 	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+
+<!-- 네이버 스마트  -->
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="/resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+
+
 <!-- 체크박스와 관련된 스크립트를 가지고 있는 js -->
 <script type="text/javascript" src="/resources/script/js/gatherCheckbox.js"></script>
 
@@ -149,6 +155,7 @@ a:visited {
 
 <!-- 카테고리/지역 정보, 스크립트가 들어있는 js -->
 <script type="text/javascript" src="/resources/script/js/gatherACselectBox.js"></script>
+
 
 <%@include file="../header.jsp"%>
 
@@ -302,7 +309,7 @@ a:visited {
 
 <!-- ************************************** 모달  -->
 		<div class="modal fade" id="GatherModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					
 					<div class="modal-header">
@@ -384,7 +391,7 @@ a:visited {
 							<div class="form-group">
 								<label for="modal-body-content" class="col-sm-2 control-label">상세정보</label>
 								<div class="col-sm-8">
-									<div class="modal-body" id="modal-body-content"></div>
+									<div id="modal-body-content"></div>
 								</div>
 							</div>
 						
@@ -425,7 +432,15 @@ a:visited {
 							<input type="hidden" class="form-control" name="guserId" id="guserId">
 							<input type="hidden" class="form-control" name="gatherState" id="gatherState">
 							<input type="hidden" class="form-control" name="gatherNo" id="gatherNo">
-							
+						
+
+						<!-- 이미지 올리기  -->
+						<div class="form-group">
+							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
+							<div class="col-sm-7">
+								<input id="gatherImg" type="file" name="gatherImg" >
+							</div>
+						</div>
 							
 						<div class="form-group">
 							<!-- 입력항목이름 -->
@@ -544,17 +559,8 @@ a:visited {
 						<!-- 모집분류  -->
 						<div class="form-group">
 							<label for="Name" class="col-sm-2 control-label">상세정보</label>
-							<div class="col-sm-7">
-								<textarea id="gatherContent" class="form-control" rows="5" name="gatherContent"
-									placeholder="상세내용을 입력해 주세영"></textarea>
-							</div>
-						</div>
-
-						<!-- 이미지 올리기  -->
-						<div class="form-group">
-							<label for="Name" class="col-sm-2 control-label">썸네일 사진</label>
-							<div class="col-sm-7">
-								<input id="gatherImg" type="file" name="gatherImg" >
+							<div class="col-sm-10">
+								<textarea id="gatherContent" class="form-control" rows="5" name="gatherContent" style="width: 700px; height: 300px;"></textarea>
 							</div>
 						</div>
 
