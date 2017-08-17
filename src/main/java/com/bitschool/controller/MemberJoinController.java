@@ -94,21 +94,21 @@ public class MemberJoinController {
 	}
 	
 	// 02-1. [기업회원가입-1단계] 회원가입 1단계에 입력한 값 저장 후 >상세정보입력하는 폼으로 넘기기
-		@RequestMapping(value="/CompanyDataRegist", method=RequestMethod.POST)
-		public String CompanyDataRegist(CompanyDTO cfdto, HttpSession session, Model model) {
-			String url = null;
-			
-			// 2단계 가기 전,cdto 전체 데이터 저장
-			session.setAttribute("cfdto", cfdto);
-			System.out.println("[TEST 1단계]" + cfdto);
-			
-			model.addAttribute("cfdto", cfdto);
-			
-			// 기업상세정보선택"회원가입 2단계 폼"으로 이동
-			url = "join/JoinCompanyDetail";
-			
-			return url;
-		}
+	@RequestMapping(value = "/CompanyDataRegist", method = RequestMethod.POST)
+	public String CompanyDataRegist(CompanyDTO cfdto, HttpSession session, Model model) {
+		String url = null;
+
+		// 2단계 가기 전,cdto 전체 데이터 저장
+		session.setAttribute("cfdto", cfdto);
+		System.out.println("[TEST 1단계]" + cfdto);
+
+		model.addAttribute("cfdto", cfdto);
+
+		// 기업상세정보선택"회원가입 2단계 폼"으로 이동
+		url = "join/JoinCompanyDetail";
+
+		return url;
+	}
 	
 	// 03. [회원가입-2단계] 지역 및 카테고리 등록	
 	@RequestMapping(value = "/PersonDatailRegist", method = { RequestMethod.GET, RequestMethod.POST })
@@ -120,15 +120,15 @@ public class MemberJoinController {
 		
 		
 		// [Flag_01] 유저 코드값(A) + 회원가입 1단계 데이터
-		//System.out.println("[TEST-회원가입(2)] 1단계에서 받아온 데이터: " + pdto);		
+		System.out.println("[TEST-회원가입(2)] 1단계에서 받아온 데이터: " + pdto);		
 		boolean flagInfo = memberService.PersonDataRegist(pdto);		
 		
 		// [Flag_02] 희망 지역 삽입
-		//System.out.println("[TEST-회원가입(2)] 2단계 희망 지역: " + adto);		
+		System.out.println("[TEST-회원가입(2)] 2단계 희망 지역: " + adto);		
 		boolean flagArea = memberService.PersonAreaRegist(adto);
 		
 		// [Flag_03] 희망 카테고리 삽입 
-		//System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cdto);		
+		System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cdto);		
 		boolean flagCtg = memberService.PersonCategoryRegist(cdto);
 		
 		// [모두 TRUE] 회원가입 완료 > 메인 페이지
@@ -167,7 +167,6 @@ public class MemberJoinController {
 	@ResponseBody 
 	@RequestMapping(value="/checkDuplicatePersonIdAjax", method=RequestMethod.POST)
 	public String checkDuplicatePersonIdAjax(@RequestParam("guserId") String guserId, Model model) {
-		String url = null;
 		String result = null;
 
 		//System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + guserId);
