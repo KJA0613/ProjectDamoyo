@@ -162,7 +162,7 @@ public class MemberLoginController {
 	
 	// 02. [개인&기업회원] 로그아웃 (세션 유지 해제)
 	@RequestMapping(value = "/Logout", method = RequestMethod.GET)
-	public String Logout(HttpSession session, @RequestParam("preURL") String preURL) {
+	public String Logout(HttpSession session) {
 		String url = null;
 
 		// guser가 선택한 것을 담아놓은 dto를 db에 넣음
@@ -175,17 +175,6 @@ public class MemberLoginController {
 			
 			if(flag){
 				System.out.println("성공했다 짜식아");
-				int idx = preURL.indexOf('/',7);
-				String goURI = preURL.substring(idx);
-				if(goURI.length() == 2) {
-					goURI = "/";
-				}
-				url = "redirect:" + goURI;
-				url = url.substring(0, url.length()-1);
-				//System.out.println(url);
-				if(url.length() == 9) {
-					url = url + "/";
-				}
 			}
 		}
 		// 세션 초기화		
@@ -301,7 +290,8 @@ public class MemberLoginController {
 					 	return url;
 					 }
 				
-				}			
+				}		
+		
 		//개인회원비번찾기			
 		String pw = pdto.getGuserPw();
 		String id = pdto.getGuserId();

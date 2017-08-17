@@ -39,28 +39,27 @@ public class MemberDAO implements IMemberDAO {
 		return pdto;
 	}
 	
-	//[개인회원] 로그인 아이디 찾기
-		@Override
-		public PersonDTO findId(String guserEmail) throws SQLException {
-			
-			PersonDTO pdto = null;
-			
-			pdto = (PersonDTO) session.selectOne(namespace+".findID", guserEmail);
-			
-			return pdto;
-		}
-
-		//[개인회원] 로그인 비번 찾기
-		@Override
-		public PersonDTO findPW(String guserId) throws SQLException {
-
-			PersonDTO pdto = null;
-			
-			pdto = (PersonDTO)session.selectOne(namespace+".findPW",guserId);
-			
-			return pdto;
-		}
 	
+	// [개인회원] 로그인 아이디 찾기
+	@Override
+	public PersonDTO findId(String guserEmail) throws SQLException {
+		PersonDTO pdto = null;
+
+		pdto = (PersonDTO) session.selectOne(namespace + ".findID", guserEmail);
+
+		return pdto;
+	}
+
+	
+	// [개인회원] 로그인 비번 찾기
+	@Override
+	public PersonDTO findPW(String guserId) throws SQLException {
+		PersonDTO pdto = null;
+
+		pdto = (PersonDTO) session.selectOne(namespace + ".findPW", guserId);
+
+		return pdto;
+	}
 	
 	
 	// ----------------------------------------- [개인회원] 회 원 가 입 -----------------------------------------//
