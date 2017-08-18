@@ -62,90 +62,6 @@ a {
 }
 </style>
 
-<!-- [회원가입 - 데이터 유효성 검사] -->	
-<script>
-
-// [Check] Caps Lock
-
-
-// [Check_01] 이름
-function checkName() {
-	var name = document.getElementById('guserName').value;		// 이름 값
-	name = name.trim();											// 공백 제거
-	var oMsg = document.getElementById('nameMsg');				// 보낼 에러 메세지
-	
-	if(name == "") {
-		//oMsg.style.display = "block";
-	    oMsg.className = "error";
-		oMsg.innerHTML = "필수 정보입니다."
-	
-		return false;
-	}		
-}
-
-
-// [Check_02] 아이디
-function checkId() {
-	
-	// [데이터 유효성 검사1] 입력여부 확인
-	var id = document.getElementById('guserId').value;			// 아이디 값
-	var tempId = document.getElementById('guserId');
-	id = id.trim();												// 공백 제거
-	var oMsg = document.getElementById('idMsg');				// 보낼 에러 메세지
-	
-	if(id == "") {
-		oMsg.style.display = "block";
-	    oMsg.className = "error";
-		oMsg.innerHTML = "필수 정보입니다."
-	
-		return false;
-	}
-	
-	// [데이터 유효성 검사2]
-	var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
-	
-    if (!isID.test(id)) {
-		oMsg.style.display = "block";
-        oMsg.className = "error";
-        oMsg.innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
-    
-        return false;
-    }
-    
-    // [데이터 유효성 검사3] DB에 아이디 있는지 여부 판단 
-    // 서버에 보낼 데이터
-    var checkId = "guserId=" + $("#guserId").val();
-        
-    // Ajax: 비동기식 데이터 전송 방식 (URL 이동 없이 데이터만 확인해서 결과 출력 가능)
-    // [참고 사이트] : http://marobiana.tistory.com/77
-	$.ajax({
-			type : "POST",														// 서버에 반환되는 데이터 타입
-			data : checkId,														// 서버로 보낼 데이터
-			dataType: "text",													// 받을 데이터 포맷 형식													
-			url : "/join/checkDuplicatePersonIdAjax",							// 정보 요청할 URL
-			success : function(result) {										// 요청 성공하면 실행될 콜백함수
-				if (result == "OK") {
-					oMsg.className = "error gm";
-					oMsg.innerHTML = "멋진 아이디네요!";
-					document.getElementById("guserId").style.color = "blue";
-				} else {
-					oMsg.className = "error";
-					oMsg.innerHTML = "이미 사용중이거나 탈퇴한 아이디입니다.";
-					tempId.value = "";
-					tempId.focus();
-				}
-			},error : function() {
-				alert("통신오류가 발생하였습니다. 재시도 해주세요");
-			}
-	});
-}
-
-
-// [Check_03] 이메일
-
-	
-</script>
-
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
 <%@include file = "../header.jsp"%>
@@ -167,7 +83,7 @@ function checkId() {
 				<!-- 폼 가운데에 놓기 위해 디브추가함-->
 				<!-- 회원가입입력폼 : 1단계 -->
 				<!-- onblur: 요소가 마우스나 키보드 등의 컨트롤러에 의해 포커스를 잃을 때 발생 -->
-				<form action="/join/PersonDataRegist" method="post" class="form-horizontal">
+				<form action="" method="post" class="form-horizontal" id="data">
 					
 					<!-- 이름 -->
 					<div class="form-group">
@@ -191,12 +107,8 @@ function checkId() {
 							<input type="text" class="form-control" id="guserId" name="guserId" placeholder="아이디" onblur="checkId()">
 							<!-- 경고 메세지 -->
 							<div id="idMsg" class="error">
-								<!-- 에러 메세지 적용되는 부분 -->
-							</div>
-							<div id="idMsg" class="error gm">
-								<!-- 에러 메세지 적용되는 부분 -->
-							</div>		
-							
+								<!-- 에러 메세지 출력 부분 -->
+							</div>							
 						</div>						
 					</div>
 					
@@ -204,40 +116,40 @@ function checkId() {
 					<div class="form-group">
 						<label for="Password" class="col-md-2 control-label">비밀번호</label>
 						<div class="col-md-10">
-							<input type="password" class="form-control" name="guserPw" placeholder="비밀번호">
+							<input type="password" class="form-control" id="guserPw" name="guserPw" placeholder="비밀번호" onblur="checkPw1()">
+							<!-- 경고 메세지 -->
+							<div id="pwMsg1" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="pwMsg" class="error"></div>
 					</div>
 					
 					<!-- 비밀번호 확인 -->
 					<div class="form-group">
 						<label for="Password" class="col-md-2 control-label">비밀번호 확인</label>
 						<div class="col-md-10">
-							<input type="password" class="form-control" name="guserPwConfirm" placeholder="비밀번호 재입력" onkeydown="blank_key_check()" required>
+							<input type="password" class="form-control" id="guserPwConfirm" name="guserPwConfirm" placeholder="비밀번호 재입력" onblur="checkPw2()">
+							<!-- 경고 메세지 -->
+							<div id="pwMsg2" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="pwConfirmMsg" class="error"></div>
 					</div>		
 										
 					<!-- 이메일 -->
 					<div class="form-group">
 						<label for="Email" class="col-md-2 control-label">이메일</label>
 						<div class="col-md-10">
-							<input type="email" class="form-control" name="guserEmail" placeholder="abc@gmail.com" required>
+							<input type="email" class="form-control" id="guserEmail" name="guserEmail" placeholder="abc@gmail.com" onblur="checkEmail()">
+							<!-- 경고 메세지 -->
+							<div id="emailMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="emailMsg" class="error"></div>
 					</div>
 					
 					<!-- 핸드폰 번호 -->
 					<div class="form-group">
 						<label for="Phone" class="col-md-2 control-label">휴대폰 번호</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="guserPhone" placeholder="01012345678" required>
+							<input type="text" class="form-control" id="guserPhone" name="guserPhone" placeholder="01012345678" onblur="checkPhone()">
+							<!-- 경고 메세지 -->
+							<div id="mobileMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="mobileMsg" class="error"></div>
 					</div>
 					
 					<!-- 성별 -->
@@ -248,9 +160,9 @@ function checkId() {
 								<label><input type="radio" name="guserGender" value="W" checked="checked"> 여 </label> 
 								&nbsp;&nbsp; <label><input type="radio" name="guserGender" value="M"> 남 </label>
 							</div>
+							<!-- 경고 메세지 -->
+							<div id="sexMsg" class="error"></div>
 						</div>
-						<!-- 경고 메세지 -->
-						<div id="sexMsg" class="error"></div>
 					</div>
 					<hr>						
 
@@ -263,7 +175,9 @@ function checkId() {
 							</small>
 						</p>
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary">1단계 완료</button>
+							<!-- return=false > 기본 속성 무시
+						  	     check_info1() 함수에서 데이터 유효성 만족하면 페이지 넘어가는걸로 만듬 -->
+							<button type="submit" class="btn btn-primary" onclick="check_info1(); return false;">1단계 완료</button>
 						</div>
 					</div>
 					
@@ -275,6 +189,10 @@ function checkId() {
 		</div>
 	
 	
+		<!-- [회원가입(개인) 1단계 JS - 데이터 유효성 검사] -->	
+		<script src="/resources/script/js/joinPersonIntoValidation.js"></script>
+		
+		
 		<!-- [Footer] 페이지 하단 (고정화면) -->
 		<hr>
 		<%@include file = "../footer.jsp"%>

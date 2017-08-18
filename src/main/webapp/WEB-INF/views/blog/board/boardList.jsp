@@ -35,7 +35,11 @@
 			<tr>
 				<td colspan="2" style="border-style: hidden;"><h4>자유게시판</h4></td>
 				<td colspan="3" style="border-style: hidden;">
-					<button class="btn btn-primary" onclick="location.href='/blog/board/viewRegist'" style="float: right;">새 글 쓰기</button>
+					<c:choose>
+					<c:when test = "${null ne pdto.guserId}">
+						<button class="btn btn-primary" onclick="location.href='/blog/board/viewRegist'" style="float: right;">새 글 쓰기</button>
+					</c:when>				
+					</c:choose>
 				</td>
 			</tr>
 			<tr>

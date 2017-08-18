@@ -28,18 +28,7 @@
 
 		<%@ include file="./includeSub.jspf" %>
 		
-		<div style="margin-left: 300px;">
-			<c:forEach var="gathering" items="${list2}">
-				<li>${gathering.name}</li><br/>
-			</c:forEach>
-		</div>
-
-		<!-- Page Content -->
-		<div id="page-content-wrapper" style="background: #f1f1f1; padding-left: 100px; height: 1040px; border-style: solid;">
-			<c:forEach var="dto" items="${list}">
-				<li>${dto.gatherSubject}</li>><br/>
-			</c:forEach>
-		</div>
+	</div>
 	<!-- /#wrapper -->
 
 	<!-- jQuery -->

@@ -49,8 +49,8 @@ public class BReplyDTO {
 	
 	@Override
 	public String toString() {
-		return "ReplyDTO [replyNo=" + replyNo + ", replyContents=" + replyContents + ", replyDate=" + replyDate
-				+ ", postNo=" + postNo + ", replyUserId=" + replyUserId + "]";
+		return "BReplyDTO [replyNo=" + replyNo + ", replyContents=" + replyContents + ", replyDate=" + replyDate
+				+ ", postNo=" + postNo + ", replyUserId=" + replyUserId + ", boardName=" + boardName + "]";
 	}
 }
 

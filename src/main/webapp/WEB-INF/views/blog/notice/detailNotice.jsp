@@ -66,7 +66,11 @@
 				<tr>
 					<td style="border-left-style: hidden; border-top-style: hidden;"><h4>공지사항</h4></td>
 					<td style="border-right-style: hidden; border-top-style: hidden; padding-right: 0px;">
-						<a href="/blog/notice/viewRegist"><button type="button" class="btn btn-primary" style="float: right;">새 글 쓰기</button></a>
+						<c:choose>
+							<c:when test = "${null ne pdto.guserId}">
+								<a href="/blog/notice/viewRegist"><button type="button" class="btn btn-primary" style="float: right;">새 글 쓰기</button></a>
+							</c:when>
+						</c:choose>
 					</td>
 				</tr>
 				<tr>
@@ -99,8 +103,12 @@
 			<input type="hidden" name="query" id="query" value="${query}">
 			<div style="padding-left: 19px; margin-left: 30px">
 				<button class="btn btn-success" onclick="go_url(1)">목록</button>
-				<button class="btn btn-warning" onclick="go_url(2)">수정</button>
-				<button class="btn btn-danger" onclick="go_url(3)">삭제</button>
+				<c:choose>
+					<c:when test = "${authFlag == true}">
+						<button class="btn btn-warning" onclick="go_url(2)">수정</button>
+						<button class="btn btn-danger" onclick="go_url(3)">삭제</button>
+					</c:when>
+				</c:choose>
 			</div>
 		</form>
 		
@@ -117,31 +125,50 @@
 					<i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
 					${reply.replyUserId}
 				</td>
-				<td></td>
+				<form action="" method="POST" id="${reply.replyNo}">
+					<input type="hidden" name="replyNo" value="${reply.replyNo}"/>
+					<input type="hidden" name="boardName" value="free"/>
+					<input type="hidden" name="postNo" value="${post.postNo}"/>
+					<input type="hidden" name="page" id="page" value="${page}">
+				</form>
+				<td>
+					<c:choose>
+					<c:when test = "${pdto.guserId == reply.replyUserId}">
+					<a href="javascript:modifyReply(${reply.replyNo});" style="float: right; margin-left: 20px;">수정</a>
+					<a href="javascript:removeReply(${reply.replyNo});" style="float: right;">삭제</a>
+					</c:when>
+					</c:choose>
+				</td>
 			</tr>
 			<tr style="height: 120px;">
-				<td>${reply.replyContents}</td>
+				<td>
+					<input type="text" id="replyCon" value="${reply.replyContents}" style="border-style: none;" readonly="readonly" />
+				</td>
 				<td></td>
 			</tr>
 			</c:forEach>
 		</table>
 		
-		<form action="/blog/notice/reply" method="POST" style="margin-top: 70px">
-			<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc;">
-				<tr>
-					<td style="border: solid 1px #ccc; width: 600px;">
-						<input type="text" name="replyUserId" style="margin-bottom: 10px">
-						<textarea class="form-control" rows="5" placeholder="comment" name="replyContents" ></textarea>
-					</td>
-					<td style="float: right; padding-top: 130px;">
-						<button class="btn btn-success" style="margin-left: 0px">작성</button>
-						<input type="hidden" name="replyNo" value="${post.replyCounts+1}">
-						<input type="hidden" name="postNo" value="${post.postNo}">
-						<input type="hidden" name="page" id="page" value="${page}">						
-					</td>
-			</tr>
-		</table>
-	</form>
+		<c:choose>
+		<c:when test = "${null ne pdto.guserId}">
+				<form action="/blog/notice/reply" method="POST" style="margin-top: 70px">
+					<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc;">
+						<tr>
+							<td style="border: solid 1px #ccc; width: 600px;">
+								<input type="text" name="replyUserId" value="${pdto.guserId}" style="margin-bottom: 10px; border-style: none;" readonly="readonly">
+								<textarea class="form-control" rows="5" placeholder="comment" name="replyContents" ></textarea>
+							</td>
+							<td style="float: right; padding-top: 130px;">
+								<button class="btn btn-success" style="margin-left: 0px">작성</button>
+								<input type="hidden" name="replyNo" value="${post.replyCounts+1}">
+								<input type="hidden" name="postNo" value="${post.postNo}">
+								<input type="hidden" name="page" id="page" value="${page}">						
+							</td>
+					</tr>
+				</table>
+			</form>
+		</c:when>
+		</c:choose>
 	</div>
 	<!-- /#wrapper -->
 

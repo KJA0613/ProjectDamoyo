@@ -38,4 +38,14 @@ public class BReplyDAO {
 		return list;
 	}
 
+	public boolean deleteReply(BReplyDTO reply) {
+		boolean flag = false;
+		System.out.println(reply);
+		int aCnt = session.delete(namespace+".deleteReply", reply);
+		if(aCnt > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
 }

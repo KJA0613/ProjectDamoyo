@@ -94,21 +94,21 @@ public class MemberJoinController {
 	}
 	
 	// 02-1. [기업회원가입-1단계] 회원가입 1단계에 입력한 값 저장 후 >상세정보입력하는 폼으로 넘기기
-		@RequestMapping(value="/CompanyDataRegist", method=RequestMethod.POST)
-		public String CompanyDataRegist(CompanyDTO cfdto, HttpSession session, Model model) {
-			String url = null;
-			
-			// 2단계 가기 전,cdto 전체 데이터 저장
-			session.setAttribute("cfdto", cfdto);
-			System.out.println("[TEST 1단계]" + cfdto);
-			
-			model.addAttribute("cfdto", cfdto);
-			
-			// 기업상세정보선택"회원가입 2단계 폼"으로 이동
-			url = "join/JoinCompanyDetail";
-			
-			return url;
-		}
+	@RequestMapping(value = "/CompanyDataRegist", method = RequestMethod.POST)
+	public String CompanyDataRegist(CompanyDTO cfdto, HttpSession session, Model model) {
+		String url = null;
+
+		// 2단계 가기 전,cdto 전체 데이터 저장
+		session.setAttribute("cfdto", cfdto);
+		System.out.println("[TEST 1단계]" + cfdto);
+
+		model.addAttribute("cfdto", cfdto);
+
+		// 기업상세정보선택"회원가입 2단계 폼"으로 이동
+		url = "join/JoinCompanyDetail";
+
+		return url;
+	}
 	
 	// 03. [회원가입-2단계] 지역 및 카테고리 등록	
 	@RequestMapping(value = "/PersonDatailRegist", method = { RequestMethod.GET, RequestMethod.POST })
@@ -163,11 +163,13 @@ public class MemberJoinController {
 	}
 	
 	
-	// 04. [회원가입 - 데이터 유효성 검사] 아이디 중복 체크
+	
+	// ---------------------------------------- [개인&기업 회원] 아이디 중복 체크 ----------------------------------------//
+	
+	// 04-01. [개인회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
 	@ResponseBody 
 	@RequestMapping(value="/checkDuplicatePersonIdAjax", method=RequestMethod.POST)
 	public String checkDuplicatePersonIdAjax(@RequestParam("guserId") String guserId, Model model) {
-		String url = null;
 		String result = null;
 
 		//System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + guserId);
@@ -184,6 +186,29 @@ public class MemberJoinController {
 		}
 		
 		return result;		
+	}
+	
+	
+	// 04-02. [기업회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/checkDuplicateCompanyIdAjax", method = RequestMethod.POST)
+	public String checkDuplicateCompanyIdAjax(@RequestParam("comId") String comId, Model model) {
+		String result = null;
+
+		//System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + comId);
+
+		// DB에 저장된 아이디랑 비교
+		result = memberService.checkDuplicateCompanyId(comId);
+		//System.out.println("[TEST] DB Data(DB에 저장된 결과): " + result);
+
+		// 입력한 id = DB에 조회한 id
+		if (result == null) { // 가입 가능한 아이디
+			result = "OK";
+		} else { // 중복 된 아이디
+			result = "FAIL";
+		}
+
+		return result;
 	}
 
 }

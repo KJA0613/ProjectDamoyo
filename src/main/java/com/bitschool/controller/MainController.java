@@ -12,8 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bitschool.dto.BTempDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
+import com.bitschool.helper.Gathering;
+import com.bitschool.helper.Recommend;
+import com.bitschool.service.BTempService;
 import com.bitschool.service.IPlaceService;
 
 // [메인] - 메인페이지 이동
@@ -27,7 +31,13 @@ public class MainController {
 	
 	// [주입] 서비스 인터페이스
 	@Inject
-	private IPlaceService placeService;	
+	private IPlaceService placeService;
+	
+	@Inject
+	private BTempService tService;
+	
+	@Inject
+	private Recommend recom;
 	
 	//---------------------------------------- 메 인 페 이 지  ----------------------------------------//
 
@@ -40,8 +50,14 @@ public class MainController {
 		// 메인페이지에 모임 장소 최신날짜로 6개 가져오기
 		placeList = placeService.getPlaceRecentInfo();
 		
-		model.addAttribute("plList", placeList);
+		////////////////////////////////////////////////////////////////////////////////////////
+		List<BTempDTO> list = tService.listAll();
+		//List<Gathering> list2 = recom.startReccomend();
+		//model.addAttribute("list2", list2);
+		//model.addAttribute("list", list);
+		////////////////////////////////////////////////////////////////////////////////////////
 		
+		model.addAttribute("plList", placeList);
 		url = "DamoyoMain";
 		
 		return url;

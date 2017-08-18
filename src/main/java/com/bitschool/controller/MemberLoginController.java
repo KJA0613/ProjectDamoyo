@@ -90,6 +90,11 @@ public class MemberLoginController {
 				goURI = "/";
 			}
 			url = "redirect:" + goURI;
+			url = url.substring(0, url.length()-1);
+			//System.out.println(url);
+			if(url.length() == 9) {
+				url = url + "/";
+			}
 			//로그인하고나서 바로 전 페이지로 돌아가기
 			
 			model.addAttribute("pdto",pdto);
@@ -176,7 +181,7 @@ public class MemberLoginController {
 		session.invalidate();
 
 		// 로그아웃 된 상태로 메인 페이지 이동 (reload)
-		url = "redirect:/";
+		//url = "redirect:/";
 
 		return url;
 	}
@@ -285,7 +290,8 @@ public class MemberLoginController {
 					 	return url;
 					 }
 				
-				}			
+				}		
+		
 		//개인회원비번찾기			
 		String pw = pdto.getGuserPw();
 		String id = pdto.getGuserId();
