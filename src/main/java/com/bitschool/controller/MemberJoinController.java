@@ -100,7 +100,7 @@ public class MemberJoinController {
 
 		// 2단계 가기 전,cdto 전체 데이터 저장
 		session.setAttribute("cfdto", cfdto);
-		System.out.println("[TEST 1단계] " + cfdto);
+		//System.out.println("[TEST 1단계] " + cfdto);
 
 		model.addAttribute("cfdto", cfdto);
 
