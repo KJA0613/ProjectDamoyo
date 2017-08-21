@@ -2,7 +2,7 @@
  *  [개인] 회원가입 1단계 > 데이터 유효성 검사
  */
 
-// 1단계 유효성 전체 함수 관리
+// [전체 함수 관리] 1단계 유효성 검사
 function check_info1() {
 	// 유효성 체크 함수들
 	checkName();
@@ -16,14 +16,14 @@ function check_info1() {
 	var data = document.getElementById('data');
 	
 	// 유효성에 적합한 값 입력 시, 2단계로 데이터 전송
-	if(checkName() && checkId() && checkPw1() && checkPw2() && checkEmail() && checkPhone()) {
+	if(checkName() && checkId() && checkPw1() && checkPw2() && checkEmail() && checkPhone()) {	
 		var url = '/join/PersonDataRegist';
 		
 		data.action = url;
 		data.submit();
-	}
-		
+	}		
 }
+
 
 // [Check_01] 이름 (중복 허용)
 function checkName() {
@@ -43,7 +43,6 @@ function checkName() {
 	
 	
 	// [데이터 유효성 검사2] 유효 문자 제한 (한글과 영문만 가능)
-	//var isName = /^[0-9]*$/;
 	var isName = /^[가-힣a-zA-Z]+$/;
 	
 	if(!isName.test(name)) {

@@ -18,7 +18,7 @@
 <!-- JQuery CDN -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<title>개인회원가입-1단계</title>
+<title>기업회원가입-1단계</title>
 
 <!-- 헤더 폼 CSS -->
 <style type="text/css">
@@ -145,7 +145,7 @@ a {
 					<div class="form-group">
 						<label for="Phone" class="col-md-2 control-label">연락처</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" id="comPhone" name="comPhone" placeholder="기업 또는 담당자의 연락처" onblur="checkPhone()">
+							<input type="text" class="form-control" id="comPhone" name="comPhone" placeholder="기업 또는 담당자의 연락처 ('-' 없이 입력)" onblur="checkPhone()">
 							<!-- 경고 메세지 -->
 							<div id="mobileMsg" class="error"></div>
 						</div>
@@ -178,7 +178,7 @@ a {
 	
 	
 		<!-- [회원가입(기업) 1단계 JS - 데이터 유효성 검사] -->	
-		<script src="/resources/script/js/JoinCompanyInto.js"></script>
+		<script src="/resources/script/js/joinCompanyIntoValidation.js"></script>
 	
 		<!-- [Footer] 페이지 하단 (고정화면) -->
 		<hr>

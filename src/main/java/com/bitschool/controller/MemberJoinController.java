@@ -64,7 +64,7 @@ public class MemberJoinController {
 	
 	//01-1. 회원가입 유형 > 기업회원: value = B (name값: 'company' 넘어옴)
 	@RequestMapping(value="/JoinChoiceCheck2", method=RequestMethod.POST)
-	public String JoinChoiceCheck2(@RequestParam("company") String company, CompanyDTO cdto,Model model){
+	public String JoinChoiceCheck2(@RequestParam("company") String company, CompanyDTO cdto, Model model){
 		String url = null;
 		
 		// cdto에 comCode값(B) > 새로 저장
@@ -100,7 +100,7 @@ public class MemberJoinController {
 
 		// 2단계 가기 전,cdto 전체 데이터 저장
 		session.setAttribute("cfdto", cfdto);
-		System.out.println("[TEST 1단계]" + cfdto);
+		System.out.println("[TEST 1단계] " + cfdto);
 
 		model.addAttribute("cfdto", cfdto);
 
@@ -140,11 +140,13 @@ public class MemberJoinController {
 	}
 	
 	// 03-1. [기업회원가입-2단계] 기업상세정보 등록	
-	@RequestMapping(value = "/CompanyDetailRegist", method = { RequestMethod.GET, RequestMethod.POST })
-	public String CompanyDetailRegist(CompanyDTO cdto ,HttpSession session, Model model){
-
+	@RequestMapping(value = "/CompanyDetailRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String CompanyDetailRegist(CompanyDTO cdto, HttpSession session, Model model){
+		String url = null;
+		
+		//System.out.println("받아온 cdto: " + cdto);
 		CompanyDTO cfdto = (CompanyDTO) session.getAttribute("cfdto");
-	
+		
 		cdto.setComManager(cfdto.getComManager());
 		cdto.setComId(cfdto.getComId());
 		cdto.setComPw(cfdto.getComPw());
@@ -152,13 +154,15 @@ public class MemberJoinController {
 		cdto.setComPhone(cfdto.getComPhone());
 		cdto.setComCode(cfdto.getComCode());
 		
-		String url = null;
+		//System.out.println("cdto " + cdto);
+		//System.out.println("cfdto " + cfdto);
 		
 		boolean flagInsert = memberService.CompanyRegist(cdto);
-				
+
 		if(flagInsert){
 			url="redirect:/";
 		}
+		
 		return url;
 	}
 	

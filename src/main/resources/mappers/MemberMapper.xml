@@ -96,8 +96,8 @@
 		<selectKey keyProperty="comNo" resultType="int" order="BEFORE">
 			select companySeq.nextval from dual
 		</selectKey>
-		insert into company(comNo, comId, comPw, comName, comPhone,  comEmail, comManager,comSaNo,comZoneCode,comRoadAddress,comJibunAddress,comDetailAddress,comCeoName,comCode) 
-		values(#{comNo}, #{comId}, #{comPw}, #{comName}, #{comPhone},  #{comEmail}, #{comManager}, #{comSaNo},#{comZoneCode},#{comRoadAddress},#{comJibunAddress},#{comDetailAddress},#{comCeoName},#{comCode})
+		insert into company(comNo, comId, comPw, comName, comPhone,  comEmail, comManager, comSaNo, comZoneCode, comRoadAddress, comJibunAddress, comDetailAddress, comCeoName, comCode) 
+		values(#{comNo}, #{comId}, #{comPw}, #{comName}, #{comPhone}, #{comEmail}, #{comManager}, #{comSaNo}, #{comZoneCode}, #{comRoadAddress}, #{comJibunAddress}, #{comDetailAddress}, #{comCeoName}, #{comCode})
 	</insert>
 	
 	<!-- [기업회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크 -->

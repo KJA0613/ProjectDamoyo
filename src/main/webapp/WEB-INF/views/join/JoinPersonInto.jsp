@@ -103,12 +103,9 @@ a {
 						<label for="Id" class="col-md-2 control-label">아이디</label>
 			
 						<div class="col-md-10">
-							<!-- 입력칸크기 -->
 							<input type="text" class="form-control" id="guserId" name="guserId" placeholder="아이디" onblur="checkId()">
 							<!-- 경고 메세지 -->
-							<div id="idMsg" class="error">
-								<!-- 에러 메세지 출력 부분 -->
-							</div>							
+							<div id="idMsg" class="error"></div>							
 						</div>						
 					</div>
 					
