@@ -11,7 +11,7 @@ $(function() {
 		var href = $(event.relatedTarget); /* 모달 윈도우를 오픈하는 버튼 */
 		var no = href.data('no'); /*  href태그에서 data- 값을 변수에 저장 */
 		var subject = href.data('subject'); /*  href태그에서 data- 값을 변수에 저장 */
-		
+				
 		var categorytop = href.data('categorytop'); /*  href태그에서 data- 값을 변수에 저장 */
 		var categorymid = href.data('categorymid'); /*  href태그에서 data- 값을 변수에 저장 */
 		var categorybot = href.data('categorybot'); /*  href태그에서 data- 값을 변수에 저장 */
@@ -22,7 +22,7 @@ $(function() {
 		
 		var day = href.data('day');
 		
-		var parti = href.data('parti'); /*  href태그에서 data- 값을 변수에 저장 */
+		/*var parti = href.data('parti');   href태그에서 data- 값을 변수에 저장 */
 		var partimax = href.data('partimax');
 
 		var areatop = href.data('areatop'); /*  href태그에서 data- 값을 변수에 저장 */
@@ -32,7 +32,7 @@ $(function() {
 		var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
 		var id = href.data('id'); 
 		var state = href.data('state'); 
-		
+				
 		var DATA = {
 			"category" : categorybot,
 			"area" : area,
@@ -52,15 +52,32 @@ $(function() {
 			cache : false,
 			data : DATA,
 			success : function(data) {
+				// 디비조회해서 이미지 바꾸는 부분
 				var changeImg;
-				
 				if(data.result === 'yes'){
 					changeImg ="/resources/image/icon/img_heart_after.png";
 				}else{
 					changeImg = "/resources/image/icon/img_heart_before.png";
 				}
-
 				$('#imgchange').attr('src', changeImg);
+				
+				// 참가인원수 구함
+				modal.find('#modal-body-parti').text(data.gpdtoSize); // 참가인원 뿌리기
+				
+				// 참가인원 구함
+				
+				var str;
+				
+				$.each(data.gpdto, function(index, gpdto) {
+					if(index=='0'){
+						str = gpdto.guserId
+					}else{
+						str += ", "+gpdto.guserId
+					}
+				})
+				
+				modal.find('#modal-body-partiname').text(str);
+				
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
@@ -78,6 +95,7 @@ $(function() {
 			}
 		}
 		
+		
 		modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-subject').text(subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-categorytop').text(categorytop); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
@@ -88,7 +106,6 @@ $(function() {
 		modal.find('#modal-body-edate').text(edate); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-areatop').text(areatop); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-area').text(area); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
-		modal.find('#modal-body-parti').text(parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-day').text(day); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-content').html(content); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		//$('#modal-body-content').attr('text', content);
@@ -151,13 +168,35 @@ $(function() {
 	
 	});
 	
-	/* 수정버튼 눌렀을때 수정하는 모달 켜기 */
-    //전역변수
+	$('#gatherApply').click(function(){
+		
+		// 인쟈 이겨시 ajax로 데이터 전송, 필요한건 로그인 정보와 게시글 정보
+		var no = $('#modal-body-no').text(); // 작성글 번호
+		var info = {"no" : no};
+		
+		$.ajax({
+			url : '/gather/gatherApplyPeople',
+			dataType : 'json',
+			typoe : 'POST',
+			cache : false,
+			data : info,
+			success : function(data){
+				if(data.result=='yes'){
+					alert('신청하였습니다.');
+				}else{
+					alert('이미 신청된 회원입니다.');
+				}
+				
+			},
+			error : function(request, status, error){
+				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+			}
+		});
+	});
+	
+	
+    // 스마트에디터에 필요한 전역변수
 	var obj = [];              
-    //스마트에디터 프레임생성
-	
-    	
-	
 	
 	/* 수정버튼 눌렀을때 수정하는 모달 켜기 */
 	$('#gatherModify').click(function() {
@@ -205,7 +244,8 @@ $(function() {
 		$('#gatherEdate').val(edate);
 		$('#gatherPartiMax').val(partimax);
 		$('#gatherContent').val(content);
-		
+
+	    //스마트에디터 프레임생성
 		nhn.husky.EZCreator.createInIFrame({
 	        oAppRef: obj,
 	        elPlaceHolder: "gatherContent",
@@ -325,6 +365,11 @@ $(function() {
 			}
 		}
 	});
+	
+	/* 모달 수정창에서 close버튼 누르면 obj = [] 하기 - 이거 효과없음.. */
+/*	$("#gatherModifyClose").click(function(){
+//		obj.getById["gatherContent"].exec("UPDATE_CONTENTS_FIELD", []);
+	});*/
 });
 
 
@@ -347,11 +392,11 @@ function imgChange(guser){
 
 /* 모달수정창 - 완료시 빈칸체크하기 */
 function form_check(){
-	 var content = $("#gatherContent").val();
+//	 var content = $("#gatherContent").val();
 	 
-	 if(!content){ /*  !content 이뜻은 스크립트에서 값이 null 일때는 false를 반환하기 때문에 !false == true임 */
-		 alert("생각 좀 하고 빈칸 채우렴.");
-	 }else{
-		 $("#gMake").submit();
-	 }
+//	 if(!content){ /*  !content 이뜻은 스크립트에서 값이 null 일때는 false를 반환하기 때문에 !false == true임 */
+//		 alert("생각 좀 하고 빈칸 채우렴.");
+//	 }else{
+//		 $("#gMake").submit();
+//	 }
 }

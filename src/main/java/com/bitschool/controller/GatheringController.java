@@ -1,5 +1,7 @@
 package com.bitschool.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
@@ -54,43 +57,36 @@ public class GatheringController {
 		CompanyDTO cdto = (CompanyDTO)session.getAttribute("cdto");
 		
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
+				
+		List<GatheringDTO> recommList = gService.getRecommDefault(); // 추천글 가져옴
 		
-		List<GatheringDTO> recommList = gService.getRecommDefault();
-		
-		if(cdto==null){		
-			if (pdto != null) { // 로그인 중이면
+		/*if(cdto==null){		
+			if (pdto != null) { // 로그인 중이면 디폴트 추천 검색을 함
 				model.addAttribute("pdto", pdto);
 
-				recommList = gService.getRecommendUser(pdto.getGuserId()); // 사용자
-																			// 추천
-																			// 리스트
-				// 사용자 정보에 따른 추천글 가져옴
-				// 그리고 jsp로 모델을 보냄
-
+				recommList = gService.getRecommendUser(pdto.getGuserId());
 				if (recommList.size() == 0) { // 사용자 추천 리스트가 없으면
 					recommList = gService.getRecommDefault();// 디폴트 추천검색
 				}
 			}
-
-			if (gList != null) {
-				model.addAttribute("gath", gList);
-			}
-		}
+		}*/
 		
-		if(pdto!=null){ // 로그인 중이면
-			model.addAttribute("pdto", pdto);
-			List<GatheringDTO> recommListCopy = recommList;
-			
-			recommList = gService.getRecommendUser(pdto.getGuserId()); //사용자 추천 리스트
-			// 사용자 정보에 따른 추천글 가져옴
-			// 그리고 jsp로 모델을 보냄
-			
-			if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
-				recommList = recommListCopy;// 디폴트 추천검색
-
+		if(cdto==null){
+			if(pdto!=null){ // 로그인 중이면 사용자에 맞는 추천검색을 함
+				model.addAttribute("pdto", pdto);
+				List<GatheringDTO> recommListCopy = recommList;
+				
+				recommList = gService.getRecommendUser(pdto.getGuserId()); //사용자 추천 리스트
+				// 사용자 정보에 따른 추천글 가져옴
+				// 그리고 jsp로 모델을 보냄
+				
+				if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
+					recommList = recommListCopy;// 디폴트 추천검색
+	
+				}
+	
+				model.addAttribute("recomm", recommList);
 			}
-
-			model.addAttribute("recomm", recommList);
 		}
 		
 		if(pdto==null){
@@ -111,10 +107,12 @@ public class GatheringController {
 			if (gList != null) {
 				model.addAttribute("gath", gList);
 			}
-
 			model.addAttribute("recomm", recommList);
 		}
 		
+		if (gList != null) {
+			model.addAttribute("gath", gList);
+		}
 		return url;
 	}
 
@@ -249,7 +247,7 @@ public class GatheringController {
 		return url;
 	}
 	
-	// 올린파일을 내부에 저장하는 메서드
+	// 네이버 에디터로 올린 이미지파일을 내부에 저장하는 메서드
 	@RequestMapping(value = "/gatherImg", method = RequestMethod.POST)
 	public @ResponseBody String multiplePhotoUpload(HttpServletRequest request) {
 		// 파일정보
@@ -293,7 +291,10 @@ public class GatheringController {
 	
 	// 모집글 디비에 삽입하는 메서드
 	@RequestMapping(value="/gatheringInsert",method={RequestMethod.GET, RequestMethod.POST})
-	public String gatheringInsert(HttpServletRequest req){
+	public String gatheringInsert(
+			HttpServletRequest req,
+			HttpSession session
+			){
 		String url = null;
 		int checkType = 0;
 		
@@ -387,6 +388,8 @@ public class GatheringController {
 						gath.setGatherContent(item.getString("UTF-8"));
 					} else if(item.getFieldName().equals("guserId")){
 						gath.setGuserId(item.getString("UTF-8"));
+					} else if(item.getFieldName().equals("gatherBlog")){
+						gath.setGatherBlog(item.getString("UTF-8"));
 					}
 				}
 			} // 파일 뽑아내는 while문 쓰기
@@ -414,8 +417,15 @@ public class GatheringController {
 		if(!flag){
 			// 성공했으면 reigstBook으로 가서 등록하고 listAll로 감
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			System.out.println(gath);			
+			System.out.println(gath);
+			
+			//로그인 회원정보 == 이걸 GatehrPeople테이블에 넣을꺼임
+			PersonDTO pdto = new PersonDTO();
+			pdto = (PersonDTO) session.getAttribute("gdto");
+			
 			map.put("gath", gath);
+			map.put("pdto", pdto); // 글쓴이 정보
+			
 			flag = gService.GatheringInsert(map);
 		}
 		
@@ -467,7 +477,7 @@ public class GatheringController {
 	// 게시글 클릭했을때 사용자 클릭한 게시글의 카테고리와 지역을 db 추천테이블에 넣는것
 	// + 추가로 여기다 게시글 클릭했을때 모달로 띄우기전, 관심글 체크 유무 여부를 불러와서 리턴해야함
 	@RequestMapping(value = "/gatheringRecomm", method = { RequestMethod.GET, RequestMethod.POST })
-	public @ResponseBody HashMap<String, String>  gatheringRecomm(
+	public @ResponseBody HashMap<String, Object>  gatheringRecomm(
 			@RequestParam(value = "category", defaultValue="") String category,
 			@RequestParam(value = "area", defaultValue="") String area,
 			@RequestParam(value = "no") int gatherNo,
@@ -507,7 +517,7 @@ public class GatheringController {
 		
 		
 		/* 여기서부터는 관심글 유무를 구분함 */
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("result", "no"); // 값이 없을때는 no, result에 디폴트값으로 no를 넣는 이유는 로그인 안했을때에는 1가 나와야함으로
 						
@@ -529,6 +539,16 @@ public class GatheringController {
 				map.put("result", "yes");
 			}
 		}
+		
+		/* 여기서부터는 no를 가지고 이 글의 참여한 인원수와 인원을 가져옴 */
+		List<GatherPeopleDTO> gpdto = gService.getGatherApply(gatherNo);
+		System.out.println(gpdto);
+		if(gpdto!=null){
+			map.put("gpdto", gpdto);
+			map.put("gpdtoSize", gpdto.size());
+		}
+		
+		session.setAttribute("pdto", pdto);
 		
 		return map;
 	}
@@ -630,4 +650,33 @@ public class GatheringController {
 		return map;
 	}
 
+	@RequestMapping(value="/gatherApplyPeople", method={RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody HashMap<String, Object> gatherApplyPeople(
+			@RequestParam(value="no") int no,
+			HttpSession session
+			){
+		
+		System.out.println("people ajax들옴");
+		
+		boolean flag = false;
+				
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		System.out.println(pdto);
+		System.out.println(no);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("result", "no");
+		
+		map.put("no", no);
+		map.put("pdto", pdto);
+		
+		flag = gService.GatheringPeopleInsert(map);
+		
+		if(flag){
+			map.put("result", "yes");
+		}
+		
+		
+		return map;
+	}
 }

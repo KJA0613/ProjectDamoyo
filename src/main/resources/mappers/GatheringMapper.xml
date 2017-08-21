@@ -4,12 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitschool.GatheringMapper">
 	
+	<!-- 모든 모임글을 작성날짜 내림차순으로 가져옴 -->
 	<select id="getherAll" resultType="com.bitschool.dto.GatheringDTO">
 		select * 
 		from gather 
 		order by gatherWrite desc
 	</select>
 	
+	
+	<!-- 메인페이지에서 검색했을때 -->
 	<select id="damoyoAll" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
 		select * 
 		from gather 
@@ -23,6 +26,7 @@
 	</select>
 	
 	
+	<!-- 추천가져오는거, 추천테이블에서 로그인한 사용자가 글을 클릭한 cnt가 가장 높은것 1개을 기준으로 그거와 같은 카테고리 or 지역명을 4개만 가저옴 -->
 	<select id="recommAll" parameterType="String" resultType="com.bitschool.dto.GatheringDTO">
 		select b.* 
 		from (  select *
@@ -36,6 +40,8 @@
 		 <![CDATA[where rownum <=4]]> and (b.gathercategorybot = a.recommGatherName or b.gatherarea = a.recommGatherName)
 	</select>
 	
+	
+	<!-- 비로그인시나, 갓 회원가입했을때 나오게 하는 추천 글 -->
 	<select id="recommDefault" resultType="com.bitschool.dto.GatheringDTO">
 		select * 
 		from (  select *
@@ -48,6 +54,8 @@
 		 <![CDATA[where rownum <=4]]> and (b.GATHERCATEGORYBot = a.recommGatherName or b.GATHERAREA = a.recommGatherName)
 	</select>
 	
+	
+	<!-- 카테고리 / 지역 체크박스, 검색 했을시 결과값 출력하게 하는것  -->
 	<select id="getherCheck" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
 		
 		select * 
@@ -81,32 +89,75 @@
    	</select>
 	
 	
+	<!-- 클릭한 모집글 불러오는것 -->
 	<select id="getherOne" parameterType="int" resultType="com.bitschool.dto.GatheringDTO">
 		select * from gather where gatherNo = #{gatherNo}
 	</select>
 	
+	
+	<!-- 모집글 생성 -->
 	<insert id="insertGather" parameterType="hashmap">
-		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+		<selectKey keyProperty="gatherNo" resultType="int" order="BEFORE">
 	        select gatherseq.nextval from dual
 	    </selectKey>
 
-		insert into gather (gatherno, gathersubject, gatherCategoryTop, gatherCategoryMid, gatherCategoryBot, gatherwrite, gathersdate, gatheredate, gatherarea, gatherareatop, gatherparti, gatherpartimax, gathercontent, gatherimg, guserid, gatherday, gatherstate)
-		values(#{seq}, #{gath.gatherSubject}, #{gath.gatherCategoryTop}, #{gath.gatherCategoryMid}, #{gath.gatherCategoryBot}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherAreaTop}, #{gath.gatherParti}, #{gath.gatherPartiMax}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherDay}, '모집중')
+		insert into gather (gatherno, gathersubject, gatherCategoryTop, gatherCategoryMid, gatherCategoryBot, gatherwrite, gathersdate, gatheredate, gatherarea, gatherareatop, gatherparti, gatherpartimax, gathercontent, gatherimg, guserid, gatherday, gatherstate, gatherblog, gatherrecognition)
+		values(#{gatherNo}, #{gath.gatherSubject}, #{gath.gatherCategoryTop}, #{gath.gatherCategoryMid}, #{gath.gatherCategoryBot}, sysdate, to_date( #{gath.gatherSdate},'yyyy-mm-dd'), to_date( #{gath.gatherEdate},'yyyy-mm-dd'), #{gath.gatherArea}, #{gath.gatherAreaTop}, #{gath.gatherParti}, #{gath.gatherPartiMax}, #{gath.gatherContent}, #{gath.gatherImg}, #{gath.guserId}, #{gath.gatherDay}, '모집중', #{gath.gatherBlog}, 'yet')
 	
 	</insert>
 	
 	
+	<!-- 모집글 작성시 글쓴이 신청테이블에 정보 -->
+	<insert id="insertGatherReader" parameterType="com.bitschool.dto.GatheringDTO">
+		
+		<selectKey keyProperty="gatherNo" resultType="int" order="BEFORE">
+	        select gatherPeopleSeq.nextval from dual
+	    </selectKey>
+
+		insert into gatherpeople
+		select #{gatherNo}, gatherno, guserid, '리더', gatherwrite 
+		from
+		(
+		  select gatherno, guserid, '리더', gatherwrite 
+		  from gather
+		  where guserid = #{guserId} 
+		  order by gatherwrite desc
+		)
+		where rownum =1
+	</insert>
+	
+	
+	<!-- 모집글에서 신청하기 눌렀을때 로그인한사람 신청테이블에 정보 넣음 -->
+	<insert id="insertGatherPeople" parameterType="hashmap">
+		
+		<selectKey keyProperty="gatherPeopleNo" resultType="int" order="BEFORE">
+	        select gatherPeopleSeq.nextval from dual
+	    </selectKey>
+
+		<!-- insert into gatherpeople 
+		values (#{gatherPeopleNo}, #{no}, #{pdto.guserId}, '멤버', sysdate) -->
+		insert into gatherpeople 
+		select distinct #{gatherPeopleNo}, #{no}, #{pdto.guserId}, '멤버', sysdate
+		from gatherpeople
+		where not exists (select * from gatherpeople where gatherno = #{no} and guserId =  #{pdto.guserId})
+	</insert>
+		
+	
+	<!-- 참여중인 모임 -->
 	<select id="partiList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
 	    select * 
 		from gather a 
 		where exists (select gatherno from gatherparti b where gatherpartiid = #{guserId} and b.gatherparticode = '가입' and a.gatherno = b.gatherno)
 	</select>
 	
+	
+	<!-- 내가 만든 모임 -->
 	<select id="makeList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
 		select * from gather where guserid = #{guserId}
 	</select>
 	
 	
+	<!-- 머지문 이용하여 추천 넣기  -->
 	<update id="mergeList" parameterType="com.bitschool.dto.RecommGatherDTO">
 		
 		<selectKey keyProperty="recommgatherNo" resultType="int" order="BEFORE">
@@ -120,19 +171,20 @@
 				update set
 					recommgathercnt = recommgathercnt + 1
 			when not matched then 
-				insert (recommgatherno, recommgathername, recommgathercode, recommgathercnt, guserid, recommgatherdate)
-				values (#{recommgatherNo}, #{recommgatherName}, #{recommgatherCode}, 1, #{guserId}, sysdate)
-		
-	
+				insert (recommgatherno, recommgathername, recommgathercode, recommgathercnt, guserid, recommgatherdate, gatherno)
+				values (#{recommgatherNo}, #{recommgatherName}, #{recommgatherCode}, 1, #{guserId}, sysdate, #{gatherNo})
 	</update>
 	
 	
+	<!-- 모달 띄울때 얘가 예전이 관심글인지 아닌지를 구분함, count가 0보다 크면 예전에 눌렀기 때문에 빨강하트, 아님 하양하트 나옴 -->
 	<select id="existAddons" resultType="int" parameterType="com.bitschool.dto.GatherAddonsDTO">
 		select count(*) 
 		from gatheraddons
 		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and guserId = #{guserId} and gatheraddonswriter = #{gatherAddonsWriter}
 	</select>
 	
+	
+	<!-- 관심모임이 없으면 추가하기 -->
 	<insert id="insertAddons" parameterType="com.bitschool.dto.GatherAddonsDTO">
 		
 		<selectKey keyProperty="gatherAddonsNo" resultType="int" order="BEFORE">
@@ -149,10 +201,13 @@
 		
 	</insert>
 	 
+	
+	<!-- 관심모임이면 삭제하기 -->
 	<delete id="deleteAddons" parameterType="com.bitschool.dto.GatherAddonsDTO">
 		delete from gatheraddons
 		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and gatheraddonswriter = #{gatherAddonsWriter} and guserId = #{guserId}
 	</delete>
+	
 	
 	<select id="attendGather" resultType="com.bitschool.dto.GatheringDTO" parameterType="String">
 		select *
@@ -160,10 +215,13 @@
 		where a.gatherno in (select b.gatherno as gatherno  from GATHERADDONS b where b.guserid = #{guserId} and b.gatheraddonscode = '관심')
 	</select>
 	
+	
 	<select id="comMakeList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
 		select * from gather where guserid = #{guserId}
 	</select>
 	
+	
+	<!-- 모달 모임글 수정하기 -->
 	<update id="updateModalGather" parameterType="com.bitschool.dto.GatheringDTO" >
 		update gather 
 		set gatherSubject = #{gatherSubject}, 
@@ -184,4 +242,9 @@
 		where gatherNo = #{gatherNo}
 	</update>
 
+	
+	<!-- 모달 글 클릭시 인원정보 가져오기 -->
+	<select id="gatherPeople" parameterType="int" resultType="GatherPeopleDTO">
+		select * from gatherpeople where gatherno = #{gatherNo}
+	</select>
 </mapper>

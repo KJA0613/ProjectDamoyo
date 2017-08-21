@@ -26,6 +26,8 @@ public class GatheringDTO {
 	private String gatherImg;
 	private String guserId;
 	private String gatherState;
+	private String gatherBlog;
+	private String gatherRecognition;
 	
 	
 	public int getGatherNo() {
@@ -130,6 +132,18 @@ public class GatheringDTO {
 	public void setGatherAreaTop(String gatherAreaTop) {
 		this.gatherAreaTop = gatherAreaTop;
 	}
+	public String getGatherBlog() {
+		return gatherBlog;
+	}
+	public void setGatherBlog(String gatherBlog) {
+		this.gatherBlog = gatherBlog;
+	}
+	public String getGatherRecognition() {
+		return gatherRecognition;
+	}
+	public void setGatherRecognition(String gatherRecognition) {
+		this.gatherRecognition = gatherRecognition;
+	}
 	
 	@Override
 	public String toString() {
@@ -139,8 +153,11 @@ public class GatheringDTO {
 				+ gatherEdate + ", gatherDay=" + gatherDay + ", gatherArea=" + gatherArea + ", gatherAreaTop="
 				+ gatherAreaTop + ", gatherParti=" + gatherParti + ", gatherPartiMax=" + gatherPartiMax
 				+ ", gatherContent=" + gatherContent + ", gatherImg=" + gatherImg + ", guserId=" + guserId
-				+ ", gatherState=" + gatherState + "]";
+				+ ", gatherState=" + gatherState + ", gatherBlog=" + gatherBlog + ", gatherRecognition="
+				+ gatherRecognition + "]";
 	}
+	
+	
 	
 	
 }
