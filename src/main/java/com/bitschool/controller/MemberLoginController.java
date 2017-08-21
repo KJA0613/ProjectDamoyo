@@ -181,7 +181,7 @@ public class MemberLoginController {
 		session.invalidate();
 
 		// 로그아웃 된 상태로 메인 페이지 이동 (reload)
-		//url = "redirect:/";
+		url = "redirect:/";
 
 		return url;
 	}

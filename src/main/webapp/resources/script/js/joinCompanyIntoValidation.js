@@ -1,8 +1,8 @@
 /**
- *  [기업] 회원가입 1단계 > 데이터 유효성 검사
+ *  [광고주] 회원가입 1단계 > 데이터 유효성 검사
  */
 
-//1단계 유효성 전체 함수 관리
+// [전체 함수 관리] 1단계 유효성 검사
 function check_info1() {
 	// 유효성 체크 함수들
 	checkName();
@@ -25,6 +25,7 @@ function check_info1() {
 		
 }
 
+
 // [Check_01] 이름 (중복 허용)
 function checkName() {
 	var name = document.getElementById('comManager').value;						// 이름 값
@@ -43,7 +44,6 @@ function checkName() {
 	
 	
 	// [데이터 유효성 검사2] 유효 문자 제한 (한글과 영문만 가능)
-	//var isName = /^[0-9]*$/;
 	var isName = /^[가-힣a-zA-Z]+$/;
 	
 	if(!isName.test(name)) {
@@ -121,9 +121,9 @@ function checkId() {
 					
 					return false;
 				}
-			}, error : function(request, status, error){														// 에러가 어디서 발생했는지 무슨 에러인지 알려줌
+			}/*, error : function(request, status, error){														// 에러가 어디서 발생했는지 무슨 에러인지 알려줌
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			// [참고 사이트] http://shonm.tistory.com/454
-		    }
+		    }*/
 	});
     
 	return true;
@@ -272,21 +272,21 @@ function checkPhone() {
 	}	
 	
 	// [데이터 유효성 검사2] 회사 번호 혹은 핸드폰 번호
-	var isPhone =  /^0([1-9]{2,3})?([0-9]{3,4})?([0-9]{4})$/;
-		
+	var isPhone = /^(01[016789]{1}|070|02|0[3-9]{1}[0-9]{1})?[0-9]{3,4}?[0-9]{4}$/;
+
     if (!isPhone.test(phone)) {
-		oMsg.style.display = "block";
+    	oMsg.style.display = "block";
         oMsg.className = "error";
-        oMsg.innerHTML = "회사번호 혹은 개인 연락처만 입력 가능합니다. (숫자)";
+        oMsg.innerHTML = "잘못된 전화번호입니다. '-'없이 숫자만 입력해주세요. 예) 010-XXXX-XXXX";
         document.getElementById("mobileMsg").style.color = "red";
-        
+
         tempPhone.value = "";
         tempPhone.focus();
         
-        return false;
-    } else {
-    	oMsg.style.display = "none";
-    }		
+        return false;		
+    } else {        
+        oMsg.style.display = "none";
+    }	
 	
     return true;
 }
