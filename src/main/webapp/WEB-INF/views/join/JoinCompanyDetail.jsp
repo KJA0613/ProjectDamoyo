@@ -121,7 +121,7 @@ a {
 </script>
 
 <!-- [Header2] Navigation Bar로 구현 > 로그인 폼 페이지 > 아무것도 안 보이게 하기  -->
-<%@include file = "../header.jsp"%>
+<%@include file = "../header2.jsp"%>
 
 </head>
 
