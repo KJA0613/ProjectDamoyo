@@ -83,12 +83,12 @@ public class AdminController {
 		
 		}
 		
-		// 03. 카테고리 관리
+	/*	// 03. 카테고리 관리
 		@RequestMapping(value = "/category",method = {RequestMethod.POST,RequestMethod.GET})
 		public String category(){
 			String url = null;
 			url = "admin/category";
 			return url;
-		}
+		}*/
 	
 	}

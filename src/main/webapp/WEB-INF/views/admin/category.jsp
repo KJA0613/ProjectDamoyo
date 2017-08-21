@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
+<!-- JQuery CDN -->
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
 <link rel="apple-touch-icon" sizes="76x76" href="/resources/admin/img/apple-icon.png" />
 	<link rel="icon" type="image/png" href="/resources/admin/img/favicon.png" />
@@ -28,7 +30,7 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-    
+  
 <script type="text/javascript">
 
 var catMidOne0 = new Array("-선택-",""); 
@@ -74,51 +76,29 @@ function catChangeOne(item){
     return true;
 }
 
-/*카테고리 그룹 선택 2-1  */
-function catChangeTwo(item){
+/*카테고리 그룹 선택 1-2  */
+function catMidChangeOne(item){
     var temp, i=0, j=0;
     var ccount, cselect;
 
-    temp = document.signform.catMidTwo;
-    
+  
+    temp = document.signform.catBotOne;
 
     for (i=(temp.options.length-1) ; i>0 ; i--){
        temp.options[i] = null; 
     }
-    eval('ccount = catMidTwo' + item + '.length');
+    eval('ccount = catBotOne' + item + '.length');
    
     
     for (j=0 ; j<ccount ; j++) {
-        eval('cselect = catMidTwo' + item + '[' + j + '];');
+        eval('cselect = catBotOne' + item + '[' + j + '];');
         temp.options[j]= new Option(cselect,cselect); 
     }
-    
+        
     temp.options[0].selected=true;
     return true;
 }
 
-/*카테고리 그룹 선택 3-1  */
-function catChangeThr(item){
-    var temp, i=0, j=0;
-    var ccount, cselect;
-
-    temp = document.signform.catMidThr;
-    
-
-    for (i=(temp.options.length-1) ; i>0 ; i--){
-       temp.options[i] = null; 
-    }
-    eval('ccount = catMidThr' + item + '.length');
-   
-    
-    for (j=0 ; j<ccount ; j++) {
-        eval('cselect = catMidThr' + item + '[' + j + '];');
-        temp.options[j]= new Option(cselect,cselect); 
-    }
-    
-    temp.options[0].selected=true;
-    return true;
-}
 
 </script>
    </head>
@@ -247,7 +227,7 @@ function catChangeThr(item){
 					</div>
 				</div>
 			</nav>
-
+			
 	        <div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
@@ -259,6 +239,7 @@ function catChangeThr(item){
 	                            </div>
 	                            <h4><strong>희망 카테고리</strong></h4>										
 			         <!-- 카테고리 선택 -->
+			         <form action="" method="post" name="signform" id="per">
 			         <div id=list2>
 			            <div class="dropdown">
 			               <!-- 카테고리 그룹 선택 3-1 -->
@@ -291,7 +272,7 @@ function catChangeThr(item){
 			               </table>
 			               </div>
 			               </div>
-			               
+			               </form>
 	                    	</div>
 	                	</div>
 	            	</div>
