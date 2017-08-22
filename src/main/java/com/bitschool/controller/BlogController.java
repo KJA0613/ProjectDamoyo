@@ -76,12 +76,12 @@ public class BlogController {
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home(Model model, HttpSession session) {
-//		List<BTempDTO> list = tService.listAll();
+		List<BTempDTO> list = tService.listAll();
+		
 //		List<Gathering> list2 = recom.startReccomend();
 //		model.addAttribute("list2", list2);
-//		model.addAttribute("list", list);
-		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		model.addAttribute("pdto", pdto);
+
+		//model.addAttribute("pdto", pdto);
 		
 		return "blog/home";
 	}

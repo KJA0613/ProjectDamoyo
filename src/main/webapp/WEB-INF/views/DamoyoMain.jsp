@@ -235,7 +235,7 @@
 		<!-- Page Content -->
 		</div>	
 		
-		 <div style="margin-left: 830px; border-style: solid; border-color: #b3b3b3;">
+		 <div style="margin-left: 830px; border-style: solid; border-color: #b3b3b3; border-width: thin;">
 		 	<ol>
 			<c:forEach var="dto" items="${list}">
 				<li style="text-align: left;">${dto.gatherSubject}</li>

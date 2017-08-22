@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bitschool.dto.BTempDTO;
+import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.PlaceDTO;
 import com.bitschool.helper.Gathering;
 import com.bitschool.helper.Recommend;
 import com.bitschool.service.BTempService;
+import com.bitschool.service.IMemberService;
 import com.bitschool.service.IPlaceService;
 
 // [메인] - 메인페이지 이동
@@ -37,24 +40,48 @@ public class MainController {
 	private BTempService tService;
 	
 	@Inject
+	private IMemberService memberService;	
+	
+	@Inject
 	private Recommend recom;
 	
 	//---------------------------------------- 메 인 페 이 지  ----------------------------------------//
 
 	// 01. 개인회원 메인 폼 (Connection URL)
 	@RequestMapping(value = "/", method = { RequestMethod.POST, RequestMethod.GET })
-	public String DamoyoMain(Model model) {
+	public String DamoyoMain(Model model, HttpSession session) {
 		String url = null;
+		Recommend recommend = new Recommend();
 		List<PlaceDTO> placeList = null;
 		
 		// 메인페이지에 모임 장소 최신날짜로 6개 가져오기
 		placeList = placeService.getPlaceRecentInfo();
-		
+
 		////////////////////////////////////////////////////////////////////////////////////////
+
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		List<BTempDTO> top10List;
 		List<BTempDTO> list = tService.listAll();
-		//List<Gathering> list2 = recom.startReccomend();
-		//model.addAttribute("list2", list2);
-		//model.addAttribute("list", list);
+		if(pdto == null) {
+			list = recommend.beforeLogin(list);			
+			session.setAttribute("tempList", list);
+		}
+		
+		if(pdto == null) {
+			top10List = list.subList(0, 10);
+			for(BTempDTO dto : list) {
+				System.out.println(dto);
+			}
+		} else {
+			list = (List<BTempDTO>)session.getAttribute("tempList");
+			CategoryDTO cdto = memberService.PersonHopeCategoryAll(pdto.getGuserId());
+			top10List = recommend.afterLogin(list, cdto);
+			for(BTempDTO dto : list) {
+				System.out.println(dto);
+			}
+		}
+		model.addAttribute("list", top10List);
+		
 		////////////////////////////////////////////////////////////////////////////////////////
 		
 		model.addAttribute("plList", placeList);

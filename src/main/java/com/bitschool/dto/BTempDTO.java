@@ -27,7 +27,35 @@ public class BTempDTO {
 	private String guserId;
 	private String gatherState;
 	
+	private int recomScore;
+	private int hitCnts;
+	private int wishCnts;
+	private int newBlogCnts;
 	
+	public int getHitCnts() {
+		return hitCnts;
+	}
+	public void setHitCnts(int hitCnts) {
+		this.hitCnts = hitCnts;
+	}
+	public int getWishCnts() {
+		return wishCnts;
+	}
+	public void setWishCnts(int wishCnts) {
+		this.wishCnts = wishCnts;
+	}
+	public int getNewBlogCnts() {
+		return newBlogCnts;
+	}
+	public void setNewBlogCnts(int newBlogCnts) {
+		this.newBlogCnts = newBlogCnts;
+	}
+	public int getRecomScore() {
+		return recomScore;
+	}
+	public void setRecomScore(int recomScore) {
+		this.recomScore = recomScore;
+	}
 	public int getGatherNo() {
 		return gatherNo;
 	}
@@ -130,16 +158,9 @@ public class BTempDTO {
 	public void setGatherAreaTop(String gatherAreaTop) {
 		this.gatherAreaTop = gatherAreaTop;
 	}
-	
 	@Override
 	public String toString() {
-		return "GatheringDTO [gatherNo=" + gatherNo + ", gatherSubject=" + gatherSubject + ", gatherCategoryTop="
-				+ gatherCategoryTop + ", gatherCategoryMid=" + gatherCategoryMid + ", gatherCategoryBot="
-				+ gatherCategoryBot + ", gatherWrite=" + gatherWrite + ", gatherSdate=" + gatherSdate + ", gatherEdate="
-				+ gatherEdate + ", gatherDay=" + gatherDay + ", gatherArea=" + gatherArea + ", gatherAreaTop="
-				+ gatherAreaTop + ", gatherParti=" + gatherParti + ", gatherPartiMax=" + gatherPartiMax
-				+ ", gatherContent=" + gatherContent + ", gatherImg=" + gatherImg + ", guserId=" + guserId
-				+ ", gatherState=" + gatherState + "]";
+		return "BTempDTO [gatherSubject=" + gatherSubject + ", recomScore=" + recomScore + "]";
 	}
 	
 	
