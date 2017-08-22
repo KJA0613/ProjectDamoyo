@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,72 +31,7 @@
 
 	<div class="wrapper">
 
-	    <div class="sidebar" data-color="blue" data-image="/resources/admin/img/sidebar-1.jpg">
-			<!--
-		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-		        Tip 2: you can also add an image using data-image tag
-		    -->
-
-			<div class="logo">
-				<a href="" class="simple-text">
-					DAMOYO 관리자
-				</a>
-			</div>
-
-	    	<div class="sidebar-wrapper">
-	            <ul class="nav">
-	                <li class="active">
-	                    <a href="/dashbord">
-	                        <i class="material-icons">dashboard</i>
-	                        <p>Dashboard</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="/PeopleTable">
-	                        <i class="material-icons">person</i>
-	                        <p>회원관리</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="/">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>게시판관리</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="/category">
-	                        <i class="material-icons">library_books</i>
-	                        <p>카테고리관리</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="icons.jsp">
-	                        <i class="material-icons">bubble_chart</i>
-	                        <p>통계보기</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="maps.jsp">
-	                        <i class="material-icons">location_on</i>
-	                        <p>지도</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="notifications.jsp">
-	                        <i class="material-icons text-gray">notifications</i>
-	                        <p>배너보기</p>
-	                    </a>
-	                </li>
-					<li class="active-pro">
-	                    <a href="upgrade.jsp">
-	                        <i class="material-icons">unarchive</i>
-	                        <p>Upgrade to PRO</p>
-	                    </a>
-	                </li>
-	            </ul>
-	    	</div>
-	    </div>
+	    <%@ include file="./admin_sidebar.jspf"%>
 
 	    <div class="main-panel">
 			<nav class="navbar navbar-transparent navbar-absolute">

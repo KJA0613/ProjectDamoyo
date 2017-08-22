@@ -278,9 +278,8 @@ a:visited {
 								data-day='${gath.gatherDay}'
 								data-img='${gath.gatherImg}' 
 								data-id='${gath.guserId}'
-								data-state='${gath.gatherState}'> <img
-								class='gatherimg' width="213px" height="120px"
-								src='${gath.gatherImg}'> <span class="price">${gath.gatherState}</span>
+								data-state='${gath.gatherState}'> 
+								<img class='gatherimg' width="213px" height="120px" src='${gath.gatherImg}'> <span class="price">${gath.gatherState}</span>
 								<h4 align="center">
 									<c:choose>
 										<c:when test="${fn:length(gath.gatherSubject) > 9}">
@@ -385,7 +384,7 @@ a:visited {
 							<div class="form-group">
 								<label for="modal-body-partimax" class="col-sm-2 control-label">인원</label>
 								<div class="col-sm-8">
-								<div class="modal-body">
+								<div class="modal-body" id="modalTotalParti">
 									<span id="modal-body-parti" ></span> / <span id="modal-body-partimax"></span>
 								</div>
 								</div>
@@ -414,7 +413,8 @@ a:visited {
 						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
 						<button id='gatherModify' type="button" class="btn btn-warning pull-left" style="display: none;">수정하기</button>
 						<button type="button" class="btn btn-info" data-dismiss="modal">블로그 가기</button>
-						<button id='gatherApply' type="button" class="btn btn-primary">신청</button>
+						<button id='gatherApply' type="button" class="btn btn-primary" style="display: none;">신청</button>
+						<button id='gatherComplete' type="button" class="btn btn-primary" style="display: none;">완료</button>
 					</div>				
 										
 					<!-- style="display:none;"은 히든과 같음 -->

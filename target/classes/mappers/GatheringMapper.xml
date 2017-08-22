@@ -171,8 +171,8 @@
 				update set
 					recommgathercnt = recommgathercnt + 1
 			when not matched then 
-				insert (recommgatherno, recommgathername, recommgathercode, recommgathercnt, guserid, recommgatherdate, gatherno)
-				values (#{recommgatherNo}, #{recommgatherName}, #{recommgatherCode}, 1, #{guserId}, sysdate, #{gatherNo})
+				insert (recommgatherno, recommgathername, recommgathercode, recommgathercnt, guserid, recommgatherdate)
+				values (#{recommgatherNo}, #{recommgatherName}, #{recommgatherCode}, 1, #{guserId}, sysdate)
 	</update>
 	
 	
@@ -247,4 +247,11 @@
 	<select id="gatherPeople" parameterType="int" resultType="GatherPeopleDTO">
 		select * from gatherpeople where gatherno = #{gatherNo}
 	</select>
+	
+	<!-- 모달 신청하기 눌렀을때 people테이블에 값넣고 parti에 있는값 업데이트 하기 -->
+	<update id="updateGatherParti" parameterType="hashmap">
+		update 	gather
+		set		gatherparti = (select count(*) as gatherparti from gatherpeople where gatherno = #{no}) 
+		where 	gatherno = #{no}
+	</update>
 </mapper>

@@ -1,7 +1,5 @@
 package com.bitschool.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -311,6 +309,7 @@ public class GatheringController {
  		String fileName = null;
 		try { 
 			//HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+			@SuppressWarnings("unchecked")
 			List<FileItem> list = sfu.parseRequest(new ServletRequestContext(req));
 			// List<FileItem> 객체변수인 items에다가  은 request를 받아서 다 읽어옴, 모든 태그들을 받아옴
 			// 네트웤에 관련된 작업을 개발자가 인식못하게 할려고 이렇게함
@@ -484,10 +483,14 @@ public class GatheringController {
 			@RequestParam(value = "id") String guserId, // id이지만 모집글을 쓴사람
 			HttpSession session
 			) {
-				
+
+		
+		System.out.println("no :" +gatherNo);
+		
+		
 		@SuppressWarnings("unchecked")
 		List<RecommGatherDTO> recommgatherList = (List<RecommGatherDTO>) session.getAttribute("recommgatherList");
-		
+						
 		// 로그인 사용자 정보
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		

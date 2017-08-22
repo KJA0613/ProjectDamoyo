@@ -94,7 +94,12 @@ public class GatheringDAO implements IGatheringDAO {
 		int result = session.insert(namespace+".insertGatherReader", gather);
 		
 		if(result>0){
-			flag = true;
+
+			result = session.update(namespace+".updateGatherParti", map);
+			
+			if(result>0){
+				flag = true;
+			}
 		}
 		
 		return flag;
@@ -110,7 +115,11 @@ public class GatheringDAO implements IGatheringDAO {
 		int result = session.insert(namespace+".insertGatherPeople", map);
 		
 		if(result>0){
-			flag = true;
+			result = session.update(namespace+".updateGatherParti", map);
+			
+			if(result>0){
+				flag = true;
+			}
 		}
 		
 		return flag;

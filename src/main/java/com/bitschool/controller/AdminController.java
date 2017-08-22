@@ -15,6 +15,7 @@ import com.bitschool.dto.PersonDTO;
 import com.bitschool.service.IAdminService;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 	//----------------------------------------------- 설 정 -----------------------------------------------//
 	@Inject
@@ -83,12 +84,52 @@ public class AdminController {
 		
 		}
 		
-	/*	// 03. 카테고리 관리
-		@RequestMapping(value = "/category",method = {RequestMethod.POST,RequestMethod.GET})
-		public String category(){
-			String url = null;
-			url = "admin/category";
+		
+		// 밑에는 그냥 테이블 이용하는 url
+		
+		// 03. 카테고리 관리
+		@RequestMapping(value = "/gathering", method = {RequestMethod.POST,RequestMethod.GET})
+		public String gathering(){
+			String url = "";			
+			url = "/admin/gathering";
+			
 			return url;
-		}*/
+		}
+		
+		@RequestMapping(value = "/category", method = {RequestMethod.POST,RequestMethod.GET})
+		public String category(){
+			String url = "";
+			url = "/admin/category";
+			
+			return url;
+		}
+		
+		@RequestMapping(value = "/map", method = {RequestMethod.POST,RequestMethod.GET})
+		public String map(){
+			String url = "/admin/map";
+			
+			return url;
+		}
+		
+		@RequestMapping(value = "/upgrade", method = {RequestMethod.POST,RequestMethod.GET})
+		public String upgrade(){
+			String url = "/admin/upgrade";
+			
+			return url;
+		}
+		
+		@RequestMapping(value = "/notifications", method = {RequestMethod.POST,RequestMethod.GET})
+		public String notifications(){
+			String url = "/admin/notifications";
+			
+			return url;
+		}
+		
+		@RequestMapping(value = "/user", method = {RequestMethod.POST,RequestMethod.GET})
+		public String user(){
+			String url = "/admin/user";
+			
+			return url;
+		}
 	
 	}

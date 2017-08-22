@@ -22,14 +22,14 @@ $(function() {
 		
 		var day = href.data('day');
 		
-		/*var parti = href.data('parti');   href태그에서 data- 값을 변수에 저장 */
+		var parti = href.data('parti');  
 		var partimax = href.data('partimax');
 
-		var areatop = href.data('areatop'); /*  href태그에서 data- 값을 변수에 저장 */
-		var area = href.data('area'); /*  href태그에서 data- 값을 변수에 저장 */
+		var areatop = href.data('areatop');
+		var area = href.data('area');
 		
-		var content = href.data('content'); /*  href태그에서 data- 값을 변수에 저장 */
-		var img = href.data('img'); /*  href태그에서 data- 값을 변수에 저장 */
+		var content = href.data('content');
+		var img = href.data('img'); 
 		var id = href.data('id'); 
 		var state = href.data('state'); 
 				
@@ -62,11 +62,9 @@ $(function() {
 				$('#imgchange').attr('src', changeImg);
 				
 				// 참가인원수 구함
-				modal.find('#modal-body-parti').text(data.gpdtoSize); // 참가인원 뿌리기
-				
+				/*modal.find('#modal-body-parti').text(data.gpdtoSize); // 참가인원 뿌리기 */				
 				// 참가인원 구함
-				
-				var str;
+				var str="";
 				
 				$.each(data.gpdto, function(index, gpdto) {
 					if(index=='0'){
@@ -75,8 +73,11 @@ $(function() {
 						str += ", "+gpdto.guserId
 					}
 				})
-				
+							
 				modal.find('#modal-body-partiname').text(str);
+				
+			
+				
 				
 			},
 			error : function(request, status, error) {
@@ -88,13 +89,29 @@ $(function() {
 		var loginId = $('#loginGuser').val();
 		
 		if(loginId.length>0){ // 값이 비어있지 않고
-			if(loginId == id){
-				$('#gatherModify').show();
-			}else{
-				$('#gatherModify').hide();
+			
+			if(loginId == id){ // 로그인한사람이 글 작성자 일때는
+				$('#gatherModify').show(); // 수정버튼 보이게
+				$('#gatherComplete').show(); // 완료버튼 보이게
+				$('#gatherApply').hide(); // 신청버튼 숨기기
+			}else{ // 로그인한사람이 글쓴이가 아닐때
+				$('#gatherApply').show(); // 신천하기 버튼보이고
+				$('#gatherModify').hide(); //수정 숨기기
+				$('#gatherComplete').hide(); // 완료 숨기기
 			}
 		}
 		
+		
+		// 최대인원 신청인원 같으면 신청버튼 막기
+		if(parti >= partimax){
+			$('#gatherApply').attr("disabled", true);
+			// 글짜 빨갛게
+			$('#modalTotalParti').css("color","red");
+			//$("#test_1").css("color", "#ff0000");
+		}else{
+			$('#gatherApply').attr("disabled", false);
+			$('#modalTotalParti').css("color","black");
+		}
 		
 		modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-subject').text(subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
@@ -113,6 +130,9 @@ $(function() {
 		modal.find('#modal-body-id').text(id); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-state').text(state); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-partimax').text(partimax); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		modal.find('#modal-body-parti').text(parti); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
+		
+
 	});
 	
 	
@@ -370,6 +390,15 @@ $(function() {
 /*	$("#gatherModifyClose").click(function(){
 //		obj.getById["gatherContent"].exec("UPDATE_CONTENTS_FIELD", []);
 	});*/
+	
+	
+	/*모달 수정창 - 완료 버튼 누르면 물어보기 / 확인 취소 있음 */
+	$('#gatherComplete').click(function(){
+		var bool = confirm('신청하시겠습니꽈?');
+		
+		alert(bool); // 인쟈 여기서 확인버튼 누르면 관리자한테 가는거임 +++ 밥먹고와서부터 하기
+		
+	});
 });
 
 

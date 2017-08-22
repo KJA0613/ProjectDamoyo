@@ -1,0 +1,75 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    
+<div class="sidebar" data-color="blue" data-image="/resources/admin/img/sidebar-1.jpg">
+			<!--
+		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
+
+		        Tip 2: you can also add an image using data-image tag
+		    -->
+
+			<div class="logo">
+				<a href="" class="simple-text">
+					DAMOYO 관리자
+				</a>
+			</div>
+
+	    	<div class="sidebar-wrapper">
+	            <ul class="nav">
+	                <li class="active">
+	                    <a href="/admin/dashbord">
+	                        <i class="material-icons">dashboard</i>
+	                        <p>Dashboard</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="/admin/PeopleTable">
+	                        <i class="material-icons">person</i>
+	                        <p>회원관리</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="/">
+	                        <i class="material-icons">content_paste</i>
+	                        <p>게시판관리</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="/admin/gathering">
+	                        <i class="material-icons">library_books</i>
+	                        <p>모임 관리</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="/admin/category">
+	                        <i class="material-icons">library_books</i>
+	                        <p>카테고리관리</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="/admin/user">
+	                        <i class="material-icons">bubble_chart</i>
+	                        <p>유저보기</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="/admin/map">
+	                        <i class="material-icons">location_on</i>
+	                        <p>지도</p>
+	                    </a>
+	                </li>
+	                <li>
+	                    <a href="/admin/notifications">
+	                        <i class="material-icons text-gray">notifications</i>
+	                        <p>배너보기</p>
+	                    </a>
+	                </li>
+					<li class="active-pro">
+	                    <a href="/admin/upgrade">
+	                        <i class="material-icons">unarchive</i>
+	                        <p>Upgrade to PRO</p>
+	                    </a>
+	                </li>
+	            </ul>
+	    	</div>
+	    </div>

@@ -46,8 +46,7 @@ $(function() {
 	
 	var tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
 	
-	if(tempUrl.length>0){
-		
+	if(tempUrl.length>0){	
 		var person = tempUrl.split('='); // '=' 을 기준으로 분리하기
 		
 		if(person[0] == 'guserNo'){ // person[0] : 파라미터 명 
@@ -56,9 +55,6 @@ $(function() {
 			$('#comInfo').show();
 		}
 	}
-	
-	
-	
 });
 </script>
 
@@ -80,8 +76,6 @@ $(function() {
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">DAMOYO 관리자 페이지</a>
-
 				</div>
 
 
@@ -130,7 +124,7 @@ $(function() {
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-header" data-background-color="blue">
-									<h4 class="title">개인회원</h4>
+									<h4 class="title">모임 생성 요청</h4>
 									<p class="category">전체개인회원정보</p>
 								</div>
 								<div class="card-content table-responsive">
@@ -145,7 +139,7 @@ $(function() {
 											<tbody>
 												<tr>
 													<td id="guserNo"><a
-														href="/admin/PeopleTable?guserNo=${pdto.guserNo}"
+														href="/table?guserNo=${pdto.guserNo}"
 														style="color: #00bcd4">${pdto.guserNo}</a></td>
 													<td>${pdto.guserId}</td>
 													<td>${pdto.guserName}</td>
@@ -163,7 +157,7 @@ $(function() {
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-header" data-background-color="blue">
-									<h4 class="title">기업회원</h4>
+									<h4 class="title">현재 승인된 모임</h4>
 									<p class="category">전체기업회원정보</p>
 								</div>
 								<div class="card-content table-responsive">
@@ -178,7 +172,7 @@ $(function() {
 										<c:forEach var="cdto" items="${cdtoCompanyList}">
 											<tbody>
 												<tr>
-													<td><a href="/admin/PeopleTable?comNo=${cdto.comNo}" style="color: #00bcd4">${cdto.comNo}</a></td>
+													<td><a href="/table?comNo=${cdto.comNo}" style="color: #00bcd4">${cdto.comNo}</a></td>
 													<td>${cdto.comId}</td>
 													<td>${cdto.comName}</td>
 													<td>${cdto.comManager}</td>
@@ -193,91 +187,39 @@ $(function() {
 						</div>
 
 
-						<div class="col-md-12" id="guserInfo" style="display: none">						
+					<div class="col-md-6">
 							<div class="card">
 								<div class="card-header" data-background-color="blue">
-									<h4 class="title">상세정보</h4>
-									<p class="category">선택회원상세정보</p>
+									<h4 class="title">모임 생성 요청</h4>
+									<p class="category">전체개인회원정보</p>
 								</div>
 								<div class="card-content table-responsive">
-									<!-- <table class="comDetail" style="display:none"> -->
-									<table class="comDetail">
+									<table class="table">
 
 										<thead class="text-primary-none" style="color: #00bcd4">
-											<th width="40px">번호</th>
-											<th width="80px">아이디</th>											
-											<th width="100px">이름</th>
-											<th width="80px">성별</th>
-											<th width="150px">핸드폰</th>
-											<th width="200px">이메일</th>
-											<th width="200px">가입일</th>
+											<th>회원번호</th>
+											<th>아이디</th>
+											<th>이름</th>
 										</thead>
+										<c:forEach var="pdto" items="${pdtoGuserList}">
+											<tbody>
+												<tr>
+													<td id="guserNo"><a
+														href="/table?guserNo=${pdto.guserNo}"
+														style="color: #00bcd4">${pdto.guserNo}</a></td>
+													<td>${pdto.guserId}</td>
+													<td>${pdto.guserName}</td>
+												</tr>
 
-										<tbody>
-											<tr>
-												<td width="40px">${guserDetail.guserNo}</td>
-												<td width="80px">${guserDetail.guserId}</td>												
-												<td width="100px">${guserDetail.guserName}</td>
-												<td width="80px">${guserDetail.guserGender}</td>
-												<td width="150px">${guserDetail.guserPhone}</td>
-												<td width="200px">${guserDetail.guserEmail}</td>
-												<td width="200px"><fmt:formatDate value="${guserDetail.guserDate}" pattern="yyyy-MM-dd"/></td>
-												
-											</tr>
-										</tbody>
-
+											</tbody>
+										</c:forEach>
 									</table>
+
 								</div>
+
 							</div>
 						</div>
 						
-					<div class="col-md-12" id="comInfo" style="display: none">						
-							<div class="card">
-								<div class="card-header" data-background-color="blue">
-									<h4 class="title">상세정보</h4>
-									<p class="category">선택기업회원상세정보</p>
-								</div>
-								<div class="card-content table-responsive">
-									<!-- <table class="comDetail" style="display:none"> -->
-									<table class="comDetail">
-
-										<thead class="text-primary-none" style="color: #00bcd4">
-											<th width="40px">번호</th>
-											<th width="80px">아이디</th>											
-											<th width="100px">기업명</th>
-											<th width="80px">담당자명</th>
-											<th width="150px">핸드폰</th>
-											<th width="200px">이메일</th>
-											<th width="80px">사업자번호</th>
-											<th width="80px">우편번호</th>
-											<th width="230px">주소</th>
-											<th width="230px">상세주소</th>
-											<th width="80px">사업주명</th>
-											<th width="200px">가입일</th>
-										</thead>
-
-										<tbody>
-											<tr>
-												<td width="40px">${companyDetail.comNo}</td>
-												<td width="80px">${companyDetail.comId}</td>												
-												<td width="100px">${companyDetail.comName}</td>
-												<td width="80px">${companyDetail.comManager}</td>
-												<td width="150px">${companyDetail.comPhone}</td>
-												<td width="200px">${companyDetail.comEmail}</td>
-												<td width="80px">${companyDetail.comSaNo}</td>
-												<td width="80px">${companyDetail.comZoneCode}</td>
-												<td width="230px">${companyDetail.comRoadAddress}</td>
-												<td width="230px">${companyDetail.comDetailAddress}</td>												
-												<td width="80px">${companyDetail.comCeoName}</td>
-												<td width="200px"><fmt:formatDate value="${companyDetail.comDate}" pattern="yyyy-MM-dd"/></td>
-												
-											</tr>
-										</tbody>
-
-									</table>
-								</div>
-							</div>
-						</div>
 							
 						
 					</div>
