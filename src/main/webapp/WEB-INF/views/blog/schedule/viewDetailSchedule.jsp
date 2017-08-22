@@ -111,7 +111,11 @@
 			</form>
 			<div id="firstArea">
 				<button class="btn btn-warning" onclick="closeWindow()">취소</button>
+				<c:choose>
+				<c:when test = "${null ne pdto.guserId}">
 				<button class="btn btn-info" type="button" id="btnModify" onclick="modify()" style="float: right;">수정</button>
+				</c:when>
+				</c:choose>
 			</div>
 			<div id="secondArea" style="display: none;">
 				<button class="btn btn-warning" onclick="back()">돌아가기</button>

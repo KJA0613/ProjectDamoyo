@@ -65,7 +65,11 @@
 				</div>
 			</form>
 			<button class="btn btn-danger" onclick="closeWindow()">취소</button>
-			<button class="btn btn-success" type="button" onclick="sendData()" style="float: right;">추가</button>
+			<c:choose>
+				<c:when test = "${null ne pdto.guserId}">
+				<button class="btn btn-success" type="button" onclick="sendData()" style="float: right;">추가</button>					
+				</c:when>				
+			</c:choose>
 		</div>
 	</article>
 	<!-- jQuery -->

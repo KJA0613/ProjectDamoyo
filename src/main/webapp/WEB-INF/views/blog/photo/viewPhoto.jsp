@@ -80,7 +80,11 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 	<div class="container" style="margin-left: 300px;">
-		<button class="btn btn-primary" onclick="location.href='viewUploadPhoto'" style="float: right; margin-top: 50px;">이미지 업로드</button>
+		<c:choose>
+			<c:when test = "${null ne pdto.guserId}">
+				<button class="btn btn-primary" onclick="location.href='viewUploadPhoto'" style="float: right; margin-top: 50px;">이미지 업로드</button>
+			</c:when>
+		</c:choose>
 		<h4 style="margin-top: 50px;">사진첩</h4>
 		<div class="row" style="margin-top: 40px;">
 			<c:forEach var="image" items="${imgList}">

@@ -241,15 +241,18 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/schedule/viewRegistSchedule", method = RequestMethod.GET)
-	public String viewRegistSchedule(@RequestParam("fDate") String date, Model model) {
-		//System.out.println(date);
+	public String viewRegistSchedule(@RequestParam("fDate") String date, Model model, HttpSession session) {
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("startDate",date);
 		return "blog/schedule/viewRegistSchedule";
 	}
 	
 	@RequestMapping(value="/schedule/viewDetailSchedule", method = RequestMethod.GET)
-	public String viewDetailSchedule(@RequestParam("sid") int sid, Model model) {
+	public String viewDetailSchedule(@RequestParam("sid") int sid, Model model, HttpSession session) {
 		BScheduleDTO schedule = cService.readScheduleOne(sid);
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		model.addAttribute("schedule", schedule);
 		model.addAttribute("sid", sid);
 		return "blog/schedule/viewDetailSchedule";
