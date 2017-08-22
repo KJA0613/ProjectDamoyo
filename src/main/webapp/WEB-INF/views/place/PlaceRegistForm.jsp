@@ -65,7 +65,6 @@
     }
 </script>
 
-
 <!-- 이미지 업로드 유효성 검사 -->
 <script>
 	$(function() {
@@ -89,7 +88,24 @@
 <!-- [체크한 값 가져오기] 라디오/체크박스 -->
 <!-- [참고 사이트] http://lng1982.tistory.com/80 -->
 <script>
-	$(document).ready(function() {	    
+	$(document).ready(function() {	 
+			//전역변수
+		var obj = [];              
+		     //스마트에디터 프레임생성
+			nhn.husky.EZCreator.createInIFrame({
+		    	oAppRef: obj,
+		        elPlaceHolder: "placeContent",
+		        sSkinURI: "/resources/editor_place/SmartEditor2Skin.html",
+		        htParams : {
+		            // 툴바 사용 여부
+		        	bUseToolbar : true,            
+		            // 입력창 크기 조절바 사용 여부
+		            bUseVerticalResizer : true,    
+		            // 모드 탭(Editor | HTML | TEXT) 사용 여부
+		            bUseModeChanger : true,
+			}
+		});
+		
 	 	$("#submitAfterCheck").click(function(){	 		
 	 		
 	 		// [radio] 주차 유무
@@ -111,9 +127,20 @@
 				var dayList = $(this).val();
 			});
 	        
+			//id가 smarteditor인 textarea에 에디터에서 대입
+	          obj.getById["placeContent"].exec("UPDATE_CONTENTS_FIELD", []);
+	          //폼 submit
+	          $("#placeForm").submit();
+	        
 	    });
 	}); 
 </script>
+
+<!-- 네이버 스마트  -->
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="/resources/editor_place/js/HuskyEZCreator.js" charset="utf-8"></script>
+
+
 
 
 <!-- [Header] 공통 헤더 -->
@@ -123,7 +150,7 @@
 
 	<div class="container">
 		<div class="clearfix">
-			<div class="col-md-8 col-md-offset-2">	
+			<div class="col-md-12 "><!-- col-md-offset-2 뻄 -->
 				<h1>모임공간 등록</h1>				
 				<p class="help-block">
 					&nbsp;<small>* 회원님의 모임공간 등록에 필요한 사항을 모두 입력해주세요.</small>
@@ -132,11 +159,11 @@
 				
 				
 				<!-- 모임공간 등록 폼 -->
-				<form action="/place/PlaceRegist" method="POST" class="form-horizontal" enctype="multipart/form-data">					
+				<form action="/place/PlaceRegist" id="placeForm" method="POST" class="form-horizontal" enctype="multipart/form-data">					
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="file" name="placeImage" id="placeImage" class="form-control" accept="image/gif, image/jpg, image/jpeg, image/png">						
 						</div>
 						<!-- <div class="col-md-2">
@@ -164,21 +191,21 @@
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간명</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeName" class="form-control" placeholder="10자 이내로 입력해주세요." required>						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간 소개</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeIntro" class="form-control" placeholder="20자 이내로 입력해주세요." required>						
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">전화</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeTel" class="form-control" placeholder="02-123-4567" required>						
 						</div>
 					</div>
@@ -198,7 +225,7 @@
 	
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">URL</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="text" name="placeURL" class="form-control" placeholder="www.damoyo.com" required>						
 						</div>
 					</div>
@@ -219,7 +246,7 @@
 										
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">영업시간</label>
-						<div class="col-md-10"> 
+						<div class="col-md-8"> 
 							<input type="text" name="placeUseTime" class="form-control" placeholder="09:00 ~ 18:00" required>						
 						</div>
 					</div>
@@ -242,7 +269,7 @@
 					
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">정기휴무</label>
-						<div class="col-md-10">
+						<div class="col-md-8">
 							<input type="checkbox" name="placeNotUseDay" value="월">&nbsp;월			&nbsp;
 							<input type="checkbox" name="placeNotUseDay" value="화">&nbsp;화			&nbsp;
 							<input type="checkbox" name="placeNotUseDay" value="수">&nbsp;수			&nbsp;
@@ -257,7 +284,7 @@
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">상세설명</label>
 						<div class="col-md-10">
-							<textarea rows="5" cols="10" name="placeContent" class="form-control" required></textarea>			
+							<textarea rows="5" cols="10" id="placeContent" name="placeContent" class="form-control" required></textarea>			
 						</div>
 					</div>
 									
@@ -290,7 +317,7 @@
 
 					<div class="clear-fix">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" id="submitAfterCheck">모임공간 등록하기</button>
+							<button type="button" class="btn btn-primary" id="submitAfterCheck">모임공간 등록하기</button>
 						</div>
 					</div>
 				

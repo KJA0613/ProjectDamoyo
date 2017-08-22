@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IGatheringDAO;
 import com.bitschool.dto.GatherAddonsDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
+import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.util.FormatData;
 
@@ -61,6 +63,23 @@ public class GatheringService implements IGatheringService {
 	public boolean GatheringInsert(HashMap<String, Object> map) {
 		
 		boolean flag = gDao.insertGathering(map);
+				
+		if(flag){ // 게시글 삽입 성공하면
+			// 로그인정보(PersonDTO)를 ==> GatherPeopleDTO로 변경하여 넣기  =========== 여기서는 메소드 생성
+			flag =	gDao.insertGatherReader(map);
+		
+			// 메서드에서 잘 넣으면 gatherPeopleDTO의 값을 gatherPeopleInsert로 넘김
+		}
+		
+		return flag;
+	}
+	
+	@Override
+	public boolean GatheringPeopleInsert(HashMap<String, Object> map){
+		
+		boolean flag = false;
+		
+		flag =	gDao.insertGatherPeople(map);
 		
 		return flag;
 	}
@@ -156,6 +175,13 @@ public class GatheringService implements IGatheringService {
 		return flag;
 	}
 
-	
+	@Override
+	public List<GatherPeopleDTO> getGatherApply(int gatherNo) {
+
+		List<GatherPeopleDTO> gpdto = gDao.getGatherApply(gatherNo);
+		
+		return gpdto;
+	}
+
 
 }

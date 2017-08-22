@@ -20,6 +20,7 @@
 	</select>
 	
 	
+	
 	<!-- [개인회원] 회원가입 - 1단계 > 개인정보 등록 + 코드값 -->		
 	<insert id="insertPersonData" parameterType="PersonDTO">
 		<selectKey keyProperty="guserNo" resultType="int" order="BEFORE">
@@ -54,6 +55,7 @@
 	
 
 
+
 	<!-- [개인회원] 마이페이지 - 1단계 > 개인정보 수정-->
 	<update id="updatePersonInfo" parameterType="PersonDTO">
 		update guser set guserName = #{guserName}, guserEmail = #{guserEmail}, guserPhone = #{guserPhone}, guserGender = #{guserGender} 
@@ -86,15 +88,22 @@
 		where gatheraddonscode = #{gatherAddonsCode} and gatherno = #{gatherNo} and gatheraddonswriter = #{gatherAddonsWriter} and guserId = #{guserId}
 	</delete>
 
+
+
 	
 	<!-- [기업회원] 회원가입 - 1단계  + 2단계 -->		
 	<insert id="insertCompanyRegist" parameterType="CompanyDTO">
 		<selectKey keyProperty="comNo" resultType="int" order="BEFORE">
 			select companySeq.nextval from dual
 		</selectKey>
-		insert into company(comNo, comId, comPw, comName, comPhone,  comEmail, comManager,comSaNo,comZoneCode,comRoadAddress,comJibunAddress,comDetailAddress,comCeoName,comCode) 
-		values(#{comNo}, #{comId}, #{comPw}, #{comName}, #{comPhone},  #{comEmail}, #{comManager}, #{comSaNo},#{comZoneCode},#{comRoadAddress},#{comJibunAddress},#{comDetailAddress},#{comCeoName},#{comCode})
+		insert into company(comNo, comId, comPw, comName, comPhone,  comEmail, comManager, comSaNo, comZoneCode, comRoadAddress, comJibunAddress, comDetailAddress, comCeoName, comCode) 
+		values(#{comNo}, #{comId}, #{comPw}, #{comName}, #{comPhone}, #{comEmail}, #{comManager}, #{comSaNo}, #{comZoneCode}, #{comRoadAddress}, #{comJibunAddress}, #{comDetailAddress}, #{comCeoName}, #{comCode})
 	</insert>
+	
+	<!-- [기업회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크 -->
+	<select id="selectDuplicateCompanyId" parameterType="String" resultType="String">
+		select comId from company where comId = #{comId}
+	</select>
 
 	<!-- [기업회원] 로그인 > 사용자가 입력한 "아이디" > 유무 조회 -->
 	<select id="selectCompanyLogin" parameterType="String" resultType="CompanyDTO">

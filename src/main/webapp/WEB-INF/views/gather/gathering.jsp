@@ -227,6 +227,7 @@ a:visited {
 								data-content='${recomm.gatherContent}'
 								data-img='${recomm.gatherImg}' data-id='${recomm.guserId}'
 								data-state='${recomm.gatherState}'> 
+								
 								<img class='gatherimg' width="213px" height="120px" src='${recomm.gatherImg}'> <span class="price">${recomm.gatherState}</span>
 								<h4 align="center">
 									<c:choose>
@@ -243,6 +244,7 @@ a:visited {
 									요일 : ${recomm.gatherDay}<br> 
 									지역 : ${recomm.gatherArea}<br>
 									신청인원 : ${recomm.gatherParti}<br>
+									게시글 번호 : ${recomm.gatherNo}<br>
 								</h5>
 							</a>
 						</div>
@@ -259,7 +261,8 @@ a:visited {
 				<div class="row" id="gatherSelect">
 					<c:forEach var="gath" items="${gath}">
 						<div class="col-xs-4 col-lg-3" id="gather">
-							<a data-toggle='modal' href='#GatherModalInfo' data-no='${gath.gatherNo}'
+							<a 	data-toggle='modal' href='#GatherModalInfo' 
+								data-no='${gath.gatherNo}'
 								data-subject="${gath.gatherSubject}"
 								data-categorytop='${gath.gatherCategoryTop}'
 								data-categorymid='${gath.gatherCategoryMid}'
@@ -293,6 +296,7 @@ a:visited {
 									${fn:substring(gath.gatherEdate, 0, 10)}<br> 요일 :
 									${gath.gatherDay}<br> 지역 : ${gath.gatherArea}<br>
 									신청인원 : ${gath.gatherParti}<br>
+									게시글 번호 : ${gath.gatherNo}<br>
 								</h5>
 							</a>
 						</div>
@@ -377,13 +381,21 @@ a:visited {
 								</div>
 							</div>
 		
-							<!-- 인원  -->
+							<!-- 인원수  -->
 							<div class="form-group">
 								<label for="modal-body-partimax" class="col-sm-2 control-label">인원</label>
 								<div class="col-sm-8">
 								<div class="modal-body">
 									<span id="modal-body-parti" ></span> / <span id="modal-body-partimax"></span>
 								</div>
+								</div>
+							</div>
+		
+							<!-- 인원이름 -->
+							<div class="form-group">
+								<label for="modal-body-subject" class="col-sm-2 control-label">신청아이디</label>
+								<div class="col-sm-10">
+									<div class="modal-body" id="modal-body-partiname"></div>
 								</div>
 							</div>
 		
@@ -402,7 +414,7 @@ a:visited {
 						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
 						<button id='gatherModify' type="button" class="btn btn-warning pull-left" style="display: none;">수정하기</button>
 						<button type="button" class="btn btn-info" data-dismiss="modal">블로그 가기</button>
-						<button type="button" class="btn btn-primary">신청</button>
+						<button id='gatherApply' type="button" class="btn btn-primary">신청</button>
 					</div>				
 										
 					<!-- style="display:none;"은 히든과 같음 -->

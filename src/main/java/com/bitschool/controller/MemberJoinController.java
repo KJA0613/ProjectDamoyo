@@ -64,7 +64,7 @@ public class MemberJoinController {
 	
 	//01-1. 회원가입 유형 > 기업회원: value = B (name값: 'company' 넘어옴)
 	@RequestMapping(value="/JoinChoiceCheck2", method=RequestMethod.POST)
-	public String JoinChoiceCheck2(@RequestParam("company") String company, CompanyDTO cdto,Model model){
+	public String JoinChoiceCheck2(@RequestParam("company") String company, CompanyDTO cdto, Model model){
 		String url = null;
 		
 		// cdto에 comCode값(B) > 새로 저장
@@ -100,7 +100,7 @@ public class MemberJoinController {
 
 		// 2단계 가기 전,cdto 전체 데이터 저장
 		session.setAttribute("cfdto", cfdto);
-		System.out.println("[TEST 1단계]" + cfdto);
+		//System.out.println("[TEST 1단계] " + cfdto);
 
 		model.addAttribute("cfdto", cfdto);
 
@@ -120,15 +120,15 @@ public class MemberJoinController {
 		
 		
 		// [Flag_01] 유저 코드값(A) + 회원가입 1단계 데이터
-		System.out.println("[TEST-회원가입(2)] 1단계에서 받아온 데이터: " + pdto);		
+		//System.out.println("[TEST-회원가입(2)] 1단계에서 받아온 데이터: " + pdto);		
 		boolean flagInfo = memberService.PersonDataRegist(pdto);		
 		
 		// [Flag_02] 희망 지역 삽입
-		System.out.println("[TEST-회원가입(2)] 2단계 희망 지역: " + adto);		
+		//System.out.println("[TEST-회원가입(2)] 2단계 희망 지역: " + adto);		
 		boolean flagArea = memberService.PersonAreaRegist(adto);
 		
 		// [Flag_03] 희망 카테고리 삽입 
-		System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cdto);		
+		//System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cdto);		
 		boolean flagCtg = memberService.PersonCategoryRegist(cdto);
 		
 		// [모두 TRUE] 회원가입 완료 > 메인 페이지
@@ -140,11 +140,13 @@ public class MemberJoinController {
 	}
 	
 	// 03-1. [기업회원가입-2단계] 기업상세정보 등록	
-	@RequestMapping(value = "/CompanyDetailRegist", method = { RequestMethod.GET, RequestMethod.POST })
-	public String CompanyDetailRegist(CompanyDTO cdto ,HttpSession session, Model model){
-
+	@RequestMapping(value = "/CompanyDetailRegist", method = {RequestMethod.GET, RequestMethod.POST})
+	public String CompanyDetailRegist(CompanyDTO cdto, HttpSession session, Model model){
+		String url = null;
+		
+		//System.out.println("받아온 cdto: " + cdto);
 		CompanyDTO cfdto = (CompanyDTO) session.getAttribute("cfdto");
-	
+		
 		cdto.setComManager(cfdto.getComManager());
 		cdto.setComId(cfdto.getComId());
 		cdto.setComPw(cfdto.getComPw());
@@ -152,18 +154,23 @@ public class MemberJoinController {
 		cdto.setComPhone(cfdto.getComPhone());
 		cdto.setComCode(cfdto.getComCode());
 		
-		String url = null;
+		//System.out.println("cdto " + cdto);
+		//System.out.println("cfdto " + cfdto);
 		
 		boolean flagInsert = memberService.CompanyRegist(cdto);
-				
+
 		if(flagInsert){
 			url="redirect:/";
 		}
+		
 		return url;
 	}
 	
 	
-	// 04. [회원가입 - 데이터 유효성 검사] 아이디 중복 체크
+	
+	// ---------------------------------------- [개인&기업 회원] 아이디 중복 체크 ----------------------------------------//
+	
+	// 04-01. [개인회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
 	@ResponseBody 
 	@RequestMapping(value="/checkDuplicatePersonIdAjax", method=RequestMethod.POST)
 	public String checkDuplicatePersonIdAjax(@RequestParam("guserId") String guserId, Model model) {
@@ -183,6 +190,29 @@ public class MemberJoinController {
 		}
 		
 		return result;		
+	}
+	
+	
+	// 04-02. [기업회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/checkDuplicateCompanyIdAjax", method = RequestMethod.POST)
+	public String checkDuplicateCompanyIdAjax(@RequestParam("comId") String comId, Model model) {
+		String result = null;
+
+		//System.out.println("[TEST] Ajax Data(아이디 값 받아오기): " + comId);
+
+		// DB에 저장된 아이디랑 비교
+		result = memberService.checkDuplicateCompanyId(comId);
+		//System.out.println("[TEST] DB Data(DB에 저장된 결과): " + result);
+
+		// 입력한 id = DB에 조회한 id
+		if (result == null) { // 가입 가능한 아이디
+			result = "OK";
+		} else { // 중복 된 아이디
+			result = "FAIL";
+		}
+
+		return result;
 	}
 
 }

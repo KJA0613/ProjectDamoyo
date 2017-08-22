@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.bitschool.dto.GatherAddonsDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.RecommGatherDTO;
 
@@ -39,5 +40,11 @@ public interface IGatheringDAO {
 	public List<GatheringDTO> selectComMakeList(String guserId);
 
 	public boolean updateModalGathering(GatheringDTO gdto);
+
+	boolean insertGatherReader(HashMap<String, Object> map);
+
+	public boolean insertGatherPeople(HashMap<String, Object> map);
+
+	public List<GatherPeopleDTO> getGatherApply(int gatherNo);
 	
 }

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.GatherAddonsDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.RecommGatherDTO;
 
@@ -74,6 +75,7 @@ public class GatheringDAO implements IGatheringDAO {
 		
 		int result = session.insert(namespace+".insertGather", map);
 		
+		
 		if(result>0){
 			flag = true;
 		}
@@ -81,6 +83,39 @@ public class GatheringDAO implements IGatheringDAO {
 		return flag;
 	}
 
+	// 로그인한 회원, 글쓰거나, 신청하기 했을때 뿌리기
+	@Override
+	public boolean insertGatherReader(HashMap<String, Object> map) {
+
+		boolean flag = false;
+
+		GatheringDTO gather = (GatheringDTO) map.get("gath");
+		
+		int result = session.insert(namespace+".insertGatherReader", gather);
+		
+		if(result>0){
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+
+
+	@Override
+	public boolean insertGatherPeople(HashMap<String, Object> map) {
+
+		boolean flag = false;
+		
+		int result = session.insert(namespace+".insertGatherPeople", map);
+		
+		if(result>0){
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
 	@Override
 	public List<GatheringDTO> selectPartiList(String guserId) {
 
@@ -209,5 +244,14 @@ public class GatheringDAO implements IGatheringDAO {
 		System.out.println(flag);
 		
 		return flag;
+	}
+
+	@Override
+	public List<GatherPeopleDTO> getGatherApply(int gatherNo) {
+
+		List<GatherPeopleDTO> gpdto = null;
+		gpdto = session.selectList(namespace+".gatherPeople", gatherNo);	
+		
+		return gpdto;
 	}
 }

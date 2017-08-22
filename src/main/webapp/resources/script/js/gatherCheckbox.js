@@ -113,7 +113,7 @@ $(function() {
 						if(img===null){
 							img = '\\resources\\image\\mozip\\damoyo_noPicture.png';
 						}							
-									
+												
 						var str = "";
 						str += "<div class='col-xs-4 col-lg-3' id='gather'>";
 						str += "<a data-toggle='modal' href='#GatherModalInfo' data-no='"+gList.gatherNo+
@@ -333,10 +333,7 @@ function search_click(){
 			})
 		},
 		error : function(request, status, error) {
-			alert("code:" + request.status
-					+ "\n" + "message:"
-					+ request.responseText
-					+ "\n" + "error:" + error);
+			alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
 		} 
 
 	});
