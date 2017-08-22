@@ -62,25 +62,25 @@ public class MainController {
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		List<BTempDTO> top10List;
 		List<BTempDTO> list = tService.listAll();
-		if(pdto == null) {
-			list = recommend.beforeLogin(list);			
-			session.setAttribute("tempList", list);
-		}
-		
-		if(pdto == null) {
-			top10List = list.subList(0, 10);
-			for(BTempDTO dto : list) {
-				System.out.println(dto);
-			}
-		} else {
-			list = (List<BTempDTO>)session.getAttribute("tempList");
-			CategoryDTO cdto = memberService.PersonHopeCategoryAll(pdto.getGuserId());
-			top10List = recommend.afterLogin(list, cdto);
-			for(BTempDTO dto : list) {
-				System.out.println(dto);
-			}
-		}
-		model.addAttribute("list", top10List);
+//		if(pdto == null) {
+//			list = recommend.beforeLogin(list);			
+//			session.setAttribute("tempList", list);
+//		}
+//		
+//		if(pdto == null) {
+//			top10List = list.subList(0, 10);
+//			for(BTempDTO dto : list) {
+//				System.out.println(dto);
+//			}
+//		} else {
+//			list = (List<BTempDTO>)session.getAttribute("tempList");
+//			CategoryDTO cdto = memberService.PersonHopeCategoryAll(pdto.getGuserId());
+//			top10List = recommend.afterLogin(list, cdto);
+//			for(BTempDTO dto : list) {
+//				System.out.println(dto);
+//			}
+//		}
+//		model.addAttribute("list", top10List);
 		
 		////////////////////////////////////////////////////////////////////////////////////////
 		

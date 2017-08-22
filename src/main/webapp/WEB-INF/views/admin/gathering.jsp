@@ -42,20 +42,20 @@
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
 <script type="text/javascript">
-$(function() {
-	
-	var tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
-	
-	if(tempUrl.length>0){	
-		var person = tempUrl.split('='); // '=' 을 기준으로 분리하기
-		
-		if(person[0] == 'guserNo'){ // person[0] : 파라미터 명 
-			$('#guserInfo').show();
-		}else if(person[0] == 'comNo'){
-			$('#comInfo').show();
+	$(function() {
+
+		var tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
+
+		if (tempUrl.length > 0) {
+			var person = tempUrl.split('='); // '=' 을 기준으로 분리하기
+
+			if (person[0] == 'guserNo') { // person[0] : 파라미터 명 
+				$('#guserInfo').show();
+			} else if (person[0] == 'comNo') {
+				$('#comInfo').show();
+			}
 		}
-	}
-});
+	});
 </script>
 
 
@@ -64,8 +64,8 @@ $(function() {
 <body>
 
 	<div class="wrapper">
-		
-	    <%@ include file="./admin_sidebar.jspf"%>
+
+		<%@ include file="./admin_sidebar.jspf"%>
 
 		<div class="main-panel">
 			<nav class="navbar navbar-transparent navbar-absolute">
@@ -121,107 +121,172 @@ $(function() {
 			<div class="content">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header" data-background-color="blue">
 									<h4 class="title">모임 생성 요청</h4>
-									<p class="category">전체개인회원정보</p>
+									<p class="category">생성될 수 있는 모임인지..</p>
 								</div>
 								<div class="card-content table-responsive">
 									<table class="table">
-
 										<thead class="text-primary-none" style="color: #00bcd4">
-											<th>회원번호</th>
-											<th>아이디</th>
-											<th>이름</th>
+											<th>모임 번호</th>
+											<th>모임 명</th>
+											<th>모임 생성자</th>
+											<th>모임 지역</th>
+											<th>모임 분류</th>
+											<th>모임 카테고리</th>
+											<th>블로그 생성 유무</th>
+											<th>생성 승인/거절</th>
 										</thead>
-										<c:forEach var="pdto" items="${pdtoGuserList}">
-											<tbody>
-												<tr>
-													<td id="guserNo"><a
-														href="/table?guserNo=${pdto.guserNo}"
-														style="color: #00bcd4">${pdto.guserNo}</a></td>
-													<td>${pdto.guserId}</td>
-													<td>${pdto.guserName}</td>
-												</tr>
-
-											</tbody>
+										<tbody>
+										<c:forEach var="waitdto" items="${waitdto}">
+										<a href="#" style="color: #00bcd4">
+											<tr>
+												
+													<td>${waitdto.gatherNo}</td>
+													<td>${waitdto.gatherSubject}</td>
+													<td>${waitdto.guserId}</td>
+													<td>${waitdto.gatherArea}</td>
+													<td>${waitdto.gatherCategoryTop}</td>
+													<td>${waitdto.gatherCategoryBot}</td>
+													<td>
+													<c:if test="${waitdto.gatherBlog eq 'Yes'}">O</c:if>
+													<c:if test="${waitdto.gatherBlog eq 'No'}">X</c:if>
+													</td>
+												
+												<td><input type="button" id="yesBtn" value="승인"><input type="button" id="noBtn" value="거절"></td>
+											</tr>
+										</a>
 										</c:forEach>
+										</tbody>
 									</table>
-
 								</div>
-
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="card">
 								<div class="card-header" data-background-color="blue">
-									<h4 class="title">현재 승인된 모임</h4>
-									<p class="category">전체기업회원정보</p>
-								</div>
-								<div class="card-content table-responsive">
-									<table class="table table-hover">
-
-										<thead class="text-primary-none" style="color: #00bcd4">
-											<th>기업번호</th>
-											<th>기업아이디</th>
-											<th>기업명</th>
-											<th>담당자명</th>
-										</thead>
-										<c:forEach var="cdto" items="${cdtoCompanyList}">
-											<tbody>
-												<tr>
-													<td><a href="/table?comNo=${cdto.comNo}" style="color: #00bcd4">${cdto.comNo}</a></td>
-													<td>${cdto.comId}</td>
-													<td>${cdto.comName}</td>
-													<td>${cdto.comManager}</td>
-												</tr>
-
-											</tbody>
-										</c:forEach>
-
-									</table>
-								</div>
-							</div>
-						</div>
-
-
-					<div class="col-md-6">
-							<div class="card">
-								<div class="card-header" data-background-color="blue">
-									<h4 class="title">모임 생성 요청</h4>
-									<p class="category">전체개인회원정보</p>
+									<h4 class="title">승인된 모임</h4>
+									<p class="category">승인된 모임인지..</p>
 								</div>
 								<div class="card-content table-responsive">
 									<table class="table">
-
 										<thead class="text-primary-none" style="color: #00bcd4">
-											<th>회원번호</th>
-											<th>아이디</th>
-											<th>이름</th>
+											<th>모임 번호</th>
+											<th>모임 명</th>
+											<th>모임 생성자</th>
+											<th>모임 지역</th>
+											<th>모임 분류</th>
+											<th>모임 카테고리</th>
+											<th>블로그 생성 유무</th>
 										</thead>
-										<c:forEach var="pdto" items="${pdtoGuserList}">
-											<tbody>
-												<tr>
-													<td id="guserNo"><a
-														href="/table?guserNo=${pdto.guserNo}"
-														style="color: #00bcd4">${pdto.guserNo}</a></td>
-													<td>${pdto.guserId}</td>
-													<td>${pdto.guserName}</td>
-												</tr>
-
-											</tbody>
+										<tbody>
+										<c:forEach var="yesdto" items="${yesdto}">
+										<a href="#" style="color: #00bcd4">
+											<tr>
+												<td>${yesdto.gatherNo}</td>
+												<td>${yesdto.gatherSubject}</td>
+												<td>${yesdto.guserId}</td>
+												<td>${yesdto.gatherArea}</td>
+												<td>${yesdto.gatherCategoryTop}</td>
+												<td>${yesdto.gatherCategoryBot}</td>
+												<td>
+													<c:if test="${yesdto.gatherBlog eq 'Yes'}">O</c:if>
+													<c:if test="${yesdto.gatherBlog eq 'No'}">X</c:if>
+												</td>
+											</tr>
+										</a>
 										</c:forEach>
+										</tbody>
 									</table>
+								</div>
+							</div>
+						</div>
 
+
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header" data-background-color="blue">
+									<h4 class="title">거절된 모임</h4>
+									<p class="category">거절된 모임인지</p>
+								</div>
+								<div class="card-content table-responsive">
+									<table class="table">
+										<thead class="text-primary-none" style="color: #00bcd4">
+											<th>모임 번호</th>
+											<th>모임 명</th>
+											<th>모임 생성자</th>
+											<th>모임 지역</th>
+											<th>모임 분류</th>
+											<th>모임 카테고리</th>
+											<th>블로그 생성 유무</th>
+										</thead>
+										<tbody>
+										<c:forEach var="nodto" items="${nodto}">
+										<a href="#" style="color: #00bcd4">
+											<tr>
+												<td>${nodto.gatherNo}</td>
+												<td>${nodto.gatherSubject}</td>
+												<td>${nodto.guserId}</td>
+												<td>${nodto.gatherArea}</td>
+												<td>${nodto.gatherCategoryTop}</td>
+												<td>${nodto.gatherCategoryBot}</td>
+												<td>
+													<c:if test="${nodto.gatherBlog eq 'Yes'}">O</c:if>
+													<c:if test="${nodto.gatherBlog eq 'No'}">X</c:if>
+												</td>
+											</tr>
+										</a>
+										</c:forEach>
+										</tbody>
+									</table>
 								</div>
 
 							</div>
 						</div>
-						
-							
-						
+
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header" data-background-color="blue">
+									<h4 class="title">모집중인 모임</h4>
+									<p class="category">모집중인 모임인지..</p>
+								</div>
+								<div class="card-content table-responsive">
+									<table class="table">
+										<thead class="text-primary-none" style="color: #00bcd4">
+											<th>모임 번호</th>
+											<th>모임 명</th>
+											<th>모임 생성자</th>
+											<th>모임 지역</th>
+											<th>모임 분류</th>
+											<th>모임 카테고리</th>
+											<th>블로그 생성 유무</th>
+										</thead>
+										<tbody>
+										<c:forEach var="yetdto" items="${yetdto}">
+										<a href="#" style="color: #00bcd4">
+											<tr>
+												<td>${yetdto.gatherNo}</td>
+												<td>${yetdto.gatherSubject}</td>
+												<td>${yetdto.guserId}</td>
+												<td>${yetdto.gatherArea}</td>
+												<td>${yetdto.gatherCategoryTop}</td>
+												<td>${yetdto.gatherCategoryBot}</td>
+												<td>
+													<c:if test="${yetdto.gatherBlog eq 'Yes'}">O</c:if>
+													<c:if test="${yetdto.gatherBlog eq 'No'}">X</c:if>
+												</td>
+											</tr>
+										</a>
+										</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>

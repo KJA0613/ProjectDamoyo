@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
 @Repository
@@ -38,6 +39,16 @@ public class AdminDAO implements IAdminDAO{
 		List<CompanyDTO> cdto = session.selectList(namespace+".getCompany");
 		
 		return cdto;
+	}
+
+	@Override
+	public List<GatheringDTO> getGatherList() {
+		
+		List<GatheringDTO> gdto = null;
+		
+		gdto = session.selectList(namespace+".getGatherList");
+		
+		return gdto;
 	}
 
 	
