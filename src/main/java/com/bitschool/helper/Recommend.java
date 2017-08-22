@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import com.bitschool.dto.BTempDTO;
 import com.bitschool.dto.CategoryDTO;
-import com.bitschool.dto.PersonDTO;
 
 @Component
 public class Recommend {

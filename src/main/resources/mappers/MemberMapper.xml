@@ -154,6 +154,9 @@
 	</select>
 	
 
+	<select id="getGatherList" resultType="GatheringDTO">
+		select * from gather
+	</select>
 	
 
 </mapper>

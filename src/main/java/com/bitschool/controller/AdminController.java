@@ -1,6 +1,10 @@
 package com.bitschool.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.service.IAdminService;
 
@@ -46,7 +51,6 @@ public class AdminController {
 		if(pdto!=null && cdto!=null){
 			
 			model.addAttribute("pdtoGuserList", pdto);
-			
 			model.addAttribute("cdtoCompanyList",cdto);
 			
 			url = "admin/PeopleTable";
@@ -85,21 +89,61 @@ public class AdminController {
 		}
 		
 		
-		// 밑에는 그냥 테이블 이용하는 url
+		// 밑에는 테이블 이용하는 url 
 		
-		// 03. 카테고리 관리
+		// ( yet/모집중, wait/승인대기중, yes/승인됨, no/승인 거절 )
+		// 모임 관리 
 		@RequestMapping(value = "/gathering", method = {RequestMethod.POST,RequestMethod.GET})
-		public String gathering(){
+		public String gathering(Model model){
 			String url = "";			
+			
+			// 조건이 gather
+			List<GatheringDTO> gdto = adminService.getGatherList();
+			
+			List<GatheringDTO> waitdto = new ArrayList<GatheringDTO>();
+			List<GatheringDTO> yetdto = new ArrayList<GatheringDTO>();
+			List<GatheringDTO> yesdto = new ArrayList<GatheringDTO>();
+			List<GatheringDTO> nodto = new ArrayList<GatheringDTO>();
+			
+			for(int i=0; i<gdto.size(); i++){
+				
+				String recog = gdto.get(i).getGatherRecognition();
+				
+				System.out.println(gdto.get(i));
+				
+				if(recog.equals("Wait")){
+					waitdto.add(gdto.get(i));
+				}else if(recog.equals("yet")){
+					yetdto.add(gdto.get(i));
+				}else if(recog.equals("Yes")){
+					yesdto.add(gdto.get(i));					
+				}else if(recog.equals("No")){
+					nodto.add(gdto.get(i));					
+				}
+			}
+			
+			if(waitdto!=null){
+				model.addAttribute("waitdto",waitdto);
+			}if(yetdto!=null){
+				model.addAttribute("yetdto",yetdto);
+			}if(yesdto!=null){
+				model.addAttribute("yesdto",yesdto);
+			}if(nodto!=null){
+				model.addAttribute("nodto",nodto);
+			}
+			
 			url = "/admin/gathering";
 			
 			return url;
 		}
 		
+		// 카테고리 관리
 		@RequestMapping(value = "/category", method = {RequestMethod.POST,RequestMethod.GET})
 		public String category(){
 			String url = "";
 			url = "/admin/category";
+			
+			
 			
 			return url;
 		}
