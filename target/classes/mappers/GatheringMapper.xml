@@ -254,4 +254,19 @@
 		set		gatherparti = (select count(*) as gatherparti from gatherpeople where gatherno = #{no}) 
 		where 	gatherno = #{no}
 	</update>
+	
+	<!-- 모달 신청하기 눌렀을때 people테이블에 값넣고 parti에 있는값 업데이트 하기 -->
+	<update id="updateGatherPartiReader" parameterType="hashmap">
+		<!-- update 	gather
+		set		gatherparti = (select count(*) as gatherparti from gatherpeople where gatherno = #{no}) 
+		where 	gatherno = #{no} -->
+		
+		update 	gather
+		set		gatherparti = (	select count(*) as gatherparti 
+                          from gatherpeople a, (	select gatherno 
+                                                  from (select * from gather where guserId = #{guserId} order by gatherNo desc) 
+                                                  where rownum =1 ) b
+                          where a.gatherno = b.gatherno) 
+		where 	gatherno =(select gatherno from (select * from gather where guserId = #{guserId} order by gatherNo desc) where rownum =1)
+	</update>
 </mapper>

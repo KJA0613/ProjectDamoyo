@@ -90,12 +90,13 @@ public class GatheringDAO implements IGatheringDAO {
 		boolean flag = false;
 
 		GatheringDTO gather = (GatheringDTO) map.get("gath");
-		
 		int result = session.insert(namespace+".insertGatherReader", gather);
 		
 		if(result>0){
-
-			result = session.update(namespace+".updateGatherParti", map);
+			
+			
+			System.out.println(map.get("no"));
+			result = session.update(namespace+".updateGatherPartiReader", gather);
 			
 			if(result>0){
 				flag = true;
@@ -115,6 +116,7 @@ public class GatheringDAO implements IGatheringDAO {
 		int result = session.insert(namespace+".insertGatherPeople", map);
 		
 		if(result>0){
+			
 			result = session.update(namespace+".updateGatherParti", map);
 			
 			if(result>0){
