@@ -56,13 +56,13 @@
 <!-- 빈칸 입력시 알림창 띄우는 스크립트 -->
 <script type="text/javascript">
  function form_check(){ // 11써서 막아놓음
-	 var content = $("#gContent").val();
+	 /* var content = $("#gContent").val();
 	 
 	 if(!content){ /*  !content 이뜻은 스크립트에서 값이 null 일때는 false를 반환하기 때문에 !false == true임 */
 		 alert("생각 좀 하고 빈칸 채우렴.");
 	 }else{
 		 $("#gMake").submit();
-	 }
+	 } */
  }
 </script>
 
