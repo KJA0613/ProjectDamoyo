@@ -51,7 +51,7 @@
                 document.getElementById('comJibunAddress').value = data.jibunAddress;
 
                 // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
+                /* if(data.autoRoadAddress) {
                     //예상되는 도로명 주소에 조합형 주소를 추가한다.
                     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                     document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
@@ -62,21 +62,27 @@
 
                 } else {
                     document.getElementById('guide').innerHTML = '';
-                }
+                } */
             }
         }).open();
     }
 </script>
 
-<title>기업회원가입 저장한 내용 수정</title>
 
-<!-- <script>
-	 $(document).ready(function(){
-		 var link = document.location.href;				//현재접속url
-		 var tab = link.split('/').pop(); 				// 배열의 맨 마지막 요소를 삭제하고 삭제된 해당 값을 반환함
-		 $('a[href$='+tab+']').trigger("click");		//해당 앵커트리거를 이용 클릭 이벤트
-	 });
-</script> -->
+<!-- 경고 메세지 CSS -->
+<style type="text/css">
+.gm {
+	padding-top: 8px;
+	color: #39f;	
+}
+
+.error {
+	padding-top: 8px;
+	color: #e51e1f;
+}
+</style>
+
+<title>기업회원가입 저장한 내용 수정</title>
 
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
@@ -106,7 +112,7 @@
             <div class="panel panel-default"> 
                <!--/// 제목 ///-->
                <div class="panel-heading">
-                  <h4><strong>회원정보수정 : 1단계</strong></h4>               
+                  <h4><strong>회원정보수정</strong></h4>               
                </div>
                <!--/// 내용 ///-->
                <div class="panel-body">
@@ -118,107 +124,126 @@
                   <br>                 
 
                   <!-- [Form] 개인정보 수정할 수 있는 폼 -->
-                  <form action="/mypage/CompanySecondModify" class="form-horizontal" method="post">               
+                  <form action="" class="form-horizontal" method="post" id="dataset">               
+                    
                      <!-- 아이디(비활성화) -->
                      <div class="form-group">
                         <label for="Id" class="col-md-2 control-label">아이디</label>               
                         <div class="col-md-10">
-                           <input type="text" class="form-control" name="comId" value="${cdto.comId}" required disabled>
+                           <input type="text" class="form-control" name="comId" value="${cdto.comId}" disabled>
                         </div>
                      </div>
+                             
                                           
                      <!-- 담당자명 -->
                      <div class="form-group">
                         <label for="Name" class="col-md-2 control-label">담당자명</label>
                         <div class="col-md-10">
-                           <input type="text" class="form-control" name="comManager" value="${cdto.comManager}" required>
+                           <input type="text" class="form-control" id="comManager" name="comManager" value="${cdto.comManager}" onblur="checkName()">
+                           <!-- 경고 메세지 -->
+						   <div id="nameMsg" class="error">
+						   	   <!-- 에러 메세지 적용되는 부분 -->
+                           </div>
                         </div>
                      </div>
+                     
                      
                      <!-- 이메일 -->
                      <div class="form-group">
                         <label for="Email" class="col-md-2 control-label">이메일</label>
                         <div class="col-md-10">
-                           <input type="email" class="form-control" name="comEmail" value="${cdto.comEmail}" required>
+                        	<input type="email" class="form-control" id="comEmail" name="comEmail" value="${cdto.comEmail}" onblur="checkEmail()">
+							<div id="emailMsg" class="error"></div>
                         </div>
                      </div>
+                     
                      
                      <!-- 연락처 -->
                      <div class="form-group">
                         <label for="Phone" class="col-md-2 control-label">연락처</label>
                         <div class="col-md-10">
-                           <input type="text" class="form-control" name="comPhone" value="${cdto.comPhone}" required>
+                            <input type="text" class="form-control" id="comPhone" name="comPhone" value="${cdto.comPhone}" onblur="checkPhone()">
+							<div id="mobileMsg" class="error"></div>
                         </div>
                      </div>
                      
-                     <!-- 기업명 -->
+                     
+                    <!-- 기업명 -->
 					<div class="form-group">
 						<label for="Name" class="col-md-2 control-label">기업명</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" id="comName" name="comName" maxlength="20" placeholder="기업명" value="${cdto.comName}" required>
-							
+							<input type="text" class="form-control" id="comName" name="comName" maxlength="20" placeholder="기업명" value="${cdto.comName}" onblur="checkComName()">
+							<div id="cnameMsg" class="error"></div>
 						</div>
 					</div>
 					
 				
+					<!-- 대표명 -->
 					<div class="form-group">
-						<!-- 입력항목이름 -->
-						<label for="Id" class="col-md-2 control-label">대표명</label>
-			
+						<label for="Id" class="col-md-2 control-label">대표명</label>			
 						<div class="col-md-10">
-							<!-- 입력칸크기 -->
-							<input type="text" class="form-control" id="comCeoName" name="comCeoName" placeholder="대표명" value="${cdto.comCeoName}" required>
-														
+							<input type="text" class="form-control" id="comCeoName" name="comCeoName" placeholder="대표명" value="${cdto.comCeoName}" onblur="checkCeoName()">
+							<div id="ceoNameMsg" class="error"></div>								
 						</div>						
 					</div>
+					
 					
 					<!-- 사업자번호 -->
 					<div class="form-group">
 						<label for="comSaNo" class="col-md-2 control-label">사업자번호</label>
 						<div class="col-md-10">
-							<input type="text" class="form-control" name="comSaNo" placeholder="사업자번호" value="${cdto.comSaNo}" required>
+							<input type="text" class="form-control" id="comSaNo" name="comSaNo" placeholder="사업자번호" value="${cdto.comSaNo}" onblur="checkSaNo()">
+							<div id="sanumMsg" class="error"></div>
 						</div>
-						
 					</div>
+					
 					
 					<!-- 기업주소우편번호검색버튼 -->
 					<div class="form-group">
 						<label for="comJuNo" class="col-md-2 control-label">기업주소</label>
 							<div class="col-md-10">
-								<input type="button"class="btn btn-grey" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">								
-									</div></div>
+								<input type="button"class="btn btn-grey" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">															
+							</div>
+					</div>
+					
 					
 					<!-- 기업주소우편번호노출창 -->
 					<div class="form-group">					
 						<label for="comZoneCode" class="col-md-2 control-label"></label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="comZoneCode" name="comZoneCode" placeholder="우편번호" value="${cdto.comZoneCode}" required>
-									</div></div>
+								<input type="text" class="form-control" id="comZoneCode" name="comZoneCode" placeholder="우편번호" value="${cdto.comZoneCode}" style="background: #FFFFFF" readonly="readonly" onclick="sample4_execDaumPostcode()" onblur="checkWooNo()">
+							</div>
+					</div>
+					
 					
 					<!-- 선택된기업주소도로명 -->
 					<div class="form-group">					
 						<label for="comRoadAddress" class="col-md-2 control-label"></label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="comRoadAddress" name="comRoadAddress" placeholder="도로명주소" value="${cdto.comRoadAddress}" required> 
-									</div></div>
+								<input type="text" class="form-control" id="comRoadAddress" name="comRoadAddress" placeholder="도로명주소" value="${cdto.comRoadAddress}" style="background: #FFFFFF" readonly="readonly" onclick="sample4_execDaumPostcode()" onblur="checkDoro()"> 
+							</div>
+					</div>
+					
 					
 					<!-- 선택된기업주소지번 -->
 					<div class="form-group">					
 						<label for="comJibunAddress" class="col-md-2 control-label"></label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="comJibunAddress" name="comJibunAddress" placeholder="지번주소" value="${cdto.comJibunAddress}" required>
-									</div></div>
+								<input type="text" class="form-control" id="comJibunAddress" name="comJibunAddress" placeholder="지번주소" value="${cdto.comJibunAddress}" style="background: #FFFFFF" readonly="readonly" onclick="sample4_execDaumPostcode()" onblur="checkJibun()">
+							</div>
+					</div>
+					
 					
 					<!-- 기업주소상세정보입력 -->
 					<div class="form-group">					
 						<label for="comDetailAddress" class="col-md-2 control-label"></label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="ComDetailAddress" name="comDetailAddress" placeholder="상세주소를입력해주세요" value="${cdto.comDetailAddress}" required> 
-									</div></div>
+								<input type="text" class="form-control" id="comDetailAddress" name="comDetailAddress" placeholder="상세주소를입력해주세요" value="${cdto.comDetailAddress}" onblur="checkDetail()"> 
+								<div id="detailMsg" class="error"></div>
+							</div>
+					</div>
 					
-					<hr>						
-
-                                  
+					<hr>		                                  
       
                      <!-- hidden -->
                      <input type="hidden" name="comId" value="${cdto.comId}">
@@ -228,7 +253,7 @@
                      <!-- 1단계 수정완료 버튼 -->
                      <div class="clear-fix">
                         <div class="pull-right">
-                           <button type="submit" class="btn btn-primary">수정완료</button>
+                           <button type="submit" class="btn btn-primary" onclick="companyModify(); return false;">수정완료</button>
                         </div>
                      </div>
                   </form>
@@ -245,6 +270,9 @@
    <hr>
    <%@include file = "../footer.jsp"%>
 
+   <!-- [마이페이지(개인정보수정) JS - 데이터 유효성 검사] -->	
+   <script src="/resources/script/js/mypageCompanyDetailValidation.js"></script>
+   
    </div>   
    
 </body>

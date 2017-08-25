@@ -2,7 +2,7 @@
  *  [개인] 회원가입 1단계 > 데이터 유효성 검사
  */
 
-// [전체 함수 관리] 1단계 유효성 검사
+// [전체 함수 관리-회원가입] 1단계 유효성 검사
 function check_info1() {
 	// 유효성 체크 함수들
 	checkName();
@@ -21,9 +21,28 @@ function check_info1() {
 		
 		data.action = url;
 		data.submit();
-	}		
+	}	
 }
 
+
+// [전체 함수 관리-마이페이지] 1단계 유효성 검사
+function personModify1() {
+	// 유효성 체크 함수들
+	checkName();
+	checkEmail();
+	checkPhone();	
+	
+	// Form Id
+	var data = document.getElementById('data');
+	
+	// 유효성에 적합한 값 입력 시, 2단계로 데이터 전송
+	if(checkName() && checkEmail() && checkPhone()) {	
+		var url = '/mypage/PersonSecondModify';
+		
+		data.action = url;
+		data.submit();
+	}
+}
 
 // [Check_01] 이름 (중복 허용)
 function checkName() {

@@ -399,7 +399,7 @@ function catMidChangeThr(item){
 						<br>
 						
 						<!-- [Form] 희망지역, 희망카테고리 수정 -->
-						<form action="/mypage/PersonFinalCheck" method="post" name="signform" id="per">
+						<form action="" method="post" name="signform" id="per">
 						         <h4>모임 희망지역</h4>
 						         <div id=list1>
 						            <div class="dropdown">
@@ -482,7 +482,7 @@ function catMidChangeThr(item){
 						                  </tr>
 						                  <tr>
 						                     <!--3차지역선택  -->
-						                     <td><select class="form-control" name="bigarea3" onChange="areachange3(this.options.selectedIndex)">
+						                     <td><select class="form-control" id="bigarea3" name="bigarea3" onChange="areachange3(this.options.selectedIndex)">
 						                           	   <option selected value="">-선택-</option>
 								                       <option value="1" <c:if test="${adto.bigarea3 eq '1'}">selected="selected"</c:if>>서울특별시</option>
 								                       <option value="2" <c:if test="${adto.bigarea3 eq '2'}">selected="selected"</c:if>>경기도</option>
@@ -533,7 +533,7 @@ function catMidChangeThr(item){
 						                  </tr>
 						                  <tr>
 						                     <!--1차카테고리선택  -->
-						                     <td><select class="form-control" name="catTopOne" onChange="catChangeOne(this.options.selectedIndex)">
+						                     <td><select class="form-control" id="catTopOne" name="catTopOne" onChange="catChangeOne(this.options.selectedIndex)">
 						                           <option selected value="">-선택-</option>
 						                           <option value="1" <c:if test="${cadto.catTopOne eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
 						                           <option value="2" <c:if test="${cadto.catTopOne eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
@@ -541,14 +541,14 @@ function catMidChangeThr(item){
 						
 						                     </select></td>
 						                     <!--2차카테고리선택  -->
-						                     <td><select class="form-control" name="catMidOne" size=1 onChange="catMidChangeOne(this.options.selectedIndex)">
+						                     <td><select class="form-control" id="catMidOne" name="catMidOne" size=1 onChange="catMidChangeOne(this.options.selectedIndex)">
 						                     	 <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
 							                           <option selected value="${cadto.catMidOne}">${cadto.catMidOne}</option>					                      
 							                     <%-- </c:forEach> --%>
 						                     </select></td>
 						                     <!--3차카테고리선택  -->
-						                     <td><select class="form-control" name="catBotOne" size=1>
+						                     <td><select class="form-control" id="catBotOne" name="catBotOne" size=1>
 							                     <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
 							                           <option selected value="${cadto.catBotOne}">${cadto.catBotOne}</option>					                      
@@ -566,7 +566,7 @@ function catMidChangeThr(item){
 						                  </tr>
 						                  <tr>
 						                     <!--1차카테고리선택  -->
-						                     <td><select class="form-control" name="catTopTwo" onChange="catChangeTwo(this.options.selectedIndex)">
+						                     <td><select class="form-control" id="catTopTwo" name="catTopTwo" onChange="catChangeTwo(this.options.selectedIndex)">
 						                           <option selected value="">-선택-</option>
 						                           <option value="1" <c:if test="${cadto.catTopTwo eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
 						                           <option value="2" <c:if test="${cadto.catTopTwo eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
@@ -575,7 +575,7 @@ function catMidChangeThr(item){
 						                     </select></td>
 						                     <!--2차카테고리선택  -->
 						                      
-						                     <td><select class="form-control" name="catMidTwo" size=1 onChange="catMidChangeTwo(this.options.selectedIndex)">
+						                     <td><select class="form-control" id="catMidTwo" name="catMidTwo" size=1 onChange="catMidChangeTwo(this.options.selectedIndex)">
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
 							                           <option selected value="${cadto.catMidTwo}">${cadto.catMidTwo}</option>					                      
@@ -583,7 +583,7 @@ function catMidChangeThr(item){
 						                     </select></td>
 						                     
 						                     <!--3차카테고리선택  -->
-						                     <td><select class="form-control" name="catBotTwo" size=1>
+						                     <td><select class="form-control" id="catBotTwo" name="catBotTwo" size=1>
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
 							                           <option selected value="${cadto.catBotTwo}">${cadto.catBotTwo}</option>					                      
@@ -601,7 +601,7 @@ function catMidChangeThr(item){
 						                  </tr>
 						                  <tr>
 						                     <!--1차카테고리선택  -->
-						                     <td><select class="form-control" name="catTopThr" onChange="catChangeThr(this.options.selectedIndex)">
+						                     <td><select class="form-control" id="catTopThr" name="catTopThr" onChange="catChangeThr(this.options.selectedIndex)">
 						                           <option selected value="">-선택-</option>
 						                           <option value="1" <c:if test="${cadto.catTopThr eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
 						                           <option value="2" <c:if test="${cadto.catTopThr eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
@@ -609,14 +609,14 @@ function catMidChangeThr(item){
 						
 						                     </select></td>
 						                     <!--2차카테고리선택  -->
-						                     <td><select class="form-control" name="catMidThr" size=1 onChange="catMidChangeThr(this.options.selectedIndex)">
+						                     <td><select class="form-control" id="catMidThr" name="catMidThr" size=1 onChange="catMidChangeThr(this.options.selectedIndex)">
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
 							                           <option selected value="${cadto.catMidThr}">${cadto.catMidThr}</option>					                      
 							                     <%-- </c:forEach> --%>
 						                     </select></td>
 						                     <!--3차카테고리선택  -->
-						                     <td><select class="form-control" name="catBotThr" size=1>
+						                     <td><select class="form-control" id="catBotThr" name="catBotThr" size=1>
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
 							                           <option selected value="${cadto.catBotThr}">${cadto.catBotThr}</option>					                      
@@ -644,7 +644,7 @@ function catMidChangeThr(item){
 								 <!-- 2단계 > 수정완료 버튼 -->
 								 <div class="clear-fix">
 									<div class="pull-right">
-										<button type="submit" class="btn btn-primary" onClick="TwoSubmit()">2단계 수정완료</button>
+										<button type="submit" class="btn btn-primary" onClick="mypageModify2(); return false;">2단계 수정완료</button>
 									</div>
 								 </div>
 						      </form>
@@ -654,6 +654,9 @@ function catMidChangeThr(item){
 			</div>
 			 </div>
 		</div>
+		
+		<!-- [마이페이지(개인정보수정-2단계) JS - 데이터 유효성 검사] -->
+		<script src="/resources/script/js/mypagePersonDetailValidation.js"></script>
 	</div>
 </body>
 </html>
