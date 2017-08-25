@@ -29,7 +29,7 @@ public interface IMemberService {
 	public boolean PersonAreaRegist(AreaDTO adto);
 
 	// [개인회원] 회원가입 - 2단계 > 희망 카테고리 3개 삽입
-	public boolean PersonCategoryRegist(CategoryDTO cdto);	
+	public boolean PersonCategoryRegist(CategoryDTO cadto);	
 	
 	// [개인회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
 	public String checkDuplicatePersonId(String guserId);
@@ -44,6 +44,12 @@ public interface IMemberService {
 
 	// [개인회원] 마이페이지 - 2단계 > 희망카테고리 전체조회
 	public CategoryDTO PersonHopeCategoryAll(String guserId);
+	
+	// [개인회원] 마이페이지 - 2단계 > 희망지역 수정
+	public boolean PersonHopeAreaModify(AreaDTO adto);
+	
+	// [개인회원] 마이페이지 - 2단계 > 희망카테고리 수정
+	public boolean PersonHopeCategoryModify(CategoryDTO cadto);
 	
 	// [개인회원] 마이페이지 - 비밀번호 변경
 	public boolean PersonPwModify(PersonDTO pdto);
@@ -77,6 +83,5 @@ public interface IMemberService {
 
 	// 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
 	public String checkDuplicateCompanyId(String comId);
-
 	
 }

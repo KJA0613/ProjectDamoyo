@@ -535,23 +535,23 @@ function catMidChangeThr(item){
 						                     <!--1차카테고리선택  -->
 						                     <td><select class="form-control" name="catTopOne" onChange="catChangeOne(this.options.selectedIndex)">
 						                           <option selected value="">-선택-</option>
-						                           <option value="1" <c:if test="${cdto.catTopOne eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
-						                           <option value="2" <c:if test="${cdto.catTopOne eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
-						                           <option value="3" <c:if test="${cdto.catTopOne eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
+						                           <option value="1" <c:if test="${cadto.catTopOne eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
+						                           <option value="2" <c:if test="${cadto.catTopOne eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
+						                           <option value="3" <c:if test="${cadto.catTopOne eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
 						
 						                     </select></td>
 						                     <!--2차카테고리선택  -->
 						                     <td><select class="form-control" name="catMidOne" size=1 onChange="catMidChangeOne(this.options.selectedIndex)">
 						                     	 <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
-							                           <option selected value="${cdto.catMidOne}">${cdto.catMidOne}</option>					                      
+							                           <option selected value="${cadto.catMidOne}">${cadto.catMidOne}</option>					                      
 							                     <%-- </c:forEach> --%>
 						                     </select></td>
 						                     <!--3차카테고리선택  -->
 						                     <td><select class="form-control" name="catBotOne" size=1>
 							                     <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
-							                           <option selected value="${cdto.catBotOne}">${cdto.catBotOne}</option>					                      
+							                           <option selected value="${cadto.catBotOne}">${cadto.catBotOne}</option>					                      
 							                     <%-- </c:forEach> --%>
 						                     </select></td>
 						                  </tr>
@@ -568,9 +568,9 @@ function catMidChangeThr(item){
 						                     <!--1차카테고리선택  -->
 						                     <td><select class="form-control" name="catTopTwo" onChange="catChangeTwo(this.options.selectedIndex)">
 						                           <option selected value="">-선택-</option>
-						                           <option value="1" <c:if test="${cdto.catTopTwo eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
-						                           <option value="2" <c:if test="${cdto.catTopTwo eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
-						                           <option value="3" <c:if test="${cdto.catTopTwo eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
+						                           <option value="1" <c:if test="${cadto.catTopTwo eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
+						                           <option value="2" <c:if test="${cadto.catTopTwo eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
+						                           <option value="3" <c:if test="${cadto.catTopTwo eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
 						
 						                     </select></td>
 						                     <!--2차카테고리선택  -->
@@ -578,7 +578,7 @@ function catMidChangeThr(item){
 						                     <td><select class="form-control" name="catMidTwo" size=1 onChange="catMidChangeTwo(this.options.selectedIndex)">
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
-							                           <option selected value="${cdto.catMidTwo}">${cdto.catMidTwo}</option>					                      
+							                           <option selected value="${cadto.catMidTwo}">${cadto.catMidTwo}</option>					                      
 							                     <%-- </c:forEach> --%>				                           
 						                     </select></td>
 						                     
@@ -586,7 +586,7 @@ function catMidChangeThr(item){
 						                     <td><select class="form-control" name="catBotTwo" size=1>
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
-							                           <option selected value="${cdto.catBotTwo}">${cdto.catBotTwo}</option>					                      
+							                           <option selected value="${cadto.catBotTwo}">${cadto.catBotTwo}</option>					                      
 							                     <%-- </c:forEach> --%>
 						                     </select></td>
 						                  </tr>
@@ -603,23 +603,23 @@ function catMidChangeThr(item){
 						                     <!--1차카테고리선택  -->
 						                     <td><select class="form-control" name="catTopThr" onChange="catChangeThr(this.options.selectedIndex)">
 						                           <option selected value="">-선택-</option>
-						                           <option value="1" <c:if test="${cdto.catTopThr eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
-						                           <option value="2" <c:if test="${cdto.catTopThr eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
-						                           <option value="3" <c:if test="${cdto.catTopThr eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
+						                           <option value="1" <c:if test="${cadto.catTopThr eq '1'}">selected="selected"</c:if>>스터디(취업/시험 대비)</option>
+						                           <option value="2" <c:if test="${cadto.catTopThr eq '2'}">selected="selected"</c:if>>동호회(취미)</option>
+						                           <option value="3" <c:if test="${cadto.catTopThr eq '3'}">selected="selected"</c:if>>컨퍼런스</option>
 						
 						                     </select></td>
 						                     <!--2차카테고리선택  -->
 						                     <td><select class="form-control" name="catMidThr" size=1 onChange="catMidChangeThr(this.options.selectedIndex)">
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
-							                           <option selected value="${cdto.catMidThr}">${cdto.catMidThr}</option>					                      
+							                           <option selected value="${cadto.catMidThr}">${cadto.catMidThr}</option>					                      
 							                     <%-- </c:forEach> --%>
 						                     </select></td>
 						                     <!--3차카테고리선택  -->
 						                     <td><select class="form-control" name="catBotThr" size=1>
 						                         <%-- <c:forEach var = "cdto" items="${cdto}" varStatus="1">	 --%>					                           
 							                           <option value="" >-선택-</option>
-							                           <option selected value="${cdto.catBotThr}">${cdto.catBotThr}</option>					                      
+							                           <option selected value="${cadto.catBotThr}">${cadto.catBotThr}</option>					                      
 							                     <%-- </c:forEach> --%>
 						                     </select></td>
 						                  </tr>

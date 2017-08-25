@@ -26,6 +26,7 @@
 	 });
 </script> -->
 
+
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
 </head>
@@ -66,7 +67,7 @@
                   <br>                 
 
                   <!-- [Form] 개인정보 수정할 수 있는 폼 -->
-                  <form action="/mypage/PersonSecondModify" class="form-horizontal" method="post">               
+                  <form action="/mypage/PersonSecondModify" class="form-horizontal" method="post" id="dataset">               
                      <!-- 아이디(비활성화) -->
                      <div class="form-group">
                         <label for="Id" class="col-md-2 control-label">아이디</label>               
@@ -128,7 +129,7 @@
                      <!-- 1단계 수정완료 버튼 -->
                      <div class="clear-fix">
                         <div class="pull-right">
-                           <button type="submit" class="btn btn-primary">1단계 수정완료</button>
+                           <button type="submit" class="btn btn-primary" onclick="go_url(2)">수정완료 및 2단계 수정</button>
                         </div>
                      </div>
                   </form>

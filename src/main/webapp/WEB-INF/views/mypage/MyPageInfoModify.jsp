@@ -101,7 +101,7 @@
 							<div class="form-group">
 								<label for="guserPw" class="control-label col-md-2">비밀번호 </label>
 								<div class="col-md-8">
-									<input type="password" class="form-control" id="guserPw" name="guserInfoPw" placeholder="비밀번호를 입력하세요." required>
+									<input type="password" class="form-control" id="guserPw" name="guserPw" placeholder="비밀번호를 입력하세요." required>
 								</div>
 							</div>
 							

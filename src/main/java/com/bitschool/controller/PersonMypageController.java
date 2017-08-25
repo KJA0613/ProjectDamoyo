@@ -61,30 +61,26 @@ public class PersonMypageController {
 	
 	// 01-01-01. [개인회원],[기업회원] 마이페이지 - 개인정보 수정 > 비밀번호 확인 후, "수정할 수 있는 페이지로 이동"
 	@RequestMapping(value="/PersonFirstModify", method = RequestMethod.POST)
-	public String PersonFirstModify(@RequestParam("guserInfoPw") String guserInfoPw, HttpSession session, Model model){
+	public String PersonFirstModify(@RequestParam("guserPw") String guserPw, HttpSession session, Model model){
 		String url = null;
-		boolean flag = false;
 		
 		// 현재 세션에 저장된 정보 > pdto에 저장(개인회원경우)
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		// 현재 세션에 저장된 정보 > cdto에 저장(기업회원경우)
-		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");
-		
+		CompanyDTO cdto = (CompanyDTO) session.getAttribute("cdto");		
 		
 		// 세션에 저장되어있는 현재 비밀번호 == 입력한 현재 비밀번호
 		
 		//개인회원
 		if(pdto!=null){
-			if(guserInfoPw != null && pdto.getGuserPw().equals(guserInfoPw)) {	
+			if(guserPw != null && pdto.getGuserPw().equals(guserPw)) {	
 				
 				// pdto 모델에 저장 (세션과 확인한 비밀번호를 가진 사용자 > 회원가입 데이터 불러와야하기 때문에)
-				model.addAttribute("pdto", pdto);
-							
+				model.addAttribute("pdto", pdto);							
 						
 				// 회원가입한 정보 > 수정 가능한 페이지로 이동	(기존 정보 뿌려주기)
 				url = "mypage/PersonInfoFirstModify";				
-			}
-			else{
+			} else{
 				/*------------------- [2차 처리 예정] ------------------
 					2) 비밀번호들 일치 안 할 경우 > 예외처리 > 에러 메세지
 	 	 	     ---------------------------------------------------*/
@@ -94,25 +90,22 @@ public class PersonMypageController {
 		
 		//기업회원
 		if(cdto!=null){
-			if(guserInfoPw != null && cdto.getComPw().equals(guserInfoPw)) {	
+			if(guserPw != null && cdto.getComPw().equals(guserPw)) {	
 				
 				// cdto 모델에 저장 (세션과 확인한 비밀번호를 가진 사용자 > 회원가입 데이터 불러와야하기 때문에)
-				model.addAttribute("cdto", cdto);
-							
+				model.addAttribute("cdto", cdto);							
 				
 				// 회원가입한 정보 > 수정 가능한 페이지로 이동	(기존 정보 뿌려주기)
 				url = "mypage/CompanyInfoFirstModify";				
 				
-			}
-			else{
+			} else{
 				/*------------------- [2차 처리 예정] ------------------
 					2) 비밀번호들 일치 안 할 경우 > 예외처리 > 에러 메세지
 	 	 	     ---------------------------------------------------*/
 				url = "redirect:/mypage/MyPageManagement";
 			}
 		}
-		
-		
+				
 		return url;
 	}
 	
@@ -134,13 +127,13 @@ public class PersonMypageController {
 		//System.out.println("[TEST-회원정보 수정(희망 지역)] 로그인 사용자 > 희망지역 데이터: " + adto);
 		
 		// 로그인 된 사용자의 > 희망카테고리 > 정보 가져오기
-		CategoryDTO cdto = memberService.PersonHopeCategoryAll(guserId);
-		//System.out.println("[TEST-회원정보 수정(희망 카테고리)] 로그인 사용자 > 희망카테고리 데이터: " + cdto);	
+		CategoryDTO cadto = memberService.PersonHopeCategoryAll(guserId);
+		//System.out.println("[TEST-회원정보 수정(희망 카테고리)] 로그인 사용자 > 희망카테고리 데이터: " + cadto);	
 		
 		// 희망지역, 카테고리 > 데이터 저장해서 보내기 (뿌려주기 위해서)
 		model.addAttribute("pdto", pdto);
 		model.addAttribute("adto", adto);
-		model.addAttribute("cdto", cdto);
+		model.addAttribute("cadto", cadto);
 			
 		// 희망지역, 카테고리 > 2단계 수정페이지에 데이터들 뿌려주기
 		if(flag) {	
@@ -155,15 +148,13 @@ public class PersonMypageController {
 	// [1단계] 아이디, 패스워드 > hidden으로 값 받아오기
 	// [2단계] CompanyInfoFirstModify.jsp > hidden > guserId값 가져오기 
 	@RequestMapping(value = "/CompanySecondModify", method = RequestMethod.POST)
-	public String CompanySecondModify(CompanyDTO cdto,Model model){
-		
+	public String CompanySecondModify(CompanyDTO cdto,Model model){		
 		String url = null;
 		boolean flag = false;
 		
 		flag = memberService.updateComInfo(cdto);	
 		
-		if(flag==true){
-			
+		if(flag == true){			
 			url = "redirect:/mypage/MyPageManagement";
 		}
 		
@@ -173,23 +164,25 @@ public class PersonMypageController {
 	
 	// 01-01-03. [개인회원] 마이페이지 - 2단계 > 희망지역 및 카테고리 > 전체 조회
 	@RequestMapping(value="/PersonFinalCheck", method=RequestMethod.POST)
-	public String PersonFinalCheck(PersonDTO pdto, AreaDTO adto, CategoryDTO cdto, Model model) {
+	public String PersonFinalCheck(PersonDTO pdto, AreaDTO adto, CategoryDTO cadto, Model model) {
 		String url = null;			
 		
 		System.out.println("[TEST-회원정보 수정(개인정보 수정)] 1단계 수정 완료된 데이터: " + pdto);
 		System.out.println("[TEST-회원정보 수정(희망 지역 수정)] 2단계 수정 완료된 데이터: " + adto);
-		System.out.println("[TEST-회원정보 수정(희망 카테고리 수정)] 2단계 수정 완료된 데이터: " + cdto);
+		System.out.println("[TEST-회원정보 수정(희망 카테고리 수정)] 2단계 수정 완료된 데이터: " + cadto);
 		
 		// 희망지역 & 희망카테고리 수정
-		//boolean adtoFlag = memberService.PersonHopeAreaModify(adto);
-		//boolean cdtoFlag = memberService.PersonHopeCategoryModify(cdto);
+		boolean adtoFlag = memberService.PersonHopeAreaModify(adto);
+		boolean cadtoFlag = memberService.PersonHopeCategoryModify(cadto);
 		
-		// model 사용
-		//model.addAttribute("adto", adto);
-		//model.addAttribute("cdto", cdto);
-		
-		// 개인회원 마이페이지 비밀번호 확인 폼 이동
-		url = "mypage/MyPageManagement";
+		// 지역, 카테고리 수정 후 > 페이지 이동
+		if(adtoFlag && cadtoFlag) {
+			model.addAttribute("adto", adto);
+			model.addAttribute("cadto", cadto);
+			
+			// 개인회원 마이페이지 비밀번호 확인 폼 이동
+			url = "mypage/MyPageManagement";
+		}
 		
 		return url;
 	}
@@ -210,6 +203,7 @@ public class PersonMypageController {
 		// 세션에 사용자 정보가 있으면 > 수정 가능
 		
 		if (pdto != null) {
+			
 			// [수정 처리] 세션에 저장되어있는 pw = 현재 비밀번호 입력란에 입력한 pw
 			if (pdto.getGuserPw().equals(guserCurPw)) {
 				// 새 비밀번호 > 현재 세션에 새로 저장

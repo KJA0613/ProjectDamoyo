@@ -67,10 +67,23 @@
 		select * from usearea where guserId = #{guserId}
 	</select>
 	
-	<!--  -->
+	<!-- [개인회원] 마이페이지 - 2단계 > 카테고리 전체 조회 -->
 	<select id="selectPersonHopeCategory" parameterType="String" resultType="CategoryDTO">
 		select * from usecategory where guserId = #{guserId}
 	</select>
+	
+	<!-- [개인회원] 마이페이지 - 2단계 > 희망지역 수정 -->
+	<update id="updatePersonHopeArea" parameterType="AreaDTO">
+		update usearea set bigarea1 = #{bigarea1}, area = #{area}, bigarea2 = #{bigarea2}, areaP = #{areaP}, bigarea3 = #{bigarea3}, areaPP = #{areaPP} 
+		where guserId = #{guserId}
+	</update>
+	
+	<!-- [개인회원] 마이페이지 - 2단계 > 희망카테고리 수정 -->
+	<update id="updatePersonHopeCategory">
+		update usecategory set catTopOne = #{catTopOne}, catMidOne = #{catMidOne}, catBotOne = #{catBotOne}, catTopTwo = #{catTopTwo}, 
+		catMidTwo = #{catMidTwo}, catBotTwo = #{catBotTwo}, catTopThr = #{catTopThr}, catMidThr = #{catMidThr}, catBotThr = #{catBotThr} 
+		where guserId = #{guserId}
+	</update>
 	
 	<!-- [개인회원] 마이페이지 - 비밀번호 변경 > 아이디값 확인 후, 비밀번호 수정 -->
 	<update id="updatePersonPw" parameterType="PersonDTO">
