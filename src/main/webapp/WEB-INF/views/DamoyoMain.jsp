@@ -242,11 +242,9 @@
 			</c:forEach>
 			</ol>
 		</div>
-
-  		<br><br><br><br><br><br><br><br>	
    
 		<!-- 02. 테마  -->
-		<h1>테마별 검색</h1>
+		<h1 style="margin-top: 180px">테마별 검색</h1>
 		<hr style="border: solid 1px #b3b3b3;">
 		<br>
 		
@@ -369,15 +367,12 @@
 			<div class="clear"></div>
 		</div>	
 	
-
-		
-	   <br><br><br><br><br><br><br><br><br><br><br><br>
 	   
 	   <!-- 03. 광고  -->
-	   <h1>모임 공간</h1>
+	   <h1 style="margin-top: 230px">모임 공간</h1>
 	   
 	   <hr style="border: solid 1px #b3b3b3;">
-	   	    <div class="more" align="right"><a href="/place/PlaceListAll">최근에 개설된 모임들입니다. 더 궁금하다면? ▷▶</a></div>
+	   	    <div class="more" align="right"><a href="/place/PlaceListAll">최근에 개설된 모임들입니다. 더 궁금하다면?</a></div>
 	   <br>
 
    	   <div class="wrapper">
@@ -390,7 +385,7 @@
 	   <input type="hidden" name="guserPw" value="${pdto.guserPw}">
 
 
-   	   <br><br><br>
+   	   <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
    
    <!-- [Footer] 페이지 하단 (고정화면) -->
    <hr>

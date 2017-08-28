@@ -157,8 +157,6 @@ a {
 								<label><input type="radio" name="guserGender" value="W" checked="checked"> 여 </label> 
 								&nbsp;&nbsp; <label><input type="radio" name="guserGender" value="M"> 남 </label>
 							</div>
-							<!-- 경고 메세지 -->
-							<div id="sexMsg" class="error"></div>
 						</div>
 					</div>
 					<hr>						
@@ -183,17 +181,15 @@ a {
 					
 				</form>
 			</div>
-		</div>
-	
-	
-		<!-- [회원가입(개인) 1단계 JS - 데이터 유효성 검사] -->	
-		<script src="/resources/script/js/joinPersonIntoValidation.js"></script>
-		
+		</div>		
 		
 		<!-- [Footer] 페이지 하단 (고정화면) -->
 		<hr>
 		<%@include file = "../footer.jsp"%>
 		
+		<!-- [회원가입(개인) 1단계 JS - 데이터 유효성 검사] -->	
+		<script src="/resources/script/js/joinPersonIntoValidation.js"></script>
+	
 	</div>
 
 </body>

@@ -154,12 +154,12 @@ public class MemberService implements IMemberService {
 	
 	// [개인회원] 회원가입 - 2단계 > 희망 카테고리 3개 삽입
 	@Override
-	public boolean PersonCategoryRegist(CategoryDTO cdto) {
+	public boolean PersonCategoryRegist(CategoryDTO cadto) {
 		boolean flag = false;
 
 		// 선택한 희망 카테고리 DB에 삽입
 		try {
-			flag = personDAO.insertPersonCategory(cdto);
+			flag = personDAO.insertPersonCategory(cadto);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -234,6 +234,35 @@ public class MemberService implements IMemberService {
 		return cdto;
 	}
 	
+	
+	// [개인회원] 마이페이지 - 2단계 > 희망지역 수정
+	@Override
+	public boolean PersonHopeAreaModify(AreaDTO adto) {
+		boolean flag = false;
+		
+		try {
+			flag = personDAO.updatePersonHopeArea(adto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
+	
+	
+	// [개인회원] 마이페이지 - 2단계 > 희망카테고리 수정
+	@Override
+	public boolean PersonHopeCategoryModify(CategoryDTO cadto) {
+		boolean flag = false;
+		
+		try {
+			flag = personDAO.updatePersonHopeCategory(cadto);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return flag;
+	}
 
 	// [개인회원] 마이페이지 - 비밀번호 변경
 	@Override
@@ -392,6 +421,5 @@ public class MemberService implements IMemberService {
 				
 		return result;
 	}
-
 
 }

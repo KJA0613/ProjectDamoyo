@@ -123,13 +123,13 @@ public class AdminController {
 				
 				System.out.println(gdto.get(i));
 				
-				if(recog.equals("Wait")){
+				if(recog.equals("Wait")){ // 승인 대기
 					waitdto.add(gdto.get(i));
-				}else if(recog.equals("yet")){
+				}else if(recog.equals("yet")){ // 모집중
 					yetdto.add(gdto.get(i));
-				}else if(recog.equals("Yes")){
+				}else if(recog.equals("Yes")){ // 승인됨 ==
 					yesdto.add(gdto.get(i));					
-				}else if(recog.equals("No")){
+				}else if(recog.equals("No")){ //  
 					nodto.add(gdto.get(i));					
 				}
 			}

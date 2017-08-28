@@ -147,7 +147,7 @@
 						        <td><a href='#'>자바 모임</a></td>
 						        <td>가나다</td>
 						        <td>3/4</td>
-						        <td>2017/06/20</td>
+						        <td>2017-06-20</td>
 						        <td>20</td>
 						        <td><span class="glyphicon glyphicon-heart" onclick="btn_heart()"></span></td>
 							</tr>
@@ -156,9 +156,9 @@
 								<tr>
 							        <td id="no">${attend.gatherNo}</td>
 							        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-							        <td><a href='#'>${attend.gatherSubject}</a></td>
+							        <td><a href="/gather/gathering?subject=${attend.gatherSubject}&no=${attend.gatherNo}">${attend.gatherSubject}</a></td>
 							        <td id="writer">${attend.guserId}</td>
-							        <td>${attend.gatherParti}</td>
+							        <td>${attend.gatherParti} / ${attend.gatherPartiMax}</td>
 							        <td>${fn:substring(attend.gatherEdate, 0, 10)}</td>
 							        <td>20(디비값 아님)</td>
 							        <td><span class="glyphicon glyphicon-heart" onclick="btn_attend()"></span></td>

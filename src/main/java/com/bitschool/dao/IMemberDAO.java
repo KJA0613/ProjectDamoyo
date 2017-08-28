@@ -26,7 +26,7 @@ public interface IMemberDAO {
 	public boolean insertPersonArea(AreaDTO adto) throws SQLException;
 
 	// [개인회원] 회원가입 - 2단계 > 희망 카테고리 3개 삽입
-	public boolean insertPersonCategory(CategoryDTO cdto) throws SQLException;	
+	public boolean insertPersonCategory(CategoryDTO cadto) throws SQLException;	
 	
 	// [개인회원] 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
 	public String selectDuplicatePersonId(String guserId) throws SQLException;
@@ -41,6 +41,12 @@ public interface IMemberDAO {
 
 	// [개인회원] 마이페이지 - 2단계 > 희망카테고리 전체조회
 	public CategoryDTO selectPersonHopeCategory(String guserId) throws SQLException;
+	
+	// [개인회원] 마이페이지 - 2단계 > 희망지역 수정
+	public boolean updatePersonHopeArea(AreaDTO adto) throws SQLException;
+	
+	// [개인회원] 마이페이지 - 2단계 > 희망카테고리 수정
+	public boolean updatePersonHopeCategory(CategoryDTO cadto) throws SQLException;
 	
 	// [개인회원] 마이페이지 - 비밀번호 변경
 	public boolean updatePersonPw(PersonDTO pdto) throws SQLException;
