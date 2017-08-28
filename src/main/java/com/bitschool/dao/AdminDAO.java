@@ -9,7 +9,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.CompanyDTO;
+<<<<<<< HEAD
 import com.bitschool.dto.GatherRankDTO;
+=======
+import com.bitschool.dto.GatherPeopleDTO;
+>>>>>>> bd86fcdb6f88922ebd6fec808a8c75668e734176
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -54,6 +58,7 @@ public class AdminDAO implements IAdminDAO{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public HashMap<String, Integer> gatherplaceCnt() {
 		
 		HashMap<String, Integer> gpCnt = null;
@@ -67,6 +72,23 @@ public class AdminDAO implements IAdminDAO{
 		List<GatherRankDTO> gatherRank = null;
 		gatherRank = session.selectList(namespace+".gatherRank");
 		return gatherRank;
+=======
+	public List<GatherPeopleDTO> getGather() {
+
+		List<GatherPeopleDTO> gpdto = null;
+		
+		gpdto = session.selectList(namespace+".getGather");
+		
+		return gpdto;
+	}
+
+	@Override
+	public List<GatheringDTO> getGatherInfo(String guserId) {
+
+		List<GatheringDTO>	gather = session.selectList(namespace+".gatherInfo", guserId);		
+		
+		return gather;
+>>>>>>> bd86fcdb6f88922ebd6fec808a8c75668e734176
 	}
 
 	

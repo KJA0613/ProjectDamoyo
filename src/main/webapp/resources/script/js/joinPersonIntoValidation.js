@@ -2,7 +2,7 @@
  *  [개인] 회원가입 1단계 > 데이터 유효성 검사
  */
 
-// [전체 함수 관리] 1단계 유효성 검사
+// [전체 함수 관리-회원가입] 1단계 유효성 검사
 function check_info1() {
 	// 유효성 체크 함수들
 	checkName();
@@ -21,9 +21,28 @@ function check_info1() {
 		
 		data.action = url;
 		data.submit();
-	}		
+	}	
 }
 
+
+// [전체 함수 관리-마이페이지] 1단계 유효성 검사
+function personModify1() {
+	// 유효성 체크 함수들
+	checkName();
+	checkEmail();
+	checkPhone();	
+	
+	// Form Id
+	var data = document.getElementById('data');
+	
+	// 유효성에 적합한 값 입력 시, 2단계로 데이터 전송
+	if(checkName() && checkEmail() && checkPhone()) {	
+		var url = '/mypage/PersonSecondModify';
+		
+		data.action = url;
+		data.submit();
+	}
+}
 
 // [Check_01] 이름 (중복 허용)
 function checkName() {
@@ -95,7 +114,7 @@ function checkId() {
     }
     
     
-    // [데이터 유효성 검사3] DB에 아이디 있는지 여부 판단 
+    // [데이터 유효성 검사3] DB에 아이디 유무 판단 
     var checkId = "guserId=" + $("#guserId").val();
         
     // Ajax: 비동기식 데이터 전송 방식 (URL 이동 없이 데이터만 확인해서 결과 출력 가능)
@@ -112,6 +131,7 @@ function checkId() {
 					oMsg.innerHTML = "멋진 아이디네요^^";
 					document.getElementById("idMsg").style.color = "blue";
 				} else {
+					oMsg.style.display = "block";
 					oMsg.className = "error";
 					oMsg.innerHTML = "이미 사용중이거나 탈퇴한 아이디입니다.";
 					document.getElementById("idMsg").style.color = "red";
@@ -149,8 +169,8 @@ function checkPw1() {
 	
 	
 	// [데이터 유효성 검사2] 비밀번호 정규식
-	var isPW = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#\$%\^&\*\(\)_\+|\{\}:"<>\?]{6,16}$/;
-
+	var isPW = /^.*(?=^.{6,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		
 	if (!isPW.test(pw)) {
 		oMsg.style.display = "block";
 	    oMsg.className = "error";

@@ -1,8 +1,8 @@
 /**
- * [개인] 회원가입 2단계 > 데이터 유효성 검사
+ * [개인] 마이페이지 - 개인정보수정 > 데이터 유효성 검사
  */
 
-function TwoSubmit() {
+function mypageModify2() {
 
 	// 처음 소스코드
 	// document.signform.submit();
@@ -63,7 +63,7 @@ function TwoSubmit() {
 
 	
 	// 카테고리 모두 선택 후, 회원가입 완료
-	var url = '/join/PersonDatailRegist';
+	var url = '/mypage/PersonFinalCheck';
 
 	data.action = url;
 	data.submit();
