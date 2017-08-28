@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
@@ -210,52 +211,34 @@ public class PersonMypageController {
 				// 세션 초기화
 				session.invalidate();
 
-				// 로그아웃 된 상태의 메인페이지로 이동 (2차 수정 예정 --- 1번 참조)
-				url = "redirect:/";
+				// 로그인 폼으로 이동
+				url = "login/LoginForm";
 			
 			// 비밀번호 수정 미성공 
-			} else {
-				
-				/*-------------------------- [2차 처리 예정] -------------------------
-					1) 비밀번호 수정 성공 > 팝업 > 로그인 화면 or 메인 화면 선택
-					2) 비밀번호들 일치 안 할 경우 > 로그아웃 시키면서 메인 페이지로 이동 X > 예외처리
-					3) [MyPageInfoModify.jsp] 
-					   > 현재 비밀번호, 새 비밀번호 = 새 비밀번호 확인 > 예외처리
-					4) html > required 태그 미적용되는 이유 알아보기
-		 	 	 -----------------------------------------------------------------*/
-				
+			} else {				
 				// 마이페이지 관리 폼으로 이동 (reload)
 				url = "redirect:/mypage/MyPageManagement";
 			}
 		}	
 		
 		if(cdto!=null){
-			if(cdto.getComPw().equals(guserCurPw)){
+			if (cdto.getComPw().equals(guserCurPw)) {
 				cdto.setComPw(guserNewPwCheck);
 				flag = memberService.CompanyPwModify(cdto);
 			}
 			// 비밀번호 수정 성공
-						if (flag) {
-							// 세션 초기화
-							session.invalidate();
+			if (flag) {
+				// 세션 초기화
+				session.invalidate();
 
-							// 로그아웃 된 상태의 메인페이지로 이동 (2차 수정 예정 --- 1번 참조)
-							url = "redirect:/";
-						
-						// 비밀번호 수정 미성공 
-						} else {
-							
-							/*-------------------------- [2차 처리 예정] -------------------------
-								1) 비밀번호 수정 성공 > 팝업 > 로그인 화면 or 메인 화면 선택
-								2) 비밀번호들 일치 안 할 경우 > 로그아웃 시키면서 메인 페이지로 이동 X > 예외처리
-								3) [MyPageInfoModify.jsp] 
-								   > 현재 비밀번호, 새 비밀번호 = 새 비밀번호 확인 > 예외처리
-								4) html > required 태그 미적용되는 이유 알아보기
-					 	 	 -----------------------------------------------------------------*/
-							
-							// 마이페이지 관리 폼으로 이동 (reload)
-							url = "redirect:/mypage/MyPageManagement";
-						}
+				// 로그아웃 된 상태의 메인페이지로 이동 (2차 수정 예정 --- 1번 참조)
+				url = "redirect:/";
+
+				// 비밀번호 수정 미성공
+			} else {
+				// 마이페이지 관리 폼으로 이동 (reload)
+				url = "redirect:/mypage/MyPageManagement";
+			}
 		
 		}
 		
@@ -349,7 +332,7 @@ public class PersonMypageController {
 		List<GatheringDTO> mlist = null;			// 모임
 		List<PlaceDTO> placeList = null;			// 광고주(장소)
 		
-		if(cdto==null){
+		if(cdto == null){
 			if (pdto != null) { // 로그인 체크
 
 				model.addAttribute("pdto", pdto);
@@ -366,8 +349,8 @@ public class PersonMypageController {
 		}
 		
 
-		if(pdto==null){
-			if(cdto!=null){
+		if(pdto == null){
+			if(cdto != null){
 				model.addAttribute("cdto",cdto);
 				String guserId = cdto.getComId();
 				
@@ -400,8 +383,7 @@ public class PersonMypageController {
 		
 		List<GatheringDTO> plist = null;
 		
-		if(pdto!=null){ // 로그인 체크
-			
+		if(pdto!=null){ // 로그인 체크			
 			model.addAttribute("pdto", pdto);
 			
 			String guserId = pdto.getGuserId();
@@ -417,12 +399,10 @@ public class PersonMypageController {
 		return url; 
 	}
 
+	
 	// 04. [개인회원] 마이페이지 - 내가 찜한 모임
 	@RequestMapping(value = "/MyPageGood", method = RequestMethod.GET)
-	public String MyPageGood(
-			Model model,
-			HttpSession session
-			) {
+	public String MyPageGood(Model model, HttpSession session) {
 		String url = "default";
 
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
@@ -432,18 +412,19 @@ public class PersonMypageController {
 		model.addAttribute("pdto", pdto);
 			
 		String guserId = pdto.getGuserId();
-		attendList = gatherService.getAttendList(guserId); // 참여중인 모임
-		System.out.println("내가 찜한 모임 : "+attendList);
+		attendList = gatherService.getAttendList(guserId); 		// 참여중인 모임
+		System.out.println("내가 찜한 모임 : " + attendList);
 		
 		url="mypage/MyPageGood";
 		
-		if(attendList!=null){
+		if(attendList != null){
 			model.addAttribute("attendList", attendList);
 		}
 		
 		return url;
 	}
 
+	
 	// 04-1. [개인회원] 마이페이지 - 내가 찜한 모임 삭제
 	@RequestMapping(value="/attendDelete")
 	public String attendDelete(
@@ -476,12 +457,10 @@ public class PersonMypageController {
 				if(flag){
 					url="redirect:/mypage/MyPageGood";	
 				}
-			}
-			
-			
-			
-			return url;
-		}
+			}					
+		return url;
+	}
+	
 	
 	// 05. [개인회원] 마이페이지 - 내가 올린 자료
 	@RequestMapping(value = "/MyPageUploadFile", method = RequestMethod.GET)
@@ -490,5 +469,30 @@ public class PersonMypageController {
 			
 		return url;
 	}
+	
+	
+	
+	// ---------------------------------------- [개인] 비밀번호 DB 유무 확인 ----------------------------------------//
+	@ResponseBody
+	@RequestMapping(value = "/checkDuplicatePersonPwAjax", method = RequestMethod.POST)
+	public String checkDuplicatePersonPwAjax(@RequestParam("guserPw") String guserPw, HttpSession session) {
+		String result = null;
+
+		// 현재 로그인한 사람의 세션 정보 가져오기
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
+		//System.out.println("[TEST] Ajax Data(입력한 PW 값 받아오기): " + guserPw);
+		//System.out.println("[TEST] Session Data(세션 PW 값): " + pdto.getGuserPw());
+		
+		// 입력한 비밀번호 값 = 세션에 저장되어있는 비밀번호의 값
+		if(pdto.getGuserPw().equals(guserPw)) {
+			result = "OK";									 
+		} else {
+			result = "FAIL";
+		}
+
+		return result;
+	}
+	
 	
 }

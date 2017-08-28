@@ -25,25 +25,55 @@
 	}
 </style>
 
+<!-- 경고 메세지 CSS -->
+<style type="text/css">
+.gm {
+	padding-top: 8px;
+	color: #39f;	
+}
+
+.error {
+	padding-top: 8px;
+	color: #e51e1f;
+}
+</style>
+
 <script type="text/javascript">
 	
 	// 한 페이지 안에서 > 폼 번호에 따라 각각 다른 경로로 폼 3개에 해당하는 데이터 전송
 	function form_link(formNum) {
 		
+		// 개인정보 수정
 		if(formNum == 1) {			
-			// 개인정보 수정
 			document.form1.action = "/mypage/PersonFirstModify";		// 폼 name으로 접근
 			document.form1.submit();			
 			
+		// 비밀번호 변경
 		} else if (formNum == 2) {
-			// 비밀번호 변경
-			document.form2.action = "/mypage/PersonPwModify";
-			document.form2.submit();
+			//document.form2.action = "/mypage/PersonPwModify";
+			//document.form2.submit();
 			
+			// 유효성 체크 함수들
+			checkPwDB();
+			checkPwNew();
+			checkPwNewRe();
+			
+			// Form Id
+			var data = document.getElementById('data');
+			
+			// 유효성에 적합한 값 입력 시, 컨트롤러로 페이지 이동
+			if(checkPwDB() && checkPwNew() && checkPwNewRe()) {	
+				alert('비밀번호가 정상적으로 수정되었습니다.^^ \n다시 로그인해주세요!');
+				
+				var url = '/mypage/PersonPwModify';
+				
+				data.action = url;
+				data.submit();
+			}
+			
+		// 회원 탈퇴
 		} else if (formNum == 3) {
 			// 입력값이 없을 경우 > 경고창			
-			
-			// 회원 탈퇴
 			document.form3.action = "/mypage/PersonQuit";
 			document.form3.submit();
 		}
@@ -53,9 +83,9 @@
 </script>
 
 <!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
-<script>
+<!-- <script>
    $('.nav-pills').scrollingTabs(); 
-</script>
+</script> -->
 
 </head>
 <body>
@@ -134,26 +164,26 @@
 					<div class="panel-body">					
 						<!-- [비밀번호수정 폼] --> 
 						<!-- onsubmit="return false;": Enter키를 통해 form 객체의 Submit 방지 -->
-						<form action="" method="POST" class="col-md-12" id="passwordForm" name="form2" onsubmit="return false;">
+						<form action="" method="POST" class="col-md-12" id="data" name="form2" onsubmit="return false;">
 							<div class="form-group">
 								<label for="currentPasswordInput">현재 비밀번호</label>
-								<input type="password" class="form-control" id="currentPwInput" name="guserCurPw" placeholder="현재 비밀번호를 입력하세요." required>
+								<input type="password" class="form-control" id="guserCurPw" name="guserCurPw" placeholder="현재 비밀번호를 입력하세요." onblur="checkPwDB()">
+								<!-- 경고 메세지 -->								
+								<div id="pwDBMsg" class="error"></div>
 							</div>
 							<div class="form-group">
 								<label for="newPasswordInput">새로운 비밀번호</label>
-								<input type="password" class="form-control" id="newPwInput" name="guserNewPw" placeholder="새로운 비밀번호를 입력하세요." required>
-								<!-- 도움말 -->
-								<p class="help-block">
-									&nbsp;<small>* 6~32자의 영문 대/소문자, 숫자, 특수문자 혼용 가능</small>
-								</p>
+								<input type="password" class="form-control" id="guserNewPw" name="guserNewPw" placeholder="6~16자 영문 대/소문자, 숫자, 특수문자를 사용하세요." onblur="checkPwNew()">
+								<div id="pwNewMsg" class="error"></div>
 							</div>
 							<div class="form-group">
 								<label for="newPasswordCheckInput">새로운 비밀번호 확인</label>
-								<input type="password" class="form-control" id="newPwCheckInput" name="guserNewPwCheck" placeholder="새로운 비밀번호를 재입력하세요." required>
+								<input type="password" class="form-control" id="guserNewPwCheck" name="guserNewPwCheck" placeholder="새로운 비밀번호를 재입력하세요." onblur="checkPwNewRe()">
+								<div id="pwNewReMsg" class="error"></div>
 							</div>
 							<br>
 							<div class="clearfix">
-								<button type="submit" class="btn btn-danger pull-right" id="pwChange" onclick="form_link(2)">비밀번호 변경</button>
+								<button type="submit" class="btn btn-danger pull-right" id="pwChange" onclick="form_link(2); return false;">비밀번호 변경</button>
 							</div>
 						</form>
 					</div>
@@ -226,7 +256,11 @@
 				</div>
 			</div>
 		</div>
-
+		
+		
+		<!-- [마이페이지(비밀번호 수정) JS - 데이터 유효성 검사] -->
+		<script src="/resources/script/js/mypagePersonPwValidation.js"></script>
+		
 	</div>
 </body>
 </html>
