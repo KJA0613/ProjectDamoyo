@@ -171,5 +171,11 @@
 		select * from gather
 	</select>
 	
+	<select id="gatherInfo" resultType="GatheringDTO" parameterType="String">
+		select *
+		from gather
+		where gatherNo in (select gatherNo from gatherPeople where guserId = #{guserId})
+	</select>
+	
 
 </mapper>

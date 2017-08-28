@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IAdminDAO;
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -42,6 +43,22 @@ public class AdminService implements IAdminService {
 			List<GatheringDTO> gdto = adminDao.getGatherList();
 			
 			return gdto;
+		}
+
+		@Override
+		public List<GatherPeopleDTO> getGather() {
+			
+			List<GatherPeopleDTO> gpdto = adminDao.getGather();
+			
+			return gpdto;
+		}
+
+		@Override
+		public List<GatheringDTO> getGatherInfo(String guserId) {
+
+			List<GatheringDTO> gather =  adminDao.getGatherInfo(guserId);
+			
+			return gather;
 		}
 
 		

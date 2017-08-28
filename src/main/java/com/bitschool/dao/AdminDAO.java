@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -49,6 +50,24 @@ public class AdminDAO implements IAdminDAO{
 		gdto = session.selectList(namespace+".getGatherList");
 		
 		return gdto;
+	}
+
+	@Override
+	public List<GatherPeopleDTO> getGather() {
+
+		List<GatherPeopleDTO> gpdto = null;
+		
+		gpdto = session.selectList(namespace+".getGather");
+		
+		return gpdto;
+	}
+
+	@Override
+	public List<GatheringDTO> getGatherInfo(String guserId) {
+
+		List<GatheringDTO>	gather = session.selectList(namespace+".gatherInfo", guserId);		
+		
+		return gather;
 	}
 
 	
