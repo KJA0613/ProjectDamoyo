@@ -26,17 +26,11 @@ public class AdminController {
 	private IAdminService adminService;
 	
 		
-<<<<<<< HEAD
 	// 01. 관리자대쉬보드(메인)페이지
 	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
 	public String dashbord(
 				Model model
 			){
-=======
-		// 01. 관리자대쉬보드(메인)페이지
-		@RequestMapping(value = "/dashboard", method = RequestMethod.GET )
-		public String dashbord(){
->>>>>>> bd86fcdb6f88922ebd6fec808a8c75668e734176
 			
 			String url = "admin/dashboard";	
 			
@@ -66,9 +60,8 @@ public class AdminController {
 		}
 		
 		// 02. 관리자회원관리페이지
-<<<<<<< HEAD
-	@RequestMapping(value = "/PeopleTable",method = {RequestMethod.POST,RequestMethod.GET})
-	public String PeopleTable(Model model, @RequestParam(value="guserNo", defaultValue="-1")int guserNo,
+		@RequestMapping(value = "/PeopleTable",method = {RequestMethod.POST,RequestMethod.GET})
+		public String PeopleTable(Model model, @RequestParam(value="guserNo", defaultValue="-1")int guserNo,
 				                         @RequestParam(value="comNo",defaultValue="-2")int comNo){
 		String url = null;
 		List<PersonDTO> pdto = null;
@@ -78,73 +71,44 @@ public class AdminController {
 		cdto = adminService.getCompany();
 		
 		if(pdto!=null && cdto!=null){
-=======
-		@RequestMapping(value = "/PeopleTable",method = {RequestMethod.POST,RequestMethod.GET})
-		public String PeopleTable(
-				Model model, 
-				@RequestParam(value="guserNo", defaultValue="-1") int guserNo,
-				@RequestParam(value="comNo",defaultValue="-2") int comNo){
+			
+			model.addAttribute("pdtoGuserList", pdto);
+			model.addAttribute("cdtoCompanyList",cdto);
+			
+			url = "admin/PeopleTable";
+			
+		}
 		
-			String url = null;
-			List<PersonDTO> pdto = null;
-			List<CompanyDTO> cdto = null;
->>>>>>> bd86fcdb6f88922ebd6fec808a8c75668e734176
+		if(guserNo>0&&comNo==-2){
+			PersonDTO guser = null;
 			
-			pdto = adminService.getPerson(); // 클릭한 회원정보 가저옴
-			cdto = adminService.getCompany();
-			
-			
-			if(pdto!=null && cdto!=null){
+			for(int i=0; i<pdto.size(); i++){
 				
-				model.addAttribute("pdtoGuserList", pdto);
-				model.addAttribute("cdtoCompanyList",cdto);
-				
-				url = "admin/PeopleTable";
-				
-			}
-			
-			if(guserNo>0&&comNo==-2){
-				PersonDTO guser = null;
-				
-				
-				for(int i=0; i<pdto.size(); i++){
+				if(pdto.get(i).getGuserNo() == guserNo){
+					guser = new PersonDTO();
+					guser = pdto.get(i);
 					
-					if(pdto.get(i).getGuserNo() == guserNo){
-						
-						guser = new PersonDTO();
-						guser = pdto.get(i);
-						
-						
-						List<GatheringDTO> gather = null;
-						System.out.println(guser.getGuserId());
-						gather= adminService.getGatherInfo(guser.getGuserId());
-						System.out.println(gather);
-						
-						model.addAttribute("guserDetail", guser);
-						model.addAttribute("gather", gather);
-						
-					}
-					
+					model.addAttribute("guserDetail", guser);
 				}
-								
-			}
-			
-			else if(comNo>0&&guserNo==-1){
-				CompanyDTO company = null;
 				
-				for(int i=0;i<cdto.size();i++){
+			}
+		}
+		else if(comNo>0&&guserNo==-1){
+			CompanyDTO company = null;
+			
+			for(int i=0;i<cdto.size();i++){
+				
+				if(cdto.get(i).getComNo()==comNo){
+					company = new CompanyDTO();
+					company = cdto.get(i);
 					
-					if(cdto.get(i).getComNo()==comNo){
-						company = new CompanyDTO();
-						company = cdto.get(i);
-						
-						model.addAttribute("companyDetail",company);
-					}
+					model.addAttribute("companyDetail",company);
 				}
 			}
-			return url;
-			
-			}
+		}
+		return url;
+		
+		}
 		
 		
 		// 밑에는 테이블 이용하는 url 

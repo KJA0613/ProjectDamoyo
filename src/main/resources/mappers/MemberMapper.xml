@@ -170,8 +170,7 @@
 	<select id="getGatherList" resultType="GatheringDTO">
 		select * from gather
 	</select>
-	
-<<<<<<< HEAD
+
 	<select id="gatherpacleCnt" resultType="HashMap">
 		select
 		      (select count(*) from gather) as gathercntAll, 
@@ -179,15 +178,13 @@
 		      (select count(*) from gather where gatherrecognition = 'Wait') as gatherRequest
 		from dual
 	</select>
-=======
+	
 	<select id="gatherInfo" resultType="GatheringDTO" parameterType="String">
 		select *
 		from gather
 		where gatherNo in (select gatherNo from gatherPeople where guserId = #{guserId})
 	</select>
 	
->>>>>>> bd86fcdb6f88922ebd6fec808a8c75668e734176
-
 	<select	id="gatherRank" resultType="GatherRankDTO">
 		select *
 		from ( select gathercategorybot as gathertype, count(*) as typecnt, 'category' as typecode

@@ -9,11 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IAdminDAO;
 import com.bitschool.dto.CompanyDTO;
-<<<<<<< HEAD
 import com.bitschool.dto.GatherRankDTO;
-=======
 import com.bitschool.dto.GatherPeopleDTO;
->>>>>>> bd86fcdb6f88922ebd6fec808a8c75668e734176
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -50,7 +47,6 @@ public class AdminService implements IAdminService {
 			return gdto;
 		}
 
-<<<<<<< HEAD
 		// 게시글수, 장소글수 받아옴
 		@Override
 		public HashMap<String, Integer> gatherplaceCnt() {
@@ -66,7 +62,8 @@ public class AdminService implements IAdminService {
 			List<GatherRankDTO> gatherRank = adminDao.gatherRank();
 			
 			return gatherRank;
-=======
+		}
+		
 		@Override
 		public List<GatherPeopleDTO> getGather() {
 			
@@ -81,7 +78,6 @@ public class AdminService implements IAdminService {
 			List<GatheringDTO> gather =  adminDao.getGatherInfo(guserId);
 			
 			return gather;
->>>>>>> bd86fcdb6f88922ebd6fec808a8c75668e734176
 		}
 
 		
