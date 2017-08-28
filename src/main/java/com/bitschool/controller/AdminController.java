@@ -45,7 +45,25 @@ public class AdminController {
 			List<GatherRankDTO> gatherRank = adminService.gatherRank();
 			if(gatherRank!=null){
 				System.out.println(gatherRank);
-				model.addAttribute("gatherRank()", gatherRank);
+				
+				List<GatherRankDTO> categoryRank = new ArrayList<GatherRankDTO>();;
+				List<GatherRankDTO> areaRank = new ArrayList<GatherRankDTO>();
+				List<GatherRankDTO> typeRank = new ArrayList<GatherRankDTO>();
+								
+				for(int i=0; i<gatherRank.size(); i++){
+					String code = gatherRank.get(i).getTypeCode();
+					if(code.equals("category")){
+						categoryRank.add(gatherRank.get(i));
+					}else if(code.equals("area")){
+						areaRank.add(gatherRank.get(i));
+					}else if(code.equals("type")){
+						typeRank.add(gatherRank.get(i));
+					}
+				}
+				
+				model.addAttribute("categoryRank", categoryRank);
+				model.addAttribute("areaRank", areaRank);
+				model.addAttribute("typeRank", typeRank);
 			}
 			
 			// 접속자, 모집글, 광고글 수
@@ -164,8 +182,6 @@ public class AdminController {
 		public String category(){
 			String url = "";
 			url = "/admin/category";
-			
-			
 			
 			return url;
 		}

@@ -19,7 +19,7 @@
 	                <li class="active">
 	                    <a href="/admin/dashbord">
 	                        <i class="material-icons">dashboard</i>
-	                        <p>Dashboard</p>
+	                        <p>통계</p>
 	                    </a>
 	                </li>
 	                <li>
@@ -41,12 +41,12 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="/admin/category">
+	                    <a href="/admin/gathering">
 	                        <i class="material-icons">library_books</i>
-	                        <p>카테고리관리</p>
+	                        <p>장소 관리</p>
 	                    </a>
 	                </li>
-	                <li>
+	                 <!--<li>
 	                    <a href="/admin/user">
 	                        <i class="material-icons">bubble_chart</i>
 	                        <p>유저보기</p>
@@ -63,7 +63,7 @@
 	                        <i class="material-icons text-gray">notifications</i>
 	                        <p>배너보기</p>
 	                    </a>
-	                </li>
+	                </li> -->
 					<li class="active-pro">
 	                    <a href="/admin/upgrade">
 	                        <i class="material-icons">unarchive</i>

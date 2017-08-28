@@ -167,13 +167,13 @@
 					</div>
 
 					<div class="row">
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="card">
-								<div class="card-header card-chart" data-background-color="green">
+								<div class="card-header card-chart" data-background-color="orange">
 									<div class="ct-chart" id="dailySalesChart"></div>
 								</div>
 								<div class="card-content">
-									<h4 class="title">주별 접속자 / 모집글 / 광고글</h4>
+									<h4 class="title">주별 접속자</h4>
 									<p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%  </span> increase in today sales.</p>
 								</div>
 								<div class="card-footer">
@@ -184,7 +184,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-4">
+						<!-- <div class="col-md-4">
 							<div class="card">
 								<div class="card-header card-chart" data-background-color="orange">
 									<div class="ct-chart" id="emailsSubscriptionChart"></div>
@@ -200,15 +200,15 @@
 								</div>
 
 							</div>
-						</div>
+						</div> -->
 
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="card">
 								<div class="card-header card-chart" data-background-color="red">
 									<div class="ct-chart" id="completedTasksChart"></div>
 								</div>
 								<div class="card-content">
-									<h4 class="title">시간별 접속자 / 모집글 / 광고글</h4>
+									<h4 class="title">시간별 접속자</h4>
 									<p class="category">Last Campaign Performance</p>
 								</div>
 								<div class="card-footer">
@@ -220,54 +220,64 @@
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-lg-6 col-md-12">
+					<div class="col-md-4">
 							<div class="card">
-	                            <div class="card-header" data-background-color="orange">
-	                                <h4 class="title">모임 분야별 많은순</h4>
+	                            <div class="card-header" data-background-color="blue">
+	                                <h4 class="title">모임 분야별 많은 순</h4>
 	                                <p class="category">New employees on 15th September, 2016</p>
 	                            </div>
 	                            <div class="card-content table-responsive">
 	                                <table class="table table-hover">
 	                                    <thead class="text-warning">
-	                                        <th>ID</th>
-	                                    	<th>Name</th>
-	                                    	<th>Salary</th>
-	                                    	<th>Country</th>
+	                                        <th>순위</th>
+	                                    	<th>분야명</th>
+	                                    	<th>모임수</th>
 	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>1</td>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>$36,738</td>
-	                                        	<td>Niger</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>2</td>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>$23,789</td>
-	                                        	<td>CuraÃ§ao</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>3</td>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>$56,142</td>
-	                                        	<td>Netherlands</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>4</td>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>$38,735</td>
-	                                        	<td>Korea, South</td>
-	                                        </tr>
-	                                    </tbody>
+	                                    <c:forEach var="type" items="${typeRank}" varStatus="rank">
+		                                    <tbody>
+		                                        <tr>
+		                                        	<td>${rank.count}</td>
+		                                        	<td>${type.gatherType}</td>
+		                                        	<td>${type.typeCnt}</td>
+		                                        </tr>
+		                                    </tbody>
+	                                    </c:forEach>
+	                                </table>
+	                            </div>
+	                        </div>
+						</div>
+
+					
+						<div class="col-md-4">
+							<div class="card">
+	                            <div class="card-header" data-background-color="green">
+	                                <h4 class="title">모임 카테고리별 많은순</h4>
+	                                <p class="category">New employees on 15th September, 2016</p>
+	                            </div>
+	                            
+	                            <div class="card-content table-responsive">
+	                                <table class="table table-hover">
+	                                    <thead class="text-warning">
+	                                        <th>순위</th>
+	                                    	<th>카테고리명</th>
+	                                    	<th>모임수</th>
+	                                    </thead>
+	                                    <c:forEach var="category" items="${categoryRank}" varStatus="rank">
+		                                    <tbody>
+		                                        <tr>
+		                                        	<td>${rank.count}</td>
+		                                        	<td>${category.gatherType}</td>
+		                                        	<td>${category.typeCnt}</td>
+		                                        </tr>
+		                                    </tbody>
+	                                    </c:forEach>
 	                                </table>
 	                            </div>
 	                        </div>
 						</div>
 						
 						
-						<div class="col-lg-6 col-md-12">
+						<div class="col-md-4">
 							<div class="card">
 	                            <div class="card-header" data-background-color="purple">
 	                                <h4 class="title">모임 지역별 많은 순</h4>
@@ -276,42 +286,24 @@
 	                            <div class="card-content table-responsive">
 	                                <table class="table table-hover">
 	                                    <thead class="text-warning">
-	                                        <th>ID</th>
-	                                    	<th>Name</th>
-	                                    	<th>Salary</th>
-	                                    	<th>Country</th>
+	                                        <th>순위</th>
+	                                    	<th>지역명</th>
+	                                    	<th>모임수</th>
 	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>1</td>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>$36,738</td>
-	                                        	<td>Niger</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>2</td>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>$23,789</td>
-	                                        	<td>CuraÃ§ao</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>3</td>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>$56,142</td>
-	                                        	<td>Netherlands</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>4</td>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>$38,735</td>
-	                                        	<td>Korea, South</td>
-	                                        </tr>
-	                                    </tbody>
+	                                    <c:forEach var="area" items="${areaRank}" varStatus="rank">
+		                                    <tbody>
+		                                        <tr>
+		                                        	<td>${rank.count}</td>
+		                                        	<td>${area.gatherType}</td>
+		                                        	<td>${area.typeCnt}</td>
+		                                        </tr>
+		                                    </tbody>
+	                                    </c:forEach>
 	                                </table>
 	                            </div>
 	                        </div>
 						</div>
-					</div>
+					
 				</div>
 			</div>
 

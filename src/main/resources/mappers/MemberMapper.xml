@@ -192,7 +192,7 @@
 		       group by gathercategorybot
 		       order by typecnt desc, gathercategorybot
 		      )
-		<![CDATA[where rownum <=5]]>
+				<!-- <![CDATA[where rownum <=5]]> -->
 		union all
 		select *
 		from ( select gatherarea as gathertype, count(*) as typecnt, 'area' as typecode
@@ -200,6 +200,14 @@
 		       group by gatherarea
 		       order by typecnt desc, gatherarea
 		      )
-		<![CDATA[where rownum <=5]]>
+				<!-- <![CDATA[where rownum <=5]]> -->
+		union all
+		select *
+		from ( select gathercategorytop as gathertype, count(*) as typecnt, 'type' as typecode
+		       from gather
+		       group by gathercategorytop
+		       order by typecnt desc, gathercategorytop
+		      )
+		<!-- <![CDATA[where rownum <=5]]> -->
 	</select>
 </mapper>
