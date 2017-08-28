@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -97,8 +98,10 @@
 									<i class="material-icons">content_copy</i>
 								</div>
 								<div class="card-content">
-									<p class="category">Used Space</p>
-									<h3 class="title">49/50<small>GB</small></h3>
+									<p class="category">총 모임 수</p>
+									<h3 class="title">
+									<c:out value="${gpCnt['GATHERCNTALL']}"/>
+									<small>모임</small></h3>
 								</div>
 								<div class="card-footer">
 									<div class="stats">
@@ -113,8 +116,10 @@
 									<i class="material-icons">store</i>
 								</div>
 								<div class="card-content">
-									<p class="category">Revenue</p>
-									<h3 class="title">$34,245</h3>
+									<p class="category">총 광고 수</p>
+									<h3 class="title">
+									<c:out value="${gpCnt['PLACECNTALL']}"/>
+									<small>장소</small></h3>
 								</div>
 								<div class="card-footer">
 									<div class="stats">
@@ -129,8 +134,8 @@
 									<i class="material-icons">info_outline</i>
 								</div>
 								<div class="card-content">
-									<p class="category">Fixed Issues</p>
-									<h3 class="title">75</h3>
+									<p class="category">신고 모임 수</p>
+									<h3 class="title">0</h3>
 								</div>
 								<div class="card-footer">
 									<div class="stats">
@@ -146,8 +151,11 @@
 									<i class="fa fa-twitter"></i>
 								</div>
 								<div class="card-content">
-									<p class="category">Followers</p>
-									<h3 class="title">+245</h3>
+									<p class="category">생성 모임 요청 수</p>
+									<h3 class="title">
+									<c:out value="${gpCnt['GATHERREQUEST']}"/>									
+									<small>모임</small>
+									</h3>
 								</div>
 								<div class="card-footer">
 									<div class="stats">
@@ -165,7 +173,7 @@
 									<div class="ct-chart" id="dailySalesChart"></div>
 								</div>
 								<div class="card-content">
-									<h4 class="title">Daily Sales</h4>
+									<h4 class="title">주별 접속자 / 모집글 / 광고글</h4>
 									<p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%  </span> increase in today sales.</p>
 								</div>
 								<div class="card-footer">
@@ -182,7 +190,7 @@
 									<div class="ct-chart" id="emailsSubscriptionChart"></div>
 								</div>
 								<div class="card-content">
-									<h4 class="title">Email Subscriptions</h4>
+									<h4 class="title">월별 접속자 / 모집글 / 광고글</h4>
 									<p class="category">Last Campaign Performance</p>
 								</div>
 								<div class="card-footer">
@@ -200,7 +208,7 @@
 									<div class="ct-chart" id="completedTasksChart"></div>
 								</div>
 								<div class="card-content">
-									<h4 class="title">Completed Tasks</h4>
+									<h4 class="title">시간별 접속자 / 모집글 / 광고글</h4>
 									<p class="category">Last Campaign Performance</p>
 								</div>
 								<div class="card-footer">
@@ -214,229 +222,55 @@
 
 					<div class="row">
 						<div class="col-lg-6 col-md-12">
-							<div class="card card-nav-tabs">
-								<div class="card-header" data-background-color="purple">
-									<div class="nav-tabs-navigation">
-										<div class="nav-tabs-wrapper">
-											<span class="nav-tabs-title">Tasks:</span>
-											<ul class="nav nav-tabs" data-tabs="tabs">
-												<li class="active">
-													<a href="#profile" data-toggle="tab">
-														<i class="material-icons">bug_report</i>
-														Bugs
-													<div class="ripple-container"></div></a>
-												</li>
-												<li class="">
-													<a href="#messages" data-toggle="tab">
-														<i class="material-icons">code</i>
-														Website
-													<div class="ripple-container"></div></a>
-												</li>
-												<li class="">
-													<a href="#settings" data-toggle="tab">
-														<i class="material-icons">cloud</i>
-														Server
-													<div class="ripple-container"></div></a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-
-								<div class="card-content">
-									<div class="tab-content">
-										<div class="tab-pane active" id="profile">
-											<table class="table">
-												<tbody>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
-															</div>
-														</td>
-														<td>Sign contract for "What are conference organizers afraid of?"</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-														</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
-															</div>
-														</td>
-														<td>Create 4 Invisible User Experiences you Never Knew About</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div class="tab-pane" id="messages">
-											<table class="table">
-												<tbody>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
-															</div>
-														</td>
-														<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-														</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Sign contract for "What are conference organizers afraid of?"</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-										<div class="tab-pane" id="settings">
-											<table class="table">
-												<tbody>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes" checked>
-																</label>
-															</div>
-														</td>
-														<td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-														</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<div class="checkbox">
-																<label>
-																	<input type="checkbox" name="optionsCheckboxes">
-																</label>
-															</div>
-														</td>
-														<td>Sign contract for "What are conference organizers afraid of?"</td>
-														<td class="td-actions text-right">
-															<button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-simple btn-xs">
-																<i class="material-icons">edit</i>
-															</button>
-															<button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-																<i class="material-icons">close</i>
-															</button>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-6 col-md-12">
 							<div class="card">
 	                            <div class="card-header" data-background-color="orange">
-	                                <h4 class="title">Employees Stats</h4>
+	                                <h4 class="title">모임 분야별 많은순</h4>
+	                                <p class="category">New employees on 15th September, 2016</p>
+	                            </div>
+	                            <div class="card-content table-responsive">
+	                                <table class="table table-hover">
+	                                    <thead class="text-warning">
+	                                        <th>ID</th>
+	                                    	<th>Name</th>
+	                                    	<th>Salary</th>
+	                                    	<th>Country</th>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr>
+	                                        	<td>1</td>
+	                                        	<td>Dakota Rice</td>
+	                                        	<td>$36,738</td>
+	                                        	<td>Niger</td>
+	                                        </tr>
+	                                        <tr>
+	                                        	<td>2</td>
+	                                        	<td>Minerva Hooper</td>
+	                                        	<td>$23,789</td>
+	                                        	<td>CuraÃ§ao</td>
+	                                        </tr>
+	                                        <tr>
+	                                        	<td>3</td>
+	                                        	<td>Sage Rodriguez</td>
+	                                        	<td>$56,142</td>
+	                                        	<td>Netherlands</td>
+	                                        </tr>
+	                                        <tr>
+	                                        	<td>4</td>
+	                                        	<td>Philip Chaney</td>
+	                                        	<td>$38,735</td>
+	                                        	<td>Korea, South</td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>
+	                        </div>
+						</div>
+						
+						
+						<div class="col-lg-6 col-md-12">
+							<div class="card">
+	                            <div class="card-header" data-background-color="purple">
+	                                <h4 class="title">모임 지역별 많은 순</h4>
 	                                <p class="category">New employees on 15th September, 2016</p>
 	                            </div>
 	                            <div class="card-content table-responsive">

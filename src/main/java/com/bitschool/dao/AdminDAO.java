@@ -1,5 +1,6 @@
 package com.bitschool.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -49,6 +51,22 @@ public class AdminDAO implements IAdminDAO{
 		gdto = session.selectList(namespace+".getGatherList");
 		
 		return gdto;
+	}
+
+	@Override
+	public HashMap<String, Integer> gatherplaceCnt() {
+		
+		HashMap<String, Integer> gpCnt = null;
+		gpCnt = session.selectOne(namespace+".gatherpacleCnt");
+		return gpCnt;
+	}
+
+	@Override
+	public List<GatherRankDTO> gatherRank() {
+
+		List<GatherRankDTO> gatherRank = null;
+		gatherRank = session.selectList(namespace+".gatherRank");
+		return gatherRank;
 	}
 
 	

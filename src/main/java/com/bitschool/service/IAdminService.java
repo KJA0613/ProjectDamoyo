@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -14,6 +15,10 @@ public interface IAdminService {
 	public List<CompanyDTO> getCompany();
 
 	public List<GatheringDTO> getGatherList();
+
+	public HashMap<String, Integer> gatherplaceCnt();
+
+	public List<GatherRankDTO> gatherRank();
 
 	
 }

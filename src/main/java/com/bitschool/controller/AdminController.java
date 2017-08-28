@@ -1,6 +1,7 @@
 package com.bitschool.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.service.IAdminService;
@@ -22,22 +24,45 @@ public class AdminController {
 	//----------------------------------------------- 설 정 -----------------------------------------------//
 	@Inject
 	private IAdminService adminService;
+	
 		
-		// 01. 관리자대쉬보드(메인)페이지
-		@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
-		public String dashbord(){
+	// 01. 관리자대쉬보드(메인)페이지
+	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
+	public String dashbord(
+				Model model
+			){
 			
 			String url = "admin/dashboard";	
+			
+			// 총 카테고리, 총 장소, 모임요청수, 신고글(이건 하드코딩) 
+			HashMap<String, Integer> gpCnt = adminService.gatherplaceCnt();
+			if(gpCnt!=null){
+				System.out.println(gpCnt);
+				model.addAttribute("gpCnt", gpCnt);
+			}
+			
+			// 모임 카테고리별, 지역별 많은순		
+			List<GatherRankDTO> gatherRank = adminService.gatherRank();
+			if(gatherRank!=null){
+				System.out.println(gatherRank);
+				model.addAttribute("gatherRank()", gatherRank);
+			}
+			
+			// 접속자, 모집글, 광고글 수
+			
+			// 월별 접속자, 모집글, 광고글 수
+			
+			// 시간별 접속자, 모집글, 광고글 수
+						
 			
 			
 			return url;
 		}
 		
 		// 02. 관리자회원관리페이지
-		@RequestMapping(value = "/PeopleTable",method = {RequestMethod.POST,RequestMethod.GET})
-		public String PeopleTable(Model model, @RequestParam(value="guserNo", defaultValue="-1")int guserNo,
+	@RequestMapping(value = "/PeopleTable",method = {RequestMethod.POST,RequestMethod.GET})
+	public String PeopleTable(Model model, @RequestParam(value="guserNo", defaultValue="-1")int guserNo,
 				                         @RequestParam(value="comNo",defaultValue="-2")int comNo){
-		
 		String url = null;
 		List<PersonDTO> pdto = null;
 		List<CompanyDTO> cdto = null;

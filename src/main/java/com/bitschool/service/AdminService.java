@@ -1,5 +1,6 @@
 package com.bitschool.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IAdminDAO;
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 
@@ -42,6 +44,23 @@ public class AdminService implements IAdminService {
 			List<GatheringDTO> gdto = adminDao.getGatherList();
 			
 			return gdto;
+		}
+
+		// 게시글수, 장소글수 받아옴
+		@Override
+		public HashMap<String, Integer> gatherplaceCnt() {
+			// TODO Auto-generated method stub
+			HashMap<String, Integer> gpCnt = adminDao.gatherplaceCnt();
+			
+			return gpCnt;
+		}
+
+		@Override
+		public List<GatherRankDTO> gatherRank() {
+			
+			List<GatherRankDTO> gatherRank = adminDao.gatherRank();
+			
+			return gatherRank;
 		}
 
 		

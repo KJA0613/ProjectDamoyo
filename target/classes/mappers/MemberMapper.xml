@@ -158,5 +158,29 @@
 		select * from gather
 	</select>
 	
+	<select id="gatherpacleCnt" resultType="HashMap">
+		select
+		      (select count(*) from gather) as gathercntAll, 
+		      (select count(*) from place) as placecntAll,
+		      (select count(*) from gather where gatherrecognition = 'Wait') as gatherRequest
+		from dual
+	</select>
 
+	<select	id="gatherRank" resultType="GatherRankDTO">
+		select *
+		from ( select gathercategorybot as gathertype, count(*) as typecnt, 'category' as typecode
+		       from gather
+		       group by gathercategorybot
+		       order by typecnt desc, gathercategorybot
+		      )
+		<![CDATA[where rownum <=5]]>
+		union all
+		select *
+		from ( select gatherarea as gathertype, count(*) as typecnt, 'area' as typecode
+		       from gather
+		       group by gatherarea
+		       order by typecnt desc, gatherarea
+		      )
+		<![CDATA[where rownum <=5]]>
+	</select>
 </mapper>
