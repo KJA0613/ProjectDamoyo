@@ -173,7 +173,7 @@
 									<div class="ct-chart" id="dailySalesChart"></div>
 								</div>
 								<div class="card-content">
-									<h4 class="title">주별 접속자</h4>
+									<h4 class="title">요일별 접속자</h4>
 									<p class="category"><span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%  </span> increase in today sales.</p>
 								</div>
 								<div class="card-footer">
@@ -371,5 +371,26 @@
 
     	});
 	</script>
-
+	
+	<input type="hidden" id="week1" value="<c:out value="${week['월요일']}"/>">
+	<input type="hidden" id="week2" value="<c:out value="${week['화요일']}"/>">
+	<input type="hidden" id="week3" value="<c:out value="${week['수요일']}"/>">
+	<input type="hidden" id="week4" value="<c:out value="${week['목요일']}"/>">
+	<input type="hidden" id="week5" value="<c:out value="${week['금요일']}"/>">
+	<input type="hidden" id="week6" value="<c:out value="${week['토요일']}"/>">
+	<input type="hidden" id="week7" value="<c:out value="${week['일요일']}"/>">
+	
+	<input type="hidden" id="time00" value="<c:out value="${time['00']+time['01']}"/>">
+	<input type="hidden" id="time02" value="<c:out value="${time['02']+time['03']}"/>">
+	<input type="hidden" id="time04" value="<c:out value="${time['04']+time['05']}"/>">
+	<input type="hidden" id="time06" value="<c:out value="${time['06']+time['07']}"/>">
+	<input type="hidden" id="time08" value="<c:out value="${time['08']+time['09']}"/>">
+	<input type="hidden" id="time10" value="<c:out value="${time['10']+time['11']}"/>">
+	<input type="hidden" id="time12" value="<c:out value="${time['12']+time['13']}"/>">
+	<input type="hidden" id="time14" value="<c:out value="${time['14']+time['15']}"/>">
+	<input type="hidden" id="time16" value="<c:out value="${time['16']+time['17']}"/>">
+	<input type="hidden" id="time18" value="<c:out value="${time['18']+time['19']}"/>">
+	<input type="hidden" id="time20" value="<c:out value="${time['20']+time['21']}"/>">
+	<input type="hidden" id="time22" value="<c:out value="${time['22']+time['23']}"/>">
+	
 </html>

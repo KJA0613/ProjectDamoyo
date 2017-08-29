@@ -33,11 +33,10 @@ public class DamoyoInterceptor implements HandlerInterceptor{
 		
 		if(visitorCheck==null){
 			session.setAttribute("visitorCheck", "-1");
-			System.out.println("세션 값(안) : " + session.getAttribute("visitorCheck"));
 			
 			
 			sessionController.makeSession(request);
-			System.out.println("세션 생성됨 : " + session.getAttribute("visitorCheck"));
+			System.out.println("세션 생성됨, 새션값 : " + session.getAttribute("visitorCheck"));
 			System.out.println(request.getRequestedSessionId());
 		}
 		

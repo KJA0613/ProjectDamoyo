@@ -211,13 +211,16 @@
 		<!-- <![CDATA[where rownum <=5]]> -->
 	</select>
 	
-	<select id="visitWeek" resultType="HashMap">
-		select count(*)
+	<select id="visitWeek" resultType="VisitorWeekDTO">
+		select visitorday, count(*) as dayCount
 		from gathervisitor
 		group by visitorday
+		
 	</select>
 	
-<!-- 	<select id="visitTime" resultType="HashMap">
-		
-	</select> -->
+ 	<select id="visitTime" resultType="VisitorTimeDTO">
+ 		select TO_CHAR(visitordate,'HH24') as visitorTime, count(*) as timeCount
+		from gathervisitor
+		group by TO_CHAR(visitordate,'HH24')
+	</select>
 </mapper>

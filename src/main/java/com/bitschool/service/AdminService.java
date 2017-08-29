@@ -13,6 +13,8 @@ import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.VisitorTimeDTO;
+import com.bitschool.dto.VisitorWeekDTO;
 
 @Service
 public class AdminService implements IAdminService {
@@ -81,14 +83,15 @@ public class AdminService implements IAdminService {
 		}
 
 		@Override
-		public HashMap<String, Integer> visitWeek() {
-			HashMap<String, Integer> week = adminDao.visitWeek();
+		public List<VisitorWeekDTO> visitWeek() {
+			List<VisitorWeekDTO> week = adminDao.visitWeek();
 			return week;
 		}
 
 		@Override
-		public HashMap<String, Integer> visitTime() {
-			HashMap<String, Integer> time = adminDao.visitTime();
+		public List<VisitorTimeDTO> visitTime() {
+			List<VisitorTimeDTO> time = adminDao.visitTime();
+			
 			return time;
 		}
 

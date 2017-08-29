@@ -16,6 +16,8 @@ import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.VisitorTimeDTO;
+import com.bitschool.dto.VisitorWeekDTO;
 import com.bitschool.service.IAdminService;
 
 @Controller
@@ -67,11 +69,35 @@ public class AdminController {
 			}
 			
 
-			// 주별 접속자
-			HashMap<String, Integer> week = adminService.visitWeek();
+			// 요일별 접속자
+			List<VisitorWeekDTO> week = adminService.visitWeek();
+			
+			if(week!=null){
+				
+				HashMap<String, Integer> weekMap = new HashMap<String, Integer>();
+				
+				for(int i=0; i<week.size(); i++){
+					VisitorWeekDTO visitor = week.get(i);
+					weekMap.put(visitor.getVisitorDay(), visitor.getDayCount());
+				}
+				
+				model.addAttribute("week",weekMap);
+			}
 						
 			// 시간별 접속자
-			HashMap<String, Integer> time= adminService.visitTime();			
+			List<VisitorTimeDTO> time= adminService.visitTime();			
+			
+			if(time!=null){
+				
+				HashMap<String, Integer> timeMap = new HashMap<String, Integer>();
+				
+				for(int i=0; i<time.size(); i++){
+					VisitorTimeDTO visitor = time.get(i);
+					timeMap.put(visitor.getVisitorTime(), visitor.getTimeCount());
+				}
+				System.out.println(time);
+				model.addAttribute("time",timeMap);
+			}
 			
 			return url;
 		}

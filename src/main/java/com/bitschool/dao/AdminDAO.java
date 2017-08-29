@@ -13,6 +13,8 @@ import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.VisitorTimeDTO;
+import com.bitschool.dto.VisitorWeekDTO;
 
 @Repository
 public class AdminDAO implements IAdminDAO{
@@ -88,18 +90,23 @@ public class AdminDAO implements IAdminDAO{
 	}
 
 	@Override
-	public HashMap<String, Integer> visitWeek() {
+	public List<VisitorWeekDTO> visitWeek() {
 		
-		HashMap<String, Integer> week = session.selectOne(namespace+".visitWeek");
+		List<VisitorWeekDTO> week = null;
+		week = session.selectList(namespace+".visitWeek");
 		
 		return week;
 	}
 
 	@Override
-	public HashMap<String, Integer> visitTime() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<VisitorTimeDTO> visitTime() {
+		
+		List<VisitorTimeDTO> time = null;
+		time = session.selectList(namespace+".visitTime");
+		
+		return time;
 	}
+
 
 	
 

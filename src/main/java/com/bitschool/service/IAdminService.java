@@ -8,6 +8,8 @@ import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.VisitorTimeDTO;
+import com.bitschool.dto.VisitorWeekDTO;
 
 public interface IAdminService {
 
@@ -25,9 +27,9 @@ public interface IAdminService {
 
 	public List<GatheringDTO> getGatherInfo(String guserId);
 
-	public HashMap<String, Integer> visitWeek();
+	public List<VisitorWeekDTO> visitWeek();
 
-	public HashMap<String, Integer> visitTime();
+	public List<VisitorTimeDTO> visitTime();
 
 	
 }

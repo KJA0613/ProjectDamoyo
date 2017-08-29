@@ -203,7 +203,6 @@
 
 <body>
 	<br><br><br>
-	${sessionScope.todayCount} / ${sessionScope.totalCount}
    	<div class="container text-center">
 		<!-- 01. 검색 -->
 		<!-- 01-01. 위치 검색 (위치 선택)-->
