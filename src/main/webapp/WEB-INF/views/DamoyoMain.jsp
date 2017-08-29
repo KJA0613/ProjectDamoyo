@@ -203,8 +203,8 @@
 
 <body>
 	<br><br><br>
-	
-   <div class="container text-center">
+	${sessionScope.todayCount} / ${sessionScope.totalCount}
+   	<div class="container text-center">
 		<!-- 01. 검색 -->
 		<!-- 01-01. 위치 검색 (위치 선택)-->
 		<div class="from-group"  style="height: 0px;">
@@ -235,7 +235,7 @@
 		<!-- Page Content -->
 		</div>	
 		
-		 <div style="margin-left: 830px; border-style: solid; border-color: #b3b3b3; border-width: thin;">
+		<div style="margin-left: 830px; border-style: solid; border-color: #b3b3b3; border-width: thin;">
 		 	<ol>
 			<c:forEach var="dto" items="${list}">
 				<li style="text-align: left;">${dto.gatherSubject}</li>

@@ -210,4 +210,14 @@
 		      )
 		<!-- <![CDATA[where rownum <=5]]> -->
 	</select>
+	
+	<select id="visitWeek" resultType="HashMap">
+		select count(*)
+		from gathervisitor
+		group by visitorday
+	</select>
+	
+<!-- 	<select id="visitTime" resultType="HashMap">
+		
+	</select> -->
 </mapper>

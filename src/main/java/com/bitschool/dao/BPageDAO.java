@@ -13,8 +13,7 @@ import com.bitschool.dto.BSearchVO;
 
 @Repository
 public class BPageDAO {
-	private static final Logger logger = 
-								LoggerFactory.getLogger(BPageDAO.class);
+	private static final Logger logger = LoggerFactory.getLogger(BPageDAO.class);
 	private static final String namespace = "com.bitschool.complete.PageMapper";
 	
 	@Inject

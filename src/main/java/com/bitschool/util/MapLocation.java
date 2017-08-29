@@ -22,7 +22,7 @@ public class MapLocation {
 		try {
 			System.out.println(pdto.getPlaceAddr3());
 			String text = URLEncoder.encode(pdto.getPlaceAddr3(), "UTF-8");
-			String apiURL = "https://dapi.kakao.com/v2/local/search/keyword.json?query="+text+"&page=3&appkey=ebfbfbd7a5ec71c10c63936dd90beb22&size=15";
+			String apiURL = "https://dapi.kakao.com/v2/local/search/keyword.json?query="+text+"&page=3&appkey=c7d8e5d495b6455649d08379c3f21296&size=15";
 			
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();

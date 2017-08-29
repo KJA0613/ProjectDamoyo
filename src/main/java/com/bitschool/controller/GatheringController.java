@@ -38,8 +38,8 @@ public class GatheringController {
 	//21
 	@Inject
 	private IGatheringService gService;
-		
-
+	
+	
 	// gathering.jsp 의 정보를 뿌리는 메서드
 	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gathering(

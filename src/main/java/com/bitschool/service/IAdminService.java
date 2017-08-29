@@ -25,5 +25,9 @@ public interface IAdminService {
 
 	public List<GatheringDTO> getGatherInfo(String guserId);
 
+	public HashMap<String, Integer> visitWeek();
+
+	public HashMap<String, Integer> visitTime();
+
 	
 }

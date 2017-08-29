@@ -80,5 +80,17 @@ public class AdminService implements IAdminService {
 			return gather;
 		}
 
+		@Override
+		public HashMap<String, Integer> visitWeek() {
+			HashMap<String, Integer> week = adminDao.visitWeek();
+			return week;
+		}
+
+		@Override
+		public HashMap<String, Integer> visitTime() {
+			HashMap<String, Integer> time = adminDao.visitTime();
+			return time;
+		}
+
 		
 }

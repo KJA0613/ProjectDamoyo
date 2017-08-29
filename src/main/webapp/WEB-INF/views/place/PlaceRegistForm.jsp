@@ -23,7 +23,7 @@
 
 <!-- [여진양 짱!!!!!!] 주소 > 다음 API-->
 <!-- [참고 사이트] http://postcode.map.daum.net/guide-->
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c7d8e5d495b6455649d08379c3f21296&libraries=services"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function search_corpAddr() {
@@ -58,7 +58,24 @@
                 document.getElementById('placeAddr1').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('placeAddr2').value = fullRoadAddr;
                 document.getElementById('placeAddr3').value = data.jibunAddress;
+			
+                
+    /* 		여기서부터는 지도 API  */
+            
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new daum.maps.services.Geocoder();
 
+            // 주소로 좌표를 검색합니다
+            geocoder.addressSearch(data.jibunAddress, function(result, status) {
+
+                // 정상적으로 검색이 완료됐으면 
+                 if (status === daum.maps.services.Status.OK) {
+
+                    document.getElementById('placeX').value = result[0].x;
+                    document.getElementById('placeY').value = result[0].y;
+                   
+                } 
+            });    
            	}
         }).open();
      		
@@ -160,7 +177,8 @@
 				
 				<!-- 모임공간 등록 폼 -->
 				<form action="/place/PlaceRegist" id="placeForm" method="POST" class="form-horizontal" enctype="multipart/form-data">					
-					
+					<input type="hidden" id="placeX" name="placeX">				
+					<input type="hidden" id="placeY" name="placeY">
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-8">

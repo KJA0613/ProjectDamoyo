@@ -161,6 +161,10 @@ public class PlaceController {
 						pl_dto.setComId(item.getString("UTF-8"));
 					} else if (item.getFieldName().equals("placePerCnt")) { // 수용인원
 						pl_dto.setPlacePerCnt(Integer.parseInt(item.getString("UTF-8")));
+					} else if (item.getFieldName().equals("placeX")) { // 수용인원
+						pl_dto.setPlaceX(item.getString("UTF-8"));
+					} else if (item.getFieldName().equals("placeY")) { // 수용인원
+						pl_dto.setPlaceY(item.getString("UTF-8"));
 					}
 				}
 			}

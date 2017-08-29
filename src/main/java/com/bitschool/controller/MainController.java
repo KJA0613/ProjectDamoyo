@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bitschool.dto.BTempDTO;
-import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.PlaceDTO;
-import com.bitschool.helper.Gathering;
 import com.bitschool.helper.Recommend;
 import com.bitschool.service.BTempService;
 import com.bitschool.service.IMemberService;
@@ -58,6 +56,8 @@ public class MainController {
 		placeList = placeService.getPlaceRecentInfo();
 
 		////////////////////////////////////////////////////////////////////////////////////////
+		// 세션만들기
+		
 
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		List<BTempDTO> top10List;

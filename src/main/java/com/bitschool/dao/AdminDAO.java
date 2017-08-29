@@ -87,6 +87,20 @@ public class AdminDAO implements IAdminDAO{
 		return gather;
 	}
 
+	@Override
+	public HashMap<String, Integer> visitWeek() {
+		
+		HashMap<String, Integer> week = session.selectOne(namespace+".visitWeek");
+		
+		return week;
+	}
+
+	@Override
+	public HashMap<String, Integer> visitTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

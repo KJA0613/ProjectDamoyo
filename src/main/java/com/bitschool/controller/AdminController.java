@@ -66,13 +66,12 @@ public class AdminController {
 				model.addAttribute("typeRank", typeRank);
 			}
 			
-			// 접속자, 모집글, 광고글 수
-			
-			// 월별 접속자, 모집글, 광고글 수
-			
-			// 시간별 접속자, 모집글, 광고글 수
+
+			// 주별 접속자
+			HashMap<String, Integer> week = adminService.visitWeek();
 						
-			
+			// 시간별 접속자
+			HashMap<String, Integer> time= adminService.visitTime();			
 			
 			return url;
 		}
