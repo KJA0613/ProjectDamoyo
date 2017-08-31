@@ -269,7 +269,26 @@
                           where a.gatherno = b.gatherno) 
 		where 	gatherno =(select gatherno from (select * from gather where guserId = #{guserId} order by gatherNo desc) where rownum =1)
 	</update>
+
+	<update id="updateRecog" parameterType="int">
+		update gather set GATHERRECOGNITION = 'Wait', GATHERSTATE = '모집완료' where GATHERNO = #{no}
+	</update>
 	
+	<update id="updateRecogYes" parameterType="int">
+		update gather set GATHERRECOGNITION = 'Yes', GATHERSTATE = '진행중' where GATHERNO = #{no}
+	</update>
+	
+	<update id="updateRecogNo" parameterType="int">
+		update gather set GATHERRECOGNITION = 'No', GATHERSTATE = '승인거절' where GATHERNO = #{no}
+	</update>
+	
+	<update id="updateBlogId" parameterType="int">
+<!-- 		<selectKey keyProperty="blogId" resultType="int" order="BEFORE">
+	        select BLOGIDSEQ.nextval from dual
+	    </selectKey> -->
+	    update gather set blogId = #{no} where GATHERNO = #{no}
+	</update>
+
 	<select id="getPeoPleAlarm" resultType="GatherPeopleDTO">
 		select * from gatherpeople where gatherpeoplegrade = '리더'
 	</select>

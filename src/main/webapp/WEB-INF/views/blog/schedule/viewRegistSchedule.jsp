@@ -63,6 +63,7 @@
 					<label>상세 내용</label> 
 					<textarea class="form-control" rows="7" id="detailedContents" name="detailedContents" placeholder="스터디 장소 / 스터디 시각 / 스터디 내용 등"></textarea>
 				</div>
+				<input type="hidden" id="blogId" name="blogId" value="${blogId}">
 			</form>
 			<button class="btn btn-danger" onclick="closeWindow()">취소</button>
 			<c:choose>

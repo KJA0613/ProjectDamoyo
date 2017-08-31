@@ -26,8 +26,8 @@ public class BGalleryDAO {
 		return flag;
 	}
 
-	public List<BGalleryDTO> selectImgAll() {
-		List<BGalleryDTO> list = session.selectList(namespace+".selectImgList");
+	public List<BGalleryDTO> selectImgAll(int blogId) {
+		List<BGalleryDTO> list = session.selectList(namespace+".selectImgList", blogId);
 		return list;
 	}
 

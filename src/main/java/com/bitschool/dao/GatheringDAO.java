@@ -268,6 +268,45 @@ public class GatheringDAO implements IGatheringDAO {
 	}
 
 	@Override
+	public boolean updateRecog(int no) {
+		boolean flag = false;
+		int aCnt = session.update(namespace+".updateRecog", no);
+		if(aCnt > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateRecogYes(int no) {
+		boolean flag = false;
+		int aCnt = session.update(namespace+".updateRecogYes", no);
+		if(aCnt > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateRecogNo(int no) {
+		boolean flag = false;
+		int aCnt = session.update(namespace+".updateRecogNo", no);
+		if(aCnt > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateBlogId(int no) {
+		boolean flag = false;
+		int aCnt = session.update(namespace+".updateBlogId", no);
+		if(aCnt > 0) {
+			flag = true;
+		}
+		return flag;
+	}
+	
 	public List<AlarmDTO> getGatherAlarm() {
 		
 		List<AlarmDTO>alist = null;

@@ -184,6 +184,19 @@ public class GatheringService implements IGatheringService {
 	}
 
 	@Override
+	public boolean updateRecog(int no) {
+		boolean flag = false;
+		flag = gDao.updateRecog(no);
+		return flag;
+	}
+
+	@Override
+	public boolean updateRecogYes(int gatherNo) {
+		boolean flag = false;
+		flag = gDao.updateRecogYes(gatherNo);
+		return flag;
+	}
+
 	public List<AlarmDTO> gatherAlarm() {
 
 		List<AlarmDTO> alist = gDao.getGatherAlarm();
@@ -200,4 +213,18 @@ public class GatheringService implements IGatheringService {
 	}
 
 
+
+	@Override
+	public boolean updateRecogNo(int gatherNo) {
+		boolean flag = false;
+		flag = gDao.updateRecogNo(gatherNo);
+		return flag;
+	}
+
+	@Override
+	public boolean assignBlogId(int gatherNo) {
+		boolean flag = false;
+		flag = gDao.updateBlogId(gatherNo);
+		return flag;
+	}
 }

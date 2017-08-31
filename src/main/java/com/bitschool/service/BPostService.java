@@ -59,4 +59,10 @@ public class BPostService {
 		list = dao.selectSearchRange(page);
 		return list;
 	}
+
+	public boolean uploadfile(BPostDTO fileDTO) {
+		boolean flag = false;
+		flag = dao.insertFile(fileDTO);
+		return false;
+	}
 }

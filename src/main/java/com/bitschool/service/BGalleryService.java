@@ -20,9 +20,9 @@ public class BGalleryService {
 		return flag;
 	}
 
-	public List<BGalleryDTO> getImageList() {
+	public List<BGalleryDTO> getImageList(int blogId) {
 		List<BGalleryDTO> list = null;
-		list = dao.selectImgAll();
+		list = dao.selectImgAll(blogId);
 		for(BGalleryDTO dto : list) {
 			dto.setUploadImg("\\resources\\image\\"+dto.getUploadImg());
 		}

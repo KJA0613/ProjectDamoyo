@@ -239,7 +239,7 @@
 		from gathervisitor
 		group by TO_CHAR(visitordate,'HH24')
 	</select>
-	
+
 	<update id="readCheck" >
 		update alarm
 		set alarmread = 'yes'

@@ -7,12 +7,12 @@
 		<selectKey keyProperty="imageNo" resultType="int" order="BEFORE">
 			select imageNo.nextval from dual
 		</selectKey>
-			insert into gallery(imageNo,imageTitle,userId,uploadImg,imageContents) values
-			(#{imageNo},#{imageTitle},#{userId},#{uploadImg},#{imageContents})
+			insert into gallery(imageNo,imageTitle,userId,uploadImg,imageContents,blogId) values
+			(#{imageNo},#{imageTitle},#{userId},#{uploadImg},#{imageContents},#{blogId})
 	</insert>
 	
-	<select id="selectImgList" resultType="BGalleryDTO">
-		select * from gallery order by imageNo desc
+	<select id="selectImgList" resultType="BGalleryDTO" parameterType="int">
+		select * from gallery where blogId = #{blogId} order by imageNo desc
 	</select>
 	
 	<delete id="deleteImg" parameterType="int">

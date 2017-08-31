@@ -47,6 +47,14 @@ public interface IGatheringService {
 
 	public List<GatherPeopleDTO> getGatherApply(int gatherNo);
 
+	public boolean updateRecog(int no);
+
+	public boolean updateRecogYes(int gatherNo);
+
+	public boolean updateRecogNo(int gatherNo);
+
+	public boolean assignBlogId(int gatherNo);
+
 	public List<AlarmDTO> gatherAlarm();
 
 	public List<GatherPeopleDTO> getPeoPleAlarm();

@@ -57,13 +57,13 @@ div {
 			</div>
 
 			<ul class="sidebar-wrapper">
-				<li class="sidebar-brand" style="padding-bottom: 90px; padding-top: 40px; text-align: left; padding-left: 35px;"><a href="/blog/home" style="font-size: 22px">자바 뽀개기</a></li>
-				<li style="line-height: 40px"><a href="/blog/notice/listAll">공지사항</a></li>
-				<li style="line-height: 40px"><a href="/blog/schedule/viewSchedule">일정관리</a></li>
-				<li style="line-height: 40px"><a href="/blog/file/listAll">자료실</a></li>
-				<li style="line-height: 40px"><a href="/blog/board/listAll">자유게시판</a></li>
-				<li style="line-height: 40px"><a href="/blog/photo/viewPhoto">사진첩</a></li>
-				<li style="line-height: 40px"><a href="/blog/comments/listAll">후기게시판</a></li>
+				<li class="sidebar-brand" style="padding-bottom: 90px; padding-top: 40px; text-align: left; padding-left: 35px;"><a href="/blog/home?blogId=${blogId}&blogName=${blogName}" style="font-size: 22px">${blogName}</a></li>
+				<li style="line-height: 40px"><a href="/blog/notice/listAll?blogId=${blogId}&blogName=${blogName}">공지사항</a></li>
+				<li style="line-height: 40px"><a href="/blog/schedule/viewSchedule?blogId=${blogId}&blogName=${blogName}">일정관리</a></li>
+				<li style="line-height: 40px"><a href="/blog/file/listAll?blogId=${blogId}&blogName=${blogName}">자료실</a></li>
+				<li style="line-height: 40px"><a href="/blog/board/listAll?blogId=${blogId}&blogName=${blogName}">자유게시판</a></li>
+				<li style="line-height: 40px"><a href="/blog/photo/viewPhoto?blogId=${blogId}&blogName=${blogName}">사진첩</a></li>
+				<li style="line-height: 40px"><a href="/blog/comments/listAll?blogId=${blogId}&blogName=${blogName}">후기게시판</a></li>
 				<!-- <li style="line-height: 40px"><a href="/blog/contact">연락처</a></li> -->
 			</ul>
 		</div>

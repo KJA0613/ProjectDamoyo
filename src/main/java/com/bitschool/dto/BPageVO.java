@@ -4,7 +4,21 @@ public class BPageVO {
 	private int start;
 	private int end;
 	private String boardName;
+	private int blogId;
+	private String blogName;
 	
+	public String getBlogName() {
+		return blogName;
+	}
+	public void setBlogName(String blogName) {
+		this.blogName = blogName;
+	}
+	public int getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
+	}
 	public String getBoardName() {
 		return boardName;
 	}
@@ -28,5 +42,12 @@ public class BPageVO {
 	public void setEnd(int end) {
 		this.end = end;
 	}
+	
+	@Override
+	public String toString() {
+		return "BPageVO [start=" + start + ", end=" + end + ", boardName=" + boardName + ", blogId=" + blogId
+				+ ", blogName=" + blogName + "]";
+	}
+	
 	
 }

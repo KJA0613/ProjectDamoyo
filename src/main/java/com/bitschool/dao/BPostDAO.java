@@ -71,4 +71,13 @@ public class BPostDAO {
 		list = session.selectList(namespace+".selectSearch", page);
 		return list;
 	}
+
+	public boolean insertFile(BPostDTO fileDTO) {
+		boolean flag = false;
+		int aCnt = session.insert(namespace+".insertFile", fileDTO);
+		if(aCnt > 0) {
+			flag = true;
+		}
+		return flag;
+	}
 }

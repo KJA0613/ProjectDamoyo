@@ -32,14 +32,14 @@
 	
 	function removeReply(type) {
 		var retVal = confirm("댓글을 삭제하시겠습니까?");
+		var blogId = document.getElementById('blogId').value;
+		var blogName = document.getElementById('blogName').value
 		if(retVal == true) {
 			var ds = document.getElementById(type);
-			ds.action = "/blog/board/removeReply";
+			ds.action = "/blog/board/removeReply?blogId=" + blogId + "&blogName=" + blogName;
 			ds.submit();
 		} else {
-			
 		}
-		
 	}
 </script>
 <head>
@@ -120,6 +120,9 @@
 			<input type="hidden" name="postTitle" value="${post.postTitle}"/> 
 			<input type="hidden" name="postContents" value="${post.postContents}"/> 
 			<input type="hidden" name="query" id="query" value="${query}">
+			<input type="hidden" name="blogId" id="blogId" value="${blogId}">
+			<input type="hidden" name="blogName" id="blogName" value="${blogName}">
+			
 			<div style="padding-left: 19px; margin-left: 30px">
 				<button class="btn btn-success" onclick="go_url(1)">목록</button>
 					<c:choose>
@@ -170,7 +173,7 @@
 		
 		<c:choose>
 		<c:when test = "${null ne pdto.guserId}">
-		<form action="/blog/board/reply" method="POST" style="margin-top: 70px">
+		<form action="/blog/board/reply?blogId=${blogId}&blogName=${blogName}" method="POST" style="margin-top: 70px">
 			<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc;">
 				<tr>
 					<td style="border: solid 1px #ccc; width: 600px;">

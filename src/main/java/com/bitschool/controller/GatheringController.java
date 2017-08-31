@@ -44,6 +44,7 @@ public class GatheringController {
 	@Inject
 	private IMemberService memberService;	
 
+
 	// gathering.jsp 의 정보를 뿌리는 메서드
 	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gathering(
@@ -709,6 +710,24 @@ public class GatheringController {
 		return map;
 	}
 	
-
 	
+	@RequestMapping(value = "/recogUpdate",  method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody HashMap<String, String> recogUpdate(@RequestParam(value = "no", defaultValue="") int no) {
+		
+		//System.out.println(no);
+		
+		boolean flag =false;
+		flag = gService.updateRecog(no);
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("result", "no");
+		// 쿼리하고 결과 boolean
+		
+		if(flag){
+			map.put("result", "yes");
+		}
+		
+		return map;
+		
+	}
 }

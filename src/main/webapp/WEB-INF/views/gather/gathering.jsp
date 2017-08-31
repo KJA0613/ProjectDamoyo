@@ -21,6 +21,17 @@
 <!-- <link href="/resources/examples/offcanvas/offcanvas.css" rel="stylesheet"> -->
 <script src="/resources/assets/js/ie-emulation-modes-warning.js"></script>
 
+<script type="text/javascript">
+	function goBlog() {
+		blogUrl = 'http://localhost:5050/blog/home?blogId=';
+		blogId = document.getElementById('modal-body-no').innerHTML;
+		blogName = document.getElementById('modal-body-subject').innerHTML;
+		blogName = '&blogName='+blogName;
+		blogUrl = blogUrl + blogId + blogName;
+		window.open(blogUrl);
+	}
+</script>
+
 <style type="text/css">
 .price {
 	position: absolute;
@@ -412,7 +423,7 @@ a:visited {
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
 						<button id='gatherModify' type="button" class="btn btn-warning pull-left" style="display: none;">수정하기</button>
-						<button type="button" class="btn btn-info" data-dismiss="modal">블로그 가기</button>
+						<button type="button" class="btn btn-info" data-dismiss="modal" onclick="goBlog()">블로그 가기</button>
 						<button id='gatherApply' type="button" class="btn btn-primary" style="display: none;">신청</button>
 						<button id='gatherComplete' type="button" class="btn btn-primary" style="display: none;">완료</button>
 					</div>				

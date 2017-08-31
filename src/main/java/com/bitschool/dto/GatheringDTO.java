@@ -28,8 +28,14 @@ public class GatheringDTO {
 	private String gatherState;
 	private String gatherBlog;
 	private String gatherRecognition;
+	private int blogId;
 	
-	
+	public int getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
+	}
 	public int getGatherNo() {
 		return gatherNo;
 	}

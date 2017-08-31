@@ -48,6 +48,14 @@ public interface IGatheringDAO {
 
 	public List<GatherPeopleDTO> getGatherApply(int gatherNo);
 
+	public boolean updateRecog(int no);
+
+	public boolean updateRecogYes(int gatherNo);
+
+	public boolean updateRecogNo(int gatherNo);
+
+	public boolean updateBlogId(int gatherNo);
+	
 	public List<AlarmDTO> getGatherAlarm();
 
 	public List<GatherPeopleDTO> getPeoPleAlarm();

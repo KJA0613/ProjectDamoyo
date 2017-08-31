@@ -398,7 +398,28 @@ $(function() {
 	$('#gatherComplete').click(function(){
 		var bool = confirm('신청하시겠습니꽈?');
 		
-		alert(bool); // 인쟈 여기서 확인버튼 누르면 관리자한테 가는거임 +++ 밥먹고와서부터 하기
+		if(bool){
+			var gatherNo = $("#modal-body-no").text();
+			
+			var info = {
+					"no" : gatherNo
+			};
+			
+			$.ajax({
+				url : '/gather/recogUpdate',
+				dataType : 'json',
+				typoe : 'POST',
+				cache : false,
+				data : info,
+				success : function(data){
+					alert('완료했으니까 관리자 승인 기다려');
+				},
+				error : function(request, status, error){
+					alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+				}
+			});
+			
+		}
 		
 	});
 });

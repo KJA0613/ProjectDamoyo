@@ -29,9 +29,9 @@ public class BScheduleService {
 		return flag;
 	}
 
-	public List<BScheduleFormatDTO> getScheduleAll() {
+	public List<BScheduleFormatDTO> getScheduleAll(int blogId) {
 		List<BScheduleFormatDTO> list = new ArrayList<BScheduleFormatDTO>();
-		List<BScheduleDTO> templist = dao.selectScheduleAll();
+		List<BScheduleDTO> templist = dao.selectScheduleAll(blogId);
 		for(int i=0;i<templist.size();i++) {
 			BScheduleFormatDTO dto = new BScheduleFormatDTO();
 			BScheduleDTO temp = templist.get(i);

@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.BPageVO;
 import com.bitschool.dto.BSearchVO;
 
 @Repository
@@ -19,9 +20,9 @@ public class BPageDAO {
 	@Inject
 	private SqlSession session;
 	
-	public int selectCountAll() throws SQLException{
+	public int selectCountAll(BPageVO vo) throws SQLException{
 		int total = 0;
-		total = session.selectOne(namespace+".count");
+		total = session.selectOne(namespace+".count", vo);
 		return total;
 	}
 	

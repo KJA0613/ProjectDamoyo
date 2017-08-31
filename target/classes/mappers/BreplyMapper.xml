@@ -5,18 +5,18 @@
 <mapper namespace="com.bitschool.basic.ReplyMapper">
 
 	<update id="updateReplyCount" parameterType="BPostNoInfoDTO">
-		update post set replyCounts = replyCounts + 1 where postNo = #{postNo} and boardName = #{boardName}
+		update post set replyCounts = replyCounts + 1 where postNo = #{postNo} and boardName = #{boardName} and blogId = #{blogId}
 	</update>
 	
 	<insert id="insertReply" parameterType="BReplyDTO">
-		insert into reply(replyNo,replyContents,postNo,replyUserId,boardName) values(#{replyNo},#{replyContents},#{postNo},#{replyUserId},#{boardName})
+		insert into reply(replyNo,replyContents,postNo,replyUserId,boardName,blogId) values(#{replyNo},#{replyContents},#{postNo},#{replyUserId},#{boardName},#{blogId})
 	</insert>
 	
 	<select id="selectReply" resultType="BReplyDTO" parameterType="BPostNoInfoDTO">
-		select * from reply where postNo = #{postNo} and boardName = #{boardName} order by replyNo
+		select * from reply where postNo = #{postNo} and boardName = #{boardName} and blogId = #{blogId} order by replyNo
 	</select>
 	
 	<delete id="deleteReply" parameterType="BReplyDTO">
-		delete from reply where replyNo = #{replyNo} and boardName = #{boardName} and postNo = #{postNo}
+		delete from reply where replyNo = #{replyNo} and boardName = #{boardName} and postNo = #{postNo} and blogId = #{blogId}
 	</delete>
 </mapper>

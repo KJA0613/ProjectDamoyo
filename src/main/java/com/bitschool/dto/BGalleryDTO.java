@@ -9,14 +9,20 @@ public class BGalleryDTO {
 	private Timestamp imageDate;
 	private String uploadImg;
 	private String imageContents;
+	private int blogId;
 	
+	public int getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
+	}
 	public String getImageContents() {
 		return imageContents;
 	}
 	public void setImageContents(String imageContents) {
 		this.imageContents = imageContents;
 	}
-	
 	public int getImageNo() {
 		return imageNo;
 	}
