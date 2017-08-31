@@ -35,5 +35,18 @@ public class SessionDAO {
 		
 		return totalCount;
 	}
+
+	public boolean checkAlarm(String loginId) {
+
+		int result = session.selectOne(namespace+".checkAlarm", loginId);
+
+		boolean flag = false;
+		
+		if(result>0){
+			flag = true;
+		}
+		
+		return flag;
+	}
 	
 }

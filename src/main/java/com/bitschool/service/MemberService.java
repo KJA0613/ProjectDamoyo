@@ -445,4 +445,13 @@ public class MemberService implements IMemberService {
 		return getAlarm;
 	}
 
+
+	@Override
+	public boolean readCheck(int alarmNo) {
+
+		boolean flag = memberDAO.readCheck(alarmNo);
+		
+		return flag;
+	}
+
 }

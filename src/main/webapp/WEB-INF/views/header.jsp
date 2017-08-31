@@ -172,11 +172,18 @@
 						<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
 																			
 							<li class="dropdown">
-									<a href="/mypage/MyPageAlarm"><i class="material-icons">add_alert</i>
-									<%--이프문으로 값있을 때만 뉴가 뜨도록!!  <c:when test1 = "${null ne gatherNo}">--%>									
-									<span class="notification">N</span></a>		
+								<a href="/mypage/MyPageAlarm"><i class="material-icons">add_alert</i>
 									
-								</li>
+									<c:choose>
+									    <c:when test="${alarm eq true}">
+									        <span class="notification">N</span>		
+									    </c:when>
+									    <c:otherwise>
+									        <span class="notification"></span>		
+									    </c:otherwise>
+									</c:choose>
+								</a>
+							</li>
 							
 						<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
 					</c:when>				

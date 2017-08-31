@@ -189,8 +189,13 @@ $(function() {
 		
 		// 인쟈 이겨시 ajax로 데이터 전송, 필요한건 로그인 정보와 게시글 정보
 		var no = $('#modal-body-no').text(); // 작성글 번호
-		var info = {"no" : no};
+		var write = $('#modal-body-id').text(); // 작성글 작성자
 		
+		var info = {
+				"no" : no,
+				"write" : write
+		};
+		alert(write);
 		$.ajax({
 			url : '/gather/gatherApplyPeople',
 			dataType : 'json',

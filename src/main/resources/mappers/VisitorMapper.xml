@@ -17,4 +17,10 @@
 	<select id="selectTotal" resultType="Integer">
 		select count(*) as count from gathervisitor
 	</select> 
+	
+	<select id="checkAlarm" parameterType="String" resultType="Integer">
+		select count(*)
+		from alarm
+		where ALARMRECIVEID = #{loginId} and alarmread = 'no'
+	</select>
 </mapper>

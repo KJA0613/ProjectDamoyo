@@ -269,4 +269,18 @@ public class MemberDAO implements IMemberDAO {
 		return getAlarm;
 	}
 
+
+	@Override
+	public boolean readCheck(int alarmNo) {
+
+		boolean flag = false;
+		int result = session.update(namespace+".readCheck", alarmNo);
+		
+		if(result>0){
+			flag=true;
+		}
+		
+		return flag;
+	}
+
 }

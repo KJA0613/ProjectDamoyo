@@ -37,8 +37,8 @@
 				<li id="link_myGoodMeeting"><a href="/mypage/MyPageGood">내가
 						찜한 모임</a></li>
 				<!-- 5. 내가 올린 자료 -->
-				<li id="link_myUploadFile"><a href="/mypage/MyPageUploadFile">내가
-						올린 자료</a></li>
+				<!-- <li id="link_myUploadFile"><a href="/mypage/MyPageUploadFile">내가
+						올린 자료</a></li> -->
 						<!-- 6. 알림 메시지 -->
 				<li id="link_myAlarm"><a href="/mypage/MyPageAlarm">나의 알림 메시지 </a></li>
 			</ul>
@@ -60,11 +60,13 @@
 				<!-- 4. 내가 찜한 모임 -->
 				<li id="link_myGoodMeeting" style="display:none" ><a href="/mypage/MyPageGood">내가
 						찜한 모임</a></li>
-				<!-- 5. 내가 올린 자료 -->
-				<li id="link_myUploadFile"><a href="/mypage/MyPageUploadFile">내가
-						올린 자료</a></li>
-				<!-- 6. 알림 메시지 -->
+				<!-- 5. 알림 메시지 -->
 				<li id="link_myAlarm"><a href="/mypage/MyPageAlarm">나의 알림 메시지 </a></li>
+				
+				<!-- 5. 내가 올린 자료 이거 안씀 -->
+				<!-- <li id="link_myUploadFile"><a href="/mypage/MyPageUploadFile">내가
+						올린 자료</a></li> -->
+				
 						
 						
 			</ul>

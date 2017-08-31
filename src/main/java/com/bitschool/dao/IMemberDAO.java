@@ -63,4 +63,6 @@ public interface IMemberDAO {
 
 	public List<AlarmDTO> getAlarm();
 
+	public boolean readCheck(int alarmNo);
+
 }

@@ -40,4 +40,13 @@ public class SessionController {
 		
 		return session;
 	}
+
+	public boolean checkAlarm(String loginId) {
+
+		boolean flag  = sessionService.checkAlarm(loginId);
+		
+		return flag;
+	}
+	
+	
 }

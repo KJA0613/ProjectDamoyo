@@ -32,6 +32,13 @@ public class SessionService {
 		
 		return result;
 	}
+
+	public boolean checkAlarm(String loginId) {
+
+		boolean flag = sessionDao.checkAlarm(loginId);
+		
+		return flag;
+	}
 	
 	
 	

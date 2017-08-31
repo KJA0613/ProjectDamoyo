@@ -323,7 +323,6 @@ $(window).load(function(){
 				}else if(_keyValuePair[0]=='no'){
 					
 					$("[data-no="+_keyValuePair[1]+"][id=gathmodal]").one('onclick', '').click();
-					
 					/*$("[data-no="+_keyValuePair[1]+"]").trigger("click");*/
 				}
 			}
@@ -343,6 +342,10 @@ $(window).load(function(){
 				
 				$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
 				$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
+				
+			} else if(_keyValuePair[0] == 'no'){ // _keyValuePair[0] : 파라미터 명 
+				 // _keyValuePair[1] : 파라미터 값 
+				$("[data-no="+_keyValuePair[1]+"][id=gathmodal]").one('onclick', '').click();
 				
 			} 
 		}

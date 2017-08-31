@@ -26,6 +26,7 @@ import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.service.EmailSender;
 import com.bitschool.service.IGatheringService;
 import com.bitschool.service.IMemberService;
+import com.bitschool.service.SessionService;
 
 // [개인&기업회원] - 로그인&로그아웃
 // 회원(Member) = 개인(Person) + 기업(Company)
@@ -48,6 +49,8 @@ public class MemberLoginController {
 	@Inject
 	private IGatheringService gatherService;
 	
+	@Inject
+	private SessionService sessionService;	
 	
 	
 	//----------------------------------------------- 로 그 인 -----------------------------------------------//	
@@ -90,8 +93,17 @@ public class MemberLoginController {
 		alarmList = memberService.getAlarm();
 		List<GatherPeopleDTO> gpList = new ArrayList<GatherPeopleDTO>();
 		gpList = gatherService.getPeoPleAlarm();
+		
 		// 로그인 성공 (DB에 해당 데이터 있음)
 		if(pdto != null) {
+			
+			// 알람 기능
+			boolean flag = sessionService.checkAlarm(pdto.getGuserId()); 
+			System.out.println("로그인의 체크알람은 "+flag);
+			session.setAttribute("alarm", flag);
+			
+			
+			// -----------------------------------------------------------------\\
 			
 			// 세션에 사용자 정보 저장
 			session.setAttribute("pdto", pdto);			
@@ -114,7 +126,7 @@ public class MemberLoginController {
 			
 			model.addAttribute("pdto",pdto);
 			//로그인세션받으면서 알람유무확인
-		for(int i=0;i<alarmList.size();i++){
+			for(int i=0;i<alarmList.size();i++){
 				
 				gatherNo = alarmList.get(i).getAlarmGatherNo();
 								

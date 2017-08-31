@@ -1,6 +1,7 @@
 package com.bitschool.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -30,7 +31,7 @@ import com.bitschool.service.IPlaceService;
 
 //[개인회원] - 마이페이지
 //회원(Member) = 개인(Person) + 기업(Company)
-@RequestMapping("mypage")
+@RequestMapping("/mypage")
 @Controller
 public class PersonMypageController {
 	
@@ -582,5 +583,28 @@ public class PersonMypageController {
 		return result;
 	}
 	
+	// 마이페이지 -  알림 클릭했을때 이동하면서 그글 읽음으로 바꿈
+	@RequestMapping(value="/updateRead", method = { RequestMethod.GET, RequestMethod.POST })
+	public @ResponseBody HashMap<String, String> gatherAddons(
+			@RequestParam(value="alarmNo") int alarmNo,
+			HttpSession session
+			){
+		
+		boolean flag = false;
+
+		System.out.println("알람 번호 : "+alarmNo);
+		flag = memberService.readCheck(alarmNo);
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+			
+		if(flag){
+			map.put("result", "yes");
+		}else{
+			map.put("result", "no");
+		}
+		
+		return map;
+	}
 	
 }

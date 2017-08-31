@@ -86,7 +86,35 @@
 	
 	 -->
 
+<script type="text/javascript">
 
+ function gather(alarmNo, gatherNo){
+	
+	var DATA = {
+		"alarmNo" : alarmNo
+	};
+	 
+	$.ajax({
+		url : '/mypage/updateRead',
+		dataType : 'json',
+		type : 'POST',
+		cache : false,
+		data : DATA,
+		success : function(data) {
+			var url = "/gather/gathering?no="+gatherNo;
+			if(data.result=='yes'){
+				location.href = url;
+			}else{
+				alert("처리중 오류가 발생하였습니다.");
+			}
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+		}
+ 	});
+ };
+
+</script>
 
 
 <!-- [Header] 공통 헤더 -->
@@ -108,18 +136,7 @@
 		        
 		<!--/// [오른쪽/해당되는 내용]: 12칸 중 "9칸" 크기 확보 ///-->
 		<div class="col-md-9">	
-			<div class="tab-content"> 
-				<!-- 검색 -->
-			    <div class="col-md-4 col-md-offset-8">
-					<form action="#" method="POST" class="search-form">
-						<div class="form-group has-feedback">
-			           		<label for="search" class="sr-only">search</label>
-			           		<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력해주세요.">
-			             		<!-- 돋보기 모양 -->
-			            	<span class="glyphicon glyphicon-search form-control-feedback"></span>
-			           	</div>
-					</form>
-				</div>			
+			<div class="tab-content"> 	
 						
 					<!-- [오른쪽/리스트에 해당되는 내용]: 12칸 중 "9칸" 크기 확보 -->
 					<!-- 테이블 마우스 갖다대면 활성화 표시됨 -->
@@ -145,10 +162,28 @@
 							
 						        <td>${alarm.alarmNo}</td>
 						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
-						        <td>${alarm.alarmGatherNo}${alarm.alarmIndex}</td>
+						        <td>
+
+						        <c:choose>
+							        <c:when test="${alarm.alarmGrade eq 1}">
+										<a id="alarmGather" onclick="gather(${alarm.alarmNo}, ${alarm.alarmGatherNo});" href='#'>${alarm.alarmGatherNo}${alarm.alarmIndex}</a>
+									</c:when>
+									<c:when test="${alarm.alarmGrade eq 2}">
+										<a id="blog" href='#'>${alarm.alarmGatherNo}${alarm.alarmIndex}</a>
+									</c:when>								
+								</c:choose>
+						        </td>
 						        <td>${alarm.alarmDate}</td>
-						        <td>${alarm.alarmRead}</td>
-						    
+						        <td>
+						        <c:choose>
+							        <c:when test="${alarm.alarmRead eq 'yes'}">
+									읽음
+									</c:when>
+									<c:when test="${alarm.alarmRead eq 'no'}">
+									안읽음
+									</c:when>								
+								</c:choose>
+						    	</td>
 							</tr>
 						   </c:forEach> 
 						</tbody>

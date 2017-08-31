@@ -41,13 +41,9 @@ public class GatheringController {
 	@Inject
 	private IGatheringService gService;
 	
-<<<<<<< HEAD
 	@Inject
 	private IMemberService memberService;	
 
-=======
-	
->>>>>>> 42a568f9d0e815c948c1e1595b23ceb5d9cf9b93
 	// gathering.jsp 의 정보를 뿌리는 메서드
 	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gathering(
@@ -66,16 +62,15 @@ public class GatheringController {
 				
 		List<GatheringDTO> recommList = gService.getRecommDefault(); // 추천글 가져옴
 		
-		/*if(cdto==null){		
-			if (pdto != null) { // 로그인 중이면 디폴트 추천 검색을 함
-				model.addAttribute("pdto", pdto);
-
-				recommList = gService.getRecommendUser(pdto.getGuserId());
-				if (recommList.size() == 0) { // 사용자 추천 리스트가 없으면
-					recommList = gService.getRecommDefault();// 디폴트 추천검색
-				}
+		if(session.getAttribute("alarm")!=null){
+		
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
 			}
-		}*/
+		
+		}
 		
 		if(cdto==null){
 			if(pdto!=null){ // 로그인 중이면 사용자에 맞는 추천검색을 함
@@ -664,53 +659,51 @@ public class GatheringController {
 	@RequestMapping(value="/gatherApplyPeople", method={RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody HashMap<String, Object> gatherApplyPeople(
 			@RequestParam(value="no") int no,
+			@RequestParam(value="write") String write,
 			HttpSession session
 			){
-		
-		System.out.println("people ajax들옴");
-		
+				
 		boolean flag = false;
 		
 		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		System.out.println(pdto);
-		System.out.println(no);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("result", "no");
 		
-		map.put("no", no);
-		map.put("pdto", pdto);
+		map.put("no", no);	// 글번호
+		map.put("pdto", pdto); // 로그인한사람, 즉 신청자
 		
+		// GatheringPeopleInsert은 모임에 신청했을때 신청한 사람의 정보를 넣는것
+		// no 글번호, pdto는 로그인한 정보, 로그인한 사람이 곧 신청한 사람이기 때문에
 		flag = gService.GatheringPeopleInsert(map);
-		
+				
+		// 성공하면 쓰기
 		if(flag){
 			map.put("result", "yes");
+			
+			AlarmDTO alarm = new AlarmDTO();
+			
+			String guserId = pdto.getGuserId();
+
+			//
+			int gatherNo = no;
+			String message = "번 내 모임글에 새로운 신청이 있습니다";
+			int gradeNum = 1;
+			alarm.setAlarmId(guserId);
+			alarm.setAlarmGatherNo(gatherNo);
+			alarm.setAlarmIndex(message);
+			alarm.setAlarmGrade(gradeNum);
+			alarm.setAlarmReciveId(write); // 글쓴사람 정보 넣기
+			
+			session.setAttribute("alarmRecive", write); // 이건 인터셉터에서 처리함, 알람할때 쓸꺼임
+			
+			System.out.println("컨트롤러  : "+alarm);
+			
+			flag = memberService.getInsert(alarm);
+			
+			
 		}
-		
-		/*	여기서부터 알람	*/
-		// pdto로 guserid
-		// no로 글 전체 가져와서 제목, no  
-				
-		// alaramDTO에 넣어서 insert
-		boolean flagAlarm = false;
-		
-		
-		AlarmDTO alarm = new AlarmDTO();
-		
-		String guserId = pdto.getGuserId();
-		
-		int gatherNo = no;
-		String message = "번 내 모임글에 새로운 신청이 있습니다";
-		int gradeNum = 1;
-		alarm.setAlarmId(guserId);
-		alarm.setAlarmGatherNo(gatherNo);
-		alarm.setAlarmIndex(message);
-		alarm.setAlarmGrade(gradeNum);
-		
-		System.out.println("컨트롤러  : "+alarm);
-		
-		flagAlarm = memberService.getInsert(alarm);
 		
 			
 		return map;

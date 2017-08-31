@@ -135,22 +135,22 @@
 					        <th>작성자</th>
 					        <th>참여인원 현황</th>
 					        <th>모집마감일</th>
-					        <th>조회수</th>
+					       <!--  <th>조회수</th> -->
 					        <th>스크랩</th>			        
 					      </tr>
 					    </thead>
 					    
 						<tbody>
-							<tr>
+							<!-- <tr>
 						        <td>1</td>
-						        <!-- 모임명 클릭 > 해당 모임 블로그로 이동 -->
+						        모임명 클릭 > 해당 모임 블로그로 이동
 						        <td><a href='#'>자바 모임</a></td>
 						        <td>가나다</td>
 						        <td>3/4</td>
 						        <td>2017-06-20</td>
 						        <td>20</td>
 						        <td><span class="glyphicon glyphicon-heart" onclick="btn_heart()"></span></td>
-							</tr>
+							</tr> -->
 								
 							<c:forEach var="attend" items="${attendList}">
 								<tr>
@@ -160,7 +160,6 @@
 							        <td id="writer">${attend.guserId}</td>
 							        <td>${attend.gatherParti} / ${attend.gatherPartiMax}</td>
 							        <td>${fn:substring(attend.gatherEdate, 0, 10)}</td>
-							        <td>20(디비값 아님)</td>
 							        <td><span class="glyphicon glyphicon-heart" onclick="btn_attend()"></span></td>
 							        <%-- <td><span class="glyphicon glyphicon-heart" onclick="btn_attend('${attend.guserId}','${attend.gatherNo}')"></span></td> --%>
 								</tr>

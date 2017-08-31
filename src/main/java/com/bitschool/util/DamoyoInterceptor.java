@@ -9,6 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitschool.controller.SessionController;
+import com.bitschool.dto.PersonDTO;
 
 
 public class DamoyoInterceptor implements HandlerInterceptor{
@@ -38,6 +39,20 @@ public class DamoyoInterceptor implements HandlerInterceptor{
 			sessionController.makeSession(request);
 			System.out.println("세션 생성됨, 새션값 : " + session.getAttribute("visitorCheck"));
 			System.out.println(request.getRequestedSessionId());
+		}
+		
+		// 알람기능 가라로 하기
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
+		if(pdto!=null){
+			
+			boolean flag = sessionController.checkAlarm(pdto.getGuserId());
+						
+			if(flag){
+				session.setAttribute("alarm", flag);
+			}else{
+				session.setAttribute("alarm", flag);
+			}
 		}
 		
 	}

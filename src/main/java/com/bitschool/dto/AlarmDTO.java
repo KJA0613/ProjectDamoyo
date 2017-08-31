@@ -9,6 +9,7 @@ public class AlarmDTO {
 	private String alarmRead; // 읽었는지?
 	private int alarmGatherNo;//글번호
 	private int alarmGrade; //1은 게시글 2는 블로그 
+	private String alarmReciveId; // 알람 받는사람 아이디
 	
 	public int getAlarmNo() {
 		return alarmNo;
@@ -55,13 +56,20 @@ public class AlarmDTO {
 		this.alarmGrade = alarmGrade;
 	}
 	
+	public String getAlarmReciveId() {
+		return alarmReciveId;
+	}
+	public void setAlarmReciveId(String alarmReciveId) {
+		this.alarmReciveId = alarmReciveId;
+	}
 	
 	@Override
 	public String toString() {
 		return "AlarmDTO [alarmNo=" + alarmNo + ", alarmIndex=" + alarmIndex + ", alarmDate=" + alarmDate + ", alarmId="
 				+ alarmId + ", alarmRead=" + alarmRead + ", alarmGatherNo=" + alarmGatherNo + ", alarmGrade="
-				+ alarmGrade + "]";
+				+ alarmGrade + ", alarmReciveId=" + alarmReciveId + "]";
 	}
+	
 	
 	
 	
