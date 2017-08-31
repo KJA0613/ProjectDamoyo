@@ -2,9 +2,7 @@ package com.bitschool.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -16,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.VisitorTimeDTO;
+import com.bitschool.dto.VisitorWeekDTO;
 import com.bitschool.service.IAdminService;
 import com.bitschool.service.IGatheringService;
 
@@ -28,15 +29,82 @@ public class AdminController {
 	@Inject
 	private IAdminService adminService;
 	
+<<<<<<< HEAD
 	@Inject
 	private IGatheringService gService;
+=======
+>>>>>>> 20b5b62f1c8d3d76da5ff88eac900524f46f643a
 		
-		// 01. 관리자대쉬보드(메인)페이지
-		@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
-		public String dashbord(){
+	// 01. 관리자대쉬보드(메인)페이지
+	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
+	public String dashbord(
+				Model model
+			){
 			
 			String url = "admin/dashboard";	
 			
+			// 총 카테고리, 총 장소, 모임요청수, 신고글(이건 하드코딩) 
+			HashMap<String, Integer> gpCnt = adminService.gatherplaceCnt();
+			if(gpCnt!=null){
+				System.out.println(gpCnt);
+				model.addAttribute("gpCnt", gpCnt);
+			}
+			
+			// 모임 카테고리별, 지역별 많은순		
+			List<GatherRankDTO> gatherRank = adminService.gatherRank();
+			if(gatherRank!=null){
+				System.out.println(gatherRank);
+				
+				List<GatherRankDTO> categoryRank = new ArrayList<GatherRankDTO>();;
+				List<GatherRankDTO> areaRank = new ArrayList<GatherRankDTO>();
+				List<GatherRankDTO> typeRank = new ArrayList<GatherRankDTO>();
+								
+				for(int i=0; i<gatherRank.size(); i++){
+					String code = gatherRank.get(i).getTypeCode();
+					if(code.equals("category")){
+						categoryRank.add(gatherRank.get(i));
+					}else if(code.equals("area")){
+						areaRank.add(gatherRank.get(i));
+					}else if(code.equals("type")){
+						typeRank.add(gatherRank.get(i));
+					}
+				}
+				
+				model.addAttribute("categoryRank", categoryRank);
+				model.addAttribute("areaRank", areaRank);
+				model.addAttribute("typeRank", typeRank);
+			}
+			
+
+			// 요일별 접속자
+			List<VisitorWeekDTO> week = adminService.visitWeek();
+			
+			if(week!=null){
+				
+				HashMap<String, Integer> weekMap = new HashMap<String, Integer>();
+				
+				for(int i=0; i<week.size(); i++){
+					VisitorWeekDTO visitor = week.get(i);
+					weekMap.put(visitor.getVisitorDay(), visitor.getDayCount());
+				}
+				
+				model.addAttribute("week",weekMap);
+			}
+						
+			// 시간별 접속자
+			List<VisitorTimeDTO> time= adminService.visitTime();			
+			
+			if(time!=null){
+				
+				HashMap<String, Integer> timeMap = new HashMap<String, Integer>();
+				
+				for(int i=0; i<time.size(); i++){
+					VisitorTimeDTO visitor = time.get(i);
+					timeMap.put(visitor.getVisitorTime(), visitor.getTimeCount());
+				}
+				System.out.println(time);
+				model.addAttribute("time",timeMap);
+			}
 			
 			return url;
 		}
@@ -45,7 +113,6 @@ public class AdminController {
 		@RequestMapping(value = "/PeopleTable",method = {RequestMethod.POST,RequestMethod.GET})
 		public String PeopleTable(Model model, @RequestParam(value="guserNo", defaultValue="-1")int guserNo,
 				                         @RequestParam(value="comNo",defaultValue="-2")int comNo){
-		
 		String url = null;
 		List<PersonDTO> pdto = null;
 		List<CompanyDTO> cdto = null;
@@ -116,13 +183,13 @@ public class AdminController {
 				
 				//System.out.println(gdto.get(i));
 				
-				if(recog.equals("Wait")){
+				if(recog.equals("Wait")){ // 승인 대기
 					waitdto.add(gdto.get(i));
-				}else if(recog.equals("yet")){
+				}else if(recog.equals("yet")){ // 모집중
 					yetdto.add(gdto.get(i));
-				}else if(recog.equals("Yes")){
+				}else if(recog.equals("Yes")){ // 승인됨 ==
 					yesdto.add(gdto.get(i));					
-				}else if(recog.equals("No")){
+				}else if(recog.equals("No")){ //  
 					nodto.add(gdto.get(i));					
 				}
 			}
@@ -147,8 +214,6 @@ public class AdminController {
 		public String category(){
 			String url = "";
 			url = "/admin/category";
-			
-			
 			
 			return url;
 		}

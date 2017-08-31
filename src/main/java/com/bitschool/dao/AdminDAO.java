@@ -1,5 +1,6 @@
 package com.bitschool.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,8 +9,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherRankDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.VisitorTimeDTO;
+import com.bitschool.dto.VisitorWeekDTO;
 
 @Repository
 public class AdminDAO implements IAdminDAO{
@@ -50,6 +55,58 @@ public class AdminDAO implements IAdminDAO{
 		
 		return gdto;
 	}
+
+	@Override
+	public HashMap<String, Integer> gatherplaceCnt() {
+		
+		HashMap<String, Integer> gpCnt = null;
+		gpCnt = session.selectOne(namespace+".gatherpacleCnt");
+		return gpCnt;
+	}
+
+	@Override
+	public List<GatherRankDTO> gatherRank() {
+
+		List<GatherRankDTO> gatherRank = null;
+		gatherRank = session.selectList(namespace+".gatherRank");
+		return gatherRank;
+	}
+	
+	public List<GatherPeopleDTO> getGather() {
+
+		List<GatherPeopleDTO> gpdto = null;
+		
+		gpdto = session.selectList(namespace+".getGather");
+		
+		return gpdto;
+	}
+
+	@Override
+	public List<GatheringDTO> getGatherInfo(String guserId) {
+
+		List<GatheringDTO>	gather = session.selectList(namespace+".gatherInfo", guserId);		
+		
+		return gather;
+	}
+
+	@Override
+	public List<VisitorWeekDTO> visitWeek() {
+		
+		List<VisitorWeekDTO> week = null;
+		week = session.selectList(namespace+".visitWeek");
+		
+		return week;
+	}
+
+	@Override
+	public List<VisitorTimeDTO> visitTime() {
+		
+		List<VisitorTimeDTO> time = null;
+		time = session.selectList(namespace+".visitTime");
+		
+		return time;
+	}
+
 
 	
 

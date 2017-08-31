@@ -75,10 +75,7 @@ $(function() {
 				})
 							
 				modal.find('#modal-body-partiname').text(str);
-				
-			
-				
-				
+								
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
@@ -100,7 +97,6 @@ $(function() {
 				$('#gatherComplete').hide(); // 완료 숨기기
 			}
 		}
-		
 		
 		// 최대인원 신청인원 같으면 신청버튼 막기
 		if(parti >= partimax){
@@ -188,6 +184,7 @@ $(function() {
 	
 	});
 	
+	//신청하기
 	$('#gatherApply').click(function(){
 		
 		// 인쟈 이겨시 ajax로 데이터 전송, 필요한건 로그인 정보와 게시글 정보

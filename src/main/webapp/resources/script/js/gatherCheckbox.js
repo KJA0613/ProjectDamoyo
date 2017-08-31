@@ -85,8 +85,11 @@ $(function() {
 	
 					$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
 						var subject = gList.gatherSubject;
-						subject = subject.substring(0,11) +' ...';
-									
+						
+						if(subject.length>10){
+							subject = subject.substring(0,11) +' ...';
+						}
+						
 						var write = gList.gatherWrite;
 						write = write.substring(0,16);
 									
@@ -116,7 +119,7 @@ $(function() {
 												
 						var str = "";
 						str += "<div class='col-xs-4 col-lg-3' id='gather'>";
-						str += "<a data-toggle='modal' href='#GatherModalInfo' data-no='"+gList.gatherNo+
+						str += "<a data-toggle='modal' href='#GatherModalInfo' id='gathmodal' data-no='"+gList.gatherNo+
 						"'  data-subject='"+gList.gatherSubject+
 						"'  data-categorytop='"+gList.gatherCategoryTop+
 						"'  data-categorymid='"+gList.gatherCategoryMid+
@@ -157,68 +160,13 @@ $(function() {
 	});
 });
 
-/* 페이지 로드시 두번째로 실행되는 스크립트 */
-$(window).load(function(){
-
-	/* 쿼리스트링으로 넘어온 체크박스 값 분리하여 적용하여 나타내기 */
-	var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
-	
-	if(_tempUrl.indexOf('=')>0){
-		var _tempArray;
-				
-		if(_tempUrl.indexOf('&')>0){
-			_tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
-			
-			for(var i = 0; _tempArray.length; i++) { 
-				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
-				
-				if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
-					 // _keyValuePair[1] : 파라미터 값 
-					
-					var box = _keyValuePair[1]; // 쿼리스트링으로 type에 값을 저장해 보내서 box 에 담고
-					var boxNum = box.substring(4); // 숫자만 짤라서 필요한 것을 받음
-					
-					var boxAll  = '.cAll' +boxNum;
-					var boxTag = '.cateChk' +boxNum
-					
-					$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
-					$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
-					
-				} 
-				
-			}
-		}else{
-			_tempArray = _tempUrl;
-			
-			var _keyValuePair = _tempArray.split('=');
-			
-			if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
-				 // _keyValuePair[1] : 파라미터 값 
-				
-				var box = _keyValuePair[1]; // 쿼리스트링으로 type에 값을 저장해 보내서 box 에 담고
-				var boxNum = box.substring(4); // 숫자만 짤라서 필요한 것을 받음
-				
-				var boxAll  = '.cAll' +boxNum;
-				var boxTag = '.cateChk' +boxNum
-				
-				$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
-				$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
-				
-			} 
-		}
-		
-		
-	}
-});
-
-
 /* 체크박스의 전체를 선택 했을때 나머지 모두가 체크되고 변경할수 없게 disabled 하는것, 해제는 그 반대  */
 function checkAllFunc(obj, box) {
 	$("[name=" + box + "]").each(function() {
 		if (obj.checked == true) {
-			$("[name=" + box + "]").attr("disabled", true)//는 input 요소 설정 을 disabled
+			$("[name=" + box + "]").attr("disabled", true);//는 input 요소 설정 을 disabled
 		} else {
-			$("[name=" + box + "]").attr("disabled", false)//제거 input 요소를 disabled 속성
+			$("[name=" + box + "]").attr("disabled", false);//제거 input 요소를 disabled 속성
 		}
 
 		this.checked = obj.checked;
@@ -267,7 +215,10 @@ function search_click(){
 			$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
 
 				var subject = gList.gatherSubject;
-				subject = subject.substring(0,11) +' ...';
+				
+				if(subject.length>10){
+					subject = subject.substring(0,11) +' ...';
+				}
 				
 				var write = gList.gatherWrite;
 				write = write.substring(0,16);
@@ -298,7 +249,7 @@ function search_click(){
 									
 				var str = "";
 				str += "<div class='col-xs-4 col-lg-3' id='gather'>";
-				str += "<a data-toggle='modal' href='#GatherModalInfo' data-no='"+gList.gatherNo+
+				str += "<a data-toggle='modal' href='#GatherModalInfo' id='gathmodal' data-no='"+gList.gatherNo+
 				 									"'  data-subject='"+gList.gatherSubject+
 													"'  data-categorytop='"+gList.gatherCategoryTop+
 													"'  data-categorymid='"+gList.gatherCategoryMid+
@@ -338,3 +289,64 @@ function search_click(){
 
 	});
 }
+
+$(window).load(function(){
+
+	/* 쿼리스트링으로 넘어온 체크박스 값 분리하여 적용하여 나타내기 */
+	var _tempUrl = window.location.search.substring(1); //url에서 처음부터 '?'까지 삭제 
+	
+	if(_tempUrl.indexOf('=')>0){
+		var _tempArray;
+				
+		if(_tempUrl.indexOf('&')>0){
+			_tempArray = _tempUrl.split('&'); // '&'을 기준으로 분리하기 
+			
+			for(var i = 0; i<_tempArray.length; i++) { 
+								
+				var _keyValuePair = _tempArray[i].split('='); // '=' 을 기준으로 분리하기
+				
+				if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
+					 // _keyValuePair[1] : 파라미터 값 
+					
+					var box = _keyValuePair[1]; // 쿼리스트링으로 type에 값을 저장해 보내서 box 에 담고
+					var boxNum = box.substring(4); // 숫자만 짤라서 필요한 것을 받음
+					
+					var boxAll  = '.cAll' +boxNum;
+					var boxTag = '.cateChk' +boxNum
+					
+					$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
+					$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
+					
+				}else if(_keyValuePair[0] == 'subject'){
+					$('#search_text').val(decodeURI(_keyValuePair[1]));
+					$('#search_text_btn').trigger("click");
+				}else if(_keyValuePair[0]=='no'){
+					
+					$("[data-no="+_keyValuePair[1]+"][id=gathmodal]").one('onclick', '').click();
+					
+					/*$("[data-no="+_keyValuePair[1]+"]").trigger("click");*/
+				}
+			}
+		}else{
+			_tempArray = _tempUrl;
+			
+			var _keyValuePair = _tempArray.split('=');
+			
+			if(_keyValuePair[0] == 'type'){ // _keyValuePair[0] : 파라미터 명 
+				 // _keyValuePair[1] : 파라미터 값 
+				
+				var box = _keyValuePair[1]; // 쿼리스트링으로 type에 값을 저장해 보내서 box 에 담고
+				var boxNum = box.substring(4); // 숫자만 짤라서 필요한 것을 받음
+				
+				var boxAll  = '.cAll' +boxNum;
+				var boxTag = '.cateChk' +boxNum
+				
+				$(boxTag).trigger("click"); // 위의 태그를 선택하여 보여주는 트리거
+				$(boxAll).trigger("click"); // 위 태그의 전체를 클릭하는 트리거
+				
+			} 
+		}
+		
+		
+	}
+});

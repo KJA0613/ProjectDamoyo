@@ -8,10 +8,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IGatheringDAO;
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
-import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.util.FormatData;
 
@@ -184,6 +184,7 @@ public class GatheringService implements IGatheringService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean updateRecog(int no) {
 		boolean flag = false;
 		flag = gDao.updateRecog(no);
@@ -196,6 +197,23 @@ public class GatheringService implements IGatheringService {
 		flag = gDao.updateRecogYes(gatherNo);
 		return flag;
 	}
+=======
+	public List<AlarmDTO> gatherAlarm() {
+
+		List<AlarmDTO> alist = gDao.getGatherAlarm();
+		
+		return alist;
+	}
+
+	@Override
+	public List<GatherPeopleDTO> getPeoPleAlarm() {
+		
+		List<GatherPeopleDTO> getPeoPleAlarm = gDao.getPeoPleAlarm();
+		
+		return getPeoPleAlarm;
+	}
+
+>>>>>>> 20b5b62f1c8d3d76da5ff88eac900524f46f643a
 
 	@Override
 	public boolean updateRecogNo(int gatherNo) {

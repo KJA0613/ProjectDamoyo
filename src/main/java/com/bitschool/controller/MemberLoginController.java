@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.EmailDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.service.EmailSender;
@@ -42,6 +44,10 @@ public class MemberLoginController {
 	
 	@Inject
 	private IGatheringService gService;
+	
+	@Inject
+	private IGatheringService gatherService;
+	
 	
 	
 	//----------------------------------------------- 로 그 인 -----------------------------------------------//	
@@ -69,12 +75,21 @@ public class MemberLoginController {
 							HttpServletRequest request, RedirectAttributes redirectAttributes) {
 							
 		String url = null;
+		int gatherNo =0;
+		int pgatherNo =0;
+		int totalNo = 0;
+		String pgId = null;
+		
 		//System.out.println(preURL);
 		// 사용자가 로그인 폼에 입력한 데이터 > DB에 있는 데이터인지 여부 확인
 		PersonDTO pdto = memberService.PersonLogin(guserId, guserPw);
 
 		System.out.println("[TEST-로그인(개인)/세션유지] 세션에 저장된 회원 정보 확인: " + pdto);
-
+		
+		List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
+		alarmList = memberService.getAlarm();
+		List<GatherPeopleDTO> gpList = new ArrayList<GatherPeopleDTO>();
+		gpList = gatherService.getPeoPleAlarm();
 		// 로그인 성공 (DB에 해당 데이터 있음)
 		if(pdto != null) {
 			
@@ -98,6 +113,28 @@ public class MemberLoginController {
 			//로그인하고나서 바로 전 페이지로 돌아가기
 			
 			model.addAttribute("pdto",pdto);
+			//로그인세션받으면서 알람유무확인
+		for(int i=0;i<alarmList.size();i++){
+				
+				gatherNo = alarmList.get(i).getAlarmGatherNo();
+								
+			
+				for(int j=0;j<gpList.size();j++){
+					
+					pgatherNo = gpList.get(j).getGatherNo();
+					
+					pgId = gpList.get(j).getGuserId();
+					
+					if(gatherNo==pgatherNo&&pdto.getGuserId().equals(pgId)){
+												
+						model.addAttribute("gatherNo",gatherNo);
+						System.out.println(gatherNo);
+						
+					}
+				}				
+					
+			}
+			
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} 
 		

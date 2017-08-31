@@ -160,7 +160,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="card">
-								<div class="card-header" data-background-color="blue">
+								<div class="card-header" data-background-color="green">
 									<h4 class="title">모임 생성 요청</h4>
 									<p class="category">생성될 수 있는 모임인지..</p>
 								</div>
@@ -252,7 +252,7 @@
 
 						<div class="col-md-6">
 							<div class="card">
-								<div class="card-header" data-background-color="blue">
+								<div class="card-header" data-background-color="red">
 									<h4 class="title">거절된 모임</h4>
 									<p class="category">거절된 모임인지</p>
 								</div>
@@ -293,7 +293,7 @@
 
 						<div class="col-md-12">
 							<div class="card">
-								<div class="card-header" data-background-color="blue">
+								<div class="card-header" data-background-color="purple">
 									<h4 class="title">모집중인 모임</h4>
 									<p class="category">모집중인 모임인지..</p>
 								</div>

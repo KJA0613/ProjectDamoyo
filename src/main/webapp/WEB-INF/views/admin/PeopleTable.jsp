@@ -212,6 +212,8 @@ $(function() {
 											<th width="200px">이메일</th>
 											<th width="200px">가입일</th>
 										</thead>
+										
+										
 
 										<tbody>
 											<tr>
@@ -225,7 +227,31 @@ $(function() {
 												
 											</tr>
 										</tbody>
-
+										
+										<thead class="text-primary-none" style="color: #00bcd4">
+											<th width="40px">모임번호</th>
+											<th width="150px">모임이름</th>											
+											<th width="100px">모임생성날짜</th>						
+											<th width="100px">회원이름</th>
+											<th width="100px">카테고리Top</th>
+											<th width="100px">카테고리Bot</th>
+											<th width="100px">모임지역</th>
+											
+										</thead>
+										<c:forEach var="gather" items="${gather}">
+										<tbody>
+											<tr>
+												<td width="40px">${gather.gatherNo}</td>
+												<td width="150px">${gather.gatherSubject}</td>												
+												<td width="100px">${gather.gatherWrite}</td>
+												<td width="100px">${guserDetail.guserId}</td>
+												<td width="100px">${gather.gatherCategoryTop}</td>
+												<td width="100px">${gather.gatherCategoryBot}</td>
+												<td width="100px">${gather.gatherArea}</td>
+												
+											</tr>
+										</tbody>
+										</c:forEach>
 									</table>
 								</div>
 							</div>

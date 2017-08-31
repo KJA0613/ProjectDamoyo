@@ -56,13 +56,13 @@
 <!-- 빈칸 입력시 알림창 띄우는 스크립트 -->
 <script type="text/javascript">
  function form_check(){ // 11써서 막아놓음
-	 var content = $("#gContent").val();
+	 /* var content = $("#gContent").val();
 	 
-	 if(!content){ /*  !content 이뜻은 스크립트에서 값이 null 일때는 false를 반환하기 때문에 !false == true임 */
+	 if(!content){ // !content 이뜻은 스크립트에서 값이 null 일때는 false를 반환하기 때문에 !false == true임 
 		 alert("생각 좀 하고 빈칸 채우렴.");
 	 }else{
 		 $("#gMake").submit();
-	 }
+	 } */
  }
 </script>
 
@@ -106,7 +106,7 @@ function areachange(item){
     for (i=(temp.options.length-1) ; i>0 ; i--){ /* 전에 설정되있던 옵션을을 초기화 시킴 */
 		temp.options[i] = null; 
     }
-    eval('ccount = areaMid' + item + '.length'); // ccount = areaMid14.length 이게됨, areaMid선택한익덱스.length임
+    eval('ccount = areaMid' + item + '.length'); // ccount = areaMid14.length 이게됨, areaMid선택한익덱스.length임, eval은 동적으로 변수를 만들어주는거임
     //alert('ccount = areaMid' + item + '.length');
    
     for (j=0 ; j<ccount ; j++) {

@@ -159,13 +159,13 @@ a:visited {
 
 
 <!-- 체크박스와 관련된 스크립트를 가지고 있는 js -->
-<script type="text/javascript" src="/resources/script/js/gatherCheckbox.js"></script>
+<script type="text/javascript" src="/resources/script/js/gatherCheckbox.js" charset="utf-8"></script>
 
 <!-- 모달과 관련된 스크립트를 가지고 있는 js -->
-<script type="text/javascript" src="/resources/script/js/gatherModal.js"></script>
+<script type="text/javascript" src="/resources/script/js/gatherModal.js" charset="utf-8"></script>
 
 <!-- 카테고리/지역 정보, 스크립트가 들어있는 js -->
-<script type="text/javascript" src="/resources/script/js/gatherACselectBox.js"></script>
+<script type="text/javascript" src="/resources/script/js/gatherACselectBox.js" charset="utf-8"></script>
 
 
 <%@include file="../header.jsp"%>
@@ -207,7 +207,7 @@ a:visited {
 								<option>카테고리</option>
 							</select> 
 							<input type="text" class="form-control" id="search_text" onkeypress="if(event.keyCode==13) {search_click(); return false;}" value="${sSTR eq '' ? '' : sSTR}">
-							<button type="button" class="btn btn-default" onclick="search_click()">검색</button>
+							<button type="button" id="search_text_btn" class="btn btn-default" onclick="search_click()">검색</button>
 						</div>
 						
 					</form>
@@ -272,7 +272,7 @@ a:visited {
 				<div class="row" id="gatherSelect">
 					<c:forEach var="gath" items="${gath}">
 						<div class="col-xs-4 col-lg-3" id="gather">
-							<a 	data-toggle='modal' href='#GatherModalInfo' 
+							<a 	data-toggle='modal' href='#GatherModalInfo' id='gathmodal'
 								data-no='${gath.gatherNo}'
 								data-subject="${gath.gatherSubject}"
 								data-categorytop='${gath.gatherCategoryTop}'
@@ -620,5 +620,8 @@ a:visited {
 	<script src="/resources/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 	<script src="/resources/examples/offcanvas/offcanvas.js"></script>
+	
+	
+
 </body>
 </html>

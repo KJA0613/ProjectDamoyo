@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>헤더2</title>
 
+
 <!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
 <style type="text/css">
    .navbar-inverse {

@@ -67,10 +67,23 @@
 		select * from usearea where guserId = #{guserId}
 	</select>
 	
-	<!--  -->
+	<!-- [개인회원] 마이페이지 - 2단계 > 카테고리 전체 조회 -->
 	<select id="selectPersonHopeCategory" parameterType="String" resultType="CategoryDTO">
 		select * from usecategory where guserId = #{guserId}
 	</select>
+	
+	<!-- [개인회원] 마이페이지 - 2단계 > 희망지역 수정 -->
+	<update id="updatePersonHopeArea" parameterType="AreaDTO">
+		update usearea set bigarea1 = #{bigarea1}, area = #{area}, bigarea2 = #{bigarea2}, areaP = #{areaP}, bigarea3 = #{bigarea3}, areaPP = #{areaPP} 
+		where guserId = #{guserId}
+	</update>
+	
+	<!-- [개인회원] 마이페이지 - 2단계 > 희망카테고리 수정 -->
+	<update id="updatePersonHopeCategory">
+		update usecategory set catTopOne = #{catTopOne}, catMidOne = #{catMidOne}, catBotOne = #{catBotOne}, catTopTwo = #{catTopTwo}, 
+		catMidTwo = #{catMidTwo}, catBotTwo = #{catBotTwo}, catTopThr = #{catTopThr}, catMidThr = #{catMidThr}, catBotThr = #{catBotThr} 
+		where guserId = #{guserId}
+	</update>
 	
 	<!-- [개인회원] 마이페이지 - 비밀번호 변경 > 아이디값 확인 후, 비밀번호 수정 -->
 	<update id="updatePersonPw" parameterType="PersonDTO">
@@ -157,6 +170,75 @@
 	<select id="getGatherList" resultType="GatheringDTO">
 		select * from gather
 	</select>
-	
 
+	<select id="gatherpacleCnt" resultType="HashMap">
+		select
+		      (select count(*) from gather) as gathercntAll, 
+		      (select count(*) from place) as placecntAll,
+		      (select count(*) from gather where gatherrecognition = 'Wait') as gatherRequest
+		from dual
+	</select>
+	
+	<select id="gatherInfo" resultType="GatheringDTO" parameterType="String">
+		select *
+		from gather
+		where gatherNo in (select gatherNo from gatherPeople where guserId = #{guserId})
+	</select>
+	
+<!-- <<<<<<< HEAD -->
+	<!--  알람인서트(마이페이지-알람)-->
+	<insert id="getAlarmInsert" parameterType="AlarmDTO">
+	<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
+			select alarmSeq.nextval from dual
+		</selectKey>
+		insert into alarm (alarmNo, alarmIndex, alarmId,  alarmDate, alarmRead, alarmGatherNo,alarmGrade)
+		values (#{alarmNo}, #{alarmIndex},#{alarmId}, sysdate, 'no', #{alarmGatherNo},#{alarmGrade}) 
+		
+	</insert>
+	
+	<select id="getAlarm" resultType="AlarmDTO" >
+		select *
+		from alarm		
+	</select>
+
+<!-- ======= -->
+	<select	id="gatherRank" resultType="GatherRankDTO">
+		select *
+		from ( select gathercategorybot as gathertype, count(*) as typecnt, 'category' as typecode
+		       from gather
+		       group by gathercategorybot
+		       order by typecnt desc, gathercategorybot
+		      )
+				<!-- <![CDATA[where rownum <=5]]> -->
+		union all
+		select *
+		from ( select gatherarea as gathertype, count(*) as typecnt, 'area' as typecode
+		       from gather
+		       group by gatherarea
+		       order by typecnt desc, gatherarea
+		      )
+				<!-- <![CDATA[where rownum <=5]]> -->
+		union all
+		select *
+		from ( select gathercategorytop as gathertype, count(*) as typecnt, 'type' as typecode
+		       from gather
+		       group by gathercategorytop
+		       order by typecnt desc, gathercategorytop
+		      )
+		<!-- <![CDATA[where rownum <=5]]> -->
+	</select>
+	
+	<select id="visitWeek" resultType="VisitorWeekDTO">
+		select visitorday, count(*) as dayCount
+		from gathervisitor
+		group by visitorday
+		
+	</select>
+	
+ 	<select id="visitTime" resultType="VisitorTimeDTO">
+ 		select TO_CHAR(visitordate,'HH24') as visitorTime, count(*) as timeCount
+		from gathervisitor
+		group by TO_CHAR(visitordate,'HH24')
+	</select>
+<!-- >>>>>>> 42a568f9d0e815c948c1e1595b23ceb5d9cf9b93 -->
 </mapper>

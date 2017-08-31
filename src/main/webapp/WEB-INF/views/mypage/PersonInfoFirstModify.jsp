@@ -18,13 +18,18 @@
 
 <title>회원가입 저장한 내용 수정</title>
 
-<!-- <script>
-	 $(document).ready(function(){
-		 var link = document.location.href;				//현재접속url
-		 var tab = link.split('/').pop(); 				// 배열의 맨 마지막 요소를 삭제하고 삭제된 해당 값을 반환함
-		 $('a[href$='+tab+']').trigger("click");		//해당 앵커트리거를 이용 클릭 이벤트
-	 });
-</script> -->
+<!-- 경고 메세지 CSS -->
+<style type="text/css">
+.gm {
+	padding-top: 8px;
+	color: #39f;	
+}
+
+.error {
+	padding-top: 8px;
+	color: #e51e1f;
+}
+</style>
 
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
@@ -47,7 +52,7 @@
          	<%@include file = "MyPageSidebar.jsp"%>
          </div>
       
-      	 <!--/// [오른쪽/해당되는 내용]: 12칸 중 "9칸" 크기 확보 ///-->
+      	 <!--/// [오른쪽/리스트에 해당되는 내용]: 12칸 중 "9칸" 크기 확보 ///-->
          <div class="col-md-9">                     
             <!-- 각 탭에 해당되는 내용 -->   
             <div class="tab-content">   
@@ -66,12 +71,12 @@
                   <br>                 
 
                   <!-- [Form] 개인정보 수정할 수 있는 폼 -->
-                  <form action="/mypage/PersonSecondModify" class="form-horizontal" method="post">               
+                  <form action="" class="form-horizontal" method="post" id="data">               
                      <!-- 아이디(비활성화) -->
                      <div class="form-group">
                         <label for="Id" class="col-md-2 control-label">아이디</label>               
                         <div class="col-md-10">
-                           <input type="text" class="form-control" name="guserId" value="${pdto.guserId}" required disabled>
+                           <input type="text" class="form-control" id="guserId" name="guserId" value="${pdto.guserId}" disabled>
                         </div>
                      </div>
                                           
@@ -79,7 +84,9 @@
                      <div class="form-group">
                         <label for="Name" class="col-md-2 control-label">이름</label>
                         <div class="col-md-10">
-                           <input type="text" class="form-control" name="guserName" value="${pdto.guserName}" required>
+                           <input type="text" class="form-control" id="guserName" name="guserName" value="${pdto.guserName}" onblur="checkName()">
+                           <!-- 경고 메세지 -->
+						   <div id="nameMsg" class="error"></div>
                         </div>
                      </div>
                      
@@ -87,7 +94,9 @@
                      <div class="form-group">
                         <label for="Email" class="col-md-2 control-label">이메일</label>
                         <div class="col-md-10">
-                           <input type="email" class="form-control" name="guserEmail" value="${pdto.guserEmail}" required>
+                           <input type="email" class="form-control" id="guserEmail" name="guserEmail" value="${pdto.guserEmail}" onblur="checkEmail()">
+                       	   <!-- 경고 메세지 -->
+						   <div id="emailMsg" class="error"></div>
                         </div>
                      </div>
                      
@@ -95,7 +104,9 @@
                      <div class="form-group">
                         <label for="Phone" class="col-md-2 control-label">휴대폰 번호</label>
                         <div class="col-md-10">
-                           <input type="text" class="form-control" name="guserPhone" value="${pdto.guserPhone}" required>
+                           <input type="text" class="form-control" id="guserPhone" name="guserPhone" value="${pdto.guserPhone}" onblur="checkPhone()">
+                           <!-- 경고 메세지 -->
+						   <div id="mobileMsg" class="error"></div>
                         </div>
                      </div>
                      
@@ -128,7 +139,7 @@
                      <!-- 1단계 수정완료 버튼 -->
                      <div class="clear-fix">
                         <div class="pull-right">
-                           <button type="submit" class="btn btn-primary">1단계 수정완료</button>
+                           <button type="submit" class="btn btn-primary" onclick="personModify1(); return false;">수정완료 및 2단계 수정</button>
                         </div>
                      </div>
                   </form>
@@ -138,13 +149,16 @@
          </div>      
          </div>
       </div>
-      </div>
+   </div>
    
       
    <!-- [Footer] 페이지 하단 (고정화면) -->
    <hr>
    <%@include file = "../footer.jsp"%>
 
+   <!-- [마이페이지(개인정보수정-1단계) JS - 데이터 유효성 검사] -->	
+   <script src="/resources/script/js/joinPersonIntoValidation.js"></script>
+   
    </div>   
    
 </body>

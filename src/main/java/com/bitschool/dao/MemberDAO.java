@@ -1,12 +1,14 @@
 package com.bitschool.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.GatherAddonsDTO;
@@ -98,11 +100,11 @@ public class MemberDAO implements IMemberDAO {
 
 	// [개인회원] 회원가입 - 2단계 > 희망 카테고리 3개 삽입
 	@Override
-	public boolean insertPersonCategory(CategoryDTO cdto) throws SQLException {
+	public boolean insertPersonCategory(CategoryDTO cadto) throws SQLException {
 		boolean flag = false;
 		
 		// 희망 카테고리 3개 DB에 등록
-		int aCnt = session.insert(namespace+".insertPersonCategory", cdto);
+		int aCnt = session.insert(namespace+".insertPersonCategory", cadto);
 		
 		if(aCnt > 0) {
 			flag = true;
@@ -166,6 +168,36 @@ public class MemberDAO implements IMemberDAO {
 	}
 	
 	
+	// [개인회원] 마이페이지 - 2단계 > 희망지역 수정
+	@Override
+	public boolean updatePersonHopeArea(AreaDTO adto) throws SQLException {
+		boolean flag = false;
+		
+		int aCnt = session.update(namespace+".updatePersonHopeArea", adto);
+		
+		if(aCnt > 0) {
+			flag = true;
+		}
+		
+		return flag;
+	}
+	
+	
+	// [개인회원] 마이페이지 - 2단계 > 희망카테고리 수정
+	@Override
+	public boolean updatePersonHopeCategory(CategoryDTO cadto) throws SQLException {
+		boolean flag = false;
+		
+		int aCnt = session.update(namespace+".updatePersonHopeCategory", cadto);
+		
+		if(aCnt > 0) {
+			flag = true;
+		}
+				
+		return flag;
+	}	
+	
+	
 	// [개인회원] 마이페이지 - 비밀번호 변경
 	@Override
 	public boolean updatePersonPw(PersonDTO pdto) {
@@ -197,6 +229,7 @@ public class MemberDAO implements IMemberDAO {
 		return flag;
 	}
 	
+	
 	// [개인회원] 마이페이지 - 관심모임 삭제
 	@Override
 	public boolean deleteAttend(GatherAddonsDTO gadto) {
@@ -209,6 +242,31 @@ public class MemberDAO implements IMemberDAO {
 		}
 		
 		return flag;
+	}
+
+
+	@Override
+	public boolean getAlarmInsert(AlarmDTO alarm) {
+		boolean flag = false;
+		
+		int result = session.insert(namespace+".getAlarmInsert", alarm);
+				
+		System.out.println(alarm);
+		if(result>0){
+			flag = true;
+		}
+		
+		return flag;
+	}
+
+
+	@Override
+	public List<AlarmDTO> getAlarm() {
+
+		List<AlarmDTO> getAlarm = null;
+		getAlarm = session.selectList(namespace+".getAlarm");
+		
+		return getAlarm;
 	}
 
 }

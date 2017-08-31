@@ -53,6 +53,7 @@ function TwoSubmit() {
 	var c3_3 = document.getElementById('catBotThr');
 	var valC3_3 = c3_3.options[c3_3.selectedIndex].value;
 
+	
 	// 희망카테고리 미선택 > 제약조건
 	if (valC1_1 == '' || valC1_2 == '' || valC1_3 == '' || valC2_1 == '' || valC2_2 == '' || valC2_3 == '' || valC3_1 == '' || valC3_2 == '' || valC3_3 == '') {
 		alert('필수 항목입니다. 선택해주세요!!!');
@@ -60,6 +61,7 @@ function TwoSubmit() {
 		return false;
 	}
 
+	
 	// 카테고리 모두 선택 후, 회원가입 완료
 	var url = '/join/PersonDatailRegist';
 

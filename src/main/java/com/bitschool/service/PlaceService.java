@@ -31,7 +31,7 @@ public class PlaceService implements IPlaceService {
 	public boolean PlaceRegist(PlaceDTO pl_dto) {
 		boolean flag = false;
 		
-		pl_dto = mLcation.GetDatum(pl_dto);
+//		pl_dto = mLcation.GetDatum(pl_dto); 우선 이거 안쓰고 PlaceRegistForm에서 스크립트를 추가하여 함
 		System.out.println(pl_dto);
 		
 		try {

@@ -112,7 +112,7 @@ public class MemberJoinController {
 	
 	// 03. [회원가입-2단계] 지역 및 카테고리 등록	
 	@RequestMapping(value = "/PersonDatailRegist", method = { RequestMethod.GET, RequestMethod.POST })
-	public String PersonDatailRegist(PersonDTO pdto, AreaDTO adto, CategoryDTO cdto) {
+	public String PersonDatailRegist(PersonDTO pdto, AreaDTO adto, CategoryDTO cadto) {
 		String url = null;
 		
 		// 현재 회원가입 진행중인 사람의 아이디 > 2단계 진입 > adto에 아이디값 저장
@@ -128,8 +128,8 @@ public class MemberJoinController {
 		boolean flagArea = memberService.PersonAreaRegist(adto);
 		
 		// [Flag_03] 희망 카테고리 삽입 
-		//System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cdto);		
-		boolean flagCtg = memberService.PersonCategoryRegist(cdto);
+		//System.out.println("[TEST-회원가입(2)] 2단계 희망 카테고리: " + cadto);		
+		boolean flagCtg = memberService.PersonCategoryRegist(cadto);
 		
 		// [모두 TRUE] 회원가입 완료 > 메인 페이지
 		if(flagInfo && flagArea && flagCtg) {

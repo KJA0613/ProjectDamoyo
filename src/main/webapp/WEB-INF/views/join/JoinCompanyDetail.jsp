@@ -138,6 +138,7 @@ a {
 	
 				<!-- onblur: 요소가 마우스나 키보드 등의 컨트롤러에 의해 포커스를 잃을 때 발생 -->
 				<form action="" method="post" class="form-horizontal" id="dataSet">
+					
 					<!-- 기업명 -->
 					<div class="form-group">
 						<label for="Name" class="col-md-2 control-label">기업명</label>
@@ -148,7 +149,8 @@ a {
 						</div>
 					</div>
 					
-				
+					
+					<!-- 대표명 -->
 					<div class="form-group">
 						<label for="Id" class="col-md-2 control-label">대표명</label>			
 						<div class="col-md-10">
