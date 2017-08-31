@@ -29,7 +29,7 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="/">
+	                    <a href="/gather/gathering">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>게시판관리</p>
 	                    </a>
@@ -63,13 +63,13 @@
 	                        <i class="material-icons text-gray">notifications</i>
 	                        <p>배너보기</p>
 	                    </a>
-	                </li> -->
+	                </li> 
 					<li class="active-pro">
 	                    <a href="/admin/upgrade">
 	                        <i class="material-icons">unarchive</i>
 	                        <p>Upgrade to PRO</p>
 	                    </a>
-	                </li>
+	                </li> -->
 	            </ul>
 	    	</div>
 	    </div>

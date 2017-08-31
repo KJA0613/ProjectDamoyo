@@ -75,10 +75,7 @@ $(function() {
 				})
 							
 				modal.find('#modal-body-partiname').text(str);
-				
-			
-				
-				
+								
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
@@ -100,7 +97,6 @@ $(function() {
 				$('#gatherComplete').hide(); // 완료 숨기기
 			}
 		}
-		
 		
 		// 최대인원 신청인원 같으면 신청버튼 막기
 		if(parti >= partimax){
