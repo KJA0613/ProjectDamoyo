@@ -29,11 +29,8 @@ public class AdminController {
 	@Inject
 	private IAdminService adminService;
 	
-<<<<<<< HEAD
 	@Inject
 	private IGatheringService gService;
-=======
->>>>>>> 20b5b62f1c8d3d76da5ff88eac900524f46f643a
 		
 	// 01. 관리자대쉬보드(메인)페이지
 	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
