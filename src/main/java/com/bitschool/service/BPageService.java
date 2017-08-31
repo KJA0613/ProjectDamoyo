@@ -17,10 +17,10 @@ public class BPageService{
 	@Inject
 	private BPageDAO dao;
 	
-	public int getTotalBook(){
+	public int getTotalBook(BPageVO vo){
 		int total = 0;
 		try {
-			total = dao.selectCountAll();
+			total = dao.selectCountAll(vo);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,28 +65,26 @@ public class BPageService{
 		return list;
 	}
 	
-	public ArrayList<String> makePageList(int page,int amount){
+	public ArrayList<String> makePageList(int page,int amount, BPageVO vo){
 		ArrayList<String> list = null;
-		int pageCount = (int)Math.ceil(this.getTotalBook()/(double)amount);
+		int pageCount = (int)Math.ceil(this.getTotalBook(vo)/(double)amount);
 		int pageUnit = page/amount;
 		int endPage = (pageUnit*amount)+amount;
 		endPage = endPage<=pageCount?endPage:pageCount;
 		list = new ArrayList<String>();
 		if(pageUnit!=0){
-			list.add(" <a href='/blog/board/listAll?page="+((pageUnit-1)*amount)+"'> prev </a> ");
+			list.add(" <a href='/blog/"+vo.getBoardName()+"/listAll?page="+((pageUnit-1)*amount)+"&blogId="+vo.getBlogId()+"&blogName="+vo.getBlogName()+"'> prev </a> ");
 		}
 		for(int i=pageUnit*amount;i<endPage;i++){
-			list.add(" <a href='/blog/board/listAll?page="+(i)+"'>"+(i+1)+"</a> ");
+			list.add(" <a href='/blog/"+vo.getBoardName()+"/listAll?page="+(i)+"&blogId="+vo.getBlogId()+"&blogName="+vo.getBlogName()+"'>"+(i+1)+"</a> ");
 		}
 		//next
 		if(endPage<pageCount){
-			list.add(" <a href='/blog/board/listAll?page="+(endPage)+"'> next </a> ");
+			list.add(" <a href='/blog/"+vo.getBoardName()+"/listAll?page="+(endPage)+"&blogId="+vo.getBlogId()+"&blogName="+vo.getBlogName()+"'> next </a> ");
 		}
 		return list;
 	}
 	
 }
-
-
 
 

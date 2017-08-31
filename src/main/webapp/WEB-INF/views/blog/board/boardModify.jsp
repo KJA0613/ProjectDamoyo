@@ -61,6 +61,8 @@
 								</div>
 								<input type="hidden" name="postNo" value="${post.postNo}" />
 								<input type="hidden" name="page" value="${page}">
+								<input type="hidden" name="blogId" id="blogId" value="${blogId}">
+								<input type="hidden" name="blogName" id="blogName" value="${blogName}">
 								<div style="width: 600px;">
 									<a href="javascript:history.back()"><button type="button" class="btn btn-default">취소</button></a>
 									<button type="submit" class="btn btn-warning" style="float: right;">저장</button>

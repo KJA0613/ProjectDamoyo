@@ -40,32 +40,41 @@ body {
 	src="/resources/blog/fullcalendar-3.4.0/locale-all.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
+		
+		var blogId = $("#blogId").val();
+/* 		var DATA = {
+			"blogId" : blogId 	
+		}; */
+		var url = "recevieData?blogId=" + blogId;
 		$.ajax({
             type: "POST",
             contentType: "application/json",
             data: "{}",
-            url: "recevieData",
+            url: url,
             dataType: "json",
             success: function(data) {
-		jQuery("#calendar").fullCalendar({
-			editable : false,
-			eventLimit : true,
-			dayClick : function(date) {
-				var openWin;
-				var fDate = date.format();
-			    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1300, top=130, width=440, height=600';
-			    window.open("viewRegistSchedule?fDate="+fDate, "childForm", popupOption);
-			},
-			eventClick: function(event) { 
-			    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1300, top=130, width=440, height=600';
-			    window.open("viewDetailSchedule?sid="+event.id, "childForm", popupOption);
-				//event.backgroundColor = 'yellow';
-				//$('#mycalendar').fullCalendar('rerenderEvents');
-			},
-
-			events : data
-		});
-            }
+            
+				jQuery("#calendar").fullCalendar({
+					editable : false,
+					eventLimit : true,
+					
+					dayClick : function(date) {
+						var openWin;
+						var fDate = date.format();
+					    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1300, top=130, width=440, height=600';
+					    window.open("viewRegistSchedule?fDate="+fDate+"&blogId="+blogId, "childForm", popupOption);
+					},
+					
+					eventClick: function(event) { 
+					    var popupOption = 'directories=no, toolbar=no, location=no, menubar=no, status=no, scrollbars=no, resizable=no, left=1300, top=130, width=440, height=600';
+					    window.open("viewDetailSchedule?sid="+event.id+"&blogId="+blogId, "childForm", popupOption);
+						//event.backgroundColor = 'yellow';
+						//$('#mycalendar').fullCalendar('rerenderEvents');
+					},
+			
+					events : data
+				});
+        	}
 		});
 	});
 </script>
@@ -84,6 +93,6 @@ body {
 <!--  		<button class="btn btn-success" onclick="reLoad()" style="float: right; margin-top: 20px; height: 30px;">전달</button>
 		<button class="btn btn-danger" onclick="" style="float: right; margin-top: 20px; height: 30px;">일정 삭제</button> -->
 	</div>
-
+	<input type="hidden" value="${blogId}" id="blogId">
 </body>
 </html>

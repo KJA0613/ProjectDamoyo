@@ -46,5 +46,12 @@ public interface IGatheringDAO {
 	public boolean insertGatherPeople(HashMap<String, Object> map);
 
 	public List<GatherPeopleDTO> getGatherApply(int gatherNo);
-	
+
+	public boolean updateRecog(int no);
+
+	public boolean updateRecogYes(int gatherNo);
+
+	public boolean updateRecogNo(int gatherNo);
+
+	public boolean updateBlogId(int gatherNo);
 }

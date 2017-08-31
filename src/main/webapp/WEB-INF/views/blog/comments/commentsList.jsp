@@ -29,6 +29,10 @@
 		<%@ include file="../includeSub.jspf"%>
 	</div>
 	
+	<%
+		int num = (int)request.getAttribute("num");
+	%>
+	
 	<div id=table_section style="margin-left: 280px; padding-top: 30px;" >
 		<!-- Page Content -->
 
@@ -38,7 +42,7 @@
 				<td colspan="3" style="border-style: hidden;">
 				<c:choose>
 				<c:when test = "${null ne pdto.guserId}">
-					<button class="btn btn-primary" onclick="location.href='/blog/comments/viewRegist'" style="float: right;">새 글 쓰기</button>
+					<button class="btn btn-primary" onclick="location.href='/blog/comments/viewRegist?blogId=${blogId}&blogName=${blogName}'" style="float: right;">새 글 쓰기</button>
 				</c:when>
 				</c:choose>
 				</td>
@@ -46,7 +50,7 @@
 			<tr>
 				<td colspan="5">
 					<div class="category-filter-wrapper" style="width: 300px; float: right;">
-						<form action="/blog/comments/search" method="post">
+						<form action="/blog/comments/search?blogId=${blogId}&blogName=${blogName}" method="post">
 							<div class="input-group input-group-sm">
 								<input type="search" name="query" class="form-control" placeholder="검색어" value=""/> <span class="input-group-btn">
 									<button type="submit" class="btn btn-default">
@@ -67,8 +71,9 @@
 			</tr>
 			<c:forEach var="post" items="${list}">
 				<tr>
-					<td style="text-align: center">${post.postNo}</td>
-					<td><a href="/blog/comments/read?postNo=${post.postNo}&page=${page}">${post.postTitle}</a></td>
+					<%-- <td style="text-align: center;"><%=num</td> --%>
+					<td style="text-align: center;">${post.postNo}</td>
+					<td><a href="/blog/comments/read?postNo=${post.postNo}&page=${page}&blogId=${blogId}&blogName=${blogName}">${post.postTitle}</a></td>
 					<td style="text-align: center">${post.userId}</td>
 					<td style="text-align: center"><fmt:formatDate
 							value="${post.postDate}" pattern="YYYY-MM-dd" /></td>

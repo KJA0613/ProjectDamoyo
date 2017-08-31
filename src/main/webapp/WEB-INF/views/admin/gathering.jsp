@@ -57,6 +57,43 @@
 		}
 	});
 </script>
+<script type="text/javascript">
+	function gatherYes(gatherNo) {
+		var no = gatherNo;
+		var info = {"no" : no};
+		$.ajax({
+			url : '/admin/gatherYes',
+			dataType : 'json',
+			typoe : 'POST',
+			cache : false,
+			data : info,
+			success : function(data){
+				alert('승인 완료되었습니다');
+			},
+			error : function(request, status, error){
+				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+			}
+		});
+	}
+	
+	function gatherNo(gatherNo) {
+		var no = gatherNo;
+		var info = {"no" : no};
+		$.ajax({
+			url : '/admin/gatherNo',
+			dataType : 'json',
+			typoe : 'POST',
+			cache : false,
+			data : info,
+			success : function(data){
+				alert('승인 거절되었습니다');
+			},
+			error : function(request, status, error){
+				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+			}
+		});
+	}
+</script>
 
 
 </head>
@@ -155,7 +192,14 @@
 													<c:if test="${waitdto.gatherBlog eq 'No'}">X</c:if>
 													</td>
 												
-												<td><input type="button" id="yesBtn" value="승인"><input type="button" id="noBtn" value="거절"></td>
+												<td>
+													<form action="" id="recogData">
+														<button type="submit" onclick='gatherYes(${waitdto.gatherNo})'>승인</button>
+														<button type="submit" onclick='gatherNo(${waitdto.gatherNo})'>거절</button>
+														<!-- <input type="button" id="yesBtn" value="승인"> -->
+														<!-- <input type="button" id="noBtn" value="거절"> -->
+													</form>
+												</td>
 											</tr>
 										</a>
 										</c:forEach>

@@ -9,7 +9,15 @@ public class BReplyDTO {
 	private int postNo;
 	private String replyUserId;
 	private String boardName;
+	private int blogId;
 	
+	
+	public int getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
+	}
 	public String getBoardName() {
 		return boardName;
 	}
@@ -46,12 +54,14 @@ public class BReplyDTO {
 	public void setPostNo(int postNo) {
 		this.postNo = postNo;
 	}
-	
 	@Override
 	public String toString() {
 		return "BReplyDTO [replyNo=" + replyNo + ", replyContents=" + replyContents + ", replyDate=" + replyDate
-				+ ", postNo=" + postNo + ", replyUserId=" + replyUserId + ", boardName=" + boardName + "]";
+				+ ", postNo=" + postNo + ", replyUserId=" + replyUserId + ", boardName=" + boardName + ", blogId="
+				+ blogId + "]";
 	}
+	
+	
 }
 
 

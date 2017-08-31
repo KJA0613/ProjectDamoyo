@@ -10,13 +10,13 @@
 	<select id="selectRange" resultType="BPostDTO" parameterType="BPageVO">
 		select * from
 			(select rownum as num, temp.* from
-			(select * from post order by postNo desc) temp)
-		where num between #{start} and #{end} and boardname = #{boardName}
+			(select * from post where boardname = #{boardName} and blogId = #{blogId} order by postNo desc) temp)
+		where num between #{start} and #{end}
 	</select>
 
 	<insert id="insert" parameterType="BPostDTO">
 			<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
-				<if test="boardName == 'free'">
+				<if test="boardName == 'board'">
 					select postNo.nextval from dual
 				</if>
 				<if test="boardName == 'notice'">
@@ -29,8 +29,8 @@
 					select commentsNo.nextval from dual
 				</if>
 			</selectKey>
-		insert into post(postNo,postTitle,postContents,userId,boardName) values
-		(#{postNo},#{postTitle},#{postContents},#{userId},#{boardName})
+		insert into post(postNo,postTitle,postContents,userId,boardName,blogId) values
+		(#{postNo},#{postTitle},#{postContents},#{userId},#{boardName},#{blogId})
 	</insert>
 	
 	<update id="updateCnt" parameterType="BPostNoInfoDTO">

@@ -6,7 +6,14 @@ public class BScheduleDTO {
 	private String startDate;
 	private String endDate;
 	private String detailedContents;
+	private String blogId;
 	
+	public String getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(String blogId) {
+		this.blogId = blogId;
+	}
 	public int getSid() {
 		return sid;
 	}

@@ -6,7 +6,14 @@ public class BScheduleFormatDTO {
 	private String start;
 	private String end;
 	transient private String detailedContents;
+	private int blogId;
 	
+	public int getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
+	}
 	public String getDetailedContents() {
 		return detailedContents;
 	}

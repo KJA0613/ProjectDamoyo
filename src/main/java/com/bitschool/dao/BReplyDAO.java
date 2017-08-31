@@ -22,6 +22,7 @@ public class BReplyDAO {
 		int postNo = reply.getPostNo();
 		infoDTO.setPostNo(postNo);
 		infoDTO.setBoardName(reply.getBoardName());
+		infoDTO.setBlogId(reply.getBlogId());
 		int aCnt = session.update(namespace+".updateReplyCount", infoDTO);
 		if(aCnt > 0) {
 			aCnt = session.insert(namespace+".insertReply", reply);
@@ -40,7 +41,6 @@ public class BReplyDAO {
 
 	public boolean deleteReply(BReplyDTO reply) {
 		boolean flag = false;
-		System.out.println(reply);
 		int aCnt = session.delete(namespace+".deleteReply", reply);
 		if(aCnt > 0) {
 			flag = true;

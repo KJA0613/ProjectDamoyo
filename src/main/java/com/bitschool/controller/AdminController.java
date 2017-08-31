@@ -13,11 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.service.IAdminService;
+import com.bitschool.service.IGatheringService;
 
 @Controller
 @RequestMapping("/admin")
@@ -25,6 +27,9 @@ public class AdminController {
 	//----------------------------------------------- 설 정 -----------------------------------------------//
 	@Inject
 	private IAdminService adminService;
+	
+	@Inject
+	private IGatheringService gService;
 		
 		// 01. 관리자대쉬보드(메인)페이지
 		@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
@@ -109,7 +114,7 @@ public class AdminController {
 				
 				String recog = gdto.get(i).getGatherRecognition();
 				
-				System.out.println(gdto.get(i));
+				//System.out.println(gdto.get(i));
 				
 				if(recog.equals("Wait")){
 					waitdto.add(gdto.get(i));
@@ -175,5 +180,38 @@ public class AdminController {
 			
 			return url;
 		}
+		
+		@RequestMapping(value = "/gatherYes", method = {RequestMethod.POST,RequestMethod.GET})
+		public @ResponseBody HashMap<String, String> gatherYes(@RequestParam(value="no", defaultValue="") int gatherNo){
+			boolean flag = false;
+			GatheringDTO dto = gService.getGathering(gatherNo);
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("result", "no");
+			flag = gService.updateRecogYes(gatherNo);
+			if(dto.getGatherBlog().equals("Yes")) {
+				flag = gService.assignBlogId(gatherNo);
+			} else {
+				// 블로그 생성 필요 없음
+			}
+			if(flag) {
+				map.put("result", "yes");
+			}
+			
+			return map;
+		}
+		
+		@RequestMapping(value = "/gatherNo", method = {RequestMethod.POST,RequestMethod.GET})
+		public @ResponseBody HashMap<String, String> gatherNo(@RequestParam(value="no", defaultValue="") int gatherNo){
+			boolean flag = false;
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("result", "no");
+			flag = gService.updateRecogNo(gatherNo);
+			if(flag) {
+				map.put("result", "yes");
+			}
+			
+			return map;
+		}
+		
 	
 	}

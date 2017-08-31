@@ -33,9 +33,9 @@ public class BScheduleDAO {
 		return flag;
 	}
 
-	public List<BScheduleDTO> selectScheduleAll() {
+	public List<BScheduleDTO> selectScheduleAll(int blogId) {
 		List<BScheduleDTO> list = null;
-		list = session.selectList(namespace+".selectScheduleAll");
+		list = session.selectList(namespace+".selectScheduleAll", blogId);
 		return list;
 	}
 

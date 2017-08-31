@@ -12,7 +12,21 @@ public class BPostDTO {
 	private int postRecommend;
 	private int replyCounts;
 	private String boardName;
+	private int blogId;
+	private String filePath;
 	
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public int getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
+	}
 	public int getReplyCounts() {
 		return replyCounts;
 	}
@@ -71,8 +85,8 @@ public class BPostDTO {
 	
 	@Override
 	public String toString() {
-		return "PostDTO [postTitle=" + postTitle + ", postContents=" + postContents + ", userId=" + userId + "]";
+		return "BPostDTO [postTitle=" + postTitle + ", postContents=" + postContents + ", userId=" + userId
+				+ ", filePath=" + filePath + "]";
 	}
-	
 	
 }

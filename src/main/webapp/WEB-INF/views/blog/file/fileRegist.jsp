@@ -42,7 +42,7 @@
 		<!-- Page Content -->
 		<div class="container" style="margin-left: 20px;">
 			<h4 style="margin-top: 50px; margin-left: 50px;">자료실 글쓰기</h4>
-			<form action="/blog/file/fileRegist" method="POST" style="width:600px; margin-top: 20px;">
+			<form action="/blog/file/fileRegist?blogId=${blogId}&blogName=${blogName}" enctype="multipart/form-data" method="POST" style="width:600px; margin-top: 20px;">
 				<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; padding-top: 100px">
 						<tr>
 							<td height="80px;" style="border: solid 1px #ccc; border-right-style: none;">
@@ -58,7 +58,10 @@
 								</div>
 								<div class="form-group">
 									<textarea class="form-control" rows="20" placeholder="contents" name="postContents" ></textarea>
-								</div>							
+								</div>
+								<div class="form-group">
+									<input type='file' id="filePath" class="form-control" name="filePath"/>
+								</div>			
 							</td>
 						</tr>
 				</table>

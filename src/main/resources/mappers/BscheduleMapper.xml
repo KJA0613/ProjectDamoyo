@@ -7,11 +7,11 @@
 		<selectKey keyProperty="sid" resultType="int" order="BEFORE">
 			select scheduleNo.nextval from dual
 		</selectKey>
-		insert into schedule(sid,markedContents,startDate,endDate,detailedContents) values(#{sid},#{markedContents},#{startDate},#{endDate},#{detailedContents})
+		insert into schedule(sid,markedContents,startDate,endDate,detailedContents,blogId) values(#{sid},#{markedContents},#{startDate},#{endDate},#{detailedContents},#{blogId})
 	</insert>
 	
-	<select id="selectScheduleAll" resultType="BScheduleDTO">
-		select * from schedule
+	<select id="selectScheduleAll" resultType="BScheduleDTO" parameterType="int">
+		select * from schedule where blogId = #{blogId}
 	</select>
 	
 	<select id="selectScheduleOne" parameterType="Integer" resultType="BScheduleDTO">
@@ -19,7 +19,7 @@
 	</select>
 	
 	<update id="updateSchedule" parameterType="BScheduleDTO">
-		update schedule set markedContents = #{markedContents}, startDate = #{startDate}, endDate = #{endDate}, detailedContents = #{detailedContents} where sid = #{sid}
+		update schedule set markedContents = #{markedContents}, startDate = #{startDate}, endDate = #{endDate}, detailedContents = #{detailedContents} where sid = #{sid} and blogId = #{blogId}
 	</update>
 	
 	<delete id="deleteSchedule" parameterType="Integer">

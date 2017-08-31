@@ -108,6 +108,7 @@
 					<textarea class="form-control" rows="7" id="detailedContents" name="detailedContents" readonly="readonly">${schedule.detailedContents}</textarea>
 				</div>
 				<input type="hidden" name="sid" value="${sid}">
+				<input type="hidden" name="blogId" value="${blogId}">				
 			</form>
 			<div id="firstArea">
 				<button class="btn btn-warning" onclick="closeWindow()">취소</button>

@@ -82,7 +82,7 @@
 	<div class="container" style="margin-left: 300px;">
 		<c:choose>
 			<c:when test = "${null ne pdto.guserId}">
-				<button class="btn btn-primary" onclick="location.href='viewUploadPhoto'" style="float: right; margin-top: 50px;">이미지 업로드</button>
+				<button class="btn btn-primary" onclick="location.href='viewUploadPhoto?blogId=${blogId}&blogName=${blogName}'" style="float: right; margin-top: 50px;">이미지 업로드</button>
 			</c:when>
 		</c:choose>
 		<h4 style="margin-top: 50px;">사진첩</h4>
@@ -113,7 +113,7 @@
 							<h6 id="modal-contents" style="float: left;"></h6> <br><br>
 						</div>
 						<div class="modal-footer">
-							<form action="/blog/photo/removePhoto" method="post" id="dataset">
+							<form action="/blog/photo/removePhoto?blogId=${blogId}&blogName=${blogName}" method="post" id="dataset">
 								<input type="hidden" id=remove_no name="imgNo">
 								<button type="button" class="btn btn-success" data-dismiss="modal">목록으로</button>
 								<button class="btn btn-warning" type="button" style="float: left;" onclick="go_modify()" disabled="disabled">수정</button>

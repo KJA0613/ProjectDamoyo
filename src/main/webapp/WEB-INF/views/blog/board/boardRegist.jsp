@@ -42,7 +42,7 @@
 		<!-- Page Content -->
 		<div class="container" style="margin-left: 20px;">
 			<h4 style="margin-top: 50px; margin-left: 50px;">자유게시판 글쓰기</h4>
-			<form action="/blog/board/boardRegist" method="POST" style="width:600px; margin-top: 20px;">
+			<form action="/blog/board/boardRegist?blogId=${blogId}&blogName=${blogName}" method="POST" style="width:600px; margin-top: 20px;">
 				<table class="table" style="width: 700px; margin-left: 50px; border: solid 1px #ccc; padding-top: 100px">
 						<tr>
 							<td height="80px;" style="border: solid 1px #ccc; border-right-style: none;">
