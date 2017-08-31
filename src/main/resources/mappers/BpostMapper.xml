@@ -56,4 +56,12 @@
 		 where num between #{vo.start} and #{vo.end} and boardName = #{boardName}
 		 order by num desc
 	</select>
+	
+	<insert id="insertFile" parameterType="BPostDTO">
+			<selectKey keyProperty="postNo" resultType="int" order="BEFORE">
+				select fileNo.nextval from dual
+			</selectKey>
+		insert into post(postNo,postTitle,postContents,userId,boardName,blogId) values
+		(#{postNo},#{postTitle},#{postContents},#{userId},#{boardName},#{blogId})
+	</insert>
 </mapper>

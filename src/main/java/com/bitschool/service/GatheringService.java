@@ -212,8 +212,6 @@ public class GatheringService implements IGatheringService {
 		return getPeoPleAlarm;
 	}
 
-
-
 	@Override
 	public boolean updateRecogNo(int gatherNo) {
 		boolean flag = false;

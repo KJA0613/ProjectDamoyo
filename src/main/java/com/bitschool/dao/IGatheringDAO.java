@@ -59,5 +59,4 @@ public interface IGatheringDAO {
 	public List<AlarmDTO> getGatherAlarm();
 
 	public List<GatherPeopleDTO> getPeoPleAlarm();
-	
 }

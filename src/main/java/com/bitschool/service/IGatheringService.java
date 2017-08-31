@@ -58,5 +58,4 @@ public interface IGatheringService {
 	public List<AlarmDTO> gatherAlarm();
 
 	public List<GatherPeopleDTO> getPeoPleAlarm();
-
 }

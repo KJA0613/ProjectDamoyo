@@ -37,7 +37,7 @@ import com.bitschool.service.IMemberService;
 @RequestMapping("/gather")
 @Controller
 public class GatheringController {
-	//21
+
 	@Inject
 	private IGatheringService gService;
 	
@@ -709,7 +709,6 @@ public class GatheringController {
 			
 		return map;
 	}
-	
 	
 	@RequestMapping(value = "/recogUpdate",  method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody HashMap<String, String> recogUpdate(@RequestParam(value = "no", defaultValue="") int no) {
