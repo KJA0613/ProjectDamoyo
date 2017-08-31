@@ -37,17 +37,13 @@ import com.bitschool.service.IMemberService;
 @RequestMapping("/gather")
 @Controller
 public class GatheringController {
-	//21
+
 	@Inject
 	private IGatheringService gService;
 	
-/*<<<<<<< HEAD*/
 	@Inject
 	private IMemberService memberService;	
 
-/*=======
-	
->>>>>>> 42a568f9d0e815c948c1e1595b23ceb5d9cf9b93*/
 	// gathering.jsp 의 정보를 뿌리는 메서드
 	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gathering(
@@ -716,7 +712,7 @@ public class GatheringController {
 		return map;
 	}
 	
-<<<<<<< HEAD
+
 	@RequestMapping(value = "/recogUpdate",  method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody HashMap<String, String> recogUpdate(@RequestParam(value = "no", defaultValue="") int no) {
 		
@@ -736,8 +732,4 @@ public class GatheringController {
 		return map;
 		
 	}
-=======
-
-	
->>>>>>> 20b5b62f1c8d3d76da5ff88eac900524f46f643a
 }

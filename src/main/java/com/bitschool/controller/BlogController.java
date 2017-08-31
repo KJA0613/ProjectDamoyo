@@ -440,7 +440,7 @@ public class BlogController {
 		System.out.println(flag);
 		System.out.println(fileDTO);
 		if(!flag){
-			//flag =  gService.uploadImage(gallery);						여기 수정
+			flag =  service.uploadfile(fileDTO);
 		}
 		if(flag){
 			url = "redirect:/blog/photo/viewPhoto";

@@ -268,7 +268,7 @@ public class GatheringDAO implements IGatheringDAO {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public boolean updateRecog(int no) {
 		boolean flag = false;
 		int aCnt = session.update(namespace+".updateRecog", no);
@@ -306,7 +306,8 @@ public class GatheringDAO implements IGatheringDAO {
 			flag = true;
 		}
 		return flag;
-=======
+	}
+	
 	public List<AlarmDTO> getGatherAlarm() {
 		
 		List<AlarmDTO>alist = null;
@@ -324,6 +325,5 @@ public class GatheringDAO implements IGatheringDAO {
 		getPeoPleAlarm = session.selectList(namespace+".getPeoPleAlarm");
 		
 		return getPeoPleAlarm;
->>>>>>> 20b5b62f1c8d3d76da5ff88eac900524f46f643a
 	}
 }
