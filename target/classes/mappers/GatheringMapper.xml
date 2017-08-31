@@ -269,4 +269,9 @@
                           where a.gatherno = b.gatherno) 
 		where 	gatherno =(select gatherno from (select * from gather where guserId = #{guserId} order by gatherNo desc) where rownum =1)
 	</update>
+	
+	<select id="getPeoPleAlarm" resultType="GatherPeopleDTO">
+		select * from gatherpeople where gatherpeoplegrade = '리더'
+	</select>
+	
 </mapper>

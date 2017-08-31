@@ -4,6 +4,7 @@ package com.bitschool.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
@@ -45,5 +46,9 @@ public interface IGatheringService {
 	boolean GatheringPeopleInsert(HashMap<String, Object> map);
 
 	public List<GatherPeopleDTO> getGatherApply(int gatherNo);
+
+	public List<AlarmDTO> gatherAlarm();
+
+	public List<GatherPeopleDTO> getPeoPleAlarm();
 
 }

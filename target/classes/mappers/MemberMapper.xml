@@ -177,5 +177,19 @@
 		where gatherNo in (select gatherNo from gatherPeople where guserId = #{guserId})
 	</select>
 	
+	<!--  알람인서트(마이페이지-알람)-->
+	<insert id="getAlarmInsert" parameterType="AlarmDTO">
+	<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
+			select alarmSeq.nextval from dual
+		</selectKey>
+		insert into alarm (alarmNo, alarmIndex, alarmId,  alarmDate, alarmRead, alarmGatherNo,alarmGrade)
+		values (#{alarmNo}, #{alarmIndex},#{alarmId}, sysdate, 'no', #{alarmGatherNo},#{alarmGrade}) 
+		
+	</insert>
+	
+	<select id="getAlarm" resultType="AlarmDTO" >
+		select *
+		from alarm		
+	</select>
 
 </mapper>

@@ -8,10 +8,10 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IGatheringDAO;
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
-import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.util.FormatData;
 
@@ -181,6 +181,22 @@ public class GatheringService implements IGatheringService {
 		List<GatherPeopleDTO> gpdto = gDao.getGatherApply(gatherNo);
 		
 		return gpdto;
+	}
+
+	@Override
+	public List<AlarmDTO> gatherAlarm() {
+
+		List<AlarmDTO> alist = gDao.getGatherAlarm();
+		
+		return alist;
+	}
+
+	@Override
+	public List<GatherPeopleDTO> getPeoPleAlarm() {
+		
+		List<GatherPeopleDTO> getPeoPleAlarm = gDao.getPeoPleAlarm();
+		
+		return getPeoPleAlarm;
 	}
 
 

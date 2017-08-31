@@ -1,12 +1,14 @@
 package com.bitschool.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.GatherAddonsDTO;
@@ -240,6 +242,31 @@ public class MemberDAO implements IMemberDAO {
 		}
 		
 		return flag;
+	}
+
+
+	@Override
+	public boolean getAlarmInsert(AlarmDTO alarm) {
+		boolean flag = false;
+		
+		int result = session.insert(namespace+".getAlarmInsert", alarm);
+				
+		System.out.println(alarm);
+		if(result>0){
+			flag = true;
+		}
+		
+		return flag;
+	}
+
+
+	@Override
+	public List<AlarmDTO> getAlarm() {
+
+		List<AlarmDTO> getAlarm = null;
+		getAlarm = session.selectList(namespace+".getAlarm");
+		
+		return getAlarm;
 	}
 
 }

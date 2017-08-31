@@ -39,6 +39,8 @@
 				<!-- 5. 내가 올린 자료 -->
 				<li id="link_myUploadFile"><a href="/mypage/MyPageUploadFile">내가
 						올린 자료</a></li>
+						<!-- 6. 알림 메시지 -->
+				<li id="link_myAlarm"><a href="/mypage/MyPageAlarm">나의 알림 메시지 </a></li>
 			</ul>
 		</c:when>
 
@@ -61,6 +63,10 @@
 				<!-- 5. 내가 올린 자료 -->
 				<li id="link_myUploadFile"><a href="/mypage/MyPageUploadFile">내가
 						올린 자료</a></li>
+				<!-- 6. 알림 메시지 -->
+				<li id="link_myAlarm"><a href="/mypage/MyPageAlarm">나의 알림 메시지 </a></li>
+						
+						
 			</ul>
 		</c:otherwise>
 	</c:choose>

@@ -1,5 +1,6 @@
 package com.bitschool.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.PlaceDTO;
@@ -45,6 +48,9 @@ public class PersonMypageController {
 	
 	@Inject
 	private IPlaceService PlaceService;
+	
+	@Inject
+	private IGatheringService gService;
 	
 	
 	// --------------------------------------- [개인회원] 마 이 페 이 지  ---------------------------------------//
@@ -467,6 +473,88 @@ public class PersonMypageController {
 	public String MyPageUploadFile() {
 		String url = "mypage/MyPageUploadFile";
 			
+		return url;
+	}
+	
+	//06.[개인회원] 마이페이지 - 나의 알림 메시지
+	@RequestMapping(value="/MyPageAlarm",method=RequestMethod.GET)
+	public String MyPageAlarm(HttpSession session,
+			Model model){
+		
+		String url ="default";	
+		int gatherNo =0;
+		int pgatherNo =0;
+		int totalNo = 0;
+		String pgId = null;
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
+		
+		List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
+		
+		List<GatherPeopleDTO> gpList = new ArrayList<GatherPeopleDTO>();
+		
+		// 알람테이블 모든거
+		alarmList = memberService.getAlarm();
+		
+		// 피플테이블 모든거
+		gpList = gatherService.getPeoPleAlarm();
+		
+		//String AlarmPerson 
+		
+		
+		// 이거는 클라이언트로 값을 넘기는 리스트
+		List<AlarmDTO> aList= new ArrayList<AlarmDTO>();
+		
+		if(pdto!=null){
+			model.addAttribute("pdto", pdto);
+			
+			for(int i=0;i<alarmList.size();i++){
+				
+				//gatherNo 알람테이블에 있는 모임 번호(글번호)
+				gatherNo = alarmList.get(i).getAlarmGatherNo();
+								
+			
+				for(int j=0;j<gpList.size();j++){
+					
+					//pgatherNo 게더테이블에 있는 급이 리더!!인사람들의 모임 번호(글번호)
+					pgatherNo = gpList.get(j).getGatherNo();
+					//게더테이블에서 있는 급이 리더!!인사람들의 아이디
+					pgId = gpList.get(j).getGuserId();
+					
+					//알람(신청요청이있는)글번호랑 리더인사람의 글번호가같닝? 로그인한애 아이디랑 그글번호의리더랑아이디가같니?
+					if(gatherNo==pgatherNo&&pdto.getGuserId().equals(pgId)){
+						totalNo = gatherNo;
+						
+						    AlarmDTO Alarm = new AlarmDTO();
+							
+						    
+							Alarm.setAlarmGatherNo(alarmList.get(i).getAlarmGatherNo());
+							Alarm.setAlarmDate(alarmList.get(i).getAlarmDate().substring(0,11));
+							Alarm.setAlarmGrade(alarmList.get(i).getAlarmGrade());
+							Alarm.setAlarmId(alarmList.get(i).getAlarmId());
+							Alarm.setAlarmIndex(alarmList.get(i).getAlarmIndex());
+							Alarm.setAlarmRead(alarmList.get(i).getAlarmRead());
+							Alarm.setAlarmNo(alarmList.get(i).getAlarmNo());
+							
+							
+							aList.add(Alarm);
+							
+						
+						url="mypage/MyPageAlarm";
+						System.out.println(Alarm);
+						System.out.println("글번호"+alarmList.get(i).getAlarmGatherNo());
+					
+					}
+					else {
+						url="mypage/MyPageAlarm";
+					}
+				}				
+					
+			}
+			System.out.println("모델위 aLIst : "+aList);
+			model.addAttribute("Alarm", aList);
+			
+		}
 		return url;
 	}
 	

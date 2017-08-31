@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
@@ -264,5 +265,25 @@ public class GatheringDAO implements IGatheringDAO {
 		gpdto = session.selectList(namespace+".gatherPeople", gatherNo);	
 		
 		return gpdto;
+	}
+
+	@Override
+	public List<AlarmDTO> getGatherAlarm() {
+		
+		List<AlarmDTO>alist = null;
+		
+		alist = session.selectList(namespace+".gatherAlarm");
+		
+		return alist;
+	}
+
+	@Override
+	public List<GatherPeopleDTO> getPeoPleAlarm() {
+
+		List<GatherPeopleDTO> getPeoPleAlarm = null;
+		
+		getPeoPleAlarm = session.selectList(namespace+".getPeoPleAlarm");
+		
+		return getPeoPleAlarm;
 	}
 }

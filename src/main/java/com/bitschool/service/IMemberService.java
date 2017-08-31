@@ -1,5 +1,8 @@
 package com.bitschool.service;
 
+import java.util.List;
+
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.CompanyDTO;
@@ -83,5 +86,9 @@ public interface IMemberService {
 
 	// 회원가입 - 데이터 유효성 검사 > 아이디 중복 체크
 	public String checkDuplicateCompanyId(String comId);
+
+	public boolean getInsert(AlarmDTO alarm);
+
+	public List<AlarmDTO> getAlarm();
 	
 }

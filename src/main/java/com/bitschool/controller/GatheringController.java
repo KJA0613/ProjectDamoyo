@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatherPeopleDTO;
@@ -31,6 +32,7 @@ import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.service.IGatheringService;
+import com.bitschool.service.IMemberService;
 
 @RequestMapping("/gather")
 @Controller
@@ -38,7 +40,9 @@ public class GatheringController {
 	//21
 	@Inject
 	private IGatheringService gService;
-		
+	
+	@Inject
+	private IMemberService memberService;	
 
 	// gathering.jsp 의 정보를 뿌리는 메서드
 	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
@@ -662,7 +666,8 @@ public class GatheringController {
 		System.out.println("people ajax들옴");
 		
 		boolean flag = false;
-				
+		
+		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		System.out.println(pdto);
 		System.out.println(no);
@@ -679,7 +684,34 @@ public class GatheringController {
 			map.put("result", "yes");
 		}
 		
+		/*	여기서부터 알람	*/
+		// pdto로 guserid
+		// no로 글 전체 가져와서 제목, no  
+				
+		// alaramDTO에 넣어서 insert
+		boolean flagAlarm = false;
 		
+		
+		AlarmDTO alarm = new AlarmDTO();
+		
+		String guserId = pdto.getGuserId();
+		
+		int gatherNo = no;
+		String message = "번 내 모임글에 새로운 신청이 있습니다";
+		int gradeNum = 1;
+		alarm.setAlarmId(guserId);
+		alarm.setAlarmGatherNo(gatherNo);
+		alarm.setAlarmIndex(message);
+		alarm.setAlarmGrade(gradeNum);
+		
+		System.out.println("컨트롤러  : "+alarm);
+		
+		flagAlarm = memberService.getInsert(alarm);
+		
+			
 		return map;
 	}
+	
+
+	
 }

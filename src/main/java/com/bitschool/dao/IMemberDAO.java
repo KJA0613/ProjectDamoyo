@@ -1,7 +1,9 @@
 package com.bitschool.dao;
 
 import java.sql.SQLException;
+import java.util.List;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.GatherAddonsDTO;
@@ -56,5 +58,9 @@ public interface IMemberDAO {
 
 	// [개인회원] 마이페이지 - 관심모임 삭제
 	public boolean deleteAttend(GatherAddonsDTO gadto);
+
+	public boolean getAlarmInsert(AlarmDTO alarm);
+
+	public List<AlarmDTO> getAlarm();
 
 }

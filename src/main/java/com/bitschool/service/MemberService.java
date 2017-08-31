@@ -1,6 +1,7 @@
 package com.bitschool.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.ICompanyDAO;
 import com.bitschool.dao.IMemberDAO;
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.CompanyDTO;
@@ -27,7 +29,8 @@ public class MemberService implements IMemberService {
 	@Inject
 	private ICompanyDAO companyDAO;
 	
-	
+	@Inject
+	private IMemberDAO memberDAO;
 	//----------------------------------------------- 로 그 인 -----------------------------------------------//
 
 	// [개인회원] 로그인
@@ -420,6 +423,26 @@ public class MemberService implements IMemberService {
 		}
 				
 		return result;
+	}
+
+	//게시글모임에 참여하기 누르면 알람으로 인써트 됨
+	@Override
+	public boolean getInsert(AlarmDTO alarm) {
+		boolean flag = false;
+		
+		flag = memberDAO.getAlarmInsert(alarm);
+		
+		
+		return flag;
+	}
+
+
+	@Override
+	public List<AlarmDTO> getAlarm() {
+		
+		List<AlarmDTO> getAlarm = memberDAO.getAlarm();
+		
+		return getAlarm;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.bitschool.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.GatherAddonsDTO;
 import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
@@ -46,5 +47,9 @@ public interface IGatheringDAO {
 	public boolean insertGatherPeople(HashMap<String, Object> map);
 
 	public List<GatherPeopleDTO> getGatherApply(int gatherNo);
+
+	public List<AlarmDTO> getGatherAlarm();
+
+	public List<GatherPeopleDTO> getPeoPleAlarm();
 	
 }

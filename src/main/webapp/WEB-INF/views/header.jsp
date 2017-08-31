@@ -12,7 +12,17 @@
 <!-- Custom styles for this template -->
 <!-- <link href="/resources/examples/offcanvas/offcanvas.css" rel="stylesheet"> -->
 <script src="/resources/assets/js/ie-emulation-modes-warning.js"></script>
+  <!-- Bootstrap core CSS     -->
+    <link href="/resources/admin/css/bootstrap.min.css" rel="stylesheet" />
 
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="/resources/admin/css/demo.css" rel="stylesheet" />
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
 <title>공통 헤더</title>
 
 <!-- 헤더 전체 CSS -->
@@ -100,6 +110,12 @@
 		border: 3px solid #ffff00;
 	    text-align:center;
     }
+    .material-icons{
+	    color:white;    
+    }
+    .notification{
+		color:white;    
+    }
 </style>
 
 </head>
@@ -154,6 +170,14 @@
 				
 					<c:when test = "${null ne pdto.guserId}">
 						<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
+																			
+							<li class="dropdown">
+									<a href="/mypage/MyPageAlarm"><i class="material-icons">add_alert</i>
+									<%--이프문으로 값있을 때만 뉴가 뜨도록!!  <c:when test1 = "${null ne gatherNo}">--%>									
+									<span class="notification">N</span></a>		
+									
+								</li>
+							
 						<li><a href="/member/Logout" class="code_view actionBtn7" id="f_color">로그아웃</a></li>
 					</c:when>				
 					

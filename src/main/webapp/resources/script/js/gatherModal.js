@@ -188,6 +188,7 @@ $(function() {
 	
 	});
 	
+	//신청하기
 	$('#gatherApply').click(function(){
 		
 		// 인쟈 이겨시 ajax로 데이터 전송, 필요한건 로그인 정보와 게시글 정보
