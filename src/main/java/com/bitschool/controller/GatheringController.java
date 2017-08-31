@@ -41,9 +41,13 @@ public class GatheringController {
 	@Inject
 	private IGatheringService gService;
 	
+<<<<<<< HEAD
 	@Inject
 	private IMemberService memberService;	
 
+=======
+	
+>>>>>>> 42a568f9d0e815c948c1e1595b23ceb5d9cf9b93
 	// gathering.jsp 의 정보를 뿌리는 메서드
 	@RequestMapping(value = "/gathering", method = {RequestMethod.GET, RequestMethod.POST})
 	public String gathering(

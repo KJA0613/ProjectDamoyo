@@ -85,8 +85,11 @@ $(function() {
 	
 					$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
 						var subject = gList.gatherSubject;
-						subject = subject.substring(0,11) +' ...';
-									
+						
+						if(subject.length>10){
+							subject = subject.substring(0,11) +' ...';
+						}
+						
 						var write = gList.gatherWrite;
 						write = write.substring(0,16);
 									
@@ -212,7 +215,10 @@ function search_click(){
 			$.each(gath.gList, function(index, gList) { // 이치를 써서 모든 데이터들을 배열에 넣음
 
 				var subject = gList.gatherSubject;
-				subject = subject.substring(0,11) +' ...';
+				
+				if(subject.length>10){
+					subject = subject.substring(0,11) +' ...';
+				}
 				
 				var write = gList.gatherWrite;
 				write = write.substring(0,16);

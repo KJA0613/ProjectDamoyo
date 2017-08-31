@@ -27,8 +27,8 @@
 	}
 	
 	.wrapper ul.properties_list li img.property_img {
-	    width: 300px;
-	    height: 300px;
+	    width: 100%;
+	    height: 350px;
 	    vertical-align: top;
 	}
 	

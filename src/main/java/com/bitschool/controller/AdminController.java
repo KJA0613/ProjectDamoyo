@@ -1,6 +1,7 @@
 package com.bitschool.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.VisitorTimeDTO;
+import com.bitschool.dto.VisitorWeekDTO;
 import com.bitschool.service.IAdminService;
 
 @Controller
@@ -22,83 +26,132 @@ public class AdminController {
 	//----------------------------------------------- 설 정 -----------------------------------------------//
 	@Inject
 	private IAdminService adminService;
+	
 		
-		// 01. 관리자대쉬보드(메인)페이지
-		@RequestMapping(value = "/dashboard", method = RequestMethod.GET )
-		public String dashbord(){
+	// 01. 관리자대쉬보드(메인)페이지
+	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
+	public String dashbord(
+				Model model
+			){
 			
 			String url = "admin/dashboard";	
 			
+			// 총 카테고리, 총 장소, 모임요청수, 신고글(이건 하드코딩) 
+			HashMap<String, Integer> gpCnt = adminService.gatherplaceCnt();
+			if(gpCnt!=null){
+				System.out.println(gpCnt);
+				model.addAttribute("gpCnt", gpCnt);
+			}
+			
+			// 모임 카테고리별, 지역별 많은순		
+			List<GatherRankDTO> gatherRank = adminService.gatherRank();
+			if(gatherRank!=null){
+				System.out.println(gatherRank);
+				
+				List<GatherRankDTO> categoryRank = new ArrayList<GatherRankDTO>();;
+				List<GatherRankDTO> areaRank = new ArrayList<GatherRankDTO>();
+				List<GatherRankDTO> typeRank = new ArrayList<GatherRankDTO>();
+								
+				for(int i=0; i<gatherRank.size(); i++){
+					String code = gatherRank.get(i).getTypeCode();
+					if(code.equals("category")){
+						categoryRank.add(gatherRank.get(i));
+					}else if(code.equals("area")){
+						areaRank.add(gatherRank.get(i));
+					}else if(code.equals("type")){
+						typeRank.add(gatherRank.get(i));
+					}
+				}
+				
+				model.addAttribute("categoryRank", categoryRank);
+				model.addAttribute("areaRank", areaRank);
+				model.addAttribute("typeRank", typeRank);
+			}
+			
+
+			// 요일별 접속자
+			List<VisitorWeekDTO> week = adminService.visitWeek();
+			
+			if(week!=null){
+				
+				HashMap<String, Integer> weekMap = new HashMap<String, Integer>();
+				
+				for(int i=0; i<week.size(); i++){
+					VisitorWeekDTO visitor = week.get(i);
+					weekMap.put(visitor.getVisitorDay(), visitor.getDayCount());
+				}
+				
+				model.addAttribute("week",weekMap);
+			}
+						
+			// 시간별 접속자
+			List<VisitorTimeDTO> time= adminService.visitTime();			
+			
+			if(time!=null){
+				
+				HashMap<String, Integer> timeMap = new HashMap<String, Integer>();
+				
+				for(int i=0; i<time.size(); i++){
+					VisitorTimeDTO visitor = time.get(i);
+					timeMap.put(visitor.getVisitorTime(), visitor.getTimeCount());
+				}
+				System.out.println(time);
+				model.addAttribute("time",timeMap);
+			}
 			
 			return url;
 		}
 		
 		// 02. 관리자회원관리페이지
 		@RequestMapping(value = "/PeopleTable",method = {RequestMethod.POST,RequestMethod.GET})
-		public String PeopleTable(
-				Model model, 
-				@RequestParam(value="guserNo", defaultValue="-1") int guserNo,
-				@RequestParam(value="comNo",defaultValue="-2") int comNo){
+		public String PeopleTable(Model model, @RequestParam(value="guserNo", defaultValue="-1")int guserNo,
+				                         @RequestParam(value="comNo",defaultValue="-2")int comNo){
+		String url = null;
+		List<PersonDTO> pdto = null;
+		List<CompanyDTO> cdto = null;
 		
-			String url = null;
-			List<PersonDTO> pdto = null;
-			List<CompanyDTO> cdto = null;
+		pdto = adminService.getPerson();
+		cdto = adminService.getCompany();
+		
+		if(pdto!=null && cdto!=null){
 			
-			pdto = adminService.getPerson(); // 클릭한 회원정보 가저옴
-			cdto = adminService.getCompany();
+			model.addAttribute("pdtoGuserList", pdto);
+			model.addAttribute("cdtoCompanyList",cdto);
 			
+			url = "admin/PeopleTable";
 			
-			if(pdto!=null && cdto!=null){
-				
-				model.addAttribute("pdtoGuserList", pdto);
-				model.addAttribute("cdtoCompanyList",cdto);
-				
-				url = "admin/PeopleTable";
-				
-			}
+		}
+		
+		if(guserNo>0&&comNo==-2){
+			PersonDTO guser = null;
 			
-			if(guserNo>0&&comNo==-2){
-				PersonDTO guser = null;
+			for(int i=0; i<pdto.size(); i++){
 				
-				
-				for(int i=0; i<pdto.size(); i++){
+				if(pdto.get(i).getGuserNo() == guserNo){
+					guser = new PersonDTO();
+					guser = pdto.get(i);
 					
-					if(pdto.get(i).getGuserNo() == guserNo){
-						
-						guser = new PersonDTO();
-						guser = pdto.get(i);
-						
-						
-						List<GatheringDTO> gather = null;
-						System.out.println(guser.getGuserId());
-						gather= adminService.getGatherInfo(guser.getGuserId());
-						System.out.println(gather);
-						
-						model.addAttribute("guserDetail", guser);
-						model.addAttribute("gather", gather);
-						
-					}
-					
+					model.addAttribute("guserDetail", guser);
 				}
-								
-			}
-			
-			else if(comNo>0&&guserNo==-1){
-				CompanyDTO company = null;
 				
-				for(int i=0;i<cdto.size();i++){
+			}
+		}
+		else if(comNo>0&&guserNo==-1){
+			CompanyDTO company = null;
+			
+			for(int i=0;i<cdto.size();i++){
+				
+				if(cdto.get(i).getComNo()==comNo){
+					company = new CompanyDTO();
+					company = cdto.get(i);
 					
-					if(cdto.get(i).getComNo()==comNo){
-						company = new CompanyDTO();
-						company = cdto.get(i);
-						
-						model.addAttribute("companyDetail",company);
-					}
+					model.addAttribute("companyDetail",company);
 				}
 			}
-			return url;
-			
-			}
+		}
+		return url;
+		
+		}
 		
 		
 		// 밑에는 테이블 이용하는 url 
@@ -154,8 +207,6 @@ public class AdminController {
 		public String category(){
 			String url = "";
 			url = "/admin/category";
-			
-			
 			
 			return url;
 		}

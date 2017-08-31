@@ -33,6 +33,12 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- 안함!!!!!!!!!.. 하지만 혹시몰라서 냅둠.. 세션리스너를 통한 방문자수  -->
+	<!-- <listener>
+		<listener-class>com.bitschool.util.DamoyoSessionListener</listener-class>
+	</listener> -->
+	
+	
 	<!-- Session longTime (1 hour) -->
 	<session-config>
 		<session-timeout>60</session-timeout>	

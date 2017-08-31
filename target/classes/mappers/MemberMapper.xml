@@ -170,6 +170,14 @@
 	<select id="getGatherList" resultType="GatheringDTO">
 		select * from gather
 	</select>
+
+	<select id="gatherpacleCnt" resultType="HashMap">
+		select
+		      (select count(*) from gather) as gathercntAll, 
+		      (select count(*) from place) as placecntAll,
+		      (select count(*) from gather where gatherrecognition = 'Wait') as gatherRequest
+		from dual
+	</select>
 	
 	<select id="gatherInfo" resultType="GatheringDTO" parameterType="String">
 		select *
@@ -177,6 +185,7 @@
 		where gatherNo in (select gatherNo from gatherPeople where guserId = #{guserId})
 	</select>
 	
+<<<<<<< HEAD
 	<!--  알람인서트(마이페이지-알람)-->
 	<insert id="getAlarmInsert" parameterType="AlarmDTO">
 	<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
@@ -192,4 +201,44 @@
 		from alarm		
 	</select>
 
+=======
+	<select	id="gatherRank" resultType="GatherRankDTO">
+		select *
+		from ( select gathercategorybot as gathertype, count(*) as typecnt, 'category' as typecode
+		       from gather
+		       group by gathercategorybot
+		       order by typecnt desc, gathercategorybot
+		      )
+				<!-- <![CDATA[where rownum <=5]]> -->
+		union all
+		select *
+		from ( select gatherarea as gathertype, count(*) as typecnt, 'area' as typecode
+		       from gather
+		       group by gatherarea
+		       order by typecnt desc, gatherarea
+		      )
+				<!-- <![CDATA[where rownum <=5]]> -->
+		union all
+		select *
+		from ( select gathercategorytop as gathertype, count(*) as typecnt, 'type' as typecode
+		       from gather
+		       group by gathercategorytop
+		       order by typecnt desc, gathercategorytop
+		      )
+		<!-- <![CDATA[where rownum <=5]]> -->
+	</select>
+	
+	<select id="visitWeek" resultType="VisitorWeekDTO">
+		select visitorday, count(*) as dayCount
+		from gathervisitor
+		group by visitorday
+		
+	</select>
+	
+ 	<select id="visitTime" resultType="VisitorTimeDTO">
+ 		select TO_CHAR(visitordate,'HH24') as visitorTime, count(*) as timeCount
+		from gathervisitor
+		group by TO_CHAR(visitordate,'HH24')
+	</select>
+>>>>>>> 42a568f9d0e815c948c1e1595b23ceb5d9cf9b93
 </mapper>

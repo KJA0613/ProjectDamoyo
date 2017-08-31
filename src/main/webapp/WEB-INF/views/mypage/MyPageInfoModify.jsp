@@ -49,10 +49,7 @@
 			document.form1.submit();			
 			
 		// 비밀번호 변경
-		} else if (formNum == 2) {
-			//document.form2.action = "/mypage/PersonPwModify";
-			//document.form2.submit();
-			
+		} else if (formNum == 2) {			
 			// 유효성 체크 함수들
 			checkPwDB();
 			checkPwNew();

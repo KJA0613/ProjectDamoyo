@@ -32,47 +32,40 @@ demo = {
          });
     },
 
-    initDocumentationCharts: function(){
-        /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
-        dataDailySalesChart = {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-            series: [
-                [12, 17, 7, 17, 23, 18, 38]
-            ]
-        };
-
-        optionsDailySalesChart = {
-            lineSmooth: Chartist.Interpolation.cardinal({
-                tension: 0
-            }),
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-        }
-
-        var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-        md.startAnimationForLineChart(dailySalesChart);
-    },
-
+    
+    
+    // 여기가 소스코드 바꾸는 곳임
     initDashboardPageCharts: function(){
 
         /* ----------==========     Daily Sales Chart initialization    ==========---------- */
-
-        dataDailySalesChart = {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    	
+    	var week1 = $('#week1').val(); // 월
+    	var week2 = $('#week2').val();
+    	var week3 = $('#week3').val();
+    	var week4 = $('#week4').val(); //..
+    	var week5 = $('#week5').val();
+    	var week6 = $('#week6').val();
+    	var week7 = $('#week7').val(); // 일
+    	
+    	var week = [week1, week2, week3, week4, week5, week6, week7];
+    	var weekMax = Math.max.apply(null,week);
+    	
+    	dataDailySalesChart = {
+            
+    		labels: ['월', '화', '수', '목', '금', '토', '일'],
             series: [
-                [12, 17, 7, 17, 23, 18, 38]
+                [week1, week2, week3, week4, week5, week6, week7]
             ]
         };
 
+        
+        
         optionsDailySalesChart = {
             lineSmooth: Chartist.Interpolation.cardinal({
                 tension: 0
             }),
             low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            high: weekMax+30, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
         }
 
@@ -83,11 +76,28 @@ demo = {
 
 
         /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-
+        
+        var time00 = $('#time00').val(); 
+    	var time02 = $('#time02').val();
+    	var time04 = $('#time04').val();
+    	var time06 = $('#time06').val(); 
+    	var time08 = $('#time08').val();
+    	var time10 = $('#time10').val();
+    	var time12 = $('#time12').val(); 
+    	var time14 = $('#time14').val(); 
+    	var time16 = $('#time16').val();
+    	var time18 = $('#time18').val();
+    	var time20 = $('#time20').val();
+    	var time22 = $('#time22').val();
+        
+    	var time = [time00, time02, time04, time06, time08, time10, time12, time14, time16, time18, time20, time22];
+    	var timeMax = Math.max.apply(null, time);
+    	
+    	
         dataCompletedTasksChart = {
-            labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
+            labels: ['00h', '02h','04h','06h','08h','10h','12h','14h','16h','18h','20h','22h'],
             series: [
-                [230, 750, 450, 300, 280, 240, 200, 190]
+                [time00, time02, time04, time06, time08, time10, time12, time14, time16, time18, time20, time22]
             ]
         };
 
@@ -96,7 +106,7 @@ demo = {
                 tension: 0
             }),
             low: 0,
-            high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            high: timeMax+30, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
         }
 
@@ -141,27 +151,7 @@ demo = {
 
     },
 
-    initGoogleMaps: function(){
-        var myLatlng = new google.maps.LatLng(40.748817, -73.985428);
-        var mapOptions = {
-          zoom: 13,
-          center: myLatlng,
-          scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-          styles: [{"featureType":"water","stylers":[{"saturation":43},{"lightness":-11},{"hue":"#0088ff"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"hue":"#ff0000"},{"saturation":-100},{"lightness":99}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#808080"},{"lightness":54}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"color":"#ece2d9"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#ccdca1"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#767676"}]},{"featureType":"road","elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#b8cb93"}]},{"featureType":"poi.park","stylers":[{"visibility":"on"}]},{"featureType":"poi.sports_complex","stylers":[{"visibility":"on"}]},{"featureType":"poi.medical","stylers":[{"visibility":"on"}]},{"featureType":"poi.business","stylers":[{"visibility":"simplified"}]}]
-
-        }
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            title:"Hello World!"
-        });
-
-        // To add the marker to the map, call setMap();
-        marker.setMap(map);
-    },
-
-	showNotification: function(from, align){
+   	showNotification: function(from, align){
     	color = Math.floor((Math.random() * 4) + 1);
 
     	$.notify({
