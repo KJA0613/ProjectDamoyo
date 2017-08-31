@@ -358,16 +358,11 @@
 
 				</form>
 			</div>
+		   <!-- [Footer] 페이지 하단 (고정화면) -->
+		   <hr>
+		   <%@include file = "../footer.jsp"%>
    		</div>
    		<br>
-   		
-   		
-   		
-   <!-- [Footer] 페이지 하단 (고정화면) -->
-   <hr>
-   <%@include file = "../footer.jsp"%>
-
-
 
 </body>
 </html>

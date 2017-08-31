@@ -126,7 +126,8 @@
 	<div class="container">
 		<div class="clearfix">		
 			<!-- 01-01. 로고 -->
-			<div class="navbar-header">
+			<div class="navbar-header" id="div2">
+			
 				<a href="/" class="navbar-brand navbar-brand-center">DAMOYO</a>
 			</div>
 			
