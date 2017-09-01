@@ -37,8 +37,8 @@ public class DamoyoInterceptor implements HandlerInterceptor{
 			
 			
 			sessionController.makeSession(request);
-			System.out.println("세션 생성됨, 새션값 : " + session.getAttribute("visitorCheck"));
-			System.out.println(request.getRequestedSessionId());
+			/*System.out.println("세션 생성됨, 새션값 : " + session.getAttribute("visitorCheck"));
+			System.out.println(request.getRequestedSessionId());*/
 		}
 		
 		// 알람기능 가라로 하기

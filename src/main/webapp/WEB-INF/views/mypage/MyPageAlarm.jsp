@@ -170,7 +170,10 @@
 									</c:when>
 									<c:when test="${alarm.alarmGrade eq 2}">
 										<a id="blog" href='#'>${alarm.alarmGatherNo}${alarm.alarmIndex}</a>
-									</c:when>								
+									</c:when>
+									<c:when test="${alarm.alarmGrade eq 3}">
+										<a id="blog" href='#'>${alarm.alarmGatherNo}${alarm.alarmIndex}</a>
+									</c:when>									
 								</c:choose>
 						        </td>
 						        <td>${alarm.alarmDate}</td>

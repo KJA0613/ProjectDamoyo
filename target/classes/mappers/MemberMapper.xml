@@ -187,7 +187,7 @@
 	
 	<!--  알람인서트(마이페이지-알람)-->
 	<insert id="getAlarmInsert" parameterType="AlarmDTO">
-	<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
+		<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
 			select alarmSeq.nextval from dual
 		</selectKey>
 		insert into alarm (alarmNo, alarmIndex, alarmId,  alarmDate, alarmRead, alarmGatherNo,alarmGrade, alarmReciveId)
@@ -246,4 +246,19 @@
 		where alarmno = #{alarmNo}
 	</update>
 	
+	
+	<select id="getGatherNoPeople" resultType="GatherPeopleDTO">
+ 		select *
+		from gatherpeople
+		where gatherno = #{gatherNo}
+	</select>
+	
+	<insert id="setRecognition" parameterType="AlarmDTO">
+		<selectKey keyProperty="alarmNo" resultType="int" order="BEFORE">
+			select alarmSeq.nextval from dual
+		</selectKey>
+		
+		insert into alarm (alarmNo, alarmIndex, alarmId,  alarmDate, alarmRead, alarmGatherNo,alarmGrade, alarmReciveId) 
+		values (#{alarmNo}, #{alarmIndex}, #{alarmId}, sysdate, 'no', #{alarmGatherNo}, #{alarmGrade}, #{alarmReciveId}) 
+	</insert>
 </mapper>

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.bitschool.dao.IAdminDAO;
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatherPeopleDTO;
@@ -94,6 +95,24 @@ public class AdminService implements IAdminService {
 			
 			return time;
 		}
+
+		@Override
+		public List<GatherPeopleDTO> getGatherNoPeople(int gatherNo) {
+			
+			List<GatherPeopleDTO> gpList = adminDao.getGatherNoPeople(gatherNo);
+			
+			return gpList;
+		}
+
+		@Override
+		public boolean setRecognition(List<AlarmDTO> alarmList) {
+			// TODO Auto-generated method stub
+			
+			boolean flag = adminDao.setRecognition(alarmList);
+			
+			return flag;
+		}
+
 
 		
 }
