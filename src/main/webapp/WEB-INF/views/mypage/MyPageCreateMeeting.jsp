@@ -31,10 +31,12 @@
 </style>
 
 <script type="text/javascript">
-	function goBlog() {
+	function goBlog(num) {
   		blogUrl = 'http://localhost:5050/blog/home?blogId=';
-		blogId = document.getElementById('gatherNo').value;
-		blogName = document.getElementById('gatherName').value;
+  		gatherNoId = 'gatherNo'+num;
+  		gatherNameId = 'gatherName'+num;
+		blogId = document.getElementById(gatherNoId).value;
+		blogName = document.getElementById(gatherNameId).value;
 		blogName = '&blogName='+blogName;
 		blogUrl = blogUrl + blogId + blogName;
 		window.open(blogUrl);
@@ -79,7 +81,7 @@
 					<div class="row">
 						<c:forEach var="make" items="${mlist}">
 							<div class="col-xs-6 col-lg-6" id="gather">
-								<a href="javascript:goBlog();"> <img width="408px" height="300px" src='${make.gatherImg}'>
+								<a href="javascript:goBlog(${make.gatherNo});"> <img width="408px" height="300px" src='${make.gatherImg}'>
 									<h3 align="center">${make.gatherSubject}</h3>
 									<h4>
 										기간 : ${fn:substring(make.gatherSdate, 0, 10)} ~ ${fn:substring(make.gatherEdate, 0, 10)}<br> 
@@ -88,8 +90,8 @@
 										<%-- 요일 : ${make.gatherDay}<br> 
 										지역 : ${make.gatherArea}<br>
 										인원 : ${make.gatherParti} --%>
-										<input type="hidden" value="${make.gatherNo}" id="gatherNo">
-										<input type="hidden" value="${make.gatherSubject}" id="gatherName">
+										<input type="hidden" value="${make.gatherNo}" id="gatherNo${make.gatherNo}">
+										<input type="hidden" value="${make.gatherSubject}" id="gatherName${make.gatherNo}">
 									</h4>
 								</a>
 							</div>

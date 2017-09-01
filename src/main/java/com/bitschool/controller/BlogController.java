@@ -387,9 +387,12 @@ public class BlogController {
 	}*/
 	
 	@RequestMapping(value="/file/fileRegist", method = {RequestMethod.GET, RequestMethod.POST})
-	public String fileRegist(HttpServletRequest req, @RequestParam(value="blogId") int blogId, @RequestParam(value="blogName") String blogName, Model model) {
+	public String fileRegist(HttpServletRequest req, @RequestParam(value="blogId") int blogId,
+									@RequestParam(value="blogName") String blogName, Model model, HttpSession session) {
 		String url = null;
 		BPostDTO fileDTO = new BPostDTO();
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		model.addAttribute("pdto", pdto);
 		fileDTO.setBlogId(blogId);
 		String path = req.getSession().getServletContext().getRealPath("/")+"resources\\image\\";
 		//System.out.println(path);
@@ -440,6 +443,8 @@ public class BlogController {
 		System.out.println(flag);
 		System.out.println(fileDTO);
 		if(!flag){
+			fileDTO.setBlogId(blogId);
+			fileDTO.setBoardName("file");
 			flag =  service.uploadfile(fileDTO);
 		}
 		if(flag){
@@ -821,7 +826,8 @@ public class BlogController {
 	}
 	
 	@RequestMapping(value="/photo/uploadPhoto", method = RequestMethod.POST)
-	public String uploadPhoto(HttpServletRequest req, @RequestParam(value="blogId") int blogId, @RequestParam(value="blogName") String blogName, Model model) {
+	public String uploadPhoto(HttpServletRequest req, @RequestParam(value="blogId") int blogId, @RequestParam(value="blogName") String blogName,
+											Model model, HttpSession session) {
 		String url = null;
 		BGalleryDTO gallery = new BGalleryDTO();
 		gallery.setBlogId(blogId);

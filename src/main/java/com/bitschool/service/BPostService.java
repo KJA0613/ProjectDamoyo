@@ -63,6 +63,6 @@ public class BPostService {
 	public boolean uploadfile(BPostDTO fileDTO) {
 		boolean flag = false;
 		flag = dao.insertFile(fileDTO);
-		return false;
+		return flag;
 	}
 }
