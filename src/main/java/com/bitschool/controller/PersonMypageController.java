@@ -485,7 +485,6 @@ public class PersonMypageController {
 		String url ="default";	
 		int gatherNo =0;
 		int pgatherNo =0;
-		int totalNo = 0;
 		String pgId = null;
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
@@ -524,7 +523,6 @@ public class PersonMypageController {
 					
 					//알람(신청요청이있는)글번호랑 리더인사람의 글번호가같닝? 로그인한애 아이디랑 그글번호의리더랑아이디가같니?
 					if(gatherNo==pgatherNo&&pdto.getGuserId().equals(pgId)){
-						totalNo = gatherNo;
 						
 						    AlarmDTO Alarm = new AlarmDTO();
 							
@@ -540,18 +538,13 @@ public class PersonMypageController {
 							
 							aList.add(Alarm);
 							
-						
-						url="mypage/MyPageAlarm";
-						System.out.println(Alarm);
-						System.out.println("글번호"+alarmList.get(i).getAlarmGatherNo());
 					
 					}
-					else {
-						url="mypage/MyPageAlarm";
-					}
-				}				
 					
+				}
 			}
+
+			url="mypage/MyPageAlarm";
 			System.out.println("모델위 aLIst : "+aList);
 			model.addAttribute("Alarm", aList);
 			

@@ -151,9 +151,15 @@
 	
 	<!-- 참여중인 모임 -->
 	<select id="partiList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
-	    select * 
+	    <!-- select * 
 		from gather a 
-		where exists (select gatherno from gatherparti b where gatherpartiid = #{guserId} and b.gatherparticode = '가입' and a.gatherno = b.gatherno)
+		where exists (select gatherno from gatherparti b where gatherpartiid = #{guserId} and b.gatherparticode = '가입' and a.gatherno = b.gatherno) -->
+		
+		select a.*
+		from (select * from gather where GATHERRECOGNITION like 'yes' or GATHERRECOGNITION like 'yet') a,
+		      (select * from gatherpeople where guserid = #{guserId} and GATHERPEOPLEGRADE like '멤버') b
+		where a.gatherno = b.gatherno
+		
 	</select>
 	
 	

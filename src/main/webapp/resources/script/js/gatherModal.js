@@ -32,7 +32,8 @@ $(function() {
 		var img = href.data('img'); 
 		var id = href.data('id'); 
 		var state = href.data('state'); 
-				
+		var blog = href.data('blog'); 
+		
 		var DATA = {
 			"category" : categorybot,
 			"area" : area,
@@ -82,30 +83,6 @@ $(function() {
 			}
 		});
 		
-		// 작성자와 로그인유저와 비교하여 같으면 수정하기 버튼를 생성하는 
-		var loginId = $('#loginGuser').val();
-		
-		if(loginId.length>0){ // 값이 비어있지 않고
-			
-			if(loginId == id){ // 로그인한사람이 글 작성자 일때는
-				$('#gatherModify').show(); // 수정버튼 보이게
-				$('#gatherComplete').show(); // 완료버튼 보이게
-				$('#gatherApply').hide(); // 신청버튼 숨기기
-			}else{ // 로그인한사람이 글쓴이가 아닐때
-				$('#gatherApply').show(); // 신천하기 버튼보이고
-				$('#gatherModify').hide(); //수정 숨기기
-				$('#gatherComplete').hide(); // 완료 숨기기
-			}
-		}
-		
-		if(state=='진행중'){
-			$('#gatherBlog').show();
-			$('#gatherComplete').hide();
-		}else{
-			$('#gatherBlog').hide();
-			$('#gatherComplete').show();
-		}
-		
 		// 최대인원 신청인원 같으면 신청버튼 막기
 		if(parti >= partimax){
 			$('#gatherApply').attr("disabled", true);
@@ -115,7 +92,56 @@ $(function() {
 		}else{
 			$('#gatherApply').attr("disabled", false);
 			$('#modalTotalParti').css("color","black");
+		} 
+		
+		// 작성자와 로그인유저와 비교하여 같으면 수정하기 버튼를 생성하는 
+		var loginId = $('#loginGuser').val();
+
+		alert("상태 : "+ state+", 블로그 : "+ blog);
+		
+		
+		// 로그인 상태
+		if(loginId.length>0){ // 값이 비어있지 않고
+
+			// 로그인 한 사람이 작성자
+			if(loginId == id){ // 로그인한사람이 글 작성자 일때는
+
+				$('#gatherModify').show(); // 수정버튼
+				$('#gatherApply').hide(); // 신청버튼
+				$('#gatherComplete').hide(); // 완료버튼
+				$('#gatherBlog').hide(); // 블로그 버튼
+								
+				if(state=='진행중'&&blog=='Yes'){
+					$('#gatherBlog').show(); // 블로그 버튼
+				}else if(state=='모집중'){
+					$('#gatherComplete').show(); // 완료버튼
+				}
+				
+			// 로그인 한 사람은 작성자가 아님
+			}else{ // 로그인한사람이 글쓴이가 아닐때
+				
+				$('#gatherModify').hide(); // 수정버튼
+				$('#gatherApply').show(); // 신청버튼
+				$('#gatherComplete').hide(); // 완료버튼
+				$('#gatherBlog').hide(); // 블로그 버튼
+				
+				if(state=='진행중'&&blog=='Yes'){
+					$('#gatherBlog').show(); // 블로그 버튼
+				}
+			}
+			
+		}else{// 비로그인
+			$('#gatherModify').hide(); // 수정버튼
+			$('#gatherApply').show(); // 신청버튼
+			$('#gatherComplete').hide(); // 완료버튼
+			$('#gatherBlog').hide(); // 블로그 버튼
+			
+			if(state=='진행중'&&blog=='Yes'){
+				$('#gatherBlog').show(); // 블로그 버튼
+			}
 		}
+		
+		
 		
 		modal.find('#modal-body-no').text(no); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
 		modal.find('#modal-body-subject').text(subject); /*  모달위도우에서 .modal-body-을 찾아 값을 치환  */
@@ -203,7 +229,8 @@ $(function() {
 				"no" : no,
 				"write" : write
 		};
-		alert(write);
+
+
 		$.ajax({
 			url : '/gather/gatherApplyPeople',
 			dataType : 'json',

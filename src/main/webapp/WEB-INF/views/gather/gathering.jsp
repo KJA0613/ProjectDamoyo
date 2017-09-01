@@ -297,6 +297,7 @@ a:visited {
 								data-day='${gath.gatherDay}'
 								data-img='${gath.gatherImg}' 
 								data-id='${gath.guserId}'
+								data-blog='${gath.gatherBlog}'
 								data-state='${gath.gatherState}'> 
 								<img class='gatherimg' width="213px" height="120px" src='${gath.gatherImg}'> <span class="price">${gath.gatherState}</span>
 								<h4 align="center">
@@ -314,7 +315,6 @@ a:visited {
 									${fn:substring(gath.gatherEdate, 0, 10)}<br> 요일 :
 									${gath.gatherDay}<br> 지역 : ${gath.gatherArea}<br>
 									신청인원 : ${gath.gatherParti}<br>
-									게시글 번호 : ${gath.gatherNo}<br>
 								</h5>
 							</a>
 						</div>
@@ -338,7 +338,7 @@ a:visited {
 						<div class="col-xs-2 col-md-12">
 							<div class="modal-body" id="modal-body-attention">
 								<img class='img-responsive' width="80px" height="80px" id="imgchange"
-									onclick="imgChange('${pdto.guserId eq '' ? '' : pdto.guserId}')"
+									onclick="imgChange('${pdto.guserId eq '' ? '' : pdto.guserId}');"
 									style="margin-left: auto; margin-right: auto; display: block;">
 							</div>
 						</div>

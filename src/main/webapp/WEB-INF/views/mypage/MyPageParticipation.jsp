@@ -75,6 +75,7 @@
 								<a href=""> <img width="408px" height="300px" src='${parti.gatherImg}'>
 									<h3 align="center">${parti.gatherSubject}</h3>
 									<h4>
+										게시글 번호 : ${parti.gatherNo}<br>
 										기간 : ${fn:substring(parti.gatherSdate, 0, 10)} ~ ${fn:substring(parti.gatherEdate, 0, 10)}<br> 
 										최근 글 : 12<br>
 										오늘 방문자수 : 3
