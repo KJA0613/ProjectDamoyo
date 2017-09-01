@@ -245,7 +245,6 @@
 			gatherEdate = to_date( #{gatherEdate},'yyyy-mm-dd'), 
 			gatherArea = #{gatherArea},
 			gatherAreaTop = #{gatherAreaTop}, 
-			gatherParti = #{gatherParti}, 
 			gatherPartiMax = #{gatherPartiMax}, 
 			gatherContent = #{gatherContent}, 
 			<!-- gatherImg = #{gatherImg},  -->
