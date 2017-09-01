@@ -514,8 +514,6 @@ public class GatheringController {
 			mlist = gService.getmakeList(guserId); // 내가 만든 모임
 			
 			url="gather/gathering_parti";
-		}else{
-			
 		}
 		
 		if(session.getAttribute("alarm")!=null){

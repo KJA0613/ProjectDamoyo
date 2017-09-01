@@ -198,7 +198,8 @@
 	<select id="getAlarm" resultType="AlarmDTO" parameterType="String">
 		select *
 		from alarm	
-		where alarmreciveId = #{loginId}	
+		where alarmreciveId = #{loginId}
+		order by alarmRead, alarmDate desc
 	</select>
 
 	<!-- 관리자페이지임 -->

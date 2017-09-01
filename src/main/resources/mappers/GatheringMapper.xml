@@ -159,13 +159,14 @@
 		from (select * from gather where GATHERRECOGNITION like 'yes' or GATHERRECOGNITION like 'yet') a,
 		      (select * from gatherpeople where guserid = #{guserId} and GATHERPEOPLEGRADE like '멤버') b
 		where a.gatherno = b.gatherno
+		order by gatherWrite desc
 		
 	</select>
 	
 	
 	<!-- 내가 만든 모임 -->
 	<select id="makeList" parameterType="String" resultType="com.bitschool.dto.GatheringDTO" >
-		select * from gather where guserid = #{guserId}
+		select * from gather where guserid = #{guserId} and (GATHERRECOGNITION like 'Yes' or GATHERRECOGNITION like 'yet') order by gatherWrite desc
 	</select>
 	
 	
