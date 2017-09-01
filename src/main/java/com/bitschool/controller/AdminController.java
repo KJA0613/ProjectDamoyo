@@ -217,9 +217,10 @@ public class AdminController {
 			return url;
 		}
 		
-		@RequestMapping(value = "/map", method = {RequestMethod.POST,RequestMethod.GET})
+		// 장소관리
+		@RequestMapping(value = "/place", method = {RequestMethod.POST,RequestMethod.GET})
 		public String map(){
-			String url = "/admin/map";
+			String url = "/admin/place";
 			
 			return url;
 		}

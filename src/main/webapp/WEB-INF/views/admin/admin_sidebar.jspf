@@ -41,7 +41,7 @@
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="/admin/gathering">
+	                    <a href="/admin/place">
 	                        <i class="material-icons">library_books</i>
 	                        <p>장소 관리</p>
 	                    </a>
