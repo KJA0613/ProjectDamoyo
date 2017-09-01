@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatherPeopleDTO;
@@ -105,6 +106,33 @@ public class AdminDAO implements IAdminDAO{
 		time = session.selectList(namespace+".visitTime");
 		
 		return time;
+	}
+
+	@Override
+	public List<GatherPeopleDTO> getGatherNoPeople(int gatherNo) {
+
+		List<GatherPeopleDTO> gpList = null;
+		gpList = session.selectList(namespace+".getGatherNoPeople",gatherNo);
+		
+		return gpList;
+	}
+
+	@Override
+	public boolean setRecognition(List<AlarmDTO> alarmList) {
+		
+		int result = 0;
+		
+		for(int i=0; i<alarmList.size(); i++){
+			result += session.insert(namespace+".setRecognition", alarmList.get(i));
+		}
+		
+		boolean flag = false;
+		System.out.println(result+"=="+alarmList.size());
+		if(result==alarmList.size()){
+			flag=true;
+		}
+		
+		return flag;
 	}
 
 

@@ -98,6 +98,13 @@ $(function() {
 			}
 		}
 		
+		alert(state);
+		if(state=='진행중'){
+			$('#gatherBlog').show();
+		}else{
+			$('#gatherBlog').hide();
+		}
+		
 		// 최대인원 신청인원 같으면 신청버튼 막기
 		if(parti >= partimax){
 			$('#gatherApply').attr("disabled", true);

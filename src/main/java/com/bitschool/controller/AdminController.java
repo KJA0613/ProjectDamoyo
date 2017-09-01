@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
+import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
@@ -250,12 +252,19 @@ public class AdminController {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("result", "no");
 			flag = gService.updateRecogYes(gatherNo);
+			
 			if(dto.getGatherBlog().equals("Yes")) {
 				flag = gService.assignBlogId(gatherNo);
 			} else {
 				// 블로그 생성 필요 없음
 			}
-			if(flag) {
+			
+			boolean alarmFlag=false;
+			if(flag){
+				alarmFlag = alarmInput(gatherNo, "yes");
+			}
+			
+			if(alarmFlag) {
 				map.put("result", "yes");
 			}
 			
@@ -268,12 +277,48 @@ public class AdminController {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("result", "no");
 			flag = gService.updateRecogNo(gatherNo);
-			if(flag) {
+			
+			
+			boolean alarmFlag=false;
+			if(flag){
+				alarmFlag = alarmInput(gatherNo, "yes");
+			}
+			
+
+			System.out.println(alarmFlag);
+			
+			if(alarmFlag) {
 				map.put("result", "yes");
 			}
 			
 			return map;
 		}
 		
+		public boolean alarmInput(int gatherNo, String code){
+			
+			List<GatherPeopleDTO> gpList = adminService.getGatherNoPeople(gatherNo);
+			
+			boolean alarmFlag = false;
+			if(gpList!=null){
+				List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
+				
+				for(int i=0; i<gpList.size(); i++){
+					AlarmDTO alarm = new AlarmDTO();
+					alarm.setAlarmGatherNo(gatherNo);
+					alarm.setAlarmGrade(2);
+					alarm.setAlarmId("관리자");
+					alarm.setAlarmReciveId(gpList.get(i).getGuserId());
+					if(code.equals("yes")){
+						alarm.setAlarmIndex("모임이 승인되었습니다.");
+					}else{
+						alarm.setAlarmIndex("모임이 거절되었습니다.");						
+					}
+					alarmList.add(alarm);
+				}
+				alarmFlag = adminService.setRecognition(alarmList);
+			}
+			
+			return alarmFlag;
+		}
 	
 	}

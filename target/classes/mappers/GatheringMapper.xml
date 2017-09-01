@@ -8,6 +8,7 @@
 	<select id="getherAll" resultType="com.bitschool.dto.GatheringDTO">
 		select * 
 		from gather 
+		where GATHERRECOGNITION like 'Yes' or GATHERRECOGNITION like 'yet'
 		order by gatherWrite desc
 	</select>
 	
@@ -16,9 +17,9 @@
 	<select id="damoyoAll" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
 		select * 
 		from gather 
-		
+		where GATHERRECOGNITION like 'Yes' or GATHERRECOGNITION like 'yet'
 		<if test="sSTR != ''">
-			where gatherSubject like '%'||#{sSTR}||'%'
+			and gatherSubject like '%'||#{sSTR}||'%'
 			<!-- where gatherSubject like '%'||#{sSTR}||'%' or gatherContent like '%'||#{sSTR}||'%' -->
 		</if>
 		
@@ -60,7 +61,7 @@
 		
 		select * 
 		from gather 
-		where 1 = 1
+		where ( GATHERRECOGNITION like 'Yes' or GATHERRECOGNITION like 'yet' )
 		
 		<if test="cList!=null">
 			<foreach collection="cList" item="cdata"  open=" and (" close=")" separator="or">
@@ -75,6 +76,11 @@
         <if test="tList!=null">
  			<foreach collection="tList" item="tdata"  open=" and (" close=")" separator="or">
 	            gathercategorytop like #{tdata}
+	        </foreach>
+        </if>
+        <if test="rList!=null">
+ 			<foreach collection="rList" item="rdata"  open=" and (" close=")" separator="or">
+	            gatherstate like #{rdata}
 	        </foreach>
         </if>
               

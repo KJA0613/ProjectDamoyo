@@ -3,6 +3,7 @@ package com.bitschool.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatherPeopleDTO;
@@ -30,6 +31,11 @@ public interface IAdminService {
 	public List<VisitorWeekDTO> visitWeek();
 
 	public List<VisitorTimeDTO> visitTime();
+
+	public List<GatherPeopleDTO> getGatherNoPeople(int gatherNo);
+
+	public boolean setRecognition(List<AlarmDTO> alarmList);
+
 
 	
 }

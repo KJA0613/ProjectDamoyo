@@ -56,12 +56,24 @@ public class GatheringController {
 		
 		// 현재 세션에 저장된 정보 > pdto에 저장 
 		// 즉, 로그인된 사용자의 정보를 나타냄
-		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		CompanyDTO cdto = (CompanyDTO)session.getAttribute("cdto");
 		
 		List<GatheringDTO> gList = gService.getGatheringAll(); // 전체게시글 가져옴
 				
-		List<GatheringDTO> recommList = gService.getRecommDefault(); // 추천글 가져옴
+		/*if(gList.size()>0){
+			List<GatheringDTO> gatherYesList = new ArrayList<GatheringDTO>();
+			List<GatheringDTO> gatherYetList = new ArrayList<GatheringDTO>();
+			
+			for(int i=0; i<gList.size(); i++){
+				GatheringDTO gdto = gList.get(i);
+				if(gdto.getGatherRecognition().equals("Yes")){
+					gatherYesList.add(gdto);
+				}else if(gdto.getGatherRecognition().equals("yet")){
+					gatherYetList.add(gdto);
+				}
+			}
+			System.out.println("gList 사이즈 : "+gList.size()+", yes/yet : "+gatherYesList.size()+"/"+gatherYetList.size());
+		}*/
+/*//		List<GatheringDTO> recommList = gService.getRecommDefault(); // 모집글 가져옴
 		
 		if(session.getAttribute("alarm")!=null){
 		
@@ -110,6 +122,10 @@ public class GatheringController {
 				model.addAttribute("gath", gList);
 			}
 			model.addAttribute("recomm", recommList);
+		}*/
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		if(pdto!=null){
+			model.addAttribute("pdto", pdto);
 		}
 		
 		if (gList != null) {
@@ -124,6 +140,7 @@ public class GatheringController {
 			@RequestParam(value = "cDATA", defaultValue="") String cData,
 			@RequestParam(value = "aDATA", defaultValue="") String aData,
 			@RequestParam(value = "tDATA", defaultValue="") String tData,
+			@RequestParam(value = "rDATA", defaultValue="") String rData,
 			@RequestParam(value = "sSTR", defaultValue="") String sSTR,
 			@RequestParam(value = "sSelect", defaultValue="") String sSelect,
 			HttpSession session
@@ -157,20 +174,22 @@ public class GatheringController {
 		List<String> cList = null;
 		List<String> aList = null;
 		List<String> tList = null;
+		List<String> rList = null;
 
 		String[] aaList = aData.split(",");
 		String[] ccList = cData.split(",");
 		String[] ttList = tData.split(",");
+		String[] rrList = rData.split(",");
 		
-		
+
+		System.out.println("tdate : "+ttList);
+		System.out.println("rdate : "+rrList);
 		
 		if(ccList.length>1){
 			cList = new ArrayList<String>();
 			for (int i = 0; i < ccList.length; i++) {
 				cList.add(ccList[i]);
 				
-				
-				// 체크박스 했을때 dto에 저장
 				if(i==ccList.length-1&&recommgatherList!=null){
 					if(!ccList[i].equals("")){
 						regather = new RecommGatherDTO();
@@ -217,11 +236,26 @@ public class GatheringController {
 			}
 		}
 		
+		if(rrList.length>1){
+			rList = new ArrayList<String>();
+			for (int i = 0; i < rrList.length; i++) {
+				rList.add(rrList[i]);
+
+				if(i==rrList.length-1&&recommgatherList!=null){
+					if(!rrList[i].equals("")){
+						regather = new RecommGatherDTO();
+						regather.setRecommgatherName(rrList[i]);
+						regather.setRecommgatherCode("상태");
+						regather.setGuserId(pdto.getGuserId());
+						recommgatherList.add(regather);
+					}
+				}
+			}
+		}
+		
 		session.setAttribute("recommgatherList", recommgatherList);
-		
-		System.out.println(tList);
-		
-		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, tList, sSelect, sSTR);
+				
+		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, tList, rList, sSelect, sSTR);
 		HashMap<String, List<GatheringDTO>> map = new HashMap<String, List<GatheringDTO>>();
 				
 		if (gList != null) {

@@ -197,6 +197,14 @@ a:visited {
 				</div>
 				
 				<br>
+				
+				<div class="center-block" style="text-align: center;">
+					<input type="checkbox" id="rtop1" name="rbox" value="모집중" ><label for="rtop1">모집중&nbsp;&nbsp;&nbsp;</label>
+					<input type="checkbox" id="rtop2" name="rbox" value="진행중" ><label for="rtop2">진행중&nbsp;&nbsp;&nbsp;</label>
+				</div>
+				
+				<br>
+				
 				<div class="col-md-offset-3">
 					<form class="form-inline">
 						<label>상세검색&nbsp;&nbsp;</label>
@@ -214,8 +222,8 @@ a:visited {
 				</div>
 
 				<br>
-				<div>
-					<h3>추천 모임</h3>
+				<%-- <div>
+					<h3>모집중인 모임</h3>
 				</div>
 				
 				<div class="row" id="gatherRecommed">
@@ -260,7 +268,7 @@ a:visited {
 							</a>
 						</div>
 					</c:forEach>
-				</div>
+				</div> --%>
 
 				<hr>
 
@@ -423,7 +431,7 @@ a:visited {
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
 						<button id='gatherModify' type="button" class="btn btn-warning pull-left" style="display: none;">수정하기</button>
-						<button type="button" class="btn btn-info" data-dismiss="modal" onclick="goBlog()">블로그 가기</button>
+						<button id='gatherBlog' type="button" class="btn btn-info" data-dismiss="modal" onclick="goBlog()" style="display: none;">블로그 가기</button>
 						<button id='gatherApply' type="button" class="btn btn-primary" style="display: none;">신청</button>
 						<button id='gatherComplete' type="button" class="btn btn-primary" style="display: none;">완료</button>
 					</div>				
