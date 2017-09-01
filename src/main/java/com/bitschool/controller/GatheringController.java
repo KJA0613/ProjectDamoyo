@@ -123,6 +123,10 @@ public class GatheringController {
 			}
 			model.addAttribute("recomm", recommList);
 		}*/
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		if(pdto!=null){
+			model.addAttribute("pdto", pdto);
+		}
 		
 		if (gList != null) {
 			model.addAttribute("gath", gList);
