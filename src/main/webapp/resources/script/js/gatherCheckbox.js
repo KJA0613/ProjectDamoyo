@@ -63,11 +63,20 @@ $(function() {
 								tDATA += "," + ($(this).val());
 					}
 			});
+						
+			var rDATA = "";
+			$("input[name='rbox']").each(
+				function() {
+					if ($(this).is(':checked')&& $(this).val() != "on"){
+								rDATA += "," + ($(this).val());
+					}
+			});
 				
 			var DATA = {
 				"cDATA" : cDATA,
 				"aDATA" : aDATA,
-				"tDATA" : tDATA
+				"tDATA" : tDATA,
+				"rDATA" : rDATA
 			};
 				
 			/* 이거는 #execute를 클릭하면 일어나는 ajax */
@@ -97,7 +106,7 @@ $(function() {
 						if(sdate != null){
 							sdate = sdate.substring(0,10);
 						}else{
-							sdate = '몰름';
+							sdate = '추후';
 						}
 										 
 						var edate = gList.gatherEdate;
@@ -191,6 +200,22 @@ function search_click(){
 					aDATA += "," + ($(this).val());
 				}
 	});
+	
+	var tDATA = "";
+	$("input[name='tbox']").each(
+		function() {
+			if ($(this).is(':checked')&& $(this).val() != "on"){
+						tDATA += "," + ($(this).val());
+			}
+	});
+				
+	var rDATA = "";
+	$("input[name='rbox']").each(
+		function() {
+			if ($(this).is(':checked')&& $(this).val() != "on"){
+						rDATA += "," + ($(this).val());
+			}
+	});
 
 	var sSelect = $("#serach_garhering").val();
 	var sSTR = $("#search_text").val();
@@ -198,6 +223,8 @@ function search_click(){
 	var DATA = {
 		"cDATA" : cDATA,
 		"aDATA" : aDATA,
+		"tDATA" : tDATA,
+		"rDATA" : rDATA,
 		"sSTR" : sSTR,
 		"sSelect" : sSelect
 	};

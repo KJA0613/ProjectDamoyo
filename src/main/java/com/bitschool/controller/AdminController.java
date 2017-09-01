@@ -305,7 +305,7 @@ public class AdminController {
 				for(int i=0; i<gpList.size(); i++){
 					AlarmDTO alarm = new AlarmDTO();
 					alarm.setAlarmGatherNo(gatherNo);
-					alarm.setAlarmGrade(3);
+					alarm.setAlarmGrade(2);
 					alarm.setAlarmId("관리자");
 					alarm.setAlarmReciveId(gpList.get(i).getGuserId());
 					if(code.equals("yes")){
