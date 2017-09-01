@@ -7,8 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,6 @@ import com.bitschool.dto.AreaDTO;
 import com.bitschool.dto.CategoryDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.GatherAddonsDTO;
-import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.PlaceDTO;
@@ -38,7 +36,7 @@ public class PersonMypageController {
 	//----------------------------------------------- 설 정 -----------------------------------------------//
 	
 	// [로깅]
-	private static final Logger logger = LoggerFactory.getLogger(PersonMypageController.class);
+//	private static final Logger logger = LoggerFactory.getLogger(PersonMypageController.class);
 
 	// [주입] 서비스 인터페이스
 	@Inject
@@ -49,10 +47,7 @@ public class PersonMypageController {
 	
 	@Inject
 	private IPlaceService PlaceService;
-	
-	@Inject
-	private IGatheringService gService;
-	
+		
 	
 	// --------------------------------------- [개인회원] 마 이 페 이 지  ---------------------------------------//
 
@@ -483,30 +478,20 @@ public class PersonMypageController {
 			Model model){
 		
 		String url ="default";	
-		int gatherNo =0;
-		int pgatherNo =0;
-		String pgId = null;
+		
+		String loginId = "";
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
-		
-		
-		List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
-		
-		List<GatherPeopleDTO> gpList = new ArrayList<GatherPeopleDTO>();
-		
-		// 알람테이블 모든거
-		alarmList = memberService.getAlarm();
-		
-		// 피플테이블 모든거
-		gpList = gatherService.getPeoPleAlarm();
-		
-		//String AlarmPerson 
-		
-		
-		// 이거는 클라이언트로 값을 넘기는 리스트
-		List<AlarmDTO> aList= new ArrayList<AlarmDTO>();
+				
 		
 		if(pdto!=null){
-			model.addAttribute("pdto", pdto);
+			loginId = pdto.getGuserId();
+			
+			List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
+			
+			// 로그인한 유저 == recivedId 의 알람들을 가져옴
+			alarmList = memberService.getAlarm(loginId);
+			
+			/*model.addAttribute("pdto", pdto);
 			
 			for(int i=0;i<alarmList.size();i++){
 				
@@ -542,11 +527,11 @@ public class PersonMypageController {
 					}
 					
 				}
-			}
+			}*/
 
 			url="mypage/MyPageAlarm";
-			System.out.println("모델위 aLIst : "+aList);
-			model.addAttribute("Alarm", aList);
+			System.out.println("모델위 aLIst : "+alarmList);
+			model.addAttribute("Alarm", alarmList);
 			
 		}
 		return url;

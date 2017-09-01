@@ -66,6 +66,14 @@ public class GatheringBoardController {
 		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
+		
 		if(pdto!=null){ // 로그인 체크
 			model.addAttribute("pdto", pdto);
 		}
@@ -82,6 +90,14 @@ public class GatheringBoardController {
 			) {
 		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
 		
 		if(pdto!=null){ // 로그인 체크
 			model.addAttribute("pdto", pdto);
@@ -129,7 +145,13 @@ public class GatheringBoardController {
 		if(pdto!=null){ // 로그인 체크
 			model.addAttribute("pdto", pdto);
 		}
-		
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
 		return url;
 	}
 
@@ -172,7 +194,13 @@ public class GatheringBoardController {
 		if(pdto!=null){ // 로그인 체크
 			model.addAttribute("pdto", pdto);
 		}
-		
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
 		
 		System.out.println("viewModify의 "+post);
 		model.addAttribute("post", post);

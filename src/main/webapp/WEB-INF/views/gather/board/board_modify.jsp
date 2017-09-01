@@ -43,7 +43,7 @@
 
 				<!-- Page Content -->
 				<div class="container" >
-					<form action="/gather/board/modify" method="POST"
+					<form action="/board/modify" method="POST"
 						style="width: 600px; margin-top: 50px">
 						<table class="table"
 							style="width: 700px; margin-left: 20px; border: solid 1px #ccc; padding-top: 100px">

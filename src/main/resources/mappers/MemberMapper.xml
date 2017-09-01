@@ -195,9 +195,10 @@
 		
 	</insert>
 	
-	<select id="getAlarm" resultType="AlarmDTO" >
+	<select id="getAlarm" resultType="AlarmDTO" parameterType="String">
 		select *
-		from alarm		
+		from alarm	
+		where alarmreciveId = #{loginId}	
 	</select>
 
 	<!-- 관리자페이지임 -->

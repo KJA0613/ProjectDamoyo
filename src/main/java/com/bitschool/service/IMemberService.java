@@ -89,7 +89,7 @@ public interface IMemberService {
 
 	public boolean getInsert(AlarmDTO alarm);
 
-	public List<AlarmDTO> getAlarm();
+	public List<AlarmDTO> getAlarm(String loginId);
 
 	public boolean readCheck(int alarmNo);
 	

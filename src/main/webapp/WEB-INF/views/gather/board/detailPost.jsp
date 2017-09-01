@@ -118,8 +118,10 @@
 						<%-- <input type="hidden" name="boardName" value="${post.boardName}">  --%>
 						<div style="padding-left: 19px">
 							<button type="button" class="btn btn-success" onclick="go_url(1)">목록</button>
-							<button type="button" class="btn btn-warning" onclick="go_url(2)">수정</button>
-							<button type="button" class="btn btn-danger" onclick="go_url(3)">삭제</button>
+							<c:if test="${post.userId eq pdto.guserId}">
+								<button type="button" class="btn btn-warning" onclick="go_url(2)">수정</button>
+								<button type="button" class="btn btn-danger" onclick="go_url(3)">삭제</button>
+							</c:if>
 						</div>
 					</form>
 
@@ -145,12 +147,12 @@
 						</c:forEach>
 					</table>
 
-					<form action="/gather/board/reply" method="POST" style="margin-top: 70px">
+					<form action="/board/reply" method="POST" style="margin-top: 70px">
 						<table class="table"
 							style="width: 700px; margin-left: 20px; border: solid 1px #ccc;">
 							<tr>
-								<td style="border: solid 1px #ccc; width: 600px;"><input
-									type="text" name="replyUserId" style="margin-bottom: 10px">
+								<td style="border: solid 1px #ccc; width: 600px;">
+									<input type="text" name="disreplyUserId" style="margin-bottom: 10px" value="${pdto.guserId}" disabled="disabled">
 									<!-- 아이디 --> <textarea class="form-control" rows="5"
 										placeholder="comment" name="replyContents"></textarea> <!-- 내용 -->
 								</td>
@@ -161,6 +163,7 @@
 									<input type="hidden" name="page" id="page" value="${page}"> 
 									<input type="hidden" id="boardName" name="boardName" value="${post.boardName}">
 									<input type="hidden" id="query" name="query" value="${query}">
+									<input type="hidden" name="replyUserId" value="${pdto.guserId}">
 								</td>
 							</tr>
 						</table>

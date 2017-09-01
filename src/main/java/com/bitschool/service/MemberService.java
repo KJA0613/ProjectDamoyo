@@ -438,9 +438,9 @@ public class MemberService implements IMemberService {
 
 
 	@Override
-	public List<AlarmDTO> getAlarm() {
+	public List<AlarmDTO> getAlarm(String loginId) {
 		
-		List<AlarmDTO> getAlarm = memberDAO.getAlarm();
+		List<AlarmDTO> getAlarm = memberDAO.getAlarm(loginId);
 		
 		return getAlarm;
 	}

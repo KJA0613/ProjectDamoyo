@@ -123,6 +123,15 @@ public class GatheringController {
 			}
 			model.addAttribute("recomm", recommList);
 		}*/
+		
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
+		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		if(pdto!=null){
 			model.addAttribute("pdto", pdto);
@@ -280,6 +289,14 @@ public class GatheringController {
 			model.addAttribute("cdto", cdto);
 		}
 
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
+		
 		return url;
 	}
 	
@@ -499,6 +516,14 @@ public class GatheringController {
 			url="gather/gathering_parti";
 		}else{
 			
+		}
+		
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
 		}
 		
 		if(plist!=null){

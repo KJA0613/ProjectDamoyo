@@ -78,10 +78,9 @@ public class MemberLoginController {
 							HttpServletRequest request, RedirectAttributes redirectAttributes) {
 							
 		String url = null;
-		int gatherNo =0;
+		/*int gatherNo =0;
 		int pgatherNo =0;
-		int totalNo = 0;
-		String pgId = null;
+		String pgId = null;*/
 		
 		//System.out.println(preURL);
 		// 사용자가 로그인 폼에 입력한 데이터 > DB에 있는 데이터인지 여부 확인
@@ -89,18 +88,15 @@ public class MemberLoginController {
 
 		System.out.println("[TEST-로그인(개인)/세션유지] 세션에 저장된 회원 정보 확인: " + pdto);
 		
-		List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
-		alarmList = memberService.getAlarm();
-		List<GatherPeopleDTO> gpList = new ArrayList<GatherPeopleDTO>();
-		gpList = gatherService.getPeoPleAlarm();
-		
 		// 로그인 성공 (DB에 해당 데이터 있음)
 		if(pdto != null) {
-			
+			/*
+			List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
+			alarmList = memberService.getAlarm(guserId);
+						
 			// 알람 기능
 			boolean flag = sessionService.checkAlarm(pdto.getGuserId()); 
-			System.out.println("로그인의 체크알람은 "+flag);
-			session.setAttribute("alarm", flag);
+			session.setAttribute("alarm", flag);*/
 			
 			
 			// -----------------------------------------------------------------\\
@@ -125,7 +121,8 @@ public class MemberLoginController {
 			//로그인하고나서 바로 전 페이지로 돌아가기
 			
 			model.addAttribute("pdto",pdto);
-			//로그인세션받으면서 알람유무확인
+			
+			/*//로그인세션받으면서 알람유무확인
 			for(int i=0;i<alarmList.size();i++){
 				
 				gatherNo = alarmList.get(i).getAlarmGatherNo();
@@ -145,7 +142,7 @@ public class MemberLoginController {
 					}
 				}				
 					
-			}
+			}*/
 			
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} 
