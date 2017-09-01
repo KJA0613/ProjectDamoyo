@@ -98,11 +98,12 @@ $(function() {
 			}
 		}
 		
-		alert(state);
 		if(state=='진행중'){
 			$('#gatherBlog').show();
+			$('#gatherComplete').hide();
 		}else{
 			$('#gatherBlog').hide();
+			$('#gatherComplete').show();
 		}
 		
 		// 최대인원 신청인원 같으면 신청버튼 막기
