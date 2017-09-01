@@ -95,10 +95,7 @@ $(function() {
 		} 
 		
 		// 작성자와 로그인유저와 비교하여 같으면 수정하기 버튼를 생성하는 
-		var loginId = $('#loginGuser').val();
-
-		alert("상태 : "+ state+", 블로그 : "+ blog);
-		
+		var loginId = $('#loginGuser').val();		
 		
 		// 로그인 상태
 		if(loginId.length>0){ // 값이 비어있지 않고
@@ -447,7 +444,7 @@ $(function() {
 				cache : false,
 				data : info,
 				success : function(data){
-					alert('완료했으니까 관리자 승인 기다려');
+					alert('완료하였습니다. 관리자 승인 기다려주세요~');
 				},
 				error : function(request, status, error){
 					alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);

@@ -37,15 +37,20 @@
   		gatherNoId = 'gatherNo'+num;
   		gatherNameId = 'gatherName'+num;
   		gatherBlog = 'gatherBlog'+num;
+  		gatherRecognition = 'gatherRecognition'+num;
   		
 		blogId = document.getElementById(gatherNoId).value; /* 모집글 번호==블로그 번호 */
 		blogName = document.getElementById(gatherNameId).value; /* 블로그 번호 */
+		
 		blogState = document.getElementById(gatherBlog).value; /* 블로그 유무 상태, Yes or No */
-		alert(blogState);
-		if(blogState=='Yes'){
+		blogRecognition = document.getElementById(gatherRecognition).value;
+		
+		/* alert("블로그개설?"+blogState+", 진행중?"+blogRecognition); */
+		
+		if(blogState=='Yes'&&blogRecognition=='Yes'){
 			blogName = '&blogName='+blogName;
 			Url = Url + blogId + blogName;
-		}else if(blogState=='No'){
+		}else {
 			Url = "/gather/gathering?no="+blogId;
 		}
 		window.open(Url);
@@ -102,6 +107,7 @@
 										<input type="hidden" value="${make.gatherNo}" id="gatherNo${make.gatherNo}">
 										<input type="hidden" value="${make.gatherSubject}" id="gatherName${make.gatherNo}">
 										<input type="hidden" value="${make.gatherBlog}" id="gatherBlog${make.gatherNo}">
+										<input type="hidden" value="${make.gatherRecognition}" id="gatherRecognition${make.gatherNo}">
 									</h4>
 								</a>
 							</div>

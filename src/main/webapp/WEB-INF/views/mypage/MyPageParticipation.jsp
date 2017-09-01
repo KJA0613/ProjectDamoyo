@@ -33,9 +33,35 @@
 </style>
 
 <!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
-<script>
+<!-- <script>
    $('.nav-pills').scrollingTabs(); 
+</script> -->
+
+<script type="text/javascript">
+	function goBlog(num) {
+  		Url = '/blog/home?blogId=';
+  		
+  		gatherNoId = 'partiNo'+num;
+  		gatherNameId = 'partiName'+num;
+  		gatherBlog = 'partiBlog'+num;
+  		gatherRecognition = 'partiRecognition'+num;
+  		
+		blogId = document.getElementById(gatherNoId).value; /* 모집글 번호==블로그 번호 */
+		blogName = document.getElementById(gatherNameId).value; /* 블로그 번호 */
+		
+		blogState = document.getElementById(gatherBlog).value; /* 블로그 유무 상태, Yes or No */
+		blogRecognition = document.getElementById(gatherRecognition).value;
+				
+		if(blogState=='Yes'&&blogRecognition=='Yes'){
+			blogName = '&blogName='+blogName;
+			Url = Url + blogId + blogName;
+		}else {
+			Url = "/gather/gathering?no="+blogId;
+		}
+		window.open(Url);
+	}
 </script>
+
 
 <!-- [Header] 공통 헤더 -->
 <%@include file = "../header.jsp"%>
@@ -72,16 +98,17 @@
 					<div class="row">			
 						<c:forEach var="parti" items="${plist}">
 							<div class="col-xs-6 col-lg-6" id="gather">
-								<a href=""> <img width="408px" height="300px" src='${parti.gatherImg}'>
+								<a href="javascript:goBlog(${parti.gatherNo});"> <img width="408px" height="300px" src='${parti.gatherImg}'>
 									<h3 align="center">${parti.gatherSubject}</h3>
 									<h4>
 										게시글 번호 : ${parti.gatherNo}<br>
 										기간 : ${fn:substring(parti.gatherSdate, 0, 10)} ~ ${fn:substring(parti.gatherEdate, 0, 10)}<br> 
 										최근 글 : 12<br>
 										오늘 방문자수 : 3
-										<%-- 요일 : ${parti.gatherDay}<br> 
-										지역 : ${parti.gatherArea}<br>
-										신청인원 : ${parti.gatherParti} --%>
+										<input type="hidden" value="${parti.gatherNo}" id="partiNo${parti.gatherNo}">
+										<input type="hidden" value="${parti.gatherSubject}" id="partiName${parti.gatherNo}">
+										<input type="hidden" value="${parti.gatherBlog}" id="partiBlog${parti.gatherNo}">
+										<input type="hidden" value="${parti.gatherRecognition}" id="partiRecognition${parti.gatherNo}">
 									</h4>
 								</a>
 							</div>
