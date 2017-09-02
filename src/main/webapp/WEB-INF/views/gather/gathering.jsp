@@ -42,7 +42,7 @@
 	color: #514d4d;
 	font-size: 16px;
 	font-weight: bold;
-	letter-spacing: 1px;
+	/* letter-spacing: 1px; */
 }
 
 ul {
@@ -143,6 +143,33 @@ a:visited {
 	margin-bottom: 20px;
 }
 
+/* 모임 */
+.gathering_title {
+	text-align: center;
+	font-weight: bold;
+	color: #767676;
+}
+
+#s1 {
+	margin-left: 0px;
+	color: #484848;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+}
+
+#s2 {
+	margin-left: 0px;
+	color: #777;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.details {
+    border-bottom: 1px solid #e8e5e5;
+    border-left: 1px solid #e8e5e5;
+    border-right: 1px solid #e8e5e5;
+}
 </style>
 
 <!-- jquery를 이용하여 뿌리기 -->
@@ -220,7 +247,7 @@ a:visited {
 						
 					</form>
 				</div>
-
+				
 				<br>
 				<%-- <div>
 					<h3>모집중인 모임</h3>
@@ -299,8 +326,10 @@ a:visited {
 								data-id='${gath.guserId}'
 								data-blog='${gath.gatherBlog}'
 								data-state='${gath.gatherState}'> 
-								<img class='gatherimg' width="213px" height="120px" src='${gath.gatherImg}'> <span class="price">${gath.gatherState}</span>
-								<h4 align="center">
+								<img class='gatherimg' width="214px" height="180px" src='${gath.gatherImg}'><span class="price">${gath.gatherState}</span>
+								<div class="details">
+								<h4 class="gathering_title" style="margin-top: 0px;">
+								<br>
 									<c:choose>
 										<c:when test="${fn:length(gath.gatherSubject) > 9}">
 									        ${fn:substring(gath.gatherSubject, 0, 11)} ...
@@ -310,12 +339,14 @@ a:visited {
 									    </c:otherwise>
 									</c:choose>
 								</h4>
-								<h5>
-									기간 : ${fn:substring(gath.gatherSdate, 0, 10)} ~
-									${fn:substring(gath.gatherEdate, 0, 10)}<br> 요일 :
-									${gath.gatherDay}<br> 지역 : ${gath.gatherArea}<br>
-									신청인원 : ${gath.gatherParti}<br>
-								</h5>
+								<p>
+									&nbsp;&nbsp;<span id="s1">기간</span>&nbsp;&nbsp;<span id="s2">${fn:substring(gath.gatherSdate, 0, 10)} ~
+									${fn:substring(gath.gatherEdate, 0, 10)}</span><br>
+									&nbsp;&nbsp;<span id="s1">지역</span>&nbsp;&nbsp;<span id="s2">${gath.gatherArea}</span><br> 
+									&nbsp;&nbsp;<span id="s1">요일</span>&nbsp;&nbsp;<span id="s2">${gath.gatherDay}</span><br> 
+									&nbsp;&nbsp;<span id="s1">신청인원</span>&nbsp;&nbsp;<span id="s2">${gath.gatherParti}</span><br>
+								</p>
+								</div>
 							</a>
 						</div>
 					</c:forEach>
