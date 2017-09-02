@@ -678,6 +678,19 @@ public class GatheringController {
 			model.addAttribute("gath", gList);
 		}
 		
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
+		
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		if(pdto!=null){
+			model.addAttribute("pdto", pdto);
+		}
+		
 		/*model.addAttribute("recomm", recommList);*/
 		model.addAttribute("sSTR", sSTR);
 		
