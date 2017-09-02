@@ -261,10 +261,10 @@ public class MemberDAO implements IMemberDAO {
 
 
 	@Override
-	public List<AlarmDTO> getAlarm() {
+	public List<AlarmDTO> getAlarm(String loginId) {
 
 		List<AlarmDTO> getAlarm = null;
-		getAlarm = session.selectList(namespace+".getAlarm");
+		getAlarm = session.selectList(namespace+".getAlarm", loginId);
 		
 		return getAlarm;
 	}

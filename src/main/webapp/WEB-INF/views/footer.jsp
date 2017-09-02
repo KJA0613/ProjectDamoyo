@@ -15,8 +15,8 @@
     }
 </script>
 <style type="text/css">
-	.material-icons top{	
-		font-Size: 35px;
+	.material-icons{	
+		/* font-Size: 35px; */
 		/* background-color: #03a9f4; */	
 		font-weight:bold;
 		color: #03a9f4;
@@ -34,7 +34,7 @@
 				<br><br><br>
 				<div class="footer pull-left">DAMOYO</div>
 				<!-- <div class="footer-right">ⓒ2017/09/01 DAMOYO </div> -->
-				<div class="footer-right top pull-right"><a onclick="fnMove('2')"><i class="material-icons top">arrow_upward</i>top</a></div>
+				<div class="footer-right top pull-right"><a onclick="fnMove('2')"><i class="material-icons">arrow_upward</i>top</a></div>
 			</div>
 		</address>
 	</footer>	

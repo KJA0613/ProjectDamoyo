@@ -30,6 +30,42 @@
 	src="http://scriptmoa.cafe24.com/scriptmoa/jQuery/jquery-2.1.1.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+
+<script type="text/javascript">
+	function goBlog(num, code) {
+  		Url = '/blog/home?blogId=';
+  		
+  		if(code=='1'){
+	  		gatherNoId = 'partiNo'+num;
+	  		gatherNameId = 'partiName'+num;
+	  		gatherBlog = 'partiBlog'+num;
+	  		gatherRecognition = 'partiRecognition'+num;
+  		}else if(code=='2'){
+  			gatherNoId = 'makeNo'+num;
+	  		gatherNameId = 'makeName'+num;
+	  		gatherBlog = 'makeBlog'+num;
+	  		gatherRecognition = 'makeRecognition'+num;
+  		}
+  			
+		blogId = document.getElementById(gatherNoId).value; /* 모집글 번호==블로그 번호 */
+		blogName = document.getElementById(gatherNameId).value; /* 블로그 번호 */
+		
+		blogState = document.getElementById(gatherBlog).value; /* 블로그 유무 상태, Yes or No */
+		blogRecognition = document.getElementById(gatherRecognition).value;
+		
+		/* alert("블로그개설?"+blogState+", 진행중?"+blogRecognition); */
+		
+		if(blogState=='Yes'&&blogRecognition=='Yes'){
+			blogName = '&blogName='+blogName;
+			Url = Url + blogId + blogName;
+		}else {
+			Url = "/gather/gathering?no="+blogId;
+		}
+		window.open(Url);
+	}
+</script>
+
+
 <!-- 공통 헤더 -->
 <%@include file = "../header.jsp"%>
 
@@ -56,7 +92,7 @@
 					<div class="row">
 						<c:forEach var="parti" items="${plist}">
 							<div class="col-xs-7 col-lg-5" id="gather">
-								<a href=""> <img width="376px" height="250px" src='${parti.gatherImg}'>
+								<a href="javascript:goBlog(${parti.gatherNo},'1');"> <img width="376px" height="250px" src='${parti.gatherImg}'>
 									<h3 align="center">${parti.gatherSubject}</h4>
 									<h4>
 										기간 : ${fn:substring(parti.gatherSdate, 0, 10)} ~ ${fn:substring(parti.gatherEdate, 0, 10)}<br> 
@@ -65,9 +101,13 @@
 										<%-- 요일 : ${parti.gatherDay}<br> 
 										지역 : ${parti.gatherArea}<br>
 										신청인원 : ${parti.gatherParti} --%>
+										<input type="hidden" value="${parti.gatherNo}" id="partiNo${parti.gatherNo}">
+										<input type="hidden" value="${parti.gatherSubject}" id="partiName${parti.gatherNo}">
+										<input type="hidden" value="${parti.gatherBlog}" id="partiBlog${parti.gatherNo}">
+										<input type="hidden" value="${parti.gatherRecognition}" id="partiRecognition${parti.gatherNo}">
 									</h4>
 								</a>
-							</div>
+								</div>
 						</c:forEach>
 
 					</div>
@@ -81,15 +121,19 @@
 					<div class="row">
 						<c:forEach var="make" items="${mlist}">
 							<div class="col-xs-7 col-lg-5" id="gather">
-								<a href=""> <img width="376px" height="250px" src='${make.gatherImg}'>
-									<h3 align="center">${make.gatherSubject}</h3>
+								<a href="javascript:goBlog(${make.gatherNo},'2');"> <img width="376px" height="250px" src='${make.gatherImg}'>
+									<h3 align="center">${make.gatherSubject}</h4>
 									<h4>
 										기간 : ${fn:substring(make.gatherSdate, 0, 10)} ~ ${fn:substring(make.gatherEdate, 0, 10)}<br> 
-										최근 글 : 12 <br>
+										최근 글 : 12<br>
 										오늘 방문자수 : 3
 										<%-- 요일 : ${make.gatherDay}<br> 
 										지역 : ${make.gatherArea}<br>
-										인원 : ${make.gatherParti} --%>
+										신청인원 : ${make.gatherParti} --%>
+										<input type="hidden" value="${make.gatherNo}" id="makeNo${make.gatherNo}">
+										<input type="hidden" value="${make.gatherSubject}" id="makeName${make.gatherNo}">
+										<input type="hidden" value="${make.gatherBlog}" id="makeBlog${make.gatherNo}">
+										<input type="hidden" value="${make.gatherRecognition}" id="makeRecognition${make.gatherNo}">
 									</h4>
 								</a>
 							</div>

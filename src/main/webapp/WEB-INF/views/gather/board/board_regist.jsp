@@ -44,12 +44,12 @@
 
 				<!-- Page Content -->
 				<div class="container" >
-					<form action="/gather/board/boardRegist" method="POST"
+					<form action="/board/boardRegist" method="POST"
 						style="width: 600px; margin-top: 50px">
 						<table class="table" style="margin-left: 20px; border: solid 1px #ccc; padding-top: 100px">
 							<tr>
 								<td height="80px;" style="border: solid 1px #ccc; border-right-style: none;">
-									<input type="text" class="form-control" placeholder="writer" name="userId" style="height: 70px">
+									<input type="text" class="form-control" placeholder="writer" name="disuserId" value="${pdto.guserId}" disabled="disabled" style="height: 70px">
 								</td>
 							</tr>
 							<tr>
@@ -67,11 +67,10 @@
 							</tr>
 						</table>
 						<div style="margin-left: 20px;">
-							<button type="button" class="btn btn-default"
-								onclick="location.href='/board/listAll/boardName=${boardName}'">취소</button>
-							<button type="submit" class="btn btn-primary"
-								style="float: right;">작성</button>
+							<button type="button" class="btn btn-default" onclick="location.href='/board/listAll/boardName=${boardName}'">취소</button>
+							<button type="submit" class="btn btn-primary" style="float: right;">작성</button>
 						</div>
+						<input type="hidden" name="userId" value="${pdto.guserId}">	
 					</form>
 				</div>
 

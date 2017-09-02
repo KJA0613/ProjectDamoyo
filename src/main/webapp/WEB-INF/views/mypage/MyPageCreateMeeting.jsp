@@ -32,14 +32,28 @@
 
 <script type="text/javascript">
 	function goBlog(num) {
-  		blogUrl = 'http://localhost:5050/blog/home?blogId=';
+  		Url = '/blog/home?blogId=';
+  		
   		gatherNoId = 'gatherNo'+num;
   		gatherNameId = 'gatherName'+num;
-		blogId = document.getElementById(gatherNoId).value;
-		blogName = document.getElementById(gatherNameId).value;
-		blogName = '&blogName='+blogName;
-		blogUrl = blogUrl + blogId + blogName;
-		window.open(blogUrl);
+  		gatherBlog = 'gatherBlog'+num;
+  		gatherRecognition = 'gatherRecognition'+num;
+  		
+		blogId = document.getElementById(gatherNoId).value; /* 모집글 번호==블로그 번호 */
+		blogName = document.getElementById(gatherNameId).value; /* 블로그 번호 */
+		
+		blogState = document.getElementById(gatherBlog).value; /* 블로그 유무 상태, Yes or No */
+		blogRecognition = document.getElementById(gatherRecognition).value;
+		
+		/* alert("블로그개설?"+blogState+", 진행중?"+blogRecognition); */
+		
+		if(blogState=='Yes'&&blogRecognition=='Yes'){
+			blogName = '&blogName='+blogName;
+			Url = Url + blogId + blogName;
+		}else {
+			Url = "/gather/gathering?no="+blogId;
+		}
+		window.open(Url);
 	}
 </script>
 
@@ -92,6 +106,8 @@
 										인원 : ${make.gatherParti} --%>
 										<input type="hidden" value="${make.gatherNo}" id="gatherNo${make.gatherNo}">
 										<input type="hidden" value="${make.gatherSubject}" id="gatherName${make.gatherNo}">
+										<input type="hidden" value="${make.gatherBlog}" id="gatherBlog${make.gatherNo}">
+										<input type="hidden" value="${make.gatherRecognition}" id="gatherRecognition${make.gatherNo}">
 									</h4>
 								</a>
 							</div>

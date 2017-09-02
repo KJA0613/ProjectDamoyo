@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.EmailDTO;
-import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.service.EmailSender;
@@ -69,7 +67,7 @@ public class MemberLoginController {
 	}
 	
 	
-	// 01. [개인회원] 로그인
+	// 01-01. [개인회원] 로그인
 	// "쿠키"와 "세션" 설명 : http://88240.tistory.com/190 > [1차 처리] 세션 > [2차 처리 고민] 스프링 제공
 	@RequestMapping(value = "/PersonLogin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String PersonLogin(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, 
@@ -78,10 +76,9 @@ public class MemberLoginController {
 							HttpServletRequest request, RedirectAttributes redirectAttributes) {
 							
 		String url = null;
-		int gatherNo =0;
+		/*int gatherNo =0;
 		int pgatherNo =0;
-		int totalNo = 0;
-		String pgId = null;
+		String pgId = null;*/
 		
 		//System.out.println(preURL);
 		// 사용자가 로그인 폼에 입력한 데이터 > DB에 있는 데이터인지 여부 확인
@@ -89,18 +86,15 @@ public class MemberLoginController {
 
 		System.out.println("[TEST-로그인(개인)/세션유지] 세션에 저장된 회원 정보 확인: " + pdto);
 		
-		List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
-		alarmList = memberService.getAlarm();
-		List<GatherPeopleDTO> gpList = new ArrayList<GatherPeopleDTO>();
-		gpList = gatherService.getPeoPleAlarm();
-		
 		// 로그인 성공 (DB에 해당 데이터 있음)
 		if(pdto != null) {
-			
+			/*
+			List<AlarmDTO> alarmList = new ArrayList<AlarmDTO>();
+			alarmList = memberService.getAlarm(guserId);
+						
 			// 알람 기능
 			boolean flag = sessionService.checkAlarm(pdto.getGuserId()); 
-			System.out.println("로그인의 체크알람은 "+flag);
-			session.setAttribute("alarm", flag);
+			session.setAttribute("alarm", flag);*/
 			
 			
 			// -----------------------------------------------------------------\\
@@ -125,7 +119,8 @@ public class MemberLoginController {
 			//로그인하고나서 바로 전 페이지로 돌아가기
 			
 			model.addAttribute("pdto",pdto);
-			//로그인세션받으면서 알람유무확인
+			
+			/*//로그인세션받으면서 알람유무확인
 			for(int i=0;i<alarmList.size();i++){
 				
 				gatherNo = alarmList.get(i).getAlarmGatherNo();
@@ -145,7 +140,7 @@ public class MemberLoginController {
 					}
 				}				
 					
-			}
+			}*/
 			
 		// 로그인 실패 (DB에 해당 데이터 없음)
 		} 
@@ -160,7 +155,7 @@ public class MemberLoginController {
 		return url;
 	}
 	
-	//01-1. [기업회원] 로그인
+	//01-02. [기업회원] 로그인
 	@RequestMapping(value = "/CompanyLogin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String CompanyLogin(@RequestParam("guserId") String comId, @RequestParam("guserPw") String comPw, 
 							// @RequestParam("comCode") String guserCode,
@@ -179,19 +174,6 @@ public class MemberLoginController {
 			// 세션에 사용자 정보 저장
 			session.setAttribute("cdto", cdto);			
 			
-			/*List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
-			session.setAttribute("recommgatherList", recommgatherList);*/
-			
-			//redirectAttributes.addFlashAttribute("pdto", pdto);
-			//System.out.println("리다이렉트 값: " + pdto);
-			
-			// 이전 페이지로 복귀
-			//String referer = request.getHeader("Referer");
-			//System.out.println("페이지 경로명: " + referer);		// [출력] http://localhost:5050/member/LoginForm		
-			//String[] loginReferer = referer.split("/");
-			
-			//System.out.println("4번째: " + loginReferer[4]);
-			
 			model.addAttribute("cdto",cdto);
 			url = "redirect:/place/PlaceListAll";
 			
@@ -208,6 +190,20 @@ public class MemberLoginController {
 
 		return url;
 	}
+	
+	
+	// 01-03. 
+	@RequestMapping(value = "/AdminLogin", method = RequestMethod.POST)
+	public String AdminLogin(@RequestParam("guserId") String adminId, @RequestParam("guserPw") String adminPw) {
+		String url = null;
+		
+		if(adminId.equals("admin0904") && adminPw.equals("adminpw0904")) {
+			url = "redirect:/admin/dashbord";	
+		}
+		
+		return url;
+	}
+	
 	
 	// 02. [개인&기업회원] 로그아웃 (세션 유지 해제)
 	@RequestMapping(value = "/Logout", method = RequestMethod.GET)

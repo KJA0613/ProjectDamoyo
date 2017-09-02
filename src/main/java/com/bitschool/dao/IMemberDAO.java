@@ -61,7 +61,7 @@ public interface IMemberDAO {
 
 	public boolean getAlarmInsert(AlarmDTO alarm);
 
-	public List<AlarmDTO> getAlarm();
+	public List<AlarmDTO> getAlarm(String loginId);
 
 	public boolean readCheck(int alarmNo);
 

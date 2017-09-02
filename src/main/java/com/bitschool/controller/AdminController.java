@@ -36,9 +36,7 @@ public class AdminController {
 	
 	// 01. 관리자대쉬보드(메인)페이지
 	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
-	public String dashbord(
-				Model model
-			){
+	public String dashbord(Model model){
 			
 			String url = "admin/dashboard";	
 			
@@ -217,9 +215,10 @@ public class AdminController {
 			return url;
 		}
 		
-		@RequestMapping(value = "/map", method = {RequestMethod.POST,RequestMethod.GET})
+		// 장소관리
+		@RequestMapping(value = "/place", method = {RequestMethod.POST,RequestMethod.GET})
 		public String map(){
-			String url = "/admin/map";
+			String url = "/admin/place";
 			
 			return url;
 		}

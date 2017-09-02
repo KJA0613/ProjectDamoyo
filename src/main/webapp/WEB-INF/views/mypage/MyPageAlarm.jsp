@@ -169,10 +169,10 @@
 										<a id="alarmGather" onclick="gather(${alarm.alarmNo}, ${alarm.alarmGatherNo});" href='#'>${alarm.alarmGatherNo}${alarm.alarmIndex}</a>
 									</c:when>
 									<c:when test="${alarm.alarmGrade eq 2}">
-										<a id="blog" href='#'>${alarm.alarmGatherNo}${alarm.alarmIndex}</a>
+										<a id="blog" onclick="gather(${alarm.alarmNo}, ${alarm.alarmGatherNo});" href='#'>${alarm.alarmIndex}</a>
 									</c:when>
 									<c:when test="${alarm.alarmGrade eq 3}">
-										<a id="blog" href='#'>${alarm.alarmGatherNo}${alarm.alarmIndex}</a>
+										<a id="blog" href='#'>${alarm.alarmIndex}</a>
 									</c:when>									
 								</c:choose>
 						        </td>

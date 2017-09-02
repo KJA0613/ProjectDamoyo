@@ -146,6 +146,7 @@ $(function() {
 						"'  data-id='"+gList.guserId+
 						"'  data-day='"+day+
 						"'  data-state='"+gList.gatherState+
+						"'  data-blog='"+gList.gatherBlog+
 						"' >"
 						
 						str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
@@ -294,6 +295,7 @@ function search_click(){
 													"'  data-id='"+gList.guserId+
 													"'  data-day='"+day+
 													"'  data-state='"+gList.gatherState+
+													"'  data-blog='"+gList.gatherBlog+
 													"' >"
 						
 				str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
