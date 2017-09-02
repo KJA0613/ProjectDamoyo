@@ -61,10 +61,10 @@ public class MainController {
 		
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		List<BTempDTO> top10List = null;
-		List<BTempDTO> list = tService.listAll();
-		list = recommend.beforeLogin(list);		
+		List<BTempDTO> list = tService.listAll();		
 		
 		if(list.size() >= 10) {
+			list = recommend.beforeLogin(list);
 			if(pdto == null) {
 				session.setAttribute("tempList", list);
 				top10List = list.subList(0, 10);
