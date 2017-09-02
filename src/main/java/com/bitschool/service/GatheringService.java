@@ -104,9 +104,9 @@ public class GatheringService implements IGatheringService {
 	}
 
 	@Override
-	public boolean mergeRecommend(List<RecommGatherDTO> recommgatherList) {
+	public boolean mergeRecommend(RecommGatherDTO regather) {
 
-		boolean flag = gDao.mergeList(recommgatherList);
+		boolean flag = gDao.mergeList(regather);
 		
 		return flag;
 	}

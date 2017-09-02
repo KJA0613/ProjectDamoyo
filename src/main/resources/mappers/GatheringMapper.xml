@@ -179,13 +179,13 @@
 	
 		merge into recommgather 
 			using dual
-			on (recommgathername = #{recommgatherName} and recommgathercode = #{recommgatherCode} and guserid = #{guserId})
+			on (gatherno = #{gatherNo} and gathersubject = #{gatherSubject})
 			when matched then
 				update set
-					recommgathercnt = recommgathercnt + 1
+					gathercnt = gathercnt + 1
 			when not matched then 
-				insert (recommgatherno, recommgathername, recommgathercode, recommgathercnt, guserid, recommgatherdate)
-				values (#{recommgatherNo}, #{recommgatherName}, #{recommgatherCode}, 1, #{guserId}, sysdate)
+				insert (recommgatherno, gatherNo, gatherSubject, gatherCategoryTop, gatherCategoryBot, gatherAreaTop, gatherArea, gatherCnt)
+				values (#{recommgatherNo}, #{gatherNo}, #{gatherSubject}, #{gatherCategoryTop}, #{gatherCategoryBot}, #{gatherAreaTop}, #{gatherArea}, 1)
 	</update>
 	
 	

@@ -1,14 +1,11 @@
 package com.bitschool.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.EmailDTO;
-import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.service.EmailSender;
 import com.bitschool.service.IGatheringService;
 import com.bitschool.service.IMemberService;
-import com.bitschool.service.SessionService;
 
 // [개인&기업회원] - 로그인&로그아웃
 // 회원(Member) = 개인(Person) + 기업(Company)
@@ -37,21 +31,15 @@ public class MemberLoginController {
 	//----------------------------------------------- 설 정 -----------------------------------------------//
 	
 	// [로깅]
-	private static final Logger logger = LoggerFactory.getLogger(MemberLoginController.class);
+	/*private static final Logger logger = LoggerFactory.getLogger(MemberLoginController.class);*/
 
 	// [주입] 서비스 인터페이스
 	@Inject
 	private IMemberService memberService;	
 	
-	@Inject
-	private IGatheringService gService;
-	
-	@Inject
-	private IGatheringService gatherService;
-	
-	@Inject
-	private SessionService sessionService;	
-	
+/*	@Inject
+	private IGatheringService gService;*/
+
 	
 	//----------------------------------------------- 로 그 인 -----------------------------------------------//	
 	
@@ -104,8 +92,9 @@ public class MemberLoginController {
 			// 세션에 사용자 정보 저장
 			session.setAttribute("pdto", pdto);			
 			
-			List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
-			session.setAttribute("recommgatherList", recommgatherList);
+			/*예전 추천기능, 안함유ㅠㅠ
+			 * List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
+			session.setAttribute("recommgatherList", recommgatherList);*/
 			
 			int idx = preURL.indexOf('/',7);
 			String goURI = preURL.substring(idx);
@@ -212,7 +201,8 @@ public class MemberLoginController {
 		String url = null;
 
 		// guser가 선택한 것을 담아놓은 dto를 db에 넣음
-		@SuppressWarnings("unchecked")
+		/* 예전에 만든 간단한 추천인데
+		 * @SuppressWarnings("unchecked") 
 		List<RecommGatherDTO> recommgatherList = (List<RecommGatherDTO>) session.getAttribute("recommgatherList");
 		
 		if(recommgatherList!=null){
@@ -223,6 +213,7 @@ public class MemberLoginController {
 				System.out.println("성공했다 짜식아");
 			}
 		}
+		*/
 		// 세션 초기화		
 		session.invalidate();
 

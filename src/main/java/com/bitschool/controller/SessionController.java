@@ -18,13 +18,15 @@ public class SessionController {
 		
 		HttpSession session = request.getSession();
 		
-		int todayCount = 0;
-		int totalCount = 0;
+		
 		
 		int result = sessionService.setVisitor();
 		System.out.println("result : "+result);
 		
-		if(result>0){
+		/*if(result>0){
+		 	int todayCount = 0;
+			int totalCount = 0;
+			
 			todayCount = sessionService.getToday();
 			totalCount = sessionService.getTotal();
 			
@@ -35,7 +37,7 @@ public class SessionController {
 				session.setAttribute("todayCount", todayCount);
 				session.setAttribute("totalCount", totalCount);
 			}
-		}
+		}*/
 	
 		
 		return session;

@@ -35,10 +35,13 @@ $(function() {
 		var blog = href.data('blog'); 
 		
 		var DATA = {
-			"category" : categorybot,
+			"categorytop" : categorytop,
+			"categorybot" : categorybot,
+			"areatop" : areatop,
 			"area" : area,
 			"no" : no,
 			"id" : id,
+			"subject" : subject,
 		};
 		
 		// 여기서 클릭했을 때 recommend를 해주는 컨트롤러로 이동
