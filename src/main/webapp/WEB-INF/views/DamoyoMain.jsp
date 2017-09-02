@@ -237,7 +237,7 @@
 		<div style="margin-left: 830px; border-style: solid; border-color: #b3b3b3; border-width: thin;">
 		 	<ol>
 			<c:forEach var="dto" items="${list}">
-				<li style="text-align: left;">${dto.gatherSubject}</li>
+				<li style="text-align: left;"><a href="/gather/damoyoSearch?sSTR=${dto.gatherSubject}">${dto.gatherSubject}</a></li>
 			</c:forEach>
 			</ol>
 		</div>

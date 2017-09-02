@@ -2,14 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>마이페이지</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- [TEST] CSS (나중에 resource에서 스타일시트  따로 관리 할 예정) -->
+<!-- 개설한모임 마우스 가져다 대면 정보 노출 -->
+
 <style type="text/css">
 	.table {
 		margin-left: 10px;
@@ -28,9 +33,49 @@
 	.pagination > li > a{
 		float: none;
 	}
+	.gathering_title {
+   text-align: left;
+   font-weight: bold;
+   color: #767676;
+}
+	#s1 {
+   margin-left: 0px;
+   color: #484848;
+   font-weight: bold;
+   font-size: 15px;
+   vertical-align: middle;
+  
+   /* display: inline-block; */
+   /* padding: 0px 5px 0; */
+}
+
+#s2 {
+   margin-left: 0px;
+   color: #777;
+   font-size: 15px;
+   font-weight: normal;
+   vertical-align: middle;
+   
+}
+.sun{
+
+}
+
 </style>
 
+<script >
+/* Demo purposes only */
+$(".hover").mouseleave(
+  function () {
+    $(this).removeClass("hover");
+  }
+);
+</script>
+
 <script type="text/javascript">
+	
+	
+		
 	function goBlog(num) {
   		Url = '/blog/home?blogId=';
   		
@@ -77,45 +122,44 @@
         
         	 <!--/// [오른쪽/해당되는 내용]: 12칸 중 "9칸" 크기 확보 ///-->
 			 <div class="col-md-9">
-				  <div class="tab-content">	 
-					<!-- 검색 -->
+				  <div class="tab-content">	 					
 				    <div class="col-md-4 col-md-offset-8">
-						<form action="#" method="POST" class="search-form">
-							<!-- <div class="form-group has-feedback">
+						<!-- <form action="#" method="POST" class="search-form">
+							<div class="form-group has-feedback">
 				           		<label for="search" class="sr-only">search</label>
 				           		<input type="text" class="form-control" name="search" id="search" placeholder="검색어를 입력해주세요.">
 				             		돋보기 모양
 				            	<span class="glyphicon glyphicon-search form-control-feedback"></span>
-				           	</div> -->
-						</form>
+				           	</div>
+						</form> -->
 					</div>					
 
 					
-					<!-- 개인 > 개설한 모임 목록  -->					
+			
+					
+								
 					<div class="row">
 						<c:forEach var="make" items="${mlist}">
-							<div class="col-xs-6 col-lg-6" id="gather">
-								<a href="javascript:goBlog(${make.gatherNo});"> <img width="408px" height="300px" src='${make.gatherImg}'>
-									<h3 align="center">${make.gatherSubject}</h3>
-									<h4>
-										기간 : ${fn:substring(make.gatherSdate, 0, 10)} ~ ${fn:substring(make.gatherEdate, 0, 10)}<br> 
-										최근 글 : 12 <br>
-										오늘 방문자수 : 3
-										<%-- 요일 : ${make.gatherDay}<br> 
-										지역 : ${make.gatherArea}<br>
-										인원 : ${make.gatherParti} --%>
+							<div class="col-md-4" style="border: 1px solid #e8e5e5; height: auto; padding:10px; margin-right:5px;">
+							
+								<a href="javascript:goBlog(${make.gatherNo});"> <img width="100%" height="180px" src='${make.gatherImg}'><br>	
+									
+										<h4 class="gathering_title"> ${make.gatherSubject}<br></h4>						
+										<span id="s1">지역 : </span>&nbsp;&nbsp;<span id="s2">${make.gatherArea}<br></span>
+										<span id="s1">인원 : </span>&nbsp;&nbsp;<span id="s2">${make.gatherParti}<br></span>
+										<span id="s1">기간 : </span>&nbsp;<span id="s2">${fn:substring(make.gatherSdate, 0, 10)} ~ ${fn:substring(make.gatherEdate, 0, 10)} 
+										<br></span>
 										<input type="hidden" value="${make.gatherNo}" id="gatherNo${make.gatherNo}">
 										<input type="hidden" value="${make.gatherSubject}" id="gatherName${make.gatherNo}">
 										<input type="hidden" value="${make.gatherBlog}" id="gatherBlog${make.gatherNo}">
 										<input type="hidden" value="${make.gatherRecognition}" id="gatherRecognition${make.gatherNo}">
-									</h4>
 								</a>
 							</div>
 						</c:forEach>
-					</div>
+					</div>  
 					
 					
-					<!-- 광고주 > 개설한 모임 장소 -->
+					<%-- <!-- 광고주 > 개설한 모임 장소 -->
 					<div class="wrapper">
 					<c:choose>
 						<c:when test="${empty plList}">							
@@ -130,7 +174,7 @@
 			   	   			<%@include file="../place/PlaceAll.jsp"%>
 			   	   		</c:otherwise>	
 			   	   	</c:choose>		
-			   	    </div>
+			   	    </div> --%>
 			   	    			
 				</div>
 			</div>

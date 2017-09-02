@@ -30,6 +30,31 @@
 	.pagination > li > a{
 		float: none;
 	}
+	
+	.gathering_title {
+   text-align: left;
+   font-weight: bold;
+   color: #767676;
+  }
+#s1 {
+   margin-left: 0px;
+   color: #484848;
+   font-weight: bold;
+   font-size: 15px;
+   vertical-align: middle;
+  
+   /* display: inline-block; */
+   /* padding: 0px 5px 0; */
+ }
+
+#s2 {
+   margin-left: 0px;
+   color: #777;
+   font-size: 15px;
+   font-weight: normal;
+   vertical-align: middle;
+   
+}
 </style>
 
 <!-- 왼쪽 메뉴바 클릭시, 해당 페이지 보이게하기 -->
@@ -97,19 +122,20 @@
 
 					<div class="row">			
 						<c:forEach var="parti" items="${plist}">
-							<div class="col-xs-6 col-lg-6" id="gather">
-								<a href="javascript:goBlog(${parti.gatherNo});"> <img width="408px" height="300px" src='${parti.gatherImg}'>
-									<h3 align="center">${parti.gatherSubject}</h3>
-									<h4>
-										게시글 번호 : ${parti.gatherNo}<br>
-										기간 : ${fn:substring(parti.gatherSdate, 0, 10)} ~ ${fn:substring(parti.gatherEdate, 0, 10)}<br> 
-										최근 글 : 12<br>
-										오늘 방문자수 : 3
+							<div class="col-md-4" style="border: 1px solid #e8e5e5; height: auto; padding:10px; margin-right:5px;">
+								<a href="javascript:goBlog(${parti.gatherNo});"> <img width="100%" height="180px" src='${parti.gatherImg}'>
+									<h4 class="gathering_title">${parti.gatherSubject}</h4>
+									
+										
+										<span id="s1">기간 :</span>&nbsp;<span id="s2"> ${fn:substring(parti.gatherSdate, 0, 10)} ~ ${fn:substring(parti.gatherEdate, 0, 10)}<br></span> 	
+										<span id="s1">지역 : </span>&nbsp;<span id="s2">${parti.gatherArea}<br></span> 
+                         				<span id="s1">참여인원 : </span>&nbsp;<span id="s2">${parti.gatherParti}<br></span> 
+                          									
 										<input type="hidden" value="${parti.gatherNo}" id="partiNo${parti.gatherNo}">
 										<input type="hidden" value="${parti.gatherSubject}" id="partiName${parti.gatherNo}">
 										<input type="hidden" value="${parti.gatherBlog}" id="partiBlog${parti.gatherNo}">
 										<input type="hidden" value="${parti.gatherRecognition}" id="partiRecognition${parti.gatherNo}">
-									</h4>
+									
 								</a>
 							</div>
 						</c:forEach>
