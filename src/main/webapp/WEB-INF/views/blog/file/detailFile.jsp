@@ -104,6 +104,12 @@
 					<td style="height: 400px; border: solid 1px #ccc; border-bottom-style: none;">${post.postContents}</td>
 					<td style="border: solid 1px #ccc; border-top-style: none;"></td>
 				</tr>
+				<tr style="border: solid 1px #ccc;">
+					<td style="border: solid 1px #ccc; border-right-style: none;">
+						첨부 파일 : <a href='/blog/file/download?filename=${post.uploadUTF}'>${post.filePath}</a>
+					</td>
+					<td style="border: solid 1px #ccc; border-left-style: none;"></td>
+				</tr>
 
 			</table>
 			<input type="hidden" name="page" id="page" value="${page}">
