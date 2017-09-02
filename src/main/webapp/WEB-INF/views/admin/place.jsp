@@ -112,28 +112,17 @@
 								<div class="card-content table-responsive">
 									<table class="table">
 										<thead class="text-primary-none" style="color: #00bcd4">
-											<th>모임 번호</th>
-											<th>모임 명</th>
-											<th>모임 생성자</th>
-											<th>모임 지역</th>
-											<th>모임 분류</th>
-											<th>모임 카테고리</th>
-											<th>블로그 생성 유무</th>
+											<th>지역 순위</th>
+											<th>지역 명</th>
+											<th>지역 수</th>
 										</thead>
 										<tbody>
-										<c:forEach var="yesdto" items="${yesdto}">
+										<c:forEach var="pAddr" items="${placeAddr}" varStatus="status">
 										<a href="#" style="color: #00bcd4">
 											<tr>
-												<td>${yesdto.gatherNo}</td>
-												<td>${yesdto.gatherSubject}</td>
-												<td>${yesdto.guserId}</td>
-												<td>${yesdto.gatherArea}</td>
-												<td>${yesdto.gatherCategoryTop}</td>
-												<td>${yesdto.gatherCategoryBot}</td>
-												<td>
-													<c:if test="${yesdto.gatherBlog eq 'Yes'}">O</c:if>
-													<c:if test="${yesdto.gatherBlog eq 'No'}">X</c:if>
-												</td>
+												<td>${status.count}</td>
+												<td>${pAddr.placeName}</td>
+												<td>${pAddr.cntNum}</td>
 											</tr>
 										</a>
 										</c:forEach>
@@ -153,28 +142,17 @@
 								<div class="card-content table-responsive">
 									<table class="table">
 										<thead class="text-primary-none" style="color: #00bcd4">
-											<th>모임 번호</th>
-											<th>모임 명</th>
-											<th>모임 생성자</th>
-											<th>모임 지역</th>
-											<th>모임 분류</th>
-											<th>모임 카테고리</th>
-											<th>블로그 생성 유무</th>
+											<th>카테고리 순위</th>
+											<th>카테고리 명</th>
+											<th>카테고리 수</th>
 										</thead>
 										<tbody>
-										<c:forEach var="nodto" items="${nodto}">
+										<c:forEach var="pCategory" items="${palceCategory}" varStatus="status">
 										<a href="#" style="color: #00bcd4">
 											<tr>
-												<td>${nodto.gatherNo}</td>
-												<td>${nodto.gatherSubject}</td>
-												<td>${nodto.guserId}</td>
-												<td>${nodto.gatherArea}</td>
-												<td>${nodto.gatherCategoryTop}</td>
-												<td>${nodto.gatherCategoryBot}</td>
-												<td>
-													<c:if test="${nodto.gatherBlog eq 'Yes'}">O</c:if>
-													<c:if test="${nodto.gatherBlog eq 'No'}">X</c:if>
-												</td>
+												<td>${status.count}</td>
+												<td>${pCategory.placeName}</td>
+												<td>${pCategory.cntNum}</td>
 											</tr>
 										</a>
 										</c:forEach>
@@ -199,24 +177,20 @@
 											<th>장소 생성자</th>
 											<th>장소 지역</th>
 											<th>장소 분류</th>
-											<th>장소 번호</th>
 											<th>장소 홈페이지</th>
 											<th>장소 가격</th>
 										</thead>
 										<tbody>
-										<c:forEach var="yetdto" items="${yetdto}">
+										<c:forEach var="plist" items="${placeList}">
 										<a href="#" style="color: #00bcd4">
 											<tr>
-												<td>${yetdto.gatherNo}</td>
-												<td>${yetdto.gatherSubject}</td>
-												<td>${yetdto.guserId}</td>
-												<td>${yetdto.gatherArea}</td>
-												<td>${yetdto.gatherCategoryTop}</td>
-												<td>${yetdto.gatherCategoryBot}</td>
-												<td>
-													<c:if test="${yetdto.gatherBlog eq 'Yes'}">O</c:if>
-													<c:if test="${yetdto.gatherBlog eq 'No'}">X</c:if>
-												</td>
+												<td>${plist.placeNo}</td>
+												<td>${plist.placeName}</td>
+												<td>${plist.comId}</td>
+												<td>${plist.placeAddr3}</td>
+												<td>${plist.placeType}</td>
+												<td>${plist.placeURL}</td>
+												<td>${plist.placeCost}</td>
 											</tr>
 										</a>
 										</c:forEach>

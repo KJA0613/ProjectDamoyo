@@ -654,13 +654,13 @@ public class GatheringController {
 		
 		// 현재 세션에 저장된 정보 > pdto에 저장 
 		// 즉, 로그인된 사용자의 정보를 나타냄
-		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		/*PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");*/
 		List<GatheringDTO> gList = gService.getGatheringAll(sSTR); // 전체게시글 가져옴
 		
-		List<GatheringDTO> recommList = gService.getRecommDefault();
+		/*List<GatheringDTO> recommList = gService.getRecommDefault();*/
 		
 		
-		if(pdto!=null){ // 로그인 중이면
+		/*if(pdto!=null){ // 로그인 중이면
 			model.addAttribute("pdto", pdto);
 			
 			List<GatheringDTO> recommListCopy = recommList;
@@ -672,13 +672,26 @@ public class GatheringController {
 			if(recommList.size()==0){ // 사용자 추천 리스트가 없으면
 				recommList = recommListCopy;// 디폴트 추천검색
 			}
-		}
+		}*/
 		
 		if (gList != null) {
 			model.addAttribute("gath", gList);
 		}
 		
-		model.addAttribute("recomm", recommList);
+		if(session.getAttribute("alarm")!=null){
+			boolean alarm = (boolean) session.getAttribute("alarm");
+			
+			if(alarm){
+				model.addAttribute("alarm",alarm);
+			}
+		}
+		
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		if(pdto!=null){
+			model.addAttribute("pdto", pdto);
+		}
+		
+		/*model.addAttribute("recomm", recommList);*/
 		model.addAttribute("sSTR", sSTR);
 		
 		return url;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
+import com.bitschool.dto.PlaceRankDTO;
 
 public interface IPlaceService {
 	
@@ -32,5 +33,11 @@ public interface IPlaceService {
 	public boolean PlaceModifyProcess(PlaceDTO pl_dto);
 
 	public List<PlaceDTO> searchMap(String keyWord);
+
+	public List<PlaceDTO> adminPlaceAll();
+
+	public List<PlaceRankDTO> adminCategory();
+
+	public List<PlaceRankDTO> adminAddr();
 	
 }

@@ -17,7 +17,7 @@
 	<select id="damoyoAll" parameterType="hashmap" resultType="com.bitschool.dto.GatheringDTO">
 		select * 
 		from gather 
-		where GATHERRECOGNITION like 'Yes' or GATHERRECOGNITION like 'yet'
+		where ( GATHERRECOGNITION like 'Yes' or GATHERRECOGNITION like 'yet' )
 		<if test="sSTR != ''">
 			and gatherSubject like '%'||#{sSTR}||'%'
 			<!-- where gatherSubject like '%'||#{sSTR}||'%' or gatherContent like '%'||#{sSTR}||'%' -->

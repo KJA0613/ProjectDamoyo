@@ -19,10 +19,13 @@ import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.GatherRankDTO;
 import com.bitschool.dto.GatheringDTO;
 import com.bitschool.dto.PersonDTO;
+import com.bitschool.dto.PlaceDTO;
+import com.bitschool.dto.PlaceRankDTO;
 import com.bitschool.dto.VisitorTimeDTO;
 import com.bitschool.dto.VisitorWeekDTO;
 import com.bitschool.service.IAdminService;
 import com.bitschool.service.IGatheringService;
+import com.bitschool.service.IPlaceService;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,6 +36,9 @@ public class AdminController {
 	
 	@Inject
 	private IGatheringService gService;
+	
+	@Inject
+	private IPlaceService placeService;
 	
 	// 01. 관리자대쉬보드(메인)페이지
 	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
@@ -206,19 +212,44 @@ public class AdminController {
 			return url;
 		}
 		
+		// 장소관리
+		@RequestMapping(value = "/place", method = {RequestMethod.POST,RequestMethod.GET})
+		public String place(
+				Model model
+				){
+			String url = "/admin/place";
+			
+			// 전체 조회글 가져오기
+			
+			List<PlaceDTO> placeList = placeService.adminPlaceAll();
+			System.out.println(placeList.size());
+			if(placeList!=null){
+				model.addAttribute("placeList", placeList);
+			}
+			
+			// 카테고리 많은순
+			List<PlaceRankDTO> palceCategory = placeService.adminCategory();
+			System.out.println(palceCategory.size());
+			if(palceCategory!=null){
+				model.addAttribute("palceCategory", palceCategory);
+			}
+			
+			// 지역별 많은순
+			List<PlaceRankDTO> placeAddr = placeService.adminAddr();
+			System.out.println(placeAddr.size());
+			if(placeAddr!=null){
+				model.addAttribute("placeAddr", placeAddr);
+			}
+			
+			return url;
+		}
+		
+		
 		// 카테고리 관리
 		@RequestMapping(value = "/category", method = {RequestMethod.POST,RequestMethod.GET})
 		public String category(){
 			String url = "";
 			url = "/admin/category";
-			
-			return url;
-		}
-		
-		// 장소관리
-		@RequestMapping(value = "/place", method = {RequestMethod.POST,RequestMethod.GET})
-		public String map(){
-			String url = "/admin/place";
 			
 			return url;
 		}

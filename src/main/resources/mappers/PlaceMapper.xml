@@ -70,4 +70,32 @@
 		from place 
 		where placeAddr3 like '%'||#{keyWord}||'%'
 	</select>
+	
+	<!-- 아래의 3개는 관리자 페이지의 장소관리글에 관한 쿼리   -->
+	<!-- 전체 장소글  -->
+	<select id="adminPlaceAll" resultType="PlaceDTO">
+		select * from place
+	</select>
+	
+	<!-- 카테고리별 장소 많은순 -->
+	<select id="adminCategory" resultType="PlaceRankDTO">
+		select * 
+		from(
+		  select placetype as placeName, count(*) as cntNum
+		  from place
+		  group by placetype
+		)
+		order by cntNum desc
+	</select>
+	
+	<!-- 지역별 장소 많은순 -->
+	<select id="adminAddr" resultType="PlaceRankDTO">
+		select * 
+		from(
+		  select substr(placeaddr2, 1,INSTR(placeaddr2,' ',1,2)) as placeName, count(*) as cntNum 
+		  from place
+		  group by substr(placeaddr2, 1,INSTR(placeaddr2,' ',1,2))
+		)
+		order by cntNum desc
+	</select>
 </mapper>
