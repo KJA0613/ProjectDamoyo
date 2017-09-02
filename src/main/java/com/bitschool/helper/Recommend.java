@@ -13,10 +13,19 @@ public class Recommend {
 	
 	public List<BTempDTO> beforeLogin(List<BTempDTO> listAll) {
 		List<BTempDTO> top10 = null;
+		int num1 = 50;
+		int num2 = 5;
+		int num3 = 3;
 		for(BTempDTO dto : listAll) {
-			dto.setHitCnts((int)(Math.random()*1000+1));
-			dto.setWishCnts((int)(Math.random()*30+1));
-			dto.setNewBlogCnts((int)(Math.random()*10+1));
+			dto.setHitCnts(num1);
+			dto.setWishCnts(num2);
+			dto.setNewBlogCnts(num3);
+			num1 += 20;
+			num2 += 5;
+			num3 += 3;
+//			dto.setHitCnts((int)(Math.random()*1000+1));
+//			dto.setWishCnts((int)(Math.random()*30+1));
+//			dto.setNewBlogCnts((int)(Math.random()*10+1));
 			// 나중엔 자동으로 들어가야 할 데이터
 			int score = (int)(dto.getHitCnts() / 50.0 + dto.getWishCnts() / 5.0 + dto.getNewBlogCnts() / 3.0);
 			dto.setRecomScore(score);
@@ -33,11 +42,11 @@ public class Recommend {
 		//int num = 3;
 		for(BTempDTO dto : listAll) {
 			if(dto.getGatherCategoryBot().equals(cdto.getCatBotOne())) {
-				dto.setRecomScore(dto.getRecomScore()+10);
+				dto.setRecomScore(dto.getRecomScore()+20);
 			} else if(dto.getGatherCategoryBot().equals(cdto.getCatBotTwo())) {
-				dto.setRecomScore(dto.getRecomScore()+7);
+				dto.setRecomScore(dto.getRecomScore()+15);
 			} else if(dto.getGatherCategoryBot().equals(cdto.getCatBotThr())) {
-				dto.setRecomScore(dto.getRecomScore()+5);
+				dto.setRecomScore(dto.getRecomScore()+10);
 			}
 		}
 		Collections.sort(listAll, new ScoreComparator());
