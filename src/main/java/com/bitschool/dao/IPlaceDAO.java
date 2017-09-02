@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
+import com.bitschool.dto.PlaceRankDTO;
 
 public interface IPlaceDAO {
 	
@@ -33,6 +34,12 @@ public interface IPlaceDAO {
 	public boolean updatePlaceModify(PlaceDTO pl_dto) throws SQLException;
 
 	public List<PlaceDTO> searchMap(String keyWord);
+
+	public List<PlaceDTO> adminPlaceAll();
+
+	public List<PlaceRankDTO> adminCategory();
+
+	public List<PlaceRankDTO> adminAddr();
 
 	
 }

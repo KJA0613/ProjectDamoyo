@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
+import com.bitschool.dto.PlaceRankDTO;
 
 @Repository
 public class PlaceDAO implements IPlaceDAO {
@@ -136,6 +137,36 @@ public class PlaceDAO implements IPlaceDAO {
 		System.out.println(mapList);
 		
 		return mapList;
+	}
+
+
+	@Override
+	public List<PlaceDTO> adminPlaceAll() {	
+		
+		List<PlaceDTO> adminPlace = null;
+		adminPlace = session.selectList(namespace+".adminPlaceAll");
+		
+		return adminPlace;
+	}
+
+
+	@Override
+	public List<PlaceRankDTO> adminCategory() {
+
+		List<PlaceRankDTO> adminCategory = null;
+		adminCategory = session.selectList(namespace+".adminCategory");
+		
+		return adminCategory;
+	}
+
+
+	@Override
+	public List<PlaceRankDTO> adminAddr() {
+
+		List<PlaceRankDTO> adminAddr = null;
+		adminAddr = session.selectList(namespace+".adminAddr");
+		
+		return adminAddr;
 	}
 
 	

@@ -51,7 +51,6 @@ public class DamoyoInterceptor implements HandlerInterceptor{
 			}else{
 				session.setAttribute("alarm", flag);
 			}
-			System.out.println("인터셉터에서 알람체크 : "+flag);
 		}
 		
 	}

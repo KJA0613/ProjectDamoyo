@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.bitschool.dao.IPlaceDAO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.PlaceDTO;
+import com.bitschool.dto.PlaceRankDTO;
 import com.bitschool.util.MapLocation;
 
 @Service
@@ -157,6 +158,30 @@ public class PlaceService implements IPlaceService {
 		 List<PlaceDTO> mapList = PlaceDAO.searchMap(keyWord);
 		
 		return mapList;
+	}
+
+
+	@Override
+	public List<PlaceDTO> adminPlaceAll() {
+		// TODO Auto-generated method stub
+		List<PlaceDTO> placeList = PlaceDAO.adminPlaceAll();
+		return placeList;
+	}
+
+
+	@Override
+	public List<PlaceRankDTO> adminCategory() {
+		// TODO Auto-generated method stub
+		List<PlaceRankDTO> placeCategory = PlaceDAO.adminCategory();
+		return placeCategory;
+	}
+
+
+	@Override
+	public List<PlaceRankDTO> adminAddr() {
+		// TODO Auto-generated method stub
+		List<PlaceRankDTO> placeAddr = PlaceDAO.adminAddr();
+		return placeAddr;
 	}
 	
 }
