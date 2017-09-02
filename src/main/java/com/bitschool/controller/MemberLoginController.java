@@ -17,10 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bitschool.dto.AlarmDTO;
 import com.bitschool.dto.CompanyDTO;
 import com.bitschool.dto.EmailDTO;
-import com.bitschool.dto.GatherPeopleDTO;
 import com.bitschool.dto.PersonDTO;
 import com.bitschool.dto.RecommGatherDTO;
 import com.bitschool.service.EmailSender;
@@ -69,7 +67,7 @@ public class MemberLoginController {
 	}
 	
 	
-	// 01. [개인회원] 로그인
+	// 01-01. [개인회원] 로그인
 	// "쿠키"와 "세션" 설명 : http://88240.tistory.com/190 > [1차 처리] 세션 > [2차 처리 고민] 스프링 제공
 	@RequestMapping(value = "/PersonLogin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String PersonLogin(@RequestParam("guserId") String guserId, @RequestParam("guserPw") String guserPw, 
@@ -157,7 +155,7 @@ public class MemberLoginController {
 		return url;
 	}
 	
-	//01-1. [기업회원] 로그인
+	//01-02. [기업회원] 로그인
 	@RequestMapping(value = "/CompanyLogin", method = {RequestMethod.POST, RequestMethod.GET})
 	public String CompanyLogin(@RequestParam("guserId") String comId, @RequestParam("guserPw") String comPw, 
 							// @RequestParam("comCode") String guserCode,
@@ -176,19 +174,6 @@ public class MemberLoginController {
 			// 세션에 사용자 정보 저장
 			session.setAttribute("cdto", cdto);			
 			
-			/*List<RecommGatherDTO> recommgatherList = new ArrayList<RecommGatherDTO>();
-			session.setAttribute("recommgatherList", recommgatherList);*/
-			
-			//redirectAttributes.addFlashAttribute("pdto", pdto);
-			//System.out.println("리다이렉트 값: " + pdto);
-			
-			// 이전 페이지로 복귀
-			//String referer = request.getHeader("Referer");
-			//System.out.println("페이지 경로명: " + referer);		// [출력] http://localhost:5050/member/LoginForm		
-			//String[] loginReferer = referer.split("/");
-			
-			//System.out.println("4번째: " + loginReferer[4]);
-			
 			model.addAttribute("cdto",cdto);
 			url = "redirect:/place/PlaceListAll";
 			
@@ -205,6 +190,20 @@ public class MemberLoginController {
 
 		return url;
 	}
+	
+	
+	// 01-03. 
+	@RequestMapping(value = "/AdminLogin", method = RequestMethod.POST)
+	public String AdminLogin(@RequestParam("guserId") String adminId, @RequestParam("guserPw") String adminPw) {
+		String url = null;
+		
+		if(adminId.equals("admin0904") && adminPw.equals("adminpw0904")) {
+			url = "redirect:/admin/dashbord";	
+		}
+		
+		return url;
+	}
+	
 	
 	// 02. [개인&기업회원] 로그아웃 (세션 유지 해제)
 	@RequestMapping(value = "/Logout", method = RequestMethod.GET)

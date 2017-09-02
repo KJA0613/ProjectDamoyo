@@ -89,12 +89,14 @@
 		});
 	});		 */
 	
+	
   // [개인회원, 기업회원 선택 ] 
-  function LoginChoiceSubmit(type) {
-       
-       // 폼 안에 있는 데이터들 사용하려고 셋팅
-       // var lc = document.getElementById('dataset');   
-       
+
+	function LoginChoiceSubmit(type) {
+
+		// 폼 안에 있는 데이터들 사용하려고 셋팅
+		// var lc = document.getElementById('dataset');   
+
 		//if(event.keyCode == 13) {
 		var guserId = $('#input_guserId').val();
 		var guserPw = $('#input_guserPw').val();
@@ -113,7 +115,7 @@
 			return false; // 함수 종료
 		}
 
-		// "개인" 회원가입 폼 이동
+		// 개인
 		if (type.value === 'A') {
 			// 개인회원 : value = A > 값 찍기
 			//var person = document.getElementById('person').value;
@@ -121,12 +123,20 @@
 			document.loginForm.submit();
 
 		}
+		
+		// 광고주
 		if (type.value === 'B') {
 			//var company = document.getElementById('company').value;
 			document.loginForm.action = "/member/CompanyLogin";
 			document.loginForm.submit();
 		}
-		//}
+		
+		// 관리자
+		if(type.value != 'A' && type.value != 'B') {
+			document.loginForm.action = "/member/AdminLogin";
+			document.loginForm.submit();
+		}
+
 	}
 </script>
 
@@ -158,9 +168,11 @@
 				
 				<form method="POST" id="dataset" name="loginForm" onKeyPress="if(event.keyCode == 13) {LoginChoiceSubmit(guserCode);}">
 					<div class="radio">
-						<label><input type="radio" name="guserCode" value="A" checked="checked">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<label><input type="radio" name="guserCode" value="A">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
 						<label><input type="radio" name="guserCode" value="B" >기업회원</label>
+						
+						<!-- <label><input type="hidden" name="guserCode" value="Z">관리자</label> -->
 					</div>
 					
 					<div class="form-group">

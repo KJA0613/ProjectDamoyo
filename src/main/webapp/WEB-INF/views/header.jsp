@@ -110,9 +110,9 @@
 		border: 3px solid #ffff00;
 	    text-align:center;
     }
-    .material-icons{
+  /*   .material-icons{
 	    color:white;    
-    }
+    } */
     .notification{
 		color:white;    
     }
@@ -173,7 +173,7 @@
 						<li><a href="/mypage/MyPageManagement" class="code_view actionBtn7" id="f_color">${pdto.guserId}님 마이페이지</a></li>
 																			
 							<li class="dropdown">
-								<a href="/mypage/MyPageAlarm"><i class="material-icons">add_alert</i>
+								<a href="/mypage/MyPageAlarm"><i class="material-icons" style=color:white;>add_alert</i>
 									
 									<c:choose>
 									    <c:when test="${alarm eq true}">

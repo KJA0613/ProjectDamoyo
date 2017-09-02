@@ -54,7 +54,7 @@
 									<p class="hidden-lg hidden-md">Dashboard</p>
 								</a>
 							</li>
-							<li class="dropdown">
+					<!-- 		<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									<i class="material-icons">notifications</i>
 									<span class="notification">N</span>
@@ -67,7 +67,7 @@
 									<li><a href="#">Another Notification</a></li>
 									<li><a href="#">Another One</a></li>
 								</ul>
-							</li>
+							</li> -->
 							<li>
 								<a href="#pablo" class="dropdown-toggle" data-toggle="dropdown">
 	 							   <i class="material-icons">person</i>
