@@ -166,9 +166,10 @@ a:visited {
 }
 
 .details {
-    border-bottom: 1px solid #e8e5e5;
-    border-left: 1px solid #e8e5e5;
-    border-right: 1px solid #e8e5e5;
+    /* border-bottom: 1px solid #e8e5e5; */
+    border-bottom: 1px solid #d1cfcf;
+    border-left: 1px solid #d1cfcf;
+    border-right: 1px solid #d1cfcf;
 }
 </style>
 
