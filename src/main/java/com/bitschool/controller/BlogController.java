@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bitschool.dto.BGalleryDTO;
 import com.bitschool.dto.BPageVO;
@@ -394,8 +395,8 @@ public class BlogController {
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		model.addAttribute("pdto", pdto);
 		fileDTO.setBlogId(blogId);
-		String path = req.getSession().getServletContext().getRealPath("/")+"resources\\image\\";
-		//System.out.println(path);
+		//String path = req.getSession().getServletContext().getRealPath("/")+"resources\\image\\";
+		String path = "d:\\dev\\upload\\";
 		boolean flag = false;
 		DiskFileItemFactory fac = new DiskFileItemFactory();
 		ServletFileUpload sfu = new ServletFileUpload(fac);
@@ -448,13 +449,22 @@ public class BlogController {
 			flag =  service.uploadfile(fileDTO);
 		}
 		if(flag){
-			url = "redirect:/blog/photo/viewPhoto";
+			url = "redirect:/blog/file/listAll";
 		}
 		//System.out.println(gallery);
 		model.addAttribute("blogName",blogName);
 		model.addAttribute("blogId", blogId);
 		return url;
 	}
+	
+	@RequestMapping(value="/file/download", method=RequestMethod.GET)
+	public ModelAndView download(@RequestParam("filename") String filename, Model model){
+		System.out.println(filename);
+		String path = "d:\\dev\\upload\\";
+		File file = new File(path+filename);
+		return new ModelAndView("download", "fileName", file);
+	}
+
 	
 	@RequestMapping(value="/file/read", method = RequestMethod.GET)
 	public String fileRead(@RequestParam("postNo") int postNo, @RequestParam("page") int page,
@@ -470,6 +480,7 @@ public class BlogController {
 		boolean authFlag = false;
 		if(flag){
 			BPostDTO post = service.readPost(infoDTO);
+			System.out.println(post.getFilePath());
 			if(pdto != null) {
 				if(post.getUserId().equals(pdto.getGuserId())) {
 					authFlag = true;

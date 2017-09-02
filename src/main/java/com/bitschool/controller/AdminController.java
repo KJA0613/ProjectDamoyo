@@ -36,9 +36,7 @@ public class AdminController {
 	
 	// 01. 관리자대쉬보드(메인)페이지
 	@RequestMapping(value = "/dashbord", method = RequestMethod.GET )
-	public String dashbord(
-				Model model
-			){
+	public String dashbord(Model model){
 			
 			String url = "admin/dashboard";	
 			

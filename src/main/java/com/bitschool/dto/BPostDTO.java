@@ -1,5 +1,7 @@
 package com.bitschool.dto;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 
 public class BPostDTO {
@@ -14,7 +16,26 @@ public class BPostDTO {
 	private String boardName;
 	private int blogId;
 	private String filePath;
+	private String uploadUTF;
 	
+	public String getUploadUTF() {
+		String temp= null;
+		try {
+			if(filePath!=null&&!filePath.equals("")){
+				temp = URLEncoder.encode(filePath, "UTF-8");
+			} else {
+				temp= "";
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return temp;		
+	}
+	
+	public void setUploadUTF(String uploadUTF) {
+		this.uploadUTF = uploadUTF;
+	}
 	public String getFilePath() {
 		return filePath;
 	}
@@ -83,6 +104,20 @@ public class BPostDTO {
 		this.boardName = boardName;
 	}
 	
+/*	public String getFilePathUTF(){
+		try {
+			if(filePath!=null&&!filePath.equals("")){
+				filePath = URLEncoder.encode(filePath, "UTF-8");
+			} else {
+				filePath= "";
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return filePath;		
+	}*/
+
 	@Override
 	public String toString() {
 		return "BPostDTO [postTitle=" + postTitle + ", postContents=" + postContents + ", userId=" + userId
