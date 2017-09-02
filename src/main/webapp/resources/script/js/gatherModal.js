@@ -127,6 +127,7 @@ $(function() {
 				
 				if(state=='진행중'&&blog=='Yes'){
 					$('#gatherBlog').show(); // 블로그 버튼
+					$('#gatherApply').hide(); // 신청버튼
 				}
 			}
 			
@@ -138,6 +139,7 @@ $(function() {
 			
 			if(state=='진행중'&&blog=='Yes'){
 				$('#gatherBlog').show(); // 블로그 버튼
+				$('#gatherApply').hide(); // 신청버튼
 			}
 		}
 		
