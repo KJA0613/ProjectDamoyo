@@ -80,6 +80,9 @@ public class MemberLoginController {
 		int pgatherNo =0;
 		String pgId = null;*/
 		
+		System.out.println("guserId" + guserId);
+		System.out.println("guserPw" + guserPw);
+				
 		//System.out.println(preURL);
 		// 사용자가 로그인 폼에 입력한 데이터 > DB에 있는 데이터인지 여부 확인
 		PersonDTO pdto = memberService.PersonLogin(guserId, guserPw);
@@ -152,6 +155,12 @@ public class MemberLoginController {
 			// 로그인 폼 페이지 이동
 			url = "login/LoginForm";
 		}
+		
+		// 관리자 > 로그인 했을경우
+		if (guserId.equals("admin0904") && guserPw.equals("adminpw0904")) {
+			url = "redirect:/admin/dashbord";
+		}
+				
 		return url;
 	}
 	
@@ -193,7 +202,7 @@ public class MemberLoginController {
 	
 	
 	// 01-03. 
-	@RequestMapping(value = "/AdminLogin", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/AdminLogin", method = RequestMethod.POST)
 	public String AdminLogin(@RequestParam("guserId") String adminId, @RequestParam("guserPw") String adminPw) {
 		String url = null;
 		
@@ -202,7 +211,7 @@ public class MemberLoginController {
 		}
 		
 		return url;
-	}
+	}*/
 	
 	
 	// 02. [개인&기업회원] 로그아웃 (세션 유지 해제)
