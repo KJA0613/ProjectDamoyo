@@ -33,12 +33,10 @@ public class DamoyoInterceptor implements HandlerInterceptor{
 		String visitorCheck = (String) session.getAttribute("visitorCheck");
 		
 		if(visitorCheck==null){
-			session.setAttribute("visitorCheck", "-1");
+			session.setAttribute("visitorCheck", "-1");// 이걸 이용해 클릭할때 마다 값 넣기
 			
-			
+			// 세션이 생성될때 값 넣기
 			sessionController.makeSession(request);
-			/*System.out.println("세션 생성됨, 새션값 : " + session.getAttribute("visitorCheck"));
-			System.out.println(request.getRequestedSessionId());*/
 		}
 		
 		// 알람기능 가라로 하기

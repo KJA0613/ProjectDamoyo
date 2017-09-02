@@ -132,10 +132,10 @@
 		}
 		
 		// 관리자
-		if(type.value != 'A' && type.value != 'B') {
+		/* if(type.value != 'A' && type.value != 'B') {
 			document.loginForm.action = "/member/AdminLogin";
 			document.loginForm.submit();
-		}
+		} */
 
 	}
 </script>
@@ -168,11 +168,9 @@
 				
 				<form method="POST" id="dataset" name="loginForm" onKeyPress="if(event.keyCode == 13) {LoginChoiceSubmit(guserCode);}">
 					<div class="radio">
-						<label><input type="radio" name="guserCode" value="A">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
+						<label><input type="radio" name="guserCode" value="A" checked="checked">개인회원</label>&nbsp;&nbsp;&nbsp;&nbsp;
 					
 						<label><input type="radio" name="guserCode" value="B" >기업회원</label>
-						
-						<!-- <label><input type="hidden" name="guserCode" value="Z">관리자</label> -->
 					</div>
 					
 					<div class="form-group">

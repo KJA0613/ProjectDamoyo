@@ -162,15 +162,17 @@ public class GatheringController {
 
 		// 메서드에 @RequestBody가 적용된 경우, 리턴 객체를 JSON이나 XML과 같은 알맞은 응답으로 변환
 
-		
+
+		/* 체크 하거나 검색할 때 하는건데, 클릭하거나 검색한 값 넣는 건데 지금은 의미가 없어서 안함,  지금은 의미가 없어서 안함
 		@SuppressWarnings("unchecked")
 		List<RecommGatherDTO> recommgatherList = (List<RecommGatherDTO>) session.getAttribute("recommgatherList");
 		RecommGatherDTO regather = null;
 		
-		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
+		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");*/
 		
 		
-		if(!sSTR.equals("")){
+		/*체크/검색값 넣는건데 안하무ㅜㅜ
+		 * if(!sSTR.equals("")){
 			if(pdto!=null){ // 로그인 했을때
 				regather = new RecommGatherDTO();
 				regather.setRecommgatherName(sSTR);
@@ -178,7 +180,7 @@ public class GatheringController {
 				regather.setGuserId(pdto.getGuserId());
 				recommgatherList.add(regather);
 			}
-		}
+		}*/
 		
 		List<String> cList = null;
 		List<String> aList = null;
@@ -189,17 +191,16 @@ public class GatheringController {
 		String[] ccList = cData.split(",");
 		String[] ttList = tData.split(",");
 		String[] rrList = rData.split(",");
+	
 		
-
-		System.out.println("tdate : "+ttList);
-		System.out.println("rdate : "+rrList);
 		
 		if(ccList.length>1){
 			cList = new ArrayList<String>();
 			for (int i = 0; i < ccList.length; i++) {
 				cList.add(ccList[i]);
 				
-				if(i==ccList.length-1&&recommgatherList!=null){
+				/* 체크/검색값 넣는건데 안하무ㅜㅜ
+				 * if(i==ccList.length-1&&recommgatherList!=null){
 					if(!ccList[i].equals("")){
 						regather = new RecommGatherDTO();
 						regather.setRecommgatherName(ccList[i]);
@@ -207,7 +208,7 @@ public class GatheringController {
 						regather.setGuserId(pdto.getGuserId());
 						recommgatherList.add(regather);
 					}
-				}
+				}*/
 			}
 		}
 		
@@ -216,7 +217,8 @@ public class GatheringController {
 			for (int i = 0; i < aaList.length; i++) {
 				aList.add(aaList[i]);
 
-				if(i==aaList.length-1&&recommgatherList!=null){
+				/*체크/검색값 넣는건데 안하무ㅜㅜ
+				 * if(i==aaList.length-1&&recommgatherList!=null){
 					if(!aaList[i].equals("")){
 						regather = new RecommGatherDTO();
 						regather.setRecommgatherName(aaList[i]);
@@ -224,7 +226,7 @@ public class GatheringController {
 						regather.setGuserId(pdto.getGuserId());
 						recommgatherList.add(regather);
 					}
-				}
+				}*/
 			}
 		}
 		
@@ -233,7 +235,8 @@ public class GatheringController {
 			for (int i = 0; i < ttList.length; i++) {
 				tList.add(ttList[i]);
 
-				if(i==ttList.length-1&&recommgatherList!=null){
+				/*체크/검색값 넣는건데 안하무ㅜㅜ
+				 * if(i==ttList.length-1&&recommgatherList!=null){
 					if(!ttList[i].equals("")){
 						regather = new RecommGatherDTO();
 						regather.setRecommgatherName(ttList[i]);
@@ -241,7 +244,7 @@ public class GatheringController {
 						regather.setGuserId(pdto.getGuserId());
 						recommgatherList.add(regather);
 					}
-				}
+				}*/
 			}
 		}
 		
@@ -250,7 +253,8 @@ public class GatheringController {
 			for (int i = 0; i < rrList.length; i++) {
 				rList.add(rrList[i]);
 
-				if(i==rrList.length-1&&recommgatherList!=null){
+				/* 체크/검색값 넣는건데 안하무ㅜㅜ
+				 * if(i==rrList.length-1&&recommgatherList!=null){
 					if(!rrList[i].equals("")){
 						regather = new RecommGatherDTO();
 						regather.setRecommgatherName(rrList[i]);
@@ -258,11 +262,12 @@ public class GatheringController {
 						regather.setGuserId(pdto.getGuserId());
 						recommgatherList.add(regather);
 					}
-				}
+				}*/
 			}
 		}
 		
-		session.setAttribute("recommgatherList", recommgatherList);
+		/*체크/검색값 넣는건데 안하무ㅜㅜ
+		 * session.setAttribute("recommgatherList", recommgatherList);*/
 				
 		List<GatheringDTO> gList = gService.getGatheringCheck(cList, aList, tList, rList, sSelect, sSTR);
 		HashMap<String, List<GatheringDTO>> map = new HashMap<String, List<GatheringDTO>>();
@@ -538,46 +543,33 @@ public class GatheringController {
 	// + 추가로 여기다 게시글 클릭했을때 모달로 띄우기전, 관심글 체크 유무 여부를 불러와서 리턴해야함
 	@RequestMapping(value = "/gatheringRecomm", method = { RequestMethod.GET, RequestMethod.POST })
 	public @ResponseBody HashMap<String, Object>  gatheringRecomm(
-			@RequestParam(value = "category", defaultValue="") String category,
+			@RequestParam(value = "categorytop", defaultValue="") String categorytop,
+			@RequestParam(value = "categorybot", defaultValue="") String categorybot,
+			@RequestParam(value = "areatop", defaultValue="") String areatop,
 			@RequestParam(value = "area", defaultValue="") String area,
-			@RequestParam(value = "no") int gatherNo,
-			@RequestParam(value = "id") String guserId, // id이지만 모집글을 쓴사람
+			@RequestParam(value = "subject", defaultValue="") String subject,
+			@RequestParam(value = "no", defaultValue="0") int gatherNo,
+			@RequestParam(value = "id", defaultValue="") String guserId, // id이지만 모집글을 쓴사람
 			HttpSession session
 			) {
-
-		
-		System.out.println("no :" +gatherNo);
-		
-		
-		@SuppressWarnings("unchecked")
-		List<RecommGatherDTO> recommgatherList = (List<RecommGatherDTO>) session.getAttribute("recommgatherList");
-						
+								
 		// 로그인 사용자 정보
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		
 		// 사용자가 클릭한 모집글의 값을 dto에 담음
-		if(recommgatherList!=null){
-		
-			RecommGatherDTO regather = null;
-			if(!category.equals("")){
-				regather = new RecommGatherDTO();
-				regather.setGatherNo(gatherNo);
-				regather.setRecommgatherName(category);
-				regather.setRecommgatherCode("카테고리");
-				regather.setGuserId(pdto.getGuserId()); // RecommgatherDTO 의 
-				recommgatherList.add(regather);
-			}
-			if(!area.equals("")){
-				regather = new RecommGatherDTO();
-				regather.setGatherNo(gatherNo);
-				regather.setRecommgatherName(area);
-				regather.setRecommgatherCode("지역");
-				regather.setGuserId(pdto.getGuserId());
-				recommgatherList.add(regather);
-			}
+		RecommGatherDTO regather = new RecommGatherDTO();
+		regather.setGatherNo(gatherNo);
+		regather.setGatherSubject(subject);
+		regather.setGatherCategoryTop(categorytop);
+		regather.setGatherCategoryBot(categorybot);
+		regather.setGatherAreaTop(areatop);	
+		regather.setGatherArea(area);
 			
-			session.setAttribute("recommgatherList", recommgatherList);
-		}
+		System.out.println("클릭글  : "+regather);
+		boolean flagRecoom= false;
+		flagRecoom = gService.mergeRecommend(regather);
+		System.out.println("클릭글 merge 성공여부 : "+flagRecoom);
+		//디비에 넣음
 		
 		
 		/* 여기서부터는 관심글 유무를 구분함 */

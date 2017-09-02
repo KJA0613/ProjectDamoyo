@@ -23,7 +23,7 @@ public interface IGatheringDAO {
 
 	public List<GatheringDTO> selectMakeList(String guserId);
 
-	public boolean mergeList(List<RecommGatherDTO> recommgatherList);
+	public boolean mergeList(RecommGatherDTO regather);
 
 	public List<GatheringDTO> getRecommUser(String guserId);
 

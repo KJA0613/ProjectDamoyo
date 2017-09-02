@@ -149,18 +149,15 @@ public class GatheringDAO implements IGatheringDAO {
 	}
 
 	@Override
-	public boolean mergeList(List<RecommGatherDTO> recommgatherList) {
+	public boolean mergeList(RecommGatherDTO regather) {
 
 		boolean flag = false;
 				
 		int cnt = 0;
 		
 //		이부분 강사님께 여쭤보기
+		cnt = session.update(namespace+".mergeList",  regather);
 		
-		for(int i=0; i<recommgatherList.size(); i++){
-			System.out.println("["+i+"] : "+recommgatherList.get(i));
-			cnt = session.update(namespace+".mergeList",  recommgatherList.get(i));
-		}
 		
 		if(cnt>0){
 			flag=true;
