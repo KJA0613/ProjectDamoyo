@@ -62,10 +62,10 @@ public class MainController {
 		PersonDTO pdto = (PersonDTO) session.getAttribute("pdto");
 		List<BTempDTO> top10List = null;
 		List<BTempDTO> list = tService.listAll();
+		list = recommend.beforeLogin(list);		
 		
 		if(list.size() >= 10) {
 			if(pdto == null) {
-				list = recommend.beforeLogin(list);			
 				session.setAttribute("tempList", list);
 				top10List = list.subList(0, 10);
 				for(BTempDTO dto : list) {
@@ -73,7 +73,7 @@ public class MainController {
 				}
 			}
 			else {
-				list = (List<BTempDTO>)session.getAttribute("tempList");
+				//list = (List<BTempDTO>)session.getAttribute("tempList");
 				CategoryDTO cdto = memberService.PersonHopeCategoryAll(pdto.getGuserId());
 				top10List = recommend.afterLogin(list, cdto);
 				for(BTempDTO dto : list) {
