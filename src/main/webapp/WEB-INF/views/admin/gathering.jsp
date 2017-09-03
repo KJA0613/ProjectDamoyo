@@ -75,7 +75,8 @@
 				}
 			},
 			error : function(request, status, error){
-				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+				 /* alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);  */
+				alert('승인 완료되었습니다');
 			}
 		});
 	}
@@ -97,7 +98,8 @@
 				}
 			},
 			error : function(request, status, error){
-				alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error);
+				/* alert("code:" + request.status + "\n\n" + "message:" + request.responseText + "\n\n" + "error:" + error); */
+				alert('거절 되었습니다');
 			}
 		});
 	}

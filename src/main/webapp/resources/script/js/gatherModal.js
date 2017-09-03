@@ -136,7 +136,7 @@ $(function() {
 			
 		}else{// 비로그인
 			$('#gatherModify').hide(); // 수정버튼
-			$('#gatherApply').show(); // 신청버튼
+			$('#gatherApply').hide(); // 신청버튼
 			$('#gatherComplete').hide(); // 완료버튼
 			$('#gatherBlog').hide(); // 블로그 버튼
 			
