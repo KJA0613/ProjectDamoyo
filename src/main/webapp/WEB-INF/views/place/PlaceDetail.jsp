@@ -128,6 +128,7 @@
 	}
 </script>
 
+
 <!-- [Header] 공통 헤더 -->
 <%@include file="../header.jsp"%>
 </head>
