@@ -149,13 +149,15 @@ $(function() {
 						"'  data-blog='"+gList.gatherBlog+
 						"' >"
 						
-						str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
-						str += "<span class='price'>"+gList.gatherState+"</span>"
-						str += "<h4 align='center'>" + subject + "</h4>";
-						str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
-						str += "요일 : " + day + "<br>" ;
-						str += "지역 : " + gList.gatherArea + "<br>";
-						str += "신청인원 : " + gList.gatherParti + "</h5>";
+						str += "<img class='gatherimg' width='213px' height='180px' src='" + img + "'>";
+						str += "<span class='price'>"+gList.gatherState+"</span>";
+						str += "<div class='details'><br>";
+						str += "<h4  class='gathering_title' style='margin-top: 0px;'>" + subject + "</h4>";
+						str += "<p>&nbsp;&nbsp;<span id='s1'>기간 </span>&nbsp;&nbsp;<span id='s2'>" + sdate + " ~ " + edate + "</span><br>";
+						str += "&nbsp;&nbsp;<span id='s1'>요일</span>&nbsp;&nbsp;<span id='s2'>" + day + "<br>" ;
+						str += "&nbsp;&nbsp;<span id='s1'>지역</span>&nbsp;&nbsp;<span id='s2'>" + gList.gatherArea + "</span><br>";
+						str += "&nbsp;&nbsp;<span id='s1'>신청인원</span>&nbsp;&nbsp;<span id='s2'>" + gList.gatherParti + "</span></p>";
+						str += "</div>";
 						str += "</a>";
 						str += "</div>";
 	
@@ -298,13 +300,15 @@ function search_click(){
 													"'  data-blog='"+gList.gatherBlog+
 													"' >"
 						
-				str += "<img class='gatherimg' width='213px' height='120px' src='" + img + "'>";
-				str += "<span class='price'>"+gList.gatherState+"</span>"
-				str += "<h4 align='center'>" + subject + "</h4>";
-				str += "<h5>기간 : " + sdate + " ~ " + edate + "<br>";
-				str += "요일 : " + day + "<br>" ;
-				str += "지역 : " + gList.gatherArea + "<br>";
-				str += "신청인원 : " + gList.gatherParti + "</h5>";
+				str += "<img class='gatherimg' width='213px' height='180px' src='" + img + "'>";
+				str += "<span class='price'>"+gList.gatherState+"</span>";
+				str += "<div class='details'><br>";
+				str += "<h4  class='gathering_title' style='margin-top: 0px;'>" + subject + "</h4>";
+				str += "<p>&nbsp;&nbsp;<span id='s1'>기간 </span>&nbsp;&nbsp;<span id='s2'>" + sdate + " ~ " + edate + "</span><br>";
+				str += "&nbsp;&nbsp;<span id='s1'>요일</span>&nbsp;&nbsp;<span id='s2'>" + day + "<br>" ;
+				str += "&nbsp;&nbsp;<span id='s1'>지역</span>&nbsp;&nbsp;<span id='s2'>" + gList.gatherArea + "</span><br>";
+				str += "&nbsp;&nbsp;<span id='s1'>신청인원</span>&nbsp;&nbsp;<span id='s2'>" + gList.gatherParti + "</span></p>";
+				str += "</div>";
 				str += "</a>";
 				str += "</div>";
 
