@@ -457,7 +457,7 @@ public class PlaceController {
 			System.out.println("파일경로 : " + filePath);
 
 			// 여기서 oldName은 그냥 파일 이름 확장자
-			String saveName =  sb.append(cdto.getComCeoName()+"_").append(oldName).toString();
+			String saveName =  sb.append(oldName).toString();
 			System.out.println(saveName);
 			InputStream is = request.getInputStream();
 			OutputStream os = new FileOutputStream(filePath + saveName);
