@@ -168,7 +168,9 @@ public class PlaceController {
 					}
 				}
 			}
-
+			
+			System.out.println("placeX : "+pl_dto.getPlaceX()+", placeY : "+pl_dto.getPlaceY());
+			
 			// 파일이름이 있고, 공백제거한 파일이름이 ""(널)이 아니면, 즉 성공했으면
 			if (fileName != null && !fileName.trim().equals("")) {
 				// 저장할 파일의 경로
