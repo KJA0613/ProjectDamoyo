@@ -153,12 +153,12 @@
 				<form action="/place/PlaceListAll" method="POST" class="form-horizontal" enctype="multipart/form-data">					
 					<h3>기본 정보</h3>
 					<hr>
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<label for="type" class="col-md-2 control-label">사진</label>
 						<div class="col-md-6">
 							<img src="${pl_dto.placeImage}" width="50%" height="auto" class="property_img">					
 						</div>
-					</div>
+					</div> --%>
 
 					<div class="form-group">
 						<label for="type" class="col-md-2 control-label">공간유형</label>
@@ -274,16 +274,19 @@
 				
 						// 검색을 요청하는 함수입니다
 						ps.keywordSearch('${pl_dto.placeAddr3}', placesSearchCB); // placesSearchCB는 지도의 위치를 나타내줌, ex) 서울특별시 강남구면 강남구를 뿌려줌.
-										
+						
+												
 						// 검색 위치에 맞는 지도를 뿌려주는 
 						function placesSearchCB(data, status, pagination) { // state는 성공 했을때 
 							
 							if (status === daum.maps.services.Status.OK) {
 								
+								/* alert(${pl_dto.placeY}+", "+${pl_dto.placeX}); */
+								
 								// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 						        // LatLngBounds 객체에 좌표를 추가합니다
 						        var bounds = new daum.maps.LatLngBounds();
-				
+								
 					            displayMarker();    
 					            bounds.extend(new daum.maps.LatLng(${pl_dto.placeY}, ${pl_dto.placeX}));
 						              

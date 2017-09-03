@@ -168,7 +168,9 @@ public class PlaceController {
 					}
 				}
 			}
-
+			
+			System.out.println("placeX : "+pl_dto.getPlaceX()+", placeY : "+pl_dto.getPlaceY());
+			
 			// 파일이름이 있고, 공백제거한 파일이름이 ""(널)이 아니면, 즉 성공했으면
 			if (fileName != null && !fileName.trim().equals("")) {
 				// 저장할 파일의 경로
@@ -457,7 +459,7 @@ public class PlaceController {
 			System.out.println("파일경로 : " + filePath);
 
 			// 여기서 oldName은 그냥 파일 이름 확장자
-			String saveName =  sb.append(cdto.getComCeoName()+"_").append(oldName).toString();
+			String saveName =  sb.append(oldName).toString();
 			System.out.println(saveName);
 			InputStream is = request.getInputStream();
 			OutputStream os = new FileOutputStream(filePath + saveName);

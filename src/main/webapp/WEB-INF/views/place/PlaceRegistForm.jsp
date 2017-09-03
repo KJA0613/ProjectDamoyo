@@ -27,6 +27,8 @@
     function search_corpAddr() {
         new daum.Postcode({
             oncomplete: function(data) {
+            	
+            	alert("주소검색 들어옴");
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -61,21 +63,24 @@
     /* 		여기서부터는 지도 API  */
             
             // 주소-좌표 변환 객체를 생성합니다
-            var geocoder = new daum.maps.services.Geocoder();
+	            var geocoder = new daum.maps.services.Geocoder();
+	
+	            // 주소로 좌표를 검색합니다
+	            alert("jibunAddress : "+ data.jibunAddress);
+	            geocoder.addressSearch(data.jibunAddress, function(result, status) {
+	                // 정상적으로 검색이 완료됐으면 
+	                 if (status === daum.maps.services.Status.OK) {
+						
 
-            // 주소로 좌표를 검색합니다
-            geocoder.addressSearch(data.jibunAddress, function(result, status) {
-
-                // 정상적으로 검색이 완료됐으면 
-                 if (status === daum.maps.services.Status.OK) {
-
-                    document.getElementById('placeX').value = result[0].x;
-                    document.getElementById('placeY').value = result[0].y;
-                   
-                } 
-            });    
-           	}
-        }).open();
+	 					alert(result[0].x+", "+result[0].y);
+	                	 
+	                    document.getElementById('placeX').value = result[0].x;
+	                    document.getElementById('placeY').value = result[0].y;
+	                   
+	                } 
+	            });    
+       		}
+   		}).open();
      		
     }
 </script>

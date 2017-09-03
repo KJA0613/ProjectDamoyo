@@ -23,7 +23,11 @@
 
 <script type="text/javascript">
 	function goBlog() {
-		blogUrl = 'http://localhost:5050/blog/home?blogId=';
+		var url = location.href;
+		var tokens = url.split(':');
+		var addr = tokens[0] + ':' + tokens[1];
+		blogUrl = addr + ':5050/blog/home?blogId=';
+		//alert(blogUrl);
 		blogId = document.getElementById('modal-body-no').innerHTML;
 		blogName = document.getElementById('modal-body-subject').innerHTML;
 		blogName = '&blogName='+blogName;
