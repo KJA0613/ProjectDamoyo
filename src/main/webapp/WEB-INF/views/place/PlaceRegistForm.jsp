@@ -28,7 +28,6 @@
         new daum.Postcode({
             oncomplete: function(data) {
             	
-            	alert("주소검색 들어옴");
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -72,8 +71,6 @@
 	                 if (status === daum.maps.services.Status.OK) {
 						
 
-	 					alert(result[0].x+", "+result[0].y);
-	                	 
 	                    document.getElementById('placeX').value = result[0].x;
 	                    document.getElementById('placeY').value = result[0].y;
 	                   
