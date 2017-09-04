@@ -250,7 +250,7 @@ $(function() {
 					
 					/*$('#GatherModalInfo').modal('hide');*/
 					/*$('#gatherCloseBtn').trigger("click");*/
-					location.reload();
+					/*location.reload();*/
 				}else{
 					alert('이미 신청된 회원입니다.');
 				}

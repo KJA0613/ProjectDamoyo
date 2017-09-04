@@ -67,8 +67,8 @@ a:visited {
 		<a href="/gather/gatheringMake" id="makeHref" class="list-group-item" onclick="login_check(${pdto.guserId})">모집글쓰기</a>
 		<a href="/gather/gathering" class="list-group-item">모집메뉴</a> 
 		<a href="/place/PlaceListAll" class="list-group-item">장소추천</a> 
-		<a href="/board/listAll?boardName=free" class="list-group-item">자유게시판</a> 
-		<a href="/board/listAll?boardName=review" class="list-group-item">후기게시판</a>
+<!-- 		<a href="/board/listAll?boardName=free" class="list-group-item">자유게시판</a> 
+		<a href="/board/listAll?boardName=review" class="list-group-item">후기게시판</a> -->
 		<c:if test="${pdto.guserId ne null}">
 			<a href="/gather/gatheringParti" class="list-group-item">참여중인모임</a>
 		</c:if>
