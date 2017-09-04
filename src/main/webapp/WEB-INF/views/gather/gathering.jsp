@@ -465,7 +465,7 @@ a:visited {
 					</div>					
 				
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
+						<button id='gatherCloseBtn' type="button" class="btn btn-danger pull-left" data-dismiss="modal">닫기</button>
 						<button id='gatherModify' type="button" class="btn btn-warning pull-left" style="display: none;">수정하기</button>
 						<button id='gatherBlog' type="button" class="btn btn-info" data-dismiss="modal" onclick="goBlog()" style="display: none;">블로그 가기</button>
 						<button id='gatherApply' type="button" class="btn btn-primary" style="display: none;">신청</button>

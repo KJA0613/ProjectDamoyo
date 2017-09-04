@@ -247,9 +247,15 @@ $(function() {
 			success : function(data){
 				if(data.result=='yes'){
 					alert('신청하였습니다.');
+					
+					/*$('#GatherModalInfo').modal('hide');*/
+					/*$('#gatherCloseBtn').trigger("click");*/
+					location.reload();
 				}else{
 					alert('이미 신청된 회원입니다.');
 				}
+				
+				
 				
 			},
 			error : function(request, status, error){

@@ -234,16 +234,19 @@
 		<!-- Page Content -->
 		</div>	
 		
-		<div style="margin-left: 830px; border-style: solid; border-color: #b3b3b3; border-width: thin;">
+		<div style="margin-left: 830px; border-style: solid; border-color: #A4A4A4; border-width: thin;">
+			<h4 style="font-weight: bold; margin-top: 20px; color: #585858;">추천 모임</h4>
 		 	<ol>
 			<c:forEach var="dto" items="${list}">
-				<li style="text-align: left;"><a href="/gather/damoyoSearch?sSTR=${dto.gatherSubject}">${dto.gatherSubject}</a></li>
+				<li style="text-align: left; font-weight: bold; font-size: 16px;">&nbsp;
+					<a href="/gather/damoyoSearch?sSTR=${dto.gatherSubject}" style="color: black; font-weight: normal; font-size: 12px;">${dto.gatherSubject}</a>
+				</li>
 			</c:forEach>
 			</ol>
 		</div>
    
 		<!-- 02. 테마  -->
-		<h1 style="margin-top: 180px">테마별 검색</h1>
+		<h1 style="margin-top: 45px;">테마별 검색</h1>
 		<hr style="border: solid 1px #b3b3b3;">
 		<br>
 		
@@ -368,7 +371,7 @@
 	
 	   
 	   <!-- 03. 광고  -->
-	   <h1 style="margin-top: 230px">모임 공간</h1>
+	   <h1 style="margin-top: 200px">모임 공간</h1>
 	   
 	   <hr style="border: solid 1px #b3b3b3;">
 	   	    <div class="more" align="right"><a href="/place/PlaceListAll">최근에 개설된 모임들입니다. 더 궁금하다면?</a></div>

@@ -42,11 +42,11 @@ public class Recommend {
 		//int num = 3;
 		for(BTempDTO dto : listAll) {
 			if(dto.getGatherCategoryBot().equals(cdto.getCatBotOne())) {
-				dto.setRecomScore(dto.getRecomScore()+20);
+				dto.setRecomScore(dto.getRecomScore()+100);
 			} else if(dto.getGatherCategoryBot().equals(cdto.getCatBotTwo())) {
-				dto.setRecomScore(dto.getRecomScore()+15);
+				dto.setRecomScore(dto.getRecomScore()+70);
 			} else if(dto.getGatherCategoryBot().equals(cdto.getCatBotThr())) {
-				dto.setRecomScore(dto.getRecomScore()+10);
+				dto.setRecomScore(dto.getRecomScore()+50);
 			}
 		}
 		Collections.sort(listAll, new ScoreComparator());
